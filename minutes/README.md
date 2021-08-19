@@ -4,6 +4,4 @@
 
 ## 순서
 
-### 2021-08-19
-
-@kimjoochang
+- [ ] 2021-08-19 @kimjoochang
