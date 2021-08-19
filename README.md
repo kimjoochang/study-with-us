@@ -1,3 +1,3 @@
 # study-with-us
 
-BIT: Project by @gyeryeongban @kimjoochang @seoyeoningb @SeonyoungHa
+BIT: Project by @gyeryeongban @kimjoochang @seoyeoningb @SeonyoungHa @jei-kim
