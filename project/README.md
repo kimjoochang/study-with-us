@@ -1,3 +1,0 @@
-# project
-
-STUDY WITH US
