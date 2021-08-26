@@ -28,7 +28,7 @@ public class CommunityHandler {
 
   // 커뮤니티 목록
   public void list() {
-    System.out.println("[커뮤니티 목록]");
+    System.out.println("[커뮤니티 조회]");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", this.communities[i].no, this.communities[i].title, this.communities[i].writer,
           this.communities[i].registeredDate, this.communities[i].viewCount, this.communities[i].like);

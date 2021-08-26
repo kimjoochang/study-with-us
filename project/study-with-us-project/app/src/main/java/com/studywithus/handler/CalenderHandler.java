@@ -4,6 +4,11 @@ package main.java.com.studywithus.handler;
 import main.java.com.studywithus.domain.Calender;
 import main.java.com.studywithus.util.Prompt;
 
+<<<<<<< HEAD
+=======
+import com.studywithus.domain.Calender;
+import com.studywithus.util.Prompt;
+>>>>>>> 8940ac7e7cafc2ff59a1b9035eb847ea0211185d
 
 public class CalenderHandler {
 
@@ -51,21 +56,31 @@ public class CalenderHandler {
     System.out.println("[채용공고 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
+<<<<<<< HEAD
     Calender calender = findByNo(no);
+=======
+	Calender[] calenders = new Calender[MAX_LENGTH];
+	int size = 0;
+>>>>>>> 8940ac7e7cafc2ff59a1b9035eb847ea0211185d
 
     if (calender == null) {
       System.out.println("해당 번호의 채용공고가 없습니다.");
       return;
     }
 
+<<<<<<< HEAD
     System.out.printf("제목: %s\n", calender.title);
     System.out.printf("내용: %s\n", calender.content);
     System.out.printf("시작일: %s\n", calender.startDate);
     System.out.printf("종료일: %s\n", calender.endDate);
     System.out.printf("조회수: %d\n", ++calender.viewCount);
   }
+=======
+		Calender calender = new Calender();
+>>>>>>> 8940ac7e7cafc2ff59a1b9035eb847ea0211185d
 
 
+<<<<<<< HEAD
 
   // 캘린더 채용공고 채용공고
   public void update() {
@@ -73,6 +88,10 @@ public class CalenderHandler {
     int no = Prompt.inputInt("번호? ");
 
     Calender calender = findByNo(no);
+=======
+		this.calenders[this.size++] = calender;
+	}
+>>>>>>> 8940ac7e7cafc2ff59a1b9035eb847ea0211185d
 
     if (calender == null) {
       System.out.println("해당 번호의 채용공고가 없습니다.");
