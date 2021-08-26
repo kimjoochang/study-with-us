@@ -1,7 +1,11 @@
-package com.studywithus.handler;
+package main.java.com.studywithus.handler;
 
+<<<<<<< HEAD
 import com.studywithus.domain.Calender;
 import com.studywithus.util.Prompt;
+=======
+import main.java.com.studywithus.util.Prompt;
+>>>>>>> 4ca99f94d90dede36eda022714876d3db71f2562
 
 
 
