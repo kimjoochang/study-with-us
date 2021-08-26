@@ -1,13 +1,8 @@
-package main.java.com.studywithus.handler;
+package com.studywithus.handler;
 
 import java.sql.Date;
-<<<<<<< HEAD
-import main.java.com.studywithus.domain.Board;
-import main.java.com.studywithus.util.Prompt;
-=======
 import com.studywithus.domain.Board;
 import com.studywithus.util.Prompt;
->>>>>>> 8940ac7e7cafc2ff59a1b9035eb847ea0211185d
 
 public class FreeStudyHandler {
 
@@ -31,15 +26,9 @@ public class FreeStudyHandler {
     this.studies[this.size++] = study;
   }
 
-<<<<<<< HEAD
-  // 무료 스터디 목록
-  public void list() {
-    System.out.println("[무료 스터디 목록]");
-=======
   // 무료 스터디 조회
   public void list() {
     System.out.println("[무료 스터디 조회]");
->>>>>>> 8940ac7e7cafc2ff59a1b9035eb847ea0211185d
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", this.studies[i].no, this.studies[i].title, this.studies[i].writer,
           this.studies[i].registeredDate, this.studies[i].viewCount, this.studies[i].like);
@@ -103,7 +92,7 @@ public class FreeStudyHandler {
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("무료 스터디 삭제를 취소하였습니다.");
       return;
