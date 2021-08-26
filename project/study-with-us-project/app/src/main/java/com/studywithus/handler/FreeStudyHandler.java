@@ -9,7 +9,7 @@ public class FreeStudyHandler {
 
 	static final int MAX_LENGTH = 5;
 
-	Board[] studys = new Board[MAX_LENGTH];
+	Board[] studies = new Board[MAX_LENGTH];
 	int size = 0;
 
 	// 무료 스터디 생성
@@ -24,15 +24,16 @@ public class FreeStudyHandler {
 		study.writer = Prompt.inputString("팀장? ");
 		study.registeredDate = new Date(System.currentTimeMillis());
 
-		this.studys[this.size++] = study;
+		this.studies[this.size++] = study;
 	}
 
 	// 무료 스터디 목록
 	public void list() {
 		System.out.println("[무료 스터디 목록]");
 		for (int i = 0; i < this.size; i++) {
-			System.out.printf("%d, %s, %s, %s, %d, %d\n", this.studys[i].no, this.studys[i].title, this.studys[i].writer,
-					this.studys[i].registeredDate, this.studys[i].viewCount, this.studys[i].like);
+			System.out.printf("%d, %s, %s, %s, %d, %d\n", this.studies[i].no, this.studies[i].title,
+					this.studies[i].writer, this.studies[i].registeredDate, this.studies[i].viewCount,
+					this.studies[i].like);
 		}
 	}
 
@@ -100,9 +101,9 @@ public class FreeStudyHandler {
 		}
 
 		for (int i = index + 1; i < this.size; i++) {
-			this.studys[i - 1] = this.studys[i];
+			this.studies[i - 1] = this.studies[i];
 		}
-		this.studys[--this.size] = null;
+		this.studies[--this.size] = null;
 
 		System.out.println("무료 스터디를 삭제하였습니다.");
 	}
@@ -110,8 +111,8 @@ public class FreeStudyHandler {
 	// 무료 스터디 번호 조회
 	private Board findByNo(int no) {
 		for (int i = 0; i < this.size; i++) {
-			if (this.studys[i].no == no) {
-				return this.studys[i];
+			if (this.studies[i].no == no) {
+				return this.studies[i];
 			}
 		}
 		return null;
@@ -120,7 +121,7 @@ public class FreeStudyHandler {
 	// 무료 스터디 조회
 	private int indexOf(int no) {
 		for (int i = 0; i < this.size; i++) {
-			if (this.studys[i].no == no) {
+			if (this.studies[i].no == no) {
 				return i;
 			}
 		}
