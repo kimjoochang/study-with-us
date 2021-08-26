@@ -92,7 +92,7 @@ public class ChargeStudyHandler {
 
 	// 유료스터디 삭제요청
 	public void delete() {
-		System.out.println("[유료스터디 삭제]");
+		System.out.println("[유료스터디 삭제요청]");
 		int no = Prompt.inputInt("번호? ");
 
 		int index = indexOf(no);
