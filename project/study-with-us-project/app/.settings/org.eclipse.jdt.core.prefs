@@ -1,24 +1,5 @@
 #
-<<<<<<< HEAD
-<<<<<<< HEAD
-#Thu Aug 26 12:14:22 KST 2021
-=======
-#Thu Aug 26 09:31:10 KST 2021
->>>>>>> 4c98487e842a3bb2b8272a384f77b011bd6c941e
-=======
-#Wed Aug 25 22:43:56 KST 2021
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-#Thu Aug 26 09:22:41 KST 2021
-=======
-#Thu Aug 26 09:31:10 KST 2021
->>>>>>> 59fe3aceefb12c57badb421a8a1719b400e17488
-=======
-#Thu Aug 26 12:14:22 KST 2021
->>>>>>> 9e93643b64a17189cc0e29d68f9bf6419c05aa3d
->>>>>>> d4a460c8037dad0a17211890193e6ff4d21b9297
->>>>>>> f1add4c6bfe9c0d48b040b5faad49b88cf82803c
+#Thu Aug 26 14:18:02 KST 2021
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=11
