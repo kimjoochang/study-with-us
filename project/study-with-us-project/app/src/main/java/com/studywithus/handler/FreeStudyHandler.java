@@ -1,8 +1,8 @@
-package main.java.com.studywithus.handler;
+package com.studywithus.handler;
 
 import java.sql.Date;
-import main.java.com.studywithus.domain.Board;
-import main.java.com.studywithus.util.Prompt;
+import com.studywithus.domain.Board;
+import com.studywithus.util.Prompt;
 
 public class FreeStudyHandler {
 

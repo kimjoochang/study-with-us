@@ -1,11 +1,13 @@
-package main.java.com.studywithus.handler;
+package com.studywithus.handler;
 
-import main.java.com.studywithus.domain.Calender;
-import main.java.com.studywithus.util.Prompt;
+import com.studywithus.domain.Calender;
+import com.studywithus.util.Prompt;
+
 public class CalenderHandler {
   static final int MAX_LENGTH = 5;
   Calender[] calenders = new Calender[MAX_LENGTH];
   int size = 0;
+
   // 캘린더 채용공고 생성
   public void add() {
     System.out.println("채용공고 등록]");
@@ -18,6 +20,7 @@ public class CalenderHandler {
     //    calender.viewCount = 0; // 인스턴스 변수는 생성되는 순간 기본 값이 0으로 설정된다.
     CalenderHandler[] calenders = new CalenderHandler[MAX_LENGTH];
   }
+
   // 캘린더 채용공고 목록
   public void list() {
     System.out.println("[채용공고 목록]");
@@ -30,6 +33,7 @@ public class CalenderHandler {
           this.calenders[i].viewCount );
     }
   }
+
   // 캘린더 채용공고 상세목록
   public void detail() {
     System.out.println("[채용공고 상세보기]");
@@ -45,6 +49,7 @@ public class CalenderHandler {
     System.out.printf("종료일: %s\n", calender.endDate);
     System.out.printf("조회수: %d\n", ++calender.viewCount);
   }
+
   // 캘린더 채용공고 채용공고
   public void update() {
     System.out.println("[채용공고 변경]");
@@ -65,6 +70,7 @@ public class CalenderHandler {
     calender.content = content;
     System.out.println("채용공고를 변경하였습니다.");
   }
+
   // 캘린더 채용공고 삭제
   public void delete() {
     System.out.println("[채용공고 삭제]");
@@ -93,6 +99,7 @@ public class CalenderHandler {
     }
     return null;
   }
+
   // 캘린더 채용공고 조회
   private int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
