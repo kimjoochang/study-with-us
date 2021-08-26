@@ -5,9 +5,6 @@ import main.java.com.studywithus.domain.Calender;
 import main.java.com.studywithus.util.Prompt;
 
 
-
-
-
 public class CalenderHandler {
 
   static final int MAX_LENGTH = 5;
@@ -17,6 +14,7 @@ public class CalenderHandler {
   Calender[] calenders = new Calender[MAX_LENGTH];
   int size = 0;
 
+  // 캘린더 채용공고 생성
   public void add() {
     System.out.println("채용공고 등록]");
 
@@ -34,6 +32,7 @@ public class CalenderHandler {
   }
 
 
+  // 캘린더 채용공고 목록
   public void list() {
     System.out.println("[채용공고 목록]");
     for (int i = 0; i < this.size; i++) {
@@ -47,6 +46,7 @@ public class CalenderHandler {
   }
 
 
+  // 캘린더 채용공고 상세목록
   public void detail() {
     System.out.println("[채용공고 상세보기]");
     int no = Prompt.inputInt("번호? ");
@@ -67,6 +67,7 @@ public class CalenderHandler {
 
 
 
+  // 캘린더 채용공고 채용공고
   public void update() {
     System.out.println("[채용공고 변경]");
     int no = Prompt.inputInt("번호? ");
@@ -92,6 +93,7 @@ public class CalenderHandler {
     System.out.println("채용공고를 변경하였습니다.");
   }
 
+  // 캘린더 채용공고 삭제
   public void delete() {
     System.out.println("[채용공고 삭제]");
     int no = Prompt.inputInt("번호? ");
@@ -117,6 +119,7 @@ public class CalenderHandler {
     System.out.println("채용공고를 삭제하였습니다.");
   }
 
+
   private Calender findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.calenders[i].no == no) {
@@ -126,6 +129,7 @@ public class CalenderHandler {
     return null;
   }
 
+  // 캘린더 채용공고 조회
   private int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.calenders[i].no == no) {

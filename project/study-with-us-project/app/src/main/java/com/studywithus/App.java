@@ -1,10 +1,10 @@
-package com.studywithus;
+package main.java.com.studywithus;
 
-import com.studywithus.handler.CalenderHandler;
-import com.studywithus.handler.ChargeStudyHandler;
-import com.studywithus.handler.CommunityHandler;
-import com.studywithus.handler.FreeStudyHandler;
-import com.studywithus.util.Prompt;
+import main.java.com.studywithus.handler.CalenderHandler;
+import main.java.com.studywithus.handler.ChargeStudyHandler;
+import main.java.com.studywithus.handler.CommunityHandler;
+import main.java.com.studywithus.handler.FreeStudyHandler;
+import main.java.com.studywithus.util.Prompt;
 
 public class App {
 
