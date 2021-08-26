@@ -21,7 +21,7 @@ public class ChargeStudyHandler {
 		study.no = Prompt.inputInt("번호? ");
 		study.title = Prompt.inputString("제목? ");
 		study.content = Prompt.inputString("내용? ");
-		study.writer = Prompt.inputString("팀장? ");
+		study.writer = Prompt.inputString("멘? ");
 		study.registeredDate = new Date(System.currentTimeMillis());
 
 		this.studys[this.size++] = study;
@@ -112,7 +112,7 @@ public class ChargeStudyHandler {
 			return;
 		}
 
-		String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+		String input = Prompt.inputString("정말 삭제 요청 하시겠습니까?(y/N) ");
 		if (input.equalsIgnoreCase("n") || input.length() == 0) {
 			System.out.println("유료 스터디 삭제 요청을 취소하였습니다.");
 			return;
