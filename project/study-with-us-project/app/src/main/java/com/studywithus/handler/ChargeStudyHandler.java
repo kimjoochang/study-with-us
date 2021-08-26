@@ -1,6 +1,7 @@
 package com.studywithus.handler;
 
 import java.sql.Date;
+
 import com.studywithus.domain.Board;
 import com.studywithus.util.Prompt;
 
@@ -148,14 +149,5 @@ public class ChargeStudyHandler {
 		return -1;
 	}
 
-
 }
 
-
-
-
-
-
-
-
-}
