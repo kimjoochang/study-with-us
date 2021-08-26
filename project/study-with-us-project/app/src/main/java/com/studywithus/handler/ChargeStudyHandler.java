@@ -1,6 +1,7 @@
 package com.studywithus.handler;
 
 import java.sql.Date;
+
 import com.studywithus.domain.Board;
 import com.studywithus.util.Prompt;
 
@@ -83,7 +84,7 @@ public class ChargeStudyHandler {
 
 	// 유료 스터디 삭제
 	public void delete() {
-		System.out.println("[유료 스터디 삭제]");
+		System.out.println("[유료 스터디 삭제 요청]");
 		int no = Prompt.inputInt("번호? ");
 
 		int index = indexOf(no);
@@ -93,18 +94,30 @@ public class ChargeStudyHandler {
 			return;
 		}
 
-		String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
+		String input = Prompt.inputString("정말 삭제 요청 하시겠습니까? (y/N) ");
 		if (input.equalsIgnoreCase("n") || input.length() == 0) {
-			System.out.println("유료 스터디 삭제를 취소하였습니다.");
+			System.out.println("유료 스터디 삭제 요청을 취소하였습니다.");
+			return;
+		}
+	}
+
+	// 유료 스터디 상세보기
+	public void deletedDetail() {
+		System.out.println("[삭제 요청된 유료 스터디 상세보기]");
+		int no = Prompt.inputInt("번호? ");
+
+		Board study = findByNo(no);
+
+		if (study == null) {
+			System.out.println("해당 번호의 삭제 요청 유료 스터디가 없습니다.");
 			return;
 		}
 
-		for (int i = index + 1; i < this.size; i++) {
-			this.studies[i - 1] = this.studies[i];
-		}
-		this.studies[--this.size] = null;
-
-		System.out.println("유료 스터디를 삭제하였습니다.");
+		System.out.printf("제목: %s\n", study.title);
+		System.out.printf("내용: %s\n", study.content);
+		System.out.printf("멘토: %s\n", study.writer);
+		System.out.printf("등록일: %s\n", study.registeredDate);
+		System.out.printf("조회수: %d\n", ++study.viewCount);
 	}
 
 	// 유료 스터디 번호 조회
