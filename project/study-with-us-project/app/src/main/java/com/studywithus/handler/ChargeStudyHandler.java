@@ -1,4 +1,4 @@
-package com.studywithus.handler;
+package src.main.java.com.studywithus.handler;
 
 import java.sql.Date;
 
@@ -54,7 +54,7 @@ public class ChargeStudyHandler {
 		Board study = findByNo(no);
 
 		if (study == null) {
-			System.out.println("해당 번호의 게시글이 없습니다.");
+			System.out.println("해당 번호의 유료스터디가 없습니다.");
 			return;
 		}
 
