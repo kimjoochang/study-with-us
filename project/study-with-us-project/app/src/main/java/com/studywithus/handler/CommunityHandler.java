@@ -1,72 +1,68 @@
-package com.studywithus.handler;
-
-public class CommunityHandler {
-
-package com.studywithus.handler;
+package main.java.com.studywithus.handler;
 
 import java.sql.Date;
-import com.studywithus.domain.Board;
-import com.studywithus.util.Prompt;
+import main.java.com.studywithus.domain.Board;
+import main.java.com.studywithus.util.Prompt;
 
 public class CommunityHandler {
 
   static final int MAX_LENGTH = 5;
 
-  Board[] communities = new Board[MAX_LENGTH];
+  Board[] studys = new Board[MAX_LENGTH];
   int size = 0;
 
-  // 커뮤니티 게시글 생성
+  // 무료 커뮤니티 생성
   public void add() {
-    System.out.println("커뮤니티 게시글 생성]");
+    System.out.println("[새 무료 커뮤니티]");
 
-    Board community = new Board();
+    Board study = new Board();
 
-    community.no = Prompt.inputInt("번호? ");
-    community.title = Prompt.inputString("제목? ");
-    community.content = Prompt.inputString("내용? ");
-    community.writer = Prompt.inputString("작성자? ");
-    community.registeredDate = new Date(System.currentTimeMillis());
+    study.no = Prompt.inputInt("번호? ");
+    study.title = Prompt.inputString("제목? ");
+    study.content = Prompt.inputString("내용? ");
+    study.writer = Prompt.inputString("팀장? ");
+    study.registeredDate = new Date(System.currentTimeMillis());
 
-    this.communities[this.size++] = community;
+    this.studys[this.size++] = study;
   }
 
-  // 커뮤니티 게시글 목록
+  // 무료 커뮤니티 목록
   public void list() {
-    System.out.println("[커뮤니티 목록]");
+    System.out.println("[무료 커뮤니티 목록]");
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", this.communities[i].no, this.communities[i].title, this.communities[i].writer,
-          this.communities[i].registeredDate, this.communities[i].viewCount, this.communities[i].like);
+      System.out.printf("%d, %s, %s, %s, %d, %d\n", this.studys[i].no, this.studys[i].title, this.studys[i].writer,
+          this.studys[i].registeredDate, this.studys[i].viewCount, this.studys[i].like);
     }
   }
 
-  // 커뮤니티 게시글 상세보기
+  // 무료 커뮤니티 상세보기
   public void detail() {
-    System.out.println("[커뮤니티 상세보기]");
+    System.out.println("[무료 커뮤니티 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
     Board board = findByNo(no);
 
     if (board == null) {
-      System.out.println("해당 번호의 커뮤니티 게시글이 없습니다.");
+      System.out.println("해당 번호의 무료 커뮤니티가 없습니다.");
       return;
     }
 
     System.out.printf("제목: %s\n", board.title);
     System.out.printf("내용: %s\n", board.content);
-    System.out.printf("작성자: %s\n", board.writer);
+    System.out.printf("팀장: %s\n", board.writer);
     System.out.printf("등록일: %s\n", board.registeredDate);
     System.out.printf("조회수: %d\n", ++board.viewCount);
   }
 
-  // 커뮤니티 게시글 변경
+  // 무료 커뮤니티 변경
   public void update() {
-    System.out.println("[커뮤니티 게시글 변경]");
+    System.out.println("[무료 커뮤니티 변경]");
     int no = Prompt.inputInt("번호? ");
 
     Board board = findByNo(no);
 
     if (board == null) {
-      System.out.println("해당 번호의 커뮤니티 게시글이 없습니다.");
+      System.out.println("해당 번호의 무료 커뮤니티가 없습니다.");
       return;
     }
 
@@ -75,60 +71,58 @@ public class CommunityHandler {
 
     String input = Prompt.inputString("정말 변경하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("커뮤니티 게시글 변경을 취소하였습니다.");
+      System.out.println("무료 커뮤니티 변경을 취소하였습니다.");
       return;
     }
 
     board.title = title;
     board.content = content;
-    System.out.println("커뮤니티 게시글을 변경하였습니다.");
+    System.out.println("무료 커뮤니티를 변경하였습니다.");
   }
 
-  // 커뮤니티 게시글 삭제
+  // 무료 커뮤니티 삭제
   public void delete() {
-    System.out.println("[커뮤니티 게시글 삭제]");
+    System.out.println("[무료 커뮤니티 삭제]");
     int no = Prompt.inputInt("번호? ");
 
     int index = indexOf(no);
 
     if (index == -1) {
-      System.out.println("해당 번호의 커뮤니티 게시글이 없습니다.");
+      System.out.println("해당 번호의 무료 커뮤니티가 없습니다.");
       return;
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("커뮤니티 게시글 삭제를 취소하였습니다.");
+      System.out.println("무료 커뮤니티 삭제를 취소하였습니다.");
       return;
     }
 
     for (int i = index + 1; i < this.size; i++) {
-      this.communities[i - 1] = this.communities[i];
+      this.studys[i - 1] = this.studys[i];
     }
-    this.communities[--this.size] = null;
+    this.studys[--this.size] = null;
 
-    System.out.println("커뮤니티 게시글을 삭제하였습니다.");
+    System.out.println("무료 커뮤니티를 삭제하였습니다.");
   }
 
-  // 커뮤니티 게시글 번호 조회
+  // 무료 커뮤니티 번호 조회
   private Board findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
-      if (this.communities[i].no == no) {
-        return this.communities[i];
+      if (this.studys[i].no == no) {
+        return this.studys[i];
       }
     }
     return null;
   }
 
-  //  커뮤니티 게시글 조회
+  // 무료 커뮤니티 조회
   private int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
-      if (this.communities[i].no == no) {
+      if (this.studys[i].no == no) {
         return i;
       }
     }
     return -1;
   }
-}
-
 }
