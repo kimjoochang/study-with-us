@@ -1,4 +1,4 @@
-package main.java.com.studywithus.handler;
+package com.studywithus.handler;
 
 public class BoardHandler {
 
