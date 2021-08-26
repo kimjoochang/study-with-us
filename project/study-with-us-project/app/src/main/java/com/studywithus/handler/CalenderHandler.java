@@ -3,7 +3,6 @@ package main.java.com.studywithus.handler;
 
 import main.java.com.studywithus.domain.Calender;
 import main.java.com.studywithus.util.Prompt;
-import java.sql.Date;
 
 
 
@@ -31,55 +30,42 @@ public class CalenderHandler {
     //    calender.viewCount = 0; // 인스턴스 변수는 생성되는 순간 기본 값이 0으로 설정된다.
 
     CalenderHandler[] calenders = new CalenderHandler[MAX_LENGTH];
-    int size = 0;
 
-    public void add() {
-      System.out.println("[채용공고 등록]");
-
-      CalenderHandler calender = new CalenderHandler();
-
-      calender.title = Prompt.inputString("제목 ");
-      calender.content = Prompt.inputString("내용? ");
-      calender.startDate = Prompt.inputDate("시작일? ");
-      calender.endDate = Prompt.inputDate("종료일? ");
-
-
-      this.calenders[this.size++] = calender;
-    }
-
-    public void list() {
-      System.out.println("[채용공고 목록]");
-      for (int i = 0; i < this.size; i++) {
-        System.out.printf("%d, %s, %d, %d, %d\n", 
-            this.calenders[i].no,
-            this.calenders[i].title, 
-            this.calenders[i].startDate,
-            this.calenders[i].endDate,
-            this.calenders[i].viewCount );
-      }
-    }
-
-
-    public void detail() {
-      System.out.println("[채용공고 상세보기]");
-      int no = Prompt.inputInt("번호? ");
-
-      Calender calender = findByNo(no);
-
-      if (calender == null) {
-        System.out.println("해당 번호의 채용공고가 없습니다.");
-        return;
-      }
-
-      System.out.printf("제목: %s\n", calender.title);
-      System.out.printf("내용: %s\n", calender.content);
-      System.out.printf("시작일: %s\n", calender.startDate);
-      System.out.printf("종료일: %s\n", calender.endDate);
-      System.out.printf("조회수: %d\n", ++calender.viewCount);
-    }
-
-    this.calenders[this.size++] = calender;
   }
+
+
+  public void list() {
+    System.out.println("[채용공고 목록]");
+    for (int i = 0; i < this.size; i++) {
+      System.out.printf("%d, %s, %d, %d, %d\n", 
+          this.calenders[i].no,
+          this.calenders[i].title, 
+          this.calenders[i].startDate,
+          this.calenders[i].endDate,
+          this.calenders[i].viewCount );
+    }
+  }
+
+
+  public void detail() {
+    System.out.println("[채용공고 상세보기]");
+    int no = Prompt.inputInt("번호? ");
+
+    Calender calender = findByNo(no);
+
+    if (calender == null) {
+      System.out.println("해당 번호의 채용공고가 없습니다.");
+      return;
+    }
+
+    System.out.printf("제목: %s\n", calender.title);
+    System.out.printf("내용: %s\n", calender.content);
+    System.out.printf("시작일: %s\n", calender.startDate);
+    System.out.printf("종료일: %s\n", calender.endDate);
+    System.out.printf("조회수: %d\n", ++calender.viewCount);
+  }
+
+
 
   public void update() {
     System.out.println("[채용공고 변경]");
