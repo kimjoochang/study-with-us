@@ -1,4 +1,4 @@
-package com.studywithus.domain;
+package main.java.com.studywithus.domain;
 import java.sql.Date;
 
 
