@@ -1,5 +1,9 @@
 #
+<<<<<<< HEAD
 #Thu Aug 26 09:31:10 KST 2021
+=======
+#Thu Aug 26 12:14:22 KST 2021
+>>>>>>> 9e93643b64a17189cc0e29d68f9bf6419c05aa3d
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=11
