@@ -1,8 +1,8 @@
-package com.studywithus.handler;
+package main.java.com.studywithus.handler;
 
 import java.sql.Date;
-import com.studywithus.domain.Board;
-import com.studywithus.util.Prompt;
+import main.java.com.studywithus.domain.Board;
+import main.java.com.studywithus.util.Prompt;
 
 public class CommunityHandler {
 
