@@ -15,16 +15,15 @@ public class FreeStudyHandler {
   public void add() {
     System.out.println("[새 무료 스터디]");
 
-    Board board = new Board();
+    Board study = new Board();
 
-    board.no = Prompt.inputInt("번호? ");
-    board.title = Prompt.inputString("제목? ");
-    board.content = Prompt.inputString("내용? ");
-    board.writer = Prompt.inputString("팀장? ");
-    board.registeredDate = new Date(System.currentTimeMillis());
-    // board.viewCount = 0; // 인스턴스 변수는 생성되는 순간 기본 값이 0으로 설정된다.
+    study.no = Prompt.inputInt("번호? ");
+    study.title = Prompt.inputString("제목? ");
+    study.content = Prompt.inputString("내용? ");
+    study.writer = Prompt.inputString("팀장? ");
+    study.registeredDate = new Date(System.currentTimeMillis());
 
-    this.studys[this.size++] = board;
+    this.studys[this.size++] = study;
   }
 
   // 무료 스터디 목록
@@ -67,8 +66,8 @@ public class FreeStudyHandler {
       return;
     }
 
-    String title = Prompt.inputString(String.format("제목(%s)? ", board.title));
-    String content = Prompt.inputString(String.format("내용(%s)? ", board.content));
+    String title = Prompt.inputString(String.format("[%s] 수정된 제목: ", board.title));
+    String content = Prompt.inputString(String.format("[%s] 수정된 내용: ", board.content));
 
     String input = Prompt.inputString("정말 변경하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
