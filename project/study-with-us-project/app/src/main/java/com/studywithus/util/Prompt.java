@@ -1,4 +1,4 @@
-package main.java.com.studywithus.util;
+package com.studywithus.util;
 
 import java.sql.Date;
 import java.util.Scanner;
