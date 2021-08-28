@@ -166,11 +166,11 @@ public class App {
             }
             break Main;
           
-            case 3 :
-            newMemberHandler.add();
-            continue Main;
+          case 3 :
+          newMemberHandler.add();
+          continue Main;
           
-            case 4 : System.out.println("종료되었습니다.");
+          case 4 : System.out.println("종료되었습니다.");
           break Main;
           
           default : System.out.println("잘못된 번호입니다");
