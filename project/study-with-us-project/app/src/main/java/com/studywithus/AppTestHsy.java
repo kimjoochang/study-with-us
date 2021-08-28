@@ -96,35 +96,26 @@ public class AppTestHsy {
 									} else if (input == 3) {
 										chargeStudyHandler.detail(); // 상세보기
 
-										System.out.println("0. 이전");
-										System.out.println("1. 신청하기");
+										while(true) {
+											System.out.println("[유료 스터디 상세보기]\n");
+											System.out.println("0. 이전");
+											System.out.println("1. 결제하기");
+											input = Prompt.inputInt("메뉴를 선택해주세요> ");
 
-										if (input == 1) {
-											String input1 = Prompt.inputString("유료 스터디를 신청 하시겠습니까? (y/N)");
-											if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
-												System.out.println(" 유료 스터디 신청을 취소하셨습니다.");
-												return;
-											}
-											else {
-												System.out.println("유료스터디를 신청하셨습니다.");
-
-											} if (
-													System.out.println("0. 이전");
-													System.out.println("1. 결제하기");
-
-													)
+											if (input == 1) {
 												String input1 = Prompt.inputString("유료 스터디를 결제 하시겠습니까? (y/N)");
-											if (input.equalsIgnoreCase("n")) {
-												System.out.println(" 유료 스터디 결제를 취소하셨습니다.");
-												return;
-											} else {
+												if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
+													System.out.println(" 유료 스터디 결제를 취소하셨습니다.");
+													continue;
+												}
+												else {
+													System.out.println("유료스터디를 결제 하셨습니다.");
 
+												}
+
+												System.out.println("유료 스터디 결제가 완료 되었습니다.");
 											}
-											break;
-
-											System.out.println("유료 스터디 결제가 완료 되었습니다.");
 										}
-
 
 									}
 									else if (input == 4) {
