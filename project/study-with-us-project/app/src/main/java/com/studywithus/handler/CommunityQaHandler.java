@@ -4,16 +4,16 @@ import java.sql.Date;
 import com.studywithus.domain.Community;
 import com.studywithus.util.Prompt;
 
-public class CommunityHandler {
+public class CommunityQaHandler {
 
   static final int MAX_LENGTH = 5;
 
   Community[] communities = new Community[MAX_LENGTH];
   int size = 0;
 
-  // 커뮤니티 생성
+  // 새 질문 생성
   public void add() {
-    System.out.println("[새 커뮤니티 게시글]");
+    System.out.println("[새 질문 게시글]");
 
     Community community = new Community();
 
@@ -26,9 +26,9 @@ public class CommunityHandler {
     this.communities[this.size++] = community;
   }
 
-  // 커뮤니티 조회
+  // 새 질문 조회
   public void list() {
-    System.out.println("[커뮤니티 조회]");
+    System.out.println("[질문 조회]");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", this.communities[i].no, this.communities[i].title,
           this.communities[i].writer, this.communities[i].registeredDate, this.communities[i].viewCount,
@@ -36,15 +36,15 @@ public class CommunityHandler {
     }
   }
 
-  // 커뮤니티 상세보기
+  // 새 질문 상세보기
   public void detail() {
-    System.out.println("[커뮤니티 상세보기]");
+    System.out.println("[질문 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
     Community community = findByNo(no);
 
     if (community == null) {
-      System.out.println("해당 번호의 커뮤니티 게시글이 없습니다.");
+      System.out.println("해당 번호의 질문 게시글이 없습니다.");
       return;
     }
 
@@ -55,15 +55,15 @@ public class CommunityHandler {
     System.out.printf("조회수: %d\n", ++community.viewCount);
   }
 
-  // 커뮤니티 게시글 수정
+  // 질문 게시글 수정
   public void update() {
-    System.out.println("[커뮤니티 수정]");
+    System.out.println("[질문 수정]");
     int no = Prompt.inputInt("번호? ");
 
     Community community = findByNo(no);
 
     if (community == null) {
-      System.out.println("해당 번호의 커뮤니티 게시글이 없습니다.");
+      System.out.println("해당 번호의 질문 게시글이 없습니다.");
       return;
     }
 
@@ -72,30 +72,30 @@ public class CommunityHandler {
 
     String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("커뮤니티 게시글 수정을 취소하였습니다.");
+      System.out.println("질문 게시글 수정을 취소하였습니다.");
       return;
     }
 
     community.title = title;
     community.content = content;
-    System.out.println("커뮤니티 게시글을 수정하였습니다.");
+    System.out.println("질문 게시글을 수정하였습니다.");
   }
 
-  // 커뮤니티 삭제
+  // 질문 게시글
   public void delete() {
-    System.out.println("[커뮤니티 게시글 삭제]");
+    System.out.println("[질문 게시글 삭제]");
     int no = Prompt.inputInt("번호? ");
 
     int index = indexOf(no);
 
     if (index == -1) {
-      System.out.println("해당 번호의 커뮤니티 게시글이 없습니다.");
+      System.out.println("해당 번호의 질문 게시글이 없습니다.");
       return;
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("커뮤니티 게시글 삭제를 취소하였습니다.");
+      System.out.println("질문 게시글 삭제를 취소하였습니다.");
       return;
     }
 
@@ -104,10 +104,10 @@ public class CommunityHandler {
     }
     this.communities[--this.size] = null;
 
-    System.out.println("커뮤니티 게시글을 삭제하였습니다.");
+    System.out.println("질문 게시글을 삭제하였습니다.");
   }
 
-  // 커뮤니티 게시글 번호 조회
+  // 질문 게시글 번호 조회
   private Community findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.communities[i].no == no) {
@@ -117,7 +117,7 @@ public class CommunityHandler {
     return null;
   }
 
-  // 커뮤니티 게시글 조회
+  // 질문 게시글 조회
   private int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.communities[i].no == no) {
@@ -126,4 +126,5 @@ public class CommunityHandler {
     }
     return -1;
   }
+
 }
