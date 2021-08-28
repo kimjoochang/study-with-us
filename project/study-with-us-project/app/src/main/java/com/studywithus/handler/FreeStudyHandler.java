@@ -17,11 +17,12 @@ public class FreeStudyHandler {
 
     FreeStudy study = new FreeStudy();
 
+    study.no = Prompt.inputInt("번호? ");
     study.writer = Prompt.inputString("팀장? ");
 
     System.out.println("온/오프라인?");
-    System.out.println("1: 온라인");
-    System.out.println("2: 오프라인");
+    System.out.println("1. 온라인");
+    System.out.println("2. 오프라인");
     study.onOffLine = Prompt.inputString("> ");
 
     if (study.onOffLine.equals("2")) {
