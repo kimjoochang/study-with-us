@@ -2,27 +2,30 @@ package com.studywithus.handler;
 
 import java.sql.Date;
 
-import com.studywithus.domain.Board;
+import com.studywithus.domain.ChargeStudy;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyHandler {
 
 	static final int MAX_LENGTH = 5;
 
-	Board[] studies = new Board[MAX_LENGTH];
+	ChargeStudy[] studies = new ChargeStudy[MAX_LENGTH];
 	int size = 0;
 
 	// 유료 스터디 생성
 	public void add() {
 		System.out.println("[새 유료 스터디]");
 
-		Board study = new Board();
+		ChargeStudy study = new ChargeStudy();
 
+		study.writer = Prompt.inputString("멘토? ");
 		study.no = Prompt.inputInt("번호? ");
+		study.area = Prompt.inputString("지역? ");
+
+
 		study.title = Prompt.inputString("스터디 제목? ");
 		study.explanation = Prompt.inputString("스터디 설명? ");
-		study.writer = Prompt.inputString("멘토? ");
-		study.area = Prompt.inputString("지역? ");
+		study.price = Prompt.inputInt("가격?" );
 		study.registeredDate = new Date(System.currentTimeMillis());
 
 		this.studies[this.size++] = study;
@@ -43,7 +46,7 @@ public class ChargeStudyHandler {
 		System.out.println("[유료 스터디 상세보기]");
 		int no = Prompt.inputInt("번호? ");
 
-		Board study = findByNo(no);
+		ChargeStudy study = findByNo(no);
 
 		if (study == null) {
 			System.out.println("해당 번호의 유료 스터디가 없습니다.");
@@ -52,17 +55,38 @@ public class ChargeStudyHandler {
 
 		System.out.printf("스터디 제목: %s\n", study.title);
 		System.out.printf("스터디 설명: %s\n", study.explanation);
+		System.out.printf("지역: %s\n", study.area);
 		System.out.printf("멘토: %s\n", study.writer);
+		System.out.printf("가격: %qs\n", study.price);
 		System.out.printf("등록일: %s\n", study.registeredDate);
 		System.out.printf("조회수: %d\n", ++study.viewCount);
+
+		// 유료 스터디 결제
+		System.out.println("------------------------------------");
+		String input = Prompt.inputString("결제 하시겠습니까? (y/N) ");
+		if (input.equalsIgnoreCase("n") || input.length() == 0) {
+			System.out.println("유료 스터디 결제를 취소하였습니다.");
+			return;
+		}
+
+		System.out.println("결제 이용약관입니다.");
+
+		String input = Prompt.inputString("이용약관에 동의하십니까? (y/N) ");
+		if (input.equalsIgnoreCase("n") || input.length() == 0) {
+			System.out.println("결제 이용약관 동의를 취소하셨습니다.");
+			return;
+		}
+
+
 	}
+
 
 	// 유료 스터디 변경
 	public void update() {
 		System.out.println("[유료 스터디 변경]");
 		int no = Prompt.inputInt("번호? ");
 
-		Board study = findByNo(no);
+		ChargeStudy study = findByNo(no);
 
 		if (study == null) {
 			System.out.println("해당 번호의 유료 스터디가 없습니다.");
@@ -107,7 +131,7 @@ public class ChargeStudyHandler {
 		System.out.println("[삭제 요청된 유료 스터디 상세보기]");
 		int no = Prompt.inputInt("번호? ");
 
-		Board study = findByNo(no);
+		ChargeStudy study = findByNo(no);
 
 		if (study == null) {
 			System.out.println("해당 번호의 삭제 요청 유료 스터디가 없습니다.");
@@ -116,13 +140,15 @@ public class ChargeStudyHandler {
 
 		System.out.printf("스터디 제목: %s\n", study.title);
 		System.out.printf("스터디 설명: %s\n", study.explanation);
+		System.out.printf("지역: %s\n", study.area);
+		System.out.printf("가격: %s\n", study.price);
 		System.out.printf("멘토: %s\n", study.writer);
 		System.out.printf("등록일: %s\n", study.registeredDate);
 		System.out.printf("조회수: %d\n", ++study.viewCount);
 	}
 
 	// 유료 스터디 번호 조회
-	private Board findByNo(int no) {
+	private ChargeStudy findByNo(int no) {
 		for (int i = 0; i < this.size; i++) {
 			if (this.studies[i].no == no) {
 				return this.studies[i];
