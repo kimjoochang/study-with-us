@@ -69,14 +69,17 @@ public class ChargeStudyHandler {
 			return;
 		}
 
-		System.out.println("결제 이용약관입니다.");
+		System.out.println("결제 이용약관입니다."
+				+ "(＼(＼     \n"
+				+ "(  -.- )~♥\n"
+				+ " O_(\")(\")");
 
-		String input = Prompt.inputString("이용약관에 동의하십니까? (y/N) ");
-		if (input.equalsIgnoreCase("n") || input.length() == 0) {
+		String input1 = Prompt.inputString("이용약관에 동의하십니까? (y/N) ");
+		if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
 			System.out.println("결제 이용약관 동의를 취소하셨습니다.");
 			return;
 		}
-
+		System.out.println("결제가 완료됐습니다.");
 
 	}
 
@@ -180,17 +183,4 @@ public class ChargeStudyHandler {
 	//	= > 유료스터디 약관 조회
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
