@@ -1,7 +1,7 @@
-package com.studywithus.handler;
+package main.java.com.studywithus.handler;
 
-import com.studywithus.domain.NewMember;
-import com.studywithus.util.Prompt;
+import main.java.com.studywithus.domain.NewMember;
+import main.java.com.studywithus.util.Prompt;
 
 public class NewMemberHandler {
   static final int MAX_LENGTH = 5;

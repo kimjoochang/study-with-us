@@ -1,4 +1,4 @@
-package com.studywithus.domain;
+package main.java.com.studywithus.domain;
 
 public class NewMember {
   public String name;
