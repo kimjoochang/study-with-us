@@ -36,6 +36,11 @@ public class FreeStudyHandler {
     this.studies[this.size++] = study;
   }
 
+  // 무료 스터디 신청
+  public void apply() {
+    System.out.println("[무료 스터디 신청]");
+  }
+
   // 무료 스터디 조회
   public void list() {
     System.out.println("[무료 스터디 조회]");
@@ -82,15 +87,15 @@ public class FreeStudyHandler {
     String title = Prompt.inputString(String.format("[%s] 수정된 제목: ", study.title));
     String explanation = Prompt.inputString(String.format("[%s] 수정된 내용: ", study.explanation));
 
-    String input = Prompt.inputString("정말 변경하시겠습니까? (y/N) ");
+    String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("무료 스터디 변경을 취소하였습니다.");
+      System.out.println("무료 스터디 수정을 취소하였습니다.");
       return;
     }
 
     study.title = title;
     study.explanation = explanation;
-    System.out.println("무료 스터디를 변경하였습니다.");
+    System.out.println("무료 스터디를 수정하였습니다.");
   }
 
   // 무료 스터디 삭제
