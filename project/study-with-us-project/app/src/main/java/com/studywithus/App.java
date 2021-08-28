@@ -1,5 +1,6 @@
 package com.studywithus;
 
+import com.studywithus.domain.InterestList;
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyHandler;
 import com.studywithus.handler.CommunityHandler;
@@ -11,6 +12,7 @@ public class App {
 
   public static void main(String[] args) {
 
+    InterestList[] interests = new InterestList[100];
     FreeStudyHandler freeStudyHandler = new FreeStudyHandler();
     CommunityHandler communityHandler = new CommunityHandler();
     NewMemberHandler newMemberHandler = new NewMemberHandler();
@@ -39,29 +41,30 @@ public class App {
       }
 
       else if (input == 2) { // 로그인
-        Login : while(true) {
+        while(true) {
           for (int i=0; i < newMemberHandler.newMembers.length;) {
             String id = Prompt.inputString("아이디 입력: ");
             String pwd = Prompt.inputString("비밀번호 입력: ");
+            Login : while(true) {
+              if (id.equals(NewMember.adminId)&&pwd.equals(NewMember.adminPwd)) { // 아이디 매칭
+                input = adminMenuList();
 
-            if (id.equals(NewMember.adminId)&&pwd.equals(NewMember.adminPwd)) { // 아이디 매칭
-              input = adminMenuList();
+                if (input ==0) { // 메서드 추출할 예정
+                  System.out.println("로그아웃이 완료되었습니다.");
+                  continue Main;
+                } else if (input > 4) {
+                  System.out.println("잘못된 번호입니다.");
+                }
 
-              if (input ==0) { // 메서드 추출할 예정
-                System.out.println("로그아웃이 완료되었습니다.");
-                continue Main;
-              } else if (input > 4) {
-                System.out.println("잘못된 번호입니다.");
+              } else if (!id.equals(newMemberHandler.newMembers[i].id) || !pwd.equals(newMemberHandler.newMembers[i].pwd)) {
+                System.out.println("아이디 또는 비밀번호가 다릅니다.\n");
+                continue;
+              } else {
+                System.out.println();
+                System.out.println("로그인이 완료되었습니다.\n");
               }
-
-            } else if (!id.equals(newMemberHandler.newMembers[i].id) || !pwd.equals(newMemberHandler.newMembers[i].pwd)) {
-              System.out.println("아이디 또는 비밀번호가 다릅니다.\n");
-              continue Login;
-            } else {
-              System.out.println();
-              System.out.println("로그인이 완료되었습니다.\n");
-
               input = memberMenuList(); // 로그인 성공 후 메뉴
+
               if (input==0) {
                 System.out.println("로그아웃이 완료되었습니다.");
                 continue Main;
@@ -108,7 +111,7 @@ public class App {
                 }
 
               } else if (input == 3) { // 관심목록 메뉴
-                Interest : while (true) {
+                InterestList : while (true) {
                   System.out.println("[관심목록]\n");
                   System.out.println("1. 조회");
                   System.out.println("2. 삭제");
@@ -116,19 +119,80 @@ public class App {
                 }
               } else if (input == 4) { // 커뮤니티 메뉴
                 Community : while (true) {
+                  System.out.println("[커뮤니티]");
+                  System.out.println("1. 질문");
+                  System.out.println("2. 정보");
+                  System.out.println("3. 스몰톡");
+                  System.out.println("0. 이전\n");
 
-                  input = communityMenuList();
-                  if (input == 1) {
-                    communityHandler.add();
-                  } else if (input == 2) {
-                    communityHandler.list();
-                  } else if (input == 3) {
-                    communityHandler.detail();
-                  } else if (input == 4) {
-                    communityHandler.update();
-                  } else if (input == 5) {
-                    communityHandler.delete();
-                  } else if (input == 0) {
+                  input = Prompt.inputInt("게시판을 선택해주세요. >");
+                  if(input == 1) {
+                    while(true) {
+                      System.out.println();
+                      System.out.println("[커뮤니티 / 질문]\n");
+                      input = communityMenuList();
+                      if (input == 1) {
+                        communityHandler.add();
+                      } else if (input == 2) {
+                        communityHandler.list();
+                      } else if (input == 3) {
+                        communityHandler.detail();
+                      } else if (input == 4) {
+                        communityHandler.update();
+                      } else if (input == 5) {
+                        communityHandler.delete();
+                      } else if (input == 0) {
+                        continue Community;
+                      }else {
+                        System.out.println("잘못된 번호입니다.");
+                        continue;
+                      }
+                    }
+                  } else if(input == 2) {
+                    while(true) {
+                      System.out.println();
+                      System.out.println("[커뮤니티 / 정보]\n");
+                      input = communityMenuList();
+                      if (input == 1) {
+                        communityHandler.add();
+                      } else if (input == 2) {
+                        communityHandler.list();
+                      } else if (input == 3) {
+                        communityHandler.detail();
+                      } else if (input == 4) {
+                        communityHandler.update();
+                      } else if (input == 5) {
+                        communityHandler.delete();
+                      } else if (input == 0) {
+                        continue Community;
+                      }else {
+                        System.out.println("잘못된 번호입니다.");
+                        continue;
+                      }
+                    }
+                  }else if(input == 3) {
+                    while(true) {
+                      System.out.println();
+                      System.out.println("[커뮤니티 / 스몰톡]\n");
+                      input = communityMenuList();
+                      if (input == 1) {
+                        communityHandler.add();
+                      } else if (input == 2) {
+                        communityHandler.list();
+                      } else if (input == 3) {
+                        communityHandler.detail();
+                      } else if (input == 4) {
+                        communityHandler.update();
+                      } else if (input == 5) {
+                        communityHandler.delete();
+                      } else if (input == 0) {
+                        continue Community;
+                      }else {
+                        System.out.println("잘못된 번호입니다.");
+                        continue;
+                      }
+                    }
+                  }else if(input == 0) {
                     continue Login;
                   }else {
                     System.out.println("잘못된 번호입니다.");
@@ -139,6 +203,7 @@ public class App {
             }
           }
         }
+
       } else if (input == 3) { // 회원가입
         newMemberHandler.add();
       } else if (input == 4) {
@@ -151,15 +216,12 @@ public class App {
   }
 
 
-
-
-
   private static int chargeStudyMenu() {
     System.out.println("[유료 스터디]\n");
     System.out.println("1. 생성");
     System.out.println("2. 조회");
     System.out.println("3. 상세보기");
-    System.out.println("4. 수정");
+    System.out.println("4. 변경");
     System.out.println("5. 삭제");
     System.out.println("0. 이전\n");
     int input4 = Prompt.inputInt("메뉴를 선택해주세요. > ");
@@ -172,7 +234,7 @@ public class App {
     System.out.println("1. 생성");
     System.out.println("2. 조회");
     System.out.println("3. 상세보기");
-    System.out.println("4. 수정");
+    System.out.println("4. 변경");
     System.out.println("5. 삭제");
     System.out.println("0. 이전\n");
     int input3 = Prompt.inputInt("메뉴를 선택해주세요. > ");
@@ -231,13 +293,13 @@ public class App {
   }
 
   private static int communityMenuList() {
-    System.out.println("[커뮤니티]\n");
+
     System.out.println("1. 생성");
     System.out.println("2. 조회");
     System.out.println("3. 상세보기");
-    System.out.println("4. 수정");
+    System.out.println("4. 변경");
     System.out.println("5. 삭제");
-    System.out.println("0. 이전");
+    System.out.println("0. 이전\n");
     int input = Prompt.inputInt("메뉴를 선택해주세요. > ");
     System.out.println();
     return input;
