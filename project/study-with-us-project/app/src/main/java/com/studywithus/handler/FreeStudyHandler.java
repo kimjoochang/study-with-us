@@ -46,7 +46,7 @@ public class FreeStudyHandler {
   public void list() {
     System.out.println("[무료 스터디 조회]");
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", this.studies[i].no, this.studies[i].title, this.studies[i].writer,
+      System.out.printf("%d, %s, %s, %s, %d\n", this.studies[i].no, this.studies[i].title, this.studies[i].writer,
           this.studies[i].registeredDate, this.studies[i].viewCount);
     }
   }
