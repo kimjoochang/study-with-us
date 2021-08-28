@@ -67,18 +67,18 @@ public class CommunityHandler {
       return;
     }
 
-    String title = Prompt.inputString(String.format("[%s] 수정된 제목: ", community.title));
-    String content = Prompt.inputString(String.format("[%s] 수정된 내용: ", community.content));
+    String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", community.title));
+    String content = Prompt.inputString(String.format("[%s] 수정할 내용: ", community.content));
 
-    String input = Prompt.inputString("정말 변경하시겠습니까? (y/N) ");
+    String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("커뮤니티 게시글 변경을 취소하였습니다.");
+      System.out.println("커뮤니티 게시글 수정을 취소하였습니다.");
       return;
     }
 
     community.title = title;
     community.content = content;
-    System.out.println("커뮤니티 게시글을 변경하였습니다.");
+    System.out.println("커뮤니티 게시글을 수정하였습니다.");
   }
 
   // 커뮤니티 삭제
