@@ -1,21 +1,21 @@
 package com.studywithus.handler;
 
 import java.sql.Date;
-import com.studywithus.domain.Board;
+import com.studywithus.domain.Community;
 import com.studywithus.util.Prompt;
 
 public class CommunityHandler {
 
   static final int MAX_LENGTH = 5;
 
-  Board[] communities = new Board[MAX_LENGTH];
+  Community[] communities = new Community[MAX_LENGTH];
   int size = 0;
 
   // 커뮤니티 생성
   public void add() {
-    System.out.println("[새 커뮤니티]");
+    System.out.println("[새 커뮤니티 게시글]");
 
-    Board community = new Board();
+    Community community = new Community();
 
     community.no = Prompt.inputInt("번호? ");
     community.title = Prompt.inputString("제목? ");
@@ -41,7 +41,7 @@ public class CommunityHandler {
     System.out.println("[커뮤니티 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
-    Board community = findByNo(no);
+    Community community = findByNo(no);
 
     if (community == null) {
       System.out.println("해당 번호의 커뮤니티 게시글이 없습니다.");
@@ -60,7 +60,7 @@ public class CommunityHandler {
     System.out.println("[커뮤니티 변경]");
     int no = Prompt.inputInt("번호? ");
 
-    Board community = findByNo(no);
+    Community community = findByNo(no);
 
     if (community == null) {
       System.out.println("해당 번호의 커뮤니티 게시글이 없습니다.");
@@ -108,7 +108,7 @@ public class CommunityHandler {
   }
 
   // 커뮤니티 게시글 번호 조회
-  private Board findByNo(int no) {
+  private Community findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.communities[i].no == no) {
         return this.communities[i];
