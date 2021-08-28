@@ -59,31 +59,31 @@ public class ChargeStudyHandler {
 		System.out.printf("스터디 설명: %s\n", study.explanation);
 		System.out.printf("지역: %s\n", study.area);
 		System.out.printf("멘토: %s\n", study.writer);
-		System.out.printf("가격: %qs\n", study.price);
+		System.out.printf("가격: %s\n", study.price);
 		System.out.printf("등록일: %s\n", study.registeredDate);
 		System.out.printf("조회수: %d\n", ++study.viewCount);
 
 
-		// 유료 스터디 결제
-		System.out.println("------------------------------------");
-		String input = Prompt.inputString("결제 하시겠습니까? (y/N) ");
-		if (input.equalsIgnoreCase("n") || input.length() == 0) {
-			System.out.println("유료 스터디 결제를 취소하였습니다.");
-			return;
-		}
-
-		System.out.println("결제 이용약관입니다."
-				+ "(＼(＼     \n"
-				+ "(  -.- )~♥\n"
-				+ " O_(\")(\")");
-
-		String input1 = Prompt.inputString("이용약관에 동의하십니까? (y/N) ");
-		if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
-			System.out.println("결제 이용약관 동의를 취소하셨습니다.");
-			return;
-		}
-		System.out.println("결제가 완료되셨습니다.");
-
+		//		유료 스터디 결제
+		//		System.out.println("------------------------------------");
+		//		String input = Prompt.inputString("결제 하시겠습니까? (y/N) ");
+		//		if (input.equalsIgnoreCase("n") || input.length() == 0) {
+		//			System.out.println("유료 스터디 결제를 취소하였습니다.");
+		//			return;
+		//		}
+		//
+		//		System.out.println("결제 이용약관입니다."
+		//				+ "(＼(＼     \n"
+		//				+ "(  -.- )~♥\n"
+		//				+ " O_(\")(\")");
+		//		System.out.println("------------------------------------");
+		//		String input1 = Prompt.inputString("이용약관에 동의하십니까? (y/N) ");
+		//		if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
+		//			System.out.println("결제 이용약관 동의를 취소하셨습니다.");
+		//			return;
+		//		}
+		//		System.out.println("결제가 완료되셨습니다.");
+		//
 	}
 
 

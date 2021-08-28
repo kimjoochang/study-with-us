@@ -115,7 +115,8 @@ public class AppTestHsy {
 
 												System.out.println("유료 스터디 결제가 완료 되었습니다.");
 											}
-										}
+											continue Charge;
+										} 
 
 									}
 									else if (input == 4) {
