@@ -29,7 +29,9 @@ public class ChargeStudyHandler {
 		study.registeredDate = new Date(System.currentTimeMillis());
 
 		this.studies[this.size++] = study;
+		System.out.println("유료스터디 등록이 완료되었습니다.");
 	}
+
 
 	// 유료 스터디 조회
 	public void list() {
@@ -61,6 +63,7 @@ public class ChargeStudyHandler {
 		System.out.printf("등록일: %s\n", study.registeredDate);
 		System.out.printf("조회수: %d\n", ++study.viewCount);
 
+
 		// 유료 스터디 결제
 		System.out.println("------------------------------------");
 		String input = Prompt.inputString("결제 하시겠습니까? (y/N) ");
@@ -79,14 +82,14 @@ public class ChargeStudyHandler {
 			System.out.println("결제 이용약관 동의를 취소하셨습니다.");
 			return;
 		}
-		System.out.println("결제가 완료됐습니다.");
+		System.out.println("결제가 완료되셨습니다.");
 
 	}
 
 
-	// 유료 스터디 변경
+	// 유료 스터디 수정
 	public void update() {
-		System.out.println("[유료 스터디 변경]");
+		System.out.println("[유료 스터디 수정]");
 		int no = Prompt.inputInt("번호? ");
 
 		ChargeStudy study = findByNo(no);
@@ -99,15 +102,15 @@ public class ChargeStudyHandler {
 		String title = Prompt.inputString(String.format("[%s] 수정된 스터디 제목: ", study.title));
 		String explanation = Prompt.inputString(String.format("[%s] 수정된 내용: ", study.explanation));
 
-		String input = Prompt.inputString("정말 변경하시겠습니까? (y/N) ");
+		String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
 		if (input.equalsIgnoreCase("n") || input.length() == 0) {
-			System.out.println("유료 스터디 변경을 취소하였습니다.");
+			System.out.println("유료 스터디 수정을 취소하였습니다.");
 			return;
 		}
 
 		study.title = title;
 		study.explanation = explanation;
-		System.out.println("유료 스터디를 변경하였습니다.");
+		System.out.println("유료 스터디를 수정하였습니다.");
 	}
 
 	// 유료 스터디 삭제 요청
@@ -144,8 +147,8 @@ public class ChargeStudyHandler {
 		System.out.printf("스터디 제목: %s\n", study.title);
 		System.out.printf("스터디 설명: %s\n", study.explanation);
 		System.out.printf("지역: %s\n", study.area);
-		System.out.printf("가격: %s\n", study.price);
 		System.out.printf("멘토: %s\n", study.writer);
+		System.out.printf("가격: %s\n", study.price);
 		System.out.printf("등록일: %s\n", study.registeredDate);
 		System.out.printf("조회수: %d\n", ++study.viewCount);
 	}
