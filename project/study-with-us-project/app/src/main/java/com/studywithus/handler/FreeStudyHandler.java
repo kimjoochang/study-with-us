@@ -34,6 +34,7 @@ public class FreeStudyHandler {
     study.registeredDate = new Date(System.currentTimeMillis());
 
     this.studies[this.size++] = study;
+    System.out.println("무료 스터디 등록이 완료되었습니다.");
   }
 
   // 무료 스터디 신청
