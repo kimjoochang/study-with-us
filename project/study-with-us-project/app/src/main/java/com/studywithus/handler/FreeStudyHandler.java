@@ -40,8 +40,8 @@ public class FreeStudyHandler {
   public void list() {
     System.out.println("[무료 스터디 조회]");
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %d, %d, %s\n", this.studies[i].no, this.studies[i].title, this.studies[i].writer,
-          this.studies[i].registeredDate, this.studies[i].viewCount, this.studies[i].like);
+      System.out.printf("%d, %s, %s, %s, %d, %d\n", this.studies[i].no, this.studies[i].title, this.studies[i].writer,
+          this.studies[i].registeredDate, this.studies[i].viewCount);
     }
   }
 
@@ -60,6 +60,9 @@ public class FreeStudyHandler {
     System.out.printf("제목: %s\n", study.title);
     System.out.printf("내용: %s\n", study.explanation);
     System.out.printf("팀장: %s\n", study.writer);
+    System.out.printf("지역: %s\n", study.area);
+    System.out.printf("설명: %s\n", study.explanation);
+    System.out.printf("룰: %s\n", study.rule);
     System.out.printf("등록일: %s\n", study.registeredDate);
     System.out.printf("조회수: %d\n", ++study.viewCount);
   }
