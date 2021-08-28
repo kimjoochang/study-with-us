@@ -17,10 +17,15 @@ public class FreeStudyHandler {
 
     Board study = new Board();
 
-    study.no = Prompt.inputInt("번호? ");
+    study.writer = Prompt.inputString("팀장? ");
+    study.onOffLine = Prompt.inputString("온/오프라인? ");
+    if (onOffLine.equals("오프라인")) {
+      study.area = Prompt.inputString("지역? ");
+    }
     study.title = Prompt.inputString("제목? ");
     study.content = Prompt.inputString("내용? ");
-    study.writer = Prompt.inputString("팀장? ");
+    study.explanation = Prompt.inputString("설명? ");
+    study.rule = Prompt.inputString("룰? ");
     study.registeredDate = new Date(System.currentTimeMillis());
 
     this.studies[this.size++] = study;
