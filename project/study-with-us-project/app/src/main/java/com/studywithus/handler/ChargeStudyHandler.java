@@ -19,9 +19,10 @@ public class ChargeStudyHandler {
 		Board study = new Board();
 
 		study.no = Prompt.inputInt("번호? ");
-		study.title = Prompt.inputString("제목? ");
-		study.content = Prompt.inputString("내용? ");
+		study.title = Prompt.inputString("스터디 제목? ");
+		study.explanation = Prompt.inputString("스터디 설명? ");
 		study.writer = Prompt.inputString("멘토? ");
+		study.area = Prompt.inputString("지역? ");
 		study.registeredDate = new Date(System.currentTimeMillis());
 
 		this.studies[this.size++] = study;
@@ -49,8 +50,8 @@ public class ChargeStudyHandler {
 			return;
 		}
 
-		System.out.printf("제목: %s\n", study.title);
-		System.out.printf("내용: %s\n", study.content);
+		System.out.printf("스터디 제목: %s\n", study.title);
+		System.out.printf("스터디 설명: %s\n", study.explanation);
 		System.out.printf("멘토: %s\n", study.writer);
 		System.out.printf("등록일: %s\n", study.registeredDate);
 		System.out.printf("조회수: %d\n", ++study.viewCount);
@@ -68,8 +69,8 @@ public class ChargeStudyHandler {
 			return;
 		}
 
-		String title = Prompt.inputString(String.format("[%s] 수정된 제목: ", study.title));
-		String content = Prompt.inputString(String.format("[%s] 수정된 내용: ", study.content));
+		String title = Prompt.inputString(String.format("[%s] 수정된 스터디 제목: ", study.title));
+		String explanation = Prompt.inputString(String.format("[%s] 수정된 내용: ", study.explanation));
 
 		String input = Prompt.inputString("정말 변경하시겠습니까? (y/N) ");
 		if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -78,7 +79,7 @@ public class ChargeStudyHandler {
 		}
 
 		study.title = title;
-		study.content = content;
+		study.explanation = explanation;
 		System.out.println("유료 스터디를 변경하였습니다.");
 	}
 
@@ -113,8 +114,8 @@ public class ChargeStudyHandler {
 			return;
 		}
 
-		System.out.printf("제목: %s\n", study.title);
-		System.out.printf("내용: %s\n", study.content);
+		System.out.printf("스터디 제목: %s\n", study.title);
+		System.out.printf("스터디 설명: %s\n", study.explanation);
 		System.out.printf("멘토: %s\n", study.writer);
 		System.out.printf("등록일: %s\n", study.registeredDate);
 		System.out.printf("조회수: %d\n", ++study.viewCount);
@@ -139,4 +140,31 @@ public class ChargeStudyHandler {
 		}
 		return -1;
 	}
+
+	// 유료스터디 상세보기
+	//	= > 후기 멘토소개 
+	//	= > 가격 조회
+
+	// 유료스터디 후기 작성
+	//	=> 후기 삭제
+
+	// 유료스터디 멘토 소개 조회
+
+	// 유료스터디 결제 요청
+	//	= > 유료스터디 약관 조회
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
