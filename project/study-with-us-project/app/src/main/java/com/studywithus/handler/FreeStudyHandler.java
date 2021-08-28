@@ -1,13 +1,8 @@
-package main.java.com.studywithus.handler;
+package com.studywithus.handler;
 
 import java.sql.Date;
-<<<<<<< HEAD
-import main.java.com.studywithus.domain.Board;
-import main.java.com.studywithus.util.Prompt;
-=======
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.util.Prompt;
->>>>>>> 9a6bde6e9a7547409f79ba63cbefb8a60a6b51c3
 
 public class FreeStudyHandler {
 
@@ -22,12 +17,11 @@ public class FreeStudyHandler {
 
     FreeStudy study = new FreeStudy();
 
-    study.no = Prompt.inputInt("번호? ");
     study.writer = Prompt.inputString("팀장? ");
 
     System.out.println("온/오프라인?");
-    System.out.println("1. 온라인");
-    System.out.println("2. 오프라인");
+    System.out.println("1: 온라인");
+    System.out.println("2: 오프라인");
     study.onOffLine = Prompt.inputString("> ");
 
     if (study.onOffLine.equals("2")) {

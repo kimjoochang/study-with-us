@@ -1,7 +1,7 @@
-package main.java.com.studywithus.handler;
+package com.studywithus.handler;
 
-import main.java.com.studywithus.domain.Calender;
-import main.java.com.studywithus.util.Prompt;
+import com.studywithus.domain.Calender;
+import com.studywithus.util.Prompt;
 
 public class CalenderHandler {
   static final int MAX_LENGTH = 5;
