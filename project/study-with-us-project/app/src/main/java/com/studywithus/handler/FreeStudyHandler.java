@@ -1,6 +1,7 @@
 package com.studywithus.handler;
 
 import java.sql.Date;
+import com.studywithus.domain.FreeStudy;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyHandler {
@@ -122,7 +123,7 @@ public class FreeStudyHandler {
       default: return null;
     }
   }
-  //
+
   //  private int promptOnOffLine() {
   //    return promptOnOffLine(-1);
   //  }
