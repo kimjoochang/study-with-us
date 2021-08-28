@@ -55,9 +55,9 @@ public class CommunityHandler {
     System.out.printf("조회수: %d\n", ++community.viewCount);
   }
 
-  // 커뮤니티 변경
+  // 커뮤니티 게시글 수정
   public void update() {
-    System.out.println("[커뮤니티 변경]");
+    System.out.println("[커뮤니티 수정]");
     int no = Prompt.inputInt("번호? ");
 
     Community community = findByNo(no);

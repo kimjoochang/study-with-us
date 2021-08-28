@@ -159,7 +159,7 @@ public class App {
     System.out.println("1. 생성");
     System.out.println("2. 조회");
     System.out.println("3. 상세보기");
-    System.out.println("4. 변경");
+    System.out.println("4. 수정");
     System.out.println("5. 삭제");
     System.out.println("0. 이전\n");
     int input4 = Prompt.inputInt("메뉴를 선택해주세요. > ");
@@ -172,7 +172,7 @@ public class App {
     System.out.println("1. 생성");
     System.out.println("2. 조회");
     System.out.println("3. 상세보기");
-    System.out.println("4. 변경");
+    System.out.println("4. 수정");
     System.out.println("5. 삭제");
     System.out.println("0. 이전\n");
     int input3 = Prompt.inputInt("메뉴를 선택해주세요. > ");
@@ -235,7 +235,7 @@ public class App {
     System.out.println("1. 생성");
     System.out.println("2. 조회");
     System.out.println("3. 상세보기");
-    System.out.println("4. 변경");
+    System.out.println("4. 수정");
     System.out.println("5. 삭제");
     System.out.println("0. 이전");
     int input = Prompt.inputInt("메뉴를 선택해주세요. > ");
