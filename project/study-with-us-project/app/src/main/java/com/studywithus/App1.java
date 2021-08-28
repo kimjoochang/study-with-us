@@ -81,7 +81,7 @@ public class App1 {
 
                     if (input == 1) {
                       String input1 = Prompt.inputString("정말 신청하시겠습니까? (y/N) ");
-                      if (input1.equalsIgnoreCase("n")) {
+                      if (input1.equalsIgnoreCase("n") || input1.equals("")) {
                         System.out.println("무료 스터디 신청을 취소하였습니다.");
                         return;
                       }
