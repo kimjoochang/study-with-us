@@ -39,7 +39,30 @@ public class InterestHandler {
     this.interests[this.size++] = interest;
     System.out.println("관심목록에 추가되었습니다.");
   }
-  public void list() {
+  public void freeList() {
+    System.out.println("[관심목록 조회]");
+    for (int i = 0; i < this.size; i++) {
+      if(this.interests[i].freeInterest.onOffLine.equals("2")) {
+        System.out.println();
+        System.out.printf("%d, %s, %s, %d, %s\n",
+            this.interests[i].freeInterest.no,
+            this.interests[i].freeInterest.title,
+            this.interests[i].freeInterest.writer,
+            this.interests[i].freeInterest.onOffLine,
+            this.interests[i].freeInterest.area
+            );
+      }else {
+        System.out.println();
+        System.out.printf("%d, %s, %s, %d \n",
+            this.interests[i].freeInterest.no,
+            this.interests[i].freeInterest.title,
+            this.interests[i].freeInterest.writer,
+            this.interests[i].freeInterest.onOffLine);
+      }
+    }
+  }
+
+  public void chargeList() {
     System.out.println("[관심목록 조회]");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %d,\n",
