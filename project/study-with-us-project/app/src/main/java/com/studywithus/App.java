@@ -3,7 +3,9 @@ package com.studywithus;
 import com.studywithus.domain.InterestList;
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyHandler;
-import com.studywithus.handler.CommunityHandler;
+import com.studywithus.handler.CommunityInfoHandler;
+import com.studywithus.handler.CommunityQaHandler;
+import com.studywithus.handler.CommunityTalkHandler;
 import com.studywithus.handler.FreeStudyHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.util.Prompt;
@@ -14,9 +16,12 @@ public class App {
 
     InterestList[] interests = new InterestList[100];
     FreeStudyHandler freeStudyHandler = new FreeStudyHandler();
-    CommunityHandler communityHandler = new CommunityHandler();
+    CommunityInfoHandler communityInfoHandler = new CommunityInfoHandler();
+    CommunityQaHandler communityQaHandler = new CommunityQaHandler();
+    CommunityTalkHandler communityTalkHandler = new CommunityTalkHandler();
     NewMemberHandler newMemberHandler = new NewMemberHandler();
     ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
+
     Main : while(true) {
       int input = mainMenuList();
       if (input==0) {
@@ -31,7 +36,7 @@ public class App {
         } else if (input == 2) {
           chargeStudyHandler.list();
         } else if (input == 3) {
-          communityHandler.list();
+          communityInfoHandler.list();
         } else if (input == 0) {
           continue Main;
         } else {
@@ -91,7 +96,7 @@ public class App {
 
               }else if (input == 2) { // 유료스터디 메뉴
                 Charge : while (true) {
-                  input = chargeStudyMenu();
+                  input = chargeStudyMenuList();
                   if (input == 1) {
                     chargeStudyHandler.add();
                   } else if (input == 2) {
@@ -132,15 +137,15 @@ public class App {
                       System.out.println("[커뮤니티 / 질문]\n");
                       input = communityMenuList();
                       if (input == 1) {
-                        communityHandler.add();
+                        communityQaHandler.add();
                       } else if (input == 2) {
-                        communityHandler.list();
+                        communityQaHandler.list();
                       } else if (input == 3) {
-                        communityHandler.detail();
+                        communityQaHandler.detail();
                       } else if (input == 4) {
-                        communityHandler.update();
+                        communityQaHandler.update();
                       } else if (input == 5) {
-                        communityHandler.delete();
+                        communityQaHandler.delete();
                       } else if (input == 0) {
                         continue Community;
                       }else {
@@ -154,15 +159,15 @@ public class App {
                       System.out.println("[커뮤니티 / 정보]\n");
                       input = communityMenuList();
                       if (input == 1) {
-                        communityHandler.add();
+                        communityInfoHandler.add();
                       } else if (input == 2) {
-                        communityHandler.list();
+                        communityInfoHandler.list();
                       } else if (input == 3) {
-                        communityHandler.detail();
+                        communityInfoHandler.detail();
                       } else if (input == 4) {
-                        communityHandler.update();
+                        communityInfoHandler.update();
                       } else if (input == 5) {
-                        communityHandler.delete();
+                        communityInfoHandler.delete();
                       } else if (input == 0) {
                         continue Community;
                       }else {
@@ -176,15 +181,15 @@ public class App {
                       System.out.println("[커뮤니티 / 스몰톡]\n");
                       input = communityMenuList();
                       if (input == 1) {
-                        communityHandler.add();
+                        communityTalkHandler.add();
                       } else if (input == 2) {
-                        communityHandler.list();
+                        communityTalkHandler.list();
                       } else if (input == 3) {
-                        communityHandler.detail();
+                        communityTalkHandler.detail();
                       } else if (input == 4) {
-                        communityHandler.update();
+                        communityTalkHandler.update();
                       } else if (input == 5) {
-                        communityHandler.delete();
+                        communityTalkHandler.delete();
                       } else if (input == 0) {
                         continue Community;
                       }else {
@@ -216,7 +221,7 @@ public class App {
   }
 
 
-  private static int chargeStudyMenu() {
+  private static int chargeStudyMenuList() {
     System.out.println("[유료 스터디]\n");
     System.out.println("1. 생성");
     System.out.println("2. 조회");
