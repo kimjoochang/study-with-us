@@ -3,6 +3,7 @@ package com.studywithus;
 import com.studywithus.domain.InterestList;
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyHandler;
+import com.studywithus.handler.CommunityHandler;
 import com.studywithus.handler.CommunityInfoHandler;
 import com.studywithus.handler.CommunityQaHandler;
 import com.studywithus.handler.CommunityTalkHandler;
@@ -10,12 +11,13 @@ import com.studywithus.handler.FreeStudyHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.util.Prompt;
 
-public class AppJ {
+public class AppJ4 {
 
   public static void main(String[] args) {
 
     InterestList[] interests = new InterestList[100];
     FreeStudyHandler freeStudyHandler = new FreeStudyHandler();
+    CommunityHandler communityHandler = new CommunityHandler();
     CommunityQaHandler communityQaHandler = new CommunityQaHandler();
     CommunityTalkHandler communityTalkHandler = new CommunityTalkHandler();
     CommunityInfoHandler communityInfoHandler = new CommunityInfoHandler();
@@ -35,7 +37,7 @@ public class AppJ {
         } else if (input == 2) {
           chargeStudyHandler.list();
         } else if (input == 3) {
-          communityQaHandler.list();
+          communityHandler.list();
         } else if (input == 0) {
           continue Main;
         } else {
@@ -123,7 +125,7 @@ public class AppJ {
                 }
               } else if (input == 4) { // 커뮤니티 메뉴
                 Community : while (true) {
-                  System.out.println("[커뮤니티]");
+                  System.out.println("[커뮤니티]\n");
                   System.out.println("1. 질문");
                   System.out.println("2. 정보");
                   System.out.println("3. 스몰톡");
