@@ -11,7 +11,7 @@ public class ChargeStudyHandler {
   ChargeStudy[] studies = new ChargeStudy[MAX_LENGTH];
   int size = 0;
 
-  // 유료 스터디 생성
+  // 유료 스터디 생성.
   public void add() {
     System.out.println("[새 유료 스터디]");
 
