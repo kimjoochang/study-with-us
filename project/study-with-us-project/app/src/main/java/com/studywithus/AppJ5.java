@@ -11,7 +11,7 @@ import com.studywithus.handler.FreeStudyHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.util.Prompt;
 
-public class AppJ3 {
+public class AppJ5 {
 
   public static void main(String[] args) {
 
