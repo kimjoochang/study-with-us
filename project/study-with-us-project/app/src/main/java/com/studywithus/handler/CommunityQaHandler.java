@@ -128,5 +128,4 @@ public class CommunityQaHandler {
     }
     return -1;
   }
-
 }

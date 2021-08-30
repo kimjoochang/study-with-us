@@ -1,6 +1,7 @@
 package com.studywithus.domain;
 
 public class InterestList {
+
   private FreeStudy freeInterest;
   private ChargeStudy chargeInterest;
   private int no;
