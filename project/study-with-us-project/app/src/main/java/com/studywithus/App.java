@@ -4,7 +4,7 @@ import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyHandler;
 import com.studywithus.handler.MentorHandler;
 import com.studywithus.handler.NewMemberHandler;
-import com.studywithus.menuList.MenuList;
+import com.studywithus.menuList.MenuList3;
 import com.studywithus.util.Prompt;
 
 public class App {
@@ -15,7 +15,7 @@ public class App {
 		NewMemberHandler newMemberHandler = new NewMemberHandler();
 		ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
 		NewMember[] loginInfo = new NewMember[5];
-		MenuList menuList = new MenuList();
+		MenuList3 menuList = new MenuList3();
 
 		Main : while(true) {
 			int input = menuList.mainMenuList();

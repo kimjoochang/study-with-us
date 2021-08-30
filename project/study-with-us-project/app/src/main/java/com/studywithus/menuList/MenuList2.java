@@ -14,7 +14,7 @@ import com.studywithus.handler.JobsCalenderHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.util.Prompt;
 
-public class MenuList {
+public class MenuList2 {
 
   InterestList[] interests = new InterestList[100];
 
@@ -403,16 +403,24 @@ public class MenuList {
         // 1. 회원 관리
       } else if (input == 1) {
         System.out.println("[관리자 / 회원 관리]");
-        System.out.println("1. 이달의 멘토 승인 관리");
-        System.out.println("2. 이달의 블랙 리스트 관리");
+        System.out.println("1. 멘토 승인 관리");
+        System.out.println("2. 블랙 리스트 관리");
 
         input = Prompt.inputInt("메뉴를 선택해주세요. > ");
         System.out.println();
 
-        if () {
+        if (input == 1) {
+          System.out.println("[관리자 / 회원 관리 / 멘토 승인 관리]");
+          // [추가] 메서드 호출
+          System.out.println("1. 멘토 승인");
+          System.out.println("2. 멘토 거절");
+          System.out.println("0. 이전");
 
-        } else if () {
-
+        } else if (input == 2) {
+          System.out.println("[관리자 / 회원 관리 / 블랙 리스트 관리]");
+          // [추가] 메서드 호출
+          input = Prompt.inputInt("회원 번호를 선택하세요. > ");
+          System.out.println("0. 이전");
         }
 
         // 2. 캘린더 관리
