@@ -72,4 +72,66 @@ public class InterestHandler {
           this.interests[i].chargeInterest.price);
     }
   }
+
+  // 무료 스터디 관심 목록 삭제
+  public void freeDelete() {
+    System.out.println("[관심 목록 / 무료 스터디]");
+    int no = Prompt.inputInt("번호? ");
+
+    int index = indexOf(no);
+
+    if (index == -1) {
+      System.out.println("해당 번호의 무료 스터디 관심 목록이 없습니다.");
+      return;
+    }
+
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("무료 스터디 관심 목록을 취소하였습니다.");
+      return;
+    }
+
+    for (int i = index + 1; i < this.size; i++) {
+      this.interests[i - 1] = this.interests[i];
+    }
+    this.interests[--this.size] = null;
+
+    System.out.println("무료 스터디 관심 목록을 삭제하였습니다.");
+  }
+
+  // 유료 스터디 관심 목록 삭제
+  public void chargeDelete() {
+    System.out.println("[관심 목록 / 유료 스터디]");
+    int no = Prompt.inputInt("번호? ");
+
+    int index = indexOf(no);
+
+    if (index == -1) {
+      System.out.println("해당 번호의 유료 스터디 관심 목록이 없습니다.");
+      return;
+    }
+
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("유료 스터디 관심 목록을 취소하였습니다.");
+      return;
+    }
+
+    for (int i = index + 1; i < this.size; i++) {
+      this.interests[i - 1] = this.interests[i];
+    }
+    this.interests[--this.size] = null;
+
+    System.out.println("유료 스터디 관심 목록을 삭제하였습니다.");
+  }
+
+  // 유/무료 스터디 조회
+  private int indexOf(int no) {
+    for (int i = 0; i < this.size; i++) {
+      if (this.interests[i].no == no) {
+        return i;
+      }
+    }
+    return -1;
+  }
 }
