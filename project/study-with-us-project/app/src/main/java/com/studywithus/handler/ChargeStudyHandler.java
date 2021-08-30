@@ -14,7 +14,7 @@ public class ChargeStudyHandler {
 
 	// 유료 스터디 생성.
 	public void add() {
-		System.out.println("[새 유료 스터디]");
+		System.out.println("[유료 스터디 / 새 유료 스터디]");
 
 		ChargeStudy study = new ChargeStudy();
 
@@ -33,7 +33,7 @@ public class ChargeStudyHandler {
 
 	// 유료 스터디 조회
 	public void list() {
-		System.out.println("[유료 스터디 조회]");
+		System.out.println("[유료 스터디 / 유료 스터디 조회]");
 		for (int i = 0; i < this.size; i++) {
 			System.out.printf("%d, %s, %s, %s, %d, %d\n", this.studies[i].getNo(), this.studies[i].getTitle(),
 					this.studies[i].getWriter(), this.studies[i].getRegisteredDate(), this.studies[i].getViewCount(),
@@ -43,7 +43,7 @@ public class ChargeStudyHandler {
 
 	// 유료 스터디 상세보기
 	public void detail() {
-		System.out.println("[유료 스터디 상세보기]");
+		System.out.println("[유료 스터디 / 유료 스터디 상세보기]");
 		int no = Prompt.inputInt("번호? ");
 
 		ChargeStudy study = findByNo(no);
@@ -87,7 +87,7 @@ public class ChargeStudyHandler {
 
 	// 유료 스터디 수정
 	public void update() {
-		System.out.println("[유료 스터디 수정]");
+		System.out.println("[유료 스터디 / 유료 스터디 수정]");
 		int no = Prompt.inputInt("번호? ");
 
 		ChargeStudy study = findByNo(no);
@@ -97,8 +97,8 @@ public class ChargeStudyHandler {
 			return;
 		}
 
-		String title = Prompt.inputString(String.format("[%s] 수정된 스터디 제목: ", study.getTitle()));
-		String explanation = Prompt.inputString(String.format("[%s] 수정된 내용: ", study.getExplanation()));
+		String title = Prompt.inputString(String.format("[%s] 유료 스터디 / 수정된 스터디 제목: ", study.getTitle()));
+		String explanation = Prompt.inputString(String.format("[%s] 유료 스터디 / 수정된 내용: ", study.getExplanation()));
 
 		String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
 		if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -113,7 +113,7 @@ public class ChargeStudyHandler {
 
 	// 유료 스터디 삭제 요청
 	public void delete() {
-		System.out.println("[유료 스터디 삭제 요청]");
+		System.out.println("[유료 스터디 / 삭제 요청]");
 		int no = Prompt.inputInt("번호? ");
 
 		int index = indexOf(no);
@@ -132,7 +132,7 @@ public class ChargeStudyHandler {
 
 	// 삭제 요청된 유료 스터디 상세보기
 	public void deletedDetail() {
-		System.out.println("[삭제 요청된 유료 스터디 상세보기]");
+		System.out.println("[유료 스터디 / 삭제 요청된 유료 스터디 상세보기]");
 		int no = Prompt.inputInt("번호? ");
 
 		ChargeStudy study = findByNo(no);

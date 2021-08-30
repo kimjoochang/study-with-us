@@ -73,7 +73,7 @@ public class App {
 										}
 										else {
 											System.out.println("------------------------------------");
-											System.out.println("결제 이용약관입니다."
+											System.out.println("결제 이용약관입니다.\n"
 													+ "(＼(＼     \n"
 													+ "(  -.- )~♥\n"
 													+ " O_(\")(\")");
@@ -149,9 +149,5 @@ public class App {
 			}
 		}
 	}
-
-
-
-
 
 }
