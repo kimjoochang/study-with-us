@@ -23,14 +23,13 @@ public class AppJ5 {
     CommunityTalkHandler communityTalkHandler = new CommunityTalkHandler();
     NewMemberHandler newMemberHandler = new NewMemberHandler();
     ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
+
     Main : while(true) {
       int input = mainMenuList();
       if (input==0) {
         System.out.println("종료되었습니다.");
         return;
-      }
-
-      else if (input == 1) { // 비회원
+      } else if (input == 1) { // 비회원
         input = noneMemberMenuList(); //비회원 시작 시 메뉴
         if (input == 1) {
           freeStudyHandler.list();

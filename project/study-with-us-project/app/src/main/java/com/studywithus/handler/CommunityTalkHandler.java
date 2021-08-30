@@ -17,11 +17,11 @@ public class CommunityTalkHandler {
 
     Community community = new Community();
 
-    community.no = Prompt.inputInt("번호? ");
-    community.title = Prompt.inputString("제목? ");
-    community.content = Prompt.inputString("내용? ");
-    community.writer = Prompt.inputString("작성자? ");
-    community.registeredDate = new Date(System.currentTimeMillis());
+    community.setNo(Prompt.inputInt("번호? "));
+    community.setTitle(Prompt.inputString("제목? "));
+    community.setContent(Prompt.inputString("내용? "));
+    community.setWriter(Prompt.inputString("작성자? "));
+    community.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     this.communities[this.size++] = community;
   }
@@ -30,9 +30,9 @@ public class CommunityTalkHandler {
   public void list() {
     System.out.println("[스몰톡 게시글 조회]");
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", this.communities[i].no, this.communities[i].title,
-          this.communities[i].writer, this.communities[i].registeredDate, this.communities[i].viewCount,
-          this.communities[i].like);
+      System.out.printf("%d, %s, %s, %s, %d, %d\n", this.communities[i].getNo(), this.communities[i].getTitle(),
+          this.communities[i].getWriter(), this.communities[i].getRegisteredDate(), this.communities[i].getViewCount(),
+          this.communities[i].getLike());
     }
   }
 
@@ -48,11 +48,13 @@ public class CommunityTalkHandler {
       return;
     }
 
-    System.out.printf("제목: %s\n", community.title);
-    System.out.printf("내용: %s\n", community.content);
-    System.out.printf("작성자: %s\n", community.writer);
-    System.out.printf("등록일: %s\n", community.registeredDate);
-    System.out.printf("조회수: %d\n", ++community.viewCount);
+    System.out.printf("제목: %s\n", community.getTitle());
+    System.out.printf("내용: %s\n", community.getContent());
+    System.out.printf("작성자: %s\n", community.getWriter());
+    System.out.printf("등록일: %s\n", community.getRegisteredDate());
+
+    community.setViewCount(community.getViewCount() + 1);
+    System.out.printf("조회수: %d\n", community.getViewCount());
   }
 
   // 스몰톡 게시글 수정
@@ -67,8 +69,8 @@ public class CommunityTalkHandler {
       return;
     }
 
-    String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", community.title));
-    String content = Prompt.inputString(String.format("[%s] 수정할 내용: ", community.content));
+    String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", community.getTitle()));
+    String content = Prompt.inputString(String.format("[%s] 수정할 내용: ", community.getContent()));
 
     String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -76,8 +78,8 @@ public class CommunityTalkHandler {
       return;
     }
 
-    community.title = title;
-    community.content = content;
+    community.setTitle(title);
+    community.setContent(content);
     System.out.println("스몰톡 게시글을 수정하였습니다.");
   }
 
@@ -110,17 +112,17 @@ public class CommunityTalkHandler {
   // 스몰톡 게시글 번호 조회
   private Community findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
-      if (this.communities[i].no == no) {
+      if (this.communities[i].getNo() == no) {
         return this.communities[i];
       }
     }
     return null;
   }
 
-  // 스몰톡 게시글 조회
+  // 스몰톡 게시글 조회용
   private int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
-      if (this.communities[i].no == no) {
+      if (this.communities[i].getNo() == no) {
         return i;
       }
     }
