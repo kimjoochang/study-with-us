@@ -15,7 +15,7 @@ import com.studywithus.handler.JobsCalenderHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.util.Prompt;
 
-public class MenuList2 {
+public class MenuList {
 
   InterestList[] interests = new InterestList[100];
 
