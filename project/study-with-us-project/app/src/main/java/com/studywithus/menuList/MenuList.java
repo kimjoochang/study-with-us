@@ -445,10 +445,10 @@ public class MenuList {
     String pwd = Prompt.inputString("비밀번호 입력: ");
 
     for (int i = 0; i < loginInfo.length; i++) {
-      if (id.equals(NewMember.adminId) && pwd.equals(NewMember.adminPwd)) {// 아이디 매칭
+      if (id.equals(NewMember.getAdminId()) && pwd.equals(NewMember.getAdminPwd())) {// 아이디 매칭
         return 2;
 
-      } else if (! id.equals (loginInfo[i].id) || ! pwd.equals (loginInfo[i].pwd)) {
+      } else if (! id.equals (loginInfo[i].getId()) || ! pwd.equals (loginInfo[i].getPwd())) {
 
       } else {
         System.out.println();
