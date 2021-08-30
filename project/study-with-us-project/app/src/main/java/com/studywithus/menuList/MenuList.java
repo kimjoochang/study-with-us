@@ -164,8 +164,8 @@ public class MenuList {
   public void interestMenuList() {
     while (true) {
       System.out.println("[관심목록]\n");
-      System.out.println("1. 무료스터디 관심목록");
-      System.out.println("2. 유료스터디 관심목록");
+      System.out.println("1. 무료 스터디 관심목록");
+      System.out.println("2. 유료 스터디 관심목록");
       System.out.println("0. 이전");
 
       input = Prompt.inputInt("메뉴를 선택해주세요. > ");
@@ -189,9 +189,9 @@ public class MenuList {
 
   private void chargeInterestMenuList() {
     while(true) {
-      System.out.println("[유료스터디 관심목록]\n");
-      System.out.println("1. 유료스터디 관심목록 조회");
-      System.out.println("2. 유료스터디 관심목록 삭제");
+      System.out.println("[유료 스터디 / 관심목록]\n");
+      System.out.println("1. 유료 스터디 관심목록 조회");
+      System.out.println("2. 유료 스터디 관심목록 삭제");
       System.out.println("0. 이전");
 
       input = Prompt.inputInt("메뉴를 선택해주세요. > ");
@@ -215,9 +215,9 @@ public class MenuList {
 
   private void freeInterestMenuList() {
     while (true) {
-      System.out.println("[무료스터디 관심목록]\n");
-      System.out.println("1. 무료스터디 관심목록 조회");
-      System.out.println("2. 무료스터디 관심목록 삭제");
+      System.out.println("[무료 스터디 / 관심목록]\n");
+      System.out.println("1. 무료 스터디 관심목록 조회");
+      System.out.println("2. 무료 스터디 관심목록 삭제");
       System.out.println("0. 이전");
 
       input = Prompt.inputInt("메뉴를 선택해주세요. > ");
@@ -370,9 +370,9 @@ public class MenuList {
   }
 
   public int memberMenuList() {
-    System.out.println("[회원 메뉴]\n");
-    System.out.println("1. 무료스터디");
-    System.out.println("2. 유료스터디");
+    System.out.println("[회원]\n");
+    System.out.println("1. 무료 스터디");
+    System.out.println("2. 유료 스터디");
     System.out.println("3. 관심목록");
     System.out.println("4. 커뮤니티");
     System.out.println("5. 멘토 신청하기");
@@ -387,7 +387,7 @@ public class MenuList {
   public int adminMenuList() {
     while (true) {
       System.out.println("관리자로 로그인 되었습니다.\n");
-      System.out.println("[관리자 메뉴]\n");
+      System.out.println("[관리자]\n");
       System.out.println("1. 회원 관리");
       System.out.println("2. 캘린더 관리");
       System.out.println("0. 로그아웃\n");
