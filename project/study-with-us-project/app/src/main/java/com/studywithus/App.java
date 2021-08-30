@@ -4,8 +4,12 @@ import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyHandler;
 import com.studywithus.handler.MentorHandler;
 import com.studywithus.handler.NewMemberHandler;
+<<<<<<< HEAD
 import com.studywithus.menuList.MenuList3;
 import com.studywithus.util.Prompt;
+=======
+import com.studywithus.menuList.MenuList;
+>>>>>>> fcfd8469807a45e46f8edc500a83c6230b099044
 
 public class App {
 
@@ -59,37 +63,7 @@ public class App {
 								chargeStudyHandler.list(); // 2. 조회
 							} else if (input == 3) {
 								chargeStudyHandler.detail(); // 3. 상세보기
-								while(true) {
-									System.out.println("[유료 스터디 상세보기]\n");
-									System.out.println("0. 이전");
-									System.out.println("1. 결제하기");
-									input = Prompt.inputInt("메뉴를 선택해주세요> ");
-
-									if (input == 1) {
-										String input1 = Prompt.inputString("유료 스터디를 결제 하시겠습니까? (y/N)");
-										if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
-											System.out.println(" 유료 스터디 결제를 취소하셨습니다.");
-											continue;
-										}
-										else {
-											System.out.println("------------------------------------");
-											System.out.println("결제 이용약관입니다.\n"
-													+ "(＼(＼     \n"
-													+ "(  -.- )~♥\n"
-													+ " O_(\")(\")");
-											System.out.println("------------------------------------");
-											String input11 = Prompt.inputString("이용약관에 동의하십니까? (y/N) ");
-											if (input11.equalsIgnoreCase("n") || input11.length() == 0) {
-												System.out.println("결제 이용약관 동의를 취소하셨습니다.");
-												return;
-											}
-										}
-										System.out.println("유료 스터디 결제가 완료 되었습니다.");
-									}
-									continue Charge;
-								} 
-							}
-							else if (input == 4) {
+							} else if (input == 4) {
 								chargeStudyHandler.update(); // 4. 수정
 							} else if (input == 5) {
 								chargeStudyHandler.delete(); // 5. 삭제
@@ -129,7 +103,7 @@ public class App {
 								continue Community;
 							}
 						}
-					}else {
+					} else {
 						System.out.println("잘못된 번호입니다.");
 						continue;
 					}
