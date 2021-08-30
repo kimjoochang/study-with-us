@@ -58,8 +58,7 @@ public class App {
 								chargeStudyHandler.list(); // 2. 조회
 							} else if (input == 3) {
 								chargeStudyHandler.detail(); // 3. 상세보기
-							}
-							else if (input == 4) {
+							} else if (input == 4) {
 								chargeStudyHandler.update(); // 4. 수정
 							} else if (input == 5) {
 								chargeStudyHandler.delete(); // 5. 삭제
@@ -99,7 +98,7 @@ public class App {
 								continue Community;
 							}
 						}
-					}else {
+					} else {
 						System.out.println("잘못된 번호입니다.");
 						continue;
 					}
