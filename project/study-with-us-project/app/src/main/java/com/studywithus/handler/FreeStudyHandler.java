@@ -17,21 +17,22 @@ public class FreeStudyHandler {
 
     FreeStudy study = new FreeStudy();
 
-    study.writer = Prompt.inputString("팀장? ");
+    study.setNo(Prompt.inputInt("번호? "));
+    study.setWriter(Prompt.inputString("팀장? "));
 
     System.out.println("온/오프라인?");
-    System.out.println("1: 온라인");
-    System.out.println("2: 오프라인");
-    study.onOffLine = Prompt.inputString("> ");
+    System.out.println("1. 온라인");
+    System.out.println("2. 오프라인");
+    study.setOnOffLine(Prompt.inputString("> "));
 
-    if (study.onOffLine.equals("2")) {
-      study.area = Prompt.inputString("지역? ");
+    if (study.getOnOffLine().equals("2")) {
+      study.setArea(Prompt.inputString("지역? "));
     }
 
-    study.title = Prompt.inputString("제목? ");
-    study.explanation = Prompt.inputString("설명? ");
-    study.rule = Prompt.inputString("룰? ");
-    study.registeredDate = new Date(System.currentTimeMillis());
+    study.setTitle(Prompt.inputString("제목? "));
+    study.setExplanation(Prompt.inputString("설명? "));
+    study.setRule(Prompt.inputString("규칙? "));
+    study.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     this.studies[this.size++] = study;
     System.out.println("무료 스터디 등록이 완료되었습니다.");
@@ -45,17 +46,18 @@ public class FreeStudyHandler {
   // 무료 스터디 조회
   public void list() {
     System.out.println("[무료 스터디 조회]");
+
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %d\n", this.studies[i].no, this.studies[i].title, this.studies[i].writer,
-          this.studies[i].registeredDate, this.studies[i].viewCount);
+      System.out.printf("%d, %s, %s, %s, %d\n", this.studies[i].getNo(), this.studies[i].getTitle(), this.studies[i].getWriter(),
+          this.studies[i].getRegisteredDate(), this.studies[i].getViewCount());
     }
   }
 
   // 무료 스터디 상세보기
   public void detail() {
     System.out.println("[무료 스터디 상세보기]");
-    int no = Prompt.inputInt("번호? ");
 
+    int no = Prompt.inputInt("번호? ");
     FreeStudy study = findByNo(no);
 
     if (study == null) {
@@ -63,19 +65,24 @@ public class FreeStudyHandler {
       return;
     }
 
-    System.out.printf("제목: %s\n", study.title);
-    System.out.printf("내용: %s\n", study.explanation);
-    System.out.printf("팀장: %s\n", study.writer);
-    System.out.printf("지역: %s\n", study.area);
-    System.out.printf("설명: %s\n", study.explanation);
-    System.out.printf("룰: %s\n", study.rule);
-    System.out.printf("등록일: %s\n", study.registeredDate);
-    System.out.printf("조회수: %d\n", ++study.viewCount);
+    System.out.printf("제목: %s\n", study.getTitle());
+    System.out.printf("내용: %s\n", study.getExplanation());
+    System.out.printf("팀장: %s\n", study.getWriter());
+
+    if (study.getArea().length() != 0) {
+      System.out.printf("지역: %s\n", study.getArea());
+    }
+
+    System.out.printf("설명: %s\n", study.getExplanation());
+    System.out.printf("규칙: %s\n", study.getRule());
+    System.out.printf("등록일: %s\n", study.getRegisteredDate());
+    System.out.printf("조회수: %d\n", study.getViewCount() + 1);
   }
 
   // 무료 스터디 변경
   public void update() {
     System.out.println("[무료 스터디 변경]");
+
     int no = Prompt.inputInt("번호? ");
 
     FreeStudy study = findByNo(no);
@@ -85,23 +92,28 @@ public class FreeStudyHandler {
       return;
     }
 
-    String title = Prompt.inputString(String.format("[%s] 수정된 제목: ", study.title));
-    String explanation = Prompt.inputString(String.format("[%s] 수정된 내용: ", study.explanation));
+    String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", study.getTitle()));
+    String explanation = Prompt.inputString(String.format("[%s] 수정할 설명: ", study.getExplanation()));
+    String rule = Prompt.inputString(String.format("[%s] 수정할 규칙: ", study.getRule()));
 
     String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
+
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("무료 스터디 수정을 취소하였습니다.");
       return;
     }
 
-    study.title = title;
-    study.explanation = explanation;
+    study.setTitle(title);
+    study.setExplanation(explanation);
+    study.setRule(rule);
+
     System.out.println("무료 스터디를 수정하였습니다.");
   }
 
   // 무료 스터디 삭제
   public void delete() {
     System.out.println("[무료 스터디 삭제]");
+
     int no = Prompt.inputInt("번호? ");
 
     int index = indexOf(no);
@@ -112,6 +124,7 @@ public class FreeStudyHandler {
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
+
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("무료 스터디 삭제를 취소하였습니다.");
       return;
@@ -120,38 +133,16 @@ public class FreeStudyHandler {
     for (int i = index + 1; i < this.size; i++) {
       this.studies[i - 1] = this.studies[i];
     }
+
     this.studies[--this.size] = null;
 
     System.out.println("무료 스터디를 삭제하였습니다.");
   }
 
-  private String onOffLineLabel(int onOffLine) {
-    switch (onOffLine) {
-      case 1: return "온라인";
-      case 2: return "오프라인";
-      default: return null;
-    }
-  }
-
-  //  private int promptOnOffLine() {
-  //    return promptOnOffLine(-1);
-  //  }
-  //
-  //  private int promptOnOffLine(int onOffLine) {
-  //    if (onOffLine == -1) {
-  //      System.out.println("온/오프라인?");
-  //    } else {
-  //      System.out.printf("[%s] 온/오프라인?\n", onOffLineLabel(onOffLine));
-  //    }
-  //    System.out.println("1: 온라인");
-  //    System.out.println("2: 오프라인");
-  //    return Prompt.inputInt("> ");
-  //  }
-
   // 무료 스터디 번호 조회
   private FreeStudy findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
-      if (this.studies[i].no == no) {
+      if (this.studies[i].getNo() == no) {
         return this.studies[i];
       }
     }
@@ -161,7 +152,7 @@ public class FreeStudyHandler {
   // 무료 스터디 조회
   private int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
-      if (this.studies[i].no == no) {
+      if (this.studies[i].getNo() == no) {
         return i;
       }
     }
