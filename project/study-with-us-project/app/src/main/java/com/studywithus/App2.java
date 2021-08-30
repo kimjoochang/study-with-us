@@ -7,7 +7,7 @@ import com.studywithus.handler.FreeStudyHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.util.Prompt;
 
-public class App1 {
+public class App2 {
 
   public static void main(String[] args) {
 
@@ -74,24 +74,37 @@ public class App1 {
                     freeStudyHandler.list();
                   } else if (input == 3) {
                     freeStudyHandler.detail();
+                    input = freeStudyDetailMenu();
 
-                    // 무료 스터디 신청
-                    System.out.println("1. 신청하기");
-                    System.out.println("0. 이전");
-
+                    // 1. 신청
                     if (input == 1) {
-                      String input1 = Prompt.inputString("정말 신청하시겠습니까? (y/N) ");
-                      if (input1.equalsIgnoreCase("n") || input1.equals("")) {
+                      String FreeInput = Prompt.inputString("정말 신청하시겠습니까? (y/N) ");
+
+                      if (FreeInput.equalsIgnoreCase("n") || FreeInput.equals("")) {
                         System.out.println("무료 스터디 신청을 취소하였습니다.");
+                        continue Free;
+
+                      } else if (FreeInput.equalsIgnoreCase("y")) {
+                        System.out.println("무료 스터디 신청이 완료되었습니다.");
+                        continue Free;
+                      }
+
+                      // 2. 관심 목록 추가
+                    } else if (input == 2) {
+                      String FreeReal = Prompt.inputString("관심 목록에 추가하시겠습니까? (y/N) ");
+
+                      if (FreeReal.equalsIgnoreCase("n") || FreeReal.equals("")) {
+                        System.out.println("무료 스터디 관심 목록 등록을 취소하였습니다.");
+                        continue Free;
+                      } else if (FreeReal.equalsIgnoreCase("y")) {
+                        System.out.println("무료 스터디 관심 목록이 추가되었습니다.");
+                        continue Free;
+
+                        // 0. 이전
+                      } if (input == 0) {
                         return;
                       }
-                      else if (input1.equalsIgnoreCase("y")) {
-                        System.out.println("무료 스터디 신청이 완료되었습니다.");
-                      }
-                    } else if (input == 0) {
-                      continue Free;
                     }
-
 
                   } else if (input == 4) {
                     freeStudyHandler.update();
@@ -186,6 +199,7 @@ public class App1 {
     return input4;
   }
 
+  // 무료 스터디
   private static int freeStudyMenuList() {
     System.out.println("[무료 스터디]\n");
     System.out.println("1. 생성");
@@ -194,10 +208,18 @@ public class App1 {
     System.out.println("4. 변경");
     System.out.println("5. 삭제");
     System.out.println("0. 이전\n");
-    int input3 = Prompt.inputInt("메뉴를 선택해주세요. > ");
-    return input3;
+    int input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+    return input;
   }
 
+  private static int freeStudyDetailMenu() {
+    System.out.println("[무료 스터디 / 상세보기]\n");
+    System.out.println("1. 신청");
+    System.out.println("2. 관심 목록 추가");
+    System.out.println("0. 이전");
+    int input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+    return input;
+  }
 
   private static int memberMenuList() {
     int input;
