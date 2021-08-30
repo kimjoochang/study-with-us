@@ -24,6 +24,7 @@ public class MenuList {
 
   int input;
 
+
   // 메인 메뉴 조회
   public int mainMenuList() {
     System.out.println();
@@ -330,23 +331,22 @@ public class MenuList {
   }
 
   public int loginExecute(NewMember[] loginInfo) {
-    while(true) {
-      String id ="a";   // 이거 없으면 로그인 시 NullPointerException 뜸
-      String pwd ="a";  // 이거 없으면 로그인 시 NullPointerException 뜸
-      for (int i = 0; i < loginInfo.length; i++) {
-        id = Prompt.inputString("아이디 입력: ");
-        pwd = Prompt.inputString("비밀번호 입력: ");
-        if (id.equals(NewMember.adminId)&&pwd.equals(NewMember.adminPwd)) {// 아이디 매칭
-          return 2;
-        } else if (!id.equals(loginInfo[i].id) || ! pwd.equals(loginInfo[i].pwd)) {
-          System.out.println("아이디 또는 비밀번호가 다릅니다.\n");
-        } else {
-          System.out.println();
-          System.out.println("로그인이 완료되었습니다.\n");
-          return 1;
-        }
+    String id = Prompt.inputString("아이디 입력: ");
+    String pwd = Prompt.inputString("비밀번호 입력: ");
+    for (int i = 0; i < loginInfo.length; i++) {
+      if (id.equals(NewMember.adminId) && pwd.equals(NewMember.adminPwd)) {// 아이디 매칭
+        return 2;
+      } else if (! id.equals (loginInfo[i].id) || ! pwd.equals (loginInfo[i].pwd)) {
+
+      } else {
+        System.out.println();
+        System.out.println("로그인이 완료되었습니다.\n");
+        return 1;
       }
+      continue;
     }
+    System.out.println("아이디 또는 비밀번호가 다릅니다.\n");
+    return 0;
   }
 
 }

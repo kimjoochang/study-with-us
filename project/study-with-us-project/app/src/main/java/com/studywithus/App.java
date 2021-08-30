@@ -22,13 +22,20 @@ public class App {
       } else if (input == 1) { // 비회원 조회하기
         menuList.noneMemberMenuList();
         continue Main;
-      } else if (input == 2) { // 로그인 s
-        input = menuList.loginExecute(loginInfo);
+      } else if (input == 2) { // 로그인
+        try{
+          input = menuList.loginExecute(loginInfo);
+        } catch (Exception e) {
+          System.out.println();
+          System.out.println("일치하는 로그인 정보가 없습니다.");
+          continue;
+        }
 
         if (input == 0){
           continue Main;
         } else if (input == 2) {
-          int adminInput = menuList.adminMenuList();
+          menuList.adminMenuList();
+          continue Main;
         }
 
         // 로그인 성공 후 메뉴
@@ -79,7 +86,7 @@ public class App {
 
         // 회원가입
       } else if (input == 3) {
-        loginInfo = newMemberHandler.add(loginInfo);
+        newMemberHandler.add(loginInfo);   
         continue;
 
         // 메인 메뉴에서 종료
