@@ -1,6 +1,5 @@
 package com.studywithus.menuList;
 
-
 import com.studywithus.domain.InterestList;
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyHandler;
@@ -33,18 +32,33 @@ public class MenuList {
   int input;
 
   // 메인 메뉴 조회
-  public int mainMenuList() {
+  public void mainMenuList() {
     System.out.println();
     System.out.println("[STUDY WITH US]\n");
     System.out.println("1. 비회원으로 시작하기");
     System.out.println("2. 로그인");
-    System.out.println("3. 회원가입");
+    System.out.println("3. 관리자 로그인");
+    System.out.println("4. 회원가입");
     System.out.println("0. 종료하기\n");
 
     input = Prompt.inputInt("메뉴를 선택해주세요. > ");
     System.out.println();
 
-    return input;
+    if (input == 1) {
+      noneMemberMenuList();
+
+    } else if (input == 2) {
+      // [추가] 로그인
+
+    } else if (input == 3) {
+      adminMenuList();
+
+    } else if (input == 4) {
+      // [추가] 회원가입
+
+    } else if (input == 0) {
+      return;
+    }
   }
 
   // 비회원 메뉴 조회
@@ -78,6 +92,107 @@ public class MenuList {
         continue; // 다시 반복
       }
       continue; // 완료 후 돌아가기
+    }
+  }
+
+  // 회원 메뉴
+  public int memberMenuList() {
+    System.out.println("[회원]\n");
+    System.out.println("1. 무료 스터디");
+    System.out.println("2. 유료 스터디");
+    System.out.println("3. 관심목록");
+    System.out.println("4. 커뮤니티");
+    System.out.println("5. 캘린더");
+    System.out.println("6. 멘토 신청하기");
+    System.out.println("0. 로그아웃\n");
+
+    input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+
+    System.out.println();
+    return input;
+  }
+
+  // 관리자 메뉴 조회
+  public void adminMenuList() {
+    while (true) {
+      System.out.println("관리자로 로그인 되었습니다.\n");
+      System.out.println("[관리자]\n");
+      System.out.println("1. 회원 관리");
+      System.out.println("2. 캘린더 관리");
+      System.out.println("0. 로그아웃\n");
+
+      input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+
+      System.out.println();
+
+
+      // 1. 회원 관리
+      if (input == 1) {
+        System.out.println("[관리자 / 회원 관리]");
+        System.out.println("1. 멘토 승인 관리");
+        System.out.println("2. 블랙 리스트 관리");
+        System.out.println("0. 이전");
+
+        input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+        System.out.println();
+
+        // 1-1. 멘토 승인 관리
+        if (input == 1) {
+          System.out.println("[관리자 / 회원 관리 / 멘토 승인 관리]");
+
+          // [추가] 메서드 호출
+          System.out.println("1. 멘토 승인");
+          System.out.println("2. 멘토 거절");
+          System.out.println("0. 이전");
+
+          // 1-2. 블랙 리스트 관리
+        } else if (input == 2) {
+          System.out.println("[관리자 / 회원 관리 / 블랙 리스트 관리]");
+
+          // [추가] 메서드 호출
+          input = Prompt.inputInt("회원 번호를 선택하세요. > ");
+
+          // 1-0. 이전
+        } else if (input == 0) {
+          return;
+        }
+
+        // 2. 캘린더 관리
+      } else if (input == 2) {
+        System.out.println("[관리자 / 캘린더 관리]");
+        System.out.println("1. 이달의 채용 공고 관리");
+        System.out.println("2. 이달의 시험 공고 관리");
+        System.out.println("0. 이전");
+        input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+
+        // 2-1. 이달의 채용 공고 관리
+        if (input == 1) {
+          JobsCalenderMenuList();
+        }
+
+        // 2-2. 이달의 시험 공고 관리
+        else if (input == 2) {
+          ExamCalenderMenuList();
+        }
+
+        // 2-0. 이전
+        else if (input == 0) {
+          return;
+        }
+
+        // 0. 로그아웃
+        if (input == 0) {
+          System.out.println("로그아웃이 완료되었습니다.");
+          return;
+        }
+
+        // 그 외 번호 입력
+      } else {
+        System.out.println("잘못된 번호입니다.");
+
+        continue;
+      }
+      continue;
     }
   }
 
@@ -331,6 +446,7 @@ public class MenuList {
     }
   }
 
+  // 스몰톡 커뮤니티 메뉴 조회
   public void communityTalkMenuList() {
     while(true) {
       System.out.println("1. 생성");
@@ -369,14 +485,14 @@ public class MenuList {
     }
   }
 
-  public int memberMenuList() {
-    System.out.println("[회원]\n");
-    System.out.println("1. 무료 스터디");
-    System.out.println("2. 유료 스터디");
-    System.out.println("3. 관심목록");
-    System.out.println("4. 커뮤니티");
-    System.out.println("5. 멘토 신청하기");
-    System.out.println("0. 로그아웃\n");
+  // 이달의 시험일정 메뉴
+  public int ExamCalenderMenuList() {
+    System.out.println("[관리자 / 캘린더 관리 / 이달의 시험일정 관리]");
+    System.out.println("1. 생성");
+    System.out.println("2. 상세 목록");
+    System.out.println("3. 변경");
+    System.out.println("4. 삭제");
+    System.out.println("0. 이전");
 
     input = Prompt.inputInt("메뉴를 선택해주세요. > ");
 
@@ -384,62 +500,22 @@ public class MenuList {
     return input;
   }
 
-  public int adminMenuList() {
-    while (true) {
-      System.out.println("관리자로 로그인 되었습니다.\n");
-      System.out.println("[관리자]\n");
-      System.out.println("1. 회원 관리");
-      System.out.println("2. 캘린더 관리");
-      System.out.println("0. 로그아웃\n");
+  // 이달의 채용공고 메뉴
+  public int JobsCalenderMenuList() {
+    System.out.println("[관리자 / 캘린더 관리 / 이달의 채용공고 관리]");
+    System.out.println("1. 생성");
+    System.out.println("2. 상세 목록");
+    System.out.println("3. 변경");
+    System.out.println("4. 삭제");
+    System.out.println("0. 이전");
 
-      input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+    input = Prompt.inputInt("메뉴를 선택해주세요. > ");
 
-      System.out.println();
-
-      // 0. 로그아웃
-      if (input == 0) {
-        System.out.println("로그아웃이 완료되었습니다.");
-        return 0;
-
-        // 1. 회원 관리
-      } else if (input == 1) {
-        System.out.println("[관리자 / 회원 관리]");
-        System.out.println("1. 멘토 승인 관리");
-        System.out.println("2. 블랙 리스트 관리");
-
-        input = Prompt.inputInt("메뉴를 선택해주세요. > ");
-        System.out.println();
-
-        if (input == 1) {
-          System.out.println("[관리자 / 회원 관리 / 멘토 승인 관리]");
-          // [추가] 메서드 호출
-          System.out.println("1. 멘토 승인");
-          System.out.println("2. 멘토 거절");
-          System.out.println("0. 이전");
-
-        } else if (input == 2) {
-          System.out.println("[관리자 / 회원 관리 / 블랙 리스트 관리]");
-          // [추가] 메서드 호출
-          input = Prompt.inputInt("회원 번호를 선택하세요. > ");
-          System.out.println("0. 이전");
-        }
-
-        // 2. 캘린더 관리
-      } else if (input == 2) {
-        System.out.println("[관리자 / 캘린더 관리]");
-        System.out.println("1. 이달의 채용 공고 관리");
-        System.out.println("2. 이달의 시험 공고 관리");
-        input = Prompt.inputInt("메뉴를 선택해주세요. > ");
-
-        System.out.println();
-        return input;
-
-      } else {
-        System.out.println("잘못된 번호입니다.");
-      }
-    }
+    System.out.println();
+    return input;
   }
 
+  // 로그인
   public int loginExecute(NewMember[] loginInfo) {
     String id = Prompt.inputString("아이디 입력: ");
     String pwd = Prompt.inputString("비밀번호 입력: ");
