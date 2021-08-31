@@ -88,7 +88,7 @@ public class MenuList {
       System.out.println("1. 생성");
       System.out.println("2. 조회");
       System.out.println("3. 상세보기");
-      System.out.println("4. 변경");
+      System.out.println("4. 수정");
       System.out.println("5. 삭제");
       System.out.println("0. 이전\n");
 
@@ -127,7 +127,7 @@ public class MenuList {
       System.out.println("1. 생성");
       System.out.println("2. 조회");
       System.out.println("3. 상세보기");
-      System.out.println("4. 변경");
+      System.out.println("4. 수정");
       System.out.println("5. 삭제");
       System.out.println("0. 이전\n");
 
@@ -247,7 +247,7 @@ public class MenuList {
     System.out.println("3. 스몰톡");
     System.out.println("0. 이전\n");
 
-    input = Prompt.inputInt("게시판을 선택해주세요. >");
+    input = Prompt.inputInt("게시판을 선택해주세요. > ");
 
     System.out.println();
     return input;
@@ -259,7 +259,7 @@ public class MenuList {
       System.out.println("1. 생성");
       System.out.println("2. 조회");
       System.out.println("3. 상세보기");
-      System.out.println("4. 변경");
+      System.out.println("4. 수정");
       System.out.println("5. 삭제");
       System.out.println("0. 이전\n");
 
@@ -298,7 +298,7 @@ public class MenuList {
       System.out.println("1. 생성");
       System.out.println("2. 조회");
       System.out.println("3. 상세보기");
-      System.out.println("4. 변경");
+      System.out.println("4. 수정");
       System.out.println("5. 삭제");
       System.out.println("0. 이전\n");
 
@@ -336,7 +336,7 @@ public class MenuList {
       System.out.println("1. 생성");
       System.out.println("2. 조회");
       System.out.println("3. 상세보기");
-      System.out.println("4. 변경");
+      System.out.println("4. 수정");
       System.out.println("5. 삭제");
       System.out.println("0. 이전\n");
 
