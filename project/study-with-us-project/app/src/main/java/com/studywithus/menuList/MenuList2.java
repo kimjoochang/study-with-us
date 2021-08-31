@@ -1,6 +1,7 @@
 package com.studywithus.menuList;
 
 import com.studywithus.domain.InterestList;
+import com.studywithus.domain.LoginMemberInfo;
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyHandler;
 import com.studywithus.handler.CommunityHandler;
@@ -11,12 +12,25 @@ import com.studywithus.handler.ExamCalenderHandler;
 import com.studywithus.handler.FreeStudyHandler;
 import com.studywithus.handler.InterestHandler;
 import com.studywithus.handler.JobsCalenderHandler;
+import com.studywithus.handler.MentorApplicantHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.util.Prompt;
 
 public class MenuList {
 
-  InterestList[] interests = new InterestList[100];
+	InterestList[] interests = new InterestList[100];
+
+	ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
+	CommunityHandler communityHandler = new CommunityHandler();
+	CommunityInfoHandler communityInfoHandler = new CommunityInfoHandler();
+	CommunityQaHandler communityQaHandler = new CommunityQaHandler();
+	CommunityTalkHandler communityTalkHandler = new CommunityTalkHandler();
+	ExamCalenderHandler examCalenderHandler = new ExamCalenderHandler();
+	FreeStudyHandler freeStudyHandler = new FreeStudyHandler();
+	InterestHandler interestHandler = new InterestHandler();
+	JobsCalenderHandler jobsCalenderHandler = new JobsCalenderHandler();
+	NewMemberHandler newMemberHandler = new NewMemberHandler();
+	MentorApplicantHandler mentorApplicantHandler = new MentorApplicantHandler();
 
   ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
   CommunityHandler communityHandler = new CommunityHandler();
@@ -29,7 +43,14 @@ public class MenuList {
   JobsCalenderHandler jobsCalenderHandler = new JobsCalenderHandler();
   NewMemberHandler newMemberHandler = new NewMemberHandler();
 
-  int input;
+	// 메인 메뉴 조회
+	public int mainMenuList() {
+		System.out.println();
+		System.out.println("[STUDY WITH US]\n");
+		System.out.println("1. 비회원으로 시작하기");
+		System.out.println("2. 로그인");
+		System.out.println("3. 회원가입");
+		System.out.println("0. 종료하기\n");
 
   // 메인 메뉴 조회
   public void mainMenuList() {
@@ -40,9 +61,11 @@ public class MenuList {
     System.out.println("3. 관리자 로그인");
     System.out.println("4. 회원가입");
     System.out.println("0. 종료하기\n");
+		input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+		System.out.println();
 
-    input = Prompt.inputInt("메뉴를 선택해주세요. > ");
-    System.out.println();
+		return input;
+	}
 
     if (input == 1) {
       noneMemberMenuList();
@@ -60,17 +83,19 @@ public class MenuList {
       return;
     }
   }
+	// 비회원 메뉴 조회
+	public void noneMemberMenuList() {
+		while(true) {
+			System.out.println();
+			System.out.println("[비회원으로 시작]\n");
+			System.out.println("1. 무료스터디 조회");
+			System.out.println("2. 유료스터디 조회");
+			System.out.println("3. 커뮤니티 조회");
+			System.out.println("4. 캘린더 조회");
+			System.out.println("0. 이전\n");
 
-  // 비회원 메뉴 조회
-  public void noneMemberMenuList() {
-    while(true) {
-      System.out.println();
-      System.out.println("[비회원으로 시작]\n");
-      System.out.println("1. 무료스터디 조회");
-      System.out.println("2. 유료스터디 조회");
-      System.out.println("3. 커뮤니티 조회");
-      System.out.println("4. 캘린더 조회");
-      System.out.println("0. 이전\n");
+			input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+			System.out.println();
 
       input = Prompt.inputInt("메뉴를 선택해주세요. > ");
       System.out.println();
@@ -255,11 +280,34 @@ public class MenuList {
       } else if (input == 2) {
         chargeStudyHandler.list();
 
-      } else if (input == 3) {
-        chargeStudyHandler.detail();
+				System.out.println("------------------------------------");
+				System.out.println("0. 이전");
+				System.out.println("1. 결제하기\n");
+				input = Prompt.inputInt("메뉴를 선택해주세요> ");
 
-      } else if (input == 4) {
-        chargeStudyHandler.update();
+				if (input == 1) {
+					String input = Prompt.inputString("유료 스터디를 결제 하시겠습니까? (y/N)");
+					if (input.equalsIgnoreCase("n") || input.length() == 0) {
+						System.out.println(" 유료 스터디 결제를 취소하셨습니다.");
+					}
+					else {
+						System.out.println("------------------------------------");
+						System.out.println("결제 이용약관입니다.\n"
+								+ "(＼(＼     \n"
+								+ "(  -.- )~♥\n"
+								+ " O_(\")(\")");
+						System.out.println("------------------------------------");
+						String input1 = Prompt.inputString("이용약관에 동의하십니까? (y/N) ");
+						if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
+							System.out.println("결제 이용약관 동의를 취소하셨습니다.");
+						} else {
+							System.out.println("유료 스터디 결제가 완료 되었습니다.");
+							return;
+						}
+						continue;
+					}
+				} else if (input == 4) {
+					chargeStudyHandler.update();
 
       } else if (input == 5) {
         chargeStudyHandler.delete();
@@ -471,19 +519,19 @@ public class MenuList {
       } else if (input == 4) {
         communityTalkHandler.update();
 
-      } else if (input == 5) {
-        communityTalkHandler.delete();
+			} else if (input == 5) {
+				communityTalkHandler.delete();
 
-      } else if (input == 0) {
-        return;
+			} else if (input == 0) {
+				return;
 
-      } else {
-        System.out.println("잘못된 번호입니다.");
-        continue;
-      }
-      continue;
-    }
-  }
+			} else {
+				System.out.println("잘못된 번호입니다.");
+				continue;
+			}
+			continue;
+		}
+	}
 
   // 이달의 시험일정 메뉴
   public int ExamCalenderMenuList() {
@@ -493,6 +541,22 @@ public class MenuList {
     System.out.println("3. 변경");
     System.out.println("4. 삭제");
     System.out.println("0. 이전");
+	public int memberMenuList() {
+		System.out.println("[회원]\n");
+		System.out.println("1. 무료 스터디");
+		System.out.println("2. 유료 스터디");
+		System.out.println("3. 관심목록");
+		System.out.println("4. 커뮤니티");
+		System.out.println("5. 멘토 신청하기");
+		System.out.println("0. 로그아웃\n");
+	public int memberMenuList() {
+		System.out.println("[회원]\n");
+		System.out.println("1. 무료 스터디");
+		System.out.println("2. 유료 스터디");
+		System.out.println("3. 관심목록");
+		System.out.println("4. 커뮤니티");
+		System.out.println("5. 멘토 신청하기");
+		System.out.println("0. 로그아웃\n");
 
     input = Prompt.inputInt("메뉴를 선택해주세요. > ");
 
@@ -508,12 +572,65 @@ public class MenuList {
     System.out.println("3. 변경");
     System.out.println("4. 삭제");
     System.out.println("0. 이전");
+	public int adminMenuList() {
+		while (true) {
+			System.out.println("관리자로 로그인 되었습니다.\n");
+			System.out.println("[관리자]\n");
+			System.out.println("1. 회원 관리");
+			System.out.println("2. 캘린더 관리");
+			System.out.println("0. 로그아웃\n");
 
     input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+			input = Prompt.inputInt("메뉴를 선택해주세요. > ");
 
     System.out.println();
     return input;
   }
+			System.out.println();
+
+			// 0. 로그아웃
+			if (input == 0) {
+				System.out.println("로그아웃이 완료되었습니다.");
+				return 0;
+
+				// 1. 회원 관리
+			} else if (input == 1) {
+				System.out.println("[관리자 / 회원 관리]");
+				System.out.println("1. 멘토 승인 관리");
+				System.out.println("2. 블랙 리스트 관리");
+
+				input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+				System.out.println();
+
+				if (input == 1) {
+					System.out.println("[관리자 / 회원 관리 / 멘토 승인 관리]");
+					mentorApplicantHandler.list();
+					System.out.println("1. 멘토 승인");
+					System.out.println("2. 멘토 거절");
+					System.out.println("0. 이전");
+
+				} else if (input == 2) {
+					System.out.println("[관리자 / 회원 관리 / 블랙 리스트 관리]");
+					// [추가] 메서드 호출
+					input = Prompt.inputInt("회원 번호를 선택하세요. > ");
+					System.out.println("0. 이전");
+				}
+
+				// 2. 캘린더 관리
+			} else if (input == 2) {
+				System.out.println("[관리자 / 캘린더 관리]");
+				System.out.println("1. 이달의 채용 공고 관리");
+				System.out.println("2. 이달의 시험 공고 관리");
+				input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+
+				System.out.println();
+				return input;
+
+			} else {
+				System.out.println("잘못된 번호입니다.");
+			}
+		}
+	}
 
   // 로그인
   public int loginExecute(NewMember[] loginInfo) {
@@ -526,14 +643,16 @@ public class MenuList {
 
       } else if (! id.equals (loginInfo[i].getId()) || ! pwd.equals (loginInfo[i].getPwd())) {
 
-      } else {
-        System.out.println();
-        System.out.println("로그인이 완료되었습니다.\n");
-        return 1;
-      }
-      continue;
-    }
-    System.out.println("아이디 또는 비밀번호가 다릅니다.\n");
-    return 0;
-  }
+			} else {
+				LoginMemberInfo.setId(loginInfo[i].getId()); 
+				LoginMemberInfo.setName(loginInfo[i].getId());
+				System.out.println();
+				System.out.println("로그인이 완료되었습니다.\n");
+				return 1;
+			}
+			continue;
+		}
+		System.out.println("아이디 또는 비밀번호가 다릅니다.\n");
+		return 0;
+	}
 }

@@ -11,7 +11,7 @@ public class ChargeStudyHandler {
   ChargeStudy[] studies = new ChargeStudy[MAX_LENGTH];
   int size = 0;
 
-  // 유료 스터디 생성.
+  // 유료 스터디 생성
   public void add() {
     System.out.println("[유료 스터디 / 생성]");
 
@@ -22,11 +22,12 @@ public class ChargeStudyHandler {
     study.setArea(Prompt.inputString("지역? "));
     study.setTitle(Prompt.inputString("스터디 제목? "));
     study.setExplanation(Prompt.inputString("스터디 설명? "));
-    study.setPrice(Prompt.inputInt("가격?" ));
+    study.setPrice(Prompt.inputInt("가격? " ));
     study.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     this.studies[this.size++] = study;
-    System.out.println("유료스터디 등록이 완료되었습니다.");
+    System.out.println();
+    System.out.println("유료스터디 등록이 완료되었습니다.\n");
   }
 
   // 유료 스터디 조회
@@ -47,7 +48,8 @@ public class ChargeStudyHandler {
     ChargeStudy study = findByNo(no);
 
     if (study == null) {
-      System.out.println("해당 번호의 유료 스터디가 없습니다.");
+      System.out.println();
+      System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
       return;
     }
 
@@ -57,6 +59,11 @@ public class ChargeStudyHandler {
     System.out.printf("멘토: %s\n", study.getWriter());
     System.out.printf("가격: %s\n", study.getPrice());
     System.out.printf("등록일: %s\n", study.getRegisteredDate());
+
+    study.setViewCount(study.getViewCount() + 1);
+    System.out.printf("조회수: %d\n", study.getViewCount());
+
+
     System.out.printf("조회수: %d\n", study.getViewCount() + 1);
 
     //		유료 스터디 결제
@@ -89,7 +96,8 @@ public class ChargeStudyHandler {
     ChargeStudy study = findByNo(no);
 
     if (study == null) {
-      System.out.println("해당 번호의 유료 스터디가 없습니다.");
+      System.out.println();
+      System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
       return;
     }
 
@@ -98,13 +106,15 @@ public class ChargeStudyHandler {
 
     String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("유료 스터디 수정을 취소하였습니다.");
+      System.out.println();
+      System.out.println("유료 스터디 수정을 취소하였습니다.\n");
       return;
     }
 
     study.setTitle(title);
     study.setExplanation(explanation);
-    System.out.println("유료 스터디를 수정하였습니다.");
+    System.out.println();
+    System.out.println("유료 스터디를 수정하였습니다.\n");
   }
 
   // 유료 스터디 삭제 요청
@@ -115,13 +125,15 @@ public class ChargeStudyHandler {
     int index = indexOf(no);
 
     if (index == -1) {
-      System.out.println("해당 번호의 유료 스터디가 없습니다.");
+      System.out.println();
+      System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
       return;
     }
 
     String input = Prompt.inputString("정말 삭제 요청 하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("유료 스터디 삭제 요청을 취소하였습니다.");
+      System.out.println();
+      System.out.println("유료 스터디 삭제 요청을 취소하였습니다.\n");
       return;
     }
   }
@@ -134,7 +146,8 @@ public class ChargeStudyHandler {
     ChargeStudy study = findByNo(no);
 
     if (study == null) {
-      System.out.println("해당 번호의 삭제 요청 유료 스터디가 없습니다.");
+      System.out.println();
+      System.out.println("해당 번호의 삭제 요청 유료 스터디가 없습니다.\n");
       return;
     }
 
@@ -144,7 +157,9 @@ public class ChargeStudyHandler {
     System.out.printf("멘토: %s\n", study.getWriter());
     System.out.printf("가격: %s\n", study.getPrice());
     System.out.printf("등록일: %s\n", study.getRegisteredDate());
-    System.out.printf("조회수: %d\n", study.getViewCount() + 1);
+
+    study.setViewCount(study.getViewCount() + 1);
+    System.out.printf("조회수: %d\n", study.getViewCount());
   }
 
   // 유료 스터디 번호 조회
