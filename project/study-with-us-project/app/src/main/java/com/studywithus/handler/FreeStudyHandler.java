@@ -35,7 +35,8 @@ public class FreeStudyHandler {
     study.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     this.studies[this.size++] = study;
-    System.out.println("무료 스터디 등록이 완료되었습니다.");
+    System.out.println();
+    System.out.println("무료 스터디 등록이 완료되었습니다.\n");
   }
 
   // 무료 스터디 신청
@@ -48,8 +49,9 @@ public class FreeStudyHandler {
     System.out.println("[무료 스터디 조회]");
 
     for (int i = 0; i < this.size; i++) {
-      System.out.printf("%d, %s, %s, %s, %d\n", this.studies[i].getNo(), this.studies[i].getTitle(), this.studies[i].getWriter(),
-          this.studies[i].getRegisteredDate(), this.studies[i].getViewCount());
+      System.out.printf("%d, %s, %s, %s, %d\n", this.studies[i].getNo(), this.studies[i].getTitle(),
+          this.studies[i].getWriter(), this.studies[i].getRegisteredDate(),
+          this.studies[i].getViewCount(), this.studies[i].getLike());
     }
   }
 
@@ -61,7 +63,8 @@ public class FreeStudyHandler {
     FreeStudy study = findByNo(no);
 
     if (study == null) {
-      System.out.println("해당 번호의 무료 스터디가 없습니다.");
+      System.out.println();
+      System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
       return;
     }
 
@@ -76,19 +79,22 @@ public class FreeStudyHandler {
     System.out.printf("설명: %s\n", study.getExplanation());
     System.out.printf("규칙: %s\n", study.getRule());
     System.out.printf("등록일: %s\n", study.getRegisteredDate());
-    System.out.printf("조회수: %d\n", study.getViewCount() + 1);
+
+    study.setViewCount(study.getViewCount() + 1);
+    System.out.printf("조회수: %d\n", study.getViewCount());
   }
 
-  // 무료 스터디 변경
+  // 무료 스터디 수정
   public void update() {
-    System.out.println("[무료 스터디 변경]");
+    System.out.println("[무료 스터디 수정]");
 
     int no = Prompt.inputInt("번호? ");
 
     FreeStudy study = findByNo(no);
 
     if (study == null) {
-      System.out.println("해당 번호의 무료 스터디가 없습니다.");
+      System.out.println();
+      System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
       return;
     }
 
@@ -99,7 +105,8 @@ public class FreeStudyHandler {
     String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("무료 스터디 수정을 취소하였습니다.");
+      System.out.println();
+      System.out.println("무료 스터디 수정을 취소하였습니다.\n");
       return;
     }
 
@@ -107,7 +114,8 @@ public class FreeStudyHandler {
     study.setExplanation(explanation);
     study.setRule(rule);
 
-    System.out.println("무료 스터디를 수정하였습니다.");
+    System.out.println();
+    System.out.println("무료 스터디를 수정하였습니다.\n");
   }
 
   // 무료 스터디 삭제
@@ -119,14 +127,16 @@ public class FreeStudyHandler {
     int index = indexOf(no);
 
     if (index == -1) {
-      System.out.println("해당 번호의 무료 스터디가 없습니다.");
+      System.out.println();
+      System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
       return;
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("무료 스터디 삭제를 취소하였습니다.");
+      System.out.println();
+      System.out.println("무료 스터디 삭제를 취소하였습니다.\n");
       return;
     }
 
@@ -136,7 +146,8 @@ public class FreeStudyHandler {
 
     this.studies[--this.size] = null;
 
-    System.out.println("무료 스터디를 삭제하였습니다.");
+    System.out.println();
+    System.out.println("무료 스터디를 삭제하였습니다.\n");
   }
 
   // 무료 스터디 번호 조회
