@@ -2,6 +2,7 @@ package com.studywithus.menuList;
 
 
 import com.studywithus.domain.InterestList;
+import com.studywithus.domain.LoginMemberInfo;
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyHandler;
 import com.studywithus.handler.CommunityHandler;
@@ -12,6 +13,7 @@ import com.studywithus.handler.ExamCalenderHandler;
 import com.studywithus.handler.FreeStudyHandler;
 import com.studywithus.handler.InterestHandler;
 import com.studywithus.handler.JobsCalenderHandler;
+import com.studywithus.handler.MentorApplicantHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.util.Prompt;
 
@@ -29,6 +31,7 @@ public class MenuList {
   InterestHandler interestHandler = new InterestHandler();
   JobsCalenderHandler jobsCalenderHandler = new JobsCalenderHandler();
   NewMemberHandler newMemberHandler = new NewMemberHandler();
+  MentorApplicantHandler mentorApplicantHandler = new MentorApplicantHandler();
 
   int input;
 
@@ -412,7 +415,7 @@ public class MenuList {
 
         if (input == 1) {
           System.out.println("[관리자 / 회원 관리 / 멘토 승인 관리]");
-          // [추가] 메서드 호출
+          mentorApplicantHandler.list();
           System.out.println("1. 멘토 승인");
           System.out.println("2. 멘토 거절");
           System.out.println("0. 이전");
@@ -451,6 +454,8 @@ public class MenuList {
       } else if (! id.equals (loginInfo[i].getId()) || ! pwd.equals (loginInfo[i].getPwd())) {
 
       } else {
+        LoginMemberInfo.setId(loginInfo[i].getId()); 
+        LoginMemberInfo.setName(loginInfo[i].getId());
         System.out.println();
         System.out.println("로그인이 완료되었습니다.\n");
         return 1;

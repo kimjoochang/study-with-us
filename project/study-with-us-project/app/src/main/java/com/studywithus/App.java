@@ -2,7 +2,7 @@ package com.studywithus;
 
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyHandler;
-import com.studywithus.handler.MentorHandler;
+import com.studywithus.handler.MentorApplicantHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.menuList.MenuList;
 
@@ -10,7 +10,7 @@ public class App {
 
   public static void main(String[] args) {
 
-    MentorHandler mentorHandler = new MentorHandler();
+    MentorApplicantHandler mentorApplicantHandler = new MentorApplicantHandler();
     NewMemberHandler newMemberHandler = new NewMemberHandler();
     ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
     NewMember[] loginInfo = new NewMember[5];
@@ -36,7 +36,7 @@ public class App {
         if (input == 0){
           continue Main;
         } else if (input == 2) {
-          menuList.adminMenuList();
+          menuList.adminMenuList(); // 관리자 메뉴
           continue Main;
         }
 
@@ -74,7 +74,7 @@ public class App {
             menuList.interestMenuList();
             continue Member;
           } else if (input == 5) {
-            mentorHandler.add();
+            mentorApplicantHandler.add();
           } else if (input == 4) { // 커뮤니티 메뉴
             Community : while (true) {
               input = menuList.communityMenuList();
