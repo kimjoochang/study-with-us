@@ -246,6 +246,7 @@ public class MenuList {
       } else if (input == 2) {
         chargeStudyHandler.list();
 
+      } else if (input == 3) {
         System.out.println("------------------------------------");
         System.out.println("0. 이전");
         System.out.println("1. 결제하기\n");
@@ -268,27 +269,29 @@ public class MenuList {
               System.out.println("결제 이용약관 동의를 취소하셨습니다.");
             } else {
               System.out.println("유료 스터디 결제가 완료 되었습니다.");
-              return;
             }
             continue;
           }
-        } else if (input == 4) {
-          chargeStudyHandler.update();
 
-        } else if (input == 5) {
-          chargeStudyHandler.delete();
-
-        } else if (input == 0) {
-          return;
-
-        } else {
-          System.out.println("잘못된 번호입니다.");
-          continue;
         }
+
+      } else if (input == 4) {
+        chargeStudyHandler.update();
+
+      } else if (input == 5) {
+        chargeStudyHandler.delete();
+
+      } else if (input == 0) {
+        return;
+
+      } else {
+        System.out.println("잘못된 번호입니다.");
         continue;
       }
+      continue;
     }
   }
+
 
   // 관심목록 기본 메뉴 조회
   public void interestMenuList() {

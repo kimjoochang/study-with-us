@@ -63,7 +63,7 @@ public class App {
               } else if (input == 5) {
                 chargeStudyHandler.delete(); // 5. 삭제
               } else if (input == 0) {
-                continue;
+                continue Member;
               }else {
                 System.out.println("잘못된 번호입니다.");
                 continue Charge;
