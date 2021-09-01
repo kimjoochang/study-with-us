@@ -9,8 +9,8 @@ public class InterestHandler {
 
   static final int MAX_LENGTH = 5;
 
-  InterestList[] interests = new InterestList[MAX_LENGTH];
-  int size = 0;
+  static InterestList[] interests = new InterestList[MAX_LENGTH];
+  static int size = 0;
 
   // 무료 스터디 관심 목록 추가
   public void freeAdd(FreeStudy study) {
@@ -30,7 +30,7 @@ public class InterestHandler {
   }
 
   // 유료 스터디 관심 목록 추가
-  public void chargeAdd(ChargeStudy study) {
+  public static void chargeAdd(ChargeStudy study) {
     String input = Prompt.inputString("관심 목록에 추가하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -40,10 +40,12 @@ public class InterestHandler {
 
     InterestList interest = new InterestList();
 
+
     interest.setChargeInterest(study);
 
-    this.interests[this.size++] = interest;
+    interests[size++] = interest;
     System.out.println("유료 스터디 관심 목록에 추가되었습니다.");
+    return;
   }
 
   // 무료 스터디 관심 목록 조회
