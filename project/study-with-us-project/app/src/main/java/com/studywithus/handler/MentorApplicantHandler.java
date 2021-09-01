@@ -5,8 +5,11 @@ import com.studywithus.domain.MentorApplicant;
 import com.studywithus.util.Prompt;
 
 public class MentorApplicantHandler {
+
   MentorApplicant[] mentorApplicants = new MentorApplicant[5];
+  MentorApplicant mentorApplicant = new MentorApplicant();
   int size = 0;
+
   // 멘토 신청하기
   public void add() {
     String input = Prompt.inputString("멘토 신청을 하시겠습니까? (y/N) ");
@@ -15,13 +18,12 @@ public class MentorApplicantHandler {
       System.out.println("취소");
       return;
     }
-    MentorApplicant mentorApplicant = new MentorApplicant();
+    mentorApplicants[0] = new MentorApplicant();
 
-    mentorApplicant.name = LoginMemberInfo.name ;
-    mentorApplicant.id = LoginMemberInfo.id ;
-    System.out.println("신청 이름 : " + mentorApplicant.name);
+    mentorApplicant.name = LoginMemberInfo.getName();
+    mentorApplicant.id = LoginMemberInfo.getId();
 
-    this.mentorApplicants[size].name = mentorApplicant.name ;
+    this.mentorApplicants[size].name = mentorApplicant.name;
     this.mentorApplicants[size].id = mentorApplicant.id;
 
     size++;
