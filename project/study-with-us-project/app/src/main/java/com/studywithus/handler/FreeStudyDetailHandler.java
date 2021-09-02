@@ -1,14 +1,14 @@
 package com.studywithus.handler;
 
+import java.util.List;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
 
-  static final int MAX_LENGTH = 5;
-
-  FreeStudy[] studies = new FreeStudy[MAX_LENGTH];
-  int size = 0;
+  public FreeStudyDetailHandler(List<FreeStudy> freeStudyList) {
+    super(freeStudyList);
+  }
 
   // 무료 스터디 상세보기
   public void execute() {
