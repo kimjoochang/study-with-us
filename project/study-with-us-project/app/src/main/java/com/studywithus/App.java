@@ -148,22 +148,21 @@ public class App {
               System.out.println("잘못된 번호입니다.");
               continue;
             }
+            // 회원가입
+          } else if (input == 3) {
+            newMemberHandler.add(loginInfo);   
+            continue;
+
+            // 아이디 / 비밀번호 찾기
+          } else if (input == 4) {
+            menuList.findMemberInfoList();
+            return;
+
+          } else {
+            System.out.println("잘못된 번호입니다.");
           }
-
-          // 회원가입
-        } else if (input == 3) {
-          newMemberHandler.add(loginInfo);   
-          continue;
-
-          // 아이디 / 비밀번호 찾기
-        } else if (input == 4) {
-          menuList.findMemberInfoList();
-          return;
-
-        } else {
-          System.out.println("잘못된 번호입니다.");
         }
       }
     }
-
   }
+}
