@@ -44,51 +44,15 @@ public class App {
           continue;
         }
 
-        Member : while(true) {
-          if (input == 0){
-            continue Main;
+        if (input == 0){
+          continue Main;
 
-            // 관리자 메뉴
-          } else if (input == 2) {
-            menuList.adminMenuList();
-            continue Main;
-
-            // 관심목록 메뉴
-          } else if (input == 3) {
-            interestMenuList.interestMenuList();
-            continue Member;
-
-            // 커뮤니티 메뉴
-          } else if (input == 4) {
-            Community : while (true) {
-              input = communityMenuList.communityMainMenuList();
-
-              if(input == 1) { // 커뮤니티-질문 메뉴 
-                System.out.println("[커뮤니티 / 질문]\n");
-                communityMenuList.communityQaMenuList();
-                continue Community;                 
-
-              } else if(input == 2) { //커뮤니티-정보 메뉴
-                System.out.println("[커뮤니티 / 정보]\n");
-                communityMenuList.communityInfoMenuList();
-                continue Community;
-
-              } else if(input == 3) { //커뮤니티-스몰톡 메뉴
-                System.out.println("[커뮤니티 / 스몰톡]\n");
-                communityMenuList.communityTalkMenuList();
-                continue Community;  
-
-              } else if(input == 0) { // 커뮤니티 메뉴에서 이전
-                continue Member;
-
-              } else {
-                System.out.println("잘못된 번호입니다.");
-                continue Community;
-              }
-            }
-          } else if (input == 5) { // 캘린더
-
-            // 로그인 성공 후 메뉴
+          // 관리자 메뉴
+        } else if (input == 2) {
+          menuList.adminMenuList();
+          continue Main;
+          // 로그인 성공 후 메뉴
+          Member : while(true) {
             input = menuList.memberMenuList(); 
 
             if (input == 0) {
@@ -105,7 +69,7 @@ public class App {
               chargeStudyMenuList.chargeStudyMenuList();
               continue Member;
 
-              // 3. 관심목록 메뉴
+              // 관심목록 메뉴
             } else if (input == 3) {
               interestMenuList.interestMenuList();
               continue Member;
@@ -138,7 +102,8 @@ public class App {
                   continue Community;
                 }
               }
-            } else if (input == 5) { // 캘린더
+            }// 3. 관심목록 메뉴          
+            else if (input == 5) { // 캘린더
               // [추가]
 
             } else if (input == 6) { // 멘토 신청하기
@@ -165,5 +130,6 @@ public class App {
         }
       }
     }
-
   }
+}
+
