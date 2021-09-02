@@ -1,5 +1,7 @@
 package com.studywithus.menuList;
 
+import java.util.List;
+
 import com.studywithus.domain.ChargeStudy;
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteHandler;
@@ -12,12 +14,14 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyMenuList {
 
-	ChargeStudyAddHandler chargeStudyAddHandler = new ChargeStudyAddHandler();
-	ChargeStudyListHandler chargeStudyListHandler = new ChargeStudyListHandler();
-	ChargeStudyDeleteHandler chargeStudyDeleteHandler = new ChargeStudyDeleteHandler();
-	ChargeStudyDeletedDetailHandler chargeStudyDeletedDetailHandler = new ChargeStudyDeletedDetailHandler();
-	ChargeStudyDetailHandler chargeStudyDetailHandler = new ChargeStudyDetailHandler();
-	ChargeStudyUpdateHandler chargeStudyUpdateHandler = new ChargeStudyUpdateHandler();
+	private List<ChargeStudy> chargeStudyList;
+
+	ChargeStudyAddHandler chargeStudyAddHandler = new ChargeStudyAddHandler(chargeStudyList);
+	ChargeStudyListHandler chargeStudyListHandler = new ChargeStudyListHandler(chargeStudyList);
+	ChargeStudyDeleteHandler chargeStudyDeleteHandler = new ChargeStudyDeleteHandler(chargeStudyList);
+	ChargeStudyDeletedDetailHandler chargeStudyDeletedDetailHandler = new ChargeStudyDeletedDetailHandler(chargeStudyList);
+	ChargeStudyDetailHandler chargeStudyDetailHandler = new ChargeStudyDetailHandler(chargeStudyList);
+	ChargeStudyUpdateHandler chargeStudyUpdateHandler = new ChargeStudyUpdateHandler(chargeStudyList);
 
 	int input;
 
