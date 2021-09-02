@@ -1,10 +1,8 @@
 package com.studywithus;
 
 import com.studywithus.domain.NewMember;
-import com.studywithus.handler.ChargeStudyHandler;
 import com.studywithus.handler.AbstractMentorApplicantHandler;
 import com.studywithus.handler.NewMemberHandler;
-import com.studywithus.menuList.MenuList;
 
 public class App {
 
@@ -76,19 +74,19 @@ public class App {
             continue Member;
           } else if (input == 4) { // 커뮤니티 메뉴
             Community : while (true) {
-              input = menuList.communityMenuList();
+              input = communityMenuList.communityMainMenuList();
 
               if(input == 1) { // 커뮤니티-질문 메뉴 
                 System.out.println("[커뮤니티 / 질문]\n");
-                menuList.communityQaMenuList();
+                communityMenuList.communityQaMenuList();
                 continue Community;                 
               } else if(input == 2) { //커뮤니티-정보 메뉴
                 System.out.println("[커뮤니티 / 정보]\n");
-                menuList.communityInfoMenuList();
+                communityMenuList.communityInfoMenuList();
                 continue Community;
               } else if(input == 3) { //커뮤니티-스몰톡 메뉴
                 System.out.println("[커뮤니티 / 스몰톡]\n");
-                menuList.communityTalkMenuList();
+                communityMenuList.communityTalkMenuList();
                 continue Community;  
               } else if(input == 0) { // 커뮤니티 메뉴에서 이전
                 continue Member;
