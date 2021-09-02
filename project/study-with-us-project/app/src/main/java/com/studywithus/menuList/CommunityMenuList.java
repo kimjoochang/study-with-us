@@ -21,7 +21,7 @@ import com.studywithus.util.Prompt;
 
 public class CommunityMenuList {
 
-  private List <Community> communityList;
+  List <Community> communityList;
 
   CommunityInfoAddHandler communityInfoAddHandler = new CommunityInfoAddHandler(communityList);
   CommunityInfoListHandler communityInfoListHandler = new CommunityInfoListHandler(communityList);
