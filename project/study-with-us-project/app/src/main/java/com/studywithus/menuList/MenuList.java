@@ -203,32 +203,29 @@ public class MenuList {
   public void freeStudyMenuList() {
     while(true) {
       System.out.println("[무료 스터디]\n");
-      System.out.println("1. 신청");
-      System.out.println("2. 생성");
-      System.out.println("3. 조회");
-      System.out.println("4. 상세보기");
-      System.out.println("5. 수정");
-      System.out.println("6. 삭제");
+      System.out.println("1. 생성");
+      System.out.println("2. 조회");
+      System.out.println("3. 상세보기");
+      System.out.println("4. 수정");
+      System.out.println("5. 삭제");
       System.out.println("0. 이전\n");
 
       input = Prompt.inputInt("메뉴를 선택해주세요. > ");
 
       if (input == 1) {
-        freeStudyApplyHandler.execute();
-
-      } else if (input == 2) {
         freeStudyAddHandler.execute();
-
-      } else if (input == 3) {
+        
+      } else if (input == 2) {
         freeStudyListHandler.execute();
-
-      } else if (input == 4) {
+        
+      } else if (input == 3) {
         freeStudyDetailHandler.execute();
-
-      } else if (input == 5) {
+        freeStudyApplyHandler.execute();
+        
+      } else if (input == 4) {
         freeStudyUpdateHandler.execute();
 
-      } else if (input == 6) {
+      } else if (input == 5) {
         freeStudyDeleteHandler.execute();
 
       } else if (input == 0) {
