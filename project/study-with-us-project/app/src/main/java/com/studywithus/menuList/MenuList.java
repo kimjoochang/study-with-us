@@ -13,7 +13,7 @@ import com.studywithus.handler.ExamCalenderHandler;
 import com.studywithus.handler.FreeStudyHandler;
 import com.studywithus.handler.InterestHandler;
 import com.studywithus.handler.JobsCalenderHandler;
-import com.studywithus.handler.MentorApplicantHandler;
+import com.studywithus.handler.AbstractMentorApplicantHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.util.Prompt;
 
@@ -31,7 +31,7 @@ public class MenuList {
   InterestHandler interestHandler = new InterestHandler();
   JobsCalenderHandler jobsCalenderHandler = new JobsCalenderHandler();
   NewMemberHandler newMemberHandler = new NewMemberHandler();
-  MentorApplicantHandler mentorApplicantHandler = new MentorApplicantHandler();
+  AbstractMentorApplicantHandler mentorApplicantHandler = new AbstractMentorApplicantHandler();
 
   int input;
 

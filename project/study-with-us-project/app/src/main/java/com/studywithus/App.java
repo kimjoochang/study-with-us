@@ -2,7 +2,7 @@ package com.studywithus;
 
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyHandler;
-import com.studywithus.handler.MentorApplicantHandler;
+import com.studywithus.handler.AbstractMentorApplicantHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.menuList.MenuList;
 
@@ -10,7 +10,7 @@ public class App {
 
   public static void main(String[] args) {
 
-    MentorApplicantHandler mentorApplicantHandler = new MentorApplicantHandler();
+    AbstractMentorApplicantHandler mentorApplicantHandler = new AbstractMentorApplicantHandler();
     NewMemberHandler newMemberHandler = new NewMemberHandler();
     ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
     NewMember[] loginInfo = new NewMember[5];
