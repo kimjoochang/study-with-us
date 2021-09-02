@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.util.Prompt;
 
-public class InterestFreeAddHandler extends AbstractFreeInterestHandler {
+public class InterestFreeAddHandler extends AbstractInterestFreeHandler {
 
   public InterestFreeAddHandler(List<FreeStudy> freeInterestList) {
     super(freeInterestList);

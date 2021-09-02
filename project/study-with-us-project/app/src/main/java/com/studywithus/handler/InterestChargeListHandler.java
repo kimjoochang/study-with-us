@@ -3,7 +3,7 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.ChargeStudy;
 
-public class InterestChargeListHandler extends AbstractChargeInterestHandler {
+public class InterestChargeListHandler extends AbstractInterestChargeHandler {
 
 
   public InterestChargeListHandler(List<ChargeStudy> chargeInterestList) {
@@ -25,11 +25,5 @@ public class InterestChargeListHandler extends AbstractChargeInterestHandler {
           chargeStudy.getPrice());
     }
   }
-
-  @Override
-  public void execute(ChargeStudy wishChargeStudy) {
-
-  }
-
 
 }
