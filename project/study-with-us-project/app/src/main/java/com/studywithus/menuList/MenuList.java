@@ -42,6 +42,7 @@ public class MenuList {
     System.out.println("1. 비회원으로 시작하기");
     System.out.println("2. 로그인");
     System.out.println("3. 회원가입");
+    System.out.println("4. 아이디 / 비밀번호 찾기"); // 추가한 부분
     System.out.println("0. 종료하기\n");
 
     input = Prompt.inputInt("메뉴를 선택해주세요. > ");
@@ -548,6 +549,39 @@ public class MenuList {
     System.out.println("아이디 또는 비밀번호가 다릅니다.\n");
     return 0;
   }
+
+
+  // 김제이 ing
+
+  public void findMemberInfoList() {
+    NewMemberHandler newMemberHandler = new NewMemberHandler();
+
+    while(true) {
+      System.out.println("[회원 정보 찾기]\n");
+      System.out.println("1. 아이디 찾기");
+      System.out.println("2. 비밀번호 찾기"); // 비밀번호 변경?
+      System.out.println("0. 이전\n");
+
+      input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+      System.out.println();
+
+      if (input == 1) {
+        newMemberHandler.findMemberId();
+
+      } else if (input == 2) {
+        newMemberHandler.updateMemberPwd();
+
+      } else if (input == 0) {
+        this.mainMenuList();
+
+      } else {
+        System.out.println("잘못된 번호입니다.");
+        continue;
+      }
+      continue; 
+    }
+  }
+
 }
 
 

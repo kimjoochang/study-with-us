@@ -13,7 +13,7 @@ public class CommunityInfoHandler {
 
   // 정보 게시글 생성
   public void add() {
-    System.out.println("[새 정보 게시글]");
+    System.out.println("[커뮤니티 / 정보 게시글 생성]");
 
     Community community = new Community();
 
@@ -30,7 +30,7 @@ public class CommunityInfoHandler {
 
   // 정보 게시글 조회
   public void list() {
-    System.out.println("[정보 게시글 조회]");
+    System.out.println("[커뮤니티 / 정보 게시글 조회]");
 
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", this.communities[i].getNo(),
@@ -42,7 +42,7 @@ public class CommunityInfoHandler {
 
   // 정보 게시글 상세보기
   public void detail() {
-    System.out.println("[정보 게시글 상세보기]");
+    System.out.println("[커뮤니티 / 정보 게시글 상세보기]");
 
     int no = Prompt.inputInt("번호? ");
     Community community = findByNo(no);
@@ -64,7 +64,7 @@ public class CommunityInfoHandler {
 
   // 정보 게시글 수정
   public void update() {
-    System.out.println("[정보 게시글 수정]");
+    System.out.println("[커뮤니티 / 정보 게시글 수정]");
 
     int no = Prompt.inputInt("번호? ");
     Community community = findByNo(no);
@@ -92,7 +92,7 @@ public class CommunityInfoHandler {
 
   // 정보 게시글 삭제
   public void delete() {
-    System.out.println("[정보 게시글 삭제]");
+    System.out.println("[커뮤니티 / 정보 게시글 삭제]");
 
     int no = Prompt.inputInt("번호? ");
 

@@ -3,7 +3,7 @@ package com.studywithus.handler;
 import com.studywithus.domain.NewMember;
 import com.studywithus.util.Prompt;
 
-public class NewMemberHandler {
+public class NewMemberHandlerJEI {
 
   static final int MAX_LENGTH = 5;
 
@@ -68,6 +68,7 @@ public class NewMemberHandler {
   }
 
   private NewMember findIdByName(String name) {
+
     for (int i = 0; i < this.size; i++) {
       if (this.newMembers[i].getName() == name) {
         return this.newMembers[i];
@@ -77,6 +78,7 @@ public class NewMemberHandler {
   }
 
   private NewMember updatePwdById(String name, String id) {
+
     for (int i = 0; i < this.size; i++) {
       if (this.newMembers[i].getName() == name && this.newMembers[i].getId() == id) {
         return this.newMembers[i];
