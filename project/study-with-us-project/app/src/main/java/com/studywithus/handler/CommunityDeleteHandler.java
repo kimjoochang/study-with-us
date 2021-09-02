@@ -4,7 +4,7 @@ import java.sql.Date;
 import com.studywithus.domain.Community;
 import com.studywithus.util.Prompt;
 
-public class CommunityTalkHandler {
+public class CommunityDeleteHandler {
 
   static final int MAX_LENGTH = 5;
 
