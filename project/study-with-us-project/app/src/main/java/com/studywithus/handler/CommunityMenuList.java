@@ -1,6 +1,6 @@
 package com.studywithus.handler;
 
-public class CommunityHandler {
+public class CommunityMenuList {
 
   public void list() {
 

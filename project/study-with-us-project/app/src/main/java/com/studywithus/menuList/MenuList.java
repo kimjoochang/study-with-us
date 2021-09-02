@@ -5,8 +5,8 @@ import com.studywithus.domain.InterestList;
 import com.studywithus.domain.LoginMemberInfo;
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyHandler;
-import com.studywithus.handler.CommunityHandler;
 import com.studywithus.handler.CommunityInfoHandler;
+import com.studywithus.handler.CommunityMenuList;
 import com.studywithus.handler.CommunityQaHandler;
 import com.studywithus.handler.CommunityTalkHandler;
 import com.studywithus.handler.ExamCalenderHandler;
@@ -22,7 +22,7 @@ public class MenuList {
   InterestList[] interests = new InterestList[100];
 
   ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
-  CommunityHandler communityHandler = new CommunityHandler();
+  CommunityMenuList communityMenuList = new CommunityMenuList();
   CommunityInfoHandler communityInfoHandler = new CommunityInfoHandler();
   CommunityQaHandler communityQaHandler = new CommunityQaHandler();
   CommunityTalkHandler communityTalkHandler = new CommunityTalkHandler();
