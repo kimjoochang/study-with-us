@@ -12,7 +12,7 @@ public class FreeStudyUpdateHandler extends AbstractFreeStudyHandler {
 
   // 무료 스터디 수정
   public void execute() {
-    System.out.println("[무료 스터디 수정]");
+    System.out.println("[무료 스터디 / 수정]");
 
     int no = Prompt.inputInt("번호? ");
 

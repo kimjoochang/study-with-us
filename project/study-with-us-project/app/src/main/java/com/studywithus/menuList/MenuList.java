@@ -10,7 +10,12 @@ import com.studywithus.handler.CommunityInfoHandler;
 import com.studywithus.handler.CommunityQaHandler;
 import com.studywithus.handler.CommunityTalkHandler;
 import com.studywithus.handler.ExamCalenderHandler;
-import com.studywithus.handler.FreeStudyHandler;
+import com.studywithus.handler.FreeStudyAddHandler;
+import com.studywithus.handler.FreeStudyApplyHandler;
+import com.studywithus.handler.FreeStudyDeleteHandler;
+import com.studywithus.handler.FreeStudyDetailHandler;
+import com.studywithus.handler.FreeStudyListHandler;
+import com.studywithus.handler.FreeStudyUpdateHandler;
 import com.studywithus.handler.InterestHandler;
 import com.studywithus.handler.JobsCalenderHandler;
 import com.studywithus.handler.MentorApplicantHandler;
@@ -22,14 +27,24 @@ public class MenuList {
   InterestList[] interests = new InterestList[100];
 
   ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
+
   CommunityHandler communityHandler = new CommunityHandler();
   CommunityInfoHandler communityInfoHandler = new CommunityInfoHandler();
   CommunityQaHandler communityQaHandler = new CommunityQaHandler();
   CommunityTalkHandler communityTalkHandler = new CommunityTalkHandler();
+
   ExamCalenderHandler examCalenderHandler = new ExamCalenderHandler();
-  FreeStudyHandler freeStudyHandler = new FreeStudyHandler();
-  InterestHandler interestHandler = new InterestHandler();
   JobsCalenderHandler jobsCalenderHandler = new JobsCalenderHandler();
+
+  FreeStudyApplyHandler freeStudyApplyHandler = new FreeStudyApplyHandler(freeStudyList);
+  FreeStudyAddHandler freeStudyAddHandler = new FreeStudyAddHandler(freeStudyList);
+  FreeStudyListHandler freeStudyListHandler = new FreeStudyListHandler(freeStudyList);
+  FreeStudyDetailHandler freeStudyDetailHandler = new FreeStudyDetailHandler(freeStudyList);
+  FreeStudyUpdateHandler freeStudyUpdateHandler = new FreeStudyUpdateHandler(freeStudyList);
+  FreeStudyDeleteHandler freeStudyDeleteHandler = new FreeStudyDeleteHandler(freeStudyList);
+
+  InterestHandler interestHandler = new InterestHandler();
+
   NewMemberHandler newMemberHandler = new NewMemberHandler();
   MentorApplicantHandler mentorApplicantHandler = new MentorApplicantHandler();
 
@@ -66,7 +81,7 @@ public class MenuList {
       System.out.println();
 
       if (input == 1) {
-        freeStudyHandler.list();
+        freeStudyListHandler.execute();
 
       } else if (input == 2) {
         chargeStudyHandler.list();
@@ -188,29 +203,33 @@ public class MenuList {
   public void freeStudyMenuList() {
     while(true) {
       System.out.println("[무료 스터디]\n");
-      System.out.println("1. 생성");
-      System.out.println("2. 조회");
-      System.out.println("3. 상세보기");
-      System.out.println("4. 변경");
-      System.out.println("5. 삭제");
+      System.out.println("1. 신청");
+      System.out.println("2. 생성");
+      System.out.println("3. 조회");
+      System.out.println("4. 상세보기");
+      System.out.println("5. 수정");
+      System.out.println("6. 삭제");
       System.out.println("0. 이전\n");
 
       input = Prompt.inputInt("메뉴를 선택해주세요. > ");
 
       if (input == 1) {
-        freeStudyHandler.add();
+        freeStudyApplyHandler.execute();
 
       } else if (input == 2) {
-        freeStudyHandler.list();
+        freeStudyAddHandler.execute();
 
       } else if (input == 3) {
-        freeStudyHandler.detail();
+        freeStudyListHandler.execute();
 
       } else if (input == 4) {
-        freeStudyHandler.update();
+        freeStudyDetailHandler.execute();
 
       } else if (input == 5) {
-        freeStudyHandler.delete();
+        freeStudyUpdateHandler.execute();
+
+      } else if (input == 6) {
+        freeStudyDeleteHandler.execute();
 
       } else if (input == 0) {
         return;
