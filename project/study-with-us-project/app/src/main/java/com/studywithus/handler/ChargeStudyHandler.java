@@ -14,7 +14,7 @@ public class ChargeStudyHandler {
 
   // 유료 스터디 생성
   public void add() {
-    System.out.println("[유료 스터디 / 생성]");
+    System.out.println("[유료 스터디 / 생성]\n");
 
     ChargeStudy study = new ChargeStudy();
 
@@ -33,7 +33,7 @@ public class ChargeStudyHandler {
 
   // 유료 스터디 조회
   public void list() {
-    System.out.println("[유료 스터디 / 조회]");
+    System.out.println("[유료 스터디 / 조회]\n");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", this.studies[i].getNo(), this.studies[i].getTitle(),
           this.studies[i].getWriter(), this.studies[i].getRegisteredDate(), this.studies[i].getViewCount(),
@@ -45,7 +45,7 @@ public class ChargeStudyHandler {
   public void detail() {
     while(true) {
 
-      System.out.println("[유료 스터디 / 상세보기]");
+      System.out.println("[유료 스터디 / 상세보기]\n");
       int no = Prompt.inputInt("번호? ");
 
       ChargeStudy study = findByNo(no);
@@ -70,11 +70,12 @@ public class ChargeStudyHandler {
       System.out.printf("조회수: %d\n", study.getViewCount() + 1);
 
       System.out.println("------------------------------------");
-      System.out.println("0. 이전");
       System.out.println("1. 결제하기");
-      System.out.println("2. 관심목록 추가\n");
+      System.out.println("2. 관심목록 추가");
+      System.out.println("0. 이전\n");
 
-      int input = Prompt.inputInt("메뉴를 선택해주세요");
+      int input = Prompt.inputInt("메뉴를 선택해주세요. >");
+      System.out.println();
       int answer = MenuList.detailMenuList(input,study);
 
       if (answer == 0) {

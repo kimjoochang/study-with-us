@@ -64,9 +64,6 @@ public class MenuList {
       input = Prompt.inputInt("메뉴를 선택해주세요. > ");
       System.out.println();
 
-      input = Prompt.inputInt("메뉴를 선택해주세요. > ");
-      System.out.println();
-
       if (input == 1) {
         freeStudyHandler.list();
 
@@ -253,14 +250,24 @@ public class MenuList {
           continue;
         }
         else {
-          System.out.println("------------------------------------");
-          System.out.println("결제중...\n"
+          StringBuffer dot = new StringBuffer("");
+
+          System.out.print("------------------------------------");
+          System.out.println("\n"
               + "(＼(＼     \n"
               + "(  -.- )~♥\n"
               + " O_(\")(\")");
           System.out.println("------------------------------------");
-
-          System.out.println("유료 스터디 결제가 완료 되었습니다.");
+          System.out.print("결제중");
+          for(int i = 0; i < 3; i++) {
+            try {
+              Thread.sleep(500);
+            } catch (InterruptedException e) {
+            }
+            System.out.print(dot.append("."));
+          }
+          System.out.println();
+          System.out.println("유료 스터디 결제가 완료 되었습니다.\n");
         }
         return 1;
       } else if (input == 2) {
@@ -276,7 +283,7 @@ public class MenuList {
       System.out.println("[관심목록]\n");
       System.out.println("1. 무료 스터디 관심목록");
       System.out.println("2. 유료 스터디 관심목록");
-      System.out.println("0. 이전");
+      System.out.println("0. 이전\n");
 
       input = Prompt.inputInt("메뉴를 선택해주세요. > ");
       System.out.println();
@@ -297,12 +304,12 @@ public class MenuList {
     } 
   }
 
-  private void chargeInterestMenuList() {
+  private boolean chargeInterestMenuList() {
     while(true) {
       System.out.println("[유료 스터디 / 관심목록]\n");
       System.out.println("1. 유료 스터디 관심목록 조회");
       System.out.println("2. 유료 스터디 관심목록 삭제");
-      System.out.println("0. 이전");
+      System.out.println("0. 이전\n");
 
       input = Prompt.inputInt("메뉴를 선택해주세요. > ");
       System.out.println();
@@ -311,11 +318,10 @@ public class MenuList {
         interestHandler.chargeList();
 
       } else if(input == 2) {
-
+        interestHandler.chargeDelete();
         // 삭제
       } else if (input == 0) {
-        interestMenuList();
-
+        return false;
       } else {
         System.out.println("잘못된 번호입니다.");
         continue;
@@ -328,7 +334,7 @@ public class MenuList {
       System.out.println("[무료 스터디 / 관심목록]\n");
       System.out.println("1. 무료 스터디 관심목록 조회");
       System.out.println("2. 무료 스터디 관심목록 삭제");
-      System.out.println("0. 이전");
+      System.out.println("0. 이전\n");
 
       input = Prompt.inputInt("메뉴를 선택해주세요. > ");
       System.out.println();
