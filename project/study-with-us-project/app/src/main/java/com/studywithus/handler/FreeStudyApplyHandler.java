@@ -11,6 +11,6 @@ public class FreeStudyApplyHandler extends AbstractFreeStudyHandler {
 
   // 무료 스터디 신청
   public void execute() {
-    System.out.println("[무료 스터디 신청]");
+    System.out.println("[무료 스터디 / 신청]");
   }
 }

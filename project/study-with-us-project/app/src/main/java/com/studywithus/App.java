@@ -14,7 +14,6 @@ public class App {
     NewMemberHandler newMemberHandler = new NewMemberHandler();
     ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
     NewMember[] loginInfo = new NewMember[5];
-    MenuList menuList = new MenuList();
 
     Main : while(true) {
       int input = menuList.mainMenuList();

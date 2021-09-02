@@ -4,6 +4,7 @@ import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.InterestList;
 import com.studywithus.domain.LoginMemberInfo;
 import com.studywithus.domain.NewMember;
+import com.studywithus.handler.AbstractMentorApplicantHandler;
 import com.studywithus.handler.ChargeStudyHandler;
 import com.studywithus.handler.CommunityHandler;
 import com.studywithus.handler.CommunityInfoHandler;
@@ -13,7 +14,6 @@ import com.studywithus.handler.ExamCalenderHandler;
 import com.studywithus.handler.FreeStudyHandler;
 import com.studywithus.handler.InterestHandler;
 import com.studywithus.handler.JobsCalenderHandler;
-import com.studywithus.handler.AbstractMentorApplicantHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.util.Prompt;
 

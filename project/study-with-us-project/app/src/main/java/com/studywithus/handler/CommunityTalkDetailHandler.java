@@ -4,16 +4,16 @@ import java.sql.Date;
 import com.studywithus.domain.Community;
 import com.studywithus.util.Prompt;
 
-public class CommunityQaHandler {
+public class CommunityTalkDetailHandler {
 
   static final int MAX_LENGTH = 5;
 
   Community[] communities = new Community[MAX_LENGTH];
   int size = 0;
 
-  // 질문 게시글 생성
+  // 스몰톡 게시글 생성
   public void add() {
-    System.out.println("[커뮤니티 / 질문 게시글 생성]");
+    System.out.println("[커뮤니티 / 새 스몰톡 게시글]");
 
     Community community = new Community();
 
@@ -25,12 +25,12 @@ public class CommunityQaHandler {
 
     this.communities[this.size++] = community;
     System.out.println();
-    System.out.println("질문 게시글 등록이 완료되었습니다.\n");
+    System.out.println("스몰톡 게시글 등록이 완료되었습니다.\n");
   }
 
-  // 질문 게시글 조회
+  // 스몰톡 게시글 조회
   public void list() {
-    System.out.println("[커뮤니티 / 질문 게시글 조회]");
+    System.out.println("[커뮤니티 / 스몰톡 게시글 조회]");
 
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", this.communities[i].getNo(),
@@ -40,16 +40,16 @@ public class CommunityQaHandler {
     }
   }
 
-  // 질문 게시글 상세보기
+  // 스몰톡 게시글 상세보기
   public void detail() {
-    System.out.println("[커뮤니티 / 질문 게시글 상세보기]");
+    System.out.println("[커뮤니티 / 스몰톡 게시글 상세보기]");
 
     int no = Prompt.inputInt("번호? ");
     Community community = findByNo(no);
 
     if (community == null) {
       System.out.println();
-      System.out.println("해당 번호의 질문 게시글이 없습니다.\n");
+      System.out.println("해당 번호의 스몰톡 게시글이 없습니다.\n");
       return;
     }
 
@@ -62,16 +62,17 @@ public class CommunityQaHandler {
     System.out.printf("조회수: %d\n", community.getViewCount());
   }
 
-  // 질문 게시글 수정
+  // 스몰톡 게시글 수정
   public void update() {
-    System.out.println("[커뮤니티 / 질문 게시글 수정]");
+    System.out.println("[커뮤니티 / 스몰톡 게시글 수정]");
 
     int no = Prompt.inputInt("번호? ");
+
     Community community = findByNo(no);
 
     if (community == null) {
       System.out.println();
-      System.out.println("해당 번호의 질문 게시글이 없습니다.\n");
+      System.out.println("해당 번호의 스몰톡 게시글이 없습니다.\n");
       return;
     }
 
@@ -79,22 +80,20 @@ public class CommunityQaHandler {
     String content = Prompt.inputString(String.format("[%s] 수정할 내용: ", community.getContent()));
 
     String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
-
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println();
-      System.out.println("질문 게시글 수정을 취소하였습니다.\n");
+      System.out.println("스몰톡 게시글 수정을 취소하였습니다.\n");
       return;
     }
 
     community.setTitle(title);
     community.setContent(content);
-    System.out.println();
-    System.out.println("질문 게시글을 수정하였습니다.\n");
+    System.out.println("스몰톡 게시글을 수정하였습니다.");
   }
 
-  // 질문 게시글 삭제
+  // 스몰톡 게시글 삭제
   public void delete() {
-    System.out.println("[커뮤니티 / 질문 게시글 삭제]");
+    System.out.println("[커뮤니티 / 스몰톡 게시글 삭제]");
 
     int no = Prompt.inputInt("번호? ");
 
@@ -102,14 +101,14 @@ public class CommunityQaHandler {
 
     if (index == -1) {
       System.out.println();
-      System.out.println("해당 번호의 질문 게시글이 없습니다.\n");
+      System.out.println("해당 번호의 스몰톡 게시글이 없습니다.\n");
       return;
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println();
-      System.out.println("질문 게시글 삭제를 취소하였습니다.\n");
+      System.out.println("스몰톡 게시글 삭제를 취소하였습니다.\n");
       return;
     }
 
@@ -119,10 +118,10 @@ public class CommunityQaHandler {
     this.communities[--this.size] = null;
 
     System.out.println();
-    System.out.println("질문 게시글을 삭제하였습니다.\n");
+    System.out.println("스몰톡 게시글을 삭제하였습니다.\n");
   }
 
-  // 질문 게시글 번호 조회
+  // 스몰톡 게시글 번호 조회
   private Community findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.communities[i].getNo() == no) {
@@ -132,7 +131,7 @@ public class CommunityQaHandler {
     return null;
   }
 
-  // 질문 게시글 조회용
+  // 스몰톡 게시글 조회용
   private int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.communities[i].getNo() == no) {
