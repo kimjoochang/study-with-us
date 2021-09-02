@@ -2,6 +2,7 @@ package com.studywithus.handler;
 
 import java.sql.Date;
 import com.studywithus.domain.ChargeStudy;
+import com.studywithus.menuList.MenuList;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyHandler {
@@ -13,7 +14,7 @@ public class ChargeStudyHandler {
 
   // 유료 스터디 생성
   public void add() {
-    System.out.println("[유료 스터디 / 생성]");
+    System.out.println("[유료 스터디 / 생성]\n");
 
     ChargeStudy study = new ChargeStudy();
 
@@ -32,7 +33,7 @@ public class ChargeStudyHandler {
 
   // 유료 스터디 조회
   public void list() {
-    System.out.println("[유료 스터디 / 조회]");
+    System.out.println("[유료 스터디 / 조회]\n");
     for (int i = 0; i < this.size; i++) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", this.studies[i].getNo(), this.studies[i].getTitle(),
           this.studies[i].getWriter(), this.studies[i].getRegisteredDate(), this.studies[i].getViewCount(),
@@ -42,50 +43,47 @@ public class ChargeStudyHandler {
 
   // 유료 스터디 상세보기
   public void detail() {
-    System.out.println("[유료 스터디 / 상세보기]");
-    int no = Prompt.inputInt("번호? ");
+    while(true) {
 
-    ChargeStudy study = findByNo(no);
+      System.out.println("[유료 스터디 / 상세보기]\n");
+      int no = Prompt.inputInt("번호? ");
 
-    if (study == null) {
+      ChargeStudy study = findByNo(no);
+
+      if (study == null) {
+        System.out.println();
+        System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
+        return;
+      }
+
+      System.out.printf("스터디 제목: %s\n", study.getTitle());
+      System.out.printf("스터디 설명: %s\n", study.getExplanation());
+      System.out.printf("지역: %s\n", study.getArea());
+      System.out.printf("멘토: %s\n", study.getWriter());
+      System.out.printf("가격: %s\n", study.getPrice());
+      System.out.printf("등록일: %s\n", study.getRegisteredDate());
+
+      study.setViewCount(study.getViewCount() + 1);
+      System.out.printf("조회수: %d\n", study.getViewCount());
+
+
+      System.out.printf("조회수: %d\n", study.getViewCount() + 1);
+
+      System.out.println("------------------------------------");
+      System.out.println("1. 결제하기");
+      System.out.println("2. 관심목록 추가");
+      System.out.println("0. 이전\n");
+
+      int input = Prompt.inputInt("메뉴를 선택해주세요. >");
       System.out.println();
-      System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
-      return;
+      int answer = MenuList.detailMenuList(input,study);
+
+      if (answer == 0) {
+        continue;
+      } else {
+        return; 
+      }
     }
-
-    System.out.printf("스터디 제목: %s\n", study.getTitle());
-    System.out.printf("스터디 설명: %s\n", study.getExplanation());
-    System.out.printf("지역: %s\n", study.getArea());
-    System.out.printf("멘토: %s\n", study.getWriter());
-    System.out.printf("가격: %s\n", study.getPrice());
-    System.out.printf("등록일: %s\n", study.getRegisteredDate());
-
-    study.setViewCount(study.getViewCount() + 1);
-    System.out.printf("조회수: %d\n", study.getViewCount());
-
-
-    System.out.printf("조회수: %d\n", study.getViewCount() + 1);
-
-    //		유료 스터디 결제
-    //		System.out.println("------------------------------------");
-    //		String input = Prompt.inputString("결제 하시겠습니까? (y/N) ");
-    //		if (input.equalsIgnoreCase("n") || input.length() == 0) {
-    //			System.out.println("유료 스터디 결제를 취소하였습니다.");
-    //			return;
-    //		}
-    //
-    //		System.out.println("결제 이용약관입니다."
-    //				+ "(＼(＼     \n"
-    //				+ "(  -.- )~♥\n"
-    //				+ " O_(\")(\")");
-    //		System.out.println("------------------------------------");
-    //		String input1 = Prompt.inputString("이용약관에 동의하십니까? (y/N) ");
-    //		if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
-    //			System.out.println("결제 이용약관 동의를 취소하셨습니다.");
-    //			return;
-    //		}
-    //		System.out.println("결제가 완료되셨습니다.");
-    //
   }
 
   // 유료 스터디 수정

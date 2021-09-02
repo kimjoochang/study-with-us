@@ -53,7 +53,7 @@ public class App {
             continue Member;
           }else if (input == 2) { // 2. 유료스터디 메뉴
             Charge : while (true) {
-              menuList.chargeStudyMenuList();
+              input = menuList.chargeStudyMenuList();
               if (input == 1) { 
                 chargeStudyHandler.add(); // 1. 생성
               } else if (input == 2) { 
@@ -65,7 +65,7 @@ public class App {
               } else if (input == 5) {
                 chargeStudyHandler.delete(); // 5. 삭제
               } else if (input == 0) {
-                continue;
+                continue Member;
               }else {
                 System.out.println("잘못된 번호입니다.");
                 continue Charge;
@@ -75,8 +75,6 @@ public class App {
           } else if (input == 3) { // 관심목록 메뉴
             menuList.interestMenuList();
             continue Member;
-          } else if (input == 5) {
-            mentorApplicantHandler.add();
           } else if (input == 4) { // 커뮤니티 메뉴
             Community : while (true) {
               input = menuList.communityMenuList();
@@ -100,6 +98,10 @@ public class App {
                 continue Community;
               }
             }
+          } else if (input == 5) { // 캘린더
+
+          } else if (input == 6) { // 멘토 신청하기
+            mentorApplicantHandler.add();
           } else {
             System.out.println("잘못된 번호입니다.");
             continue;

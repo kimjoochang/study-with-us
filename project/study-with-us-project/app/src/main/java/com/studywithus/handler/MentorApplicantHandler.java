@@ -1,12 +1,13 @@
 package com.studywithus.handler;
 
 import com.studywithus.domain.LoginMemberInfo;
-import com.studywithus.domain.NewMember;
+import com.studywithus.domain.MentorApplicant;
 import com.studywithus.util.Prompt;
 
 public class MentorApplicantHandler {
 
-  NewMember[] MentorApplicants = new NewMember[5];
+  MentorApplicant[] mentorApplicants = new MentorApplicant[5];
+  MentorApplicant mentorApplicant = new MentorApplicant();
   int size = 0;
 
   // 멘토 신청하기
@@ -17,9 +18,16 @@ public class MentorApplicantHandler {
       System.out.println("취소");
       return;
     }
-    MentorApplicants[size].setId(LoginMemberInfo.getId());
-    MentorApplicants[size].setName(LoginMemberInfo.getName());
+    mentorApplicants[0] = new MentorApplicant();
+
+    mentorApplicant.name = LoginMemberInfo.getName();
+    mentorApplicant.id = LoginMemberInfo.getId();
+
+    this.mentorApplicants[size].name = mentorApplicant.name;
+    this.mentorApplicants[size].id = mentorApplicant.id;
+
     size++;
+
     System.out.println();
     System.out.println("멘토 신청이 완료되었습니다.");
   }
@@ -28,7 +36,7 @@ public class MentorApplicantHandler {
     System.out.println("[멘토 신청 내역]");
 
     for(int i = 0; i < this.size; i++) {
-      System.out.printf("%s, %s\n",this.MentorApplicants[i].getName(), this.MentorApplicants[i].getName());
+      System.out.printf("%s, %s\n",this.mentorApplicants[i].name, this.mentorApplicants[i].id);
     }
   }
 }
