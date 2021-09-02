@@ -1,17 +1,19 @@
 package com.studywithus.handler;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.studywithus.domain.Community;
 import com.studywithus.util.Prompt;
 
-public class CommunityTalkAddHandler extends AbstractCommunityTalkAddHandler{
+public class CommunityTalkAddHandler extends AbstractCommunityHandler{
 
-	public CommunityTalkAddHandler(List<CommunityTalk> communityTalkList) {
-		super(communityTalkList);
+	public CommunityTalkAddHandler(List<Community> communityList) {
+		super(communityList);
 	}
 	// 스몰톡 게시글 생성
-	public void add() {
+	@Override
+	public void execute() {
 		System.out.println("[커뮤니티 / 새 스몰톡 게시글]");
 
 		Community community = new Community();
