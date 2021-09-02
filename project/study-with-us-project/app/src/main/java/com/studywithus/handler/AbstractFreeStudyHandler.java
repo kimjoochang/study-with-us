@@ -1,10 +1,8 @@
 package com.studywithus.handler;
 
-import java.sql.Date;
 import com.studywithus.domain.FreeStudy;
-import com.studywithus.util.Prompt;
 
-public class AbstractFreeStudyHandler implements Command {
+public abstract class AbstractFreeStudyHandler implements Command {
 
   static final int MAX_LENGTH = 5;
 
@@ -12,7 +10,7 @@ public class AbstractFreeStudyHandler implements Command {
   int size = 0;
 
   // 무료 스터디 번호 조회
-  private FreeStudy findByNo(int no) {
+  protected FreeStudy findByNo(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.studies[i].getNo() == no) {
         return this.studies[i];
@@ -22,7 +20,7 @@ public class AbstractFreeStudyHandler implements Command {
   }
 
   // 무료 스터디 조회
-  private int indexOf(int no) {
+  protected int indexOf(int no) {
     for (int i = 0; i < this.size; i++) {
       if (this.studies[i].getNo() == no) {
         return i;

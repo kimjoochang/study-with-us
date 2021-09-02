@@ -1,6 +1,5 @@
 package com.studywithus.handler;
 
-import java.sql.Date;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.util.Prompt;
 
