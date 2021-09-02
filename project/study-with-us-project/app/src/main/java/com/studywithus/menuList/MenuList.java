@@ -11,6 +11,7 @@ import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
 import com.studywithus.handler.CommunityHandler;
 import com.studywithus.handler.CommunityInfoHandler;
+import com.studywithus.handler.CommunityMenuList;
 import com.studywithus.handler.CommunityQaHandler;
 import com.studywithus.handler.CommunityTalkHandler;
 import com.studywithus.handler.ExamCalenderHandler;
@@ -42,6 +43,17 @@ public class MenuList {
 	JobsCalenderHandler jobsCalenderHandler = new JobsCalenderHandler();
 	NewMemberHandler newMemberHandler = new NewMemberHandler();
 	MentorApplicantHandler mentorApplicantHandler = new MentorApplicantHandler();
+  ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
+  CommunityMenuList communityMenuList = new CommunityMenuList();
+  CommunityInfoHandler communityInfoHandler = new CommunityInfoHandler();
+  CommunityQaHandler communityQaHandler = new CommunityQaHandler();
+  CommunityTalkHandler communityTalkHandler = new CommunityTalkHandler();
+  ExamCalenderHandler examCalenderHandler = new ExamCalenderHandler();
+  FreeStudyHandler freeStudyHandler = new FreeStudyHandler();
+  InterestHandler interestHandler = new InterestHandler();
+  JobsCalenderHandler jobsCalenderHandler = new JobsCalenderHandler();
+  NewMemberHandler newMemberHandler = new NewMemberHandler();
+  MentorApplicantHandler mentorApplicantHandler = new MentorApplicantHandler();
 
 	int input;
 
