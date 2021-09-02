@@ -5,7 +5,7 @@ import com.studywithus.domain.Community;
 
 public abstract class AbstractCommunityHandler implements Command {
 
-  protected List<Community> communityList;
+  public List<Community> communityList;
 
   public AbstractCommunityHandler(List<Community> communityList) {
     this.communityList = communityList;;
