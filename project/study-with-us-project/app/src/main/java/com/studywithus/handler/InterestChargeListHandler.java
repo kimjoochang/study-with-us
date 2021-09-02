@@ -26,10 +26,4 @@ public class InterestChargeListHandler extends AbstractInterestChargeHandler {
     }
   }
 
-  @Override
-  public void execute(ChargeStudy wishChargeStudy) {
-
-  }
-
-
 }

@@ -22,9 +22,5 @@ public class InterestFreeAddHandler extends AbstractInterestFreeHandler {
     System.out.println();
     System.out.println("무료 스터디 관심 목록에 추가되었습니다.\n");
   }
-  @Override
-  public void execute() {
-
-  }
 
 }

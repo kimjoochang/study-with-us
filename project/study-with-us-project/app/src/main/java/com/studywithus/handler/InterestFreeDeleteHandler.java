@@ -9,10 +9,7 @@ public class InterestFreeDeleteHandler extends AbstractInterestFreeHandler {
   public InterestFreeDeleteHandler(List<FreeStudy> freeInterestList) {
     super(freeInterestList);
   }
-  @Override
-  public void execute(FreeStudy wishFreeStudy) {
 
-  }
   @Override
   public void execute() {
     System.out.println("[무료 스터디 / 관심 목록 / 삭제]\n");

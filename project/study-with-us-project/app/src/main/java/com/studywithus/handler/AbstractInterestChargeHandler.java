@@ -11,7 +11,12 @@ public abstract class AbstractInterestChargeHandler implements Command{
     this.chargeInterestList = chargeInterestList;
   }
 
-  abstract void execute(ChargeStudy study);
+  @Override
+  public void execute() {
+  }
+
+  protected void execute(ChargeStudy study) {
+  }
 
   protected ChargeStudy findByNo(int no) {
     for (ChargeStudy chargeStudy : chargeInterestList) {

@@ -34,10 +34,5 @@ public class InterestChargeDeleteHandler extends AbstractInterestChargeHandler {
     System.out.println();
     System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");
   }
-  @Override
-  void execute(ChargeStudy study) {
-    // TODO Auto-generated method stub
-
-  }
 
 }

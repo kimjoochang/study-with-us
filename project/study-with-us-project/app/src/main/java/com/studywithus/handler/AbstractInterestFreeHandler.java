@@ -5,13 +5,18 @@ import com.studywithus.domain.FreeStudy;
 
 public abstract class AbstractInterestFreeHandler implements Command{
 
-  protected List<FreeStudy> freeInterestList;
+  public List<FreeStudy> freeInterestList;
 
   public AbstractInterestFreeHandler(List<FreeStudy> freeInterestList) {
     this.freeInterestList = freeInterestList;
   }
 
-  abstract void execute(FreeStudy freeStudy);
+  @Override
+  public void execute() {
+  }
+
+  protected void execute(FreeStudy freeStudy) {
+  };
 
   protected FreeStudy findByNo(int no) {
     for (FreeStudy freeStudy : freeInterestList) {
@@ -21,5 +26,6 @@ public abstract class AbstractInterestFreeHandler implements Command{
     }
     return null;
   }
+
 
 }
