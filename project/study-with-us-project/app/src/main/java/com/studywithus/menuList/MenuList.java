@@ -1,12 +1,16 @@
 package com.studywithus.menuList;
 
+import java.util.List;
+import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.FreeStudy;
 import com.studywithus.domain.InterestList;
 import com.studywithus.domain.LoginMemberInfo;
 import com.studywithus.domain.NewMember;
-import com.studywithus.handler.ChargeStudyHandler;
-import com.studywithus.handler.CommunityInfoHandler;
-import com.studywithus.handler.CommunityQaHandler;
-import com.studywithus.handler.CommunityTalkHandler;
+import com.studywithus.handler.ChargeStudyAddHandler;
+import com.studywithus.handler.ChargeStudyDeleteHandler;
+import com.studywithus.handler.ChargeStudyDetailHandler;
+import com.studywithus.handler.ChargeStudyListHandler;
+import com.studywithus.handler.ChargeStudyUpdateHandler;
 import com.studywithus.handler.ExamCalenderHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
 import com.studywithus.handler.FreeStudyApplyHandler;
@@ -22,16 +26,11 @@ import com.studywithus.util.Prompt;
 public class MenuList {
 
   InterestList[] interests = new InterestList[100];
+  List<FreeStudy> freeStudyList;
+  List<ChargeStudy> chargeStudyList;
 
-  ChargeStudyHandler chargeStudyHandler = new ChargeStudyHandler();
 
   CommunityMenuList communityMenuList = new CommunityMenuList();
-  CommunityInfoHandler communityInfoHandler = new CommunityInfoHandler();
-  CommunityQaHandler communityQaHandler = new CommunityQaHandler();
-  CommunityTalkHandler communityTalkHandler = new CommunityTalkHandler();
-
-  ExamCalenderHandler examCalenderHandler = new ExamCalenderHandler();
-  JobsCalenderHandler jobsCalenderHandler = new JobsCalenderHandler();
 
   FreeStudyApplyHandler freeStudyApplyHandler = new FreeStudyApplyHandler(freeStudyList);
   FreeStudyAddHandler freeStudyAddHandler = new FreeStudyAddHandler(freeStudyList);
@@ -40,10 +39,16 @@ public class MenuList {
   FreeStudyUpdateHandler freeStudyUpdateHandler = new FreeStudyUpdateHandler(freeStudyList);
   FreeStudyDeleteHandler freeStudyDeleteHandler = new FreeStudyDeleteHandler(freeStudyList);
 
-  InterestHandler interestHandler = new InterestHandler();
+  ChargeStudyAddHandler chargeStudyAddHandler = new ChargeStudyAddHandler(chargeStudyList);
+  ChargeStudyListHandler chargeStudyListHandler = new ChargeStudyListHandler(chargeStudyList);
+  ChargeStudyDetailHandler chargeStudyDetailHandler = new ChargeStudyDetailHandler(chargeStudyList);
+  ChargeStudyUpdateHandler chargeStudyUpdateHandler = new ChargeStudyUpdateHandler(chargeStudyList);
+  ChargeStudyDeleteHandler chargeStudyDeleteHandler = new ChargeStudyDeleteHandler(chargeStudyList);
 
+  InterestHandler interestHandler = new InterestHandler();
   NewMemberHandler newMemberHandler = new NewMemberHandler();
-  MentorApplicantHandler mentorApplicantHandler = new MentorApplicantHandler();
+  ExamCalenderHandler examCalenderHandler = new ExamCalenderHandler();
+  JobsCalenderHandler jobsCalenderHandler = new JobsCalenderHandler();
 
   int input;
 
@@ -81,10 +86,10 @@ public class MenuList {
         freeStudyListHandler.execute();
 
       } else if (input == 2) {
-        chargeStudyHandler.list();
+        chargeStudyListHandler.execute();
 
       } else if (input == 3) {
-        communityHandler.list();
+        communityMenuList.communityMainMenuList();
 
       } else if (input == 0) {
         return;
