@@ -29,12 +29,14 @@ public class App {
           input = menuList.loginExecute(loginInfo);
         } catch (Exception e) {
           System.out.println();
-          System.out.println("일치하는 로그인 정보가 없습니다.");
+          System.out.println("일치하는 로그인 정보가 없습니다.\n");
+          menuList.findMemberInfoList();
           continue;
         }
 
         if (input == 0){
           continue Main;
+
         } else if (input == 2) {
           menuList.adminMenuList(); // 관리자 메뉴
           continue Main;
@@ -109,10 +111,11 @@ public class App {
         newMemberHandler.add(loginInfo);   
         continue;
 
-        // 메인 메뉴에서 종료
+        // 아이디 / 비밀번호 찾기
       } else if (input == 4) {
-        System.out.println("종료되었습니다.");
+        menuList.findMemberInfoList();
         return;
+
       } else {
         System.out.println("잘못된 번호입니다.");
       }
