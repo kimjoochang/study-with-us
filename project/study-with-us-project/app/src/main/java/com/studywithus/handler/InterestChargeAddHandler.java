@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.ChargeStudy;
 import com.studywithus.util.Prompt;
 
-public class InterestChargeAddHandler extends AbstractChargeInterestHandler {
+public class InterestChargeAddHandler extends AbstractInterestChargeHandler {
 
 
   public InterestChargeAddHandler(List<ChargeStudy> chargeInterestList) {

@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.util.Prompt;
 
-public class InterestFreeAddHandler extends AbstractFreeInterestHandler {
+public class InterestFreeAddHandler extends AbstractInterestFreeHandler {
 
   public InterestFreeAddHandler(List<FreeStudy> freeInterestList) {
     super(freeInterestList);
@@ -21,6 +21,10 @@ public class InterestFreeAddHandler extends AbstractFreeInterestHandler {
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록에 추가되었습니다.\n");
+  }
+  @Override
+  public void execute() {
+
   }
 
 }

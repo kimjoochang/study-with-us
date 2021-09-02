@@ -3,7 +3,7 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.FreeStudy;
 
-public class InterestFreeListHandler extends AbstractFreeInterestHandler {
+public class InterestFreeListHandler extends AbstractInterestFreeHandler {
 
   public InterestFreeListHandler(List<FreeStudy> freeInterestList) {
     super(freeInterestList);
@@ -33,5 +33,9 @@ public class InterestFreeListHandler extends AbstractFreeInterestHandler {
             freeStudy.getOnOffLine());
       }
     }
+  }
+  @Override
+  public void execute() {
+
   }
 }
