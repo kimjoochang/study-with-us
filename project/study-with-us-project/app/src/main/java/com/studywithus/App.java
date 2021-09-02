@@ -27,7 +27,7 @@ public class App {
       int input = menuList.mainMenuList();
 
       if (input == 0) {
-        System.out.println("종료되었습니다.\n");
+        System.out.println("종료되었습니다.");
         return;
 
       } else if (input == 1) { // 비회원 조회하기
@@ -44,31 +44,14 @@ public class App {
           continue;
         }
 
-        if (input == 0){
-          continue Main;
-
-          // 관리자 메뉴
-        } else if (input == 2) {
-          menuList.adminMenuList();
-          continue Main;
-        }
-        // 로그인 성공 후 메뉴
         Member : while(true) {
-          input = menuList.memberMenuList(); 
-
-          if (input == 0) {
-            System.out.println("로그아웃이 완료되었습니다.\n");
+          if (input == 0){
             continue Main;
 
-            // 1. 무료 스터디 메뉴
-          } else if (input == 1) {
-            freeStudyMenuList.freeStudyMenuList();
-            continue Member;
-
-            // 2. 유료 스터디 메뉴
+            // 관리자 메뉴
           } else if (input == 2) {
-            chargeStudyMenuList.chargeStudyMenuList();
-            continue Member;
+            menuList.adminMenuList();
+            continue Main;
 
             // 관심목록 메뉴
           } else if (input == 3) {
@@ -80,15 +63,18 @@ public class App {
             Community : while (true) {
               input = communityMenuList.communityMainMenuList();
 
-              if(input == 1) { // 커뮤니티-질문 메뉴                
+              if(input == 1) { // 커뮤니티-질문 메뉴 
+                System.out.println("[커뮤니티 / 질문]\n");
                 communityMenuList.communityQaMenuList();
                 continue Community;                 
 
-              } else if(input == 2) { //커뮤니티-정보 메뉴               
+              } else if(input == 2) { //커뮤니티-정보 메뉴
+                System.out.println("[커뮤니티 / 정보]\n");
                 communityMenuList.communityInfoMenuList();
                 continue Community;
 
-              } else if(input == 3) { //커뮤니티-스몰톡 메뉴                
+              } else if(input == 3) { //커뮤니티-스몰톡 메뉴
+                System.out.println("[커뮤니티 / 스몰톡]\n");
                 communityMenuList.communityTalkMenuList();
                 continue Community;  
 
@@ -96,16 +82,67 @@ public class App {
                 continue Member;
 
               } else {
-                System.out.println("잘못된 번호입니다.\n");
+                System.out.println("잘못된 번호입니다.");
                 continue Community;
               }
             }
-          }// 3. 관심목록 메뉴          
-          else if (input == 5) { // 캘린더
-            // [추가]
+          } else if (input == 5) { // 캘린더
 
-          } else if (input == 6) { // 멘토 신청하기
-            mentorApplicantAddHandler.execute();
+            // 로그인 성공 후 메뉴
+            input = menuList.memberMenuList(); 
+
+            if (input == 0) {
+              System.out.println("로그아웃이 완료되었습니다.");
+              continue Main;
+
+              // 1. 무료 스터디 메뉴
+            } else if (input == 1) {
+              freeStudyMenuList.freeStudyMenuList();
+              continue Member;
+
+              // 2. 유료 스터디 메뉴
+            } else if (input == 2) {
+              chargeStudyMenuList.chargeStudyMenuList();
+              continue Member;
+
+              // 3. 관심목록 메뉴
+            } else if (input == 3) {
+              interestMenuList.interestMenuList();
+              continue Member;
+
+              // 커뮤니티 메뉴
+            } else if (input == 4) {
+              Community : while (true) {
+                input = communityMenuList.communityMainMenuList();
+
+                if(input == 1) { // 커뮤니티-질문 메뉴 
+                  System.out.println("[커뮤니티 / 질문]\n");
+                  communityMenuList.communityQaMenuList();
+                  continue Community;                 
+
+                } else if(input == 2) { //커뮤니티-정보 메뉴
+                  System.out.println("[커뮤니티 / 정보]\n");
+                  communityMenuList.communityInfoMenuList();
+                  continue Community;
+
+                } else if(input == 3) { //커뮤니티-스몰톡 메뉴
+                  System.out.println("[커뮤니티 / 스몰톡]\n");
+                  communityMenuList.communityTalkMenuList();
+                  continue Community;  
+
+                } else if(input == 0) { // 커뮤니티 메뉴에서 이전
+                  continue Member;
+
+                } else {
+                  System.out.println("잘못된 번호입니다.");
+                  continue Community;
+                }
+              }
+            } else if (input == 5) { // 캘린더
+              // [추가]
+
+            } else if (input == 6) { // 멘토 신청하기
+              mentorApplicantAddHandler.execute();
 
             } else {
               System.out.println("잘못된 번호입니다.");
@@ -127,8 +164,5 @@ public class App {
         }
       }
     }
-  }
-
-}
   }
 }
