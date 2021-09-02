@@ -1,4 +1,4 @@
-package com.studywithus.menuList;
+/* package com.studywithus.menuList;
 
 import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.InterestList;
@@ -614,3 +614,4 @@ public class MenuList {
 //} else if (input == 0) {
 //  return;
 //}
+ */
