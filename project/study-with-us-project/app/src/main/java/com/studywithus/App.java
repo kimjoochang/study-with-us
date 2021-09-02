@@ -27,7 +27,7 @@ public class App {
       int input = menuList.mainMenuList();
 
       if (input == 0) {
-        System.out.println("종료되었습니다.");
+        System.out.println("종료되었습니다.\n");
         return;
 
       } else if (input == 1) { // 비회원 조회하기
@@ -57,7 +57,7 @@ public class App {
           input = menuList.memberMenuList(); 
 
           if (input == 0) {
-            System.out.println("로그아웃이 완료되었습니다.");
+            System.out.println("로그아웃이 완료되었습니다.\n");
             continue Main;
 
             // 1. 무료 스터디 메뉴
@@ -80,18 +80,15 @@ public class App {
             Community : while (true) {
               input = communityMenuList.communityMainMenuList();
 
-              if(input == 1) { // 커뮤니티-질문 메뉴 
-                System.out.println("[커뮤니티 / 질문]\n");
+              if(input == 1) { // 커뮤니티-질문 메뉴                
                 communityMenuList.communityQaMenuList();
                 continue Community;                 
 
-              } else if(input == 2) { //커뮤니티-정보 메뉴
-                System.out.println("[커뮤니티 / 정보]\n");
+              } else if(input == 2) { //커뮤니티-정보 메뉴               
                 communityMenuList.communityInfoMenuList();
                 continue Community;
 
-              } else if(input == 3) { //커뮤니티-스몰톡 메뉴
-                System.out.println("[커뮤니티 / 스몰톡]\n");
+              } else if(input == 3) { //커뮤니티-스몰톡 메뉴                
                 communityMenuList.communityTalkMenuList();
                 continue Community;  
 
@@ -99,7 +96,7 @@ public class App {
                 continue Member;
 
               } else {
-                System.out.println("잘못된 번호입니다.");
+                System.out.println("잘못된 번호입니다.\n");
                 continue Community;
               }
             }
@@ -111,7 +108,7 @@ public class App {
             mentorApplicantAddHandler.execute();
 
           } else {
-            System.out.println("잘못된 번호입니다.");
+            System.out.println("잘못된 번호입니다.\n");
             continue;
           }
         }

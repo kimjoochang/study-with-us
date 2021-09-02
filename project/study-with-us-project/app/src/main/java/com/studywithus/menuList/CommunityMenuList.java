@@ -21,7 +21,7 @@ import com.studywithus.util.Prompt;
 
 public class CommunityMenuList {
 
-  List <Community> communityList;
+  public List <Community> communityList;
 
   CommunityInfoAddHandler communityInfoAddHandler = new CommunityInfoAddHandler(communityList);
   CommunityInfoListHandler communityInfoListHandler = new CommunityInfoListHandler(communityList);
@@ -45,14 +45,13 @@ public class CommunityMenuList {
 
   //커뮤니티 기본 메뉴 조회
   public int communityMainMenuList() {
-    System.out.println();
     System.out.println("[커뮤니티]\n");
     System.out.println("1. 질문");
     System.out.println("2. 정보");
     System.out.println("3. 스몰톡");
     System.out.println("0. 이전\n");
 
-    input = Prompt.inputInt("게시판을 선택해주세요. >");
+    input = Prompt.inputInt("게시판을 선택해주세요. > ");
 
     System.out.println();
     return input;
@@ -174,7 +173,7 @@ public class CommunityMenuList {
         return;
 
       } else {
-        System.out.println("잘못된 번호입니다.");
+        System.out.println("잘못된 번호입니다.\n");
         continue;
       }
       continue;
