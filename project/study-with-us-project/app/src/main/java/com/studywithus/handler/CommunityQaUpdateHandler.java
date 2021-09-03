@@ -13,7 +13,7 @@ public class CommunityQaUpdateHandler extends AbstractCommunityHandler{
   // 질문 게시글 수정
   @Override
   public void execute() {
-    System.out.println("[커뮤니티 / 질문 게시글 수정]");
+    System.out.println("[커뮤니티 / 질문 / 수정] \n");
 
     int no = Prompt.inputInt("번호? ");
 
@@ -30,7 +30,7 @@ public class CommunityQaUpdateHandler extends AbstractCommunityHandler{
 
     String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("질문 게시글 수정을 취소하였습니다.");
+      System.out.println("질문 게시글 수정을 취소하였습니다.\n");
       return;
     }
 
