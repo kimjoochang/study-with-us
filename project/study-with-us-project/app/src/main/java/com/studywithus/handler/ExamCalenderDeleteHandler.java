@@ -3,12 +3,11 @@ package com.studywithus.handler;
 import com.studywithus.domain.Calender;
 import com.studywithus.util.Prompt;
 
-public class ExamCalenderHandler {
+public class ExamCalenderDeleteHandler extends AbstractExamCalenderHandler {
 
-  static final int MAX_LENGTH = 5;
-
-  Calender[] calenders = new Calender[MAX_LENGTH];
-  int size = 0;
+  public ExamCalenderAddHandler(List<ExamCalender> examCalenderList) {
+    super(examCalenderList);
+  }
 
   // 이달의 시험일정 생성
   public void add() {
