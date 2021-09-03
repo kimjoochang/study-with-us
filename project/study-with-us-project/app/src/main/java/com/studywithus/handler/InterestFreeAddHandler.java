@@ -9,8 +9,11 @@ public class InterestFreeAddHandler extends AbstractInterestFreeHandler {
   public InterestFreeAddHandler(List<FreeStudy> freeInterestList) {
     super(freeInterestList);
   }
+
   @Override
   public void execute(FreeStudy freeStudy) {
+    System.out.println("[무료 스터디 / 상세보기 / 관심 목록]\n");
+
     String input = Prompt.inputString("무료 스터디 관심 목록에 추가하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {

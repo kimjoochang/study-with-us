@@ -9,6 +9,7 @@ import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
+import com.studywithus.handler.InterestFreeAddHandler;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyMenuList {
@@ -50,7 +51,24 @@ public class FreeStudyMenuList {
         // 3. 상세보기
       } else if (input == 3) {
         freeStudyDetailHandler.execute();
-        freeStudyApplyHandler.execute();
+
+        System.out.println();
+
+        System.out.println("[무료 스터디 / 상세보기]");
+        System.out.println("1. 신청");
+        System.out.println("2. 관심 목록 추가");
+        System.out.println("0. 이전");
+
+        input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+        System.out.println();
+
+        if (input == 1) {
+          freeStudyApplyHandler.execute();
+        }
+
+        else if (input == 2) {
+          InterestFreeAddHandler.execute();
+        }
 
         // 4. 수정
       } else if (input == 4) {
