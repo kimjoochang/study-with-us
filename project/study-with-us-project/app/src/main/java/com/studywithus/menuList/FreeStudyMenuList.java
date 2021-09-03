@@ -1,5 +1,6 @@
 package com.studywithus.menuList;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.handler.FreeStudyAddHandler;
@@ -12,7 +13,7 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyMenuList {
 
-  private List<FreeStudy> freeStudyList;
+  private List<FreeStudy> freeStudyList = new ArrayList<>();
 
   FreeStudyApplyHandler freeStudyApplyHandler = new FreeStudyApplyHandler(freeStudyList);
   FreeStudyAddHandler freeStudyAddHandler = new FreeStudyAddHandler(freeStudyList);
@@ -25,6 +26,9 @@ public class FreeStudyMenuList {
 
   // 무료 스터디 메뉴 조회
   public void freeStudyMenuList() {
+
+    u.name = "aaa";
+    u.age = 100;
 
     while(true) {
       System.out.println("[무료 스터디]\n");
