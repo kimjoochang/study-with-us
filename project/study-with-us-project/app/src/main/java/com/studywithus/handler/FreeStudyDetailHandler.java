@@ -27,7 +27,7 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
     System.out.printf("내용: %s\n", study.getExplanation());
     System.out.printf("팀장: %s\n", study.getWriter());
 
-    if (study.getArea().length() != 0) {
+    if (study.getArea() != null) {
       System.out.printf("지역: %s\n", study.getArea());
     }
 

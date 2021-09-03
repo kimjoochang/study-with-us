@@ -1,5 +1,6 @@
 package com.studywithus.menuList;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.handler.FreeStudyAddHandler;
@@ -12,7 +13,7 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyMenuList {
 
-  private List<FreeStudy> freeStudyList;
+  private List<FreeStudy> freeStudyList = new ArrayList<>();
 
   FreeStudyApplyHandler freeStudyApplyHandler = new FreeStudyApplyHandler(freeStudyList);
   FreeStudyAddHandler freeStudyAddHandler = new FreeStudyAddHandler(freeStudyList);
@@ -48,7 +49,6 @@ public class FreeStudyMenuList {
         // 3. 상세보기
       } else if (input == 3) {
         freeStudyDetailHandler.execute();
-        freeStudyApplyHandler.execute();
 
         // 4. 수정
       } else if (input == 4) {

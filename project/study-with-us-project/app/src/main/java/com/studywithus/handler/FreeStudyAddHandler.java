@@ -27,6 +27,9 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
 
     if (freeStudy.getOnOffLine().equals("2")) {
       freeStudy.setArea(Prompt.inputString("지역? "));
+
+    } else {
+      freeStudy.setArea(null);
     }
 
     freeStudy.setTitle(Prompt.inputString("제목? "));
