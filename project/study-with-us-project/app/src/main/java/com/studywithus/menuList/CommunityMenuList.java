@@ -1,5 +1,6 @@
 package com.studywithus.menuList;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.studywithus.domain.Community;
 import com.studywithus.handler.CommunityInfoAddHandler;
@@ -21,25 +22,27 @@ import com.studywithus.util.Prompt;
 
 public class CommunityMenuList {
 
-  public List <Community> communityList;
+  private List<Community> communityInfoList = new ArrayList<>();
+  private List<Community> communityQaList = new ArrayList<>();
+  private List<Community> communityTalkList = new ArrayList<>();
 
-  CommunityInfoAddHandler communityInfoAddHandler = new CommunityInfoAddHandler(communityList);
-  CommunityInfoListHandler communityInfoListHandler = new CommunityInfoListHandler(communityList);
-  CommunityInfoDetailHandler communityInfoDetailHandler = new CommunityInfoDetailHandler(communityList);
-  CommunityInfoDeleteHandler communityInfoDeleteHandler = new CommunityInfoDeleteHandler(communityList);
-  CommunityInfoUpdateHandler communityInfoUpdateHandler = new CommunityInfoUpdateHandler(communityList);
+  CommunityInfoAddHandler communityInfoAddHandler = new CommunityInfoAddHandler(communityInfoList);
+  CommunityInfoListHandler communityInfoListHandler = new CommunityInfoListHandler(communityInfoList);
+  CommunityInfoDetailHandler communityInfoDetailHandler = new CommunityInfoDetailHandler(communityInfoList);
+  CommunityInfoDeleteHandler communityInfoDeleteHandler = new CommunityInfoDeleteHandler(communityInfoList);
+  CommunityInfoUpdateHandler communityInfoUpdateHandler = new CommunityInfoUpdateHandler(communityInfoList);
 
-  CommunityQaAddHandler communityQaAddHandler = new CommunityQaAddHandler(communityList);
-  CommunityQaListHandler communityQaListHandler = new CommunityQaListHandler(communityList);
-  CommunityQaDetailHandler communityQaDetailHandler = new CommunityQaDetailHandler(communityList);
-  CommunityQaDeleteHandler communityQaDeleteHandler = new CommunityQaDeleteHandler(communityList);
-  CommunityQaUpdateHandler communityQaUpdateHandler = new CommunityQaUpdateHandler(communityList);
+  CommunityQaAddHandler communityQaAddHandler = new CommunityQaAddHandler(communityQaList);
+  CommunityQaListHandler communityQaListHandler = new CommunityQaListHandler(communityQaList);
+  CommunityQaDetailHandler communityQaDetailHandler = new CommunityQaDetailHandler(communityQaList);
+  CommunityQaDeleteHandler communityQaDeleteHandler = new CommunityQaDeleteHandler(communityQaList);
+  CommunityQaUpdateHandler communityQaUpdateHandler = new CommunityQaUpdateHandler(communityQaList);
 
-  CommunityTalkAddHandler communityTalkAddHandler = new CommunityTalkAddHandler(communityList);
-  CommunityTalkListHandler communityTalkListHandler = new CommunityTalkListHandler(communityList);
-  CommunityTalkDetailHandler communityTalkDetailHandler = new CommunityTalkDetailHandler(communityList);
-  CommunityTalkDeleteHandler communityTalkDeleteHandler = new CommunityTalkDeleteHandler(communityList);
-  CommunityTalkUpdateHandler communityTalkUpdateHandler = new CommunityTalkUpdateHandler(communityList);
+  CommunityTalkAddHandler communityTalkAddHandler = new CommunityTalkAddHandler(communityTalkList);
+  CommunityTalkListHandler communityTalkListHandler = new CommunityTalkListHandler(communityTalkList);
+  CommunityTalkDetailHandler communityTalkDetailHandler = new CommunityTalkDetailHandler(communityTalkList);
+  CommunityTalkDeleteHandler communityTalkDeleteHandler = new CommunityTalkDeleteHandler(communityTalkList);
+  CommunityTalkUpdateHandler communityTalkUpdateHandler = new CommunityTalkUpdateHandler(communityTalkList);
 
   int input;
 
