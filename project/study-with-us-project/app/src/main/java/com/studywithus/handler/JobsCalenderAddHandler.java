@@ -1,27 +1,30 @@
 package com.studywithus.handler;
 
-import com.studywithus.domain.Calender;
+import java.util.List;
+import com.studywithus.domain.JobsCalender;
 import com.studywithus.util.Prompt;
 
 public class JobsCalenderAddHandler extends AbstractJobsCalenderHandler {
 
-  public AbstractJobsCalenderHandler(List<JobsCalender> jobsCalenderHandlerList) {
-    super(jobsCalenderHandlerList);
+  public JobsCalenderAddHandler(List<JobsCalender> jobsCalenderList) {
+    super(jobsCalenderList);
   }
 
   // 이달의 채용공고 생성
-  public void add() {
-    System.out.println("[이달의 채용공고 등록]");
+  public void execute() {
+    System.out.println("[이달의 채용공고 / 등록]\n");
 
-    Calender calender = new Calender();
+    JobsCalender jobsCalender = new JobsCalender();
 
-    calender.setNo(Prompt.inputInt("번호 "));
-    calender.setTitle(Prompt.inputString("제목 "));
-    calender.setContent(Prompt.inputString("내용 "));
-    calender.setStartDate(Prompt.inputDate("시작일 "));
-    calender.setEndDate(Prompt.inputDate("종료일 "));
-    calender.setEndDate(Prompt.inputDate("메모 "));
+    jobsCalender.setNo(Prompt.inputInt("번호? "));
+    jobsCalender.setTitle(Prompt.inputString("제목? "));
+    jobsCalender.setContent(Prompt.inputString("내용? "));
+    jobsCalender.setStartDate(Prompt.inputDate("시작일? "));
+    jobsCalender.setEndDate(Prompt.inputDate("종료일? "));
 
-    JobsCalenderHandler[] calenders = new JobsCalenderHandler[MAX_LENGTH];
+    jobsCalenderList.add(jobsCalender);
+
+    System.out.println();
+    System.out.println("이달의 채용공고 등록이 완료되었습니다.\n");
   }
 }

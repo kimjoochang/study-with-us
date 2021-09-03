@@ -2,14 +2,13 @@ package com.studywithus.domain;
 
 import java.sql.Date;
 
-public class Calender {
+public class JobsCalender {
 
   private int no;
   private String title;
   private String content;
   private Date startDate;
   private Date endDate;
-  private String memo;
 
   public int getNo() {
     return no;
@@ -49,13 +48,5 @@ public class Calender {
 
   public void setEndDate(Date endDate) {
     this.endDate = endDate;
-  }
-
-  public String getMemo() {
-    return memo;
-  }
-
-  public void setMemo(String memo) {
-    this.memo = memo;
   }
 }

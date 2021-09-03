@@ -1,21 +1,21 @@
 package com.studywithus.handler;
 
-import com.studywithus.domain.Calender;
-import com.studywithus.util.Prompt;
+import java.util.List;
+import com.studywithus.domain.ExamCalender;
 
-public abstract class AbstractExamCalenderHandler {
+public abstract class AbstractExamCalenderHandler implements Command {
 
   protected List<ExamCalender> examCalenderList;
-  
-  public ExamCalenderAddHandler(List<ExamCalender> examCalenderList) {
-    super(examCalenderList);
+
+  public AbstractExamCalenderHandler(List<ExamCalender> examCalenderList) {
+    this.examCalenderList = examCalenderList;
   }
 
   // 이달의 시험일정 번호 조회
-  private Calender findByNo(int no) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.calenders[i].getNo() == no) {
-        return this.calenders[i];
+  protected ExamCalender findByNo(int no) {
+    for (ExamCalender examCalender : examCalenderList) {
+      if (examCalender.getNo() == no) {
+        return examCalender;
       }
     }
     return null;

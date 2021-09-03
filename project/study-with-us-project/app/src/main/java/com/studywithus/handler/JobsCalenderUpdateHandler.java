@@ -1,37 +1,46 @@
 package com.studywithus.handler;
 
-import com.studywithus.domain.Calender;
+import java.util.List;
+import com.studywithus.domain.JobsCalender;
 import com.studywithus.util.Prompt;
 
 public class JobsCalenderUpdateHandler extends AbstractJobsCalenderHandler {
 
-  public AbstractJobsCalenderHandler(List<JobsCalender> jobsCalenderHandlerList) {
-    super(jobsCalenderHandlerList);
+  public JobsCalenderUpdateHandler(List<JobsCalender> jobsCalenderList) {
+    super(jobsCalenderList);
   }
 
-  // 이달의 채용공고 변경
-  public void update() {
-    System.out.println("[이달의 채용공고 변경]");
+  // 이달의 채용공고 수정
+  public void execute() {
+    System.out.println("[이달의 채용공고 / 수정]\n");
+
     int no = Prompt.inputInt("번호? ");
+    System.out.println();
 
-    Calender calender = findByNo(no);
+    JobsCalender jobsCalender = findByNo(no);
 
-    if (calender == null) {
+    if (jobsCalender == null) {
+      System.out.println();
       System.out.println("해당 번호의 채용공고가 없습니다.");
       return;
     }
 
-    String title = Prompt.inputString(String.format("제목(%s)? ", calender.getTitle()));
-    String content = Prompt.inputString(String.format("내용(%s)? ", calender.getContent()));
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+    String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", jobsCalender.getTitle()));
+    String content = Prompt.inputString(String.format("[%s] 수정할 내용: ", jobsCalender.getContent()));
+    String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
+
+    System.out.println();
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("채용공고 변경을 취소하였습니다.");
+      System.out.println();
+      System.out.println("채용공고 수정을 취소하였습니다.");
       return;
     }
 
-    calender.setTitle(title);
-    calender.setContent(content);
-    System.out.println("채용 공고를 변경하였습니다.");
+    jobsCalender.setTitle(title);
+    jobsCalender.setContent(content);
+
+    System.out.println();
+    System.out.println("채용 공고를 수정하였습니다.");
   }
 }

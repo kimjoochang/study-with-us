@@ -1,21 +1,21 @@
 package com.studywithus.handler;
 
-import com.studywithus.domain.Calender;
-import com.studywithus.util.Prompt;
+import java.util.List;
+import com.studywithus.domain.JobsCalender;
 
-public class AbstractJobsCalenderHandler {
+public abstract class AbstractJobsCalenderHandler implements Command {
 
-  protected List<JobsCalender> jobsCalenderHandlerList;
-  
-  public AbstractJobsCalenderHandler(List<JobsCalender> jobsCalenderHandlerList) {
-    super(jobsCalenderHandlerList);
+  protected List<JobsCalender> jobsCalenderList;
+
+  public AbstractJobsCalenderHandler(List<JobsCalender> jobsCalenderList) {
+    this.jobsCalenderList = jobsCalenderList;
   }
 
   // 이달의 채용공고 번호 조회
-  private Calender findByNo(int no) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.calenders[i].getNo() == no) {
-        return this.calenders[i];
+  protected JobsCalender findByNo(int no) {
+    for (JobsCalender jobsCalender : jobsCalenderList) {
+      if (jobsCalender.getNo() == no) {
+        return jobsCalender;
       }
     }
     return null;
