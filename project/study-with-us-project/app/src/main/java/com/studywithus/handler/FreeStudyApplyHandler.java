@@ -13,7 +13,7 @@ public class FreeStudyApplyHandler extends AbstractFreeStudyHandler {
 
   // 무료 스터디 신청
   public void execute() {
-    System.out.println("[무료 스터디 / 신청]");
+    System.out.println("[무료 스터디 / 신청]\n");
 
     String input = Prompt.inputString("무료 스터디를 신청 하시겠습니까? (y/N) ");
 
@@ -26,6 +26,6 @@ public class FreeStudyApplyHandler extends AbstractFreeStudyHandler {
     LoginMemberInfo.getId();
 
     System.out.println();
-    System.out.println("무료 스터디 신청이 완료되었습니다.");
+    System.out.println("무료 스터디 신청이 완료되었습니다.\n");
   }
 }

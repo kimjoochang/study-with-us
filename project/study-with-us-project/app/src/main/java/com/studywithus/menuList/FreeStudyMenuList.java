@@ -37,6 +37,7 @@ public class FreeStudyMenuList {
       System.out.println("0. 이전\n");
 
       input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+      System.out.println();
 
       // 1. 생성
       if (input == 1) {
@@ -49,6 +50,7 @@ public class FreeStudyMenuList {
         // 3. 상세보기
       } else if (input == 3) {
         freeStudyDetailHandler.execute();
+        freeStudyApplyHandler.execute();
 
         // 4. 수정
       } else if (input == 4) {

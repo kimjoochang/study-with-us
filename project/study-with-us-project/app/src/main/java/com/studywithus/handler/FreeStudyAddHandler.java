@@ -13,7 +13,7 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
 
   // 무료 스터디 생성
   public void execute() {
-    System.out.println("[무료 스터디 / 생성]");
+    System.out.println("[무료 스터디 / 생성]\n");
 
     FreeStudy freeStudy = new FreeStudy();
 
