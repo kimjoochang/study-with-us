@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.ExamCalender;
 import com.studywithus.util.Prompt;
 
-public abstract class ExamCalenderDeleteHandler extends AbstractExamCalenderHandler {
+public class ExamCalenderDeleteHandler extends AbstractExamCalenderHandler {
 
   public ExamCalenderDeleteHandler(List<ExamCalender> examCalenderList) {
     super(examCalenderList);
