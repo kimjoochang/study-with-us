@@ -14,7 +14,7 @@ public class CommunityQaAddHandler extends AbstractCommunityHandler{
   // 질문 게시글 생성
   @Override
   public void execute() {
-    System.out.println("[커뮤니티 / 질문 게시글 생성]");
+    System.out.println("[커뮤니티 / 질문 / 생성] \n");
 
     Community community = new Community();
 

@@ -13,13 +13,14 @@ public class CommunityQaListHandler extends AbstractCommunityHandler{
 
   @Override
   public void execute() {
-    System.out.println("[커뮤니티 / 질문 게시글 조회]");
+    System.out.println("[커뮤니티 / 질문 / 조회] \n");
 
     for (Community community : communityList) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", community.getNo(),
           community.getTitle(), community.getWriter(),
           community.getRegisteredDate(), community.getViewCount(),
           community.getLike());
+      System.out.println();
     }
   }
 

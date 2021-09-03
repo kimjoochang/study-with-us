@@ -13,7 +13,7 @@ public class CommunityQaDetailHandler extends AbstractCommunityHandler{
   // 정보 게시글 상세보기
   @Override
   public void execute() {
-    System.out.println("[커뮤니티 / 질문 게시글 상세보기]");
+    System.out.println("[커뮤니티 / 질문 / 상세보기] \n");
 
     int no = Prompt.inputInt("번호? ");
     Community community = findByNo(no);
@@ -31,6 +31,7 @@ public class CommunityQaDetailHandler extends AbstractCommunityHandler{
 
     community.setViewCount(community.getViewCount() + 1);
     System.out.printf("조회수: %d\n", community.getViewCount());
+    System.out.println();
   }
 
 }
