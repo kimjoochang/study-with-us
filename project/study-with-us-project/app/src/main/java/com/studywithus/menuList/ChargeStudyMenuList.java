@@ -73,6 +73,8 @@ public class ChargeStudyMenuList {
 
 		while(true) {
 			if (input == 1) {
+				System.out.print("[유료 스터디 / 결제]");
+
 				String input1 = Prompt.inputString("유료 스터디를 결제 하시겠습니까? (y/N)");
 				if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
 					System.out.println(" 유료 스터디 결제를 취소하셨습니다.");
@@ -100,6 +102,8 @@ public class ChargeStudyMenuList {
 				}
 				return 1;
 			} else if (input == 2) {
+				System.out.print("[유료 스터디 / 관심목록]");
+
 				InterestHandler.chargeAdd(study);
 				return 1;
 			}
