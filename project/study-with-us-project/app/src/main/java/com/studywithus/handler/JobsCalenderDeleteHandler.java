@@ -3,12 +3,11 @@ package com.studywithus.handler;
 import com.studywithus.domain.Calender;
 import com.studywithus.util.Prompt;
 
-public class JobsCalenderHandler {
+public class JobsCalenderDeleteHandler extends AbstractJobsCalenderHandler {
 
-  static final int MAX_LENGTH = 5;
-
-  Calender[] calenders = new Calender[MAX_LENGTH];
-  int size = 0;
+  public AbstractJobsCalenderHandler(List<JobsCalender> jobsCalenderHandlerList) {
+    super(jobsCalenderHandlerList);
+  }
 
   // 이달의 채용공고 생성
   public void add() {
