@@ -3,7 +3,7 @@ package com.studywithus.handler;
 import java.util.List;
 
 import com.studywithus.domain.ChargeStudy;
-import com.studywithus.menuList.MenuList;
+import com.studywithus.menuList.ChargeStudyMenuList;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
@@ -48,7 +48,7 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
 
 			int input = Prompt.inputInt("메뉴를 선택해주세요. >");
 			System.out.println();
-			int answer = MenuList.detailMenuList(input,study);
+			int answer = ChargeStudyMenuList.detailMenuList(input, study);
 
 			if (answer == 0) {
 				continue;
