@@ -2,7 +2,7 @@ package com.studywithus.handler;
 
 import java.util.List;
 import com.studywithus.domain.FreeStudy;
-import com.studywithus.domain.LoginMemberInfo;
+import com.studywithus.domain.ApplicantInfo;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyApplyHandler extends AbstractFreeStudyHandler {
@@ -22,8 +22,8 @@ public class FreeStudyApplyHandler extends AbstractFreeStudyHandler {
       return;
     }
 
-    LoginMemberInfo.getName();
-    LoginMemberInfo.getId();
+    ApplicantInfo.getName();
+    ApplicantInfo.getId();
 
     System.out.println();
     System.out.println("무료 스터디 신청이 완료되었습니다.\n");

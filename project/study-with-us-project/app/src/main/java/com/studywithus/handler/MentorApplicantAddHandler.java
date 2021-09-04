@@ -1,7 +1,7 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.LoginMemberInfo;
+import com.studywithus.domain.ApplicantInfo;
 import com.studywithus.domain.MentorApplicant;
 import com.studywithus.util.Prompt;
 
@@ -22,8 +22,8 @@ public class MentorApplicantAddHandler extends AbstractMentorApplicantHandler {
 
     MentorApplicant mentorApplicant = new MentorApplicant();
 
-    mentorApplicant.name = LoginMemberInfo.getName();
-    mentorApplicant.id = LoginMemberInfo.getId();
+    mentorApplicant.name = ApplicantInfo.getName();
+    mentorApplicant.id = ApplicantInfo.getId();
 
     mentorApplicantList.add(mentorApplicant);
 
