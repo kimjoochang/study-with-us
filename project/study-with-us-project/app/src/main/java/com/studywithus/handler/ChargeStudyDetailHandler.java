@@ -2,7 +2,6 @@ package com.studywithus.handler;
 
 import java.util.List;
 import com.studywithus.domain.ChargeStudy;
-import com.studywithus.menuList.ChargeStudyMenuList;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
@@ -10,8 +9,6 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
   public ChargeStudyDetailHandler(List<ChargeStudy> chargeStudyList) {
     super(chargeStudyList);	
   }
-
-  ChargeStudyMenuList chargeStudyMenuList = new ChargeStudyMenuList();
 
   // 유료 스터디 상세보기
   @Override
@@ -42,20 +39,20 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
 
       System.out.printf("조회수: %d\n", study.getViewCount() + 1);
 
-      System.out.println("------------------------------------");
-      System.out.println("1. 결제하기");
-      System.out.println("2. 관심목록 추가");
-      System.out.println("0. 이전\n");
-
-      int input = Prompt.inputInt("메뉴를 선택해주세요. >");
-      System.out.println();
-      int answer = chargeStudyMenuList.detailMenuList(input, study);
-
-      if (answer == 0) {
-        continue;
-      } else {
-        return; 
-      }
+      //      System.out.println("------------------------------------");
+      //      System.out.println("1. 결제하기");
+      //      System.out.println("2. 관심목록 추가");
+      //      System.out.println("0. 이전\n");
+      //
+      //      int input = Prompt.inputInt("메뉴를 선택해주세요. >");
+      //      System.out.println();
+      //      int answer = chargeStudyMenuList.detailMenuList(input, study);
+      //
+      //      if (answer == 0) {
+      //        continue;
+      //      } else {
+      //        return; 
+      //      }
     }
   }
 

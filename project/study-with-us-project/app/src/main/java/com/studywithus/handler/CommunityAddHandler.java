@@ -11,7 +11,7 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
     super(communityList);
   }
 
-  // 정보 게시글 생성
+  // 게시글 생성
   @Override
   public void execute() {
     System.out.println("[커뮤니티 / 생성] \n");
