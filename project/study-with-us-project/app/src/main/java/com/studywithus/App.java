@@ -4,21 +4,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.studywithus.domain.ChargeStudy;
-<<<<<<< HEAD
-import com.studywithus.domain.Community;
-=======
 import com.studywithus.domain.ExamCalender;
->>>>>>> f03efa3352faea1d2e427ef59dc7e460e6e286a4
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.domain.JobsCalender;
 import com.studywithus.domain.MentorApplicant;
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
-<<<<<<< HEAD
-import com.studywithus.handler.CommunityAddHandler;
-import com.studywithus.handler.CommunityListHandler;
-=======
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
@@ -33,7 +25,6 @@ import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
->>>>>>> f03efa3352faea1d2e427ef59dc7e460e6e286a4
 import com.studywithus.handler.InterestChargeAddHandler;
 import com.studywithus.handler.InterestChargeDeleteHandler;
 import com.studywithus.handler.InterestFreeAddHandler;
@@ -57,20 +48,10 @@ public class App {
   List<ChargeStudy> chargeStudyList = new ArrayList<>();
   List<FreeStudy> freeInterestList = new ArrayList<>();
   List<ChargeStudy> chargeInterestList = new ArrayList<>();
-  List<Community> CommunityInfoList = new ArrayList<>();
-  List<Community> CommunityQaList = new ArrayList<>();
-
 
   AuthLoginHandler authLoginHandler = new AuthLoginHandler(memberList);
   AuthLogoutHandler authLogoutHandler = new AuthLogoutHandler();
 
-<<<<<<< HEAD
-  CommunityAddHandler communityTalkAddHandler = new CommunityAddHandler(CommunityInfoList, "");
-  CommunityListHandler communityTalkListHandler = new CommunityListHandler(CommunityInfoList, "");
-
-  CommunityAddHandler communityQaAddHandler = new CommunityAddHandler(CommunityQaList, 1);
-  CommunityListHandler communityQaListHandler = new CommunityListHandler(CommunityQaList, 1);
-=======
   MentorApplicantAddHandler mentorApplicantAddHandler = new MentorApplicantAddHandler(mentorApplicantList);
   MentorApplicantListHandler mentorApplicantListHandler = new MentorApplicantListHandler(mentorApplicantList);
 
@@ -95,7 +76,6 @@ public class App {
   ExamCalenderDetailHandler examCalenderDetailHandler = new ExamCalenderDetailHandler(examCalenderList);
   ExamCalenderUpdateHandler examCalenderUpdateHandler = new ExamCalenderUpdateHandler(examCalenderList);
   ExamCalenderDeleteHandler examCalenderDeleteHandler = new ExamCalenderDeleteHandler(examCalenderList);
->>>>>>> f03efa3352faea1d2e427ef59dc7e460e6e286a4
 
   InterestFreeAddHandler interestFreeAddHandler = new InterestFreeAddHandler(freeInterestList);
   InterestFreeDeleteHandler interestFreeDeleteHandler = new InterestFreeDeleteHandler(freeInterestList);
@@ -116,29 +96,20 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    mainMenuGroup.add(new Menu("로그인", Menu.ENABLE_LOGOUT) {
+    mainMenuGroup.add(new Menu("로그인") {
       @Override
       public void execute() {
         authLoginHandler.execute(); 
       }
     });
 
-    mainMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
+    mainMenuGroup.add(new Menu("로그아웃") {
       @Override
       public void execute() {
         authLogoutHandler.execute(); 
       }
     });
 
-<<<<<<< HEAD
-    MenuGroup cummunityMenu = new MenuGroup("커뮤니티");
-    mainMenuGroup.add(cummunityMenu);
-
-    MenuGroup cummunityInfoMenu = new MenuGroup("커뮤니티-정보");
-    cummunityMenu.add(cummunityInfoMenu);
-
-    cummunityInfoMenu.add(new Menu("생성") {
-=======
     MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
     mainMenuGroup.add(freeStudyMenu);
 
@@ -170,6 +141,39 @@ public class App {
       @Override 
       public void execute() {
         freeStudyDeleteHandler.execute();
+      }});
+
+    MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
+    mainMenuGroup.add(chargeStudyMenu);
+
+    chargeStudyMenu.add(new Menu("생성") {
+      @Override
+      public void execute() {
+        chargeStudyAddHandler.execute(); 
+      }});
+
+    chargeStudyMenu.add(new Menu("조회") {
+      @Override
+      public void execute() {
+        chargeStudyListHandler.execute(); 
+      }});
+
+    chargeStudyMenu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        chargeStudyDetailHandler.execute(); 
+      }});
+
+    chargeStudyMenu.add(new Menu("수정") {
+      @Override
+      public void execute() {
+        chargeStudyUpdateHandler.execute(); 
+      }});
+
+    chargeStudyMenu.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        chargeStudyDeleteHandler.execute(); 
       }});
 
     MenuGroup adminMenu = new MenuGroup("관리자");
@@ -248,41 +252,6 @@ public class App {
       @Override 
       public void execute() {
         freeStudyDeleteHandler.execute();
-      }});
-
-    MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
-    mainMenuGroup.add(chargeStudyMenu);
-
-    chargeStudyMenu.add(new Menu("생성") {
->>>>>>> f03efa3352faea1d2e427ef59dc7e460e6e286a4
-      @Override
-      public void execute() {
-        communityTalkAddHandler.execute(); 
-      }});
-
-    cummunityInfoMenu.add(new Menu("조회") {
-      @Override
-      public void execute() {
-        communityTalkListHandler.execute(); 
-      }});
-
-    MenuGroup cummunityQaMenu = new MenuGroup("커뮤니티-질문");
-    cummunityMenu.add(cummunityQaMenu);
-
-    cummunityQaMenu.add(new Menu("생성") {
-      @Override
-      public void execute() {
-        communityQaAddHandler.execute(); 
-      }});
-
-<<<<<<< HEAD
-    cummunityQaMenu.add(new Menu("조회") {
-=======
-    chargeStudyMenu.add(new Menu("삭제") {
->>>>>>> f03efa3352faea1d2e427ef59dc7e460e6e286a4
-      @Override
-      public void execute() {
-        communityQaListHandler.execute(); 
       }});
 
     MenuGroup interestMenu = new MenuGroup("관심목록");
