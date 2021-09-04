@@ -29,7 +29,7 @@ public class FreeStudyMenuList {
   // 무료 스터디 메뉴 조회
   public void freeStudyMenuList() {
 
-    while(true) {
+    while (true) {
       System.out.println("[무료 스터디]\n");
       System.out.println("1. 생성");
       System.out.println("2. 조회");
