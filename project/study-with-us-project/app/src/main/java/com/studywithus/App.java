@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Community;
 import com.studywithus.domain.ExamCalender;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.domain.JobsCalender;
@@ -16,6 +17,11 @@ import com.studywithus.handler.ChargeStudyDeleteHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
 import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
+import com.studywithus.handler.CommunityAddHandler;
+import com.studywithus.handler.CommunityDeleteHandler;
+import com.studywithus.handler.CommunityDetailHandler;
+import com.studywithus.handler.CommunityListHandler;
+import com.studywithus.handler.CommunityUpdateHandler;
 import com.studywithus.handler.ExamCalenderAddHandler;
 import com.studywithus.handler.ExamCalenderDeleteHandler;
 import com.studywithus.handler.ExamCalenderDetailHandler;
@@ -49,8 +55,34 @@ public class App {
   List<FreeStudy> freeInterestList = new ArrayList<>();
   List<ChargeStudy> chargeInterestList = new ArrayList<>();
 
+  List<Community> communityInfoList = new ArrayList<>();
+  List<Community> communityQaList = new ArrayList<>();
+  List<Community> communityTalkList = new ArrayList<>();
+
+
   AuthLoginHandler authLoginHandler = new AuthLoginHandler(memberList);
   AuthLogoutHandler authLogoutHandler = new AuthLogoutHandler();
+
+
+  CommunityAddHandler communityInfoAddHandler = new CommunityAddHandler(communityInfoList);
+  CommunityAddHandler communityQaAddHandler = new CommunityAddHandler(communityQaList);
+  CommunityAddHandler communityTalkAddHandler = new CommunityAddHandler(communityTalkList);
+
+  CommunityListHandler communityInfoListHandler = new CommunityListHandler(communityInfoList);
+  CommunityListHandler communityQaListHandler = new CommunityListHandler(communityQaList);
+  CommunityListHandler communityTalkListHandler = new CommunityListHandler(communityTalkList);
+
+  CommunityDetailHandler communityInfoDetailHandler = new CommunityDetailHandler(communityInfoList);
+  CommunityDetailHandler communityQaDetailHandler = new CommunityDetailHandler(communityQaList);
+  CommunityDetailHandler communityTalkDetailHandler = new CommunityDetailHandler(communityTalkList);
+
+  CommunityUpdateHandler communityInfoUpdateHandler = new CommunityUpdateHandler(communityInfoList);
+  CommunityUpdateHandler communityQaUpdateHandler = new CommunityUpdateHandler(communityQaList);
+  CommunityUpdateHandler communityTalkUpdateHandler = new CommunityUpdateHandler(communityTalkList);
+
+  CommunityDeleteHandler communityInfoDeleteHandler = new CommunityDeleteHandler(communityInfoList);
+  CommunityDeleteHandler communityQaDeleteHandler = new CommunityDeleteHandler(communityQaList);
+  CommunityDeleteHandler communityTalkDeleteHandler = new CommunityDeleteHandler(communityTalkList);
 
   MentorApplicantAddHandler mentorApplicantAddHandler = new MentorApplicantAddHandler(mentorApplicantList);
   MentorApplicantListHandler mentorApplicantListHandler = new MentorApplicantListHandler(mentorApplicantList);
@@ -112,6 +144,46 @@ public class App {
 
     MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
     mainMenuGroup.add(freeStudyMenu);
+    MenuGroup communityMenu = new MenuGroup("커뮤니티");
+    mainMenuGroup.add(communityMenu);
+
+    MenuGroup communityInfoMenu = new MenuGroup("커뮤니티-정보");
+    communityMenu.add(communityInfoMenu);
+
+    communityInfoMenu.add(new Menu("생성") {
+
+      MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
+      mainMenuGroup.add(freeStudyMenu);
+
+      freeStudyMenu.add(new Menu("생성") {
+        @Override 
+        public void execute() {
+          freeStudyAddHandler.execute();
+        }});
+
+      freeStudyMenu.add(new Menu("조회") {
+        @Override 
+        public void execute() {
+          freeStudyListHandler.execute();
+        }});
+
+      freeStudyMenu.add(new Menu("상세보기") {
+        @Override 
+        public void execute() {
+          freeStudyDetailHandler.execute();
+        }});
+
+      freeStudyMenu.add(new Menu("수정") {
+        @Override 
+        public void execute() {
+          freeStudyUpdateHandler.execute();
+        }});
+
+      freeStudyMenu.add(new Menu("삭제") {
+        @Override 
+        public void execute() {
+          freeStudyDeleteHandler.execute();
+        }});
 
     freeStudyMenu.add(new Menu("생성") {
       @Override 
@@ -254,6 +326,27 @@ public class App {
         freeStudyDeleteHandler.execute();
       }});
 
+
+      MenuGroup communityQaMenu = new MenuGroup("커뮤니티-질문");
+      communityMenu.add(communityQaMenu);
+
+      communityQaMenu.add(new Menu("생성") {
+        @Override
+        public void execute() {
+          communityQaAddHandler.execute(); 
+        }});
+
+
+      communityQaMenu.add(new Menu("조회") {
+
+        chargeStudyMenu.add(new Menu("삭제") {   
+        }
+
+        @Override
+        public void execute() {
+          communityQaListHandler.execute(); 
+        }});
+
     MenuGroup interestMenu = new MenuGroup("관심목록");
     mainMenuGroup.add(interestMenu);
 
@@ -289,4 +382,3 @@ public class App {
 
     return mainMenuGroup;
   }
-}

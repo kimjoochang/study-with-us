@@ -4,23 +4,23 @@ import java.util.List;
 import com.studywithus.domain.Community;
 import com.studywithus.util.Prompt;
 
-public class CommunityInfoDetailHandler extends AbstractCommunityHandler{
+public class CommunityDetailHandler extends AbstractCommunityHandler{
 
-  public CommunityInfoDetailHandler(List<Community> communityList) {
+  public CommunityDetailHandler(List<Community> communityList) {
     super(communityList);
   }
 
-  // 정보 게시글 상세보기
+  // 스몰톡 게시글 상세보기
   @Override
   public void execute() {
-    System.out.println("[커뮤니티 / 정보 / 상세보기] \n");
+    System.out.println("[커뮤니티 / 상세보기] \n");
 
     int no = Prompt.inputInt("번호? ");
     Community community = findByNo(no);
 
     if (community == null) {
       System.out.println();
-      System.out.println("해당 번호의 정보 게시글이 없습니다.\n");
+      System.out.println("해당 번호의 게시글이 없습니다.\n");
       return;
     }
 

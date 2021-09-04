@@ -8,18 +8,12 @@ public class CommunityListHandler extends AbstractCommunityHandler{
   public CommunityListHandler(List<Community> communityList) {
     super(communityList);
   }
-  public CommunityListHandler(List<Community> communityQaList, int a) {
-    super(communityQaList);
-  }
-  public CommunityListHandler(List<Community> communityTalkList, String b) {
-    super(communityTalkList);
-  }
 
-  // 정보 게시글 조회
+  // 게시글 조회
 
   @Override
   public void execute() {
-    System.out.println("[커뮤니티 / 정보 / 조회]\n");
+    System.out.println("[커뮤니티 / 조회]\n");
 
     for (Community community : communityList) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", community.getNo(),

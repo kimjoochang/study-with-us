@@ -7,21 +7,14 @@ import com.studywithus.util.Prompt;
 
 public class CommunityAddHandler extends AbstractCommunityHandler{
 
-  public CommunityAddHandler(List<Community> communityInfoList) {
-    super(communityInfoList);
+  public CommunityAddHandler(List<Community> communityList) {
+    super(communityList);
   }
-  public CommunityAddHandler(List<Community> communityQaList, int a) {
-    super(communityQaList);
-  }
-  public CommunityAddHandler(List<Community> communityTalkList, String b) {
-    super(communityTalkList);
-  }
-
 
   // 정보 게시글 생성
   @Override
   public void execute() {
-    // System.out.println("[커뮤니티 / 정보 / 생성] \n");
+    System.out.println("[커뮤니티 / 생성] \n");
 
     Community communityInfo = new Community();
 
@@ -34,7 +27,7 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
     communityList.add(communityInfo);
 
     System.out.println();
-    System.out.println("정보 게시글 등록이 완료되었습니다.\n");
+    System.out.println("게시글 등록이 완료되었습니다.\n");
   }
 
 }
