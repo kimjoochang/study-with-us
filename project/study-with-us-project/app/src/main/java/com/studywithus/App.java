@@ -124,7 +124,7 @@ public class App {
 
         // 3. 회원가입
       } else if (input == 3) {
-        newMemberHandler.add(loginInfo);
+        newMemberHandler.execute();
         continue;
 
         // 4. 아이디 / 비밀번호 찾기
