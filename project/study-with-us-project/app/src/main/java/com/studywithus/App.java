@@ -35,6 +35,7 @@ public class App {
       }
     });
 
+
     mainMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
