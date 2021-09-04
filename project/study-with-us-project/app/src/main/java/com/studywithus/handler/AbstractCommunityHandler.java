@@ -7,15 +7,17 @@ public abstract class AbstractCommunityHandler implements Command {
 
   protected List<Community> communityList;
 
+
   public AbstractCommunityHandler(List<Community> communityList) {
     this.communityList = communityList;
   }
 
-  // 게시글 번호 조회
-  protected Community findByNo(int no) {
-    for (Community community : communityList) {
-      if (community.getNo() == no) {
-        return community;
+  // 정보 게시글 번호 조회
+  protected Community findInfoByNo(int no) {
+    for (Community communityInfo : communityList) {
+      if (communityInfo.getNo() == no) {
+        return communityInfo;
+
       }
     }
     return null;

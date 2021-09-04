@@ -3,10 +3,16 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.Community;
 
-public class CommunityInfoListHandler extends AbstractCommunityHandler{
+public class CommunityListHandler extends AbstractCommunityHandler{
 
-  public CommunityInfoListHandler(List<Community> communityList) {
+  public CommunityListHandler(List<Community> communityList) {
     super(communityList);
+  }
+  public CommunityListHandler(List<Community> communityQaList, int a) {
+    super(communityQaList);
+  }
+  public CommunityListHandler(List<Community> communityTalkList, String b) {
+    super(communityTalkList);
   }
 
   // 정보 게시글 조회
