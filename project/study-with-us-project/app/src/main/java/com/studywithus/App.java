@@ -151,39 +151,40 @@ public class App {
     communityMenu.add(communityInfoMenu);
 
     communityInfoMenu.add(new Menu("생성") {
+    });
 
-      MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
-      mainMenuGroup.add(freeStudyMenu);
+    MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
+    mainMenuGroup.add(freeStudyMenu);
 
-      freeStudyMenu.add(new Menu("생성") {
-        @Override 
-        public void execute() {
-          freeStudyAddHandler.execute();
-        }});
+    freeStudyMenu.add(new Menu("생성") {
+      @Override 
+      public void execute() {
+        freeStudyAddHandler.execute();
+      }});
 
-      freeStudyMenu.add(new Menu("조회") {
-        @Override 
-        public void execute() {
-          freeStudyListHandler.execute();
-        }});
+    freeStudyMenu.add(new Menu("조회") {
+      @Override 
+      public void execute() {
+        freeStudyListHandler.execute();
+      }});
 
-      freeStudyMenu.add(new Menu("상세보기") {
-        @Override 
-        public void execute() {
-          freeStudyDetailHandler.execute();
-        }});
+    freeStudyMenu.add(new Menu("상세보기") {
+      @Override 
+      public void execute() {
+        freeStudyDetailHandler.execute();
+      }});
 
-      freeStudyMenu.add(new Menu("수정") {
-        @Override 
-        public void execute() {
-          freeStudyUpdateHandler.execute();
-        }});
+    freeStudyMenu.add(new Menu("수정") {
+      @Override 
+      public void execute() {
+        freeStudyUpdateHandler.execute();
+      }});
 
-      freeStudyMenu.add(new Menu("삭제") {
-        @Override 
-        public void execute() {
-          freeStudyDeleteHandler.execute();
-        }});
+    freeStudyMenu.add(new Menu("삭제") {
+      @Override 
+      public void execute() {
+        freeStudyDeleteHandler.execute();
+      }});
 
     freeStudyMenu.add(new Menu("생성") {
       @Override 
@@ -327,58 +328,58 @@ public class App {
       }});
 
 
-      MenuGroup communityQaMenu = new MenuGroup("커뮤니티-질문");
-      communityMenu.add(communityQaMenu);
+    MenuGroup communityQaMenu = new MenuGroup("커뮤니티-질문");
+    communityMenu.add(communityQaMenu);
 
-      communityQaMenu.add(new Menu("생성") {
+    communityQaMenu.add(new Menu("생성") {
+      @Override
+      public void execute() {
+        communityQaAddHandler.execute(); 
+      }});
+
+
+    communityQaMenu.add(new Menu("조회") {
+
+      chargeStudyMenu.add(new Menu("삭제") {   
+      }
+
+      @Override
+      public void execute() {
+        communityQaListHandler.execute(); 
+      }});
+
+      MenuGroup interestMenu = new MenuGroup("관심목록");
+      mainMenuGroup.add(interestMenu);
+
+      MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
+      interestMenu.add(freeInterestMenu);
+
+      freeInterestMenu.add(new Menu("조회") {
         @Override
         public void execute() {
-          communityQaAddHandler.execute(); 
+          interestFreeAddHandler.execute(); 
         }});
 
-
-      communityQaMenu.add(new Menu("조회") {
-
-        chargeStudyMenu.add(new Menu("삭제") {   
-        }
-
+      freeInterestMenu.add(new Menu("삭제") {
         @Override
         public void execute() {
-          communityQaListHandler.execute(); 
+          interestFreeDeleteHandler.execute(); 
         }});
 
-    MenuGroup interestMenu = new MenuGroup("관심목록");
-    mainMenuGroup.add(interestMenu);
+      MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
+      interestMenu.add(chargeInterestMenu);
 
-    MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
-    interestMenu.add(freeInterestMenu);
+      chargeInterestMenu.add(new Menu("조회") {
+        @Override
+        public void execute() {
+          interestFreeAddHandler.execute(); 
+        }});
 
-    freeInterestMenu.add(new Menu("조회") {
-      @Override
-      public void execute() {
-        interestFreeAddHandler.execute(); 
-      }});
+      chargeInterestMenu.add(new Menu("삭제") {
+        @Override
+        public void execute() {
+          interestFreeDeleteHandler.execute(); 
+        }});
 
-    freeInterestMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        interestFreeDeleteHandler.execute(); 
-      }});
-
-    MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
-    interestMenu.add(chargeInterestMenu);
-
-    chargeInterestMenu.add(new Menu("조회") {
-      @Override
-      public void execute() {
-        interestFreeAddHandler.execute(); 
-      }});
-
-    chargeInterestMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        interestFreeDeleteHandler.execute(); 
-      }});
-
-    return mainMenuGroup;
+      return mainMenuGroup;
   }
