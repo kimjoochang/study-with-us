@@ -24,6 +24,7 @@ public class App {
     createMenu().execute();
     Prompt.close();
   }
+  
   Menu createMenu() {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
@@ -35,13 +36,46 @@ public class App {
       }
     });
 
-
     mainMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
         authLogoutHandler.execute(); 
       }
     });
+
+    MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
+    mainMenuGroup.add(freeStudyMenu);
+
+    freeStudyMenu.add(new Menu("생성") {
+      @Override 
+      public void execute() {
+      freeStudyAddHandler.execute(); 
+    }});
+
+    freeStudyMenu.add(new Menu("조회") {
+      @Override 
+      public void execute() {
+      freeStudyListHandler.execute(); 
+    }});
+
+    freeStudyMenu.add(new Menu("상세보기") {
+      @Override 
+      public void execute() {
+      freeStudyDetailHandler.execute(); 
+    }});
+
+    freeStudyMenu.add(new Menu("수정") {
+      @Override 
+      public void execute() {
+      freeStudyUpdateHandler.execute(); 
+    }});
+
+    freeStudyMenu.add(new Menu("삭제") {
+      @Override 
+      public void execute() {
+      freeStudyDeleteHandler.execute(); 
+    }});
+
     return mainMenuGroup;
   }
 }
