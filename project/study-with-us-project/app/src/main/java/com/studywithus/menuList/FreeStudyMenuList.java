@@ -22,6 +22,7 @@ public class FreeStudyMenuList {
   FreeStudyDetailHandler freeStudyDetailHandler = new FreeStudyDetailHandler(freeStudyList);
   FreeStudyUpdateHandler freeStudyUpdateHandler = new FreeStudyUpdateHandler(freeStudyList);
   FreeStudyDeleteHandler freeStudyDeleteHandler = new FreeStudyDeleteHandler(freeStudyList);
+  InterestFreeAddHandler interestFreeAddHandler = new InterestFreeAddHandler(freeStudyList);
 
   int input;
 
@@ -67,7 +68,7 @@ public class FreeStudyMenuList {
         }
 
         else if (input == 2) {
-          InterestFreeAddHandler.execute();
+          interestFreeAddHandler.execute();
         }
 
         // 4. 수정

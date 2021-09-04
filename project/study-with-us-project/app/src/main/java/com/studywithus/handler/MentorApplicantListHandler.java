@@ -10,7 +10,7 @@ public class MentorApplicantListHandler extends AbstractMentorApplicantHandler {
   }
   @Override
   public void execute() {
-    System.out.println("[멘토 신청 내역]");
+    System.out.println("[멘토 신청 내역]\n");
 
     for(MentorApplicant mentorApplicant : mentorApplicantList) {
       System.out.printf("%s, %s\n",mentorApplicant.name, mentorApplicant.id);
