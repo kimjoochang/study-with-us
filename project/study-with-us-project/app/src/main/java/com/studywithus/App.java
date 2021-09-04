@@ -55,6 +55,73 @@ public class App {
       }
     });
 
+    MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
+    mainMenuGroup.add(freeStudyMenu);
+
+    freeStudyMenu.add(new Menu("생성") {
+      @Override 
+      public void execute() {
+        freeStudyAddHandler.execute(); 
+      }});
+
+    freeStudyMenu.add(new Menu("조회") {
+      @Override 
+      public void execute() {
+        freeStudyListHandler.execute(); 
+      }});
+
+    freeStudyMenu.add(new Menu("상세보기") {
+      @Override 
+      public void execute() {
+        freeStudyDetailHandler.execute(); 
+      }});
+
+    freeStudyMenu.add(new Menu("수정") {
+      @Override 
+      public void execute() {
+        freeStudyUpdateHandler.execute(); 
+      }});
+
+    freeStudyMenu.add(new Menu("삭제") {
+      @Override 
+      public void execute() {
+        freeStudyDeleteHandler.execute(); 
+      }});
+
+
+    MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
+    mainMenuGroup.add(chargeStudyMenu);
+
+    chargeStudyMenu.add(new Menu("생성") {
+      @Override
+      public void execute() {
+        chargeStudyAddHandler.execute(); 
+      }});
+
+    chargeStudyMenu.add(new Menu("조회") {
+      @Override
+      public void execute() {
+        chargeStudyListHandler.execute(); 
+      }});
+
+    chargeStudyMenu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        chargeStudyDetailHandler.execute(); 
+      }});
+
+    chargeStudyMenu.add(new Menu("수정") {
+      @Override
+      public void execute() {
+        chargeStudyUpdateHandler.execute(); 
+      }});
+
+    chargeStudyMenu.add(new Menu("삭") {
+      @Override
+      public void execute() {
+        chargeStudyDeleteHandler.execute(); 
+      }});
+
     MenuGroup interestMenu = new MenuGroup("관심목록");
     mainMenuGroup.add(interestMenu);
 

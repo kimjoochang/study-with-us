@@ -14,5 +14,5 @@ public class FreeStudyAddMenu extends Menu {
   @Override 
   public void execute() {
     freeStudyAddHandler.execute(); 
-  } 
+  }
 }
