@@ -2,7 +2,7 @@ package com.studywithus.domain;
 
 import java.sql.Date;
 
-public class CommunityTalk {
+public class Community {
 
   private String title; // 게시글 제목
   private String writer; // 게시글 작성자

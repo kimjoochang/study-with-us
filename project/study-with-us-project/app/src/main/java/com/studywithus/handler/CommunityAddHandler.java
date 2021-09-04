@@ -2,21 +2,28 @@ package com.studywithus.handler;
 
 import java.sql.Date;
 import java.util.List;
-import com.studywithus.domain.CommunityInfo;
+import com.studywithus.domain.Community;
 import com.studywithus.util.Prompt;
 
-public class CommunityInfoAddHandler extends AbstractCommunityInfoHandler{
+public class CommunityAddHandler extends AbstractCommunityHandler{
 
-  public CommunityInfoAddHandler(List<CommunityInfo> communityInfoList) {
+  public CommunityAddHandler(List<Community> communityInfoList) {
     super(communityInfoList);
   }
+  public CommunityAddHandler(List<Community> communityQaList, int a) {
+    super(communityQaList);
+  }
+  public CommunityAddHandler(List<Community> communityTalkList, String b) {
+    super(communityTalkList);
+  }
+
 
   // 정보 게시글 생성
   @Override
   public void execute() {
     // System.out.println("[커뮤니티 / 정보 / 생성] \n");
 
-    CommunityInfo communityInfo = new CommunityInfo();
+    Community communityInfo = new Community();
 
     communityInfo.setNo(Prompt.inputInt("번호? "));
     communityInfo.setTitle(Prompt.inputString("제목? "));
@@ -24,7 +31,7 @@ public class CommunityInfoAddHandler extends AbstractCommunityInfoHandler{
     communityInfo.setWriter(Prompt.inputString("작성자? "));
     communityInfo.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    communityInfoList.add(communityInfo);
+    communityList.add(communityInfo);
 
     System.out.println();
     System.out.println("정보 게시글 등록이 완료되었습니다.\n");

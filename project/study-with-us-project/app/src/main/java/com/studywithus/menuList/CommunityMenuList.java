@@ -3,10 +3,10 @@ package com.studywithus.menuList;
 import java.util.ArrayList;
 import java.util.List;
 import com.studywithus.domain.Community;
-import com.studywithus.handler.CommunityInfoAddHandler;
+import com.studywithus.handler.CommunityAddHandler;
 import com.studywithus.handler.CommunityInfoDeleteHandler;
 import com.studywithus.handler.CommunityInfoDetailHandler;
-import com.studywithus.handler.CommunityInfoListHandler;
+import com.studywithus.handler.CommunityListHandler;
 import com.studywithus.handler.CommunityInfoUpdateHandler;
 import com.studywithus.handler.CommunityQaAddHandler;
 import com.studywithus.handler.CommunityQaDeleteHandler;
@@ -26,8 +26,8 @@ public class CommunityMenuList {
   private List<Community> communityQaList = new ArrayList<>();
   private List<Community> communityTalkList = new ArrayList<>();
 
-  CommunityInfoAddHandler communityInfoAddHandler = new CommunityInfoAddHandler(communityInfoList);
-  CommunityInfoListHandler communityInfoListHandler = new CommunityInfoListHandler(communityInfoList);
+  CommunityAddHandler communityInfoAddHandler = new CommunityAddHandler(communityInfoList);
+  CommunityListHandler communityInfoListHandler = new CommunityListHandler(communityInfoList);
   CommunityInfoDetailHandler communityInfoDetailHandler = new CommunityInfoDetailHandler(communityInfoList);
   CommunityInfoDeleteHandler communityInfoDeleteHandler = new CommunityInfoDeleteHandler(communityInfoList);
   CommunityInfoUpdateHandler communityInfoUpdateHandler = new CommunityInfoUpdateHandler(communityInfoList);
