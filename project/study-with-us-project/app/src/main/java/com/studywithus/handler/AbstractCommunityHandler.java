@@ -13,10 +13,10 @@ public abstract class AbstractCommunityHandler implements Command {
   }
 
   // 정보 게시글 번호 조회
-  protected Community findInfoByNo(int no) {
-    for (Community communityInfo : communityList) {
-      if (communityInfo.getNo() == no) {
-        return communityInfo;
+  protected Community findByNo(int no) {
+    for (Community community : communityList) {
+      if (community.getNo() == no) {
+        return community;
 
       }
     }
