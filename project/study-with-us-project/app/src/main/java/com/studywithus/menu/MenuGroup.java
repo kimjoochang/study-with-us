@@ -40,11 +40,11 @@ public class MenuGroup extends Menu {
   }
 
   public void add(Menu child) {
-    add(child);
+    childs.add(child);
   }
 
   public void remove(Menu child) {
-    remove(child);
+    childs.remove(child);
   }
 
   public Menu getMenu(String title) { 

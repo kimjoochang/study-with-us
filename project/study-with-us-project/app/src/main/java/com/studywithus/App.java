@@ -7,6 +7,7 @@ import com.studywithus.domain.ExamCalender;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.domain.JobsCalender;
 import com.studywithus.domain.MentorApplicant;
+import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
@@ -25,6 +26,15 @@ import com.studywithus.handler.JobsCalenderDetailHandler;
 import com.studywithus.handler.JobsCalenderUpdateHandler;
 import com.studywithus.handler.MentorApplicantAddHandler;
 import com.studywithus.handler.MentorApplicantListHandler;
+import com.studywithus.handler.ChargeStudyAddHandler;
+import com.studywithus.handler.ChargeStudyDeleteHandler;
+import com.studywithus.handler.ChargeStudyDetailHandler;
+import com.studywithus.handler.ChargeStudyListHandler;
+import com.studywithus.handler.ChargeStudyUpdateHandler;
+import com.studywithus.handler.InterestChargeAddHandler;
+import com.studywithus.handler.InterestChargeDeleteHandler;
+import com.studywithus.handler.InterestFreeAddHandler;
+import com.studywithus.handler.InterestFreeDeleteHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
@@ -197,6 +207,72 @@ public class App {
         freeStudyDeleteHandler.execute();
       }});
 
+    MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
+    mainMenuGroup.add(chargeStudyMenu);
+
+    chargeStudyMenu.add(new Menu("생성") {
+        @Override
+        public void execute() {
+            chargeStudyAddHandler.execute(); 
+        }});
+
+    chargeStudyMenu.add(new Menu("조회") {
+        @Override
+        public void execute() {
+            chargeStudyListHandler.execute(); 
+        }});
+
+    chargeStudyMenu.add(new Menu("상세보기") {
+        @Override
+        public void execute() {
+            chargeStudyDetailHandler.execute(); 
+        }});
+
+    chargeStudyMenu.add(new Menu("수정") {
+        @Override
+        public void execute() {
+            chargeStudyUpdateHandler.execute(); 
+        }});
+
+    chargeStudyMenu.add(new Menu("삭제") {
+        @Override
+        public void execute() {
+            chargeStudyDeleteHandler.execute(); 
+        }});
+
+    MenuGroup interestMenu = new MenuGroup("관심목록");
+    mainMenuGroup.add(interestMenu);
+
+    MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
+    interestMenu.add(freeInterestMenu);
+
+    freeInterestMenu.add(new Menu("조회") {
+        @Override
+        public void execute() {
+            interestFreeAddHandler.execute(); 
+        }});
+
+    freeInterestMenu.add(new Menu("삭제") {
+        @Override
+        public void execute() {
+            interestFreeDeleteHandler.execute(); 
+        }});
+
+    MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
+    interestMenu.add(chargeInterestMenu);
+
+    chargeInterestMenu.add(new Menu("조회") {
+        @Override
+        public void execute() {
+            interestFreeAddHandler.execute(); 
+        }});
+
+    chargeInterestMenu.add(new Menu("삭제") {
+        @Override
+        public void execute() {
+            interestFreeDeleteHandler.execute(); 
+        }});
+    
     return mainMenuGroup;
   }
 }
