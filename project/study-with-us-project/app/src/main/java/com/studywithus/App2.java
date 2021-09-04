@@ -10,7 +10,7 @@ import com.studywithus.menuList.FreeStudyMenuList;
 import com.studywithus.menuList.InterestMenuList;
 import com.studywithus.menuList.MenuList;
 
-public class App {
+public class App2 {
 
   public static void main(String[] args) {
 
