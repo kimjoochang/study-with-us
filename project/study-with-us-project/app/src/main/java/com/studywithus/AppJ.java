@@ -353,7 +353,7 @@ public class AppJ {
 
     // 커뮤니티 기본 메뉴
     MenuGroup communityMainMenu = new MenuGroup("커뮤니티");
-    communityMainMenu.add(communityMainMenu);
+    mainMenuGroup.add(communityMainMenu);
 
     //    MenuGroup communityMainMenu = new MenuGroup("질문");
     //    communityMainMenu.add(communityMainMenu);
@@ -394,36 +394,32 @@ public class AppJ {
       @Override
       public void execute() {
         communityInfoAddHandler.execute();
-      }
-    });
-
+      }});
     communityQaMenu.add(new Menu("조회") {
       @Override
       public void execute() {
         communityInfoAddHandler.execute();
-      }
-    });
-
+      }});
     communityQaMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         communityInfoAddHandler.execute();
-      }
-    });
-
+      }});
     communityQaMenu.add(new Menu("수정") {
       @Override
       public void execute() {
         communityInfoAddHandler.execute();
-      }
-    });
-
+      }});
     communityQaMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         communityInfoAddHandler.execute();
-      }
-    });
+      }});
+    //    communityQaMenu.add(new Menu("검색") {
+    //      @Override
+    //      public void execute() {
+    //        communityQaSearchHandler.execute();
+    //      }});
 
     // 커뮤니티 정보 메뉴
     MenuGroup communityInfoMenu = new MenuGroup("정보");
@@ -432,37 +428,33 @@ public class AppJ {
     communityInfoMenu.add(new Menu("생성") {
       @Override
       public void execute() {
-        communityQaAddHandler.execute();
-      }
-    });
-
-    communityQaMenu.add(new Menu("조회") {
+        communityInfoAddHandler.execute();
+      }});
+    communityInfoMenu.add(new Menu("조회") {
       @Override
       public void execute() {
-        communityQaListHandler.execute();
-      }
-    });
-
-    communityQaMenu.add(new Menu("상세보기") {
+        communityInfoListHandler.execute();
+      }});
+    communityInfoMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        communityQaDetailHandler.execute();
-      }
-    });
-
-    communityQaMenu.add(new Menu("수정") {
+        communityInfoDetailHandler.execute();
+      }});
+    communityInfoMenu.add(new Menu("수정") {
       @Override
       public void execute() {
-        communityQaUpdateHandler.execute();
-      }
-    });
-
-    communityQaMenu.add(new Menu("삭제") {
+        communityInfoUpdateHandler.execute();
+      }});
+    communityInfoMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        communityQaDeleteHandler.execute();
-      }
-    });
+        communityInfoDeleteHandler.execute();
+      }});
+    //    communityQaMenu.add(new Menu("검색") {
+    //      @Override
+    //      public void execute() {
+    //        communityQaSearchHandler.execute();
+    //      }});
 
     // 커뮤니티 스몰톡 메뉴
     MenuGroup communityTalkMenu = new MenuGroup("질문");
@@ -472,36 +464,32 @@ public class AppJ {
       @Override
       public void execute() {
         communityTalkAddHandler.execute();
-      }
-    });
-
+      }});
     communityTalkMenu.add(new Menu("조회") {
       @Override
       public void execute() {
         communityTalkListHandler.execute();
-      }
-    });
-
+      }});
     communityTalkMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         communityTalkDetailHandler.execute();
-      }
-    });
-
+      }});
     communityTalkMenu.add(new Menu("수정") {
       @Override
       public void execute() {
         communityTalkUpdateHandler.execute();
-      }
-    });
-
+      }});
     communityTalkMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         communityTalkDeleteHandler.execute();
-      }
-    });
+      }});
+    //    communityTalkMenu.add(new Menu("검색") {
+    //      @Override
+    //      public void execute() {
+    //        communityTalkSearchHandler.execute();
+    //      }});
 
     return mainMenuGroup;
   }

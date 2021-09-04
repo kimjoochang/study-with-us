@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class Community {
 
-  private String title; // 게시글 제목
-  private String writer; // 게시글 작성자
-  private Date registeredDate; // 등록일
-  private String content; // 내용
-  private int like; // 좋아요
-  private int viewCount; // 조회수
   private int no; // 게시글 번호
+  private String title; // 게시글 제목
+  private String content; // 내용
+  private NewMember writer; // 게시글 작성자
+  private Date registeredDate; // 등록일
+  private int viewCount; // 조회수
+  private int like; // 좋아요
 
   public int getNo() {
     return no;
@@ -28,11 +28,11 @@ public class Community {
     this.title = title;
   }
 
-  public String getWriter() {
+  public NewMember getWriter() {
     return writer;
   }
 
-  public void setWriter(String writer) {
+  public void setWriter(NewMember writer) {
     this.writer = writer;
   }
 
