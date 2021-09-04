@@ -1,6 +1,6 @@
 package com.studywithus.domain;
 
-public class LoginMemberInfo {
+public class ApplicantInfo {
 
   public static String name;
   public static String id;
