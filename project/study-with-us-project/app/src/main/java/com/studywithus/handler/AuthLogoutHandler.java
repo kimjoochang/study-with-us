@@ -1,6 +1,7 @@
 package com.studywithus.handler;
 
 public class AuthLogoutHandler implements Command {
+
   @Override
   public void execute() {
     System.out.println("[로그아웃]");

@@ -1,13 +1,11 @@
 package com.studywithus.domain;
 
-import java.sql.Date;
-
 public class ExamCalender {
 
   private int no;
   private String title;
   private String content;
-  private Date examDate;
+  private String examDate;
 
   public int getNo() {
     return no;
@@ -33,11 +31,11 @@ public class ExamCalender {
     this.content = content;
   }
 
-  public Date getExamDate() {
+  public String getExamDate() {
     return examDate;
   }
 
-  public void setExamDate(Date examDate) {
+  public void setExamDate(String examDate) {
     this.examDate = examDate;
   }
 }

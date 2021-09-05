@@ -5,7 +5,7 @@ import java.util.List;
 import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.ExamCalender;
 import com.studywithus.domain.FreeStudy;
-import com.studywithus.domain.InterestList;
+import com.studywithus.domain.Interest;
 import com.studywithus.domain.JobsCalender;
 import com.studywithus.domain.LoginMemberInfo;
 import com.studywithus.domain.NewMember;
@@ -34,7 +34,7 @@ import com.studywithus.util.Prompt;
 
 public class MenuList {
 
-  InterestList[] interests = new InterestList[100];
+  Interest[] interests = new Interest[100];
 
   private List<FreeStudy> freeStudyList = new ArrayList<>();
   private List<ChargeStudy> chargeStudyList = new ArrayList<>();

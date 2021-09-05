@@ -3,11 +3,11 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.FreeStudy;
 
-public abstract class AbstractInterestFreeHandler implements Command{
+public abstract class AbstractFreeInterestHandler implements Command {
 
-  public List<FreeStudy> freeInterestList;
+  protected List<FreeStudy> freeInterestList;
 
-  public AbstractInterestFreeHandler(List<FreeStudy> freeInterestList) {
+  public AbstractFreeInterestHandler(List<FreeStudy> freeInterestList) {
     this.freeInterestList = freeInterestList;
   }
 
@@ -26,6 +26,4 @@ public abstract class AbstractInterestFreeHandler implements Command{
     }
     return null;
   }
-
-
 }

@@ -1,10 +1,18 @@
 package com.studywithus.domain;
 
-public class InterestList {
+public class Interest {
 
+  private int no;
   private FreeStudy freeInterest;
   private ChargeStudy chargeInterest;
-  private int no;
+
+  public int getNo() {
+    return no;
+  }
+
+  public void setNo(int no) {
+    this.no = no;
+  }
 
   public FreeStudy getFreeInterest() {
     return freeInterest;
@@ -20,13 +28,5 @@ public class InterestList {
 
   public void setChargeInterest(ChargeStudy chargeInterest) {
     this.chargeInterest = chargeInterest;
-  }
-
-  public int getNo() {
-    return no;
-  }
-
-  public void setNo(int no) {
-    this.no = no;
   }
 }

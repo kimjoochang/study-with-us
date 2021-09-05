@@ -9,6 +9,29 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
 
   public FreeStudyAddHandler(List<FreeStudy> freeStudyList) {
     super(freeStudyList);
+
+    FreeStudy testUser = new FreeStudy();
+    testUser.setNo(1);
+    testUser.setWriter("반계령1");
+    testUser.setOnOffLine(2);
+    testUser.setArea("서울시 강남구");
+    testUser.setTitle("[자바] 자료구조 스터디");
+    testUser.setExplanation("Array / Linked List / Stack");
+    testUser.setRule("지각 시, 500원");
+    testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    freeStudyList.add(testUser);
+
+    testUser = new FreeStudy();
+    testUser.setNo(2);
+    testUser.setWriter("반계령2");
+    testUser.setOnOffLine(1);
+    testUser.setTitle("[자바] 자료구조 스터디");
+    testUser.setExplanation("Array / Linked List / Stack");
+    testUser.setRule("지각 시, 500원");
+    testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    freeStudyList.add(testUser);
   }
 
   // 무료 스터디 생성
@@ -23,9 +46,9 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
     System.out.println("온/오프라인?");
     System.out.println("1. 온라인");
     System.out.println("2. 오프라인");
-    freeStudy.setOnOffLine(Prompt.inputString("> "));
+    freeStudy.setOnOffLine(Prompt.inputInt("> "));
 
-    if (freeStudy.getOnOffLine().equals("2")) {
+    if (freeStudy.getOnOffLine() == 2) {
       freeStudy.setArea(Prompt.inputString("지역? "));
 
     } else {

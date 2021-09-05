@@ -4,40 +4,42 @@ import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.util.Prompt;
 
-public class AuthLoginHandler implements Command {
+public class MemberHandler implements Command {
 
   List<Member> memberList;
-
   static Member loginUser;
+
   public static Member getLoginUser() {
     return loginUser;
   }
 
-  public AuthLoginHandler(List<Member> memberList) {
+  public MemberHandler(List<Member> memberList) {
     this.memberList = memberList;
   }
 
   @Override
   public void execute() {
-    System.out.println("[로그인]");
+    System.out.println("[로그인]\n");
 
-    String id = Prompt.inputString("아이디 : ");
-    String password = Prompt.inputString("비밀번호 : ");
+    String id = Prompt.inputString("아이디? ");
+    String pwd = Prompt.inputString("암호? ");
 
-    Member member = findByIdPassword(id, password);
+    Member member = findByIdPwd(id, pwd);
 
     if (member == null) {
-      System.out.println("아이디와 비밀번호가 일치하는 회원을 찾을 수 없습니다.");
+      System.out.println("등록된 회원이 아닙니다.");
+    
     } else {
       System.out.printf("%s님 환영합니다!\n", member.getName());
       loginUser = member;
     }
   }
 
-  private Member findByIdPassword(String id, String password) {
+  // 로그인용
+  private Member findByIdPwd(String id, String pwd) {
     for (Member member : memberList) {
       if (member.getId().equalsIgnoreCase(id) &&
-          member.getPwd().equals(password)) {
+          member.getPwd().equals(pwd)) {
         return member;
       }
     }

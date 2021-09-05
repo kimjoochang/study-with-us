@@ -1,21 +1,20 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.NewMember;
+import com.studywithus.domain.Member;
 import com.studywithus.util.Prompt;
 
 public class FindIdHandler implements Command {
 
-  List<NewMember> newMemberList;
+  List<Member> memberList;
+  static Member loginUser;
 
-  static NewMember loginUser;
-  public static NewMember getLoginUser() {
+  public static Member getLoginUser() {
     return loginUser;
   }
 
-  public FindIdHandler(List<NewMember> newMemberList) {
-    this.newMemberList = newMemberList;
-
+  public FindIdHandler(List<Member> memberList) {
+    this.memberList = memberList;
   }
 
   @Override
@@ -24,26 +23,23 @@ public class FindIdHandler implements Command {
     System.out.println("[아이디 찾기]\n");
     String name = Prompt.inputString("회원 이름? ");
 
-    NewMember newMember = findIdByName(name);
+    Member member = findIdByName(name);
 
-    if (newMember == null) {
+    if (member == null) {
       System.out.println(" ");
       System.out.println("해당 이름으로 가입된 아이디가 없습니다.\n");
       return;
     }
-    System.out.printf("아이디: %s\n", newMember.getId());
+    System.out.printf("아이디: %s\n", member.getId());
   }
 
-
   // 아이디 찾기용
-  private NewMember findIdByName(String name) {
-    for (NewMember newMember : newMemberList) {
-      if (newMember.getName().equals(name)) {
-        return newMember;
+  private Member findIdByName(String name) {
+    for (Member member : memberList) {
+      if (member.getName().equals(name)) {
+        return member;
       }
     }
     return null;
   }
-
-
 }

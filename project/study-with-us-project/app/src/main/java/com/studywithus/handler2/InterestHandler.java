@@ -2,14 +2,14 @@ package com.studywithus.handler2;
 
 import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.FreeStudy;
-import com.studywithus.domain.InterestList;
+import com.studywithus.domain.Interest;
 import com.studywithus.util.Prompt;
 
 public class InterestHandler {
 
   static final int MAX_LENGTH = 5;
 
-  static InterestList[] interests = new InterestList[MAX_LENGTH];
+  static Interest[] interests = new Interest[MAX_LENGTH];
   static int size = 0;
 
   // 무료 스터디 관심 목록 추가
@@ -21,7 +21,7 @@ public class InterestHandler {
       return;
     }
 
-    InterestList interest = new InterestList();
+    Interest interest = new Interest();
 
     interest.setFreeInterest(study);
 
@@ -38,7 +38,7 @@ public class InterestHandler {
       return;
     }
 
-    InterestList interest = new InterestList();
+    Interest interest = new Interest();
 
 
     interest.setChargeInterest(study);
