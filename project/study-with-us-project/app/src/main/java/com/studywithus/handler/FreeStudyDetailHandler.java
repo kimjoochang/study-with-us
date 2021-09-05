@@ -71,7 +71,7 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
   }
 
   public void interest() {
-    System.out.println("[무료 스터디 / 상세보기 / 관심 목록]\n");
+    System.out.println("[무료 스터디 / 상세보기 / 관심 목록 추가]\n");
 
     FreeStudy freeStudy = new FreeStudy();
 
