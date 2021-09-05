@@ -9,6 +9,7 @@ import com.studywithus.domain.ExamCalender;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.domain.JobsCalender;
 import com.studywithus.domain.Member;
+import com.studywithus.domain.Mentor;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
 import com.studywithus.handler.ChargeInterestAddHandler;
@@ -32,7 +33,6 @@ import com.studywithus.handler.FreeInterestAddHandler;
 import com.studywithus.handler.FreeInterestDeleteHandler;
 import com.studywithus.handler.FreeInterestListHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
-import com.studywithus.handler.FreeStudyApplyHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
@@ -44,6 +44,8 @@ import com.studywithus.handler.JobsCalenderUpdateHandler;
 import com.studywithus.handler.MentorApplicantAddHandler;
 import com.studywithus.handler.MentorApplicantDetailHandler;
 import com.studywithus.handler.MentorApplicantListHandler;
+import com.studywithus.handler.MentorApproveHandler;
+import com.studywithus.handler.MentorRejectHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -57,11 +59,11 @@ public class App {
   List<ExamCalender> examCalenderList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
   List<ChargeStudy> chargeStudyList = new ArrayList<>();
-  List<FreeStudy> freeInterestList = new ArrayList<>();
   List<ChargeStudy> chargeInterestList = new ArrayList<>();
   List<Community> communityInfoList = new ArrayList<>();
   List<Community> communityQaList = new ArrayList<>();
   List<Community> communityTalkList = new ArrayList<>();
+  List<Mentor> mentorList = new ArrayList<>();
 
   AuthLoginHandler authLoginHandler = new AuthLoginHandler(memberList);
   AuthLogoutHandler authLogoutHandler = new AuthLogoutHandler();
@@ -70,6 +72,9 @@ public class App {
   MentorApplicantAddHandler mentorApplicantAddHandler = new MentorApplicantAddHandler(mentorApplicantList);
   MentorApplicantListHandler mentorApplicantListHandler = new MentorApplicantListHandler(mentorApplicantList);
   MentorApplicantDetailHandler mentorApplicantDetailHandler = new MentorApplicantDetailHandler(mentorApplicantList);
+  MentorApproveHandler mentorApproveHandler = new MentorApproveHandler(mentorList);
+  MentorRejectHandler mentorRejectHandler = new MentorRejectHandler(mentorApplicantList);
+
 
   FreeInterestAddHandler freeInterestAddHandler = new FreeInterestAddHandler(freeInterestList);
   FreeInterestListHandler freeInterestListHandler = new FreeInterestListHandler(freeInterestList);
@@ -176,14 +181,15 @@ public class App {
       public void execute() {
         mentorApplicantListHandler.execute();
         System.out.println();
-        mentorApplicantDetailHandler.execute();
+        Member applicant = mentorApplicantDetailHandler.execute1();
         System.out.println("1. 승인");
         System.out.println("2. 거절");
         System.out.println("0. 이전");
         int input = Prompt.inputInt("선택>");
         if(input == 1) {
-
+          mentorApproveHandler.execute1(applicant);
         }else if(input == 2) {
+          mentorRejectHandler.execute1(applicant);
         }
       }});
 
