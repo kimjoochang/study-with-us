@@ -199,55 +199,55 @@ public class App {
     MenuGroup jobsCalenderMenu = new MenuGroup("이달의 채용공고 관리");
     calenderMenu.add(jobsCalenderMenu);
 
-    freeStudyMenu.add(new Menu("생성") {
+    jobsCalenderMenu.add(new Menu("생성") {
       @Override 
       public void execute() {
-        freeStudyAddHandler.execute();
+        jobsCalenderAddHandler.execute();
       }});
 
-    freeStudyMenu.add(new Menu("상세보기") {
+    jobsCalenderMenu.add(new Menu("상세보기") {
       @Override 
       public void execute() {
-        freeStudyDetailHandler.execute();
+        jobsCalenderDetailHandler.execute();
       }});
 
-    freeStudyMenu.add(new Menu("수정") {
+    jobsCalenderMenu.add(new Menu("수정") {
       @Override 
       public void execute() {
-        freeStudyUpdateHandler.execute();
+        jobsCalenderUpdateHandler.execute();
       }});
 
-    freeStudyMenu.add(new Menu("삭제") {
+    jobsCalenderMenu.add(new Menu("삭제") {
       @Override 
       public void execute() {
-        freeStudyDeleteHandler.execute();
+        jobsCalenderDeleteHandler.execute();
       }});
 
     MenuGroup examCalenderMenu = new MenuGroup("이달의 시험일정 관리");
     calenderMenu.add(examCalenderMenu);
 
-    freeStudyMenu.add(new Menu("생성") {
+    examCalenderMenu.add(new Menu("생성") {
       @Override 
       public void execute() {
-        freeStudyAddHandler.execute();
+        examCalenderAddHandler.execute();
       }});
 
-    freeStudyMenu.add(new Menu("상세보기") {
+    examCalenderMenu.add(new Menu("상세보기") {
       @Override 
       public void execute() {
-        freeStudyDetailHandler.execute();
+        examCalenderDetailHandler.execute();
       }});
 
-    freeStudyMenu.add(new Menu("변경") {
+    examCalenderMenu.add(new Menu("변경") {
       @Override 
       public void execute() {
-        freeStudyUpdateHandler.execute();
+        examCalenderUpdateHandler.execute();
       }});
 
-    freeStudyMenu.add(new Menu("삭제") {
+    examCalenderMenu.add(new Menu("삭제") {
       @Override 
       public void execute() {
-        freeStudyDeleteHandler.execute();
+        examCalenderDeleteHandler.execute();
       }});
 
     MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");

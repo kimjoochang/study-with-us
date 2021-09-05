@@ -7,7 +7,7 @@ public class FreeStudy {
   private int no;
   private String title;
   private String writer;
-  private String onOffLine;
+  private int onOffLine;
   private String area;
   private String explanation;
   private String rule;
@@ -39,11 +39,11 @@ public class FreeStudy {
     this.writer = writer;
   }
 
-  public String getOnOffLine() {
+  public int getOnOffLine() {
     return onOffLine;
   }
 
-  public void setOnOffLine(String onOffLine) {
+  public void setOnOffLine(int onOffLine) {
     this.onOffLine = onOffLine;
   }
 
