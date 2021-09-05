@@ -50,8 +50,49 @@ public class CommunityMenuList {
     return input;
   }
 
-  // 커뮤니티 질문, 정보, 스몰톡 게시판 공통 메뉴
-  public void communityCommonMenuList() {
+  // 커뮤니티 정보 게시판 메뉴
+  public void communityInfoMenuList() {
+
+    while(true) {
+      System.out.println("[커뮤니티 / 정보]\n");
+      System.out.println("1. 생성");
+      System.out.println("2. 조회");
+      System.out.println("3. 상세보기");
+      System.out.println("4. 변경");
+      System.out.println("5. 삭제");
+      System.out.println("0. 이전\n");
+
+      input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+      System.out.println();
+
+      if (input == 1) {
+        communityInfoAddHandler.execute();
+
+      } else if (input == 2) {
+        communityInfoListHandler.execute();
+
+      } else if (input == 3) {
+        communityInfoDetailHandler.execute();
+
+      } else if (input == 4) {
+        communityInfoUpdateHandler.execute();
+
+      } else if (input == 5) {
+        communityInfoDeleteHandler.execute();
+
+      } else if (input == 0) {
+        return;
+
+      } else {
+        System.out.println("잘못된 번호입니다.");
+        continue;
+      }
+      continue;
+    }
+  }
+
+  //커뮤니티 정보 게시판 메뉴
+  public void communityQaMenuList() {
 
     while(true) {
       System.out.println("[커뮤니티 / 질문]\n");
@@ -91,5 +132,45 @@ public class CommunityMenuList {
     }
   }
 
+  //커뮤니티 스몰톡 게시판 메뉴
+  public void communityTalkMenuList() {
+
+    while(true) {
+      System.out.println("[커뮤니티 / 질문]\n");
+      System.out.println("1. 생성");
+      System.out.println("2. 조회");
+      System.out.println("3. 상세보기");
+      System.out.println("4. 변경");
+      System.out.println("5. 삭제");
+      System.out.println("0. 이전\n");
+
+      input = Prompt.inputInt("메뉴를 선택해주세요. > ");
+      System.out.println();
+
+      if (input == 1) {
+        communityTalkAddHandler.execute();
+
+      } else if (input == 2) {
+        communityTalkListHandler.execute();
+
+      } else if (input == 3) {
+        communityTalkDetailHandler.execute();
+
+      } else if (input == 4) {
+        communityTalkUpdateHandler.execute();
+
+      } else if (input == 5) {
+        communityTalkDeleteHandler.execute();
+
+      } else if (input == 0) {
+        return;
+
+      } else {
+        System.out.println("잘못된 번호입니다.");
+        continue;
+      }
+      continue;
+    }
+  }
 
 }
