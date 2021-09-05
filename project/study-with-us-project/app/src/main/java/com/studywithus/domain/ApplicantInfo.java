@@ -11,5 +11,4 @@ public class ApplicantInfo {
   public static String getId() {
     return id;
   }
-
 }

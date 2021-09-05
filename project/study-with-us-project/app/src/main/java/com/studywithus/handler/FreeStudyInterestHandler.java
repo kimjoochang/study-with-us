@@ -4,10 +4,10 @@ import java.util.List;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyInterestHandler extends AbstractFreeStudyHandler {
+public class FreeStudyInterestHandler extends AbstractFreeInterestHandler {
 
-  public FreeStudyInterestHandler(List<FreeStudy> freeStudyList) {
-    super(freeStudyList);
+  public FreeStudyInterestHandler(List<FreeStudy> freeInterestList) {
+    super(freeInterestList);
   }
 
   public void execute() {
@@ -30,24 +30,15 @@ public class FreeStudyInterestHandler extends AbstractFreeStudyHandler {
   public void list() {
     System.out.println("[무료 스터디 / 관심 목록 / 조회]");
 
-    for (FreeStudy freeStudy : freeStudyList) {
-      if (freeStudy.getOnOffLine() == 2) {
-        System.out.println();
-        System.out.printf("%d, %s, %s, %d, %s\n",
-            freeStudy.getNo(),
-            freeStudy.getTitle(),
-            freeStudy.getWriter(),
-            freeStudy.getOnOffLine(),
-            freeStudy.getArea());
-
-      } else {
-        System.out.println();
-        System.out.printf("%d, %s, %s, %d \n",
-            freeStudy.getNo(),
-            freeStudy.getTitle(),
-            freeStudy.getWriter(),
-            freeStudy.getOnOffLine());
-      }
+    for (FreeStudy freeStudy : freeInterestList) {
+      System.out.println();
+      System.out.printf("%d, %s, %s, %s, %d, %d\n",
+          freeStudy.getNo(),
+          freeStudy.getTitle(),
+          freeStudy.getWriter(),
+          freeStudy.getRegisteredDate(),
+          freeStudy.getViewCount(),
+          freeStudy.getLike());
     }
   }
 
@@ -71,7 +62,7 @@ public class FreeStudyInterestHandler extends AbstractFreeStudyHandler {
       return;
     }
 
-    freeStudyList.remove(freeStudy);
+    freeInterestList.remove(freeStudy);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");
