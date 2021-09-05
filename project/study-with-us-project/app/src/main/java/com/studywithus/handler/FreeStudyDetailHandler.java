@@ -67,7 +67,7 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
     ApplicantInfo.getId();
 
     System.out.println();
-    System.out.println("무료 스터디 신청이 완료되었습니다.\n");
+    System.out.println("무료 스터디 신청이 완료되었습니다.");
   }
 
   public void interest() {
@@ -85,6 +85,6 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
     freeStudyList.add(freeStudy);
 
     System.out.println();
-    System.out.println("무료 스터디 관심 목록에 추가되었습니다.\n");
+    System.out.println("무료 스터디 관심 목록에 추가되었습니다.");
   }
 }

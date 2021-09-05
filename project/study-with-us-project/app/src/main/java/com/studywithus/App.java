@@ -28,11 +28,10 @@ import com.studywithus.handler.ExamCalenderAddHandler;
 import com.studywithus.handler.ExamCalenderDeleteHandler;
 import com.studywithus.handler.ExamCalenderDetailHandler;
 import com.studywithus.handler.ExamCalenderUpdateHandler;
-import com.studywithus.handler.FreeInterestHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
-import com.studywithus.handler.FreeStudyApplyHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
+import com.studywithus.handler.FreeStudyInterestHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
 import com.studywithus.handler.JobsCalenderAddHandler;
@@ -52,7 +51,6 @@ public class App {
   List<ExamCalender> examCalenderList = new ArrayList<>();
   List<MentorApplicant> mentorApplicantList = new ArrayList<>();
   List<ChargeStudy> chargeStudyList = new ArrayList<>();
-  List<FreeStudy> freeInterestList = new ArrayList<>();
   List<ChargeStudy> chargeInterestList = new ArrayList<>();
   List<Community> communityInfoList = new ArrayList<>();
   List<Community> communityQaList = new ArrayList<>();
@@ -64,17 +62,15 @@ public class App {
   MentorApplicantAddHandler mentorApplicantAddHandler = new MentorApplicantAddHandler(mentorApplicantList);
   MentorApplicantListHandler mentorApplicantListHandler = new MentorApplicantListHandler(mentorApplicantList);
 
-  FreeInterestHandler freeInterestHandler = new FreeInterestHandler(freeInterestList);
-
   ChargeInterestAddHandler chargeInterestAddHandler = new ChargeInterestAddHandler(chargeInterestList);
   ChargeInterestDeleteHandler chargeInterestDeleteHandler = new ChargeInterestDeleteHandler(chargeInterestList);
 
   FreeStudyAddHandler freeStudyAddHandler = new FreeStudyAddHandler(freeStudyList);
-  FreeStudyApplyHandler freeStudyApplyHandler = new FreeStudyApplyHandler(freeStudyList);
   FreeStudyListHandler freeStudyListHandler = new FreeStudyListHandler(freeStudyList);
   FreeStudyDetailHandler freeStudyDetailHandler = new FreeStudyDetailHandler(freeStudyList);
   FreeStudyUpdateHandler freeStudyUpdateHandler = new FreeStudyUpdateHandler(freeStudyList);
   FreeStudyDeleteHandler freeStudyDeleteHandler = new FreeStudyDeleteHandler(freeStudyList);
+  FreeStudyInterestHandler freeStudyInterestHandler = new FreeStudyInterestHandler(freeStudyList);
 
   ChargeStudyAddHandler chargeStudyAddHandler = new ChargeStudyAddHandler(chargeStudyList);
   ChargeStudyListHandler chargeStudyListHandler = new ChargeStudyListHandler(chargeStudyList);
@@ -254,7 +250,7 @@ public class App {
     freeStudyMenu.add(new Menu("관심 목록") {
       @Override 
       public void execute() {
-        freeInterestHandler.execute();
+        freeStudyInterestHandler.execute();
       }});
 
     MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
