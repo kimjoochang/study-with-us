@@ -7,8 +7,10 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
 
-  public FreeStudyDetailHandler(List<FreeStudy> freeStudyList) {
-    super(freeStudyList);
+  FreeStudy study;
+
+  public FreeStudyDetailHandler(List<FreeStudy> freeInterestList) {
+    super(freeInterestList);
   }
 
   // 무료 스터디 상세보기
@@ -16,7 +18,7 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
     System.out.println("[무료 스터디 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호? ");
-    FreeStudy study = findByNo(no);
+    study = findByNo(no);
 
     if (study == null) {
       System.out.println();
@@ -73,8 +75,6 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
   public void interest() {
     System.out.println("[무료 스터디 / 상세보기 / 관심 목록 추가]\n");
 
-    FreeStudy freeStudy = new FreeStudy();
-
     String input = Prompt.inputString("무료 스터디 관심 목록에 추가하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -82,7 +82,7 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
       return;
     }
 
-    freeStudyList.add(freeStudy);
+    freeInterestList.add(study);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록에 추가되었습니다.");
