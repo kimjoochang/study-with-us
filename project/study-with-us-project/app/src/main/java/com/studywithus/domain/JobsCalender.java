@@ -1,14 +1,12 @@
 package com.studywithus.domain;
 
-import java.sql.Date;
-
 public class JobsCalender {
 
   private int no;
   private String title;
   private String content;
-  private Date startDate;
-  private Date endDate;
+  private String startDate;
+  private String endDate;
 
   public int getNo() {
     return no;
@@ -34,19 +32,19 @@ public class JobsCalender {
     this.content = content;
   }
 
-  public Date getStartDate() {
+  public String getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(Date startDate) {
+  public void setStartDate(String startDate) {
     this.startDate = startDate;
   }
 
-  public Date getEndDate() {
+  public String getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(Date endDate) {
+  public void setEndDate(String endDate) {
     this.endDate = endDate;
   }
 }

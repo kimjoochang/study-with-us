@@ -12,7 +12,7 @@ public class ExamCalenderDetailHandler extends AbstractExamCalenderHandler {
 
   // 이달의 시험일정 상세목록
   public void execute() {
-    System.out.println("[이달의 시험일정 / 상세보기\n]");
+    System.out.println("[이달의 시험일정 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호? ");
     ExamCalender examCalender = findByNo(no);

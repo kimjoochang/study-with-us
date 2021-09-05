@@ -12,7 +12,7 @@ public class ExamCalenderDeleteHandler extends AbstractExamCalenderHandler {
 
   // 이달의 시험일정 삭제
   public void execute() {
-    System.out.println("[이달의 시험일정 / 삭제\n]");
+    System.out.println("[이달의 시험일정 / 삭제]\n");
 
     int no = Prompt.inputInt("번호? ");
 
