@@ -29,10 +29,7 @@ import com.studywithus.handler.ExamCalenderAddHandler;
 import com.studywithus.handler.ExamCalenderDeleteHandler;
 import com.studywithus.handler.ExamCalenderDetailHandler;
 import com.studywithus.handler.ExamCalenderUpdateHandler;
-import com.studywithus.handler.FreeInterestAddHandler;
-import com.studywithus.handler.FreeInterestDeleteHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
-import com.studywithus.handler.FreeStudyApplyHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
@@ -43,6 +40,7 @@ import com.studywithus.handler.JobsCalenderDetailHandler;
 import com.studywithus.handler.JobsCalenderUpdateHandler;
 import com.studywithus.handler.MentorApplicantAddHandler;
 import com.studywithus.handler.MentorApplicantListHandler;
+import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
@@ -62,18 +60,19 @@ public class App3jc {
 
   AuthLoginHandler authLoginHandler = new AuthLoginHandler(memberList);
   AuthLogoutHandler authLogoutHandler = new AuthLogoutHandler();
+  SignUpHandler signUpHandler = new SignUpHandler(memberList);
 
   MentorApplicantAddHandler mentorApplicantAddHandler = new MentorApplicantAddHandler(mentorApplicantList);
   MentorApplicantListHandler mentorApplicantListHandler = new MentorApplicantListHandler(mentorApplicantList);
 
-  FreeInterestAddHandler freeInterestAddHandler = new FreeInterestAddHandler(freeInterestList);
-  FreeInterestDeleteHandler freeInterestDeleteHandler = new FreeInterestDeleteHandler(freeInterestList);
+  //  FreeInterestAddHandler freeInterestAddHandler = new FreeInterestAddHandler(freeInterestList);
+  //  FreeInterestDeleteHandler freeInterestDeleteHandler = new FreeInterestDeleteHandler(freeInterestList);
   ChargeInterestAddHandler chargeInterestAddHandler = new ChargeInterestAddHandler(chargeInterestList);
   ChargeInterestListHandler chargeInterestListHandler = new ChargeInterestListHandler(chargeInterestList);
   ChargeInterestDeleteHandler chargeInterestDeleteHandler = new ChargeInterestDeleteHandler(chargeInterestList);
 
   FreeStudyAddHandler freeStudyAddHandler = new FreeStudyAddHandler(freeStudyList);
-  FreeStudyApplyHandler freeStudyApplyHandler = new FreeStudyApplyHandler(freeStudyList);
+  //  FreeStudyApplyHandler freeStudyApplyHandler = new FreeStudyApplyHandler(freeStudyList);
   FreeStudyListHandler freeStudyListHandler = new FreeStudyListHandler(freeStudyList);
   FreeStudyDetailHandler freeStudyDetailHandler = new FreeStudyDetailHandler(freeStudyList);
   FreeStudyUpdateHandler freeStudyUpdateHandler = new FreeStudyUpdateHandler(freeStudyList);
@@ -129,14 +128,21 @@ public class App3jc {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    mainMenuGroup.add(new Menu("로그인", Menu.ENABLE_LOGOUT) {
+    mainMenuGroup.add(new Menu("로그인") {
       @Override
       public void execute() {
         authLoginHandler.execute(); 
       }
     });
 
-    mainMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
+    mainMenuGroup.add(new Menu("회원가입") {
+      @Override
+      public void execute() {
+        signUpHandler.execute(); 
+      }
+    });
+
+    mainMenuGroup.add(new Menu("로그아웃") {
       @Override
       public void execute() {
         authLogoutHandler.execute(); 
@@ -306,13 +312,13 @@ public class App3jc {
     freeInterestMenu.add(new Menu("조회") {
       @Override
       public void execute() {
-        freeInterestAddHandler.execute(); 
+        //        freeInterestAddHandler.execute(); 
       }});
 
     freeInterestMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        freeInterestDeleteHandler.execute(); 
+        //        freeInterestDeleteHandler.execute(); 
       }});
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
