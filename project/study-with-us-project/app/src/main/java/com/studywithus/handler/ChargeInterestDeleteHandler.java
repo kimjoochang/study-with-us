@@ -12,6 +12,17 @@ public class ChargeInterestDeleteHandler extends AbstractChargeInterestHandler {
   @Override
   public void execute() {
     System.out.println("[유료 스터디 / 관심 목록 / 삭제]\n");
+
+    for (ChargeStudy chargeStudy : chargeInterestList) {
+      System.out.println();
+      System.out.printf("%d, %s, %s, %d \n",
+          chargeStudy.getNo(),
+          chargeStudy.getTitle(),
+          chargeStudy.getWriter(),
+          chargeStudy.getPrice());
+    }
+    System.out.println();
+
     int no = Prompt.inputInt("번호? ");
 
     ChargeStudy chargeStudy = findByNo(no);
