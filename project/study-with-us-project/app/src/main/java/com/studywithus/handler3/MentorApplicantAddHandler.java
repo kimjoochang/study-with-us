@@ -2,12 +2,12 @@ package com.studywithus.handler3;
 
 import java.util.List;
 import com.studywithus.domain.ApplicantInfo;
-import com.studywithus.domain.MentorApplicant;
+import com.studywithus.domain.Mentor;
 import com.studywithus.util.Prompt;
 
 public class MentorApplicantAddHandler extends AbstractMentorApplicantHandler {
 
-  public MentorApplicantAddHandler (List<MentorApplicant> mentorApplicantList) {
+  public MentorApplicantAddHandler (List<Mentor> mentorApplicantList) {
     super(mentorApplicantList);
   }
   // 멘토 신청하기
@@ -20,7 +20,7 @@ public class MentorApplicantAddHandler extends AbstractMentorApplicantHandler {
       return;
     }
 
-    MentorApplicant mentorApplicant = new MentorApplicant();
+    Mentor mentorApplicant = new Mentor();
 
     mentorApplicant.name = ApplicantInfo.getName();
     mentorApplicant.id = ApplicantInfo.getId();

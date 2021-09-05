@@ -1,7 +1,6 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ApplicantInfo;
 import com.studywithus.domain.Member;
 import com.studywithus.util.Prompt;
 
@@ -34,7 +33,6 @@ public class AuthLoginHandler implements Command {
     } else {
       System.out.printf("%s님 환영합니다!\n", member.getName());
       loginUser = member;
-      ApplicantInfo.id = id;
     }
   }
 

@@ -9,7 +9,7 @@ import com.studywithus.domain.ExamCalender;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.domain.JobsCalender;
 import com.studywithus.domain.Member;
-import com.studywithus.domain.MentorApplicant;
+import com.studywithus.domain.Mentor;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
 import com.studywithus.handler.ChargeInterestAddHandler;
@@ -38,8 +38,6 @@ import com.studywithus.handler.JobsCalenderAddHandler;
 import com.studywithus.handler.JobsCalenderDeleteHandler;
 import com.studywithus.handler.JobsCalenderDetailHandler;
 import com.studywithus.handler.JobsCalenderUpdateHandler;
-import com.studywithus.handler.MentorApplicantAddHandler;
-import com.studywithus.handler.MentorApplicantListHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
@@ -49,7 +47,7 @@ public class App {
   List<FreeStudy> freeStudyList = new ArrayList<>();
   List<JobsCalender> jobsCalenderList = new ArrayList<>();
   List<ExamCalender> examCalenderList = new ArrayList<>();
-  List<MentorApplicant> mentorApplicantList = new ArrayList<>();
+  List<Mentor> mentorApplicantList = new ArrayList<>();
   List<ChargeStudy> chargeStudyList = new ArrayList<>();
   List<ChargeStudy> chargeInterestList = new ArrayList<>();
   List<Community> communityInfoList = new ArrayList<>();
@@ -59,8 +57,8 @@ public class App {
   AuthLoginHandler authLoginHandler = new AuthLoginHandler(memberList);
   AuthLogoutHandler authLogoutHandler = new AuthLogoutHandler();
 
-  MentorApplicantAddHandler mentorApplicantAddHandler = new MentorApplicantAddHandler(mentorApplicantList);
-  MentorApplicantListHandler mentorApplicantListHandler = new MentorApplicantListHandler(mentorApplicantList);
+  //  MentorAddHandler mentorApplicantAddHandler = new MentorAddHandler(mentorApplicantList);
+  //  MentorListHandler mentorApplicantListHandler = new MentorListHandler(mentorApplicantList);
 
   ChargeInterestAddHandler chargeInterestAddHandler = new ChargeInterestAddHandler(chargeInterestList);
   ChargeInterestDeleteHandler chargeInterestDeleteHandler = new ChargeInterestDeleteHandler(chargeInterestList);
@@ -148,13 +146,13 @@ public class App {
     mentorApplicantMenu.add(new Menu("멘토 승인") {
       @Override 
       public void execute() {
-        mentorApplicantAddHandler.execute();
+        //        mentorApplicantAddHandler.execute();
       }});
 
     mentorApplicantMenu.add(new Menu("멘토 거절") {
       @Override 
       public void execute() {
-        mentorApplicantListHandler.execute();
+        //        mentorApplicantListHandler.execute();
       }});
 
     MenuGroup calenderMenu = new MenuGroup("캘린더 관리");

@@ -1,6 +1,6 @@
 package com.studywithus.domain;
 
-public class MentorApplicant {
+public class Mentor {
   public String name;
   public String id;
 
