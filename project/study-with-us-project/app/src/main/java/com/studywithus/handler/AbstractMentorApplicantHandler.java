@@ -1,13 +1,13 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.MentorApplicant;
+import com.studywithus.domain.Member;
 
 public abstract class AbstractMentorApplicantHandler implements Command {
 
-  protected List<MentorApplicant> mentorApplicantList;
+  protected List<Member> mentorList;
 
-  public AbstractMentorApplicantHandler(List<MentorApplicant> mentorApplicantList) {
-    this.mentorApplicantList = mentorApplicantList;
+  public AbstractMentorApplicantHandler(List<Member> mentorList) {
+    this.mentorList = mentorList;
   }
 }
