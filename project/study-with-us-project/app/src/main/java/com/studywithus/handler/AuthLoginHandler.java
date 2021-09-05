@@ -26,7 +26,9 @@ public class AuthLoginHandler implements Command {
 
     Member member = findByIdPassword(id, password);
 
-    if (member == null) {
+    if (Member.getAdminId().equals(id) && Member.getAdminPwd().equals(password)) {
+      System.out.println("관리자님 환영합니다!");
+    } else if(member == null) {
       System.out.println("아이디와 비밀번호가 일치하는 회원을 찾을 수 없습니다.");
     } else {
       System.out.printf("%s님 환영합니다!\n", member.getName());
