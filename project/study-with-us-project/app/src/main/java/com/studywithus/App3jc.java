@@ -37,8 +37,9 @@ import com.studywithus.handler.JobsCalenderAddHandler;
 import com.studywithus.handler.JobsCalenderDeleteHandler;
 import com.studywithus.handler.JobsCalenderDetailHandler;
 import com.studywithus.handler.JobsCalenderUpdateHandler;
-import com.studywithus.handler.MentorAddHandler;
-import com.studywithus.handler.MentorListHandler;
+import com.studywithus.handler.MentorApplicantAddHandler;
+import com.studywithus.handler.MentorApplicantDetailHandler;
+import com.studywithus.handler.MentorApplicantListHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -49,7 +50,7 @@ public class App3jc {
   List<FreeStudy> freeStudyList = new ArrayList<>();
   List<JobsCalender> jobsCalenderList = new ArrayList<>();
   List<ExamCalender> examCalenderList = new ArrayList<>();
-  List<Member> mentorList = new ArrayList<>();
+  List<Member> mentorApplicantList = new ArrayList<>();
   List<ChargeStudy> chargeStudyList = new ArrayList<>();
   List<FreeStudy> freeInterestList = new ArrayList<>();
   List<ChargeStudy> chargeInterestList = new ArrayList<>();
@@ -61,8 +62,9 @@ public class App3jc {
   AuthLogoutHandler authLogoutHandler = new AuthLogoutHandler();
   SignUpHandler signUpHandler = new SignUpHandler(memberList);
 
-  MentorAddHandler mentorAddHandler = new MentorAddHandler(mentorList);
-  MentorListHandler mentorListHandler = new MentorListHandler(mentorList);
+  MentorApplicantAddHandler mentorApplicantAddHandler = new MentorApplicantAddHandler(mentorApplicantList);
+  MentorApplicantListHandler mentorApplicantListHandler = new MentorApplicantListHandler(mentorApplicantList);
+  MentorApplicantDetailHandler mentorApplicantDetailHandler = new MentorApplicantDetailHandler(mentorApplicantList);
 
   //  FreeInterestAddHandler freeInterestAddHandler = new FreeInterestAddHandler(freeInterestList);
   //  FreeInterestDeleteHandler freeInterestDeleteHandler = new FreeInterestDeleteHandler(freeInterestList);
@@ -160,18 +162,20 @@ public class App3jc {
     mentorApplicantMenu.add(new Menu("멘토 신청내역 조회") {
       @Override 
       public void execute() {
-        mentorListHandler.execute();
+        mentorApplicantListHandler.execute();
       }});
     mentorApplicantMenu.add(new Menu("멘토 신청내역 상세보기") {
       @Override 
       public void execute() {
-        mentorListHandler.execute();
+        mentorApplicantListHandler.execute();
+        System.out.println();
+        mentorApplicantDetailHandler.execute();
         System.out.println("1. 승인");
         System.out.println("2. 거절");
         System.out.println("0. 이전");
         int input = Prompt.inputInt("선택>");
         if(input == 1) {
-          return;
+
         }else if(input == 2) {
         }
       }});
@@ -346,7 +350,7 @@ public class App3jc {
     applyMentorMenu.add(new Menu("신청") {
       @Override
       public void execute() {
-        mentorAddHandler.execute(); 
+        mentorApplicantAddHandler.execute(); 
       }});
     return mainMenuGroup;
   }

@@ -40,8 +40,8 @@ import com.studywithus.handler.JobsCalenderAddHandler;
 import com.studywithus.handler.JobsCalenderDeleteHandler;
 import com.studywithus.handler.JobsCalenderDetailHandler;
 import com.studywithus.handler.JobsCalenderUpdateHandler;
-import com.studywithus.handler.MentorAddHandler;
-import com.studywithus.handler.MentorListHandler;
+import com.studywithus.handler.MentorApplicantAddHandler;
+import com.studywithus.handler.MentorApplicantListHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
@@ -62,10 +62,10 @@ public class AppJ {
   AuthLoginHandler authLoginHandler = new AuthLoginHandler(memberList);
   AuthLogoutHandler authLogoutHandler = new AuthLogoutHandler();
 
-  MentorAddHandler mentorApplicantAddHandler =
-      new MentorAddHandler(mentorApplicantList);
-  MentorListHandler mentorApplicantListHandler =
-      new MentorListHandler(mentorApplicantList);
+  MentorApplicantAddHandler mentorApplicantAddHandler =
+      new MentorApplicantAddHandler(mentorApplicantList);
+  MentorApplicantListHandler mentorApplicantListHandler =
+      new MentorApplicantListHandler(mentorApplicantList);
 
   FreeStudyAddHandler freeStudyAddHandler = new FreeStudyAddHandler(freeStudyList);
   FreeStudyListHandler freeStudyListHandler = new FreeStudyListHandler(freeStudyList);

@@ -9,11 +9,11 @@ import com.studywithus.domain.ExamCalender;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.domain.JobsCalender;
 import com.studywithus.domain.Member;
-import com.studywithus.domain.Mentor;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
 import com.studywithus.handler.ChargeInterestAddHandler;
 import com.studywithus.handler.ChargeInterestDeleteHandler;
+import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
@@ -38,6 +38,10 @@ import com.studywithus.handler.JobsCalenderAddHandler;
 import com.studywithus.handler.JobsCalenderDeleteHandler;
 import com.studywithus.handler.JobsCalenderDetailHandler;
 import com.studywithus.handler.JobsCalenderUpdateHandler;
+import com.studywithus.handler.MentorApplicantAddHandler;
+import com.studywithus.handler.MentorApplicantDetailHandler;
+import com.studywithus.handler.MentorApplicantListHandler;
+import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
@@ -47,8 +51,9 @@ public class App {
   List<FreeStudy> freeStudyList = new ArrayList<>();
   List<JobsCalender> jobsCalenderList = new ArrayList<>();
   List<ExamCalender> examCalenderList = new ArrayList<>();
-  List<Mentor> mentorApplicantList = new ArrayList<>();
+  List<Member> mentorApplicantList = new ArrayList<>();
   List<ChargeStudy> chargeStudyList = new ArrayList<>();
+  List<FreeStudy> freeInterestList = new ArrayList<>();
   List<ChargeStudy> chargeInterestList = new ArrayList<>();
   List<Community> communityInfoList = new ArrayList<>();
   List<Community> communityQaList = new ArrayList<>();
@@ -56,11 +61,14 @@ public class App {
 
   AuthLoginHandler authLoginHandler = new AuthLoginHandler(memberList);
   AuthLogoutHandler authLogoutHandler = new AuthLogoutHandler();
+  SignUpHandler signUpHandler = new SignUpHandler(memberList);
 
-  //  MentorAddHandler mentorApplicantAddHandler = new MentorAddHandler(mentorApplicantList);
-  //  MentorListHandler mentorApplicantListHandler = new MentorListHandler(mentorApplicantList);
+  MentorApplicantAddHandler mentorApplicantAddHandler = new MentorApplicantAddHandler(mentorApplicantList);
+  MentorApplicantListHandler mentorApplicantListHandler = new MentorApplicantListHandler(mentorApplicantList);
+  MentorApplicantDetailHandler mentorApplicantDetailHandler = new MentorApplicantDetailHandler(mentorApplicantList);
 
   ChargeInterestAddHandler chargeInterestAddHandler = new ChargeInterestAddHandler(chargeInterestList);
+  ChargeInterestListHandler chargeInterestListHandler = new ChargeInterestListHandler(chargeInterestList);
   ChargeInterestDeleteHandler chargeInterestDeleteHandler = new ChargeInterestDeleteHandler(chargeInterestList);
 
   FreeStudyAddHandler freeStudyAddHandler = new FreeStudyAddHandler(freeStudyList);
@@ -127,6 +135,13 @@ public class App {
       }
     });
 
+    mainMenuGroup.add(new Menu("회원가입") {
+      @Override
+      public void execute() {
+        signUpHandler.execute(); 
+      }
+    });
+
     mainMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
@@ -143,16 +158,25 @@ public class App {
     MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
     memberMenu.add(mentorApplicantMenu);
 
-    mentorApplicantMenu.add(new Menu("멘토 승인") {
+    mentorApplicantMenu.add(new Menu("멘토 신청내역 조회") {
       @Override 
       public void execute() {
-        //        mentorApplicantAddHandler.execute();
+        mentorApplicantListHandler.execute();
       }});
-
-    mentorApplicantMenu.add(new Menu("멘토 거절") {
+    mentorApplicantMenu.add(new Menu("멘토 신청내역 상세보기") {
       @Override 
       public void execute() {
-        //        mentorApplicantListHandler.execute();
+        mentorApplicantListHandler.execute();
+        System.out.println();
+        mentorApplicantDetailHandler.execute();
+        System.out.println("1. 승인");
+        System.out.println("2. 거절");
+        System.out.println("0. 이전");
+        int input = Prompt.inputInt("선택>");
+        if(input == 1) {
+
+        }else if(input == 2) {
+        }
       }});
 
     MenuGroup calenderMenu = new MenuGroup("캘린더 관리");
@@ -269,7 +293,17 @@ public class App {
     chargeStudyMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        chargeStudyDetailHandler.execute(); 
+        ChargeStudy chargeInterest = chargeStudyDetailHandler.execute1(); 
+        System.out.println("1. 결제하기");
+        System.out.println("2. 관심목록 추가하기");
+        System.out.println("0. 이전");
+        int input = Prompt.inputInt("선택>");
+
+        if(input == 1) {
+          return;
+        }else if(input == 2) {
+          chargeInterestAddHandler.execute(chargeInterest);
+        }
       }});
 
     chargeStudyMenu.add(new Menu("수정") {
@@ -293,13 +327,21 @@ public class App {
     chargeInterestMenu.add(new Menu("조회") {
       @Override
       public void execute() {
-        chargeInterestAddHandler.execute(); 
+        chargeInterestListHandler.execute(); 
       }});
 
     chargeInterestMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         chargeInterestDeleteHandler.execute(); 
+      }});
+
+    MenuGroup applyMentorMenu = new MenuGroup("멘토 신청하기");
+    mainMenuGroup.add(applyMentorMenu);
+    applyMentorMenu.add(new Menu("신청") {
+      @Override
+      public void execute() {
+        mentorApplicantAddHandler.execute(); 
       }});
 
     return mainMenuGroup;

@@ -4,12 +4,12 @@ import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.util.Prompt;
 
-public class MentorAddHandler extends AbstractMentorApplicantHandler {
+public class MentorApplicantAddHandler extends AbstractMentorApplicantHandler {
 
 
 
-  public MentorAddHandler (List<Member> mentorList) {
-    super(mentorList);
+  public MentorApplicantAddHandler (List<Member> mentorApplicantList) {
+    super(mentorApplicantList);
   }
   // 멘토 신청하기
   @Override
@@ -26,7 +26,7 @@ public class MentorAddHandler extends AbstractMentorApplicantHandler {
     mentorApplicant.setId(AuthLoginHandler.loginUser.getId());
     mentorApplicant.setName(AuthLoginHandler.loginUser.getName());
 
-    mentorList.add(mentorApplicant);
+    mentorApplicantList.add(mentorApplicant);
 
     System.out.println();
     System.out.println("멘토 신청이 완료되었습니다.");
