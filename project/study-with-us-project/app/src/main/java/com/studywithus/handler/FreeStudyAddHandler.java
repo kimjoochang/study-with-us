@@ -12,23 +12,23 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
 
     FreeStudy testUser = new FreeStudy();
     testUser.setNo(1);
-    testUser.setWriter("반계령1");
+    testUser.setWriter("팀장 1");
     testUser.setOnOffLine(2);
     testUser.setArea("서울시 강남구");
-    testUser.setTitle("[자바] 자료구조 스터디");
+    testUser.setTitle("[자바] 자료구조 스터디 1");
     testUser.setExplanation("Array / Linked List / Stack");
-    testUser.setRule("지각 시, 500원");
+    testUser.setRule("규칙 1");
     testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     freeStudyList.add(testUser);
 
     testUser = new FreeStudy();
     testUser.setNo(2);
-    testUser.setWriter("반계령2");
+    testUser.setWriter("팀장 2");
     testUser.setOnOffLine(1);
-    testUser.setTitle("[자바] 자료구조 스터디");
+    testUser.setTitle("[자바] 자료구조 스터디 2");
     testUser.setExplanation("Array / Linked List / Stack");
-    testUser.setRule("지각 시, 500원");
+    testUser.setRule("규칙 2");
     testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     freeStudyList.add(testUser);
