@@ -1,8 +1,8 @@
 package com.studywithus.domain;
 
 public class Mentor {
-  public String name;
-  public String id;
+  private String name;
+  private String id;
 
   public String getName() {
     return name;

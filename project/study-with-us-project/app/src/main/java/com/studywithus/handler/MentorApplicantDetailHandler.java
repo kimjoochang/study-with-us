@@ -10,8 +10,7 @@ public class MentorApplicantDetailHandler extends AbstractMentorApplicantHandler
     super(mentorApplicantList);
   }
 
-  @Override
-  public void execute() {
+  public Member execute1() {
     System.out.println("[커뮤니티 / 상세보기] \n");
 
     String name = Prompt.inputString("이름? ");
@@ -20,11 +19,18 @@ public class MentorApplicantDetailHandler extends AbstractMentorApplicantHandler
     if (member == null) {
       System.out.println();
       System.out.println("입력하신 이름과 일치하는 신청내역이 없습니다.\n");
-      return;
+      return null;
     }
 
     System.out.printf("이름: %s\n", member.getName());
     System.out.printf("아이디: %s\n", member.getId());
+    return member;
+  }
+
+  @Override
+  public void execute() {
+    // TODO Auto-generated method stub
+
   }
 
 
