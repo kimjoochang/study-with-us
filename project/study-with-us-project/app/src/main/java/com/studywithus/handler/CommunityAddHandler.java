@@ -16,15 +16,15 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
   public void execute() {
     System.out.println("[커뮤니티 / 생성] \n");
 
-    Community communityInfo = new Community();
+    Community community = new Community();
 
-    communityInfo.setNo(Prompt.inputInt("번호? "));
-    communityInfo.setTitle(Prompt.inputString("제목? "));
-    communityInfo.setContent(Prompt.inputString("내용? "));
-    communityInfo.setWriter(Prompt.inputString("작성자? "));
-    communityInfo.setRegisteredDate(new Date(System.currentTimeMillis()));
+    community.setNo(Prompt.inputInt("번호? "));
+    community.setTitle(Prompt.inputString("제목? "));
+    community.setContent(Prompt.inputString("내용? "));
+    community.setWriter(AuthLoginHandler.getLoginUser());
+    community.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    communityList.add(communityInfo);
+    communityList.add(community);
 
     System.out.println();
     System.out.println("게시글 등록이 완료되었습니다.\n");

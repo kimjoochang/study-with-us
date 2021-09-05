@@ -16,9 +16,12 @@ public class CommunityListHandler extends AbstractCommunityHandler{
     System.out.println("[커뮤니티 / 조회]\n");
 
     for (Community community : communityList) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", community.getNo(),
-          community.getTitle(), community.getWriter(),
-          community.getRegisteredDate(), community.getViewCount(),
+      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+          community.getNo(),
+          community.getTitle(), 
+          community.getWriter().getName(),
+          community.getRegisteredDate(), 
+          community.getViewCount(),
           community.getLike());
       System.out.println();
     }

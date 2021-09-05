@@ -26,7 +26,7 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
 
     System.out.printf("제목: %s\n", community.getTitle());
     System.out.printf("내용: %s\n", community.getContent());
-    System.out.printf("작성자: %s\n", community.getWriter());
+    System.out.printf("작성자: %s\n", community.getWriter().getName());
     System.out.printf("등록일: %s\n", community.getRegisteredDate());
 
     community.setViewCount(community.getViewCount() + 1);

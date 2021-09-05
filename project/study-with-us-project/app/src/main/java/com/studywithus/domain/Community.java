@@ -8,7 +8,7 @@ public class Community {
   private int no; // 게시글 번호
   private String title; // 게시글 제목
   private String content; // 내용
-  private Member writer; // 게시글 작성자
+  private Member writer; // 게시글 작성자 
   private Date registeredDate; // 등록일
   private int viewCount; // 조회수
   private int like; // 좋아요
@@ -36,11 +36,11 @@ public class Community {
     this.title = title;
   }
 
-  public Member getWriter() {
+  public Member getWriter() { 
     return writer;
   }
 
-  public void setWriter(Member writer) {
+  public void setWriter(Member writer) { 
     this.writer = writer;
   }
 
