@@ -4,10 +4,10 @@ import java.util.List;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.util.Prompt;
 
-public class FreeInterestHandler extends AbstractFreeInterestHandler {
+public class FreeStudyInterestHandler extends AbstractFreeStudyHandler {
 
-  public FreeInterestHandler(List<FreeStudy> freeInterestList) {
-    super(freeInterestList);
+  public FreeStudyInterestHandler(List<FreeStudy> freeStudyList) {
+    super(freeStudyList);
   }
 
   public void execute() {
@@ -30,7 +30,7 @@ public class FreeInterestHandler extends AbstractFreeInterestHandler {
   public void list() {
     System.out.println("[무료 스터디 / 관심 목록 / 조회]");
 
-    for (FreeStudy freeStudy : freeInterestList) {
+    for (FreeStudy freeStudy : freeStudyList) {
       if (freeStudy.getOnOffLine() == 2) {
         System.out.println();
         System.out.printf("%d, %s, %s, %d, %s\n",
@@ -71,7 +71,7 @@ public class FreeInterestHandler extends AbstractFreeInterestHandler {
       return;
     }
 
-    freeInterestList.remove(freeStudy);
+    freeStudyList.remove(freeStudy);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");
