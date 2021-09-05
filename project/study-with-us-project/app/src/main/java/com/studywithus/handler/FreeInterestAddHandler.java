@@ -13,6 +13,8 @@ public class FreeInterestAddHandler extends AbstractFreeInterestHandler {
   public void execute() {
     System.out.println("[무료 스터디 / 상세보기 / 관심 목록]\n");
 
+    FreeStudy freeStudy = new FreeStudy();
+
     String input = Prompt.inputString("무료 스터디 관심 목록에 추가하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {

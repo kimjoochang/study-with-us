@@ -8,10 +8,12 @@ import com.studywithus.domain.Community;
 import com.studywithus.domain.ExamCalender;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.domain.JobsCalender;
-import com.studywithus.domain.MentorApplicant;
 import com.studywithus.domain.Member;
+import com.studywithus.domain.MentorApplicant;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
+import com.studywithus.handler.ChargeInterestAddHandler;
+import com.studywithus.handler.ChargeInterestDeleteHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
@@ -26,15 +28,14 @@ import com.studywithus.handler.ExamCalenderAddHandler;
 import com.studywithus.handler.ExamCalenderDeleteHandler;
 import com.studywithus.handler.ExamCalenderDetailHandler;
 import com.studywithus.handler.ExamCalenderUpdateHandler;
+import com.studywithus.handler.FreeInterestAddHandler;
+import com.studywithus.handler.FreeInterestDeleteHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
+import com.studywithus.handler.FreeStudyApplyHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
-import com.studywithus.handler.ChargeInterestAddHandler;
-import com.studywithus.handler.ChargeInterestDeleteHandler;
-import com.studywithus.handler.FreeInterestAddHandler;
-import com.studywithus.handler.FreeInterestDeleteHandler;
 import com.studywithus.handler.JobsCalenderAddHandler;
 import com.studywithus.handler.JobsCalenderDeleteHandler;
 import com.studywithus.handler.JobsCalenderDetailHandler;
@@ -64,7 +65,13 @@ public class App {
   MentorApplicantAddHandler mentorApplicantAddHandler = new MentorApplicantAddHandler(mentorApplicantList);
   MentorApplicantListHandler mentorApplicantListHandler = new MentorApplicantListHandler(mentorApplicantList);
 
+  FreeInterestAddHandler freeInterestAddHandler = new FreeInterestAddHandler(freeInterestList);
+  FreeInterestDeleteHandler freeInterestDeleteHandler = new FreeInterestDeleteHandler(freeInterestList);
+  ChargeInterestAddHandler chargeInterestAddHandler = new ChargeInterestAddHandler(chargeInterestList);
+  ChargeInterestDeleteHandler chargeInterestDeleteHandler = new ChargeInterestDeleteHandler(chargeInterestList);
+
   FreeStudyAddHandler freeStudyAddHandler = new FreeStudyAddHandler(freeStudyList);
+  FreeStudyApplyHandler freeStudyApplyHandler = new FreeStudyApplyHandler(freeStudyList);
   FreeStudyListHandler freeStudyListHandler = new FreeStudyListHandler(freeStudyList);
   FreeStudyDetailHandler freeStudyDetailHandler = new FreeStudyDetailHandler(freeStudyList);
   FreeStudyUpdateHandler freeStudyUpdateHandler = new FreeStudyUpdateHandler(freeStudyList);
@@ -105,11 +112,6 @@ public class App {
   ExamCalenderDetailHandler examCalenderDetailHandler = new ExamCalenderDetailHandler(examCalenderList);
   ExamCalenderUpdateHandler examCalenderUpdateHandler = new ExamCalenderUpdateHandler(examCalenderList);
   ExamCalenderDeleteHandler examCalenderDeleteHandler = new ExamCalenderDeleteHandler(examCalenderList);
-
-  FreeInterestAddHandler freeinterestAddHandler = new FreeInterestAddHandler(freeInterestList);
-  FreeInterestDeleteHandler freeinterestDeleteHandler = new FreeInterestDeleteHandler(freeInterestList);
-  ChargeInterestAddHandler chargeinterestAddHandler = new ChargeInterestAddHandler(chargeInterestList);
-  ChargeInterestDeleteHandler chargeinterestDeleteHandler = new ChargeInterestDeleteHandler(chargeInterestList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -292,13 +294,13 @@ public class App {
     freeInterestMenu.add(new Menu("조회") {
       @Override
       public void execute() {
-        freeinterestAddHandler.execute(); 
+        freeInterestAddHandler.execute(); 
       }});
 
     freeInterestMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        freeinterestDeleteHandler.execute(); 
+        freeInterestDeleteHandler.execute(); 
       }});
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
@@ -307,13 +309,13 @@ public class App {
     chargeInterestMenu.add(new Menu("조회") {
       @Override
       public void execute() {
-        freeinterestAddHandler.execute(); 
+        chargeInterestAddHandler.execute(); 
       }});
 
     chargeInterestMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        freeinterestDeleteHandler.execute(); 
+        chargeInterestDeleteHandler.execute(); 
       }});
 
     return mainMenuGroup;

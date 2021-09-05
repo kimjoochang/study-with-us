@@ -9,7 +9,6 @@ public class FreeInterestListHandler extends AbstractFreeInterestHandler {
     super(freeInterestList);
   }
 
-  @Override
   public void execute() {
     System.out.println("[무료 스터디 / 관심 목록 / 조회]");
 

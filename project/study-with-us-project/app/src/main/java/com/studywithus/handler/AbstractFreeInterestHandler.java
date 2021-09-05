@@ -11,13 +11,6 @@ public abstract class AbstractFreeInterestHandler implements Command {
     this.freeInterestList = freeInterestList;
   }
 
-  @Override
-  public void execute() {
-  }
-
-  protected void execute(FreeStudy freeStudy) {
-  };
-
   protected FreeStudy findByNo(int no) {
     for (FreeStudy freeStudy : freeInterestList) {
       if (freeStudy.getNo() == no) {
