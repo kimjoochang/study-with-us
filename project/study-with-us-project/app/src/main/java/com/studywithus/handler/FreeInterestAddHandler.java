@@ -4,14 +4,13 @@ import java.util.List;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.util.Prompt;
 
-public class InterestFreeAddHandler extends AbstractInterestFreeHandler {
+public class FreeInterestAddHandler extends AbstractFreeInterestHandler {
 
-  public InterestFreeAddHandler(List<FreeStudy> freeInterestList) {
+  public FreeInterestAddHandler(List<FreeStudy> freeInterestList) {
     super(freeInterestList);
   }
 
-  @Override
-  public void execute(FreeStudy freeStudy) {
+  public void execute() {
     System.out.println("[무료 스터디 / 상세보기 / 관심 목록]\n");
 
     String input = Prompt.inputString("무료 스터디 관심 목록에 추가하시겠습니까? (y/N) ");
@@ -20,10 +19,10 @@ public class InterestFreeAddHandler extends AbstractInterestFreeHandler {
       System.out.println("무료 스터디 관심 목록 추가를 취소하였습니다.\n");
       return;
     }
+
     freeInterestList.add(freeStudy);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록에 추가되었습니다.\n");
   }
-
 }

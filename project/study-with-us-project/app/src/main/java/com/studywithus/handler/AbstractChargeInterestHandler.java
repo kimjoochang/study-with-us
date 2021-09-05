@@ -3,11 +3,11 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.ChargeStudy;
 
-public abstract class AbstractInterestChargeHandler implements Command{
+public abstract class AbstractChargeInterestHandler implements Command{
 
   protected List<ChargeStudy> chargeInterestList;
 
-  public AbstractInterestChargeHandler(List<ChargeStudy> chargeInterestList) {
+  public AbstractChargeInterestHandler(List<ChargeStudy> chargeInterestList) {
     this.chargeInterestList = chargeInterestList;
   }
 
@@ -26,6 +26,4 @@ public abstract class AbstractInterestChargeHandler implements Command{
     }
     return null;
   }
-
-
 }

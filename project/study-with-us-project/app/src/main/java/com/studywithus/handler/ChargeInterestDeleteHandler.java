@@ -1,23 +1,22 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.FreeStudy;
+import com.studywithus.domain.ChargeStudy;
 import com.studywithus.util.Prompt;
 
-public class InterestFreeDeleteHandler extends AbstractInterestFreeHandler {
+public class ChargeInterestDeleteHandler extends AbstractChargeInterestHandler {
 
-  public InterestFreeDeleteHandler(List<FreeStudy> freeInterestList) {
-    super(freeInterestList);
+  public ChargeInterestDeleteHandler(List<ChargeStudy> chargeInterestList) {
+    super(chargeInterestList);
   }
-
   @Override
   public void execute() {
-    System.out.println("[무료 스터디 / 관심 목록 / 삭제]\n");
+    System.out.println("[유료 스터디 / 관심 목록 / 삭제]\n");
     int no = Prompt.inputInt("번호? ");
 
-    FreeStudy freeStudy = findByNo(no);
+    ChargeStudy chargeStudy = findByNo(no);
 
-    if (freeStudy == null) {
+    if (chargeStudy == null) {
       System.out.println();
       System.out.println("해당 번호의 무료 스터디 관심 목록이 없습니다.\n");
       return;
@@ -30,7 +29,7 @@ public class InterestFreeDeleteHandler extends AbstractInterestFreeHandler {
       return;
     }
 
-    freeInterestList.remove(freeStudy);
+    chargeInterestList.remove(chargeStudy);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");

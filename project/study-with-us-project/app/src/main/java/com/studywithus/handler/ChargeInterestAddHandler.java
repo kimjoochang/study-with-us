@@ -4,10 +4,9 @@ import java.util.List;
 import com.studywithus.domain.ChargeStudy;
 import com.studywithus.util.Prompt;
 
-public class InterestChargeAddHandler extends AbstractInterestChargeHandler {
+public class ChargeInterestAddHandler extends AbstractChargeInterestHandler {
 
-
-  public InterestChargeAddHandler(List<ChargeStudy> chargeInterestList) {
+  public ChargeInterestAddHandler(List<ChargeStudy> chargeInterestList) {
     super(chargeInterestList);
   }
 
@@ -27,5 +26,4 @@ public class InterestChargeAddHandler extends AbstractInterestChargeHandler {
     System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
     return;
   }
-
 }

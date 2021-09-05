@@ -9,7 +9,7 @@ import com.studywithus.domain.ExamCalender;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.domain.JobsCalender;
 import com.studywithus.domain.MentorApplicant;
-import com.studywithus.domain.NewMember;
+import com.studywithus.domain.Member;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
@@ -31,10 +31,10 @@ import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
-import com.studywithus.handler.InterestChargeAddHandler;
-import com.studywithus.handler.InterestChargeDeleteHandler;
-import com.studywithus.handler.InterestFreeAddHandler;
-import com.studywithus.handler.InterestFreeDeleteHandler;
+import com.studywithus.handler.ChargeInterestAddHandler;
+import com.studywithus.handler.ChargeInterestDeleteHandler;
+import com.studywithus.handler.FreeInterestAddHandler;
+import com.studywithus.handler.FreeInterestDeleteHandler;
 import com.studywithus.handler.JobsCalenderAddHandler;
 import com.studywithus.handler.JobsCalenderDeleteHandler;
 import com.studywithus.handler.JobsCalenderDetailHandler;
@@ -46,7 +46,7 @@ import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
 
 public class App {
-  List<NewMember> memberList = new LinkedList<>();
+  List<Member> memberList = new LinkedList<>();
   List<FreeStudy> freeStudyList = new ArrayList<>();
   List<JobsCalender> jobsCalenderList = new ArrayList<>();
   List<ExamCalender> examCalenderList = new ArrayList<>();
@@ -106,10 +106,10 @@ public class App {
   ExamCalenderUpdateHandler examCalenderUpdateHandler = new ExamCalenderUpdateHandler(examCalenderList);
   ExamCalenderDeleteHandler examCalenderDeleteHandler = new ExamCalenderDeleteHandler(examCalenderList);
 
-  InterestFreeAddHandler interestFreeAddHandler = new InterestFreeAddHandler(freeInterestList);
-  InterestFreeDeleteHandler interestFreeDeleteHandler = new InterestFreeDeleteHandler(freeInterestList);
-  InterestChargeAddHandler interestChargeAddHandler = new InterestChargeAddHandler(chargeInterestList);
-  InterestChargeDeleteHandler interestChargeDeleteHandler = new InterestChargeDeleteHandler(chargeInterestList);
+  FreeInterestAddHandler freeinterestAddHandler = new FreeInterestAddHandler(freeInterestList);
+  FreeInterestDeleteHandler freeinterestDeleteHandler = new FreeInterestDeleteHandler(freeInterestList);
+  ChargeInterestAddHandler chargeinterestAddHandler = new ChargeInterestAddHandler(chargeInterestList);
+  ChargeInterestDeleteHandler chargeinterestDeleteHandler = new ChargeInterestDeleteHandler(chargeInterestList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -292,13 +292,13 @@ public class App {
     freeInterestMenu.add(new Menu("조회") {
       @Override
       public void execute() {
-        interestFreeAddHandler.execute(); 
+        freeinterestAddHandler.execute(); 
       }});
 
     freeInterestMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        interestFreeDeleteHandler.execute(); 
+        freeinterestDeleteHandler.execute(); 
       }});
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
@@ -307,13 +307,13 @@ public class App {
     chargeInterestMenu.add(new Menu("조회") {
       @Override
       public void execute() {
-        interestFreeAddHandler.execute(); 
+        freeinterestAddHandler.execute(); 
       }});
 
     chargeInterestMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        interestFreeDeleteHandler.execute(); 
+        freeinterestDeleteHandler.execute(); 
       }});
 
     return mainMenuGroup;

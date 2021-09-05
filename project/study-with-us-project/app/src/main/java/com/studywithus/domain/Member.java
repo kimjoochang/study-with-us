@@ -1,6 +1,6 @@
 package com.studywithus.domain;
 
-public class NewMember {
+public class Member {
 
   private static String adminId = "admin";
   private static String adminPwd = "admin";
@@ -13,7 +13,7 @@ public class NewMember {
   }
 
   public static void setAdminId(String adminId) {
-    NewMember.adminId = adminId;
+    Member.adminId = adminId;
   }
 
   public static String getAdminPwd() {
@@ -21,7 +21,7 @@ public class NewMember {
   }
 
   public static void setAdminPwd(String adminPwd) {
-    NewMember.adminPwd = adminPwd;
+    Member.adminPwd = adminPwd;
   }
 
   public String getName() {

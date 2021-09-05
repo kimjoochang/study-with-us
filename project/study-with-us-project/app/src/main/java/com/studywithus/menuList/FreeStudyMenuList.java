@@ -3,13 +3,13 @@ package com.studywithus.menuList;
 import java.util.ArrayList;
 import java.util.List;
 import com.studywithus.domain.FreeStudy;
+import com.studywithus.handler.FreeInterestAddHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
 import com.studywithus.handler.FreeStudyApplyHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
-import com.studywithus.handler.InterestFreeAddHandler;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyMenuList {
@@ -22,7 +22,7 @@ public class FreeStudyMenuList {
   FreeStudyDetailHandler freeStudyDetailHandler = new FreeStudyDetailHandler(freeStudyList);
   FreeStudyUpdateHandler freeStudyUpdateHandler = new FreeStudyUpdateHandler(freeStudyList);
   FreeStudyDeleteHandler freeStudyDeleteHandler = new FreeStudyDeleteHandler(freeStudyList);
-  InterestFreeAddHandler interestFreeAddHandler = new InterestFreeAddHandler(freeStudyList);
+  FreeInterestAddHandler interestFreeAddHandler = new FreeInterestAddHandler(freeStudyList);
 
   int input;
 

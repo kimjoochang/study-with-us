@@ -10,5 +10,4 @@ public abstract class AbstractMentorApplicantHandler implements Command {
   public AbstractMentorApplicantHandler(List<MentorApplicant> mentorApplicantList) {
     this.mentorApplicantList = mentorApplicantList;
   }
-
 }

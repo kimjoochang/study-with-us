@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.FreeStudy;
+import com.studywithus.handler.ChargeInterestAddHandler;
+import com.studywithus.handler.ChargeInterestDeleteHandler;
+import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteHandler;
 import com.studywithus.handler.ChargeStudyDeletedDetailHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
 import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
-import com.studywithus.handler.InterestChargeAddHandler;
-import com.studywithus.handler.InterestChargeDeleteHandler;
-import com.studywithus.handler.InterestChargeListHandler;
-import com.studywithus.handler.InterestFreeDeleteHandler;
-import com.studywithus.handler.InterestFreeListHandler;
+import com.studywithus.handler.FreeInterestDeleteHandler;
+import com.studywithus.handler.FreeInterestListHandler;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyMenuList {
@@ -24,12 +24,12 @@ public class ChargeStudyMenuList {
   List<FreeStudy> freeInterestList;
   List<ChargeStudy> chargeInterestList;
 
-  InterestFreeListHandler interestFreeListHandler = new InterestFreeListHandler(freeInterestList);
-  InterestFreeDeleteHandler interestFreeDeleteHandler = new InterestFreeDeleteHandler(freeInterestList);
+  FreeInterestListHandler interestFreeListHandler = new FreeInterestListHandler(freeInterestList);
+  FreeInterestDeleteHandler interestFreeDeleteHandler = new FreeInterestDeleteHandler(freeInterestList);
 
-  InterestChargeAddHandler interestChargeAddHandler = new InterestChargeAddHandler(chargeInterestList);
-  InterestChargeListHandler interestChargeListHandler = new InterestChargeListHandler(chargeInterestList);
-  InterestChargeDeleteHandler interestChargeDeleteHandler = new InterestChargeDeleteHandler(chargeInterestList);
+  ChargeInterestAddHandler chargeinterestAddHandler = new ChargeInterestAddHandler(chargeInterestList);
+  ChargeInterestListHandler chargeinterestListHandler = new ChargeInterestListHandler(chargeInterestList);
+  ChargeInterestDeleteHandler chargeinterestDeleteHandler = new ChargeInterestDeleteHandler(chargeInterestList);
 
   ChargeStudyAddHandler chargeStudyAddHandler = new ChargeStudyAddHandler(chargeStudyList);
   ChargeStudyListHandler chargeStudyListHandler = new ChargeStudyListHandler(chargeStudyList);
@@ -116,7 +116,7 @@ public class ChargeStudyMenuList {
         }
         return 1;
       } else if (input == 2) {
-        interestChargeAddHandler.execute(study);
+        chargeinterestAddHandler.execute(study);
         return 1;
       }
     }
@@ -185,10 +185,10 @@ public class ChargeStudyMenuList {
       System.out.println();
 
       if(input == 1) {
-        interestChargeListHandler.execute();
+        chargeInterestListHandler.execute();
 
       } else if(input == 2) {
-        interestChargeDeleteHandler.execute();
+        chargeInterestDeleteHandler.execute();
         // 삭제
       } else if (input == 0) {
         return false;
