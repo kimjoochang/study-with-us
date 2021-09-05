@@ -28,8 +28,7 @@ import com.studywithus.handler.ExamCalenderAddHandler;
 import com.studywithus.handler.ExamCalenderDeleteHandler;
 import com.studywithus.handler.ExamCalenderDetailHandler;
 import com.studywithus.handler.ExamCalenderUpdateHandler;
-import com.studywithus.handler.FreeInterestAddHandler;
-import com.studywithus.handler.FreeInterestDeleteHandler;
+import com.studywithus.handler.FreeInterestHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
 import com.studywithus.handler.FreeStudyApplyHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
@@ -65,8 +64,8 @@ public class App {
   MentorApplicantAddHandler mentorApplicantAddHandler = new MentorApplicantAddHandler(mentorApplicantList);
   MentorApplicantListHandler mentorApplicantListHandler = new MentorApplicantListHandler(mentorApplicantList);
 
-  FreeInterestAddHandler freeInterestAddHandler = new FreeInterestAddHandler(freeInterestList);
-  FreeInterestDeleteHandler freeInterestDeleteHandler = new FreeInterestDeleteHandler(freeInterestList);
+  FreeInterestHandler freeInterestHandler = new FreeInterestHandler(freeInterestList);
+
   ChargeInterestAddHandler chargeInterestAddHandler = new ChargeInterestAddHandler(chargeInterestList);
   ChargeInterestDeleteHandler chargeInterestDeleteHandler = new ChargeInterestDeleteHandler(chargeInterestList);
 
@@ -252,6 +251,12 @@ public class App {
         freeStudyDeleteHandler.execute();
       }});
 
+    freeStudyMenu.add(new Menu("관심 목록") {
+      @Override 
+      public void execute() {
+        freeInterestHandler.execute();
+      }});
+
     MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
     mainMenuGroup.add(chargeStudyMenu);
 
@@ -287,21 +292,6 @@ public class App {
 
     MenuGroup interestMenu = new MenuGroup("관심목록");
     mainMenuGroup.add(interestMenu);
-
-    MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
-    interestMenu.add(freeInterestMenu);
-
-    freeInterestMenu.add(new Menu("조회") {
-      @Override
-      public void execute() {
-        freeInterestAddHandler.execute(); 
-      }});
-
-    freeInterestMenu.add(new Menu("삭제") {
-      @Override
-      public void execute() {
-        freeInterestDeleteHandler.execute(); 
-      }});
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
     interestMenu.add(chargeInterestMenu);

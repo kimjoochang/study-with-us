@@ -14,7 +14,7 @@ import com.studywithus.handler.ChargeStudyDetailHandler;
 import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
 import com.studywithus.handler.FreeInterestDeleteHandler;
-import com.studywithus.handler.FreeInterestListHandler;
+import com.studywithus.handler.FreeInterestHandler;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyMenuList {
@@ -24,7 +24,7 @@ public class ChargeStudyMenuList {
   List<FreeStudy> freeInterestList;
   List<ChargeStudy> chargeInterestList;
 
-  FreeInterestListHandler interestFreeListHandler = new FreeInterestListHandler(freeInterestList);
+  FreeInterestHandler interestFreeListHandler = new FreeInterestHandler(freeInterestList);
   FreeInterestDeleteHandler interestFreeDeleteHandler = new FreeInterestDeleteHandler(freeInterestList);
 
   ChargeInterestAddHandler chargeinterestAddHandler = new ChargeInterestAddHandler(chargeInterestList);

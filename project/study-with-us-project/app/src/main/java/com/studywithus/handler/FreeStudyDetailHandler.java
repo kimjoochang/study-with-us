@@ -7,9 +7,6 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
 
-  FreeStudyApplyHandler freeStudyApplyHandler;
-  FreeInterestAddHandler freeInterestAddHandler;
-
   public FreeStudyDetailHandler(List<FreeStudy> freeStudyList) {
     super(freeStudyList);
   }
