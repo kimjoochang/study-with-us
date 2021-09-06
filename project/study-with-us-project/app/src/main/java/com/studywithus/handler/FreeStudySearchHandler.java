@@ -20,6 +20,7 @@ public class FreeStudySearchHandler extends AbstractFreeStudyHandler {
       if (!freeStudy.getTitle().contains(input) &&
           !freeStudy.getExplanation().contains(input) &&
           !freeStudy.getWriter().getName().contains(input)) {
+        System.out.println("입력하신 검색어가 포함된 게시물이 없습니다.");
         continue;
       }
 
