@@ -8,7 +8,6 @@ import com.studywithus.util.Prompt;
 public class AuthLoginHandler implements Command {
 
   List<Member> memberList;
-  Member member;
 
   static Member loginUser;
   static int userAccessLevel = Menu.ACCESS_LOGOUT;
@@ -32,8 +31,6 @@ public class AuthLoginHandler implements Command {
     String id = Prompt.inputString("아이디 : ");
     String password = Prompt.inputString("비밀번호 : ");
 
-    member = findByIdPassword(id, password);
-
     if (id.equals("root") && password.equals("0000")) {
       Member root = new Member();
       root.setName("관리자");
@@ -53,7 +50,7 @@ public class AuthLoginHandler implements Command {
     //    }
     //  }
 
-    member = findByIdPassword(id, password);
+    Member member = findByIdPassword(id, password);
 
     if (member == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
