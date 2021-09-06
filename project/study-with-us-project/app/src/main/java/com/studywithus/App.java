@@ -1,9 +1,9 @@
 package com.studywithus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import com.studywithus.AppMap.MenuItem;
 import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.ExamCalender;
@@ -13,9 +13,6 @@ import com.studywithus.domain.Member;
 import com.studywithus.domain.Mentor;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
-import com.studywithus.handler.ChargeInterestAddHandler;
-import com.studywithus.handler.ChargeInterestDeleteHandler;
-import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
@@ -29,30 +26,12 @@ import com.studywithus.handler.CommunityDetailHandler;
 import com.studywithus.handler.CommunityListHandler;
 import com.studywithus.handler.CommunitySearchHandler;
 import com.studywithus.handler.CommunityUpdateHandler;
-import com.studywithus.handler.ExamCalenderAddHandler;
-import com.studywithus.handler.ExamCalenderDeleteHandler;
-import com.studywithus.handler.ExamCalenderDetailHandler;
-import com.studywithus.handler.ExamCalenderUpdateHandler;
-import com.studywithus.handler.FreeInterestAddHandler;
-import com.studywithus.handler.FreeInterestDeleteHandler;
-import com.studywithus.handler.FreeInterestListHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
-import com.studywithus.handler.FreeStudyApplyHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudySearchHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
-import com.studywithus.handler.JobsCalenderAddHandler;
-import com.studywithus.handler.JobsCalenderDeleteHandler;
-import com.studywithus.handler.JobsCalenderDetailHandler;
-import com.studywithus.handler.JobsCalenderUpdateHandler;
-import com.studywithus.handler.MentorApplicantAddHandler;
-import com.studywithus.handler.MentorApplicantDetailHandler;
-import com.studywithus.handler.MentorApplicantListHandler;
-import com.studywithus.handler.MentorApproveHandler;
-import com.studywithus.handler.MentorRejectHandler;
-import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
@@ -72,9 +51,6 @@ public class App {
   List<Mentor> mentorList = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
-
-  MemberPrompt memberPrompt = new MemberPrompt(memberList);
-  ProjectPrompt projectPrompt = new ProjectPrompt(projectList);
 
   class MenuItem extends Menu {
     String menuId;
@@ -153,11 +129,10 @@ public class App {
     mainMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGIN, "/auth/userinfo"));
     mainMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/auth/logout"));
 
+    mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
-    mainMenuGroup.add(createFreeStudyMenu());
-    mainMenuGroup.add(createFreeStudyMenu());
-    mainMenuGroup.add(createFreeStudyMenu());
+    mainMenuGroup.add(createCommunityMenu());
 
     return mainMenuGroup;
   }
@@ -292,44 +267,44 @@ public class App {
   }
 }
 
-MenuGroup interestMenu = new MenuGroup("관심목록");
-mainMenuGroup.add(interestMenu);
-
-MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
-interestMenu.add(freeInterestMenu);
-
-freeInterestMenu.add(new Menu("조회") {
-  @Override
-  public void execute() {
-    freeInterestListHandler.execute(); 
-  }});
-
-freeInterestMenu.add(new Menu("삭제") {
-  @Override
-  public void execute() {
-    freeInterestDeleteHandler.execute(); 
-  }});
-
-MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
-interestMenu.add(chargeInterestMenu);
-
-chargeInterestMenu.add(new Menu("조회") {
-  @Override
-  public void execute() {
-    chargeInterestListHandler.execute(); 
-  }});
-
-chargeInterestMenu.add(new Menu("삭제") {
-  @Override
-  public void execute() {
-    chargeInterestDeleteHandler.execute(); 
-  }});
-
-MenuGroup applyMentorMenu = new MenuGroup("멘토 신청하기");
-mainMenuGroup.add(applyMentorMenu);
-
-applyMentorMenu.add(new Menu("신청") {
-  @Override
-  public void execute() {
-    mentorApplicantAddHandler.execute(); 
-  }});
+//MenuGroup interestMenu = new MenuGroup("관심목록");
+//mainMenuGroup.add(interestMenu);
+//
+//MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
+//interestMenu.add(freeInterestMenu);
+//
+//freeInterestMenu.add(new Menu("조회") {
+//  @Override
+//  public void execute() {
+//    freeInterestListHandler.execute(); 
+//  }});
+//
+//freeInterestMenu.add(new Menu("삭제") {
+//  @Override
+//  public void execute() {
+//    freeInterestDeleteHandler.execute(); 
+//  }});
+//
+//MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
+//interestMenu.add(chargeInterestMenu);
+//
+//chargeInterestMenu.add(new Menu("조회") {
+//  @Override
+//  public void execute() {
+//    chargeInterestListHandler.execute(); 
+//  }});
+//
+//chargeInterestMenu.add(new Menu("삭제") {
+//  @Override
+//  public void execute() {
+//    chargeInterestDeleteHandler.execute(); 
+//  }});
+//
+//MenuGroup applyMentorMenu = new MenuGroup("멘토 신청하기");
+//mainMenuGroup.add(applyMentorMenu);
+//
+//applyMentorMenu.add(new Menu("신청") {
+//  @Override
+//  public void execute() {
+//    mentorApplicantAddHandler.execute(); 
+//  }});
