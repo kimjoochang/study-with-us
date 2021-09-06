@@ -181,6 +181,7 @@ public class App {
     communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
     communityInfoMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/communityInfo/update"));
     communityInfoMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/communityInfo/delete"));
+    communityInfoMenu.add(new MenuItem("검색", "/communityInfoMenu/search"));
 
     return communityInfoMenu;
   }
@@ -193,6 +194,7 @@ public class App {
     communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
     communityQaMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/communityQa/update"));
     communityQaMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/communityQa/delete"));
+    communityQaMenu.add(new MenuItem("검색", "/communityQaMenu/search"));
 
     return communityQaMenu;
   }
@@ -205,6 +207,7 @@ public class App {
     communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
     communityTalkMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/communityTalk/update"));
     communityTalkMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/communityTalk/delete"));
+    communityTalkMenu.add(new MenuItem("검색", "/communityTalkMenu/search"));
 
     return communityTalkMenu;
   }
