@@ -28,7 +28,7 @@ public class MemberHandler implements Command {
 
     if (member == null) {
       System.out.println("등록된 회원이 아닙니다.");
-    
+
     } else {
       System.out.printf("%s님 환영합니다!\n", member.getName());
       loginUser = member;
@@ -39,7 +39,7 @@ public class MemberHandler implements Command {
   private Member findByIdPwd(String id, String pwd) {
     for (Member member : memberList) {
       if (member.getId().equalsIgnoreCase(id) &&
-          member.getPwd().equals(pwd)) {
+          member.getPassword().equals(pwd)) {
         return member;
       }
     }

@@ -6,7 +6,7 @@ public class FreeStudy {
 
   private int no;
   private String title;
-  private String writer;
+  private Member writer;
   private int onOffLine;
   private String area;
   private String explanation;
@@ -31,11 +31,11 @@ public class FreeStudy {
     this.title = title;
   }
 
-  public String getWriter() {
+  public Member getWriter() {
     return writer;
   }
 
-  public void setWriter(String writer) {
+  public void setWriter(Member writer) {
     this.writer = writer;
   }
 

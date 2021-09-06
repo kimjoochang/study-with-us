@@ -12,7 +12,7 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
 
     FreeStudy testUser = new FreeStudy();
     testUser.setNo(1);
-    testUser.setWriter("팀장 1");
+    testUser.setWriter(AuthLoginHandler.getLoginUser());
     testUser.setOnOffLine(2);
     testUser.setArea("서울시 강남구");
     testUser.setTitle("[자바] 자료구조 스터디 1");
@@ -24,7 +24,7 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
 
     testUser = new FreeStudy();
     testUser.setNo(2);
-    testUser.setWriter("팀장 2");
+    testUser.setWriter(AuthLoginHandler.getLoginUser());
     testUser.setOnOffLine(1);
     testUser.setTitle("[자바] 자료구조 스터디 2");
     testUser.setExplanation("Array / Linked List / Stack");
@@ -41,7 +41,6 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
     FreeStudy freeStudy = new FreeStudy();
 
     freeStudy.setNo(Prompt.inputInt("번호? "));
-    freeStudy.setWriter(Prompt.inputString("팀장? "));
 
     System.out.println("온/오프라인?");
     System.out.println("1. 온라인");

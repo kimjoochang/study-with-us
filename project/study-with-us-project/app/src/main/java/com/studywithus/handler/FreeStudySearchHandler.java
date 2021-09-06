@@ -19,14 +19,14 @@ public class FreeStudySearchHandler extends AbstractFreeStudyHandler {
     for (FreeStudy freeStudy : freeStudyList) {
       if (!freeStudy.getTitle().contains(input) &&
           !freeStudy.getExplanation().contains(input) &&
-          !freeStudy.getWriter().contains(input)) {
+          !freeStudy.getWriter().getName().contains(input)) {
         continue;
       }
 
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
           freeStudy.getNo(), 
           freeStudy.getTitle(), 
-          freeStudy.getWriter(),
+          freeStudy.getWriter().getName(),
           freeStudy.getRegisteredDate(),
           freeStudy.getViewCount(), 
           freeStudy.getLike());

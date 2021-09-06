@@ -30,8 +30,17 @@ public class MenuGroup extends Menu {
     super(title);
   }
 
+  public MenuGroup(String title, int accessScope) {
+    super(title, accessScope);
+  }
+
   public MenuGroup(String title, boolean disablePrevMenu) {
     super(title);
+    this.disablePrevMenu = disablePrevMenu;
+  }
+
+  public MenuGroup(String title, boolean disablePrevMenu, int accessScope) {
+    super(title, accessScope);
     this.disablePrevMenu = disablePrevMenu;
   }
 
@@ -68,10 +77,12 @@ public class MenuGroup extends Menu {
 
       try {
         Menu menu = selectMenu(menuList);
+
         if (menu == null) {
           System.out.println("무효한 메뉴 번호입니다.");
           continue;
         }
+
         if (menu instanceof PrevMenu) {
           breadCrumb.pop();
           return;
@@ -105,17 +116,9 @@ public class MenuGroup extends Menu {
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
     for (Menu menu : childs) {
-      if (menu.enableState == Menu.ENABLE_LOGOUT && 
-          AuthLoginHandler.getLoginUser() == null) {
+      if ((menu.accessScope & AuthLoginHandler.getUserAccessLevel()) > 0 ) {
         menuList.add(menu);
-
-      } else if (menu.enableState == Menu.ENABLE_LOGIN && 
-          AuthLoginHandler.getLoginUser() != null) {
-        menuList.add(menu);
-
-      } else if (menu.enableState == Menu.ENABLE_ALL) {
-        menuList.add(menu);
-      } 
+      }
     }
     return menuList;
   }
@@ -126,6 +129,7 @@ public class MenuGroup extends Menu {
 
   private void printMenuList(List<Menu> menuList) {
     int i = 1;
+
     for (Menu menu : menuList) {
       System.out.printf("%d. %-20s\n", i++, menu.title);
     }

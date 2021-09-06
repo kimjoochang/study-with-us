@@ -17,7 +17,7 @@ public class SignUpHandler extends AbstractLoginHandler {
 
     member.setName(Prompt.inputString("이름? "));
     member.setId(Prompt.inputString("아이디? "));
-    member.setPwd(Prompt.inputString("비밀번호? "));
+    member.setPassword(Prompt.inputString("비밀번호? "));
 
     memberList.add(member);
 

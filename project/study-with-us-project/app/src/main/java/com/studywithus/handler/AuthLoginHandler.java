@@ -2,11 +2,13 @@ package com.studywithus.handler;
 
 import java.util.List;
 import com.studywithus.domain.Member;
+import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class AuthLoginHandler implements Command {
 
   List<Member> memberList;
+  Member member;
 
   static Member loginUser;
   static int userAccessLevel = Menu.ACCESS_LOGOUT;
@@ -30,7 +32,7 @@ public class AuthLoginHandler implements Command {
     String id = Prompt.inputString("아이디 : ");
     String password = Prompt.inputString("비밀번호 : ");
 
-    Member member = findByIdPassword(id, password);
+    member = findByIdPassword(id, password);
 
     if (id.equals("root") && password.equals("0000")) {
       Member root = new Member();
@@ -51,7 +53,7 @@ public class AuthLoginHandler implements Command {
     //    }
     //  }
 
-    Member member = findByEmailPassword(id, password);
+    member = findByIdPassword(id, password);
 
     if (member == null) {
       System.out.println("아이디와 암호가 일치하는 회원을 찾을 수 없습니다.");
@@ -62,7 +64,7 @@ public class AuthLoginHandler implements Command {
     }
   }
 
-  private Member findByEmailPassword(String id, String password) {
+  private Member findByIdPassword(String id, String password) {
     for (Member member : memberList) {
       if (member.getId().equalsIgnoreCase(id) &&
           member.getPassword().equals(password)) {

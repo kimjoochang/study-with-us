@@ -15,7 +15,7 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
     testUser.setNo(1);
     testUser.setTitle("커뮤니티 게시글");
     testUser.setContent("배고파");
-    testUser.setWriter("김제이");
+    testUser.setWriter(AuthLoginHandler.getLoginUser());
     testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     communityList.add(testUser);

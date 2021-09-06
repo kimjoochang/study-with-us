@@ -32,7 +32,7 @@ public class FindPwdHandler implements Command {
       return;
     }
 
-    member.setPwd(Prompt.inputString("새 비밀번호를 입력해주세요: "));
+    member.setPassword(Prompt.inputString("새 비밀번호를 입력해주세요: "));
 
     String input = Prompt.inputString("정말 변경하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
