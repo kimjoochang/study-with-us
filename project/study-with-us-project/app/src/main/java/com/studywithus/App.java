@@ -221,24 +221,22 @@ public class App {
   private Menu createFreeStudyMenu() {
     MenuGroup freeStudyMenu = new MenuGroup("게시판");
 
-    freeStudyMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/freeStudy/add"));
+    freeStudyMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/freeStudy/add"));
     freeStudyMenu.add(new MenuItem("목록", "/freeStudy/list"));
     freeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/detail"));
-    freeStudyMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/freeStudy/update"));
+    freeStudyMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/freeStudy/update"));
     freeStudyMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/freeStudy/delete"));
     freeStudyMenu.add(new MenuItem("검색", "/freeStudy/search"));
 
     return freeStudyMenu;
   }
 
-
-
   private Menu chargeStudyMenu() {
     MenuGroup chargeStudyMenu = new MenuGroup("유료스터디");
-    chargeStudyMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/chargeStudyMenu/add"));
+    chargeStudyMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/chargeStudyMenu/add"));
     chargeStudyMenu.add(new MenuItem("목록", "/chargeStudyMenu/list"));
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudyMenu/detail"));
-    chargeStudyMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/chargeStudyMenu/update"));
+    chargeStudyMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/chargeStudyMenu/update"));
     chargeStudyMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/chargeStudyMenu/delete"));
     chargeStudyMenu.add(new MenuItem("검색", "/chargeStudyMenu/search"));
 
@@ -251,7 +249,7 @@ public class App {
 
   private Menu createCommunityInfoMenu() {
     MenuGroup memberMenu = new MenuGroup("정보");
-    communityInfoMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/communityInfo/add"));
+    communityInfoMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/communityInfo/add"));
     communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
     communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
     communityInfoMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/communityInfo/update"));
@@ -261,7 +259,7 @@ public class App {
 
   private Menu createCommunityQaMenu() {
     MenuGroup memberMenu = new MenuGroup("질문");
-    communityQaMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/communityQa/add"));
+    communityQaMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/communityQa/add"));
     communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
     communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
     communityQaMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/communityQa/update"));
@@ -270,8 +268,8 @@ public class App {
   }
 
   private Menu createCommunityTalkMenu() {
-    MenuGroup memberMenu = new MenuGroup("정보");
-    communityTalkMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/communityTalk/add"));
+    MenuGroup memberMenu = new MenuGroup("스몰톡");
+    communityTalkMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/communityTalk/add"));
     communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
     communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
     communityTalkMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/communityTalk/update"));
@@ -512,127 +510,4 @@ public class App {
       mentorApplicantAddHandler.execute(); 
     }});
 
-  // 커뮤니티 메인 메뉴
-  MenuGroup communityMainMenu = new MenuGroup("커뮤니티");
-  mainMenuGroup.add(communityMainMenu);
-
-  // 커뮤니티 정보 메뉴
-  MenuGroup communityInfoMenu = new MenuGroup("정보");
-  communityMainMenu.add(communityInfoMenu);
-
-  communityInfoMenu.add(new Menu("생성") {
-    @Override
-    public void execute() {
-      communityInfoAddHandler.execute();
-    }});
-
-  communityInfoMenu.add(new Menu("조회") {
-    @Override
-    public void execute() {
-      communityInfoListHandler.execute();
-    }});
-
-  communityInfoMenu.add(new Menu("상세보기") {
-    @Override
-    public void execute() {
-      communityInfoDetailHandler.execute();
-    }});
-
-  communityInfoMenu.add(new Menu("수정") {
-    @Override
-    public void execute() {
-      communityInfoUpdateHandler.execute();
-    }});
-
-  communityInfoMenu.add(new Menu("삭제") {
-    @Override
-    public void execute() {
-      communityInfoDeleteHandler.execute();
-    }});
-
-  communityInfoMenu.add(new Menu("검색") {
-    @Override
-    public void execute() {
-      communityInfoSearchHandler.execute();
-    }});
-
-  // 커뮤니티 질문 메뉴
-  MenuGroup communityQaMenu = new MenuGroup("질문");
-  communityMainMenu.add(communityQaMenu);
-
-  communityQaMenu.add(new Menu("생성") {
-    @Override
-    public void execute() {
-      communityQaAddHandler.execute();
-    }});
-
-  communityQaMenu.add(new Menu("조회") {
-    @Override
-    public void execute() {
-      communityQaListHandler.execute();
-    }});
-
-  communityQaMenu.add(new Menu("상세보기") {
-    @Override
-    public void execute() {
-      communityQaDetailHandler.execute();
-    }});
-
-  communityQaMenu.add(new Menu("수정") {
-    @Override
-    public void execute() {
-      communityQaUpdateHandler.execute();
-    }});
-
-  communityQaMenu.add(new Menu("삭제") {
-    @Override
-    public void execute() {
-      communityQaDeleteHandler.execute();
-    }});
-
-  communityQaMenu.add(new Menu("검색") {
-    @Override
-    public void execute() {
-      communityQaSearchHandler.execute();
-    }});
-
-  // 커뮤니티 스몰톡 메뉴
-  MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
-  communityMainMenu.add(communityTalkMenu);
-
-  communityTalkMenu.add(new Menu("생성") {
-    @Override
-    public void execute() {
-      communityTalkAddHandler.execute();
-    }});
-
-  communityTalkMenu.add(new Menu("조회") {
-    @Override
-    public void execute() {
-      communityTalkListHandler.execute();
-    }});
-
-  communityTalkMenu.add(new Menu("상세보기") {
-    @Override
-    public void execute() {
-      communityTalkDetailHandler.execute();
-    }});
-
-  communityTalkMenu.add(new Menu("수정") {
-    @Override
-    public void execute() {
-      communityTalkUpdateHandler.execute();
-    }});
-
-  communityTalkMenu.add(new Menu("삭제") {
-    @Override
-    public void execute() {
-      communityTalkDeleteHandler.execute();
-    }});
-
-  communityTalkMenu.add(new Menu("검색") {
-    @Override
-    public void execute() {
-      communityTalkSearchHandler.execute();
-    }});
 }
