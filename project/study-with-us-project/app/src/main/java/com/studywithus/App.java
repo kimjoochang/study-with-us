@@ -143,12 +143,12 @@ public class App {
   private Menu createFreeStudyMenu() {
     MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
 
+    freeStudyMenu.add(new MenuItem("검색", "/freeStudy/search"));
     freeStudyMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/freeStudy/add"));
     freeStudyMenu.add(new MenuItem("조회", "/freeStudy/list"));
     freeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/detail"));
     freeStudyMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/freeStudy/update"));
     freeStudyMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/freeStudy/delete"));
-    freeStudyMenu.add(new MenuItem("검색", "/freeStudy/search"));
 
     return freeStudyMenu;
   }
@@ -156,12 +156,12 @@ public class App {
   private Menu createChargeStudyMenu() {
     MenuGroup chargeStudyMenu = new MenuGroup("유료스터디");
 
+    chargeStudyMenu.add(new MenuItem("검색", "/chargeStudyMenu/search"));
     chargeStudyMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/chargeStudyMenu/add"));
     chargeStudyMenu.add(new MenuItem("조회", "/chargeStudyMenu/list"));
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudyMenu/detail"));
     chargeStudyMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/chargeStudyMenu/update"));
     chargeStudyMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/chargeStudyMenu/delete"));
-    chargeStudyMenu.add(new MenuItem("검색", "/chargeStudyMenu/search"));
 
     return chargeStudyMenu;
   }
@@ -179,12 +179,12 @@ public class App {
   private Menu createCommunityInfoMenu() {
     MenuGroup communityInfoMenu = new MenuGroup("정보");
 
+    communityInfoMenu.add(new MenuItem("검색", "/communityInfoMenu/search"));
     communityInfoMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/communityInfo/add"));
     communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
     communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
     communityInfoMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/communityInfo/update"));
     communityInfoMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/communityInfo/delete"));
-    communityInfoMenu.add(new MenuItem("검색", "/communityInfoMenu/search"));
 
     return communityInfoMenu;
   }
@@ -192,12 +192,12 @@ public class App {
   private Menu createCommunityQaMenu() {
     MenuGroup communityQaMenu = new MenuGroup("질문");
 
+    communityQaMenu.add(new MenuItem("검색", "/communityQaMenu/search"));
     communityQaMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/communityQa/add"));
     communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
     communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
     communityQaMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/communityQa/update"));
     communityQaMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/communityQa/delete"));
-    communityQaMenu.add(new MenuItem("검색", "/communityQaMenu/search"));
 
     return communityQaMenu;
   }
@@ -205,12 +205,12 @@ public class App {
   private Menu createCommunityTalkMenu() {
     MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
 
+    communityTalkMenu.add(new MenuItem("검색", "/communityTalkMenu/search"));
     communityTalkMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/communityTalk/add"));
     communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
     communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
     communityTalkMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/communityTalk/update"));
     communityTalkMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/communityTalk/delete"));
-    communityTalkMenu.add(new MenuItem("검색", "/communityTalkMenu/search"));
 
     return communityTalkMenu;
   }
