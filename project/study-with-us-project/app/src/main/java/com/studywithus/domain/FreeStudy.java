@@ -16,6 +16,14 @@ public class FreeStudy {
   private int like;
   private int viewCount;
 
+  @Override
+  public String toString() {
+    return "FreeStudy [no=" + no + ", title=" + title + ", writer=" + writer + ", name=" + name
+        + ", onOffLine=" + onOffLine + ", area=" + area + ", explanation=" + explanation + ", rule="
+        + rule + ", registeredDate=" + registeredDate + ", like=" + like + ", viewCount="
+        + viewCount + "]";
+  }
+
   public int getNo() {
     return no;
   }
@@ -91,15 +99,16 @@ public class FreeStudy {
   public int getViewCount() {
     return viewCount;
   }
+
+  public void setViewCount(int viewCount) {
+    this.viewCount = viewCount;
+  }
+
   public String getName() {
     return name;
   }
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public void setViewCount(int viewCount) {
-    this.viewCount = viewCount;
   }
 }

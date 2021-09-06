@@ -39,6 +39,7 @@ import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudySearchHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
+import com.studywithus.handler.MemberPrompt;
 import com.studywithus.handler.MentorApplicantAddHandler;
 import com.studywithus.handler.MentorApplicantDetailHandler;
 import com.studywithus.handler.MentorApplicantListHandler;
@@ -64,6 +65,8 @@ public class App {
   List<Mentor> mentorList = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
+
+  MemberPrompt memberPrompt = new MemberPrompt(memberList);
 
   class MenuItem extends Menu {
     String menuId;

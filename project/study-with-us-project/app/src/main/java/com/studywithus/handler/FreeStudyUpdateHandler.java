@@ -17,17 +17,22 @@ public class FreeStudyUpdateHandler extends AbstractFreeStudyHandler {
     int no = Prompt.inputInt("번호? ");
     System.out.println();
 
-    FreeStudy study = findByNo(no);
+    FreeStudy freeStudy = findByNo(no);
 
-    if (study == null) {
+    if (freeStudy == null) {
       System.out.println();
       System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
       return;
     }
 
-    String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", study.getTitle()));
-    String explanation = Prompt.inputString(String.format("[%s] 수정할 설명: ", study.getExplanation()));
-    String rule = Prompt.inputString(String.format("[%s] 수정할 규칙: ", study.getRule()));
+    if (freeStudy.getWriter().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
+      System.out.println("변경 권한이 없습니다.");
+      return;
+    }
+
+    String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", freeStudy.getTitle()));
+    String explanation = Prompt.inputString(String.format("[%s] 수정할 설명: ", freeStudy.getExplanation()));
+    String rule = Prompt.inputString(String.format("[%s] 수정할 규칙: ", freeStudy.getRule()));
 
     System.out.println();
 
@@ -39,9 +44,9 @@ public class FreeStudyUpdateHandler extends AbstractFreeStudyHandler {
       return;
     }
 
-    study.setTitle(title);
-    study.setExplanation(explanation);
-    study.setRule(rule);
+    freeStudy.setTitle(title);
+    freeStudy.setExplanation(explanation);
+    freeStudy.setRule(rule);
 
     System.out.println();
     System.out.println("무료 스터디를 수정하였습니다.\n");

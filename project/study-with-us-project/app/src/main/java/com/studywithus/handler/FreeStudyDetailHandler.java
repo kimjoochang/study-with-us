@@ -26,7 +26,7 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
     }
 
     System.out.printf("제목: %s\n", freeStudy.getTitle());
-    System.out.printf("팀장: %s\n", freeStudy.getWriter());
+    System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
 
     if (freeStudy.getArea() != null) {
       System.out.printf("지역: %s\n", freeStudy.getArea());
@@ -55,7 +55,7 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
     }
 
     System.out.printf("제목: %s\n", freeStudy.getTitle());
-    System.out.printf("팀장: %s\n", freeStudy.getWriter());
+    System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
 
     if (freeStudy.getArea() != null) {
       System.out.printf("지역: %s\n", freeStudy.getArea());

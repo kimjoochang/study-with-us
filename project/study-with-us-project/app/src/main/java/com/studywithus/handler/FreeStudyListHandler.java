@@ -15,11 +15,13 @@ public class FreeStudyListHandler extends AbstractFreeStudyHandler {
     System.out.println("[무료 스터디 / 조회]\n");
 
     for (FreeStudy freeStudy : freeStudyList) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", freeStudy.getNo(), freeStudy.getTitle(),
-          freeStudy.getWriter().getName(), freeStudy.getRegisteredDate(),
-          freeStudy.getViewCount(), freeStudy.getLike());
-
-      System.out.println();
+      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+          freeStudy.getNo(), 
+          freeStudy.getTitle(), 
+          freeStudy.getWriter().getName(),
+          freeStudy.getRegisteredDate(),
+          freeStudy.getViewCount(), 
+          freeStudy.getLike());
     }
   }
 }
