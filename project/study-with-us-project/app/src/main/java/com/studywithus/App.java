@@ -440,7 +440,7 @@ public class App {
 
     // 커뮤니티 질문 메뉴
     MenuGroup communityQaMenu = new MenuGroup("질문");
-    mainMenuGroup.add(communityQaMenu);
+    communityMainMenu.add(communityQaMenu);
 
     communityQaMenu.add(new Menu("생성") {
       @Override
@@ -479,8 +479,8 @@ public class App {
       }});
 
     // 커뮤니티 스몰톡 메뉴
-    MenuGroup communityTalkMenu = new MenuGroup("질문");
-    mainMenuGroup.add(communityTalkMenu);
+    MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
+    communityMainMenu.add(communityTalkMenu);
 
     communityTalkMenu.add(new Menu("생성") {
       @Override
