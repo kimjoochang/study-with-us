@@ -32,6 +32,7 @@ import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudySearchHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
+import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
@@ -114,6 +115,7 @@ public class App {
 
     commandMap.put("/auth/login", new AuthLoginHandler(memberList));
     commandMap.put("/auth/logout", new AuthLogoutHandler());
+    commandMap.put("/auth/signUp", new SignUpHandler(memberList));
   }
 
   void service() {
@@ -126,13 +128,14 @@ public class App {
     mainMenuGroup.setPrevMenuTitle("종료");
 
     mainMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/auth/login"));
-    mainMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGIN, "/auth/userinfo"));
+    mainMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGIN, "/auth/signUp"));
     mainMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/auth/logout"));
 
     mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
     mainMenuGroup.add(createCommunityMenu());
+    mainMenuGroup.add(createInterestMenu());
 
     return mainMenuGroup;
   }
@@ -267,6 +270,30 @@ public class App {
     examCalenderMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/examCalender/delete"));
 
     return examCalenderMenu;
+  }
+
+  private Menu createInterestMenu() {
+    MenuGroup interestMenu = new MenuGroup("관심목록");
+
+    interestMenu.add(createFreeInterestMenu());
+    interestMenu.add(createChargeInterestMenu());
+
+    return interestMenu;
+  }
+
+  private Menu createFreeInterestMenu() {
+    MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
+    freeInterestMenu.add(new MenuItem("조회", Menu.ENABLE_LOGIN, "/freeInterest/list"));
+    freeInterestMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN,"/freeInterest/list"));
+
+    return freeInterestMenu;
+  }
+
+  private Menu createChargeInterestMenu() {
+    MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
+    chargeInterestMenu.add(new MenuItem("조회", Menu.ENABLE_LOGIN, "/chargeInterest/list"));
+    chargeInterestMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/chargeInterest/list"));
+    return chargeInterestMenu;
   }
 }
 
