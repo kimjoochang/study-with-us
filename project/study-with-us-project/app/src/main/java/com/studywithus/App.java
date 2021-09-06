@@ -141,7 +141,7 @@ public class App {
     MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
 
     freeStudyMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/freeStudy/add"));
-    freeStudyMenu.add(new MenuItem("목록", "/freeStudy/list"));
+    freeStudyMenu.add(new MenuItem("조회", "/freeStudy/list"));
     freeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/detail"));
     freeStudyMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/freeStudy/update"));
     freeStudyMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/freeStudy/delete"));
@@ -154,7 +154,7 @@ public class App {
     MenuGroup chargeStudyMenu = new MenuGroup("유료스터디");
 
     chargeStudyMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/chargeStudyMenu/add"));
-    chargeStudyMenu.add(new MenuItem("목록", "/chargeStudyMenu/list"));
+    chargeStudyMenu.add(new MenuItem("조회", "/chargeStudyMenu/list"));
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudyMenu/detail"));
     chargeStudyMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/chargeStudyMenu/update"));
     chargeStudyMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/chargeStudyMenu/delete"));
