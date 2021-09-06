@@ -13,7 +13,7 @@ public class MentorApplicantListHandler extends AbstractMentorApplicantHandler {
     System.out.println("[멘토 신청 내역 / 조회]\n");
 
     for(Member mentorApplicant : mentorApplicantList) {
-      System.out.printf("%s, %s\n",mentorApplicant.getName(), mentorApplicant.getId());
+      System.out.println("신청자 이름 : " + mentorApplicant.getName());
     }
   }
 }
