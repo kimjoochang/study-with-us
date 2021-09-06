@@ -9,6 +9,7 @@ public class AuthLoginHandler implements Command {
 
   List<Member> memberList;
 
+
   static Member loginUser;
   static int userAccessLevel = Menu.ACCESS_LOGOUT;
 

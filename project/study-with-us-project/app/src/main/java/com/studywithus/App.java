@@ -106,7 +106,7 @@ public class App {
 
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
     commandMap.put("/chargeStudy/delete", new ChargeStudyDeleteHandler(chargeStudyList));
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
@@ -145,7 +145,7 @@ public class App {
 
     commandMap.put("/chargeInterest/add", new ChargeInterestAddHandler(chargeInterestList));
     commandMap.put("/chargeInterest/list", new ChargeInterestListHandler(chargeInterestList));
-    commandMap.put("/chargeInterest/detail", new ChargeInterestDeleteHandler(chargeInterestList));
+    commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
 
     commandMap.put("/auth/login", new AuthLoginHandler(memberList));
     commandMap.put("/auth/logout", new AuthLogoutHandler());
