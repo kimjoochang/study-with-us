@@ -170,6 +170,7 @@ public class App {
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
     mainMenuGroup.add(createCommunityMenu());
+    mainMenuGroup.add(createMentorApplyMenu());
 
     return mainMenuGroup;
   }
@@ -203,8 +204,8 @@ public class App {
   private Menu createMentorApplicantMenu() {
     MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
 
-    mentorApplicantMenu.add(new MenuItem("조회", ACCESS_ADMIN, "/mentorApplicant/list"));
-    mentorApplicantMenu.add(new MenuItem("상세보기", ACCESS_ADMIN, "/mentorApplicant/detail"));
+    mentorApplicantMenu.add(new MenuItem("조회", /*ACCESS_ADMIN,*/ "/mentorApplicant/list"));
+    mentorApplicantMenu.add(new MenuItem("상세보기", /*ACCESS_ADMIN,*/ "/mentorApplicant/detail"));
 
     return mentorApplicantMenu;
   }
@@ -331,5 +332,12 @@ public class App {
     communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/communityTalk/delete"));
 
     return communityTalkMenu;
+  }
+
+  private Menu createMentorApplyMenu() {
+    MenuGroup mentorApplyMenu = new MenuGroup("멘토 신청하기");
+    mentorApplyMenu.add(new MenuItem("신청", ACCESS_GENERAL, "/mentorApplicant/add"));
+
+    return mentorApplyMenu;
   }
 }
