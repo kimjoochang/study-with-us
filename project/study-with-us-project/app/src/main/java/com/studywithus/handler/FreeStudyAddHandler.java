@@ -12,7 +12,7 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
 
     FreeStudy testUser = new FreeStudy();
     testUser.setNo(1);
-    testUser.setWriter(AuthLoginHandler.getLoginUser());
+    testUser.setName("김제이");
     testUser.setOnOffLine(2);
     testUser.setArea("서울시 강남구");
     testUser.setTitle("[자바] 자료구조 스터디 1");
@@ -24,7 +24,7 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
 
     testUser = new FreeStudy();
     testUser.setNo(2);
-    testUser.setWriter(AuthLoginHandler.getLoginUser());
+    testUser.setName("하선영");
     testUser.setOnOffLine(1);
     testUser.setTitle("[자바] 자료구조 스터디 2");
     testUser.setExplanation("Array / Linked List / Stack");
@@ -35,10 +35,13 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
   }
 
   // 무료 스터디 생성
+  @Override
   public void execute() {
     System.out.println("[무료 스터디 / 생성]\n");
 
     FreeStudy freeStudy = new FreeStudy();
+
+    freeStudy.setWriter(AuthLoginHandler.getLoginUser());
 
     freeStudy.setNo(Prompt.inputInt("번호? "));
 

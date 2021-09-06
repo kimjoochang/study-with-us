@@ -7,6 +7,7 @@ public class FreeStudy {
   private int no;
   private String title;
   private Member writer;
+  private String name;
   private int onOffLine;
   private String area;
   private String explanation;
@@ -89,6 +90,13 @@ public class FreeStudy {
 
   public int getViewCount() {
     return viewCount;
+  }
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   public void setViewCount(int viewCount) {
