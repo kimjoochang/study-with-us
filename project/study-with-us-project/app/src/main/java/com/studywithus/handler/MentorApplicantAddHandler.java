@@ -6,11 +6,10 @@ import com.studywithus.util.Prompt;
 
 public class MentorApplicantAddHandler extends AbstractMentorApplicantHandler {
 
-
-
   public MentorApplicantAddHandler (List<Member> mentorApplicantList) {
     super(mentorApplicantList);
   }
+
   // 멘토 신청하기
   @Override
   public void execute() {
@@ -32,5 +31,3 @@ public class MentorApplicantAddHandler extends AbstractMentorApplicantHandler {
     System.out.println("멘토 신청이 완료되었습니다.");
   }
 }
-
-
