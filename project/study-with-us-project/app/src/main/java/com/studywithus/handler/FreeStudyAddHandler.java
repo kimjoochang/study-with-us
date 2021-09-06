@@ -9,29 +9,6 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
 
   public FreeStudyAddHandler(List<FreeStudy> freeStudyList) {
     super(freeStudyList);
-
-    FreeStudy testUser = new FreeStudy();
-    testUser.setNo(1);
-    testUser.setName("김제이");
-    testUser.setOnOffLine(2);
-    testUser.setArea("서울시 강남구");
-    testUser.setTitle("[자바] 자료구조 스터디 1");
-    testUser.setExplanation("Array / Linked List / Stack");
-    testUser.setRule("규칙 1");
-    testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    freeStudyList.add(testUser);
-
-    testUser = new FreeStudy();
-    testUser.setNo(2);
-    testUser.setName("하선영");
-    testUser.setOnOffLine(1);
-    testUser.setTitle("[자바] 자료구조 스터디 2");
-    testUser.setExplanation("Array / Linked List / Stack");
-    testUser.setRule("규칙 2");
-    testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    freeStudyList.add(testUser);
   }
 
   // 무료 스터디 생성
