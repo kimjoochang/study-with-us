@@ -13,6 +13,9 @@ import com.studywithus.domain.Member;
 import com.studywithus.domain.Mentor;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
+import com.studywithus.handler.ChargeInterestAddHandler;
+import com.studywithus.handler.ChargeInterestDeleteHandler;
+import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
@@ -26,12 +29,20 @@ import com.studywithus.handler.CommunityDetailHandler;
 import com.studywithus.handler.CommunityListHandler;
 import com.studywithus.handler.CommunitySearchHandler;
 import com.studywithus.handler.CommunityUpdateHandler;
+import com.studywithus.handler.FreeInterestAddHandler;
+import com.studywithus.handler.FreeInterestDeleteHandler;
+import com.studywithus.handler.FreeInterestListHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudySearchHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
+import com.studywithus.handler.MentorApplicantAddHandler;
+import com.studywithus.handler.MentorApplicantDetailHandler;
+import com.studywithus.handler.MentorApplicantListHandler;
+import com.studywithus.handler.MentorApproveHandler;
+import com.studywithus.handler.MentorRejectHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -112,6 +123,20 @@ public class App {
     commandMap.put("/community/update", new CommunityUpdateHandler(communityTalkList));
     commandMap.put("/community/delete", new CommunityDeleteHandler(communityTalkList));
     commandMap.put("/community/search", new CommunitySearchHandler(communityTalkList));
+
+    commandMap.put("/mentorApplicant/add", new MentorApplicantAddHandler(mentorApplicantList));
+    commandMap.put("/mentorApplicant/list", new MentorApplicantListHandler(mentorApplicantList));
+    commandMap.put("/mentorApplicant/detail", new MentorApplicantDetailHandler(mentorApplicantList));
+    commandMap.put("/mentorApplicant/Approve", new MentorApproveHandler(mentorList));
+    commandMap.put("/mentorApplicant/Reject", new MentorRejectHandler(mentorApplicantList));
+
+    commandMap.put("/freeInterest/add", new FreeInterestAddHandler(freeInterestList));
+    commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
+    commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
+
+    commandMap.put("/chargeInterest/add", new ChargeInterestAddHandler(chargeInterestList));
+    commandMap.put("/chargeInterest/list", new ChargeInterestListHandler(chargeInterestList));
+    commandMap.put("/chargeInterest/detail", new ChargeInterestDeleteHandler(chargeInterestList));
 
     commandMap.put("/auth/login", new AuthLoginHandler(memberList));
     commandMap.put("/auth/logout", new AuthLogoutHandler());
