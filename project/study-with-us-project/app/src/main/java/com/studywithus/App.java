@@ -139,11 +139,6 @@ public class App {
     app.service();
   }
 
-  void service() {
-    createMenu().execute();
-    Prompt.close();
-  }
-
   public App() {
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
@@ -151,6 +146,11 @@ public class App {
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
+  }
+
+  void service() {
+    createMenu().execute();
+    Prompt.close();
   }
 
   Menu createMenu() {
