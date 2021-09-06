@@ -7,7 +7,6 @@ public class MentorRejectHandler extends AbstractMentorApplicantHandler {
 
   public MentorRejectHandler(List<Member> mentorApplicantList) {
     super(mentorApplicantList);
-    // TODO Auto-generated constructor stub
   }
 
   @Override
@@ -19,5 +18,4 @@ public class MentorRejectHandler extends AbstractMentorApplicantHandler {
 
     System.out.println("멘토 신청을 거절하였습니다.");
   }
-
 }

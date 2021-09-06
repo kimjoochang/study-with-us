@@ -11,14 +11,14 @@ public class MentorApplicantDetailHandler extends AbstractMentorApplicantHandler
   }
 
   public Member execute1() {
-    System.out.println("[커뮤니티 / 상세보기] \n");
+    System.out.println("[멘토 신청 내역 / 상세보기] \n");
 
     String name = Prompt.inputString("이름? ");
     Member member = findByName(name);
 
     if (member == null) {
       System.out.println();
-      System.out.println("입력하신 이름과 일치하는 신청내역이 없습니다.\n");
+      System.out.println("입력하신 이름과 일치하는 신청 내역이 없습니다.\n");
       return null;
     }
 
@@ -29,9 +29,5 @@ public class MentorApplicantDetailHandler extends AbstractMentorApplicantHandler
 
   @Override
   public void execute() {
-    // TODO Auto-generated method stub
-
   }
-
-
 }
