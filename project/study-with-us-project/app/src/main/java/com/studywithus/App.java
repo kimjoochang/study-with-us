@@ -109,26 +109,26 @@ public class App {
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/pay", new ChargeStudyPayHandler(chargeStudyList));
 
-    commandMap.put("/community/add", new CommunityAddHandler(communityInfoList));
-    commandMap.put("/community/list", new CommunityListHandler(communityInfoList));
-    commandMap.put("/community/detail", new CommunityDetailHandler(communityInfoList));
-    commandMap.put("/community/update", new CommunityUpdateHandler(communityInfoList));
-    commandMap.put("/community/delete", new CommunityDeleteHandler(communityInfoList));
-    commandMap.put("/community/search", new CommunitySearchHandler(communityInfoList));
+    commandMap.put("/communityInfo/add", new CommunityAddHandler(communityInfoList));
+    commandMap.put("/communityInfo/list", new CommunityListHandler(communityInfoList));
+    commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList));
+    commandMap.put("/communityInfo/update", new CommunityUpdateHandler(communityInfoList));
+    commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(communityInfoList));
+    commandMap.put("/communityInfo/search", new CommunitySearchHandler(communityInfoList));
 
-    commandMap.put("/community/add", new CommunityAddHandler(communityQaList));
-    commandMap.put("/community/list", new CommunityListHandler(communityQaList));
-    commandMap.put("/community/detail", new CommunityDetailHandler(communityQaList));
-    commandMap.put("/community/update", new CommunityUpdateHandler(communityQaList));
-    commandMap.put("/community/delete", new CommunityDeleteHandler(communityQaList));
-    commandMap.put("/community/search", new CommunitySearchHandler(communityQaList));
+    commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
+    commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
+    commandMap.put("/communityQa/detail", new CommunityDetailHandler(communityQaList));
+    commandMap.put("/communityQa/update", new CommunityUpdateHandler(communityQaList));
+    commandMap.put("/communityQa/delete", new CommunityDeleteHandler(communityQaList));
+    commandMap.put("/communityQa/search", new CommunitySearchHandler(communityQaList));
 
-    commandMap.put("/community/add", new CommunityAddHandler(communityTalkList));
-    commandMap.put("/community/list", new CommunityListHandler(communityTalkList));
-    commandMap.put("/community/detail", new CommunityDetailHandler(communityTalkList));
-    commandMap.put("/community/update", new CommunityUpdateHandler(communityTalkList));
-    commandMap.put("/community/delete", new CommunityDeleteHandler(communityTalkList));
-    commandMap.put("/community/search", new CommunitySearchHandler(communityTalkList));
+    commandMap.put("/communityTalk/add", new CommunityAddHandler(communityTalkList));
+    commandMap.put("/communityTalk/list", new CommunityListHandler(communityTalkList));
+    commandMap.put("/communityTalk/detail", new CommunityDetailHandler(communityTalkList));
+    commandMap.put("/communityTalk/update", new CommunityUpdateHandler(communityTalkList));
+    commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityTalkList));
+    commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
 
     commandMap.put("/mentorApplicant/add", new MentorApplicantAddHandler(mentorApplicantList));
     commandMap.put("/mentorApplicant/list", new MentorApplicantListHandler(mentorApplicantList));
