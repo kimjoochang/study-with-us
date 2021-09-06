@@ -7,7 +7,6 @@ public class FreeStudy {
   private int no;
   private String title;
   private Member writer;
-  private String name;
   private int onOffLine;
   private String area;
   private String explanation;
@@ -18,10 +17,10 @@ public class FreeStudy {
 
   @Override
   public String toString() {
-    return "FreeStudy [no=" + no + ", title=" + title + ", writer=" + writer + ", name=" + name
-        + ", onOffLine=" + onOffLine + ", area=" + area + ", explanation=" + explanation + ", rule="
-        + rule + ", registeredDate=" + registeredDate + ", like=" + like + ", viewCount="
-        + viewCount + "]";
+    return "FreeStudy [no=" + no + ", title=" + title + ", writer=" + writer + ", onOffLine="
+        + onOffLine + ", area=" + area + ", explanation=" + explanation + ", rule=" + rule
+        + ", registeredDate=" + registeredDate + ", like=" + like + ", viewCount=" + viewCount
+        + "]";
   }
 
   public int getNo() {
@@ -102,13 +101,5 @@ public class FreeStudy {
 
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
   }
 }
