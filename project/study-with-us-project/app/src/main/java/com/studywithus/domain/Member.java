@@ -3,10 +3,10 @@ package com.studywithus.domain;
 public class Member {
 
   private static String adminId = "admin";
-  private static String adminPwd = "admin";
+  private static String adminPassword = "admin";
   private String name;
   private String id;
-  private String pwd;
+  private String password;
 
   public static String getAdminId() {
     return adminId;
@@ -16,12 +16,12 @@ public class Member {
     Member.adminId = adminId;
   }
 
-  public static String getAdminPwd() {
-    return adminPwd;
+  public static String getAdminPassword() {
+    return adminPassword;
   }
 
-  public static void setAdminPwd(String adminPwd) {
-    Member.adminPwd = adminPwd;
+  public static void setAdminPassword(String adminPassword) {
+    Member.adminPassword = adminPassword;
   }
 
   public String getName() {
@@ -40,11 +40,11 @@ public class Member {
     this.id = id;
   }
 
-  public String getPwd() {
-    return pwd;
+  public String getPassword() {
+    return password;
   }
 
-  public void setPwd(String pwd) {
-    this.pwd = pwd;
+  public void setPassword(String password) {
+    this.password = password;
   }
 }
