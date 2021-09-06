@@ -9,17 +9,6 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
 
   public CommunityAddHandler(List<Community> communityList) {
     super(communityList);
-
-    // 커뮤니티 게시글 생성 테스트용
-    Community testUser = new Community();
-    testUser.setNo(1);
-    testUser.setTitle("커뮤니티 게시글");
-    testUser.setContent("배고파");
-    testUser.setName("김제이");
-    testUser.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    communityList.add(testUser);
-
   }
 
   // 게시글 생성
