@@ -12,6 +12,7 @@ public class Community {
   private Date registeredDate; // 등록일
   private int viewCount; // 조회수
   private int like; // 좋아요
+  private String name;
 
   @Override
   public String toString() {
@@ -75,4 +76,13 @@ public class Community {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
 }
