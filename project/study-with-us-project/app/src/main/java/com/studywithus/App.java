@@ -182,19 +182,24 @@ public class App {
       public void execute() {
         mentorApplicantListHandler.execute();
       }});
+
     mentorApplicantMenu.add(new Menu("멘토 신청내역 상세보기") {
       @Override 
       public void execute() {
         mentorApplicantListHandler.execute();
         System.out.println();
         Member applicant = mentorApplicantDetailHandler.execute1();
+
         System.out.println("1. 승인");
         System.out.println("2. 거절");
         System.out.println("0. 이전");
-        int input = Prompt.inputInt("선택>");
-        if(input == 1) {
+
+        int input = Prompt.inputInt("선택> ");
+
+        if (input == 1) {
           mentorApproveHandler.execute1(applicant);
-        }else if(input == 2) {
+
+        } else if (input == 2) {
           mentorRejectHandler.execute1(applicant);
         }
       }});
@@ -321,14 +326,17 @@ public class App {
       @Override
       public void execute() {
         ChargeStudy chargeInterest = chargeStudyDetailHandler.execute1(); 
+
         System.out.println("1. 결제하기");
         System.out.println("2. 관심목록 추가하기");
         System.out.println("0. 이전");
+
         int input = Prompt.inputInt("선택>");
 
-        if(input == 1) {
+        if (input == 1) {
           return;
-        }else if(input == 2) {
+
+        } else if(input == 2) {
           chargeInterestAddHandler.execute(chargeInterest);
         }
       }});
@@ -380,6 +388,7 @@ public class App {
 
     MenuGroup applyMentorMenu = new MenuGroup("멘토 신청하기");
     mainMenuGroup.add(applyMentorMenu);
+
     applyMentorMenu.add(new Menu("신청") {
       @Override
       public void execute() {
@@ -399,26 +408,31 @@ public class App {
       public void execute() {
         communityInfoAddHandler.execute();
       }});
+
     communityInfoMenu.add(new Menu("조회") {
       @Override
       public void execute() {
         communityInfoListHandler.execute();
       }});
+
     communityInfoMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         communityInfoDetailHandler.execute();
       }});
+
     communityInfoMenu.add(new Menu("수정") {
       @Override
       public void execute() {
         communityInfoUpdateHandler.execute();
       }});
+
     communityInfoMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         communityInfoDeleteHandler.execute();
       }});
+
     communityInfoMenu.add(new Menu("검색") {
       @Override
       public void execute() {
@@ -434,26 +448,31 @@ public class App {
       public void execute() {
         communityQaAddHandler.execute();
       }});
+
     communityQaMenu.add(new Menu("조회") {
       @Override
       public void execute() {
         communityQaListHandler.execute();
       }});
+
     communityQaMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         communityQaDetailHandler.execute();
       }});
+
     communityQaMenu.add(new Menu("수정") {
       @Override
       public void execute() {
         communityQaUpdateHandler.execute();
       }});
+
     communityQaMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         communityQaDeleteHandler.execute();
       }});
+
     communityQaMenu.add(new Menu("검색") {
       @Override
       public void execute() {
@@ -469,26 +488,31 @@ public class App {
       public void execute() {
         communityTalkAddHandler.execute();
       }});
+
     communityTalkMenu.add(new Menu("조회") {
       @Override
       public void execute() {
         communityTalkListHandler.execute();
       }});
+
     communityTalkMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         communityTalkDetailHandler.execute();
       }});
+
     communityTalkMenu.add(new Menu("수정") {
       @Override
       public void execute() {
         communityTalkUpdateHandler.execute();
       }});
+
     communityTalkMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         communityTalkDeleteHandler.execute();
       }});
+
     communityTalkMenu.add(new Menu("검색") {
       @Override
       public void execute() {
