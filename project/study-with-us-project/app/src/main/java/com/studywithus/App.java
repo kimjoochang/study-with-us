@@ -77,7 +77,6 @@ public class App {
   MentorApproveHandler mentorApproveHandler = new MentorApproveHandler(mentorList);
   MentorRejectHandler mentorRejectHandler = new MentorRejectHandler(mentorApplicantList);
 
-
   FreeInterestAddHandler freeInterestAddHandler = new FreeInterestAddHandler(freeInterestList);
   FreeInterestListHandler freeInterestListHandler = new FreeInterestListHandler(freeInterestList);
   FreeInterestDeleteHandler freeInterestDeleteHandler = new FreeInterestDeleteHandler(freeInterestList);
