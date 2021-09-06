@@ -15,6 +15,7 @@ public class MentorApproveHandler extends AbstractMentorHandler {
   @Override
   public void execute() {
   }
+
   public void execute1(Member mentorApplicant) {
 
     mentor.setId(mentorApplicant.getId());
@@ -24,5 +25,4 @@ public class MentorApproveHandler extends AbstractMentorHandler {
 
     System.out.println("멘토 승인이 완료되었습니다.");
   }
-
 }
