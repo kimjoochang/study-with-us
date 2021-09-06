@@ -285,7 +285,7 @@ public class App {
     MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
 
     freeInterestMenu.add(new MenuItem("조회", Menu.ENABLE_LOGIN, "/freeInterest/list"));
-    freeInterestMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN,"/freeInterest/list"));
+    freeInterestMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN,"/freeInterest/delete"));
 
     return freeInterestMenu;
   }
@@ -294,7 +294,7 @@ public class App {
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
 
     chargeInterestMenu.add(new MenuItem("조회", Menu.ENABLE_LOGIN, "/chargeInterest/list"));
-    chargeInterestMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/chargeInterest/list"));
+    chargeInterestMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/chargeInterest/delete"));
 
     return chargeInterestMenu;
   }
