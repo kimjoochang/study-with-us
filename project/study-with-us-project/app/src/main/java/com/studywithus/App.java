@@ -188,14 +188,14 @@ public class App {
     return chargeStudyMenu;
   }
 
-  private Menu createCommunityMainMenu() {
-    MenuGroup communityMainMenu = new MenuGroup("커뮤니티");
+  private Menu createCommunityMenu() {
+    MenuGroup communityMenu = new MenuGroup("커뮤니티");
 
-    communityMainMenu.add(createCommunityInfoMenu());
-    communityMainMenu.add(createCommunityQaMenu());
-    communityMainMenu.add(createCommunityTalkMenu());
+    communityMenu.add(createCommunityInfoMenu());
+    communityMenu.add(createCommunityQaMenu());
+    communityMenu.add(createCommunityTalkMenu());
 
-    return communityMainMenu;
+    return communityMenu;
   }
 
   private Menu createCommunityInfoMenu() {
@@ -233,100 +233,64 @@ public class App {
 
     return communityTalkMenu;
   }
+
+  private Menu createAdminMenu() {
+    MenuGroup adminMenu = new MenuGroup("관리자");
+
+    adminMenu.add(createMemberMenu());
+    adminMenu.add(createCalenderMenu());
+
+    return adminMenu;
+  }
+
+  private Menu createMemberMenu() {
+    MenuGroup memberMenu = new MenuGroup("회원 관리");
+
+    memberMenu.add(createMentorApplicantMenu());
+
+    return memberMenu;
+  }
+
+  private Menu createCalenderMenu() {
+    MenuGroup calenderMenu = new MenuGroup("캘린더 관리");
+
+    calenderMenu.add(createJobsCalenderMenu());
+    calenderMenu.add(createExamCalenderMenu());
+
+    return calenderMenu;
+  }
+
+  private Menu createMentorApplicantMenu() {
+    MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
+
+    mentorApplicantMenu.add(new MenuItem("조회", "/mentorApplicant/list"));
+    mentorApplicantMenu.add(new MenuItem("상세보기", "/mentorApplicant/detail"));
+
+    return mentorApplicantMenu;
+  }
+
+  private Menu createJobsCalenderMenu() {
+    MenuGroup jobsCalenderMenu = new MenuGroup("이달의 채용공고 관리");
+
+    jobsCalenderMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/jobsCalender/add"));
+    jobsCalenderMenu.add(new MenuItem("상세보기", "/jobsCalender/detail"));
+    jobsCalenderMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/jobsCalender/update"));
+    jobsCalenderMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/jobsCalender/delete"));
+
+    return jobsCalenderMenu;
+  }
+
+  private Menu createExamCalenderMenu() {
+    MenuGroup examCalenderMenu = new MenuGroup("이달의 시험일정 관리");
+
+    examCalenderMenu.add(new MenuItem("생성", Menu.ENABLE_LOGIN, "/examCalender/add"));
+    examCalenderMenu.add(new MenuItem("상세보기", "/examCalender/detail"));
+    examCalenderMenu.add(new MenuItem("수정", Menu.ENABLE_LOGIN, "/examCalender/update"));
+    examCalenderMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/examCalender/delete"));
+
+    return examCalenderMenu;
+  }
 }
-
-MenuGroup adminMenu = new MenuGroup("관리자");
-mainMenuGroup.add(adminMenu);
-
-MenuGroup memberMenu = new MenuGroup("회원 관리");
-adminMenu.add(memberMenu);
-
-MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
-memberMenu.add(mentorApplicantMenu);
-
-mentorApplicantMenu.add(new Menu("멘토 신청내역 조회") {
-  @Override 
-  public void execute() {
-    mentorApplicantListHandler.execute();
-  }});
-
-mentorApplicantMenu.add(new Menu("멘토 신청내역 상세보기") {
-  @Override 
-  public void execute() {
-    mentorApplicantListHandler.execute();
-    System.out.println();
-    Member applicant = mentorApplicantDetailHandler.execute1();
-
-    System.out.println("1. 승인");
-    System.out.println("2. 거절");
-    System.out.println("0. 이전");
-
-    int input = Prompt.inputInt("선택> ");
-
-    if (input == 1) {
-      mentorApproveHandler.execute1(applicant);
-
-    } else if (input == 2) {
-      mentorRejectHandler.execute1(applicant);
-    }
-  }});
-
-MenuGroup calenderMenu = new MenuGroup("캘린더 관리");
-adminMenu.add(calenderMenu);
-
-MenuGroup jobsCalenderMenu = new MenuGroup("이달의 채용공고 관리");
-calenderMenu.add(jobsCalenderMenu);
-
-jobsCalenderMenu.add(new Menu("생성") {
-  @Override 
-  public void execute() {
-    jobsCalenderAddHandler.execute();
-  }});
-
-jobsCalenderMenu.add(new Menu("상세보기") {
-  @Override 
-  public void execute() {
-    jobsCalenderDetailHandler.execute();
-  }});
-
-jobsCalenderMenu.add(new Menu("수정") {
-  @Override 
-  public void execute() {
-    jobsCalenderUpdateHandler.execute();
-  }});
-
-jobsCalenderMenu.add(new Menu("삭제") {
-  @Override 
-  public void execute() {
-    jobsCalenderDeleteHandler.execute();
-  }});
-
-MenuGroup examCalenderMenu = new MenuGroup("이달의 시험일정 관리");
-calenderMenu.add(examCalenderMenu);
-
-examCalenderMenu.add(new Menu("생성") {
-  @Override 
-  public void execute() {
-    examCalenderAddHandler.execute();
-  }});
-
-examCalenderMenu.add(new Menu("상세보기") {
-  @Override 
-  public void execute() {
-    examCalenderDetailHandler.execute();
-  }});
-
-examCalenderMenu.add(new Menu("변경") {
-  @Override 
-  public void execute() {
-    examCalenderUpdateHandler.execute();
-  }});
-
-examCalenderMenu.add(new Menu("삭제") {
-  @Override 
-  public void execute() {
-    examCalenderDeleteHandler.execute();
-  }});
 
 MenuGroup interestMenu = new MenuGroup("관심목록");
 mainMenuGroup.add(interestMenu);
