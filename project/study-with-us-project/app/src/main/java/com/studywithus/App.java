@@ -38,6 +38,7 @@ import com.studywithus.handler.FreeStudyApplyHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
+import com.studywithus.handler.FreeStudySearchHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
 import com.studywithus.handler.JobsCalenderAddHandler;
 import com.studywithus.handler.JobsCalenderDeleteHandler;
@@ -85,6 +86,7 @@ public class App {
   ChargeInterestListHandler chargeInterestListHandler = new ChargeInterestListHandler(chargeInterestList);
   ChargeInterestDeleteHandler chargeInterestDeleteHandler = new ChargeInterestDeleteHandler(chargeInterestList);
 
+  FreeStudySearchHandler freeStudySearchHandler = new FreeStudySearchHandler(freeStudyList);
   FreeStudyAddHandler freeStudyAddHandler = new FreeStudyAddHandler(freeStudyList);
   FreeStudyListHandler freeStudyListHandler = new FreeStudyListHandler(freeStudyList);
   FreeStudyDetailHandler freeStudyDetailHandler = new FreeStudyDetailHandler(freeStudyList);
@@ -140,6 +142,15 @@ public class App {
   void service() {
     createMenu().execute();
     Prompt.close();
+  }
+
+  public App() {
+    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
+    commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList));
+    commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
+    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
+    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
   }
 
   Menu createMenu() {
@@ -262,6 +273,12 @@ public class App {
 
     MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
     mainMenuGroup.add(freeStudyMenu);
+
+    freeStudyMenu.add(new Menu("검색") {
+      @Override 
+      public void execute() {
+        freeStudySearchHandler.execute();
+      }});
 
     freeStudyMenu.add(new Menu("생성") {
       @Override 
