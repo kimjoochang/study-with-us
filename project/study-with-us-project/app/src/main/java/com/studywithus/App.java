@@ -186,6 +186,19 @@ public class App {
     return mainMenuGroup;
   }
 
+  private Menu createFreeStudyMenu() {
+    MenuGroup freeStudyMenu = new MenuGroup("게시판");
+
+    freeStudyMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/freeStudy/add"));
+    freeStudyMenu.add(new MenuItem("목록", "/freeStudy/list"));
+    freeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/detail"));
+    freeStudyMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/freeStudy/update"));
+    freeStudyMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/freeStudy/delete"));
+    freeStudyMenu.add(new MenuItem("검색", "/freeStudy/search"));
+
+    return freeStudyMenu;
+  }
+
   MenuGroup adminMenu = new MenuGroup("관리자");
   mainMenuGroup.add(adminMenu);
 
