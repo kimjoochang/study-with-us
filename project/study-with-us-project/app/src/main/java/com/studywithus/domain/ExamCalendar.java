@@ -2,6 +2,7 @@ package com.studywithus.domain;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class ExamCalendar implements Serializable {
 
   private int no;

@@ -1,9 +1,11 @@
 package com.studywithus.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-public class FreeStudy {
+@SuppressWarnings("serial")
+public class FreeStudy implements Serializable {
 
   private int no;
   private String title;
