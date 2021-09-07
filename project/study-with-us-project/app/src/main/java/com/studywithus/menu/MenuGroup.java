@@ -140,7 +140,9 @@ public class MenuGroup extends Menu {
   }
 
   private Menu selectMenu(List<Menu> menuList) {
-    int menuNo = Prompt.inputInt("선택> ");
+    System.out.println(" ");
+    int menuNo = Prompt.inputInt("선택 > ");
+    System.out.println(" ");
 
     if (menuNo < 0 || menuNo > menuList.size()) {
       return null;
