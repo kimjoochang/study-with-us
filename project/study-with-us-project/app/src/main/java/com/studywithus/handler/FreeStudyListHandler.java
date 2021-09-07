@@ -5,6 +5,8 @@ import com.studywithus.domain.FreeStudy;
 
 public class FreeStudyListHandler extends AbstractFreeStudyHandler {
 
+  FreeStudy freeStudy;
+
   public FreeStudyListHandler(List<FreeStudy> freeStudyList) {
     super(freeStudyList);
   }
@@ -13,6 +15,11 @@ public class FreeStudyListHandler extends AbstractFreeStudyHandler {
   @Override
   public void execute() {
     System.out.println("[무료 스터디 / 조회]\n");
+
+    if (freeStudy == null) {
+      System.out.println("생성된 무료 스터디가 없습니다.");
+      return;
+    }
 
     for (FreeStudy freeStudy : freeStudyList) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 

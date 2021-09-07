@@ -433,10 +433,10 @@ public class App {
   private Menu createJobsCalenderMenu() {
     MenuGroup jobsCalenderMenu = new MenuGroup("이달의 채용공고 관리");
 
-    jobsCalenderMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalender/add"));
-    jobsCalenderMenu.add(new MenuItem("상세보기", "/jobsCalender/detail"));
-    jobsCalenderMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalender/update"));
-    jobsCalenderMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalender/delete"));
+    jobsCalenderMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalendar/add"));
+    jobsCalenderMenu.add(new MenuItem("상세보기", "/jobsCalendar/detail"));
+    jobsCalenderMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalendar/update"));
+    jobsCalenderMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalendar/delete"));
 
     return jobsCalenderMenu;
   }
@@ -444,10 +444,10 @@ public class App {
   private Menu createExamCalenderMenu() {
     MenuGroup examCalenderMenu = new MenuGroup("이달의 시험일정 관리");
 
-    examCalenderMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalender/add"));
-    examCalenderMenu.add(new MenuItem("상세보기", "/examCalender/detail"));
-    examCalenderMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalender/update"));
-    examCalenderMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalender/delete"));
+    examCalenderMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalendar/add"));
+    examCalenderMenu.add(new MenuItem("상세보기", "/examCalendar/detail"));
+    examCalenderMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalendar/update"));
+    examCalenderMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
 
     return examCalenderMenu;
   }
