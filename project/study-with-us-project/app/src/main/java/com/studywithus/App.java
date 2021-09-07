@@ -166,12 +166,14 @@ public class App {
 
   void service() {
     loadFreeStudies();
+    loadJobsCalendars();
     loadExamCalendars();
 
     createMainMenu().execute();
     Prompt.close();
 
     saveFreeStudies();
+    saveJobsalendars();
     saveExamCalendars();
   }
 
@@ -205,33 +207,6 @@ public class App {
   }
 
   @SuppressWarnings("unchecked")
-  private void loadExamCalendars() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("examCalendar.data"))) {
-
-      examCalendarList.addAll((List<ExamCalendar>) in.readObject());
-
-      System.out.println("이달의 시험일정 데이터 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 이달의 시험일정 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-    }
-  }
-
-  private void saveExamCalendars() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("examCalendar.data"))) {
-
-      out.writeObject(examCalendarList);
-
-      System.out.println("이달의 시험일정 데이터 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("이달의 시험일정 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-    }
-  }
-
-  @SuppressWarnings("unchecked")
   private void loadJobsCalendars() {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("jobsCalendar.data"))) {
@@ -255,6 +230,33 @@ public class App {
 
     } catch (Exception e) {
       System.out.println("이달의 채용공고 데이터를 파일에 저장 중 오류가 발생하였습니다.");
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadExamCalendars() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("examCalendar.data"))) {
+
+      examCalendarList.addAll((List<ExamCalendar>) in.readObject());
+
+      System.out.println("이달의 시험일정 데이터 로딩이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 이달의 시험일정 데이터를 읽어 오는 중 오류가 발생하였습니다.");
+    }
+  }
+
+  private void saveExamCalendars() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("examCalendar.data"))) {
+
+      out.writeObject(examCalendarList);
+
+      System.out.println("이달의 시험일정 데이터 저장이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("이달의 시험일정 데이터를 파일에 저장 중 오류가 발생하였습니다.");
     }
   }
 
