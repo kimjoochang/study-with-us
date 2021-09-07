@@ -1,6 +1,8 @@
 package com.studywithus.domain;
 
-public class JobsCalender {
+import java.io.Serializable;
+
+public class JobsCalender implements Serializable {
 
   private int no;
   private String title;

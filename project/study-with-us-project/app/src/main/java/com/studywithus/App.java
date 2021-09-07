@@ -3,13 +3,17 @@ package com.studywithus;
 import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.Community;
-import com.studywithus.domain.ExamCalender;
+import com.studywithus.domain.ExamCalendar;
 import com.studywithus.domain.FreeStudy;
 import com.studywithus.domain.JobsCalender;
 import com.studywithus.domain.Member;
@@ -31,10 +35,10 @@ import com.studywithus.handler.CommunityDetailHandler;
 import com.studywithus.handler.CommunityListHandler;
 import com.studywithus.handler.CommunitySearchHandler;
 import com.studywithus.handler.CommunityUpdateHandler;
-import com.studywithus.handler.ExamCalenderAddHandler;
-import com.studywithus.handler.ExamCalenderDeleteHandler;
-import com.studywithus.handler.ExamCalenderDetailHandler;
-import com.studywithus.handler.ExamCalenderUpdateHandler;
+import com.studywithus.handler.ExamCalendarAddHandler;
+import com.studywithus.handler.ExamCalendarDeleteHandler;
+import com.studywithus.handler.ExamCalendarDetailHandler;
+import com.studywithus.handler.ExamCalendarUpdateHandler;
 import com.studywithus.handler.FreeInterestDeleteHandler;
 import com.studywithus.handler.FreeInterestListHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
@@ -61,7 +65,7 @@ public class App {
   List<FreeStudy> freeStudyList = new ArrayList<>();
   List<FreeStudy> freeInterestList = new ArrayList<>();
   List<JobsCalender> jobsCalenderList = new ArrayList<>();
-  List<ExamCalender> examCalenderList = new ArrayList<>();
+  List<ExamCalendar> examCalendarList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
   List<ChargeStudy> chargeStudyList = new ArrayList<>();
   List<ChargeStudy> chargeInterestList = new ArrayList<>();
@@ -140,10 +144,10 @@ public class App {
     commandMap.put("/jobsCalender/update", new JobsCalenderUpdateHandler(jobsCalenderList));
     commandMap.put("/jobsCalender/delete", new JobsCalenderDeleteHandler(jobsCalenderList));
 
-    commandMap.put("/examCalender/add", new ExamCalenderAddHandler(examCalenderList));
-    commandMap.put("/examCalender/detail", new ExamCalenderDetailHandler(examCalenderList));
-    commandMap.put("/examCalender/update", new ExamCalenderUpdateHandler(examCalenderList));
-    commandMap.put("/examCalender/delete", new ExamCalenderDeleteHandler(examCalenderList));
+    commandMap.put("/examCalendar/add", new ExamCalendarAddHandler(examCalendarList));
+    commandMap.put("/examCalendar/detail", new ExamCalendarDetailHandler(examCalendarList));
+    commandMap.put("/examCalendar/update", new ExamCalendarUpdateHandler(examCalendarList));
+    commandMap.put("/examCalendar/delete", new ExamCalendarDeleteHandler(examCalendarList));
 
     commandMap.put("/mentorApplicant/add", new MentorApplicantAddHandler(mentorApplicantList));
     commandMap.put("/mentorApplicant/list", new MentorApplicantListHandler(mentorApplicantList));
@@ -161,8 +165,41 @@ public class App {
   }
 
   void service() {
+    loadExamCalendars();
+
     createMainMenu().execute();
     Prompt.close();
+
+    saveExamCalendars();
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadExamCalendars() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("examCalendar.data"))) {
+
+      examCalendarList.addAll((List<ExamCalendar>) in.readObject());
+
+      System.out.println("게시글 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글을 읽어오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveExamCalendars() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("examCalendars.data"))) {
+
+      out.writeObject(examCalendarList);
+
+      System.out.println("게시글 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("게시글을 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
   }
 
   Menu createMainMenu() {
