@@ -37,12 +37,10 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
     study.setViewCount(study.getViewCount() + 1);
     System.out.printf("조회수: %d\n", study.getViewCount());
 
-
-    System.out.printf("조회수: %d\n", study.getViewCount() + 1);
-
+    System.out.println();
     System.out.println("1. 결제하기");
     System.out.println("2. 관심목록 추가하기");
-    System.out.println("0. 이전");
+    System.out.println("0. 이전\n");
     while(true) {
 
       int input = Prompt.inputInt("선택>");
@@ -62,7 +60,7 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
   }
 
   private void payHandler() {
-    System.out.print("[유료 스터디 / 결제]");
+    System.out.println("[유료 스터디/결제]\n");
 
     String input1 = Prompt.inputString("유료 스터디를 결제 하시겠습니까? (y/N)");
     if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
@@ -86,13 +84,14 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
         System.out.print(dot.append("♥"));
       }
       System.out.println();
+      System.out.println();
       System.out.println("유료 스터디 결제가 완료 되었습니다.\n");
     }
     return;
   }
 
   private void interestAddHandler() {
-    String input = Prompt.inputString("관심 목록에 추가하시겠습니까? (y/N) ");
+    String input = Prompt.inputString("관심 목록에 추가하시겠습니까? (y/N)");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("유료 스터디 관심 목록 추가를 취소하였습니다.\n");

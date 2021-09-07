@@ -1,8 +1,10 @@
 package com.studywithus.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Member {
+@SuppressWarnings("serial")
+public class Member implements Serializable {
 
   private static String adminId = "admin";
   private static String adminPassword = "admin";

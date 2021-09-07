@@ -3,6 +3,10 @@ package com.studywithus;
 import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -16,14 +20,12 @@ import com.studywithus.domain.Member;
 import com.studywithus.domain.Mentor;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
-import com.studywithus.handler.ChargeInterestAddHandler;
 import com.studywithus.handler.ChargeInterestDeleteHandler;
 import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
 import com.studywithus.handler.ChargeStudyListHandler;
-import com.studywithus.handler.ChargeStudyPayHandler;
 import com.studywithus.handler.ChargeStudySearchHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
 import com.studywithus.handler.Command;
@@ -46,8 +48,6 @@ import com.studywithus.handler.MemberPrompt;
 import com.studywithus.handler.MentorApplicantAddHandler;
 import com.studywithus.handler.MentorApplicantDetailHandler;
 import com.studywithus.handler.MentorApplicantListHandler;
-import com.studywithus.handler.MentorApproveHandler;
-import com.studywithus.handler.MentorRejectHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -92,7 +92,7 @@ public class App3jc {
   }
 
   public static void main(String[] args) {
-    App app = new App(); 
+    App3jc app = new App3jc(); 
     app.service();
   }
 
@@ -110,7 +110,6 @@ public class App3jc {
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
     commandMap.put("/chargeStudy/delete", new ChargeStudyDeleteHandler(chargeStudyList));
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/pay", new ChargeStudyPayHandler(chargeStudyList));
 
     commandMap.put("/communityInfo/add", new CommunityAddHandler(communityInfoList));
     commandMap.put("/communityInfo/list", new CommunityListHandler(communityInfoList));
@@ -135,15 +134,12 @@ public class App3jc {
 
     commandMap.put("/mentorApplicant/add", new MentorApplicantAddHandler(mentorApplicantList));
     commandMap.put("/mentorApplicant/list", new MentorApplicantListHandler(mentorApplicantList));
-    commandMap.put("/mentorApplicant/detail", new MentorApplicantDetailHandler(mentorApplicantList));
-    commandMap.put("/mentorApplicant/Approve", new MentorApproveHandler(mentorList));
-    commandMap.put("/mentorApplicant/Reject", new MentorRejectHandler(mentorApplicantList));
+    commandMap.put("/mentorApplicant/detail", new MentorApplicantDetailHandler(mentorApplicantList, mentorList));
 
     commandMap.put("/freeInterest/add", new FreeInterestAddHandler(freeInterestList));
     commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
 
-    commandMap.put("/chargeInterest/add", new ChargeInterestAddHandler(chargeInterestList));
     commandMap.put("/chargeInterest/list", new ChargeInterestListHandler(chargeInterestList));
     commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
 
@@ -153,8 +149,118 @@ public class App3jc {
   }
 
   void service() {
+    loadMembers();
+    loadCommunityInfos();
+    loadCommunityQas();
+    loadCommunityTalks();
+
     createMainMenu().execute();
     Prompt.close();
+
+    saveMembers();
+    saveCommunityInfos();
+    saveCommunityQas();
+    saveCommunityTalks();
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadMembers() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("member.data"))) {
+
+      memberList.addAll((List<Member>) in.readObject());
+
+    } catch (Exception e) {
+      System.out.println("파일에서 회원 정보를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadCommunityInfos() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("communityInfo.data"))) {
+
+      communityInfoList.addAll((List<Community>) in.readObject());
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadCommunityQas() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("communityQa.data"))) {
+
+      communityQaList.addAll((List<Community>) in.readObject());
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadCommunityTalks() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("communityTalk.data"))) {
+
+      communityTalkList.addAll((List<Community>) in.readObject());
+
+    } catch (Exception e) {
+      System.out.println("파일에서 게시글을 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveMembers() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("member.data"))) {
+
+      out.writeObject(memberList);
+
+    } catch (Exception e) {
+      System.out.println("회원 정보를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCommunityInfos() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("communityInfo.data"))) {
+
+      out.writeObject(communityInfoList);
+
+    } catch (Exception e) {
+      System.out.println("커뮤니티-정보 게시글을 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCommunityQas() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("communityQa.data"))) {
+
+      out.writeObject(communityQaList);
+
+    } catch (Exception e) {
+      System.out.println("커뮤니티-질문 게시글을 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCommunityTalks() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("communityTalk.data"))) {
+
+      out.writeObject(communityTalkList);
+
+    } catch (Exception e) {
+      System.out.println("커뮤니티-스몰톡 게시글을 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
   }
 
   Menu createMainMenu() {
@@ -170,6 +276,7 @@ public class App3jc {
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
     mainMenuGroup.add(createCommunityMenu());
+    mainMenuGroup.add(createMentorApplyMenu());
 
     return mainMenuGroup;
   }
@@ -272,7 +379,7 @@ public class App3jc {
   }
 
   private Menu createChargeStudyMenu() {
-    MenuGroup chargeStudyMenu = new MenuGroup("유료스터디");
+    MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
 
     chargeStudyMenu.add(new MenuItem("검색", "/chargeStudy/search"));
     chargeStudyMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/chargeStudy/add"));
@@ -331,5 +438,12 @@ public class App3jc {
     communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/communityTalk/delete"));
 
     return communityTalkMenu;
+  }
+
+  private Menu createMentorApplyMenu() {
+    MenuGroup mentorApplyMenu = new MenuGroup("멘토 신청하기");
+    mentorApplyMenu.add(new MenuItem("신청", ACCESS_GENERAL, "/mentorApplicant/add"));
+
+    return mentorApplyMenu;
   }
 }
