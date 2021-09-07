@@ -8,6 +8,8 @@ public abstract class AbstractChargeStudyHandler implements Command {
 
   protected List<ChargeStudy> chargeStudyList;
   protected List<ChargeStudy> chargeInterestList;
+  protected List<ChargeStudy> chargeDetailRequestList;
+
 
   public AbstractChargeStudyHandler(List<ChargeStudy> chargeStudyList) {
     this.chargeStudyList = chargeStudyList;
@@ -16,6 +18,15 @@ public abstract class AbstractChargeStudyHandler implements Command {
   public AbstractChargeStudyHandler(List<ChargeStudy> chargeStudyList, List<ChargeStudy> chargeInterestList) {
     this.chargeStudyList = chargeStudyList;
     this.chargeInterestList = chargeInterestList;
+  }
+
+  public AbstractChargeStudyHandler(List<ChargeStudy> chargeDetailRequestList, int nothing) {
+    this.chargeDetailRequestList = chargeDetailRequestList;
+  }
+
+  public AbstractChargeStudyHandler(List<ChargeStudy> chargeStudyList, List<ChargeStudy> chargeDetailRequestList, int nothing) {
+    this.chargeStudyList = chargeStudyList;
+    this.chargeDetailRequestList = chargeDetailRequestList;
   }
 
   @Override

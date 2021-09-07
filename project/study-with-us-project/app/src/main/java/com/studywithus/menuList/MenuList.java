@@ -10,7 +10,7 @@ import com.studywithus.domain.JobsCalender;
 import com.studywithus.domain.LoginMemberInfo;
 import com.studywithus.domain.NewMember;
 import com.studywithus.handler.ChargeStudyAddHandler;
-import com.studywithus.handler.ChargeStudyDeleteHandler;
+import com.studywithus.handler.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
 import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
@@ -52,7 +52,7 @@ public class MenuList {
   ChargeStudyListHandler chargeStudyListHandler = new ChargeStudyListHandler(chargeStudyList);
   ChargeStudyDetailHandler chargeStudyDetailHandler = new ChargeStudyDetailHandler(chargeStudyList);
   ChargeStudyUpdateHandler chargeStudyUpdateHandler = new ChargeStudyUpdateHandler(chargeStudyList);
-  ChargeStudyDeleteHandler chargeStudyDeleteHandler = new ChargeStudyDeleteHandler(chargeStudyList);
+  ChargeStudyDeleteRequestHandler chargeStudyDeleteHandler = new ChargeStudyDeleteRequestHandler(chargeStudyList);
 
   CommunityMenuList communityMenuList = new CommunityMenuList();
 

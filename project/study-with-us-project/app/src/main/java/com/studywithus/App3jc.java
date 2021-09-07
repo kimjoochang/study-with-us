@@ -23,7 +23,7 @@ import com.studywithus.handler.AuthLogoutHandler;
 import com.studywithus.handler.ChargeInterestDeleteHandler;
 import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
-import com.studywithus.handler.ChargeStudyDeleteHandler;
+import com.studywithus.handler.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
 import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudySearchHandler;
@@ -107,7 +107,7 @@ public class App3jc {
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
     commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/delete", new ChargeStudyDeleteHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/delete", new ChargeStudyDeleteRequestHandler(chargeStudyList));
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
 
     commandMap.put("/communityInfo/add", new CommunityAddHandler(communityInfoList));
