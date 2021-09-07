@@ -5,8 +5,6 @@ import com.studywithus.domain.ChargeStudy;
 
 public class ChargeStudyListHandler extends AbstractChargeStudyHandler{
 
-  ChargeStudy chargeStudy;
-
   public ChargeStudyListHandler(List<ChargeStudy> chargeStudyList) {
     super(chargeStudyList);	
   }
@@ -15,11 +13,6 @@ public class ChargeStudyListHandler extends AbstractChargeStudyHandler{
   @Override
   public void execute() {
     System.out.println("[유료 스터디 / 조회]\n");
-
-    if (chargeStudy == null) {
-      System.out.println("생성된 유료 스터디가 없습니다.");
-      return;
-    }
 
     for (ChargeStudy chargeStudy : chargeStudyList) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", chargeStudy.getNo(), chargeStudy.getTitle(),
