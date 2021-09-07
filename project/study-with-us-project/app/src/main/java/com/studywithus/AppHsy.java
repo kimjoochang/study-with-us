@@ -43,10 +43,10 @@ import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudySearchHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
-import com.studywithus.handler.JobsCalenderAddHandler;
-import com.studywithus.handler.JobsCalenderDeleteHandler;
-import com.studywithus.handler.JobsCalenderDetailHandler;
-import com.studywithus.handler.JobsCalenderUpdateHandler;
+import com.studywithus.handler.JobsCalendarAddHandler;
+import com.studywithus.handler.JobsCalendarDeleteHandler;
+import com.studywithus.handler.JobsCalendarDetailHandler;
+import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MemberPrompt;
 import com.studywithus.handler.MentorApplicantAddHandler;
 import com.studywithus.handler.MentorApplicantDetailHandler;
@@ -135,10 +135,10 @@ public class AppHsy {
     commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityTalkList));
     commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
 
-    commandMap.put("/jobsCalender/add", new JobsCalenderAddHandler(jobsCalenderList));
-    commandMap.put("/jobsCalender/detail", new JobsCalenderDetailHandler(jobsCalenderList));
-    commandMap.put("/jobsCalender/update", new JobsCalenderUpdateHandler(jobsCalenderList));
-    commandMap.put("/jobsCalender/delete", new JobsCalenderDeleteHandler(jobsCalenderList));
+    commandMap.put("/jobsCalender/add", new JobsCalendarAddHandler(jobsCalenderList));
+    commandMap.put("/jobsCalender/detail", new JobsCalendarDetailHandler(jobsCalenderList));
+    commandMap.put("/jobsCalender/update", new JobsCalendarUpdateHandler(jobsCalenderList));
+    commandMap.put("/jobsCalender/delete", new JobsCalendarDeleteHandler(jobsCalenderList));
 
     commandMap.put("/examCalender/add", new ExamCalendarAddHandler(examCalenderList));
     commandMap.put("/examCalender/detail", new ExamCalendarDetailHandler(examCalenderList));

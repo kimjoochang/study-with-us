@@ -8,10 +8,10 @@ import com.studywithus.handler.ExamCalendarAddHandler;
 import com.studywithus.handler.ExamCalendarDeleteHandler;
 import com.studywithus.handler.ExamCalendarDetailHandler;
 import com.studywithus.handler.ExamCalendarUpdateHandler;
-import com.studywithus.handler.JobsCalenderAddHandler;
-import com.studywithus.handler.JobsCalenderDeleteHandler;
-import com.studywithus.handler.JobsCalenderDetailHandler;
-import com.studywithus.handler.JobsCalenderUpdateHandler;
+import com.studywithus.handler.JobsCalendarAddHandler;
+import com.studywithus.handler.JobsCalendarDeleteHandler;
+import com.studywithus.handler.JobsCalendarDetailHandler;
+import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.util.Prompt;
 
 public class CalenderMenuList {
@@ -24,10 +24,10 @@ public class CalenderMenuList {
   ExamCalendarUpdateHandler examCalenderUpdateHandler = new ExamCalendarUpdateHandler(examCalenderList);
   ExamCalendarDeleteHandler examCalenderDeleteHandler = new ExamCalendarDeleteHandler(examCalenderList);
 
-  JobsCalenderAddHandler jobsCalenderAddHandler = new JobsCalenderAddHandler(jobsCalenderList);
-  JobsCalenderDetailHandler jobsCalenderDetailHandler = new JobsCalenderDetailHandler(jobsCalenderList);
-  JobsCalenderUpdateHandler jobsCalenderUpdateHandler = new JobsCalenderUpdateHandler(jobsCalenderList);
-  JobsCalenderDeleteHandler jobsCalenderDeleteHandler = new JobsCalenderDeleteHandler(jobsCalenderList);
+  JobsCalendarAddHandler jobsCalenderAddHandler = new JobsCalendarAddHandler(jobsCalenderList);
+  JobsCalendarDetailHandler jobsCalenderDetailHandler = new JobsCalendarDetailHandler(jobsCalenderList);
+  JobsCalendarUpdateHandler jobsCalenderUpdateHandler = new JobsCalendarUpdateHandler(jobsCalenderList);
+  JobsCalendarDeleteHandler jobsCalendarDeleteHandler = new JobsCalendarDeleteHandler(jobsCalenderList);
 
   int input;
 
@@ -127,7 +127,7 @@ public class CalenderMenuList {
 
         // 4. 삭제
       } else if (input == 4) {
-        jobsCalenderDeleteHandler.execute();
+        jobsCalendarDeleteHandler.execute();
 
         // 0. 이전
       } else if (input == 0) {

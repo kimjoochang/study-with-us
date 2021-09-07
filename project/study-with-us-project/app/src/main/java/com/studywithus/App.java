@@ -15,7 +15,7 @@ import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.ExamCalendar;
 import com.studywithus.domain.FreeStudy;
-import com.studywithus.domain.JobsCalender;
+import com.studywithus.domain.JobsCalendar;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Mentor;
 import com.studywithus.handler.AuthLoginHandler;
@@ -47,10 +47,10 @@ import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudySearchHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
-import com.studywithus.handler.JobsCalenderAddHandler;
-import com.studywithus.handler.JobsCalenderDeleteHandler;
-import com.studywithus.handler.JobsCalenderDetailHandler;
-import com.studywithus.handler.JobsCalenderUpdateHandler;
+import com.studywithus.handler.JobsCalendarAddHandler;
+import com.studywithus.handler.JobsCalendarDeleteHandler;
+import com.studywithus.handler.JobsCalendarDetailHandler;
+import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MemberPrompt;
 import com.studywithus.handler.MentorApplicantAddHandler;
 import com.studywithus.handler.MentorApplicantDetailHandler;
@@ -64,7 +64,7 @@ public class App {
   List<Member> memberList = new LinkedList<>();
   List<FreeStudy> freeStudyList = new ArrayList<>();
   List<FreeStudy> freeInterestList = new ArrayList<>();
-  List<JobsCalender> jobsCalenderList = new ArrayList<>();
+  List<JobsCalendar> jobsCalendarList = new ArrayList<>();
   List<ExamCalendar> examCalendarList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
   List<ChargeStudy> chargeStudyList = new ArrayList<>();
@@ -139,10 +139,10 @@ public class App {
     commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityTalkList));
     commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
 
-    commandMap.put("/jobsCalender/add", new JobsCalenderAddHandler(jobsCalenderList));
-    commandMap.put("/jobsCalender/detail", new JobsCalenderDetailHandler(jobsCalenderList));
-    commandMap.put("/jobsCalender/update", new JobsCalenderUpdateHandler(jobsCalenderList));
-    commandMap.put("/jobsCalender/delete", new JobsCalenderDeleteHandler(jobsCalenderList));
+    commandMap.put("/jobsCalendar/add", new JobsCalendarAddHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/detail", new JobsCalendarDetailHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/update", new JobsCalendarUpdateHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/delete", new JobsCalendarDeleteHandler(jobsCalendarList));
 
     commandMap.put("/examCalendar/add", new ExamCalendarAddHandler(examCalendarList));
     commandMap.put("/examCalendar/detail", new ExamCalendarDetailHandler(examCalendarList));
