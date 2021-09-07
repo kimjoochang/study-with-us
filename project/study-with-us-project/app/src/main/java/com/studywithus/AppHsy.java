@@ -213,7 +213,7 @@ public class AppHsy {
 		try (ObjectInputStream in = new ObjectInputStream(
 				new FileInputStream("chrageInterest.data"))) {
 
-			chargeInterestList.addAll((List<ChargeInterest>) in.readObject());
+			chargeInterestList.addAll((List<ChargeStudy>) in.readObject());
 
 			System.out.println("유료 스터디 관심목록 정보 로딩이 완료되었습니다.");
 
