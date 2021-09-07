@@ -171,7 +171,7 @@ public class App {
 
     mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/auth/login"));
     mainMenuGroup.add(new MenuItem("회원가입", ACCESS_LOGOUT, "/auth/signUp"));
-    mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL, "/auth/logout"));
+    mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL | ACCESS_ADMIN, "/auth/logout"));
 
     //    mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createMemberMenu());
@@ -209,15 +209,6 @@ public class App {
     return mentorApplyMenu;
   }
 
-  private Menu createCalenderMenu() {
-    MenuGroup calenderMenu = new MenuGroup("캘린더");
-
-    calenderMenu.add(createJobsCalenderMenu());
-    calenderMenu.add(createExamCalenderMenu());
-
-    return calenderMenu;
-  }
-
   private Menu createMentorApplicantMenu() {
     MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
 
@@ -225,6 +216,15 @@ public class App {
     mentorApplicantMenu.add(new MenuItem("상세보기", /*ACCESS_ADMIN,*/ "/mentorApplicant/detail"));
 
     return mentorApplicantMenu;
+  }
+
+  private Menu createCalenderMenu() {
+    MenuGroup calenderMenu = new MenuGroup("캘린더");
+
+    calenderMenu.add(createJobsCalenderMenu());
+    calenderMenu.add(createExamCalenderMenu());
+
+    return calenderMenu;
   }
 
   private Menu createJobsCalenderMenu() {
