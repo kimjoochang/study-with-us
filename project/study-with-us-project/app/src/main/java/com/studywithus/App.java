@@ -166,11 +166,13 @@ public class App {
 
   void service() {
     loadFreeStudies();
+    loadExamCalenders();
 
     createMainMenu().execute();
     Prompt.close();
 
     saveFreeStudies();
+    saveExamCalenders();
   }
 
   @SuppressWarnings("unchecked")
@@ -180,10 +182,10 @@ public class App {
 
       freeStudyList.addAll((List<FreeStudy>) in.readObject());
 
-      System.out.println("무료 스터디 데이터 로딩 완료!");
+      System.out.println("무료 스터디 데이터 로딩이 완료되었습니다.");
 
     } catch (Exception e) {
-      System.out.println("파일에서 무료 스터디 데이터를 읽어 오는 중 오류 발생!");
+      System.out.println("파일에서 무료 스터디 데이터를 읽어 오는 중 오류가 발생하였습니다.");
       e.printStackTrace();
     }
   }
@@ -194,10 +196,39 @@ public class App {
 
       out.writeObject(freeStudyList);
 
-      System.out.println("무료 스터디 데이터 저장 완료!");
+      System.out.println("무료 스터디 데이터 저장이 완료되었습니다.");
 
     } catch (Exception e) {
-      System.out.println("무료 스터디 데이터를 파일에 저장 중 오류 발생!");
+      System.out.println("무료 스터디 데이터를 파일에 저장 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadExamCalenders() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("examCalender.data"))) {
+
+      examCalenderList.addAll((List<ExamCalender>) in.readObject());
+
+      System.out.println("이달의 시험일정 데이터 로딩이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 이달의 시험일정 데이터를 읽어 오는 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveExamCalenders() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("examCalender.data"))) {
+
+      out.writeObject(examCalenderList);
+
+      System.out.println("이달의 시험일정 데이터 저장이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("이달의 시험일정 데이터를 파일에 저장 중 오류가 발생하였습니다.");
       e.printStackTrace();
     }
   }
