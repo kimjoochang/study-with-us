@@ -17,6 +17,7 @@ public class CommunitySearchHandler extends AbstractCommunityHandler {
     System.out.println("[커뮤니티 / 검색]");
 
     String input = Prompt.inputString("검색어? ");
+    System.out.println();
 
     for (Community community : communityList) {
       if (!community.getTitle().contains(input) &&

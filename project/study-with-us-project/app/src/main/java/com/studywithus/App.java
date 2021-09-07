@@ -306,7 +306,7 @@ public class App {
   @SuppressWarnings("unchecked")
   private void loadChargeInterests() {
     try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("chrageInterest.data"))) {
+        new FileInputStream("chargeInterest.data"))) {
 
       chargeInterestList.addAll((List<ChargeStudy>) in.readObject());
 

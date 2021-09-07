@@ -15,7 +15,7 @@ import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.ExamCalender;
 import com.studywithus.domain.FreeStudy;
-import com.studywithus.domain.JobsCalender;
+import com.studywithus.domain.JobsCalendar;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Mentor;
 import com.studywithus.handler.AuthLoginHandler;
@@ -35,7 +35,6 @@ import com.studywithus.handler.CommunityDetailHandler;
 import com.studywithus.handler.CommunityListHandler;
 import com.studywithus.handler.CommunitySearchHandler;
 import com.studywithus.handler.CommunityUpdateHandler;
-import com.studywithus.handler.FreeInterestAddHandler;
 import com.studywithus.handler.FreeInterestDeleteHandler;
 import com.studywithus.handler.FreeInterestListHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
@@ -57,7 +56,7 @@ public class App3jc {
   List<Member> memberList = new LinkedList<>();
   List<FreeStudy> freeStudyList = new ArrayList<>();
   List<FreeStudy> freeInterestList = new ArrayList<>();
-  List<JobsCalender> jobsCalenderList = new ArrayList<>();
+  List<JobsCalendar> jobsCalenderList = new ArrayList<>();
   List<ExamCalender> examCalenderList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
   List<ChargeStudy> chargeStudyList = new ArrayList<>();
@@ -99,7 +98,7 @@ public class App3jc {
   public App3jc() {
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
@@ -136,7 +135,6 @@ public class App3jc {
     commandMap.put("/mentorApplicant/list", new MentorApplicantListHandler(mentorApplicantList));
     commandMap.put("/mentorApplicant/detail", new MentorApplicantDetailHandler(mentorApplicantList, mentorList));
 
-    commandMap.put("/freeInterest/add", new FreeInterestAddHandler(freeInterestList));
     commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
 
