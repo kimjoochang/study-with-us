@@ -1,6 +1,7 @@
 package com.studywithus.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class FreeStudy {
 
@@ -14,14 +15,7 @@ public class FreeStudy {
   private Date registeredDate;
   private int like;
   private int viewCount;
-
-  @Override
-  public String toString() {
-    return "FreeStudy [no=" + no + ", title=" + title + ", writer=" + writer + ", onOffLine="
-        + onOffLine + ", area=" + area + ", explanation=" + explanation + ", rule=" + rule
-        + ", registeredDate=" + registeredDate + ", like=" + like + ", viewCount=" + viewCount
-        + "]";
-  }
+  private List<FreeStudy> freeInterest;
 
   public int getNo() {
     return no;
@@ -101,5 +95,13 @@ public class FreeStudy {
 
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
+  }
+
+  public List<FreeStudy> getFreeInterest() {
+    return freeInterest;
+  }
+
+  public void setFreeInterest(List<FreeStudy> freeInterest) {
+    this.freeInterest = freeInterest;
   }
 }
