@@ -167,8 +167,8 @@ public class App {
   void service() {
     loadMembers();
     loadFreeStudies();
-    loadCommunityInfos();
     loadCommunityQas();
+    loadCommunityInfos();
     loadCommunityTalks();
     loadJobsCalendars();
     loadExamCalendars();
@@ -178,8 +178,8 @@ public class App {
 
     saveMembers();
     saveFreeStudies();
-    saveCommunityInfos();
     saveCommunityQas();
+    saveCommunityInfos();
     saveCommunityTalks();
     saveJobsalendars();
     saveExamCalendars();
