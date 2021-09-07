@@ -165,34 +165,14 @@ public class App {
   }
 
   void service() {
-<<<<<<< HEAD
-    loadExamCalendars();
-=======
     loadFreeStudies();
-    loadExamCalenders();
->>>>>>> a2d7302ac60653f900733afa76e6a231d500cd91
+    loadExamCalendars();
 
     createMainMenu().execute();
     Prompt.close();
 
-<<<<<<< HEAD
-    saveExamCalendars();
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadExamCalendars() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("examCalendar.data"))) {
-
-      examCalendarList.addAll((List<ExamCalendar>) in.readObject());
-
-      System.out.println("게시글 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 게시글을 읽어오는 중 오류 발생!");
-=======
     saveFreeStudies();
-    saveExamCalenders();
+    saveExamCalendars();
   }
 
   @SuppressWarnings("unchecked")
@@ -206,23 +186,10 @@ public class App {
 
     } catch (Exception e) {
       System.out.println("파일에서 무료 스터디 데이터를 읽어 오는 중 오류가 발생하였습니다.");
->>>>>>> a2d7302ac60653f900733afa76e6a231d500cd91
       e.printStackTrace();
     }
   }
 
-<<<<<<< HEAD
-  private void saveExamCalendars() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("examCalendars.data"))) {
-
-      out.writeObject(examCalendarList);
-
-      System.out.println("게시글 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("게시글을 파일에 저장 중 오류 발생!");
-=======
   private void saveFreeStudies() {
     try (ObjectOutputStream out = new ObjectOutputStream(
         new FileOutputStream("freeStudy.data"))) {
@@ -238,32 +205,29 @@ public class App {
   }
 
   @SuppressWarnings("unchecked")
-  private void loadExamCalenders() {
+  private void loadExamCalendars() {
     try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("examCalender.data"))) {
+        new FileInputStream("examCalendar.data"))) {
 
-      examCalenderList.addAll((List<ExamCalender>) in.readObject());
+      examCalendarList.addAll((List<ExamCalendar>) in.readObject());
 
-      System.out.println("이달의 시험일정 데이터 로딩이 완료되었습니다.");
+      System.out.println("게시글 로딩 완료!");
 
     } catch (Exception e) {
-      System.out.println("파일에서 이달의 시험일정 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
+      System.out.println("파일에서 게시글을 읽어오는 중 오류 발생!");
     }
   }
 
-  private void saveExamCalenders() {
+  private void saveExamCalendars() {
     try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("examCalender.data"))) {
+        new FileOutputStream("examCalendars.data"))) {
 
-      out.writeObject(examCalenderList);
+      out.writeObject(examCalendarList);
 
-      System.out.println("이달의 시험일정 데이터 저장이 완료되었습니다.");
+      System.out.println("게시글 저장 완료!");
 
     } catch (Exception e) {
-      System.out.println("이달의 시험일정 데이터를 파일에 저장 중 오류가 발생하였습니다.");
->>>>>>> a2d7302ac60653f900733afa76e6a231d500cd91
-      e.printStackTrace();
+      System.out.println("게시글을 파일에 저장 중 오류 발생!");
     }
   }
 
