@@ -210,7 +210,7 @@ public class App {
   }
 
   private Menu createCalenderMenu() {
-    MenuGroup calenderMenu = new MenuGroup("캘린더 관리");
+    MenuGroup calenderMenu = new MenuGroup("캘린더");
 
     calenderMenu.add(createJobsCalenderMenu());
     calenderMenu.add(createExamCalenderMenu());
