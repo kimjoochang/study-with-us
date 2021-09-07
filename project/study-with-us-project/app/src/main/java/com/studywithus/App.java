@@ -3,7 +3,6 @@ package com.studywithus;
 import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
 import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.ExamCalendar;
@@ -306,9 +304,9 @@ public class App {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void loadChargeInterests() {
-		try (ObjectInputStream in = new ObjectInputStream(
-				new FileInputStream("chargeInterest.data"))) {
+	  private void loadChargeInterests() {
+	    try (ObjectInputStream in = new ObjectInputStream(
+	        new FileInputStream("chargeInterest.data"))) {
 
 			chargeInterestList.addAll((List<ChargeStudy>) in.readObject());
 
