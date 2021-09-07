@@ -25,10 +25,10 @@ import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
 import com.studywithus.handler.InterestHandler;
-import com.studywithus.handler.JobsCalenderAddHandler;
-import com.studywithus.handler.JobsCalenderDeleteHandler;
-import com.studywithus.handler.JobsCalenderDetailHandler;
-import com.studywithus.handler.JobsCalenderUpdateHandler;
+import com.studywithus.handler.JobsCalendarAddHandler;
+import com.studywithus.handler.JobsCalendarDeleteHandler;
+import com.studywithus.handler.JobsCalendarDetailHandler;
+import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.NewMemberHandler;
 import com.studywithus.util.Prompt;
 
@@ -61,10 +61,10 @@ public class MenuList {
   ExamCalendarUpdateHandler examCalenderUpdateHandler = new ExamCalendarUpdateHandler(examCalenderList);
   ExamCalendarDeleteHandler examCalenderDeleteHandler = new ExamCalendarDeleteHandler(examCalenderList);
 
-  JobsCalenderAddHandler jobsCalenderAddHandler = new JobsCalenderAddHandler(jobsCalenderList);
-  JobsCalenderDetailHandler jobsCalenderDetailHandler = new JobsCalenderDetailHandler(jobsCalenderList);
-  JobsCalenderUpdateHandler jobsCalenderUpdateHandler = new JobsCalenderUpdateHandler(jobsCalenderList);
-  JobsCalenderDeleteHandler jobsCalenderDeleteHandler = new JobsCalenderDeleteHandler(jobsCalenderList);
+  JobsCalendarAddHandler jobsCalenderAddHandler = new JobsCalendarAddHandler(jobsCalenderList);
+  JobsCalendarDetailHandler jobsCalenderDetailHandler = new JobsCalendarDetailHandler(jobsCalenderList);
+  JobsCalendarUpdateHandler jobsCalenderUpdateHandler = new JobsCalendarUpdateHandler(jobsCalenderList);
+  JobsCalendarDeleteHandler jobsCalendarDeleteHandler = new JobsCalendarDeleteHandler(jobsCalenderList);
 
   InterestHandler interestHandler = new InterestHandler();
   NewMemberHandler newMemberHandler = new NewMemberHandler();

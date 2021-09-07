@@ -1,16 +1,17 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.JobsCalender;
+import com.studywithus.domain.JobsCalendar;
 import com.studywithus.util.Prompt;
 
-public class JobsCalenderDeleteHandler extends AbstractJobsCalenderHandler {
+public class JobsCalendarDeleteHandler extends AbstractJobsCalendarHandler {
 
-  public JobsCalenderDeleteHandler(List<JobsCalender> jobsCalenderList) {
-    super(jobsCalenderList);
+  public JobsCalendarDeleteHandler(List<JobsCalendar> jobsCalendarList) {
+    super(jobsCalendarList);
   }
 
   // 이달의 채용공고 삭제
+  @Override
   public void execute() {
     System.out.println("[이달의 채용공고 / 삭제]\n");
 
@@ -18,9 +19,9 @@ public class JobsCalenderDeleteHandler extends AbstractJobsCalenderHandler {
 
     System.out.println();
 
-    JobsCalender jobsCalender = findByNo(no);
+    JobsCalendar jobsCalendar = findByNo(no);
 
-    if (jobsCalender == null) {
+    if (jobsCalendar == null) {
       System.out.println();
       System.out.println("해당 번호의 채용공고가 없습니다.\n");
       return;
@@ -34,7 +35,7 @@ public class JobsCalenderDeleteHandler extends AbstractJobsCalenderHandler {
       return;
     }
 
-    jobsCalenderList.remove(jobsCalender);
+    jobsCalendarList.remove(jobsCalendar);
 
     System.out.println();
     System.out.println("이달의 채용공고를 삭제하였습니다.\n");
