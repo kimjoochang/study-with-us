@@ -1,6 +1,9 @@
 package com.studywithus.domain;
 
-public class ExamCalender {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class ExamCalender implements Serializable {
 
   private int no;
   private String title;
