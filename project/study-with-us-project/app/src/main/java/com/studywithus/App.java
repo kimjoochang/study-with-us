@@ -31,7 +31,10 @@ import com.studywithus.handler.CommunityDetailHandler;
 import com.studywithus.handler.CommunityListHandler;
 import com.studywithus.handler.CommunitySearchHandler;
 import com.studywithus.handler.CommunityUpdateHandler;
-import com.studywithus.handler.FreeInterestAddHandler;
+import com.studywithus.handler.ExamCalenderAddHandler;
+import com.studywithus.handler.ExamCalenderDeleteHandler;
+import com.studywithus.handler.ExamCalenderDetailHandler;
+import com.studywithus.handler.ExamCalenderUpdateHandler;
 import com.studywithus.handler.FreeInterestDeleteHandler;
 import com.studywithus.handler.FreeInterestListHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
@@ -40,6 +43,10 @@ import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudySearchHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
+import com.studywithus.handler.JobsCalenderAddHandler;
+import com.studywithus.handler.JobsCalenderDeleteHandler;
+import com.studywithus.handler.JobsCalenderDetailHandler;
+import com.studywithus.handler.JobsCalenderUpdateHandler;
 import com.studywithus.handler.MemberPrompt;
 import com.studywithus.handler.MentorApplicantAddHandler;
 import com.studywithus.handler.MentorApplicantDetailHandler;
@@ -95,7 +102,7 @@ public class App {
   public App() {
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
@@ -128,11 +135,20 @@ public class App {
     commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityTalkList));
     commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
 
+    commandMap.put("/jobsCalender/add", new JobsCalenderAddHandler(jobsCalenderList));
+    commandMap.put("/jobsCalender/detail", new JobsCalenderDetailHandler(jobsCalenderList));
+    commandMap.put("/jobsCalender/update", new JobsCalenderUpdateHandler(jobsCalenderList));
+    commandMap.put("/jobsCalender/delete", new JobsCalenderDeleteHandler(jobsCalenderList));
+
+    commandMap.put("/examCalender/add", new ExamCalenderAddHandler(examCalenderList));
+    commandMap.put("/examCalender/detail", new ExamCalenderDetailHandler(examCalenderList));
+    commandMap.put("/examCalender/update", new ExamCalenderUpdateHandler(examCalenderList));
+    commandMap.put("/examCalender/delete", new ExamCalenderDeleteHandler(examCalenderList));
+
     commandMap.put("/mentorApplicant/add", new MentorApplicantAddHandler(mentorApplicantList));
     commandMap.put("/mentorApplicant/list", new MentorApplicantListHandler(mentorApplicantList));
     commandMap.put("/mentorApplicant/detail", new MentorApplicantDetailHandler(mentorApplicantList, mentorList));
 
-    commandMap.put("/freeInterest/add", new FreeInterestAddHandler(freeInterestList));
     commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
 
@@ -157,31 +173,40 @@ public class App {
     mainMenuGroup.add(new MenuItem("회원가입", ACCESS_LOGOUT, "/auth/signUp"));
     mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL, "/auth/logout"));
 
-    mainMenuGroup.add(createAdminMenu());
+    //    mainMenuGroup.add(createAdminMenu());
+    mainMenuGroup.add(createMemberMenu());
     mainMenuGroup.add(createInterestMenu());
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
-    mainMenuGroup.add(createCommunityMenu());
     mainMenuGroup.add(createMentorApplyMenu());
+    mainMenuGroup.add(createCommunityMenu());
+    mainMenuGroup.add(createCalenderMenu());
 
     return mainMenuGroup;
   }
 
-  private Menu createAdminMenu() {
-    MenuGroup adminMenu = new MenuGroup("관리자");
-
-    adminMenu.add(createMemberMenu());
-    adminMenu.add(createCalenderMenu());
-
-    return adminMenu;
-  }
+  //  private Menu createAdminMenu() {
+  //    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
+  //
+  //    adminMenu.add(createMemberMenu());
+  //    adminMenu.add(createCalenderMenu());
+  //
+  //    return adminMenu;
+  //  }
 
   private Menu createMemberMenu() {
-    MenuGroup memberMenu = new MenuGroup("회원 관리");
+    MenuGroup memberMenu = new MenuGroup("회원 관리", ACCESS_ADMIN);
 
     memberMenu.add(createMentorApplicantMenu());
 
     return memberMenu;
+  }
+
+  private Menu createMentorApplyMenu() {
+    MenuGroup mentorApplyMenu = new MenuGroup("멘토 신청하기");
+    mentorApplyMenu.add(new MenuItem("신청", ACCESS_GENERAL, "/mentorApplicant/add"));
+
+    return mentorApplyMenu;
   }
 
   private Menu createCalenderMenu() {
@@ -192,6 +217,15 @@ public class App {
 
     return calenderMenu;
   }
+
+  //  private Menu createCalenderMenu() {
+  //    MenuGroup calenderMenu = new MenuGroup("캘린더");
+  //
+  //    calenderMenu.add(createJobsCalenderMenu());
+  //    calenderMenu.add(createExamCalenderMenu());
+  //
+  //    return calenderMenu;
+  //  }
 
   private Menu createMentorApplicantMenu() {
     MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
@@ -265,7 +299,7 @@ public class App {
   }
 
   private Menu createChargeStudyMenu() {
-    MenuGroup chargeStudyMenu = new MenuGroup("유료스터디");
+    MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
 
     chargeStudyMenu.add(new MenuItem("검색", "/chargeStudy/search"));
     chargeStudyMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/chargeStudy/add"));
@@ -324,12 +358,5 @@ public class App {
     communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/communityTalk/delete"));
 
     return communityTalkMenu;
-  }
-
-  private Menu createMentorApplyMenu() {
-    MenuGroup mentorApplyMenu = new MenuGroup("멘토 신청하기");
-    mentorApplyMenu.add(new MenuItem("신청", ACCESS_GENERAL, "/mentorApplicant/add"));
-
-    return mentorApplyMenu;
   }
 }

@@ -8,16 +8,6 @@ public class ExamCalenderAddHandler extends AbstractExamCalenderHandler {
 
   public ExamCalenderAddHandler(List<ExamCalender> examCalenderList) {
     super(examCalenderList);
-
-    ExamCalender testUser = new ExamCalender();
-    testUser.setNo(1);
-    testUser.setTitle("[자격증] 정보처리기능사");
-    testUser.setContent("시험과목\n"
-        + "- 필기: 1. 전자계산기일반 2. 패키지활용 3. PC운영체제 4. 정보통신일반\n"
-        + "- 실기: 정보처리 실무");
-    testUser.setExamDate("2021-10-03");
-
-    examCalenderList.add(testUser);
   }
 
   // 이달의 시험일정 생성
