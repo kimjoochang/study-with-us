@@ -211,23 +211,50 @@ public class App {
 
       examCalendarList.addAll((List<ExamCalendar>) in.readObject());
 
-      System.out.println("게시글 로딩 완료!");
+      System.out.println("이달의 시험일정 데이터 로딩이 완료되었습니다.");
 
     } catch (Exception e) {
-      System.out.println("파일에서 게시글을 읽어오는 중 오류 발생!");
+      System.out.println("파일에서 이달의 시험일정 데이터를 읽어 오는 중 오류가 발생하였습니다.");
     }
   }
 
   private void saveExamCalendars() {
     try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("examCalendars.data"))) {
+        new FileOutputStream("examCalendar.data"))) {
 
       out.writeObject(examCalendarList);
 
-      System.out.println("게시글 저장 완료!");
+      System.out.println("이달의 시험일정 데이터 저장이 완료되었습니다.");
 
     } catch (Exception e) {
-      System.out.println("게시글을 파일에 저장 중 오류 발생!");
+      System.out.println("이달의 시험일정 데이터를 파일에 저장 중 오류가 발생하였습니다.");
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadJobsCalendars() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("jobsCalendar.data"))) {
+
+      jobsCalendarList.addAll((List<JobsCalendar>) in.readObject());
+
+      System.out.println("이달의 채용공고 데이터 로딩이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 이달의 채용공고 데이터를 읽어 오는 중 오류가 발생하였습니다.");
+    }
+  }
+
+  private void saveJobsalendars() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("jobsCalendar.data"))) {
+
+      out.writeObject(jobsCalendarList);
+
+      System.out.println("이달의 채용공고 데이터 저장이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("이달의 채용공고 데이터를 파일에 저장 중 오류가 발생하였습니다.");
     }
   }
 
