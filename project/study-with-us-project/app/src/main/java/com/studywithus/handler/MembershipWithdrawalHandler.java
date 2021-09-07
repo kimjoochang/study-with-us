@@ -17,6 +17,7 @@ public class MembershipWithdrawalHandler extends AbstractLoginHandler {
 	@Override
 	public void execute() {
 		System.out.println("[회원 탈퇴]");
+		System.out.println("회원 탈퇴를 위해 아이디, 비밀번호를 입력해주세요.");
 
 		String id = Prompt.inputString("아이디 : ");
 		String password = Prompt.inputString("비밀번호 : ");
@@ -27,7 +28,16 @@ public class MembershipWithdrawalHandler extends AbstractLoginHandler {
 		} else {
 			AuthLoginHandler.loginUser = null;
 			AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
-			System.out.println("정말 회원 탈퇴하시겠습니까?");
+
+			String input = Prompt.inputString("정말 회원 탈퇴하시겠습니까?? (y/N)");
+			if (input.equalsIgnoreCase("n") || input.length() == 0) {
+				System.out.println(" 회원 탈퇴를 취소하셨습니다.");
+			}
+			else {
+				System.out.println();
+				System.out.println("회원 탈퇴가 완료되었습니다.");
+			}
+			return;
 		}
 	}
 
