@@ -3,6 +3,7 @@ package com.studywithus;
 import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+
 import com.studywithus.domain.ChargeStudy;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.ExamCalendar;
@@ -52,6 +54,7 @@ import com.studywithus.handler.JobsCalendarDeleteHandler;
 import com.studywithus.handler.JobsCalendarDetailHandler;
 import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MemberPrompt;
+import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicantAddHandler;
 import com.studywithus.handler.MentorApplicantDetailHandler;
 import com.studywithus.handler.MentorApplicantListHandler;
@@ -162,6 +165,7 @@ public class App {
 		commandMap.put("/auth/login", new AuthLoginHandler(memberList));
 		commandMap.put("/auth/logout", new AuthLogoutHandler());
 		commandMap.put("/auth/signUp", new SignUpHandler(memberList));
+		commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
 	}
 
 	void service() {
@@ -304,9 +308,9 @@ public class App {
 	}
 
 	@SuppressWarnings("unchecked")
-	  private void loadChargeInterests() {
-	    try (ObjectInputStream in = new ObjectInputStream(
-	        new FileInputStream("chargeInterest.data"))) {
+	private void loadChargeInterests() {
+		try (ObjectInputStream in = new ObjectInputStream(
+				new FileInputStream("chargeInterest.data"))) {
 
 			chargeInterestList.addAll((List<ChargeStudy>) in.readObject());
 
@@ -468,6 +472,7 @@ public class App {
 		mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/auth/login"));
 		mainMenuGroup.add(new MenuItem("회원가입", ACCESS_LOGOUT, "/auth/signUp"));
 		mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL | ACCESS_ADMIN, "/auth/logout"));
+		mainMenuGroup.add(new MenuItem("회원탈퇴", ACCESS_GENERAL, "/auth/membershipwithdrawal"));
 
 		//    mainMenuGroup.add(createAdminMenu());
 		mainMenuGroup.add(createMemberMenu());
