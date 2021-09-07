@@ -168,6 +168,7 @@ public class App {
     loadMembers();
     loadFreeStudies();
     loadChargeStudies();
+    loadFreeInterests();
     loadChargeInterests();
     loadCommunityQas();
     loadCommunityInfos();
@@ -181,6 +182,7 @@ public class App {
     saveMembers();
     saveFreeStudies();
     saveChargeStudies();
+    saveFreeInterests();
     saveChargeInterests();
     saveCommunityQas();
     saveCommunityInfos();
@@ -243,7 +245,6 @@ public class App {
     }
   }
 
-
   @SuppressWarnings("unchecked")
   private void loadChargeStudies() {
     try (ObjectInputStream in = new ObjectInputStream(
@@ -274,11 +275,40 @@ public class App {
   }
 
   @SuppressWarnings("unchecked")
+  private void loadFreeInterests() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("freeInterest.data"))) {
+
+      freeInterestList.addAll((List<FreeStudy>) in.readObject());
+
+      System.out.println("무료 스터디 관심목록 데이터 로딩이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 무료 스터디 관심목록 데이터를 읽어 오는 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveFreeInterests() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("freeInterest.data"))) {
+
+      out.writeObject(freeInterestList);
+
+      System.out.println("무료 스터디 관심목록 데이터 저장이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("무료 스터디 관심목록 데이터를 파일에 저장 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
   private void loadChargeInterests() {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("chrageInterest.data"))) {
 
-      chargeInterestList.addAll((List<ChargeInterest>) in.readObject());
+      chargeInterestList.addAll((List<ChargeStudy>) in.readObject());
 
       System.out.println("유료 스터디 관심목록 정보 로딩이 완료되었습니다.");
 
