@@ -165,16 +165,49 @@ public class App {
   }
 
   void service() {
+    loadMembers();
     loadFreeStudies();
+    loadCommunityInfos();
+    loadCommunityQas();
+    loadCommunityTalks();
     loadJobsCalendars();
     loadExamCalendars();
 
     createMainMenu().execute();
     Prompt.close();
 
+    saveMembers();
     saveFreeStudies();
+    saveCommunityInfos();
+    saveCommunityQas();
+    saveCommunityTalks();
     saveJobsalendars();
     saveExamCalendars();
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadMembers() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("member.data"))) {
+
+      memberList.addAll((List<Member>) in.readObject());
+
+    } catch (Exception e) {
+      System.out.println("파일에서 회원 데이터를 읽어 오는 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveMembers() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("member.data"))) {
+
+      out.writeObject(memberList);
+
+    } catch (Exception e) {
+      System.out.println("회원 데이터를 파일에 저장 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
   }
 
   @SuppressWarnings("unchecked")
@@ -202,6 +235,81 @@ public class App {
 
     } catch (Exception e) {
       System.out.println("무료 스터디 데이터를 파일에 저장 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadCommunityQas() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("communityQa.data"))) {
+
+      communityQaList.addAll((List<Community>) in.readObject());
+
+    } catch (Exception e) {
+      System.out.println("파일에서 커뮤니티 질문 데이터를 읽어 오는 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCommunityQas() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("communityQa.data"))) {
+
+      out.writeObject(communityQaList);
+
+    } catch (Exception e) {
+      System.out.println("커뮤니티 질문 데이터를 파일에 저장 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadCommunityInfos() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("communityInfo.data"))) {
+
+      communityInfoList.addAll((List<Community>) in.readObject());
+
+    } catch (Exception e) {
+      System.out.println("파일에서 커뮤니티 정보 데이터를 읽어 오는 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCommunityInfos() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("communityInfo.data"))) {
+
+      out.writeObject(communityInfoList);
+
+    } catch (Exception e) {
+      System.out.println("커뮤니티 정보 데이터를 파일에 저장 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadCommunityTalks() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("communityTalk.data"))) {
+
+      communityTalkList.addAll((List<Community>) in.readObject());
+
+    } catch (Exception e) {
+      System.out.println("파일에서 커뮤니티 스몰톡 데이터를 읽어 오는 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCommunityTalks() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("communityTalk.data"))) {
+
+      out.writeObject(communityTalkList);
+
+    } catch (Exception e) {
+      System.out.println("커뮤니티 스몰톡 데이터를 파일에 저장 중 오류가 발생하였습니다.");
       e.printStackTrace();
     }
   }
