@@ -1,9 +1,11 @@
 package com.studywithus.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 //커뮤니티 게시글 구성요소
-public class Community {
+@SuppressWarnings("serial")
+public class Community implements Serializable {
 
   private int no; // 게시글 번호
   private String title; // 게시글 제목
