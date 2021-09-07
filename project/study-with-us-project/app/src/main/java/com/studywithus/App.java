@@ -3,6 +3,10 @@ package com.studywithus;
 import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -161,8 +165,41 @@ public class App {
   }
 
   void service() {
+    loadFreeStudies();
+
     createMainMenu().execute();
     Prompt.close();
+
+    saveFreeStudies();
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadFreeStudies() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("freeStudy.data"))) {
+
+      freeStudyList.addAll((List<FreeStudy>) in.readObject());
+
+      System.out.println("무료 스터디 데이터 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 무료 스터디 데이터를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveFreeStudies() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("freeStudy.data"))) {
+
+      out.writeObject(freeStudyList);
+
+      System.out.println("무료 스터디 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("무료 스터디 데이터를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
   }
 
   Menu createMainMenu() {
