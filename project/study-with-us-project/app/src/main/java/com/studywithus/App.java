@@ -218,15 +218,6 @@ public class App {
     return calenderMenu;
   }
 
-  //  private Menu createCalenderMenu() {
-  //    MenuGroup calenderMenu = new MenuGroup("캘린더");
-  //
-  //    calenderMenu.add(createJobsCalenderMenu());
-  //    calenderMenu.add(createExamCalenderMenu());
-  //
-  //    return calenderMenu;
-  //  }
-
   private Menu createMentorApplicantMenu() {
     MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
 
