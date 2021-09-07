@@ -167,6 +167,9 @@ public class App {
   void service() {
     loadMembers();
     loadFreeStudies();
+    loadChargeStudies();
+    loadFreeInterests();
+    loadChargeInterests();
     loadCommunityQas();
     loadCommunityInfos();
     loadCommunityTalks();
@@ -178,6 +181,9 @@ public class App {
 
     saveMembers();
     saveFreeStudies();
+    saveChargeStudies();
+    saveFreeInterests();
+    saveChargeInterests();
     saveCommunityQas();
     saveCommunityInfos();
     saveCommunityTalks();
@@ -235,6 +241,93 @@ public class App {
 
     } catch (Exception e) {
       System.out.println("무료 스터디 데이터를 파일에 저장 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadChargeStudies() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("ChargeStudy.data"))) {
+
+      chargeStudyList.addAll((List<ChargeStudy>) in.readObject());
+
+      System.out.println("유료 스터디 정보 로딩이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 유료 스터디 정보를 읽어 오는 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveChargeStudies() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("ChargeStudy.data"))) {
+
+      out.writeObject(chargeStudyList);
+
+      System.out.println("유료 스터디 정보 저장이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("유료 스터디 정보를 파일에 저장하던 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadFreeInterests() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("freeInterest.data"))) {
+
+      freeInterestList.addAll((List<FreeStudy>) in.readObject());
+
+      System.out.println("무료 스터디 관심목록 데이터 로딩이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 무료 스터디 관심목록 데이터를 읽어 오는 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveFreeInterests() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("freeInterest.data"))) {
+
+      out.writeObject(freeInterestList);
+
+      System.out.println("무료 스터디 관심목록 데이터 저장이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("무료 스터디 관심목록 데이터를 파일에 저장 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private void loadChargeInterests() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("chargeInterest.data"))) {
+
+      chargeInterestList.addAll((List<ChargeStudy>) in.readObject());
+
+      System.out.println("유료 스터디 관심목록 정보 로딩이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 유료스터디 관심목록 정보를 읽어 오는 중 오류가 발생하였습니다.");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveChargeInterests() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("chargeInterest.data"))) {
+
+      out.writeObject(chargeInterestList);
+
+      System.out.println("유료 스터디 관심목록 정보 저장이 완료되었습니다.");
+
+    } catch (Exception e) {
+      System.out.println("유료 스터디 관심 목록 정보 저장하던 중 오류가 발생하였습니다.");
       e.printStackTrace();
     }
   }
@@ -383,7 +476,7 @@ public class App {
     mainMenuGroup.add(createChargeStudyMenu());
     mainMenuGroup.add(createMentorApplyMenu());
     mainMenuGroup.add(createCommunityMenu());
-    mainMenuGroup.add(createCalenderMenu());
+    mainMenuGroup.add(createCalendarMenu());
 
     return mainMenuGroup;
   }
@@ -392,7 +485,7 @@ public class App {
   //    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
   //
   //    adminMenu.add(createMemberMenu());
-  //    adminMenu.add(createCalenderMenu());
+  //    adminMenu.add(createCalendarMenu());
   //
   //    return adminMenu;
   //  }
@@ -421,35 +514,35 @@ public class App {
     return mentorApplicantMenu;
   }
 
-  private Menu createCalenderMenu() {
-    MenuGroup calenderMenu = new MenuGroup("캘린더");
+  private Menu createCalendarMenu() {
+    MenuGroup calendarMenu = new MenuGroup("캘린더");
 
-    calenderMenu.add(createJobsCalenderMenu());
-    calenderMenu.add(createExamCalenderMenu());
+    calendarMenu.add(createJobsCalendarMenu());
+    calendarMenu.add(createExamCalendarMenu());
 
-    return calenderMenu;
+    return calendarMenu;
   }
 
-  private Menu createJobsCalenderMenu() {
-    MenuGroup jobsCalenderMenu = new MenuGroup("이달의 채용공고 관리");
+  private Menu createJobsCalendarMenu() {
+    MenuGroup jobsCalendarMenu = new MenuGroup("이달의 채용공고 관리");
 
-    jobsCalenderMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalender/add"));
-    jobsCalenderMenu.add(new MenuItem("상세보기", "/jobsCalender/detail"));
-    jobsCalenderMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalender/update"));
-    jobsCalenderMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalender/delete"));
+    jobsCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalendar/add"));
+    jobsCalendarMenu.add(new MenuItem("상세보기", "/jobsCalendar/detail"));
+    jobsCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalendar/update"));
+    jobsCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalendar/delete"));
 
-    return jobsCalenderMenu;
+    return jobsCalendarMenu;
   }
 
-  private Menu createExamCalenderMenu() {
-    MenuGroup examCalenderMenu = new MenuGroup("이달의 시험일정 관리");
+  private Menu createExamCalendarMenu() {
+    MenuGroup examCalendarMenu = new MenuGroup("이달의 시험일정 관리");
 
-    examCalenderMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalender/add"));
-    examCalenderMenu.add(new MenuItem("상세보기", "/examCalender/detail"));
-    examCalenderMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalender/update"));
-    examCalenderMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalender/delete"));
+    examCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalendar/add"));
+    examCalendarMenu.add(new MenuItem("상세보기", "/examCalendar/detail"));
+    examCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalendar/update"));
+    examCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
 
-    return examCalenderMenu;
+    return examCalendarMenu;
   }
 
   private Menu createInterestMenu() {

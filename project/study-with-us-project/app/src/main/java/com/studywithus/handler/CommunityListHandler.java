@@ -5,6 +5,8 @@ import com.studywithus.domain.Community;
 
 public class CommunityListHandler extends AbstractCommunityHandler{
 
+  Community community;
+
   public CommunityListHandler(List<Community> communityList) {
     super(communityList);
   }
@@ -14,6 +16,11 @@ public class CommunityListHandler extends AbstractCommunityHandler{
   @Override
   public void execute() {
     System.out.println("[커뮤니티 / 조회]\n");
+
+    if (community == null) {
+      System.out.println("생성된 커뮤니티가 없습니다.");
+      return;
+    }
 
     for (Community community : communityList) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
