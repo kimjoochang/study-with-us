@@ -45,6 +45,7 @@ import com.studywithus.handler.ExamCalendarUpdateHandler;
 import com.studywithus.handler.FreeInterestDeleteHandler;
 import com.studywithus.handler.FreeInterestListHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
+import com.studywithus.handler.FreeStudyApplyDetailHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
@@ -117,6 +118,7 @@ public class AppJEI {
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
+    commandMap.put("/freeStudy/apply", new FreeStudyApplyDetailHandler(freeStudyApplyList));
 
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
@@ -496,9 +498,48 @@ public class AppJEI {
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
 
+    myPageMenu.add(createInterestMenu());
     myPageMenu.add(createFreeStudyApplyMenu());
 
     return myPageMenu;
+  }
+
+  private Menu createInterestMenu() {
+    MenuGroup interestMenu = new MenuGroup("관심목록");
+
+    interestMenu.add(createFreeInterestMenu());
+    interestMenu.add(createChargeInterestMenu());
+
+    return interestMenu;
+  }
+
+  private Menu createFreeInterestMenu() {
+    MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
+
+    freeInterestMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/freeInterest/list"));
+    freeInterestMenu.add(new MenuItem("삭제", ACCESS_GENERAL,"/freeInterest/delete"));
+
+    return freeInterestMenu;
+  }
+
+  private Menu createChargeInterestMenu() {
+    MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
+
+    chargeInterestMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/chargeInterest/list"));
+    chargeInterestMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/chargeInterest/delete"));
+
+    return chargeInterestMenu;
+  }
+
+  private Menu createFreeStudyApplyMenu() {
+    MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
+
+    freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudyApply/list"));
+    freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
+    freeStudyApplyMenu.add(new MenuItem("수정", "/freeStudyApply/update"));
+    freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
+
+    return freeStudyApplyMenu;
   }
 
   private Menu createAdminMenu() {
@@ -506,7 +547,6 @@ public class AppJEI {
 
     adminMenu.add(createMemberMenu());
     adminMenu.add(createDeleteRequestStudyMenu());
-    adminMenu.add(createCalendarMenu());
 
     return adminMenu;
   }
@@ -543,64 +583,6 @@ public class AppJEI {
     return mentorApplicantMenu;
   }
 
-  private Menu createCalendarMenu() {
-    MenuGroup calendarMenu = new MenuGroup("캘린더");
-
-    calendarMenu.add(createJobsCalendarMenu());
-    calendarMenu.add(createExamCalendarMenu());
-
-    return calendarMenu;
-  }
-
-  private Menu createJobsCalendarMenu() {
-    MenuGroup jobsCalendarMenu = new MenuGroup("이달의 채용공고 관리");
-
-    jobsCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalendar/add"));
-    jobsCalendarMenu.add(new MenuItem("상세보기", "/jobsCalendar/detail"));
-    jobsCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalendar/update"));
-    jobsCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalendar/delete"));
-
-    return jobsCalendarMenu;
-  }
-
-  private Menu createExamCalendarMenu() {
-    MenuGroup examCalendarMenu = new MenuGroup("이달의 시험일정 관리");
-
-    examCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalendar/add"));
-    examCalendarMenu.add(new MenuItem("상세보기", "/examCalendar/detail"));
-    examCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalendar/update"));
-    examCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
-
-    return examCalendarMenu;
-  }
-
-  private Menu createInterestMenu() {
-    MenuGroup interestMenu = new MenuGroup("관심목록");
-
-    interestMenu.add(createFreeInterestMenu());
-    interestMenu.add(createChargeInterestMenu());
-
-    return interestMenu;
-  }
-
-  private Menu createFreeInterestMenu() {
-    MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
-
-    freeInterestMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/freeInterest/list"));
-    freeInterestMenu.add(new MenuItem("삭제", ACCESS_GENERAL,"/freeInterest/delete"));
-
-    return freeInterestMenu;
-  }
-
-  private Menu createChargeInterestMenu() {
-    MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
-
-    chargeInterestMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/chargeInterest/list"));
-    chargeInterestMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/chargeInterest/delete"));
-
-    return chargeInterestMenu;
-  }
-
   private Menu createFreeStudyMenu() {
     MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
 
@@ -612,17 +594,6 @@ public class AppJEI {
     freeStudyMenu.add(new MenuItem("삭제", ACCESS_LEADER, "/freeStudy/delete"));
 
     return freeStudyMenu;
-  }
-
-  private Menu createFreeStudyApplyMenu() {
-    MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
-
-    freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudyApply/list"));
-    freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
-    freeStudyApplyMenu.add(new MenuItem("수정", "/freeStudyApply/update"));
-    freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
-
-    return freeStudyApplyMenu;
   }
 
   private Menu createChargeStudyMenu() {
@@ -685,5 +656,36 @@ public class AppJEI {
     communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/communityTalk/delete"));
 
     return communityTalkMenu;
+  }
+
+  private Menu createCalendarMenu() {
+    MenuGroup calendarMenu = new MenuGroup("캘린더");
+
+    calendarMenu.add(createJobsCalendarMenu());
+    calendarMenu.add(createExamCalendarMenu());
+
+    return calendarMenu;
+  }
+
+  private Menu createJobsCalendarMenu() {
+    MenuGroup jobsCalendarMenu = new MenuGroup("이달의 채용공고 관리");
+
+    jobsCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalendar/add"));
+    jobsCalendarMenu.add(new MenuItem("상세보기", "/jobsCalendar/detail"));
+    jobsCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalendar/update"));
+    jobsCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalendar/delete"));
+
+    return jobsCalendarMenu;
+  }
+
+  private Menu createExamCalendarMenu() {
+    MenuGroup examCalendarMenu = new MenuGroup("이달의 시험일정 관리");
+
+    examCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalendar/add"));
+    examCalendarMenu.add(new MenuItem("상세보기", "/examCalendar/detail"));
+    examCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalendar/update"));
+    examCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
+
+    return examCalendarMenu;
   }
 }

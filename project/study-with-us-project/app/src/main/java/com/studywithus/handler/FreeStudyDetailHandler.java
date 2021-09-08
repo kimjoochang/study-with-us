@@ -3,7 +3,6 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.ApplicantInfo;
 import com.studywithus.domain.FreeStudy;
-import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
@@ -71,8 +70,6 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
     ApplicantInfo.getId();
 
     freeStudyApplyList.add(freeStudy);
-
-    Menu.ACCESS_GENERAL = Menu.ACCESS_LEADER;
 
     System.out.println();
     System.out.println("무료 스터디 신청이 완료되었습니다.\n");
