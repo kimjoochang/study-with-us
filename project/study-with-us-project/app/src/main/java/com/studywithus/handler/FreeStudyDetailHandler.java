@@ -72,7 +72,7 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
 
     freeStudyApplyList.add(freeStudy);
 
-    Menu.ACCESS_GENERAL = Menu.ACCESS_LEADER;
+    Menu.ACCESS_LEADER = Menu.ACCESS_GENERAL;
 
     System.out.println();
     System.out.println("무료 스터디 신청이 완료되었습니다.\n");

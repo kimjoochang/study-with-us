@@ -117,7 +117,6 @@ public class App {
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-
     commandMap.put("/freeStudy/apply", new FreeStudyApplyDetailHandler(freeStudyApplyList));
 
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
