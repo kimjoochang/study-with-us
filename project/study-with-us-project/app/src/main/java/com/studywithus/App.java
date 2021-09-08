@@ -24,7 +24,9 @@ import com.studywithus.handler.AuthLogoutHandler;
 import com.studywithus.handler.ChargeInterestDeleteHandler;
 import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
-import com.studywithus.handler.ChargeStudyDeleteHandler;
+import com.studywithus.handler.ChargeStudyDeleteRequestHandler;
+import com.studywithus.handler.ChargeStudyDeletedDetailHandler;
+import com.studywithus.handler.ChargeStudyDeletedListHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
 import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudySearchHandler;
@@ -70,6 +72,7 @@ public class App {
   List<ExamCalendar> examCalendarList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
   List<ChargeStudy> chargeStudyList = new ArrayList<>();
+  List<ChargeStudy> chargeDetailRequestList = new ArrayList<>();
   List<ChargeStudy> chargeInterestList = new ArrayList<>();
   List<Community> communityInfoList = new ArrayList<>();
   List<Community> communityQaList = new ArrayList<>();
@@ -117,8 +120,11 @@ public class App {
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
     commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/delete", new ChargeStudyDeleteHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDetailRequestList, 1));
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
+
+    commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDetailRequestList ,1));
+    commandMap.put("/chargeStudy/deleteDetail", new ChargeStudyDeletedDetailHandler(chargeStudyList, chargeDetailRequestList, 1));
 
     commandMap.put("/communityInfo/add", new CommunityAddHandler(communityInfoList));
     commandMap.put("/communityInfo/list", new CommunityListHandler(communityInfoList));
@@ -474,7 +480,7 @@ public class App {
     mainMenuGroup.add(new MenuItem("회원탈퇴", ACCESS_GENERAL, "/auth/membershipwithdrawal"));
 
     //    mainMenuGroup.add(createAdminMenu());
-    mainMenuGroup.add(createMemberMenu());
+    mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createInterestMenu());
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
@@ -484,15 +490,23 @@ public class App {
 
     return mainMenuGroup;
   }
+  private Menu createAdminMenu() {
+    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
 
-  //  private Menu createAdminMenu() {
-  //    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
-  //
-  //    adminMenu.add(createMemberMenu());
-  //    adminMenu.add(createCalendarMenu());
-  //
-  //    return adminMenu;
-  //  }
+    adminMenu.add(createMemberMenu());
+    adminMenu.add(createDeleteRequestStudyMenu());
+    adminMenu.add(createCalendarMenu());
+
+    return adminMenu;
+  }
+
+  private Menu createDeleteRequestStudyMenu() {
+    MenuGroup deletedRequestMenu = new MenuGroup("삭제 요청 스터디 내역");
+    deletedRequestMenu.add(new MenuItem("조회", "/chargeStudy/deleteList"));
+    deletedRequestMenu.add(new MenuItem("상세보기", "/chargeStudy/deleteDetail"));
+
+    return deletedRequestMenu;
+  }
 
   private Menu createMemberMenu() {
     MenuGroup memberMenu = new MenuGroup("회원 관리", ACCESS_ADMIN);
@@ -597,7 +611,7 @@ public class App {
     chargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/list"));
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
     chargeStudyMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/chargeStudy/update"));
-    chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_GENERAL, "/chargeStudy/delete"));
+    chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_GENERAL, "/chargeStudy/deleteRequest"));
 
     return chargeStudyMenu;
   }
