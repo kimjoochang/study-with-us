@@ -64,6 +64,7 @@ import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
 
+// 김주창 바보
 public class App {
   List<Member> memberList = new LinkedList<>();
   List<FreeStudy> freeStudyList = new ArrayList<>();
