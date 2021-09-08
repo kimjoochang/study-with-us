@@ -12,6 +12,9 @@ public abstract class AbstractFreeStudyHandler implements Command {
   public AbstractFreeStudyHandler(List<FreeStudy> freeStudyList) {
     this.freeStudyList = freeStudyList;
   }
+  public AbstractFreeStudyHandler(List<FreeStudy> freeStudyApplyList, int nothing) {
+    this.freeStudyApplyList = freeStudyApplyList;
+  }
 
   public AbstractFreeStudyHandler(List<FreeStudy> freeStudyList, List<FreeStudy> freeStudyApplyList, List<FreeStudy> freeInterestList) {
     this.freeStudyList = freeStudyList;
