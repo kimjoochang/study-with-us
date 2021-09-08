@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.util.Prompt;
 
-public class FindPwdHandler implements Command {
+public class ChangePwdHandler implements Command {
 
   List<Member> memberList;
 
@@ -13,7 +13,7 @@ public class FindPwdHandler implements Command {
     return loginUser;
   }
 
-  public FindPwdHandler(List<Member> memberList) {
+  public ChangePwdHandler(List<Member> memberList) {
     this.memberList = memberList;
   }
 
