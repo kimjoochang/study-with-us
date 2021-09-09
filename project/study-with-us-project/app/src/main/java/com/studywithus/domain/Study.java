@@ -2,6 +2,7 @@ package com.studywithus.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("serial")
@@ -25,7 +26,8 @@ public class Study implements Serializable {
 	private int onOffLine; // 온오프라인
 	private String rule; // 스터디 
 
-	private List<Study> free;
+	private List<Member> members = new ArrayList<Member>();
+
 	private List<Study> pay;
 
 	public int getNo() {
