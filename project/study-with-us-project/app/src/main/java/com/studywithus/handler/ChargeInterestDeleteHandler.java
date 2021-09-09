@@ -1,33 +1,33 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeInterestDeleteHandler extends AbstractChargeInterestHandler {
 
-  public ChargeInterestDeleteHandler(List<ChargeStudy> chargeInterestList) {
+  public ChargeInterestDeleteHandler(List<Study> chargeInterestList) {
     super(chargeInterestList);
   }
   @Override
   public void execute() {
     System.out.println("[유료 스터디 / 관심 목록 / 삭제]\n");
 
-    for (ChargeStudy chargeStudy : chargeInterestList) {
+    for (Study study : chargeInterestList) {
       System.out.println();
       System.out.printf("%d, %s, %s, %d \n",
-          chargeStudy.getNo(),
-          chargeStudy.getTitle(),
-          chargeStudy.getWriter(),
-          chargeStudy.getPrice());
+          study.getNo(),
+          study.getTitle(),
+          study.getWriter(),
+          study.getPrice());
     }
     System.out.println();
 
     int no = Prompt.inputInt("번호? ");
 
-    ChargeStudy chargeStudy = findByNo(no);
+    Study study = findByNo(no);
 
-    if (chargeStudy == null) {
+    if (study == null) {
       System.out.println();
       System.out.println("해당 번호의 무료 스터디 관심 목록이 없습니다.\n");
       return;
@@ -40,7 +40,7 @@ public class ChargeInterestDeleteHandler extends AbstractChargeInterestHandler {
       return;
     }
 
-    chargeInterestList.remove(chargeStudy);
+    chargeInterestList.remove(study);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");

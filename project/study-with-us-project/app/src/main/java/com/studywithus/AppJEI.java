@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.ExamCalendar;
 import com.studywithus.domain.FreeStudy;
@@ -73,10 +73,10 @@ public class AppJEI {
   List<JobsCalendar> jobsCalendarList = new ArrayList<>();
   List<ExamCalendar> examCalendarList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
-  List<ChargeStudy> chargeStudyList = new ArrayList<>();
-  List<ChargeStudy> chargeDetailRequestList = new ArrayList<>();
-  List<ChargeStudy> chargeInterestList = new ArrayList<>();
-  List<ChargeStudy> paymentStudyList = new ArrayList<>();
+  List<Study> chargeStudyList = new ArrayList<>();
+  List<Study> chargeDetailRequestList = new ArrayList<>();
+  List<Study> chargeInterestList = new ArrayList<>();
+  List<Study> paymentStudyList = new ArrayList<>();
   List<Community> communityInfoList = new ArrayList<>();
   List<Community> communityQaList = new ArrayList<>();
   List<Community> communityTalkList = new ArrayList<>();
@@ -263,7 +263,7 @@ public class AppJEI {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("ChargeStudy.data"))) {
 
-      chargeStudyList.addAll((List<ChargeStudy>) in.readObject());
+      chargeStudyList.addAll((List<Study>) in.readObject());
 
       System.out.println("유료 스터디 정보 로딩이 완료되었습니다.");
 
@@ -321,7 +321,7 @@ public class AppJEI {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("chargeInterest.data"))) {
 
-      chargeInterestList.addAll((List<ChargeStudy>) in.readObject());
+      chargeInterestList.addAll((List<Study>) in.readObject());
 
       System.out.println("유료 스터디 관심목록 정보 로딩이 완료되었습니다.");
 

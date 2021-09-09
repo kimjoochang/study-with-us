@@ -1,34 +1,34 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 
 public abstract class AbstractChargeStudyHandler implements Command {
 
-  protected List<ChargeStudy> chargeStudyList;
-  protected List<ChargeStudy> paymentStudyList;
-  protected List<ChargeStudy> chargeInterestList;
-  protected List<ChargeStudy> chargeDetailRequestList;
+  protected List<Study> chargeStudyList;
+  protected List<Study> paymentStudyList;
+  protected List<Study> chargeInterestList;
+  protected List<Study> chargeDetailRequestList;
 
-  public AbstractChargeStudyHandler(List<ChargeStudy> chargeStudyList) {
+  public AbstractChargeStudyHandler(List<Study> chargeStudyList) {
     this.chargeStudyList = chargeStudyList;
   }
 
-  public AbstractChargeStudyHandler(List<ChargeStudy> paymentStudyList, String a) {
+  public AbstractChargeStudyHandler(List<Study> paymentStudyList, String a) {
     this.paymentStudyList = paymentStudyList;
   }
 
-  public AbstractChargeStudyHandler(List<ChargeStudy> chargeStudyList, List<ChargeStudy> chargeInterestList, List<ChargeStudy> paymentStudyList) {
+  public AbstractChargeStudyHandler(List<Study> chargeStudyList, List<Study> chargeInterestList, List<Study> paymentStudyList) {
     this.chargeStudyList = chargeStudyList;
     this.chargeInterestList = chargeInterestList;
     this.paymentStudyList = paymentStudyList;
   }
 
-  public AbstractChargeStudyHandler(List<ChargeStudy> chargeDetailRequestList, int nothing) {
+  public AbstractChargeStudyHandler(List<Study> chargeDetailRequestList, int nothing) {
     this.chargeDetailRequestList = chargeDetailRequestList;
   }
 
-  public AbstractChargeStudyHandler(List<ChargeStudy> chargeStudyList, List<ChargeStudy> chargeDetailRequestList, int nothing) {
+  public AbstractChargeStudyHandler(List<Study> chargeStudyList, List<Study> chargeDetailRequestList, int nothing) {
     this.chargeStudyList = chargeStudyList;
     this.chargeDetailRequestList = chargeDetailRequestList;
   }
@@ -38,10 +38,10 @@ public abstract class AbstractChargeStudyHandler implements Command {
   }
 
   // 유료 스터디 번호 조회
-  protected ChargeStudy findByNo(int no) {
-    for (ChargeStudy chargeStudy : chargeStudyList) {
-      if (chargeStudy.getNo() == no) {
-        return chargeStudy;
+  protected Study findByNo(int no) {
+    for (Study study : chargeStudyList) {
+      if (study.getNo() == no) {
+        return study;
       }
     }
     return null;

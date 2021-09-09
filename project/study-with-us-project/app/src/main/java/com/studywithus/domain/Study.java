@@ -2,23 +2,31 @@ package com.studywithus.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @SuppressWarnings("serial")
-public class ChargeStudy implements Serializable {
+public class Study implements Serializable {
 
-	private String title; // 스터디 제목
 	private int no; // 번호
+	private String title; // 스터디 제목
 	private String writer; // 멘토
 	private String area; // 지역
 	private String explanation; // 스터디 설명
 	private Date registeredDate; // 등록일
 	private int like; // 좋아요수
 	private int viewCount; // 조회수
+
 	private String mentorExplanation; // 멘토 설명
 	private String review; // 후기
 	private int price; // 가격
 	//	public String payment; // 결제
 	private String termsCondition; //약관동의
+
+	private int onOffLine; // 온오프라인
+	private String rule; // 스터디 
+
+	private List<Study> free;
+	private List<Study> pay;
 
 	public int getNo() {
 		return no;
@@ -114,5 +122,21 @@ public class ChargeStudy implements Serializable {
 
 	public void setTermsCondition(String termsCondition) {
 		this.termsCondition = termsCondition;
+	}
+
+	public int getOnOffLine() {
+		return onOffLine;
+	}
+
+	public void setOnOffLine(int onOffLine) {
+		this.onOffLine = onOffLine;
+	}
+
+	public String getRule() {
+		return rule;
+	}
+
+	public void setRule(String rule) {
+		this.rule = rule;
 	}
 }

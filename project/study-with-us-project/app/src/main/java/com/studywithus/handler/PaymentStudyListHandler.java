@@ -1,13 +1,13 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 
 public class PaymentStudyListHandler extends AbstractChargeStudyHandler{
 
-  List<ChargeStudy> paymentStudyList;
+  List<Study> paymentStudyList;
 
-  public PaymentStudyListHandler(List<ChargeStudy> paymentStudyList) {
+  public PaymentStudyListHandler(List<Study> paymentStudyList) {
     super(paymentStudyList, "");
   }
 
@@ -15,9 +15,9 @@ public class PaymentStudyListHandler extends AbstractChargeStudyHandler{
   public void execute() {
     System.out.println("[메인 / 마이페이지 / 스터디 결제 내역]\n");
 
-    for (ChargeStudy chargeStudy : paymentStudyList) {
+    for (Study study : paymentStudyList) {
       System.out.println();
-      System.out.printf("%d, %s, %d \n", chargeStudy.getNo(),chargeStudy.getTitle(), chargeStudy.getPrice());
+      System.out.printf("%d, %s, %d \n", study.getNo(),study.getTitle(), study.getPrice());
     }
   }
 }

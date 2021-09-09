@@ -1,15 +1,15 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
 
-  List<ChargeStudy> paymentStudyList;
-  List<ChargeStudy> chargeInterestList;
+  List<Study> paymentStudyList;
+  List<Study> chargeInterestList;
 
-  public ChargeStudyDetailHandler(List<ChargeStudy> chargeStudyList, List<ChargeStudy> chargeInterestList, List<ChargeStudy> paymentStudyList) {
+  public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> chargeInterestList, List<Study> paymentStudyList) {
     super(chargeStudyList, chargeInterestList, paymentStudyList);
   }
 
@@ -19,7 +19,7 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
     System.out.println("[유료 스터디 / 상세보기]\n");
     int no = Prompt.inputInt("번호? ");
 
-    ChargeStudy study = findByNo(no);
+    Study study = findByNo(no);
 
     if (study == null) {
       System.out.println();
@@ -40,7 +40,7 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
     System.out.println();
     System.out.println("1. 결제하기");
 
-    for(ChargeStudy nowStudy : chargeInterestList) {
+    for(Study nowStudy : chargeInterestList) {
       if(!study.equals(nowStudy)) {
         no = 0;
         break;
@@ -104,15 +104,15 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
       System.out.println();
       System.out.println("유료 스터디 결제가 완료 되었습니다.\n");
 
-      ChargeStudy paymentStudy = new ChargeStudy();
+      Study paymentStudy = new Study();
       paymentStudyList.add(paymentStudy);
     }
     return;
   }
 
-  private void interestAddHandler(ChargeStudy interest) {
+  private void interestAddHandler(Study interest) {
 
-    for(ChargeStudy study : chargeInterestList) {
+    for(Study study : chargeInterestList) {
       if(study.equals(interest)) {
         System.out.println("");
       }
@@ -132,7 +132,7 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
     return;
   }
 
-  private void interestDeleteHandler(ChargeStudy interest) {
+  private void interestDeleteHandler(Study interest) {
     String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {

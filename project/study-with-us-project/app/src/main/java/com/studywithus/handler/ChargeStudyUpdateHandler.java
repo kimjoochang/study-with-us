@@ -2,12 +2,12 @@ package com.studywithus.handler;
 
 import java.util.List;
 
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyUpdateHandler extends AbstractChargeStudyHandler{
 
-	public ChargeStudyUpdateHandler(List<ChargeStudy> chargeStudyList) {
+	public ChargeStudyUpdateHandler(List<Study> chargeStudyList) {
 		super(chargeStudyList);	
 	}
 
@@ -17,7 +17,7 @@ public class ChargeStudyUpdateHandler extends AbstractChargeStudyHandler{
 		System.out.println("[유료 스터디 / 수정]");
 		int no = Prompt.inputInt("번호? ");
 
-		ChargeStudy study = findByNo(no);
+		Study study = findByNo(no);
 
 		if (study == null) {
 			System.out.println();

@@ -1,11 +1,11 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 
 public class ChargeInterestListHandler extends AbstractChargeInterestHandler {
 
-  public ChargeInterestListHandler(List<ChargeStudy> chargeInterestList) {
+  public ChargeInterestListHandler(List<Study> chargeInterestList) {
     super(chargeInterestList);
   }
 
@@ -13,13 +13,13 @@ public class ChargeInterestListHandler extends AbstractChargeInterestHandler {
   public void execute() {
     System.out.println("[유료 스터디 / 관심 목록 / 조회]");
 
-    for (ChargeStudy chargeStudy : chargeInterestList) {
+    for (Study study : chargeInterestList) {
       System.out.println();
       System.out.printf("%d, %s, %s, %d \n",
-          chargeStudy.getNo(),
-          chargeStudy.getTitle(),
-          chargeStudy.getWriter(),
-          chargeStudy.getPrice());
+          study.getNo(),
+          study.getTitle(),
+          study.getWriter(),
+          study.getPrice());
     }
   }
 }
