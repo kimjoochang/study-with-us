@@ -3,21 +3,25 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.ChargeStudy;
 
-
 public abstract class AbstractChargeStudyHandler implements Command {
 
   protected List<ChargeStudy> chargeStudyList;
+  protected List<ChargeStudy> paymentStudyList;
   protected List<ChargeStudy> chargeInterestList;
   protected List<ChargeStudy> chargeDetailRequestList;
-
 
   public AbstractChargeStudyHandler(List<ChargeStudy> chargeStudyList) {
     this.chargeStudyList = chargeStudyList;
   }
 
-  public AbstractChargeStudyHandler(List<ChargeStudy> chargeStudyList, List<ChargeStudy> chargeInterestList) {
+  public AbstractChargeStudyHandler(List<ChargeStudy> paymentStudyList, String a) {
+    this.paymentStudyList = paymentStudyList;
+  }
+
+  public AbstractChargeStudyHandler(List<ChargeStudy> chargeStudyList, List<ChargeStudy> chargeInterestList, List<ChargeStudy> paymentStudyList) {
     this.chargeStudyList = chargeStudyList;
     this.chargeInterestList = chargeInterestList;
+    this.paymentStudyList = paymentStudyList;
   }
 
   public AbstractChargeStudyHandler(List<ChargeStudy> chargeDetailRequestList, int nothing) {
@@ -32,7 +36,6 @@ public abstract class AbstractChargeStudyHandler implements Command {
   @Override
   public  void execute(){
   }
-
 
   // 유료 스터디 번호 조회
   protected ChargeStudy findByNo(int no) {

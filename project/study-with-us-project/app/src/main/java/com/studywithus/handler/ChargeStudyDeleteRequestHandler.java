@@ -9,8 +9,8 @@ public class ChargeStudyDeleteRequestHandler extends AbstractChargeStudyHandler{
   ChargeStudy chargeStudy;
 
   public ChargeStudyDeleteRequestHandler(List<ChargeStudy> chargeStudyList,
-      List<ChargeStudy> chargeDetailRequestList, int nothing) {
-    super(chargeStudyList, chargeDetailRequestList, 1);	
+      List<ChargeStudy> chargeDeleteRequestList, int nothing) {
+    super(chargeStudyList, chargeDeleteRequestList, 1);	
   }
 
   @Override
@@ -32,7 +32,7 @@ public class ChargeStudyDeleteRequestHandler extends AbstractChargeStudyHandler{
       System.out.println("유료 스터디 삭제 요청을 취소하였습니다.\n");
       return;
     }
-    chargeDetailRequestList.add(chargeStudy);
+    chargeDeleteRequestList.add(chargeStudy);
     System.out.println("삭제 요청이 완료되었습니다.\n");
   }
 

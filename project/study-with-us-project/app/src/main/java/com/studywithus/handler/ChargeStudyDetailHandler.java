@@ -6,9 +6,11 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
 
+  List<ChargeStudy> paymentStudyList;
+  List<ChargeStudy> chargeInterestList;
 
-  public ChargeStudyDetailHandler(List<ChargeStudy> chargeStudyList, List<ChargeStudy> chargeInterestList) {
-    super(chargeStudyList, chargeInterestList);	
+  public ChargeStudyDetailHandler(List<ChargeStudy> chargeStudyList, List<ChargeStudy> chargeInterestList, List<ChargeStudy> paymentStudyList) {
+    super(chargeStudyList, chargeInterestList, paymentStudyList);
   }
 
   @Override
@@ -101,6 +103,9 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
       System.out.println();
       System.out.println();
       System.out.println("유료 스터디 결제가 완료 되었습니다.\n");
+
+      ChargeStudy paymentStudy = new ChargeStudy();
+      paymentStudyList.add(paymentStudy);
     }
     return;
   }

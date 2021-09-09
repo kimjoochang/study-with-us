@@ -16,8 +16,13 @@ public class Member implements Serializable {
 
   @Override
   public String toString() {
-    return "Member [no=" + no + ", name=" + name + ", id=" + id + ", password=" + password + "]";
+    return "[팀장 / 멘토 = " + name + "]";
   }
+
+  //  @Override
+  //  public String toString() {
+  //    return "Member [no=" + no + ", name=" + name + ", id=" + id + ", password=" + password + "]";
+  //  }
 
   public static String getAdminId() {
     return adminId;
