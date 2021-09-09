@@ -3,15 +3,15 @@ package com.studywithus.handler;
 import java.sql.Date;
 import java.util.List;
 
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyAddHandler extends AbstractChargeStudyHandler{
 
-	public ChargeStudyAddHandler(List<ChargeStudy> chargeStudyList) {
+	public ChargeStudyAddHandler(List<Study> chargeStudyList) {
 		super(chargeStudyList);	
 
-		ChargeStudy mentorTestUser = new ChargeStudy();
+		Study mentorTestUser = new Study();
 
 		mentorTestUser.setNo(1);
 		mentorTestUser.setWriter("");
@@ -32,16 +32,16 @@ public class ChargeStudyAddHandler extends AbstractChargeStudyHandler{
 	public void execute() {
 		System.out.println("[유료 스터디 / 생성]\n");
 
-		ChargeStudy chargeStudy = new ChargeStudy();
+		Study study = new Study();
 
-		chargeStudy.setNo(Prompt.inputInt("번호? "));
-		chargeStudy.setWriter(Prompt.inputString("멘토? "));
-		chargeStudy.setArea(Prompt.inputString("지역? "));
-		chargeStudy.setTitle(Prompt.inputString("스터디 제목? "));
-		chargeStudy.setExplanation(Prompt.inputString("스터디 설명? "));
-		chargeStudy.setPrice(Prompt.inputInt("가격? " ));
-		chargeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
-		chargeStudyList.add(chargeStudy);
+		study.setNo(Prompt.inputInt("번호? "));
+		study.setWriter(Prompt.inputString("멘토? "));
+		study.setArea(Prompt.inputString("지역? "));
+		study.setTitle(Prompt.inputString("스터디 제목? "));
+		study.setExplanation(Prompt.inputString("스터디 설명? "));
+		study.setPrice(Prompt.inputInt("가격? " ));
+		study.setRegisteredDate(new Date(System.currentTimeMillis()));
+		chargeStudyList.add(study);
 
 		System.out.println();
 		System.out.println("유료스터디 등록이 완료되었습니다.\n");

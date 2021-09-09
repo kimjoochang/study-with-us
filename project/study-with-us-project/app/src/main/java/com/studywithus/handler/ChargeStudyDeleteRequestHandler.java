@@ -1,15 +1,15 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDeleteRequestHandler extends AbstractChargeStudyHandler{
 
-  ChargeStudy chargeStudy;
+  Study study;
 
-  public ChargeStudyDeleteRequestHandler(List<ChargeStudy> chargeStudyList,
-      List<ChargeStudy> chargeDeleteRequestList, int nothing) {
+  public ChargeStudyDeleteRequestHandler(List<Study> chargeStudyList,
+      List<Study> chargeDeleteRequestList, int nothing) {
     super(chargeStudyList, chargeDeleteRequestList, 1);	
   }
 
@@ -18,9 +18,9 @@ public class ChargeStudyDeleteRequestHandler extends AbstractChargeStudyHandler{
     System.out.println("[유료 스터디 / 삭제 요청]");
     int no = Prompt.inputInt("번호? ");
 
-    chargeStudy = findByNo(no);
+    study = findByNo(no);
 
-    if (chargeStudy == null) {
+    if (study == null) {
       System.out.println();
       System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
       return;
@@ -32,7 +32,7 @@ public class ChargeStudyDeleteRequestHandler extends AbstractChargeStudyHandler{
       System.out.println("유료 스터디 삭제 요청을 취소하였습니다.\n");
       return;
     }
-    chargeDeleteRequestList.add(chargeStudy);
+    chargeDeleteRequestList.add(study);
     System.out.println("삭제 요청이 완료되었습니다.\n");
   }
 

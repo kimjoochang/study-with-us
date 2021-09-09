@@ -1,13 +1,13 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 
 public abstract class AbstractChargeInterestHandler implements Command{
 
-  protected List<ChargeStudy> chargeInterestList;
+  protected List<Study> chargeInterestList;
 
-  public AbstractChargeInterestHandler(List<ChargeStudy> chargeInterestList) {
+  public AbstractChargeInterestHandler(List<Study> chargeInterestList) {
     this.chargeInterestList = chargeInterestList;
   }
 
@@ -15,13 +15,13 @@ public abstract class AbstractChargeInterestHandler implements Command{
   public void execute() {
   }
 
-  protected void execute(ChargeStudy study) {
+  protected void execute(Study study) {
   }
 
-  protected ChargeStudy findByNo(int no) {
-    for (ChargeStudy chargeStudy : chargeInterestList) {
-      if (chargeStudy.getNo() == no) {
-        return chargeStudy;
+  protected Study findByNo(int no) {
+    for (Study study : chargeInterestList) {
+      if (study.getNo() == no) {
+        return study;
       }
     }
     return null;
