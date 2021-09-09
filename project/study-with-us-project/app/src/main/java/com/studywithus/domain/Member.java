@@ -18,24 +18,17 @@ public class Member implements Serializable {
 	private String phoneNumber; // 회원 핸드폰번호
 	private Date registeredDate; // 회원 가입일
 
-
+	public static final int ACCESS_GENERAL = 0x02; // 회원
+	public static final int ACCESS_MEMBER= 0x04; // 팀원
+	public static int ACCESS_LEADER = 0x08; // 팀장
+	public static final int ACCESS_MENTOR = 0x010; // 멘토
+	public static final int ACCESS_ADMIN = 0x20; // 관리자
 
 	public static int getUserAccessLevel() {
 		return userAccessLevel;
 	}
 
 	private List<Member> members = new ArrayList<Member>();
-
-	//	@Override
-	//	public String toString() {
-	//		return "[팀장 / 멘토 = " + name + "]";
-	//	}
-
-
-	//  @Override
-	//  public String toString() {
-	//    return "Member [no=" + no + ", name=" + name + ", id=" + id + ", password=" + password + "]";
-	//  }
 
 	public static String getAdminId() {
 		return adminId;
