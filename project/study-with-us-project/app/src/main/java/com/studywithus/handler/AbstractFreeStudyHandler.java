@@ -13,7 +13,7 @@ public abstract class AbstractFreeStudyHandler implements Command {
     this.freeStudyList = freeStudyList;
   }
   public AbstractFreeStudyHandler(List<FreeStudy> freeStudyApplyList, int nothing) {
-    this.freeStudyApplyList = freeStudyApplyList;
+    this.freeStudyList = freeStudyApplyList;
   }
 
   public AbstractFreeStudyHandler(List<FreeStudy> freeStudyList, List<FreeStudy> freeStudyApplyList, List<FreeStudy> freeInterestList) {

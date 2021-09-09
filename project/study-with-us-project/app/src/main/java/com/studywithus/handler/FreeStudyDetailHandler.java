@@ -12,8 +12,12 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
   public FreeStudyDetailHandler(List<FreeStudy> freeStudyList, List<FreeStudy> freeStudyApplyList, List<FreeStudy> freeInterestList) {
     super(freeStudyList, freeStudyApplyList, freeInterestList);
   }
+  public FreeStudyDetailHandler( List<FreeStudy> freeStudyApplyList) {
+    super(freeStudyApplyList);
+  }
 
   // 무료 스터디 상세보기
+  @Override
   public void execute() {
     System.out.println("[무료 스터디 / 상세보기]\n");
 
