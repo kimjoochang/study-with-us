@@ -1,4 +1,4 @@
-package com.studywithus.handler;
+package com.studywithus.handler.copy;
 
 import java.util.List;
 import com.studywithus.domain.FreeStudy;
