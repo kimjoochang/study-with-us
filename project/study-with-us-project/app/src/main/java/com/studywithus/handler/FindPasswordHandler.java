@@ -44,7 +44,6 @@ public class FindPasswordHandler implements Command {
       System.out.println("변경이 완료되었습니다.");
       return;
     }
-    return;
   }
 
   // 비밀번호 변경용
