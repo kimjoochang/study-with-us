@@ -12,6 +12,12 @@ public class Study implements Serializable {
   // 팀원 or 멘티
   private List<Member> members;
 
+  // 무료 스터디
+  private List<Study> freeStudy;
+
+  // 유료 스터디
+  private List<Study> chargeStudy;
+
   // 게시글 번호
   private int no;
 
@@ -68,6 +74,22 @@ public class Study implements Serializable {
 
   public void setMembers(List<Member> members) {
     this.members = members;
+  }
+
+  public List<Study> getFreeStudy() {
+    return freeStudy;
+  }
+
+  public void setFreeStudy(List<Study> freeStudy) {
+    this.freeStudy = freeStudy;
+  }
+
+  public List<Study> getChargeStudy() {
+    return chargeStudy;
+  }
+
+  public void setChargeStudy(List<Study> chargeStudy) {
+    this.chargeStudy = chargeStudy;
   }
 
   public int getNo() {
