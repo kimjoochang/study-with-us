@@ -3,6 +3,7 @@ package com.studywithus.handler;
 import java.sql.Date;
 import java.util.List;
 import com.studywithus.domain.FreeStudy;
+import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
@@ -40,8 +41,12 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
     freeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     freeStudyList.add(freeStudy);
+    //    AuthLoginHandler.userAccessLevel = AuthLoginHandler.userAccessLevel | Menu.ACCESS_LEADER;
+    AuthLoginHandler.userAccessLevel |= Menu.ACCESS_LEADER;
+    //    AuthLoginHandler.userAccessLevel = Menu.ACCESS_LEADER | Menu.ACCESS_GENERAL;
 
     System.out.println();
     System.out.println("무료 스터디 등록이 완료되었습니다.\n");
+
   }
 }

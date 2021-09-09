@@ -3,6 +3,7 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Mentor;
+import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class MentorApplicantDetailHandler extends AbstractMentorApplicantHandler {
@@ -42,8 +43,9 @@ public class MentorApplicantDetailHandler extends AbstractMentorApplicantHandler
       } else if (input == 2) {
         mentorRejectHandler(member);
       } else if (input == 0) {
+        return;
+      }else {
         System.out.println("잘못된 번호입니다.");
-        continue;
       }
       return;
     }
@@ -56,7 +58,11 @@ public class MentorApplicantDetailHandler extends AbstractMentorApplicantHandler
     mentorList.add(mentor);
     mentorApplicantList.remove(mentorApplicant);
 
+    AuthLoginHandler.userAccessLevel |= Menu.ACCESS_MENTOR;
+    //    AuthLoginHandler.userAccessLevel = Menu.ACCESS_MENTOR | Menu.ACCESS_GENERAL;
+
     System.out.println("멘토 승인이 완료되었습니다.");
+
   }
   private void mentorRejectHandler(Member mentorApplicant) {
     mentorApplicantList.remove(mentorApplicant);
