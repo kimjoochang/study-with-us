@@ -1,6 +1,6 @@
 package com.studywithus.handler;
 
-import com.studywithus.domain.Board;
+import com.studywithus.domain.Community;
 import com.studywithus.util.Prompt;
 
 public class CommunityDeleteHandler extends AbstractBoardHandler{
@@ -16,9 +16,9 @@ public class CommunityDeleteHandler extends AbstractBoardHandler{
 
     int no = Prompt.inputInt("번호? ");
 
-    Board board = findByNo(no);
+    Community community = findByNo(no);
 
-    if (board == null) {
+    if (community == null) {
       System.out.println();
       System.out.println("해당 번호의 게시글이 없습니다.\n");
       return;
@@ -31,7 +31,7 @@ public class CommunityDeleteHandler extends AbstractBoardHandler{
       return;
     }
 
-    boardList.remove(board);
+    // communityList.remove(community);
 
     System.out.println();
     System.out.println("게시글을 삭제하였습니다.\n");

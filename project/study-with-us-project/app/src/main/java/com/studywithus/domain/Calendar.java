@@ -1,16 +1,9 @@
 package com.studywithus.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 @SuppressWarnings("serial")
 public class Calendar implements Serializable {
-
-  // 이달의 채용공고
-  private List<Calendar> JobsCalendarList;
-
-  // 이달의 시험일정
-  private List<Calendar> ExamCalendarList;
 
   // 채용공고 or 시험일정 제목
   private String title;
@@ -26,22 +19,6 @@ public class Calendar implements Serializable {
 
   // 시험일정
   private String examDate;
-
-  public List<Calendar> getJobsCalendarList() {
-    return JobsCalendarList;
-  }
-
-  public void setJobsCalendarList(List<Calendar> jobsCalendarList) {
-    JobsCalendarList = jobsCalendarList;
-  }
-
-  public List<Calendar> getExamCalendarList() {
-    return ExamCalendarList;
-  }
-
-  public void setExamCalendarList(List<Calendar> examCalendarList) {
-    ExamCalendarList = examCalendarList;
-  }
 
   public String getTitle() {
     return title;
