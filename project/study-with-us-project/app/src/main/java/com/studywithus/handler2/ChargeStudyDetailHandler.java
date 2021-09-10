@@ -6,7 +6,7 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
 
-  ChargeStudy chargestudy; 
+  ChargeStudy chargestudy;
 
   List<ChargeStudy> paymentStudyList;
   List<ChargeStudy> chargeInterestList;
@@ -155,6 +155,4 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
     System.out.println();
     System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");
   }
-
 }
-
