@@ -1,13 +1,15 @@
 package com.studywithus.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Board {
+@SuppressWarnings("serial")
+public class Board implements Serializable {
 
   private int no;    // 게시글 번호
   private String title; // 게시글 제목
   private String content; // 게시글 내용
-  private String writer; // 게시글 작성자
+  private Member writer; // 게시글 작성자
   private Date registeredDate; // 등록일
   private int viewCount; // 조회수
   private int like; // 좋아요
@@ -39,11 +41,11 @@ public class Board {
     this.content = content;
   }
 
-  public String getWriter() {
+  public Member getWriter() {
     return writer;
   }
 
-  public void setWriter(String writer) {
+  public void setWriter(Member writer) {
     this.writer = writer;
   }
 

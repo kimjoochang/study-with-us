@@ -20,7 +20,6 @@ public class SignUpHandler extends AbstractLoginHandler {
     String id = Prompt.inputString("아이디? ");
     String password = Prompt.inputString("비밀번호? ");
     String phoneNumber = Prompt.inputString("핸드폰번호? ");
-    Date registerdDate = (new Date(System.currentTimeMillis()));
     System.out.println();
 
     id = findById(id);
@@ -35,6 +34,7 @@ public class SignUpHandler extends AbstractLoginHandler {
       member.setPhoneNumber(phoneNumber);
       member.setRegisteredDate((new Date(System.currentTimeMillis())));
       member.setUserAccessLevel(Menu.ACCESS_GENERAL);
+      member.setRegisteredDate(new Date(System.currentTimeMillis()));
       memberList.add(member);
       System.out.println();
       System.out.println("회원가입이 완료되었습니다.\n");

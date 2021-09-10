@@ -14,10 +14,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import com.studywithus.domain.Board;
-import com.studywithus.domain.Community;
-import com.studywithus.domain.ExamCalendar;
 import com.studywithus.domain.FreeStudy;
-import com.studywithus.domain.JobsCalendar;
 import com.studywithus.domain.Mentor;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.AuthLoginHandler;
@@ -65,7 +62,7 @@ import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
 
-public class App {
+public class App_KJC_NewDomain {
   List<Member> memberList = new LinkedList<>();
   List<FreeStudy> freeStudyList = new ArrayList<>();
   List<FreeStudy> freeStudyApplyList = new ArrayList<>();
@@ -106,11 +103,11 @@ public class App {
   }
 
   public static void main(String[] args) {
-    App app = new App(); 
+    App_KJC_NewDomain app = new App_KJC_NewDomain(); 
     app.service();
   }
 
-  public App() {
+  public App_KJC_NewDomain() {
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
     commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeStudyApplyList, freeInterestList));
@@ -349,7 +346,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("communityQa.data"))) {
 
-      communityQaList.addAll((List<Community>) in.readObject());
+      communityQaList.addAll((List<Board>) in.readObject());
 
     } catch (Exception e) {
       System.out.println("파일에서 커뮤니티 질문 데이터를 읽어 오는 중 오류가 발생하였습니다.");
@@ -374,7 +371,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("communityInfo.data"))) {
 
-      communityInfoList.addAll((List<Community>) in.readObject());
+      communityInfoList.addAll((List<Board>) in.readObject());
 
     } catch (Exception e) {
       System.out.println("파일에서 커뮤니티 정보 데이터를 읽어 오는 중 오류가 발생하였습니다.");
@@ -399,7 +396,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("communityTalk.data"))) {
 
-      communityTalkList.addAll((List<Community>) in.readObject());
+      communityTalkList.addAll((List<Board>) in.readObject());
 
     } catch (Exception e) {
       System.out.println("파일에서 커뮤니티 스몰톡 데이터를 읽어 오는 중 오류가 발생하였습니다.");
@@ -424,7 +421,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("jobsCalendar.data"))) {
 
-      jobsCalendarList.addAll((List<JobsCalendar>) in.readObject());
+      jobsCalendarList.addAll((List<Board>) in.readObject());
 
       System.out.println("이달의 채용공고 데이터 로딩이 완료되었습니다.");
 
@@ -451,7 +448,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("examCalendar.data"))) {
 
-      examCalendarList.addAll((List<ExamCalendar>) in.readObject());
+      examCalendarList.addAll((List<Board>) in.readObject());
 
       System.out.println("이달의 시험일정 데이터 로딩이 완료되었습니다.");
 

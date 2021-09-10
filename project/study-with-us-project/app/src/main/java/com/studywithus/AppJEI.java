@@ -59,7 +59,7 @@ import com.studywithus.handler.MemberPrompt;
 import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicantAddHandler;
 import com.studywithus.handler.MentorApplicantDetailHandler;
-import com.studywithus.handler.MentorApplicantListHandler;
+import com.studywithus.handler.MentorApplicationDetailHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -162,7 +162,7 @@ public class AppJEI {
     commandMap.put("/examCalendar/delete", new ExamCalendarDeleteHandler(examCalendarList));
 
     commandMap.put("/mentorApplicant/add", new MentorApplicantAddHandler(mentorApplicantList));
-    commandMap.put("/mentorApplicant/list", new MentorApplicantListHandler(mentorApplicantList));
+    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicantList));
     commandMap.put("/mentorApplicant/detail", new MentorApplicantDetailHandler(mentorApplicantList, mentorList));
 
     commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));

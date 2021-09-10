@@ -1,7 +1,6 @@
 package com.studywithus.domain;
 
 import java.sql.Date;
-import java.util.List;
 
 public class MentorApplicationForm {
 
@@ -10,13 +9,13 @@ public class MentorApplicationForm {
   private String chargeStudySubject;  //  유료 스터디 주제
   private String chargeStudyExplanation;  // 유료 스터디 설명
   private Date registeredDate; // 등록일
-  private List<Member> MentorApplicationFormList; // 멘토 신청서 목록
+  private Member mentorApplicantInfo; // 멘토 신청자 정보
 
-  public List<Member> getMentorApplicationFormList() {
-    return MentorApplicationFormList;
+  public Member getMentorApplicantInfo() {
+    return mentorApplicantInfo;
   }
-  public void setMentorApplicationFormList(List<Member> mentorApplicationFormList) {
-    MentorApplicationFormList = mentorApplicationFormList;
+  public void setMentorApplicantInfo(Member mentorApplicantInfo) {
+    this.mentorApplicantInfo = mentorApplicantInfo;
   }
   public String getName() {
     return name;
