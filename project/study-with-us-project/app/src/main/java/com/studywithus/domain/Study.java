@@ -6,6 +6,7 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class Study implements Serializable {
+
   // 팀장 or 멘토
   private Member writer;
 
@@ -14,12 +15,6 @@ public class Study implements Serializable {
 
   // 유/무료 스터디
   private boolean test;
-
-  // 무료 스터디
-  private List<Study> freeStudy;
-
-  // 유료 스터디
-  private List<Study> chargeStudy;
 
   // 게시글 번호
   private int no;
@@ -57,12 +52,6 @@ public class Study implements Serializable {
   // 조회수
   private int viewCount;
 
-  // 무료 스터디 관심목록
-  private List<Study> freeInterest;
-
-  // 유료 스터디 관심목록
-  private List<Study> chargeInterest;
-
   public boolean isTest() {
     return test;
   }
@@ -85,22 +74,6 @@ public class Study implements Serializable {
 
   public void setMembers(List<Member> members) {
     this.members = members;
-  }
-
-  public List<Study> getFreeStudy() {
-    return freeStudy;
-  }
-
-  public void setFreeStudy(List<Study> freeStudy) {
-    this.freeStudy = freeStudy;
-  }
-
-  public List<Study> getChargeStudy() {
-    return chargeStudy;
-  }
-
-  public void setChargeStudy(List<Study> chargeStudy) {
-    this.chargeStudy = chargeStudy;
   }
 
   public int getNo() {
@@ -197,21 +170,5 @@ public class Study implements Serializable {
 
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
-  }
-
-  public List<Study> getFreeInterest() {
-    return freeInterest;
-  }
-
-  public void setFreeInterest(List<Study> freeInterest) {
-    this.freeInterest = freeInterest;
-  }
-
-  public List<Study> getChargeInterest() {
-    return chargeInterest;
-  }
-
-  public void setChargeInterest(List<Study> chargeInterest) {
-    this.chargeInterest = chargeInterest;
   }
 }
