@@ -2,6 +2,7 @@ package com.studywithus.handler;
 
 import java.util.List;
 import com.studywithus.domain.Board;
+import com.studywithus.handler2.Command;
 
 public abstract class AbstractBoardHandler implements Command {
 
@@ -16,7 +17,6 @@ public abstract class AbstractBoardHandler implements Command {
     for (Board board : boardList) {
       if (board.getNo() == no) {
         return board;
-
       }
     }
     return null;
