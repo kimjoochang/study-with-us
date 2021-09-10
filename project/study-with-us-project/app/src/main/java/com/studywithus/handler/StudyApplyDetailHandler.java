@@ -14,6 +14,7 @@ public class StudyApplyDetailHandler extends AbstractStudyHandler{
   public void execute() {
     System.out.println("[무료 스터디 신청 내역 / 상세보기] \n");
     System.out.println("--------------------------------");
+
     for(Study Study : StudyApplyList) {
       System.out.printf("%s, %s\n",Study.getNo(), Study.getTitle());
       System.out.println("--------------------------------");
@@ -40,6 +41,4 @@ public class StudyApplyDetailHandler extends AbstractStudyHandler{
     System.out.printf("규칙: %s\n", Study.getRule());
     System.out.printf("등록일: %s\n", Study.getRegisteredDate());
   }
-
-
 }

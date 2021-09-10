@@ -26,7 +26,7 @@ public class StudyDeleteHandler extends AbstractStudyHandler {
         return;
       }
 
-      if (freeStudy.getWriter().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
+      if (freeStudy.getWriter() != AuthLoginHandler.getLoginUser()) {
         System.out.println("삭제 권한이 없습니다.");
         return;
       }

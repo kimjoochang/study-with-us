@@ -13,13 +13,24 @@ public abstract class AbstractStudyHandler implements Command {
     this.chargeStudyList = chargeStudyList;
   }
 
-  // 무료 스터디 번호 조회
-  //  protected Study findByNo(int no) {
-  //    for (Study Study : StudyList) {
-  //      if (Study.getNo() == no) {
-  //        return Study;
-  //      }
-  //    }
-  //    return null;
-  //  }
+  protected Study findByNo(int no) {
+    // 무료 스터디 번호 조회
+    if (Study.value) {
+      for (Study freeStudy : freeStudyList) {
+        if (freeStudy.getNo() == no) {
+          return freeStudy;
+        }
+      }
+    }
+
+    // 유료 스터디 번호 조회
+    else {
+      for (Study freeStudy : chargeStudyList) {
+        if (freeStudy.getNo() == no) {
+          return freeStudy;
+        }
+      }
+    }
+    return null;
+  }
 }
