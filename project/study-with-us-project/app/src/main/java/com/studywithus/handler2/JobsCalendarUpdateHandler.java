@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.JobsCalendar;
 import com.studywithus.util.Prompt;
 
-public class JobsCalendarUpdateHandler extends AbstractJobsCalendarHandler {
+public class JobsCalendarUpdateHandler extends AbstractCalendarHandler {
 
   public JobsCalendarUpdateHandler(List<JobsCalendar> jobsCalendarList) {
     super(jobsCalendarList);
