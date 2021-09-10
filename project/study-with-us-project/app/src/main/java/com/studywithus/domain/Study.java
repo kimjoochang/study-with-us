@@ -14,7 +14,7 @@ public class Study implements Serializable {
   private List<Member> members;
 
   // 유/무료 스터디
-  private boolean test;
+  public static boolean value;
 
   // 게시글 번호
   private int no;
@@ -40,9 +40,6 @@ public class Study implements Serializable {
   // 지역
   private String area;
 
-  // 유료 스터디 후기
-  private String review;
-
   // 스터디 등록일
   private Date registeredDate;
 
@@ -51,14 +48,6 @@ public class Study implements Serializable {
 
   // 조회수
   private int viewCount;
-
-  public boolean isTest() {
-    return test;
-  }
-
-  public void setTest(boolean test) {
-    this.test = test;
-  }
 
   public Member getWriter() {
     return writer;
@@ -75,6 +64,14 @@ public class Study implements Serializable {
   public void setMembers(List<Member> members) {
     this.members = members;
   }
+
+  //  public boolean isValue() {
+  //    return value;
+  //  }
+  //
+  //  public void setValue(boolean value) {
+  //    this.value = value;
+  //  }
 
   public int getNo() {
     return no;
@@ -138,14 +135,6 @@ public class Study implements Serializable {
 
   public void setArea(String area) {
     this.area = area;
-  }
-
-  public String getReview() {
-    return review;
-  }
-
-  public void setReview(String review) {
-    this.review = review;
   }
 
   public Date getRegisteredDate() {
