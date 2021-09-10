@@ -15,7 +15,6 @@ public class Community implements Serializable {
   private int viewCount; // 조회수
   private int like; // 좋아요
 
-
   @Override
   public String toString() {
     return "Community [no=" + no + ", title=" + title + ", content=" + content + ", writer=" + writer
@@ -78,13 +77,4 @@ public class Community implements Serializable {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
 }

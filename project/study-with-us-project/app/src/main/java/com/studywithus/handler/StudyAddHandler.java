@@ -12,10 +12,10 @@ public class StudyAddHandler extends AbstractStudyHandler {
     super(freeStudyList, chargeStudyList);
   }
 
-  // 무료 스터디 생성
   @Override
   public void execute() {
 
+    // 무료 스터디 생성
     if (Study.value) {
       System.out.println("[무료 스터디 / 생성]\n");
 
@@ -47,8 +47,8 @@ public class StudyAddHandler extends AbstractStudyHandler {
       System.out.println("무료 스터디 등록이 완료되었습니다.\n");
     }
 
+    // 유료 스터디 생성
     else {
-      // 유료 스터디 생성
       System.out.println("[유료 스터디 / 생성]\n");
 
       Study chargeStudy = new Study();
