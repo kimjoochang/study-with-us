@@ -12,6 +12,9 @@ public class Study implements Serializable {
   // 팀원 or 멘티
   private List<Member> members;
 
+  // 유/무료 스터디
+  private boolean test;
+
   // 무료 스터디
   private List<Study> freeStudy;
 
@@ -59,6 +62,14 @@ public class Study implements Serializable {
 
   // 유료 스터디 관심목록
   private List<Study> chargeInterest;
+
+  public boolean isTest() {
+    return test;
+  }
+
+  public void setTest(boolean test) {
+    this.test = test;
+  }
 
   public Member getWriter() {
     return writer;
