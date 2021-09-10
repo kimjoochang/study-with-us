@@ -14,7 +14,7 @@ public class Community implements Serializable {
   private Date registeredDate; // 등록일
   private int viewCount; // 조회수
   private int like; // 좋아요
-  private String name;
+
 
   @Override
   public String toString() {

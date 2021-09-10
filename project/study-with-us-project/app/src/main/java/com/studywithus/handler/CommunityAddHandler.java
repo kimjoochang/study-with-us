@@ -1,7 +1,7 @@
 package com.studywithus.handler;
 
 import java.sql.Date;
-import com.studywithus.domain.Board;
+import com.studywithus.domain.Community;
 import com.studywithus.handler2.AuthLoginHandler;
 import com.studywithus.util.Prompt;
 
@@ -16,15 +16,15 @@ public class CommunityAddHandler extends AbstractBoardHandler{
   public void execute() {
     System.out.println("[커뮤니티 / 생성] \n");
 
-    Board board = new Board();
+    Community community = new Community();
 
-    board.setNo(Prompt.inputInt("번호? "));
-    board.setTitle(Prompt.inputString("제목? "));
-    board.setContent(Prompt.inputString("내용? "));
-    board.setWriter(AuthLoginHandler.getLoginUser());
-    board.setRegisteredDate(new Date(System.currentTimeMillis()));
+    community.setNo(Prompt.inputInt("번호? "));
+    community.setTitle(Prompt.inputString("제목? "));
+    community.setContent(Prompt.inputString("내용? "));
+    community.setWriter(AuthLoginHandler.getLoginUser());
+    community.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    boardList.add(board);
+    // communityList.add(community);
 
     System.out.println();
     System.out.println("게시글 등록이 완료되었습니다.\n");

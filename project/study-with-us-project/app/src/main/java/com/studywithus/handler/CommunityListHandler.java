@@ -1,6 +1,6 @@
 package com.studywithus.handler;
 
-import com.studywithus.domain.Board;
+import com.studywithus.domain.Community;
 
 public class CommunityListHandler extends AbstractBoardHandler{
 
@@ -14,14 +14,14 @@ public class CommunityListHandler extends AbstractBoardHandler{
   public void execute() {
     System.out.println("[커뮤니티 / 조회]\n");
 
-    for (Board board : boardList) {
+    for (Community community : communityList) {
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
-          board.getNo(),
-          board.getTitle(), 
-          board.getWriter().getName(),
-          board.getRegisteredDate(), 
-          board.getViewCount(),
-          board.getLike());
+          community.getNo(),
+          community.getTitle(), 
+          community.getWriter().getName(),
+          community.getRegisteredDate(), 
+          community.getViewCount(),
+          community.getLike());
       System.out.println();
     }
   }
