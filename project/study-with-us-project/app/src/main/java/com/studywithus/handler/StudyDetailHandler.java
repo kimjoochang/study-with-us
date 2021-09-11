@@ -147,7 +147,7 @@ public class StudyDetailHandler extends AbstractStudyHandler {
     }
 
     // [수정] 타입 불일치
-    freeStudy.setMember(AuthLoginHandler.getLoginUser());
+    freeStudy.setWriter(AuthLoginHandler.getLoginUser());
 
     applicationList.add(freeStudy);
 

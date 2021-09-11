@@ -13,7 +13,7 @@ public class Study implements Serializable {
   // 팀원 or 멘티
   private List<Member> members;
 
-  //
+  // 신청자
   private Member member;
 
   // 유/무료 스터디
