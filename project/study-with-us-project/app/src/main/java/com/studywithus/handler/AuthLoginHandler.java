@@ -39,7 +39,7 @@ public class AuthLoginHandler implements Command {
       root.setName("관리자");
       root.setId("admin");
       loginUser = root;
-      userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL;
+      userAccessLevel = Menu.ACCESS_ADMIN;
       return;
     } 
 
