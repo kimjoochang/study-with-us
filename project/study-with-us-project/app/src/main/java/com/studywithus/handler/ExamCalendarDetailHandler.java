@@ -6,6 +6,8 @@ import com.studywithus.util.Prompt;
 
 public class ExamCalendarDetailHandler extends AbstractExamCalendarHandler {
 
+  Calendar examCalendar;
+
   public ExamCalendarDetailHandler(List<Calendar> examCalendarList) {
     super(examCalendarList);
   }
@@ -16,11 +18,12 @@ public class ExamCalendarDetailHandler extends AbstractExamCalendarHandler {
     System.out.println("[이달의 시험일정 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호? ");
+
     Calendar examCalendar = findByNo(no);
 
     if (examCalendar == null) {
       System.out.println();
-      System.out.println("해당 번호의 채용공고가 없습니다.");
+      System.out.println("해당 번호의 시험일정이 없습니다.");
       return;
     }
 

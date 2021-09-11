@@ -38,7 +38,6 @@ import com.studywithus.handler.ExamCalendarDeleteHandler;
 import com.studywithus.handler.ExamCalendarDetailHandler;
 import com.studywithus.handler.ExamCalendarUpdateHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
-import com.studywithus.handler.FreeStudyApplyDetailHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
@@ -50,7 +49,9 @@ import com.studywithus.handler.JobsCalendarDetailHandler;
 import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MemberPrompt;
 import com.studywithus.handler.MembershipWithdrawalHandler;
+import com.studywithus.handler.MentorApplicationAddHandler;
 import com.studywithus.handler.MentorApplicationDetailHandler;
+import com.studywithus.handler.MentorApplicationFormListHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -62,8 +63,8 @@ public class App {
   List<Member> freeApplicantList = new ArrayList<>();
   List<Study> freeApplicationList = new ArrayList<>();
   List<Study> freeInterestList = new ArrayList<>();
-  List<Member> mentorApplicantList = new ArrayList<>();
   List<Study> chargeStudyList = new ArrayList<>();
+  List<Member> mentorApplicantList = new ArrayList<>();
   List<Study> chargeDeleteRequestList = new ArrayList<>();
   List<Study> chargeInterestList = new ArrayList<>();
   List<MentorApplicationForm> mentorList = new ArrayList<>();
@@ -72,6 +73,9 @@ public class App {
   List<Community> communityTalkList = new ArrayList<>();
   List<Calendar> jobsCalendarList = new ArrayList<>();
   List<Calendar> examCalendarList = new ArrayList<>();
+  List<MentorApplicationForm> MentorApplicationAddHandler = new ArrayList<>();
+  List<MentorApplicationForm> MentorApplicationDetailHandler = new ArrayList<>();
+  List<MentorApplicationForm> MentorApplicationFormListHandler = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
 
@@ -105,11 +109,10 @@ public class App {
   public App() {
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicationList, freeInterestList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicantList, freeApplicationList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-    commandMap.put("/freeStudy/apply", new FreeStudyApplyDetailHandler(freeApplicationList));
 
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
@@ -152,15 +155,9 @@ public class App {
     commandMap.put("/examCalendar/update", new ExamCalendarUpdateHandler(examCalendarList));
     commandMap.put("/examCalendar/delete", new ExamCalendarDeleteHandler(examCalendarList));
 
-    commandMap.put("/mentorApplicant/add", new MentorApplicantAddHandler(mentorApplicantList));
+    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicantList));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicantList));
-    commandMap.put("/mentorApplicant/detail", new MentorApplicantDetailHandler(mentorApplicantList, mentorList));
-
-    commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
-    commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
-
-    commandMap.put("/chargeInterest/list", new ChargeInterestListHandler(chargeInterestList));
-    commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
+    commandMap.put("/mentorApplicant/detail", new MentorApplicationFormListHandler(mentorApplicantList, mentorList));
 
     commandMap.put("/auth/login", new AuthLoginHandler(memberList));
     commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
