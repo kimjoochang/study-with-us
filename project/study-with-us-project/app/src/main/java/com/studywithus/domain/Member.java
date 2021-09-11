@@ -17,12 +17,6 @@ public class Member implements Serializable {
   private String phoneNumber; // 회원 핸드폰번호
   private Date registeredDate; // 회원 가입일
 
-  // 무료 스터디 관심목록
-  private List<Study> freeInterest;
-
-  // 유료 스터디 관심목록
-  private List<Study> chargeInterest;
-
   // [삭제해도 될듯]
   //  public static final int ACCESS_GENERAL = 0x02; // 회원
   //  public static final int ACCESS_MEMBER= 0x04; // 팀원

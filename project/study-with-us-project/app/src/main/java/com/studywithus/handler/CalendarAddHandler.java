@@ -6,8 +6,8 @@ import com.studywithus.util.Prompt;
 
 public class CalendarAddHandler extends AbstractCalendarHandler{
 
-  public CalendarAddHandler(List<Calendar> calendarList) {
-    super(calendarList);
+  public CalendarAddHandler(List<Calendar> jobsCalendarList, List<Calendar> examCalendarList) {
+    super(jobsCalendarList, examCalendarList);
   }
 
   // 캘린더 생성
@@ -17,13 +17,21 @@ public class CalendarAddHandler extends AbstractCalendarHandler{
 
     Calendar calendar= new Calendar();
 
-    //    calendar.setNo(Prompt.inputInt("번호? "));
+    String kind = Prompt.inputString("생성할 캘린더? (채용공고 / 시험일정)");
+
+    calendar.setKind(kind);
     calendar.setTitle(Prompt.inputString("제목? "));
     calendar.setContent(Prompt.inputString("내용? "));
-    calendar.setStartDate(Prompt.inputString("시작일? "));
-    calendar.setEndDate(Prompt.inputString("종료일? "));
 
-    calendarList.add(calendar);
+    if (kind.equals("채용공고")) {
+      calendar.setStartDate(Prompt.inputString("시작일? "));
+      calendar.setEndDate(Prompt.inputString("종료일? "));
+      jobsCalendarList.add(calendar);
+    } else {
+      calendar.setExamDate(Prompt.inputString("시험일? "));
+      examCalendarList.add(calendar);
+    }
+
 
     System.out.println();
     System.out.println("캘린더 등록이 완료되었습니다.\n");

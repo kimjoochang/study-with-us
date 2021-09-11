@@ -1,13 +1,16 @@
 package com.studywithus.handler;
 
 import java.util.List;
+import com.studywithus.domain.Calendar;
 
 public abstract class AbstractCalendarHandler implements Command {
 
-  protected List<Calendar> calendarList;
+  protected List<Calendar> jobsCalendarList;
+  protected List<Calendar> examCalendarList;
 
-  public AbstractCalendarHandler(List<Calendar> calendarList) {
-    this.calendarList = calendarList;
+  public AbstractCalendarHandler(List<Calendar> jobsCalendarList, List<Calendar> examCalendarList) {
+    this.jobsCalendarList = jobsCalendarList;
+    this.examCalendarList = examCalendarList;
   }
 
   // 캘린더 번호 조회
