@@ -1,30 +1,38 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Member;
+import com.studywithus.domain.Payment;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
 
-  ChargeStudy chargestudy;
+  Study chargestudy;
 
-  List<ChargeStudy> paymentStudyList;
-  List<ChargeStudy> chargeInterestList;
+  // 유료스터디 관심목록 리스트 (회원 관점)
+  List<Study> interests;
 
-  public ChargeStudyDetailHandler(List<ChargeStudy> chargeStudyList, List<ChargeStudy> chargeInterestList, List<ChargeStudy> paymentStudyList) {
+  // 유료스터디 결제내역 리스트 (회원 관점)
+  List<Payment> paymentList;
+
+  // 유료스터디 결제한 사람 내역 (멘토 관점)
+  List<Member> applicant;
+
+  public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> interests,
+      List<Payment> paymentList, List<Member> applicant ) {
     super(chargeStudyList);
-
-    this.paymentStudyList = paymentStudyList;
-    this.chargeInterestList = chargeInterestList;
+    this.interests = interests;
+    this.paymentList = paymentList;
+    this.applicant = applicant;
   }
 
   @Override
   public void execute() {
-    //    ChargeInterestAddHandler chargeInterestAddHandler = new ChargeInterestAddHandler(chargeInterestList);
     System.out.println("[유료 스터디 / 상세보기]\n");
     int no = Prompt.inputInt("번호? ");
 
-    ChargeStudy study = findByNo(no);
+    Study study = findByNo(no);
 
     if (study == null) {
       System.out.println();
@@ -45,14 +53,13 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
     System.out.println();
     System.out.println("1. 결제하기");
 
-    for(ChargeStudy nowStudy : chargeInterestList) {
+    for(Study nowStudy : interests) {
       if(!study.equals(nowStudy)) {
         no = 0;
         break;
       }
       no = 1;
     }
-
     if (no == 0) {
       System.out.println("2. 관심목록 삭제하기");
     } else if (no == 1) {
@@ -109,22 +116,18 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
       System.out.println();
       System.out.println("유료 스터디 결제가 완료 되었습니다.\n");
 
-      //  ChargeStudy paymentStudy = new ChargeStudy();
-      paymentStudyList.add(chargestudy);
+      // 유료스터디 결제내역 리스트 (회원 관점)
+      Payment payment = new Payment();
+      paymentList.add(payment);
+      AuthLoginHandler.loginUser.setPayment(paymentList);
+
+      // 유료스터디 결제한 사람 내역 (멘토 관점)
+      applicant.add(AuthLoginHandler.loginUser);
     }
     return;
   }
 
-  // private void interestAddHandler(ChargeStudy interest) {
-  private void interestAddHandler(ChargeStudy chargestudy) {
-
-    for(ChargeStudy study : chargeInterestList) {
-      //if(study.equals(interest)) {
-      if(study.equals(chargestudy)) {
-        System.out.println("");
-      }
-    }
-
+  private void interestAddHandler(Study chargeStudy) {
     String input = Prompt.inputString("관심 목록에 추가하시겠습니까? (y/N)");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -132,16 +135,15 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
       return;
     }
 
-    //chargeInterestList.add(interest);
-    chargeInterestList.add(chargeStudy);
+    // 유료스터디 관심목록 리스트 (회원 관점)
+    interests.add(chargeStudy);
 
     System.out.println();
     System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
     // return;
   }
 
-  // private void interestDeleteHandler(ChargeStudy interest) {
-  private void interestDeleteHandler(ChargeStudy chargestudy) {
+  private void interestDeleteHandler(Study chargestudy) {
     String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -149,8 +151,7 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
       return;
     }
 
-    //chargeInterestList.remove(interest);
-    chargeInterestList.remove(chargestudy);
+    interests.remove(chargestudy);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");

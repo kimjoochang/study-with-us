@@ -23,6 +23,10 @@ public class Member implements Serializable {
   // 유료 스터디 관심목록
   private List<Study> chargeInterest;
 
+  // 유료 스터디 결제목록
+  private List<Payment> payment;
+
+
   // [삭제해도 될듯]
   //  public static final int ACCESS_GENERAL = 0x02; // 회원
   //  public static final int ACCESS_MEMBER= 0x04; // 팀원
@@ -118,4 +122,13 @@ public class Member implements Serializable {
   public void setChargeInterest(List<Study> chargeInterest) {
     this.chargeInterest = chargeInterest;
   }
+
+  public List<Payment> getPayment() {
+    return payment;
+  }
+
+  public void setPayment(List<Payment> payment) {
+    this.payment = payment;
+  }
+
 }
