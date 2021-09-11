@@ -481,7 +481,6 @@ public class App {
 
     mainMenuGroup.add(createMyPageMenu());
     mainMenuGroup.add(createAdminMenu());
-    mainMenuGroup.add(createInterestMenu());
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
     mainMenuGroup.add(createMentorApplyMenu());
@@ -494,11 +493,48 @@ public class App {
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
 
+    myPageMenu.add(createAdminMenu());
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createFreeStudyApplyMenu());
     myPageMenu.add(createMentorApplyMenu());
 
     return myPageMenu;
+  }
+
+  private Menu createAdminMenu() {
+    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
+
+    adminMenu.add(createMemberMenu());
+    adminMenu.add(createMentorApplicantMenu());
+    adminMenu.add(createDeleteRequestStudyMenu());
+
+    return adminMenu;
+  }
+
+  private Menu createMemberMenu() {
+    MenuGroup memberMenu = new MenuGroup("회원 관리");
+
+    memberMenu.add(createMentorApplicantMenu());
+
+    return memberMenu;
+  }
+
+  private Menu createMentorApplicantMenu() {
+    MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
+
+    mentorApplicantMenu.add(new MenuItem("조회", "/mentorApplicant/list"));
+    mentorApplicantMenu.add(new MenuItem("상세보기", "/mentorApplicant/detail"));
+
+    return mentorApplicantMenu;
+  }
+
+  // [수정] 관리자 관점 or 회원 관점 (회원 관점이라면 필요 X)
+  private Menu createDeleteRequestStudyMenu() {
+    MenuGroup deletedRequestMenu = new MenuGroup("삭제 요청 스터디 내역");
+    deletedRequestMenu.add(new MenuItem("조회", "/chargeStudy/deleteList"));
+    deletedRequestMenu.add(new MenuItem("상세보기", "/chargeStudy/deleteDetail"));
+
+    return deletedRequestMenu;
   }
 
   private Menu createInterestMenu() {
@@ -544,42 +580,6 @@ public class App {
     mentorApplyMenu.add(new MenuItem("신청", "/mentorApplicant/add"));
 
     return mentorApplyMenu;
-  }
-
-  private Menu createAdminMenu() {
-    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
-
-    adminMenu.add(createMemberMenu());
-    adminMenu.add(createMentorApplicantMenu());
-    adminMenu.add(createDeleteRequestStudyMenu());
-
-    return adminMenu;
-  }
-
-  private Menu createMemberMenu() {
-    MenuGroup memberMenu = new MenuGroup("회원 관리");
-
-    memberMenu.add(createMentorApplicantMenu());
-
-    return memberMenu;
-  }
-
-  private Menu createMentorApplicantMenu() {
-    MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
-
-    mentorApplicantMenu.add(new MenuItem("조회", "/mentorApplicant/list"));
-    mentorApplicantMenu.add(new MenuItem("상세보기", "/mentorApplicant/detail"));
-
-    return mentorApplicantMenu;
-  }
-
-  // [수정] 관리자 관점 or 회원 관점 (회원 관점이라면 필요 X)
-  private Menu createDeleteRequestStudyMenu() {
-    MenuGroup deletedRequestMenu = new MenuGroup("삭제 요청 스터디 내역");
-    deletedRequestMenu.add(new MenuItem("조회", "/chargeStudy/deleteList"));
-    deletedRequestMenu.add(new MenuItem("상세보기", "/chargeStudy/deleteDetail"));
-
-    return deletedRequestMenu;
   }
 
   private Menu createFreeStudyMenu() {
