@@ -17,7 +17,7 @@ public class CalendarAddHandler extends AbstractCalendarHandler{
 
     Calendar calendar= new Calendar();
 
-    String kind = Prompt.inputString("생성할 캘린더? (채용공고 / 시험일정)");
+    String   = Prompt.inputString("생성할 캘린더? (채용공고 / 시험일정)");
 
     calendar.setKind(kind);
     calendar.setTitle(Prompt.inputString("제목? "));

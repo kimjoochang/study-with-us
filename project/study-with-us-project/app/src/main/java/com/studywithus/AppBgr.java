@@ -86,20 +86,20 @@ public class AppBgr {
   }
 
   void service() {
-    loadMembers();
-    loadFreeStudies();
-    loadChargeStudies();
-    loadFreeInterests();
-    loadChargeInterests();
+    //    loadMembers();
+    //    loadFreeStudies();
+    //    loadChargeStudies();
+    //    loadFreeInterests();
+    //    loadChargeInterests();
 
     createMainMenu().execute();
     Prompt.close();
 
-    saveMembers();
-    saveFreeStudies();
-    saveChargeStudies();
-    saveFreeInterests();
-    saveChargeInterests();
+    //    saveMembers();
+    //    saveFreeStudies();
+    //    saveChargeStudies();
+    //    saveFreeInterests();
+    //    saveChargeInterests();
   }
 
 

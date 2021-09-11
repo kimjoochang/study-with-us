@@ -13,8 +13,8 @@ public class Study implements Serializable {
   // 팀원 or 멘티
   private List<Member> members;
 
-  // 신청자
-  private Member member;
+  // 무료 스터디 신청자
+  private List<Member> applicants;
 
   // 유/무료 스터디
   public static boolean value;
@@ -68,12 +68,12 @@ public class Study implements Serializable {
     this.members = members;
   }
 
-  public Member getMember() {
-    return member;
+  public List<Member> getApplicants() {
+    return applicants;
   }
 
-  public void setMember(Member member) {
-    this.member = member;
+  public void setApplicants(List<Member> applicants) {
+    this.applicants = applicants;
   }
 
   public int getNo() {
