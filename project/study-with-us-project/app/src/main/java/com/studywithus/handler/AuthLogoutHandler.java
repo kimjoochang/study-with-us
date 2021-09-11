@@ -6,7 +6,7 @@ import com.studywithus.menu.Menu;
 
 public class AuthLogoutHandler implements Command {
 
-  public AuthLogoutHandler(List <Member> memberlist) {
+  public AuthLogoutHandler(List<Member> memberlist) {
   }
 
   @Override
