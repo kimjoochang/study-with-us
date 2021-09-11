@@ -3,6 +3,9 @@ package com.studywithus.domain;
 @SuppressWarnings("serial")
 public class Calendar extends Content {
 
+  // 캘린더 종류
+  private String kind;
+
   // 채용공고 시작일
   private String startDate;
 
@@ -12,6 +15,13 @@ public class Calendar extends Content {
   // 시험일
   private String examDate;
 
+  public String getKind() {
+    return kind;
+  }
+
+  public void setKind(String kind) {
+    this.kind = kind;
+  }
 
   public String getStartDate() {
     return startDate;
