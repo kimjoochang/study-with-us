@@ -62,7 +62,7 @@ import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
 
-public class App_KJC_NewDomain {
+public class AppKjcNewDomain {
   List<Member> memberList = new LinkedList<>();
   List<FreeStudy> freeStudyList = new ArrayList<>();
   List<FreeStudy> freeStudyApplyList = new ArrayList<>();
@@ -103,11 +103,11 @@ public class App_KJC_NewDomain {
   }
 
   public static void main(String[] args) {
-    App_KJC_NewDomain app = new App_KJC_NewDomain(); 
+    AppKjcNewDomain app = new AppKjcNewDomain(); 
     app.service();
   }
 
-  public App_KJC_NewDomain() {
+  public AppKjcNewDomain() {
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
     commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeStudyApplyList, freeInterestList));

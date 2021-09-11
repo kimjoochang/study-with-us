@@ -52,7 +52,7 @@ import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
 
-public class App3jc {
+public class AppKjc {
   List<Member> memberList = new LinkedList<>();
   List<FreeStudy> freeStudyList = new ArrayList<>();
   List<FreeStudy> freeInterestList = new ArrayList<>();
@@ -91,11 +91,11 @@ public class App3jc {
   }
 
   public static void main(String[] args) {
-    App3jc app = new App3jc(); 
+    AppKjc app = new AppKjc(); 
     app.service();
   }
 
-  public App3jc() {
+  public AppKjc() {
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
     commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeInterestList));
