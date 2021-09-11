@@ -24,6 +24,7 @@ public class StudyDetailHandler extends AbstractStudyHandler {
     this.paymentList = paymentList;
   }
 
+  @Override
   public void execute() {
 
     // 무료 스터디 상세보기
@@ -148,6 +149,8 @@ public class StudyDetailHandler extends AbstractStudyHandler {
 
     // [수정] 타입 불일치
     freeStudy.setMember(AuthLoginHandler.getLoginUser());
+
+    freeStudy.setMembers(freeStudy.getMember());
 
     applicationList.add(freeStudy);
 

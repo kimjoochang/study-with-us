@@ -8,17 +8,18 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
 import com.studywithus.handler.Command;
+import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.handler.StudyAddHandler;
 import com.studywithus.handler.StudyDeleteHandler;
@@ -26,7 +27,6 @@ import com.studywithus.handler.StudyDetailHandler;
 import com.studywithus.handler.StudyListHandler;
 import com.studywithus.handler.StudySearchHandler;
 import com.studywithus.handler.StudyUpdateHandler;
-import com.studywithus.handler2.MembershipWithdrawalHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
@@ -78,28 +78,28 @@ public class AppBgr {
     commandMap.put("/freeStudy/update", new StudyUpdateHandler(freeStudyList, chargeStudyList));
     commandMap.put("/freeStudy/delete", new StudyDeleteHandler(freeStudyList, chargeStudyList));
     commandMap.put("/freeStudy/search", new StudySearchHandler(freeStudyList, chargeStudyList));
-  
+
     commandMap.put("/auth/login", new AuthLoginHandler(memberList));
-    commandMap.put("/auth/logout", new AuthLogoutHandler());
+    commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
     commandMap.put("/auth/signUp", new SignUpHandler(memberList));
     commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
   }
 
   void service() {
-    loadMembers();
-    loadFreeStudies();
-    loadChargeStudies();
-    loadFreeInterests();
-    loadChargeInterests();
+    //    loadMembers();
+    //    loadFreeStudies();
+    //    loadChargeStudies();
+    //    loadFreeInterests();
+    //    loadChargeInterests();
 
     createMainMenu().execute();
     Prompt.close();
 
-    saveMembers();
-    saveFreeStudies();
-    saveChargeStudies();
-    saveFreeInterests();
-    saveChargeInterests();
+    //    saveMembers();
+    //    saveFreeStudies();
+    //    saveChargeStudies();
+    //    saveFreeInterests();
+    //    saveChargeInterests();
   }
 
 
