@@ -1,12 +1,14 @@
 package com.studywithus.handler;
 
+import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.menu.Menu;
 
 public class AuthLogoutHandler implements Command {
 
-  Member member = new Member();
+  public AuthLogoutHandler(List <Member> memberlist) {
 
+  }
   @Override
   public void execute() {
     System.out.println("[로그아웃]");

@@ -168,7 +168,7 @@ public class App {
     commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
 
     commandMap.put("/auth/login", new AuthLoginHandler(memberList));
-    commandMap.put("/auth/logout", new AuthLogoutHandler());
+    commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
     commandMap.put("/auth/signUp", new SignUpHandler(memberList));
     commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
   }
@@ -198,6 +198,223 @@ public class App {
     saveCommunityTalks();
     saveJobsalendars();
     saveExamCalendars();
+  }
+
+
+
+  Menu createMainMenu() {
+    MenuGroup mainMenuGroup = new MenuGroup("메인");
+    mainMenuGroup.setPrevMenuTitle("종료");
+
+    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/auth/login"));
+    mainMenuGroup.add(new MenuItem("회원가입", ACCESS_LOGOUT, "/auth/signUp"));
+    mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL | ACCESS_ADMIN, "/auth/logout"));
+    mainMenuGroup.add(new MenuItem("회원탈퇴", ACCESS_GENERAL, "/auth/membershipwithdrawal"));
+
+    mainMenuGroup.add(createMyPageMenu());
+    mainMenuGroup.add(createAdminMenu());
+    mainMenuGroup.add(createInterestMenu());
+    mainMenuGroup.add(createFreeStudyMenu());
+    mainMenuGroup.add(createChargeStudyMenu());
+    mainMenuGroup.add(createMentorApplyMenu());
+    mainMenuGroup.add(createCommunityMenu());
+    mainMenuGroup.add(createCalendarMenu());
+
+    return mainMenuGroup;
+  }
+
+  private Menu createMyPageMenu() {
+    MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
+
+    myPageMenu.add(createInterestMenu());
+    myPageMenu.add(createFreeStudyApplyMenu());
+
+    return myPageMenu;
+  }
+
+  private Menu createInterestMenu() {
+    MenuGroup interestMenu = new MenuGroup("관심목록");
+
+    interestMenu.add(createFreeInterestMenu());
+    interestMenu.add(createChargeInterestMenu());
+
+    return interestMenu;
+  }
+
+  private Menu createFreeInterestMenu() {
+    MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
+
+    freeInterestMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/freeInterest/list"));
+    freeInterestMenu.add(new MenuItem("삭제", ACCESS_GENERAL,"/freeInterest/delete"));
+
+    return freeInterestMenu;
+  }
+
+  private Menu createChargeInterestMenu() {
+    MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
+
+    chargeInterestMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/chargeInterest/list"));
+    chargeInterestMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/chargeInterest/delete"));
+
+    return chargeInterestMenu;
+  }
+
+  private Menu createFreeStudyApplyMenu() {
+    MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
+
+    freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudyApply/list"));
+    freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
+    freeStudyApplyMenu.add(new MenuItem("수정", "/freeStudyApply/update"));
+    freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
+
+    return freeStudyApplyMenu;
+  }
+
+  private Menu createAdminMenu() {
+    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
+
+    adminMenu.add(createMemberMenu());
+    adminMenu.add(createDeleteRequestStudyMenu());
+
+    return adminMenu;
+  }
+
+  private Menu createDeleteRequestStudyMenu() {
+    MenuGroup deletedRequestMenu = new MenuGroup("삭제 요청 스터디 내역");
+    deletedRequestMenu.add(new MenuItem("조회", "/chargeStudy/deleteList"));
+    deletedRequestMenu.add(new MenuItem("상세보기", "/chargeStudy/deleteDetail"));
+
+    return deletedRequestMenu;
+  }
+
+  private Menu createMemberMenu() {
+    MenuGroup memberMenu = new MenuGroup("회원 관리", ACCESS_ADMIN);
+
+    memberMenu.add(createMentorApplicantMenu());
+
+    return memberMenu;
+  }
+
+  private Menu createMentorApplyMenu() {
+    MenuGroup mentorApplyMenu = new MenuGroup("멘토 신청하기");
+    mentorApplyMenu.add(new MenuItem("신청", ACCESS_GENERAL, "/mentorApplicant/add"));
+
+    return mentorApplyMenu;
+  }
+
+  private Menu createMentorApplicantMenu() {
+    MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
+
+    mentorApplicantMenu.add(new MenuItem("조회", /*ACCESS_ADMIN,*/ "/mentorApplicant/list"));
+    mentorApplicantMenu.add(new MenuItem("상세보기", /*ACCESS_ADMIN,*/ "/mentorApplicant/detail"));
+
+    return mentorApplicantMenu;
+  }
+
+  private Menu createFreeStudyMenu() {
+    MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
+
+    freeStudyMenu.add(new MenuItem("검색", "/freeStudy/search"));
+    freeStudyMenu.add(new MenuItem("생성", ACCESS_GENERAL | ACCESS_LEADER, "/freeStudy/add"));
+    freeStudyMenu.add(new MenuItem("조회", "/freeStudy/list"));
+    freeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/detail"));
+    freeStudyMenu.add(new MenuItem("수정", ACCESS_LEADER, "/freeStudy/update"));
+    freeStudyMenu.add(new MenuItem("삭제", ACCESS_LEADER, "/freeStudy/delete"));
+
+    return freeStudyMenu;
+  }
+
+  private Menu createChargeStudyMenu() {
+    MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
+
+    chargeStudyMenu.add(new MenuItem("검색", "/chargeStudy/search"));
+    chargeStudyMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/chargeStudy/add"));
+    chargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/list"));
+    chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
+    chargeStudyMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/chargeStudy/update"));
+    chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_GENERAL, "/chargeStudy/deleteRequest"));
+
+    return chargeStudyMenu;
+  }
+
+  private Menu createCommunityMenu() {
+    MenuGroup communityMenu = new MenuGroup("커뮤니티");
+
+    communityMenu.add(createCommunityInfoMenu());
+    communityMenu.add(createCommunityQaMenu());
+    communityMenu.add(createCommunityTalkMenu());
+
+    return communityMenu;
+  }
+
+  private Menu createCommunityInfoMenu() {
+    MenuGroup communityInfoMenu = new MenuGroup("정보");
+
+    communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
+    communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
+    communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
+    communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
+    communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityInfo/update"));
+    communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/communityInfo/delete"));
+
+    return communityInfoMenu;
+  }
+
+  private Menu createCommunityQaMenu() {
+    MenuGroup communityQaMenu = new MenuGroup("질문");
+
+    communityQaMenu.add(new MenuItem("검색", "/communityQa/search"));
+    communityQaMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityQa/add"));
+    communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
+    communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
+    communityQaMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityQa/update"));
+    communityQaMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/communityQa/delete"));
+
+    return communityQaMenu;
+  }
+
+  private Menu createCommunityTalkMenu() {
+    MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
+
+    communityTalkMenu.add(new MenuItem("검색", "/communityTalk/search"));
+    communityTalkMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityTalk/add"));
+    communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
+    communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
+    communityTalkMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityTalk/update"));
+    communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/communityTalk/delete"));
+
+    return communityTalkMenu;
+  }
+
+  private Menu createCalendarMenu() {
+    MenuGroup calendarMenu = new MenuGroup("캘린더");
+
+    calendarMenu.add(createJobsCalendarMenu());
+    calendarMenu.add(createExamCalendarMenu());
+
+    return calendarMenu;
+  }
+
+  private Menu createJobsCalendarMenu() {
+    MenuGroup jobsCalendarMenu = new MenuGroup("이달의 채용공고 관리");
+
+    jobsCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalendar/add"));
+    jobsCalendarMenu.add(new MenuItem("상세보기", "/jobsCalendar/detail"));
+    jobsCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalendar/update"));
+    jobsCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalendar/delete"));
+
+    return jobsCalendarMenu;
+  }
+
+  private Menu createExamCalendarMenu() {
+    MenuGroup examCalendarMenu = new MenuGroup("이달의 시험일정 관리");
+
+    examCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalendar/add"));
+    examCalendarMenu.add(new MenuItem("상세보기", "/examCalendar/detail"));
+    examCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalendar/update"));
+    examCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
+
+    return examCalendarMenu;
   }
 
   @SuppressWarnings("unchecked")
@@ -468,220 +685,5 @@ public class App {
     } catch (Exception e) {
       System.out.println("이달의 시험일정 데이터를 파일에 저장 중 오류가 발생하였습니다.");
     }
-  }
-
-  Menu createMainMenu() {
-    MenuGroup mainMenuGroup = new MenuGroup("메인");
-    mainMenuGroup.setPrevMenuTitle("종료");
-
-    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/auth/login"));
-    mainMenuGroup.add(new MenuItem("회원가입", ACCESS_LOGOUT, "/auth/signUp"));
-    mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL | ACCESS_ADMIN, "/auth/logout"));
-    mainMenuGroup.add(new MenuItem("회원탈퇴", ACCESS_GENERAL, "/auth/membershipwithdrawal"));
-
-    mainMenuGroup.add(createMyPageMenu());
-    mainMenuGroup.add(createAdminMenu());
-    mainMenuGroup.add(createInterestMenu());
-    mainMenuGroup.add(createFreeStudyMenu());
-    mainMenuGroup.add(createChargeStudyMenu());
-    mainMenuGroup.add(createMentorApplyMenu());
-    mainMenuGroup.add(createCommunityMenu());
-    mainMenuGroup.add(createCalendarMenu());
-
-    return mainMenuGroup;
-  }
-
-  private Menu createMyPageMenu() {
-    MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
-
-    myPageMenu.add(createInterestMenu());
-    myPageMenu.add(createFreeStudyApplyMenu());
-
-    return myPageMenu;
-  }
-
-  private Menu createInterestMenu() {
-    MenuGroup interestMenu = new MenuGroup("관심목록");
-
-    interestMenu.add(createFreeInterestMenu());
-    interestMenu.add(createChargeInterestMenu());
-
-    return interestMenu;
-  }
-
-  private Menu createFreeInterestMenu() {
-    MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
-
-    freeInterestMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/freeInterest/list"));
-    freeInterestMenu.add(new MenuItem("삭제", ACCESS_GENERAL,"/freeInterest/delete"));
-
-    return freeInterestMenu;
-  }
-
-  private Menu createChargeInterestMenu() {
-    MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
-
-    chargeInterestMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/chargeInterest/list"));
-    chargeInterestMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/chargeInterest/delete"));
-
-    return chargeInterestMenu;
-  }
-
-  private Menu createFreeStudyApplyMenu() {
-    MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
-
-    freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudyApply/list"));
-    freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
-    freeStudyApplyMenu.add(new MenuItem("수정", "/freeStudyApply/update"));
-    freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
-
-    return freeStudyApplyMenu;
-  }
-
-  private Menu createAdminMenu() {
-    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
-
-    adminMenu.add(createMemberMenu());
-    adminMenu.add(createDeleteRequestStudyMenu());
-
-    return adminMenu;
-  }
-
-  private Menu createDeleteRequestStudyMenu() {
-    MenuGroup deletedRequestMenu = new MenuGroup("삭제 요청 스터디 내역");
-    deletedRequestMenu.add(new MenuItem("조회", "/chargeStudy/deleteList"));
-    deletedRequestMenu.add(new MenuItem("상세보기", "/chargeStudy/deleteDetail"));
-
-    return deletedRequestMenu;
-  }
-
-  private Menu createMemberMenu() {
-    MenuGroup memberMenu = new MenuGroup("회원 관리", ACCESS_ADMIN);
-
-    memberMenu.add(createMentorApplicantMenu());
-
-    return memberMenu;
-  }
-
-  private Menu createMentorApplyMenu() {
-    MenuGroup mentorApplyMenu = new MenuGroup("멘토 신청하기");
-    mentorApplyMenu.add(new MenuItem("신청", ACCESS_GENERAL, "/mentorApplicant/add"));
-
-    return mentorApplyMenu;
-  }
-
-  private Menu createMentorApplicantMenu() {
-    MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
-
-    mentorApplicantMenu.add(new MenuItem("조회", /*ACCESS_ADMIN,*/ "/mentorApplicant/list"));
-    mentorApplicantMenu.add(new MenuItem("상세보기", /*ACCESS_ADMIN,*/ "/mentorApplicant/detail"));
-
-    return mentorApplicantMenu;
-  }
-
-  private Menu createFreeStudyMenu() {
-    MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
-
-    freeStudyMenu.add(new MenuItem("검색", "/freeStudy/search"));
-    freeStudyMenu.add(new MenuItem("생성", ACCESS_GENERAL | ACCESS_LEADER, "/freeStudy/add"));
-    freeStudyMenu.add(new MenuItem("조회", "/freeStudy/list"));
-    freeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/detail"));
-    freeStudyMenu.add(new MenuItem("수정", ACCESS_LEADER, "/freeStudy/update"));
-    freeStudyMenu.add(new MenuItem("삭제", ACCESS_LEADER, "/freeStudy/delete"));
-
-    return freeStudyMenu;
-  }
-
-  private Menu createChargeStudyMenu() {
-    MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
-
-    chargeStudyMenu.add(new MenuItem("검색", "/chargeStudy/search"));
-    chargeStudyMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/chargeStudy/add"));
-    chargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/list"));
-    chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
-    chargeStudyMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/chargeStudy/update"));
-    chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_GENERAL, "/chargeStudy/deleteRequest"));
-
-    return chargeStudyMenu;
-  }
-
-  private Menu createCommunityMenu() {
-    MenuGroup communityMenu = new MenuGroup("커뮤니티");
-
-    communityMenu.add(createCommunityInfoMenu());
-    communityMenu.add(createCommunityQaMenu());
-    communityMenu.add(createCommunityTalkMenu());
-
-    return communityMenu;
-  }
-
-  private Menu createCommunityInfoMenu() {
-    MenuGroup communityInfoMenu = new MenuGroup("정보");
-
-    communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
-    communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
-    communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
-    communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
-    communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityInfo/update"));
-    communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/communityInfo/delete"));
-
-    return communityInfoMenu;
-  }
-
-  private Menu createCommunityQaMenu() {
-    MenuGroup communityQaMenu = new MenuGroup("질문");
-
-    communityQaMenu.add(new MenuItem("검색", "/communityQa/search"));
-    communityQaMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityQa/add"));
-    communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
-    communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
-    communityQaMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityQa/update"));
-    communityQaMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/communityQa/delete"));
-
-    return communityQaMenu;
-  }
-
-  private Menu createCommunityTalkMenu() {
-    MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
-
-    communityTalkMenu.add(new MenuItem("검색", "/communityTalk/search"));
-    communityTalkMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityTalk/add"));
-    communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
-    communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
-    communityTalkMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityTalk/update"));
-    communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/communityTalk/delete"));
-
-    return communityTalkMenu;
-  }
-
-  private Menu createCalendarMenu() {
-    MenuGroup calendarMenu = new MenuGroup("캘린더");
-
-    calendarMenu.add(createJobsCalendarMenu());
-    calendarMenu.add(createExamCalendarMenu());
-
-    return calendarMenu;
-  }
-
-  private Menu createJobsCalendarMenu() {
-    MenuGroup jobsCalendarMenu = new MenuGroup("이달의 채용공고 관리");
-
-    jobsCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalendar/add"));
-    jobsCalendarMenu.add(new MenuItem("상세보기", "/jobsCalendar/detail"));
-    jobsCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalendar/update"));
-    jobsCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalendar/delete"));
-
-    return jobsCalendarMenu;
-  }
-
-  private Menu createExamCalendarMenu() {
-    MenuGroup examCalendarMenu = new MenuGroup("이달의 시험일정 관리");
-
-    examCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalendar/add"));
-    examCalendarMenu.add(new MenuItem("상세보기", "/examCalendar/detail"));
-    examCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalendar/update"));
-    examCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
-
-    return examCalendarMenu;
   }
 }

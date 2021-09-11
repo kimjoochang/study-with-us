@@ -1,21 +1,22 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.Board;
+import com.studywithus.domain.Community;
 
-public abstract class AbstractBoardHandler implements Command {
+public abstract class AbstractCommunityHandler implements Command {
 
-  protected List<Board> boardList;
+  protected List<Community> communityList;
 
-  public AbstractBoardHandler(List<Board> boardList) {
-    this.boardList = boardList;
+
+  public AbstractCommunityHandler(List<Community> communityList) {
+    this.communityList = communityList;
   }
 
-  // 게시글 번호 조회
-  protected Board findByNo(int no) {
-    for (Board board : boardList) {
-      if (board.getNo() == no) {
-        return board;
+  // 정보 게시글 번호 조회
+  protected Community findByNo(int no) {
+    for (Community community : communityList) {
+      if (community.getNo() == no) {
+        return community;
 
       }
     }
