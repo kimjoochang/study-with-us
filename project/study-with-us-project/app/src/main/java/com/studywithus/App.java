@@ -14,11 +14,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import com.studywithus.domain.Board;
+import com.studywithus.domain.Calendar;
 import com.studywithus.domain.Community;
-import com.studywithus.domain.ExamCalendar;
-import com.studywithus.domain.FreeStudy;
-import com.studywithus.domain.JobsCalendar;
-import com.studywithus.domain.Mentor;
+import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
@@ -67,7 +65,7 @@ import com.studywithus.util.Prompt;
 public class App {
   List<Member> memberList = new LinkedList<>();
   List<Study> freeStudyList = new ArrayList<>();
-  List<Study> freeStudyApplyList = new ArrayList<>();
+  List<Study> freeApplicationList = new ArrayList<>();
   List<Study> freeInterestList = new ArrayList<>();
   List<Board> jobsCalendarList = new ArrayList<>();
   List<Board> examCalendarList = new ArrayList<>();
@@ -78,7 +76,7 @@ public class App {
   List<Board> communityInfoList = new ArrayList<>();
   List<Board> communityQaList = new ArrayList<>();
   List<Board> communityTalkList = new ArrayList<>();
-  List<Mentor> mentorList = new ArrayList<>();
+  List<MentorApplicationForm> mentorList = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
 
@@ -110,11 +108,11 @@ public class App {
   public App() {
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeStudyApplyList, freeInterestList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicationList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-    commandMap.put("/freeStudy/apply", new FreeStudyApplyDetailHandler(freeStudyApplyList));
+    commandMap.put("/freeStudy/apply", new FreeStudyApplyDetailHandler(freeApplicationList));
 
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
@@ -168,7 +166,7 @@ public class App {
     commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
 
     commandMap.put("/auth/login", new AuthLoginHandler(memberList));
-    commandMap.put("/auth/logout", new AuthLogoutHandler());
+    commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
     commandMap.put("/auth/signUp", new SignUpHandler(memberList));
     commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
   }
@@ -230,7 +228,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("freeStudy.data"))) {
 
-      freeStudyList.addAll((List<FreeStudy>) in.readObject());
+      freeStudyList.addAll((List<Study>) in.readObject());
 
       System.out.println("무료 스터디 데이터 로딩이 완료되었습니다.");
 
@@ -288,7 +286,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("freeInterest.data"))) {
 
-      freeInterestList.addAll((List<FreeStudy>) in.readObject());
+      freeInterestList.addAll((List<Study>) in.readObject());
 
       System.out.println("무료 스터디 관심목록 데이터 로딩이 완료되었습니다.");
 
@@ -421,7 +419,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("jobsCalendar.data"))) {
 
-      jobsCalendarList.addAll((List<JobsCalendar>) in.readObject());
+      jobsCalendarList.addAll((List<Calendar>) in.readObject());
 
       System.out.println("이달의 채용공고 데이터 로딩이 완료되었습니다.");
 
@@ -448,7 +446,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("examCalendar.data"))) {
 
-      examCalendarList.addAll((List<ExamCalendar>) in.readObject());
+      examCalendarList.addAll((List<Calendar>) in.readObject());
 
       System.out.println("이달의 시험일정 데이터 로딩이 완료되었습니다.");
 

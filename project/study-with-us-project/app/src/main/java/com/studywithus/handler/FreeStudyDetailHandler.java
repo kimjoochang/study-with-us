@@ -1,16 +1,19 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ApplicantInfo;
-import com.studywithus.domain.FreeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
 
-  FreeStudy freeStudy;
+  Study freeStudy;
+  List<Study> freeApplicationList;
+  List<Study> freeInterestList;
 
-  public FreeStudyDetailHandler(List<FreeStudy> freeStudyList, List<FreeStudy> freeStudyApplyList, List<FreeStudy> freeInterestList) {
-    super(freeStudyList, freeStudyApplyList, freeInterestList);
+  public FreeStudyDetailHandler(List<Study> freeStudyList, List<Study> freeApplicationList, List<Study> freeInterestList) {
+    super(freeStudyList);
+    this.freeApplicationList = freeApplicationList;
+    this.freeInterestList = freeInterestList;
   }
 
   // 무료 스터디 상세보기
@@ -66,10 +69,9 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
       return;
     }
 
-    ApplicantInfo.getName();
-    ApplicantInfo.getId();
+    freeStudy.setApplicants(AuthLoginHandler.getLoginUser());
 
-    freeStudyApplyList.add(freeStudy);
+    freeApplicationList.add(freeStudy);
 
     System.out.println();
     System.out.println("무료 스터디 신청이 완료되었습니다.\n");
