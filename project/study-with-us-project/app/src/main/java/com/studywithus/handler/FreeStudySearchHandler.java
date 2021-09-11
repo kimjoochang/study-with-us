@@ -1,12 +1,12 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.FreeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class FreeStudySearchHandler extends AbstractFreeStudyHandler {
 
-  public FreeStudySearchHandler(List<FreeStudy> freeStudyList) {
+  public FreeStudySearchHandler(List<Study> freeStudyList) {
     super(freeStudyList);
   }
 
@@ -16,7 +16,7 @@ public class FreeStudySearchHandler extends AbstractFreeStudyHandler {
 
     String input = Prompt.inputString("검색어? ");
 
-    for (FreeStudy freeStudy : freeStudyList) {
+    for (Study freeStudy : freeStudyList) {
       if (!freeStudy.getTitle().contains(input) &&
           !freeStudy.getExplanation().contains(input) &&
           !freeStudy.getWriter().getName().contains(input)) {

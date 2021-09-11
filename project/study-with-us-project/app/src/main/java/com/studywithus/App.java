@@ -64,6 +64,7 @@ import com.studywithus.util.Prompt;
 public class App {
   List<Member> memberList = new LinkedList<>();
   List<Study> freeStudyList = new ArrayList<>();
+  List<Member> freeApplicantList = new ArrayList<>();
   List<Study> freeApplicationList = new ArrayList<>();
   List<Study> freeInterestList = new ArrayList<>();
   List<Content> jobsCalendarList = new ArrayList<>();

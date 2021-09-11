@@ -150,8 +150,6 @@ public class StudyDetailHandler extends AbstractStudyHandler {
     // [수정] 타입 불일치
     freeStudy.setWriter(AuthLoginHandler.getLoginUser());
 
-    freeStudy.setMembers(freeStudy.getMember());
-
     applicationList.add(freeStudy);
 
     System.out.println();

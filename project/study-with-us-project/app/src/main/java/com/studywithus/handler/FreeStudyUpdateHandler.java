@@ -1,12 +1,12 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.FreeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyUpdateHandler extends AbstractFreeStudyHandler {
 
-  public FreeStudyUpdateHandler(List<FreeStudy> freeStudyList) {
+  public FreeStudyUpdateHandler(List<Study> freeStudyList) {
     super(freeStudyList);
   }
 
@@ -17,7 +17,7 @@ public class FreeStudyUpdateHandler extends AbstractFreeStudyHandler {
     int no = Prompt.inputInt("번호? ");
     System.out.println();
 
-    FreeStudy freeStudy = findByNo(no);
+    Study freeStudy = findByNo(no);
 
     if (freeStudy == null) {
       System.out.println();
@@ -25,7 +25,7 @@ public class FreeStudyUpdateHandler extends AbstractFreeStudyHandler {
       return;
     }
 
-    if (freeStudy.getWriter().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
+    if (freeStudy.getWriter() != AuthLoginHandler.getLoginUser()) {
       System.out.println("변경 권한이 없습니다.");
       return;
     }

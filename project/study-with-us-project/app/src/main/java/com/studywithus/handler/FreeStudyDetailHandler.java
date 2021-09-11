@@ -1,17 +1,20 @@
 package com.studywithus.handler;
 
 import java.util.List;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
 
   Study freeStudy;
+  List<Member> freeApplicantList;
   List<Study> freeApplicationList;
   List<Study> freeInterestList;
 
-  public FreeStudyDetailHandler(List<Study> freeStudyList, List<Study> freeApplicationList, List<Study> freeInterestList) {
+  public FreeStudyDetailHandler(List<Study> freeStudyList, List<Member> freeApplicantList, List<Study> freeApplicationList, List<Study> freeInterestList) {
     super(freeStudyList);
+    this.freeApplicantList = freeApplicantList;
     this.freeApplicationList = freeApplicationList;
     this.freeInterestList = freeInterestList;
   }
@@ -69,8 +72,7 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
       return;
     }
 
-    freeStudy.setApplicants(AuthLoginHandler.getLoginUser());
-
+    freeApplicantList.add(AuthLoginHandler.getLoginUser());
     freeApplicationList.add(freeStudy);
 
     System.out.println();
