@@ -174,16 +174,16 @@ public class App {
   }
 
   void service() {
-    loadMembers();
-    loadFreeInterests();
-    loadChargeInterests();
-    loadFreeStudies();
-    loadChargeStudies();
-    loadCommunityQas();
-    loadCommunityInfos();
-    loadCommunityTalks();
-    loadJobsCalendars();
-    loadExamCalendars();
+    //    loadMembers();
+    //    loadFreeInterests();
+    //    loadChargeInterests();
+    //    loadFreeStudies();
+    //    loadChargeStudies();
+    //    loadCommunityQas();
+    //    loadCommunityInfos();
+    //    loadCommunityTalks();
+    //    loadJobsCalendars();
+    //    loadExamCalendars();
 
     createMainMenu().execute();
     Prompt.close();
