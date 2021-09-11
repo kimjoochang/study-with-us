@@ -2,7 +2,6 @@ package com.studywithus.handler;
 
 import java.util.List;
 import com.studywithus.domain.Content;
-import com.studywithus.handler2.Command;
 
 public abstract class AbstractBoardHandler implements Command {
 

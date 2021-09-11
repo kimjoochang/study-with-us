@@ -3,7 +3,6 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
-import com.studywithus.handler2.Command;
 import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
