@@ -1,12 +1,12 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ExamCalendar;
+import com.studywithus.domain.Calendar;
 import com.studywithus.util.Prompt;
 
 public class ExamCalendarDeleteHandler extends AbstractExamCalendarHandler {
 
-  public ExamCalendarDeleteHandler(List<ExamCalendar> examCalendarList) {
+  public ExamCalendarDeleteHandler(List<Calendar> examCalendarList) {
     super(examCalendarList);
   }
 
@@ -19,7 +19,7 @@ public class ExamCalendarDeleteHandler extends AbstractExamCalendarHandler {
 
     System.out.println();
 
-    ExamCalendar examCalendar = findByNo(no);
+    Calendar examCalendar = findByNo(no);
 
     if (examCalendar == null) {
       System.out.println();
