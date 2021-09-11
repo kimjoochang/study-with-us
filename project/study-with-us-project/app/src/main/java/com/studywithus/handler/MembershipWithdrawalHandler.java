@@ -17,7 +17,7 @@ public class MembershipWithdrawalHandler extends AbstractLoginHandler {
   public void execute() {
     System.out.println("[회원 탈퇴]");
 
-    String input = Prompt.inputString("정말 회원 탈퇴하시겠습니까?? (y/N)");
+    String input = Prompt.inputString("정말 회원 탈퇴하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println(" 회원 탈퇴를 취소하셨습니다.");
     }

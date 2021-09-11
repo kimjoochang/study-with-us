@@ -586,7 +586,7 @@ public class App {
     MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
 
     freeStudyMenu.add(new MenuItem("검색", "/freeStudy/search"));
-    freeStudyMenu.add(new MenuItem("생성", ACCESS_GENERAL | ACCESS_LEADER, "/freeStudy/add"));
+    freeStudyMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/freeStudy/add"));
     freeStudyMenu.add(new MenuItem("조회", "/freeStudy/list"));
     freeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/detail"));
     freeStudyMenu.add(new MenuItem("수정", ACCESS_LEADER, "/freeStudy/update"));
