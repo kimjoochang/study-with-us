@@ -1,7 +1,6 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.Member;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
@@ -10,6 +9,7 @@ public class StudyDetailHandler extends AbstractStudyHandler {
 
   Study freeStudy;
   Study chargeStudy;
+  Payment payment;
 
   List<Study> freeInterestList;
   List<Study> chargeInterestList;
@@ -147,8 +147,7 @@ public class StudyDetailHandler extends AbstractStudyHandler {
     }
 
     // [수정] 타입 불일치
-    Member.setName(AuthLoginHandler.getLoginUser());
-    AuthLoginHandler.getId();
+    freeStudy.setMember(AuthLoginHandler.getLoginUser());
 
     applicationList.add(freeStudy);
 
@@ -207,7 +206,7 @@ public class StudyDetailHandler extends AbstractStudyHandler {
       System.out.println("유료 스터디 결제가 완료 되었습니다.\n");
 
       // [수정] 타입 불일치
-      paymentList.add(chargeStudy);
+      paymentList.add(payment);
     }
     return;
   }
