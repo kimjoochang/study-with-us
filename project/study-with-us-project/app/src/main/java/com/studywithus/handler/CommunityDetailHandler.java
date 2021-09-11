@@ -1,13 +1,14 @@
 package com.studywithus.handler;
 
+import java.util.List;
 import com.studywithus.domain.Community;
 import com.studywithus.util.Prompt;
 
-public class CommunityDetailHandler extends AbstractBoardHandler{
+public class CommunityDetailHandler extends AbstractCommunityHandler{
 
-  //  public CommunityDetailHandler(List<Community> communityList) {
-  //    super(communityList);
-  //  }
+  public CommunityDetailHandler(List<Community> communityList) {
+    super(communityList);
+  }
 
   // 스몰톡 게시글 상세보기
   @Override

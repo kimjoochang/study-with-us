@@ -1,15 +1,15 @@
 package com.studywithus.handler;
 
 import java.sql.Date;
+import java.util.List;
 import com.studywithus.domain.Community;
-import com.studywithus.handler2.AuthLoginHandler;
 import com.studywithus.util.Prompt;
 
-public class CommunityAddHandler extends AbstractBoardHandler{
+public class CommunityAddHandler extends AbstractCommunityHandler{
 
-  //  public CommunityAddHandler(List<Community> communityList) {
-  //    super(communityList);
-  //  }
+  public CommunityAddHandler(List<Community> communityList) {
+    super(communityList);
+  }
 
   // 게시글 생성
   @Override
@@ -24,7 +24,7 @@ public class CommunityAddHandler extends AbstractBoardHandler{
     community.setWriter(AuthLoginHandler.getLoginUser());
     community.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    // communityList.add(community);
+    communityList.add(community);
 
     System.out.println();
     System.out.println("게시글 등록이 완료되었습니다.\n");

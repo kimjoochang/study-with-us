@@ -1,15 +1,16 @@
 package com.studywithus.handler;
 
+import java.util.List;
 import com.studywithus.domain.Community;
 import com.studywithus.util.Prompt;
 
-public class CommunitySearchHandler extends AbstractBoardHandler {
+public class CommunitySearchHandler extends AbstractCommunityHandler {
 
-  //  Community community = new Community();
-  //
-  //  public CommunitySearchHandler(List<Community> communityList) {
-  //    super(communityList);
-  //  }
+  Community community = new Community();
+
+  public CommunitySearchHandler(List<Community> communityList) {
+    super(communityList);
+  }
 
   @Override
   public void execute() {

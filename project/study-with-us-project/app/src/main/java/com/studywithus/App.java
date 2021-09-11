@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import com.studywithus.domain.Board;
 import com.studywithus.domain.Calendar;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.MentorApplicationForm;
@@ -67,16 +66,16 @@ public class App {
   List<Study> freeStudyList = new ArrayList<>();
   List<Study> freeApplicationList = new ArrayList<>();
   List<Study> freeInterestList = new ArrayList<>();
-  List<Board> jobsCalendarList = new ArrayList<>();
-  List<Board> examCalendarList = new ArrayList<>();
+  List<Content> jobsCalendarList = new ArrayList<>();
+  List<Content> examCalendarList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Study> chargeStudyList = new ArrayList<>();
   List<Study> chargeDeleteRequestList = new ArrayList<>();
   List<Study> chargeInterestList = new ArrayList<>();
-  List<Board> communityInfoList = new ArrayList<>();
-  List<Board> communityQaList = new ArrayList<>();
-  List<Board> communityTalkList = new ArrayList<>();
   List<MentorApplicationForm> mentorList = new ArrayList<>();
+  List<Content> communityInfoList = new ArrayList<>();
+  List<Content> communityQaList = new ArrayList<>();
+  List<Content> communityTalkList = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
 
