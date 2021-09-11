@@ -1,19 +1,19 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.JobsCalendar;
+import com.studywithus.domain.Calendar;
 
 public abstract class AbstractJobsCalendarHandler implements Command {
 
-  protected List<JobsCalendar> jobsCalendarList;
+  protected List<Calendar> jobsCalendarList;
 
-  public AbstractJobsCalendarHandler(List<JobsCalendar> jobsCalendarList) {
+  public AbstractJobsCalendarHandler(List<Calendar> jobsCalendarList) {
     this.jobsCalendarList = jobsCalendarList;
   }
 
   // 이달의 채용공고 번호 조회
-  protected JobsCalendar findByNo(int no) {
-    for (JobsCalendar jobsCalendar: jobsCalendarList) {
+  protected Calendar findByNo(int no) {
+    for (Calendar jobsCalendar: jobsCalendarList) {
       if (jobsCalendar.getNo() == no) {
         return jobsCalendar;
       }

@@ -1,12 +1,12 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.JobsCalendar;
+import com.studywithus.domain.Calendar;
 import com.studywithus.util.Prompt;
 
-public class JobsCalendarDetailHandler extends AbstractCalendarHandler {
+public class JobsCalendarDetailHandler extends AbstractJobsCalendarHandler {
 
-  public JobsCalendarDetailHandler(List<JobsCalendar> jobsCalendarList) {
+  public JobsCalendarDetailHandler(List<Calendar> jobsCalendarList) {
     super(jobsCalendarList);
   }
 
@@ -16,7 +16,8 @@ public class JobsCalendarDetailHandler extends AbstractCalendarHandler {
     System.out.println("[이달의 채용공고 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호? ");
-    JobsCalendar jobsCalendar = findByNo(no);
+
+    Calendar jobsCalendar = findByNo(no);
 
     if (jobsCalendar == null) {
       System.out.println();

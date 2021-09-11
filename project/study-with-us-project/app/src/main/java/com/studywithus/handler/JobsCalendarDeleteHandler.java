@@ -1,12 +1,12 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.JobsCalendar;
+import com.studywithus.domain.Calendar;
 import com.studywithus.util.Prompt;
 
-public class JobsCalendarDeleteHandler extends AbstractCalendarHandler {
+public class JobsCalendarDeleteHandler extends AbstractJobsCalendarHandler {
 
-  public JobsCalendarDeleteHandler(List<JobsCalendar> jobsCalendarList) {
+  public JobsCalendarDeleteHandler(List<Calendar> jobsCalendarList) {
     super(jobsCalendarList);
   }
 
@@ -19,7 +19,7 @@ public class JobsCalendarDeleteHandler extends AbstractCalendarHandler {
 
     System.out.println();
 
-    JobsCalendar jobsCalendar = findByNo(no);
+    Calendar jobsCalendar = findByNo(no);
 
     if (jobsCalendar == null) {
       System.out.println();
