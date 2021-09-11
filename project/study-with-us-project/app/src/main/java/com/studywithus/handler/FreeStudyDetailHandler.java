@@ -1,16 +1,28 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ApplicantInfo;
-import com.studywithus.domain.FreeStudy;
+import com.studywithus.domain.Member;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
 
-  FreeStudy freeStudy;
+  Study freeStudy;
 
-  public FreeStudyDetailHandler(List<FreeStudy> freeStudyList, List<FreeStudy> freeStudyApplyList, List<FreeStudy> freeInterestList) {
-    super(freeStudyList, freeStudyApplyList, freeInterestList);
+  // 무료 스터디 신청자 리스트 (팀장 관점)
+  List<Member> freeApplicantList;
+
+  // 무료 스터디 신청 리스트 (회원 관점)
+  List<Study> freeApplicationList;
+
+  // 무료 스터디 관심목록 리스트 (회원 관점)
+  List<Study> freeInterestList;
+
+  public FreeStudyDetailHandler(List<Study> freeStudyList, List<Member> freeApplicantList, List<Study> freeApplicationList, List<Study> freeInterestList) {
+    super(freeStudyList);
+    this.freeApplicantList = freeApplicantList;
+    this.freeApplicationList = freeApplicationList;
+    this.freeInterestList = freeInterestList;
   }
 
   // 무료 스터디 상세보기
@@ -66,10 +78,11 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
       return;
     }
 
-    ApplicantInfo.getName();
-    ApplicantInfo.getId();
+    // 무료 스터디 신청자 리스트에 회원 정보 추가 (멘토 관점)
+    freeApplicantList.add(AuthLoginHandler.getLoginUser());
 
-    freeStudyApplyList.add(freeStudy);
+    // 무료 스터디 신청 리스트에 신청한 무료 스터디 추가 (회원 관점)
+    freeApplicationList.add(freeStudy);
 
     System.out.println();
     System.out.println("무료 스터디 신청이 완료되었습니다.\n");
@@ -86,6 +99,7 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
       return;
     }
 
+    // 무료 스터디 관심목록에 좋아요한 무료 스터디 추가 (회원 관점)
     freeInterestList.add(freeStudy);
 
     System.out.println();

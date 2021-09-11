@@ -1,13 +1,16 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDeletedDetailHandler extends AbstractChargeStudyHandler{
 
-  public ChargeStudyDeletedDetailHandler(List<ChargeStudy> chargeStudyList, List<ChargeStudy> chargeDetailRequestList, int nothing) {
-    super(chargeStudyList, chargeDetailRequestList, 1);	
+  List<Study> chargeDetailRequestList;
+
+  public ChargeStudyDeletedDetailHandler(List<Study> chargeStudyList, List<Study> chargeDetailRequestList) {
+    super(chargeStudyList);
+    this.chargeDetailRequestList = chargeDetailRequestList;
   }
 
   // 삭제 요청된 유료 스터디 상세보기
@@ -15,13 +18,13 @@ public class ChargeStudyDeletedDetailHandler extends AbstractChargeStudyHandler{
   public void execute() {
     System.out.println("[스터디 삭제 요청 내역 / 상세보기]\n");
 
-    for(ChargeStudy study : chargeDetailRequestList) {
+    for(Study study : chargeDetailRequestList) {
       System.out.println("제목 : " + study.getTitle());
     }
     System.out.println();
     String title = Prompt.inputString("스터디 제목? ");
 
-    ChargeStudy study = findByName(title);
+    Study study = findByName(title);
 
     if (study == null) {
       System.out.println();
@@ -55,8 +58,8 @@ public class ChargeStudyDeletedDetailHandler extends AbstractChargeStudyHandler{
 
 
 
-  private ChargeStudy findByName(String title) {
-    for (ChargeStudy chargeStudy : chargeDetailRequestList) {
+  private Study findByName(String title) {
+    for (Study chargeStudy : chargeDetailRequestList) {
       if (chargeStudy.getTitle().equals(title)) {
         return chargeStudy;
       }

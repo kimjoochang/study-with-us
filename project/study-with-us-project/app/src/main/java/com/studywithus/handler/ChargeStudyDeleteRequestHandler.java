@@ -1,16 +1,17 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDeleteRequestHandler extends AbstractChargeStudyHandler{
 
-  ChargeStudy chargeStudy;
+  Study chargeStudy;
+  List<Study> chargeDeleteRequestList;
 
-  public ChargeStudyDeleteRequestHandler(List<ChargeStudy> chargeStudyList,
-      List<ChargeStudy> chargeDeleteRequestList, int nothing) {
-    super(chargeStudyList, chargeDeleteRequestList, 1);	
+  public ChargeStudyDeleteRequestHandler(List<Study> chargeStudyList, List<Study> chargeDeleteRequestList) {
+    super(chargeStudyList);
+    this.chargeDeleteRequestList = chargeDeleteRequestList;
   }
 
   @Override

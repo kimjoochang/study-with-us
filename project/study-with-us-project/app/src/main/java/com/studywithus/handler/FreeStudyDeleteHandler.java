@@ -1,12 +1,12 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.FreeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyDeleteHandler extends AbstractFreeStudyHandler {
 
-  public FreeStudyDeleteHandler(List<FreeStudy> freeStudyList) {
+  public FreeStudyDeleteHandler(List<Study> freeStudyList) {
     super(freeStudyList);
   }
 
@@ -16,14 +16,14 @@ public class FreeStudyDeleteHandler extends AbstractFreeStudyHandler {
     System.out.println("[무료 스터디 / 삭제]");
     int no = Prompt.inputInt("번호? ");
 
-    FreeStudy freeStudy = findByNo(no);
+    Study freeStudy = findByNo(no);
 
     if (freeStudy == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
-    if (freeStudy.getWriter().getNo() != AuthLoginHandler.getLoginUser().getNo()) {
+    if (freeStudy.getWriter() != AuthLoginHandler.getLoginUser()) {
       System.out.println("삭제 권한이 없습니다.");
       return;
     }

@@ -2,27 +2,24 @@ package com.studywithus.handler;
 
 import java.sql.Date;
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyAddHandler extends AbstractChargeStudyHandler{
 
-  public ChargeStudyAddHandler(List<ChargeStudy> chargeStudyList) {
+  public ChargeStudyAddHandler(List<Study> chargeStudyList) {
     super(chargeStudyList);	
   }
-
-  // 멘토 테스트 유저 생성
-
 
   // 유료 스터디 생성
   @Override
   public void execute() {
     System.out.println("[유료 스터디 / 생성]\n");
 
-    ChargeStudy chargeStudy = new ChargeStudy();
+    Study chargeStudy = new Study();
 
+    chargeStudy.setWriter(AuthLoginHandler.loginUser);
     chargeStudy.setNo(Prompt.inputInt("번호? "));
-    chargeStudy.setWriter(Prompt.inputString("멘토? "));
     chargeStudy.setArea(Prompt.inputString("지역? "));
     chargeStudy.setTitle(Prompt.inputString("스터디 제목? "));
     chargeStudy.setExplanation(Prompt.inputString("스터디 설명? "));

@@ -3,9 +3,9 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.Calendar;
 
-public class CalendarListHandler extends AbstractCalendarHandler{
-  public CalendarListHandler(List<Calendar> jobsCalendarList, List<Calendar> examCalendarList) {
-    super(jobsCalendarList, examCalendarList);
+public class ExamCalendarListHandler extends AbstractCalendarHandler{
+  public ExamCalendarListHandler(List<Calendar> examCalendarList) {
+    super(examCalendarList);
   }
 
   @Override

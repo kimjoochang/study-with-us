@@ -1,26 +1,30 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.FreeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyApplyDetailHandler extends AbstractFreeStudyHandler{
 
-  public FreeStudyApplyDetailHandler(List<FreeStudy> freeStudyApplyList) {
-    super(freeStudyApplyList, 1);
+  List<Study> freeStudyApplyList;
+
+  public FreeStudyApplyDetailHandler(List<Study> freeStudyList, List<Study> freeStudyApplyList) {
+    super(freeStudyList);
+    this.freeStudyApplyList = freeStudyApplyList;
   }
 
   @Override
   public void execute() {
     System.out.println("[무료 스터디 신청 내역 / 상세보기] \n");
     System.out.println("--------------------------------");
-    for(FreeStudy freeStudy : freeStudyApplyList) {
+
+    for(Study freeStudy : freeStudyApplyList) {
       System.out.printf("%s, %s\n",freeStudy.getNo(), freeStudy.getTitle());
       System.out.println("--------------------------------");
     }
 
     int no = Prompt.inputInt("번호? ");
-    FreeStudy freeStudy = findByNo(no);
+    Study freeStudy = findByNo(no);
 
     if (freeStudy == null) {
       System.out.println();
@@ -40,6 +44,4 @@ public class FreeStudyApplyDetailHandler extends AbstractFreeStudyHandler{
     System.out.printf("규칙: %s\n", freeStudy.getRule());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
   }
-
-
 }

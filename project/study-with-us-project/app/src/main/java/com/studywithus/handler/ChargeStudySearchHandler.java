@@ -1,12 +1,12 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.ChargeStudy;
+import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudySearchHandler extends AbstractChargeStudyHandler{
 
-  public ChargeStudySearchHandler(List<ChargeStudy> chargeStudyList) {
+  public ChargeStudySearchHandler(List<Study> chargeStudyList) {
     super(chargeStudyList);	
   }
 
@@ -18,10 +18,10 @@ public class ChargeStudySearchHandler extends AbstractChargeStudyHandler{
     String input = Prompt.inputString("검색어? ");
     System.out.println();
 
-    for (ChargeStudy chargeStudy : chargeStudyList) {
+    for (Study chargeStudy : chargeStudyList) {
       if (!chargeStudy.getTitle().contains(input) &&
           !chargeStudy.getExplanation().contains(input) &&
-          !chargeStudy.getWriter().contains(input)) {
+          !chargeStudy.getWriter().getName().contains(input)) {
         System.out.println("입력하신 검색어가 포함된 게시물이 없습니다.");
         continue;
       }

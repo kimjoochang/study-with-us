@@ -39,7 +39,7 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
     freeStudy.setRule(Prompt.inputString("규칙? "));
     freeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    studyList.add(freeStudy);
+    freeStudyList.add(freeStudy);
 
     System.out.println();
     System.out.println("무료 스터디 등록이 완료되었습니다.\n");
