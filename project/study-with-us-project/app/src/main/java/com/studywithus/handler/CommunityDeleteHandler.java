@@ -1,13 +1,14 @@
 package com.studywithus.handler;
 
+import java.util.List;
 import com.studywithus.domain.Community;
 import com.studywithus.util.Prompt;
 
-public class CommunityDeleteHandler extends AbstractBoardHandler{
+public class CommunityDeleteHandler extends AbstractCommunityHandler{
 
-  //  public CommunityDeleteHandler(List<Community> communityList) {
-  //    super(communityList);
-  //  }
+  public CommunityDeleteHandler(List<Community> communityList) {
+    super(communityList);
+  }
 
   // 게시글 삭제
   @Override
@@ -31,7 +32,7 @@ public class CommunityDeleteHandler extends AbstractBoardHandler{
       return;
     }
 
-    // communityList.remove(community);
+    communityList.remove(community);
 
     System.out.println();
     System.out.println("게시글을 삭제하였습니다.\n");

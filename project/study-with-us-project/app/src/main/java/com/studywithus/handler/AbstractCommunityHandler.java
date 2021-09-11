@@ -16,7 +16,6 @@ public abstract class AbstractCommunityHandler implements Command {
     for (Community community : communityList) {
       if (community.getNo() == no) {
         return community;
-
       }
     }
     return null;

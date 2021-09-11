@@ -1,12 +1,13 @@
 package com.studywithus.handler;
 
+import java.util.List;
 import com.studywithus.domain.Community;
 
-public class CommunityListHandler extends AbstractBoardHandler{
+public class CommunityListHandler extends AbstractCommunityHandler{
 
-  //  public CommunityListHandler(List<Community> communityList) {
-  //    super(communityList);
-  //  }
+  public CommunityListHandler(List<Community> communityList) {
+    super(communityList);
+  }
 
   // 게시글 조회
 

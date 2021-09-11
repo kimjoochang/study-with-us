@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 @SuppressWarnings("serial")
-public class Board implements Serializable {
+public class Content implements Serializable {
 
   private int no;    // 게시글 번호
   private String title; // 게시글 제목

@@ -1,9 +1,7 @@
 package com.studywithus.domain;
 
-import java.io.Serializable;
-
 @SuppressWarnings("serial")
-public class Calendar extends Board implements Serializable {
+public class Calendar extends Content {
 
   // 채용공고 시작일
   private String startDate;
