@@ -10,7 +10,6 @@ public class ExamCalendarAddHandler extends AbstractExamCalendarHandler {
     super(examCalendarList);
   }
 
-  // 이달의 시험일정 생성
   @Override
   public void execute() {
     System.out.println("이달의 시험일정 / 등록]\n");

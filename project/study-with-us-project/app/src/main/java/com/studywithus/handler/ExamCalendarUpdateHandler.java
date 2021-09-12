@@ -10,7 +10,6 @@ public class ExamCalendarUpdateHandler extends AbstractExamCalendarHandler {
     super(examCalendarList);
   }
 
-  // 이달의 시험일정 변경
   @Override
   public void execute() {
     System.out.println("[이달의 시험일정 / 변경]\n");
