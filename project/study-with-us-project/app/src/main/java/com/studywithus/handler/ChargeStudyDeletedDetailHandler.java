@@ -36,7 +36,7 @@ public class ChargeStudyDeletedDetailHandler extends AbstractChargeStudyHandler{
     System.out.printf("스터디 제목: %s\n", study.getTitle());
     System.out.printf("스터디 설명: %s\n", study.getContent());
     System.out.printf("지역: %s\n", study.getArea());
-    System.out.printf("멘토: %s\n", study.getWriter());
+    System.out.printf("멘토: %s\n", study.getWriter().getName());
     System.out.printf("가격: %s\n", study.getPrice());
     System.out.printf("등록일: %s\n", study.getRegisteredDate());
 

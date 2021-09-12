@@ -18,7 +18,7 @@ public class ChargeStudyDeleteRequestHandler extends AbstractChargeStudyHandler{
   public void execute() {
     System.out.println("[유료 스터디 / 삭제 요청]");
 
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호: ");
     chargeStudy = findByNo(no);
 
     if (chargeStudy == null) {
