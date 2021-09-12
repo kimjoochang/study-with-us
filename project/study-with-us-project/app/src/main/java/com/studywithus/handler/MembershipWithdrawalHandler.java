@@ -11,16 +11,16 @@ public class MembershipWithdrawalHandler extends AbstractLoginHandler {
     super(memberList);
   }
 
-  Member member = findById();
-
   @Override
   public void execute() {
     System.out.println("[회원 탈퇴]");
 
+    Member member = findById();
+
     String input = Prompt.inputString("정말 회원 탈퇴하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println(" 회원 탈퇴를 취소하셨습니다.");
+      System.out.println(" 회원 탈퇴가 취소되었습니다.");
     }
 
     memberList.remove(member);

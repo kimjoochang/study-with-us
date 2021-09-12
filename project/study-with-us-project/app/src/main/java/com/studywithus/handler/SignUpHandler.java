@@ -36,6 +36,7 @@ public class SignUpHandler extends AbstractLoginHandler {
       member.setRegisteredDate((new Date(System.currentTimeMillis())));
       member.setUserAccessLevel(Menu.ACCESS_GENERAL);
       member.setRegisteredDate(new Date(System.currentTimeMillis()));
+
       memberList.add(member);
 
       System.out.println();
