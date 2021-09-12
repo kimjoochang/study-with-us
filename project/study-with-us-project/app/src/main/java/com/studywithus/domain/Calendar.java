@@ -3,8 +3,6 @@ package com.studywithus.domain;
 @SuppressWarnings("serial")
 public class Calendar extends Content {
 
-  Content content;
-
   // 채용공고 시작일
   private String startDate;
 

@@ -1,12 +1,11 @@
 package com.studywithus.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 @SuppressWarnings("serial")
 public class Content implements Serializable {
 
-  //게시글 번호
+  // 게시글 번호
   private int no;
 
   // 게시글 제목
@@ -14,12 +13,6 @@ public class Content implements Serializable {
 
   // 게시글 내용
   private String content;
-
-  // 게시글 작성자
-  private Member writer;
-
-  // 등록일
-  private Date registeredDate;
 
   public int getNo() {
     return no;
@@ -43,21 +36,5 @@ public class Content implements Serializable {
 
   public void setContent(String content) {
     this.content = content;
-  }
-
-  public Member getWriter() {
-    return writer;
-  }
-
-  public void setWriter(Member writer) {
-    this.writer = writer;
-  }
-
-  public Date getRegisteredDate() {
-    return registeredDate;
-  }
-
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
   }
 }

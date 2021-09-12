@@ -1,11 +1,10 @@
 package com.studywithus.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
 @SuppressWarnings("serial")
-public class Study implements Serializable {
+public class Study extends Content {
 
   // 팀장 or 멘토
   private Member writer;
@@ -15,18 +14,6 @@ public class Study implements Serializable {
 
   // 무료 스터디 신청자
   private List<Member> applicants;
-
-  // 유/무료 스터디
-  public static boolean value;
-
-  // 게시글 번호
-  private int no;
-
-  // 제목
-  private String title;
-
-  // 스터디 설명
-  private String explanation;
 
   // 멘토 설명
   private String mentorExplanation;
@@ -74,30 +61,6 @@ public class Study implements Serializable {
 
   public void setApplicants(List<Member> applicants) {
     this.applicants = applicants;
-  }
-
-  public int getNo() {
-    return no;
-  }
-
-  public void setNo(int no) {
-    this.no = no;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public String getExplanation() {
-    return explanation;
-  }
-
-  public void setExplanation(String explanation) {
-    this.explanation = explanation;
   }
 
   public String getMentorExplanation() {

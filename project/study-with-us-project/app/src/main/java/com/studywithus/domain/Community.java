@@ -1,18 +1,36 @@
 package com.studywithus.domain;
 
-//커뮤니티 게시글 구성요소
+import java.sql.Date;
+
 @SuppressWarnings("serial")
 public class Community extends Content {
 
-  private int viewCount; // 조회수
-  private int like; // 좋아요
+  // 게시글 작성자
+  private Member writer;
 
-  public int getLike() {
-    return like;
+  // 게시글 등록일
+  private Date registeredDate;
+
+  // 조회수
+  private int viewCount;
+
+  // 좋아요
+  private int like;
+
+  public Member getWriter() {
+    return writer;
   }
 
-  public void setLike(int like) {
-    this.like = like;
+  public void setWriter(Member writer) {
+    this.writer = writer;
+  }
+
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
   }
 
   public int getViewCount() {
@@ -21,5 +39,13 @@ public class Community extends Content {
 
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
+  }
+
+  public int getLike() {
+    return like;
+  }
+
+  public void setLike(int like) {
+    this.like = like;
   }
 }
