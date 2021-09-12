@@ -13,6 +13,7 @@ public class MentorApplicationDetailHandler implements Command {
 
   public MentorApplicationDetailHandler (List<MentorApplicationForm> mentorApplicationForm, List<Member> mentorList) {
     this.mentorApplicationForm = mentorApplicationForm;
+    this. mentorList = mentorList;
   }
 
   @Override
@@ -20,9 +21,10 @@ public class MentorApplicationDetailHandler implements Command {
     System.out.println("[멘토 신청 내역 / 상세보기] \n");
 
     for (MentorApplicationForm mentorApplication : mentorApplicationForm) {
-      System.out.printf("%s, %s\n, %s\n",mentorApplication.getName(), mentorApplication.getChargeStudySubject(), mentorApplication.getRegisteredDate());
+      System.out.printf("%s, %s, %s\n",mentorApplication.getName(), mentorApplication.getChargeStudySubject(), mentorApplication.getRegisteredDate());
     }
 
+    System.out.println();
     String name = Prompt.inputString("이름? ");
     MentorApplicationForm mentorApplication = findByName(name);
 
@@ -39,6 +41,7 @@ public class MentorApplicationDetailHandler implements Command {
     System.out.printf("스터디 설명: %s\n", mentorApplication.getChargeStudyExplanation());
     System.out.printf("등록일: %s\n", mentorApplication.getRegisteredDate());
 
+    System.out.println();
     System.out.println("1. 승인");
     System.out.println("2. 거절");
     System.out.println("0. 이전");
@@ -48,15 +51,16 @@ public class MentorApplicationDetailHandler implements Command {
 
       if (input == 1) {
         mentorApproveHandler(mentorApplication, mentorApplication.getMentorApplicantInfo());
+        break;
 
       } else if (input == 2) {
         mentorRejectHandler(mentorApplication);
+        break;
 
       } else if (input == 0) {
         return;
-      }
 
-      else {
+      } else {
         System.out.println("잘못된 번호입니다.");
         continue;
       }
@@ -65,9 +69,8 @@ public class MentorApplicationDetailHandler implements Command {
 
   private void mentorApproveHandler(MentorApplicationForm mentorApplication, Member mentorApplicant) {
     mentorList.add(mentorApplicant);
-    mentorList.add(mentorApplicant);
-
     this.mentorApplicationForm.remove(mentorApplication);
+
     mentorApplicant.setUserAccessLevel(mentorApplicant.getUserAccessLevel() + Menu.ACCESS_MENTOR);
 
     System.out.println("멘토 승인이 완료되었습니다.");
