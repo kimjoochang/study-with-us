@@ -11,7 +11,7 @@ public abstract class AbstractChargeStudyHandler implements Command {
     this.chargeStudyList = chargeStudyList;
   }
 
-  // 유료 스터디 목록 내 번호 조회
+  // 유료 스터디 게시글 번호 조회
   protected Study findByNo(int no) {
     for (Study chargeStudy : chargeStudyList) {
       if (chargeStudy.getNo() == no) {

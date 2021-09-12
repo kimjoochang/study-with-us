@@ -11,7 +11,7 @@ public abstract class AbstractExamCalendarHandler implements Command {
     this.examCalendarList = examCalendarList;
   }
 
-  // 이달의 시험일정 번호 조회
+  // 이달의 시험일정 게시글 번호 조회
   protected Calendar findByNo(int no) {
     for (Calendar examCalendar: examCalendarList) {
       if (examCalendar.getNo() == no) {

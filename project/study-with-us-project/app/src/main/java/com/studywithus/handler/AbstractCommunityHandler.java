@@ -11,7 +11,7 @@ public abstract class AbstractCommunityHandler implements Command {
     this.communityList = communityList;
   }
 
-  // 게시글 번호 조회
+  // 커뮤니티 게시글 번호 조회
   protected Community findByNo(int no) {
     for (Community community : communityList) {
       if (community.getNo() == no) {
@@ -20,5 +20,4 @@ public abstract class AbstractCommunityHandler implements Command {
     }
     return null;
   }
-
 }

@@ -11,7 +11,7 @@ public abstract class AbstractJobsCalendarHandler implements Command {
     this.jobsCalendarList = jobsCalendarList;
   }
 
-  // 이달의 채용공고 번호 조회
+  // 이달의 채용공고 게시글 번호 조회
   protected Calendar findByNo(int no) {
     for (Calendar jobsCalendar: jobsCalendarList) {
       if (jobsCalendar.getNo() == no) {

@@ -11,7 +11,7 @@ public abstract class AbstractFreeStudyHandler implements Command {
     this.freeStudyList = freeStudyList;
   }
 
-  // 무료 스터디 번호 조회
+  // 무료 스터디 게시글 번호 조회
   protected Study findByNo(int no) {
     for (Study freeStudy : freeStudyList) {
       if (freeStudy.getNo() == no) {
