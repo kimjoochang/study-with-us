@@ -54,7 +54,6 @@ import com.studywithus.handler.JobsCalendarDeleteHandler;
 import com.studywithus.handler.JobsCalendarDetailHandler;
 import com.studywithus.handler.JobsCalendarListHandler;
 import com.studywithus.handler.JobsCalendarUpdateHandler;
-import com.studywithus.handler.MemberPrompt;
 import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
 import com.studywithus.handler.MentorApplicationDetailHandler;
@@ -90,8 +89,6 @@ public class App {
   List<Calendar> examCalendarList = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
-
-  MemberPrompt memberPrompt = new MemberPrompt(memberList);
 
   class MenuItem extends Menu {
     String menuId;
@@ -535,12 +532,11 @@ public class App {
     return mentorApplicantMenu;
   }
 
-  // [수정] 관리자 관점 or 회원 관점 (회원 관점이라면 필요 X)
+  // 관리자 관점
   private Menu createDeleteRequestStudyMenu() {
     MenuGroup deletedRequestMenu = new MenuGroup("삭제 요청 스터디 관리");
 
     deletedRequestMenu.add(new MenuItem("조회", "/chargeStudy/deleteList"));
-    deletedRequestMenu.add(new MenuItem("상세보기", "/chargeStudy/deleteDetail"));
 
     return deletedRequestMenu;
   }

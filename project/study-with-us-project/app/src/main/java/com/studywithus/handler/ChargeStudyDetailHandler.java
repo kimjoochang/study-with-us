@@ -6,7 +6,7 @@ import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
-public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
+public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler {
 
   Study chargestudy;
 
@@ -66,10 +66,11 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
     } else if (no == 1) {
       System.out.println("2. 관심목록 추가하기");
     }
+
     System.out.println("0. 이전\n");
 
     while(true) {
-      int input = Prompt.inputInt("선택>");
+      int input = Prompt.inputInt("선택> ");
 
       if(input == 1) {
         payHandler();
