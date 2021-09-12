@@ -14,21 +14,22 @@ public class FreeInterestDeleteHandler extends AbstractFreeInterestHandler {
   public void execute() {
     System.out.println("[무료 스터디 관심목록 / 삭제]\n");
 
-    for (Study freeStudy : freeInterestList) {
-      System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", freeStudy.getNo(), freeStudy.getTitle(),
-          freeStudy.getWriter(), freeStudy.getRegisteredDate(),
-          freeStudy.getViewCount(), freeStudy.getLike());
+    for (Study freeInterest : freeInterestList) {
+      System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", freeInterest.getNo(), freeInterest.getTitle(),
+          freeInterest.getWriter(), freeInterest.getRegisteredDate(),
+          freeInterest.getViewCount(), freeInterest.getLike());
     }
 
     System.out.println();
 
     int no = Prompt.inputInt("번호: ");
 
-    Study freeStudy = findByNo(no);
+    Study freeInterest = findByNo(no);
 
-    if (freeStudy == null) {
+    if (freeInterest == null) {
       System.out.println();
       System.out.println("해당 번호의 무료 스터디 관심 목록이 없습니다.\n");
+
       return;
     }
 
@@ -39,7 +40,7 @@ public class FreeInterestDeleteHandler extends AbstractFreeInterestHandler {
       return;
     }
 
-    freeInterestList.remove(freeStudy);
+    freeInterestList.remove(freeInterest);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");

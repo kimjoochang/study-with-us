@@ -13,9 +13,9 @@ public abstract class AbstractFreeInterestHandler implements Command {
 
   // 무료 스터디 관심목록 번호 조회
   protected Study findByNo(int no) {
-    for (Study study : freeInterestList) {
-      if (study.getNo() == no) {
-        return study;
+    for (Study freeInterest : freeInterestList) {
+      if (freeInterest.getNo() == no) {
+        return freeInterest;
       }
     }
     return null;
