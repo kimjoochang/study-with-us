@@ -40,7 +40,9 @@ public class FindPasswordHandler implements Command {
         System.out.println("입력하신 비밀번호가 다릅니다.");
         continue;
       }
+
       member.setPassword(newPassword1);
+
       System.out.println("변경이 완료되었습니다.");
       return;
     }
@@ -57,6 +59,3 @@ public class FindPasswordHandler implements Command {
     return null;
   }
 }
-
-
-
