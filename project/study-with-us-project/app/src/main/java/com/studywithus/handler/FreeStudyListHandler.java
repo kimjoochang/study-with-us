@@ -14,7 +14,7 @@ public class FreeStudyListHandler extends AbstractFreeStudyHandler {
     System.out.println("[무료 스터디 / 조회]\n");
 
     for (Study freeStudy : freeStudyList) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+      System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
           freeStudy.getNo(), 
           freeStudy.getTitle(), 
           freeStudy.getWriter().getName(),

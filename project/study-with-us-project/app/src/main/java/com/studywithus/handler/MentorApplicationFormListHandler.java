@@ -26,7 +26,7 @@ public class MentorApplicationFormListHandler implements Command {
     System.out.println("[멘토 신청 내역 / 조회] \n");
 
     for(Member mentorApplicationForm : mentorApplicationFormList) {
-      System.out.println("신청자 이름 : " + mentorApplicationForm.getName() + "/" + "멘토 신청서 ");
+      System.out.println("신청자 이름: " + mentorApplicationForm.getName() + "/" + "멘토 신청서 ");
     }
 
     // 멘토 신청 내역 상세 보기
@@ -36,9 +36,9 @@ public class MentorApplicationFormListHandler implements Command {
       System.out.printf("%s, %s\n",mentorApplicant.getName(), mentorApplicant.getId());
     }
 
-    String name = Prompt.inputString("이름? ");
+    String name = Prompt.inputString("이름: ");
     Member member = findByName(name);
-    String selfIntroduction =  Prompt.inputString("멘토 소개? ");
+    String selfIntroduction =  Prompt.inputString("멘토 소개: ");
 
     if (member == null) {
       System.out.println();

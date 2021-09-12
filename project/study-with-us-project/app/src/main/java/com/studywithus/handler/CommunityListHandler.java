@@ -14,7 +14,7 @@ public class CommunityListHandler extends AbstractCommunityHandler{
     System.out.println("[커뮤니티 / 조회]\n");
 
     for (Community community : communityList) {
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+      System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
           community.getNo(),
           community.getTitle(), 
           community.getWriter().getName(),
