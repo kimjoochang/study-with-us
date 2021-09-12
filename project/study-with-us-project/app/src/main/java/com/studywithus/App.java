@@ -41,6 +41,8 @@ import com.studywithus.handler.ExamCalendarDeleteHandler;
 import com.studywithus.handler.ExamCalendarDetailHandler;
 import com.studywithus.handler.ExamCalendarListHandler;
 import com.studywithus.handler.ExamCalendarUpdateHandler;
+import com.studywithus.handler.FreeInterestDeleteHandler;
+import com.studywithus.handler.FreeInterestListHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
 import com.studywithus.handler.FreeStudyDetailHandler;
@@ -121,6 +123,9 @@ public class App {
     commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
     commandMap.put("/auth/signUp", new SignUpHandler(memberList));
     commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
+
+    commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
+    commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationForm));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationForm, mentorList));

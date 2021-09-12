@@ -41,7 +41,7 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
 
     freeStudyList.add(freeStudy);
 
-    AuthLoginHandler.userAccessLevel = Menu.ACCESS_LEADER;
+    AuthLoginHandler.userAccessLevel = Menu.ACCESS_GENERAL | Menu.ACCESS_LEADER;
 
     System.out.println();
     System.out.println("무료 스터디 등록이 완료되었습니다.\n");
