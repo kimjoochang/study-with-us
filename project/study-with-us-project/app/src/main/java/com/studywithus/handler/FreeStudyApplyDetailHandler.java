@@ -20,10 +20,10 @@ public class FreeStudyApplyDetailHandler extends AbstractFreeStudyHandler{
 
     for(Study freeStudy : freeStudyApplyList) {
       System.out.printf("%s, %s\n",freeStudy.getNo(), freeStudy.getTitle());
-      System.out.println("--------------------------------");
+      System.out.println("------------------------------");
     }
 
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호: ");
     Study freeStudy = findByNo(no);
 
     if (freeStudy == null) {
@@ -40,7 +40,7 @@ public class FreeStudyApplyDetailHandler extends AbstractFreeStudyHandler{
       System.out.printf("지역: %s\n", freeStudy.getArea());
     }
 
-    System.out.printf("설명: %s\n", freeStudy.getExplanation());
+    System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("규칙: %s\n", freeStudy.getRule());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
   }

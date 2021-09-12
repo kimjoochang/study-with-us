@@ -10,12 +10,11 @@ public class FreeStudyDeleteHandler extends AbstractFreeStudyHandler {
     super(freeStudyList);
   }
 
-  // 무료 스터디 삭제
   @Override
   public void execute() {
     System.out.println("[무료 스터디 / 삭제]");
-    int no = Prompt.inputInt("번호? ");
 
+    int no = Prompt.inputInt("번호: ");
     Study freeStudy = findByNo(no);
 
     if (freeStudy == null) {

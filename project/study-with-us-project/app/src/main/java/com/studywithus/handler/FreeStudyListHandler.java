@@ -9,7 +9,6 @@ public class FreeStudyListHandler extends AbstractFreeStudyHandler {
     super(freeStudyList);
   }
 
-  // 무료 스터디 조회
   @Override
   public void execute() {
     System.out.println("[무료 스터디 / 조회]\n");

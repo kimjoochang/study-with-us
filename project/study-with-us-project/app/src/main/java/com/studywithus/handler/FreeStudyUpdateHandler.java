@@ -10,11 +10,10 @@ public class FreeStudyUpdateHandler extends AbstractFreeStudyHandler {
     super(freeStudyList);
   }
 
-  // 무료 스터디 수정
   public void execute() {
     System.out.println("[무료 스터디 / 수정]\n");
 
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호: ");
     System.out.println();
 
     Study freeStudy = findByNo(no);
@@ -31,7 +30,7 @@ public class FreeStudyUpdateHandler extends AbstractFreeStudyHandler {
     }
 
     String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", freeStudy.getTitle()));
-    String explanation = Prompt.inputString(String.format("[%s] 수정할 설명: ", freeStudy.getExplanation()));
+    String content = Prompt.inputString(String.format("[%s] 수정할 설명: ", freeStudy.getContent()));
     String rule = Prompt.inputString(String.format("[%s] 수정할 규칙: ", freeStudy.getRule()));
 
     System.out.println();
@@ -45,7 +44,7 @@ public class FreeStudyUpdateHandler extends AbstractFreeStudyHandler {
     }
 
     freeStudy.setTitle(title);
-    freeStudy.setExplanation(explanation);
+    freeStudy.setContent(content);
     freeStudy.setRule(rule);
 
     System.out.println();

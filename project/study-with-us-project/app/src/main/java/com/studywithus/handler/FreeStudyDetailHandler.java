@@ -25,7 +25,6 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
     this.freeInterestList = freeInterestList;
   }
 
-  // 무료 스터디 상세보기
   public void execute() {
     System.out.println("[무료 스터디 / 상세보기]\n");
 
@@ -45,7 +44,7 @@ public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
       System.out.printf("지역: %s\n", freeStudy.getArea());
     }
 
-    System.out.printf("설명: %s\n", freeStudy.getExplanation());
+    System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("규칙: %s\n", freeStudy.getRule());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
