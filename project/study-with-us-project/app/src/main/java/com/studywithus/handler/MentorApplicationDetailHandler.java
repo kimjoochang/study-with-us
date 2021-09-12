@@ -11,17 +11,16 @@ public class MentorApplicationDetailHandler implements Command {
   List<MentorApplicationForm> mentorApplicationForm;
   List<Member> mentorList;
 
-  public MentorApplicationDetailHandler (List<MentorApplicationForm> mentorApplicationForm,
-      List<Member> mentorList) {
+  public MentorApplicationDetailHandler (List<MentorApplicationForm> mentorApplicationForm, List<Member> mentorList) {
     this.mentorApplicationForm = mentorApplicationForm;
   }
+
   @Override
   public void execute() {
     System.out.println("[멘토 신청 내역 / 상세보기] \n");
 
-    for(MentorApplicationForm mentorApplication : mentorApplicationForm) {
-      System.out.printf("%s, %s\n, %s\n",mentorApplication.getName(), 
-          mentorApplication.getChargeStudySubject(), mentorApplication.getRegisteredDate());
+    for (MentorApplicationForm mentorApplication : mentorApplicationForm) {
+      System.out.printf("%s, %s\n, %s\n",mentorApplication.getName(), mentorApplication.getChargeStudySubject(), mentorApplication.getRegisteredDate());
     }
 
     String name = Prompt.inputString("이름? ");
@@ -34,31 +33,40 @@ public class MentorApplicationDetailHandler implements Command {
     }
 
     System.out.println();
-    System.out.printf("신청자 이름 : %s\n", mentorApplication.getName());
-    System.out.printf("자기소개 : %s\n", mentorApplication.getSelfIntroduction());
-    System.out.printf("스터디 주제 : %s\n", mentorApplication.getChargeStudySubject());
-    System.out.printf("스터디 설명 : %s\n", mentorApplication.getChargeStudyExplanation());
-    System.out.printf("등록일 : %s\n", mentorApplication.getRegisteredDate());
+    System.out.printf("신청자 이름: %s\n", mentorApplication.getName());
+    System.out.printf("자기소개: %s\n", mentorApplication.getSelfIntroduction());
+    System.out.printf("스터디 주제: %s\n", mentorApplication.getChargeStudySubject());
+    System.out.printf("스터디 설명: %s\n", mentorApplication.getChargeStudyExplanation());
+    System.out.printf("등록일: %s\n", mentorApplication.getRegisteredDate());
 
     System.out.println("1. 승인");
     System.out.println("2. 거절");
     System.out.println("0. 이전");
-    while(true) {
-      int input = Prompt.inputInt("선택>");
-      if(input == 1) {
+
+    while (true) {
+      int input = Prompt.inputInt("선택> ");
+
+      if (input == 1) {
         mentorApproveHandler(mentorApplication, mentorApplication.getMentorApplicantInfo());
+
       } else if (input == 2) {
         mentorRejectHandler(mentorApplication);
+
       } else if (input == 0) {
+        return;
+      }
+
+      else {
         System.out.println("잘못된 번호입니다.");
         continue;
       }
-      return;
     }
   }
+
   private void mentorApproveHandler(MentorApplicationForm mentorApplication, Member mentorApplicant) {
     mentorList.add(mentorApplicant);
     mentorList.add(mentorApplicant);
+
     this.mentorApplicationForm.remove(mentorApplication);
     mentorApplicant.setUserAccessLevel(mentorApplicant.getUserAccessLevel() + Menu.ACCESS_MENTOR);
 
@@ -80,6 +88,3 @@ public class MentorApplicationDetailHandler implements Command {
     return null;
   }
 }
-
-
-

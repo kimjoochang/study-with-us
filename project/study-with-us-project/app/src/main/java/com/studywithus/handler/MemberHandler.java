@@ -21,8 +21,8 @@ public class MemberHandler implements Command {
   public void execute() {
     System.out.println("[로그인]\n");
 
-    String id = Prompt.inputString("아이디? ");
-    String pwd = Prompt.inputString("암호? ");
+    String id = Prompt.inputString("아이디: ");
+    String pwd = Prompt.inputString("암호: ");
 
     Member member = findByIdPwd(id, pwd);
 
@@ -30,7 +30,7 @@ public class MemberHandler implements Command {
       System.out.println("등록된 회원이 아닙니다.");
 
     } else {
-      System.out.printf("%s님 환영합니다!\n", member.getName());
+      System.out.printf("%s님 환영합니다.\n", member.getName());
       loginUser = member;
     }
   }

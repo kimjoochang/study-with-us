@@ -18,13 +18,14 @@ public class MembershipWithdrawalHandler extends AbstractLoginHandler {
     System.out.println("[회원 탈퇴]");
 
     String input = Prompt.inputString("정말 회원 탈퇴하시겠습니까? (y/N) ");
+
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println(" 회원 탈퇴를 취소하셨습니다.");
     }
 
     memberList.remove(member);
-
     AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
+
     System.out.println();
     System.out.println("회원 탈퇴가 완료되었습니다.");
 
@@ -39,6 +40,5 @@ public class MembershipWithdrawalHandler extends AbstractLoginHandler {
       return null;
     }
     return null;
-
   }
 }

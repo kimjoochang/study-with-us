@@ -13,7 +13,6 @@ public class MentorApplicationAddHandler implements Command {
     this.mentorApplicationForm = mentorApplicationForm;
   }
 
-  // 멘토 신청하기
   @Override
   public void execute() {
     MentorApplicationForm mentorApplication = new MentorApplicationForm();
@@ -21,9 +20,9 @@ public class MentorApplicationAddHandler implements Command {
     System.out.println("[멘토 신청하기]");
 
     while (true) {
-      String selfIntro = Prompt.inputString("간단한 자기 소개: ");
+      String selfIntro = Prompt.inputString("자기 소개: ");
       String subject = Prompt.inputString("개설할 스터디 주제: ");
-      String explanation = Prompt.inputString("간단한 스터디 설명: ");
+      String explanation = Prompt.inputString("스터디 설명: ");
 
       if (selfIntro.equals("") || subject.equals("") || explanation.equals("")) {
         System.out.println("모두 필수입력 항목입니다.");
