@@ -23,7 +23,7 @@ public class MentorApplicationFormListHandler implements Command {
   // 멘토 신청 회원 목록 조회
   @Override
   public void execute() {
-    System.out.println("[멘토 신청 내역 / 조회] \n");
+    System.out.println("[멘토 신청 내역 / 조회]\n");
 
     for(Member mentorApplicationForm : mentorApplicationFormList) {
       System.out.println("신청자 이름: " + mentorApplicationForm.getName() + "/" + "멘토 신청서 ");
