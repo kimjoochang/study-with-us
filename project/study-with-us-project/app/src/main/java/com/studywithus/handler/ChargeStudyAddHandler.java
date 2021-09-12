@@ -19,12 +19,13 @@ public class ChargeStudyAddHandler extends AbstractChargeStudyHandler{
     Study chargeStudy = new Study();
 
     chargeStudy.setWriter(AuthLoginHandler.loginUser);
-    chargeStudy.setNo(Prompt.inputInt("번호? "));
-    chargeStudy.setArea(Prompt.inputString("지역? "));
-    chargeStudy.setTitle(Prompt.inputString("스터디 제목? "));
-    chargeStudy.setExplanation(Prompt.inputString("스터디 설명? "));
-    chargeStudy.setPrice(Prompt.inputInt("가격? " ));
+    chargeStudy.setNo(Prompt.inputInt("번호: "));
+    chargeStudy.setArea(Prompt.inputString("지역: "));
+    chargeStudy.setTitle(Prompt.inputString("스터디 제목: "));
+    chargeStudy.setContent(Prompt.inputString("스터디 설명: "));
+    chargeStudy.setPrice(Prompt.inputInt("가격: " ));
     chargeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
+
     chargeStudyList.add(chargeStudy);
 
     System.out.println();

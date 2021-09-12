@@ -106,7 +106,7 @@ public class MenuGroup extends Menu {
       if (path.length() > 0) {
         path += " / ";
       }
-      Menu menu = breadCrumb.get(i); 
+      Menu menu = breadCrumb.get(i);
       path += menu.title;
     }
 
@@ -115,6 +115,7 @@ public class MenuGroup extends Menu {
 
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
+
     for (Menu menu : childs) {
       if ((menu.accessScope & AuthLoginHandler.getUserAccessLevel()) > 0 ) {
         menuList.add(menu);

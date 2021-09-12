@@ -19,8 +19,7 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
   // 유료스터디 결제한 사람 내역 (멘토 관점)
   List<Member> applicant;
 
-  public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> interests,
-      List<Payment> paymentList, List<Member> applicant ) {
+  public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> interests, List<Payment> paymentList, List<Member> applicant ) {
     super(chargeStudyList);
     this.interests = interests;
     this.paymentList = paymentList;
@@ -41,7 +40,7 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
     }
 
     System.out.printf("스터디 제목: %s\n", study.getTitle());
-    System.out.printf("스터디 설명: %s\n", study.getExplanation());
+    System.out.printf("스터디 설명: %s\n", study.getContent());
     System.out.printf("지역: %s\n", study.getArea());
     System.out.printf("멘토: %s\n", study.getWriter());
     System.out.printf("가격: %s\n", study.getPrice());
@@ -60,8 +59,10 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
       }
       no = 1;
     }
+
     if (no == 0) {
       System.out.println("2. 관심목록 삭제하기");
+
     } else if (no == 1) {
       System.out.println("2. 관심목록 추가하기");
     }
@@ -69,32 +70,37 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
 
     while(true) {
       int input = Prompt.inputInt("선택>");
+
       if(input == 1) {
         payHandler();
+
       } else if (input == 2) {
         if (no == 0) {
           interestDeleteHandler(study);
           return;
         }
         interestAddHandler(study);
+
       } else if (input == 0) {
         return;
+
       } else {
         System.out.println("잘못된 번호입니다.");
         continue;
       }
       return;
     }
-
   }
 
   private void payHandler() {
     System.out.println("[유료 스터디/결제]\n");
 
     String input1 = Prompt.inputString("유료 스터디를 결제 하시겠습니까? (y/N)");
+
     if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
       System.out.println(" 유료 스터디 결제를 취소하셨습니다.");
     }
+
     else {
       StringBuffer heart = new StringBuffer("");
 
@@ -105,13 +111,16 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
           + " O_(\")(\")");
       System.out.println("------------------------------------");
       System.out.print("결제중");
+
       for(int i = 0; i < 5; i++) {
         try {
           Thread.sleep(1000);
+
         } catch (InterruptedException e) {
         }
         System.out.print(heart.append("♡♥"));
       }
+
       System.out.println();
       System.out.println();
       System.out.println("유료 스터디 결제가 완료 되었습니다.\n");
@@ -140,7 +149,6 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler{
 
     System.out.println();
     System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
-    // return;
   }
 
   private void interestDeleteHandler(Study chargestudy) {

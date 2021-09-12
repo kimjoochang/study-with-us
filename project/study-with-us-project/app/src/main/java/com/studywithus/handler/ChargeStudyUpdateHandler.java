@@ -25,7 +25,7 @@ public class ChargeStudyUpdateHandler extends AbstractChargeStudyHandler{
     }
 
     String title = Prompt.inputString(String.format("[%s] 유료 스터디 / 수정된 스터디 제목: ", study.getTitle()));
-    String explanation = Prompt.inputString(String.format("[%s] 유료 스터디 / 수정된 내용: ", study.getExplanation()));
+    String content = Prompt.inputString(String.format("[%s] 유료 스터디 / 수정된 내용: ", study.getContent()));
 
     String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -35,7 +35,7 @@ public class ChargeStudyUpdateHandler extends AbstractChargeStudyHandler{
     }
 
     study.setTitle(title);
-    study.setExplanation(explanation);
+    study.setContent(content);
     System.out.println();
     System.out.println("유료 스터디를 수정하였습니다.\n");
   }

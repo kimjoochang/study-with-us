@@ -16,8 +16,7 @@ public class ChargeStudyDeletedListHandler extends AbstractChargeStudyHandler{
     for(Study study : chargeStudyList) {
       System.out.println("스터디 제목 : " + study.getTitle());
       System.out.println("멘토 이름 : " + study.getWriter());
-      System.out.println("-----------------------------");
+      System.out.println("---------------------------");
     }
   }
-
 }

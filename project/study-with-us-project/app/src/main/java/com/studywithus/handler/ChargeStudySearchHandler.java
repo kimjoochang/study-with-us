@@ -20,11 +20,13 @@ public class ChargeStudySearchHandler extends AbstractChargeStudyHandler{
 
     for (Study chargeStudy : chargeStudyList) {
       if (!chargeStudy.getTitle().contains(input) &&
-          !chargeStudy.getExplanation().contains(input) &&
+          !chargeStudy.getContent().contains(input) &&
           !chargeStudy.getWriter().getName().contains(input)) {
+
         System.out.println("입력하신 검색어가 포함된 게시물이 없습니다.");
         continue;
       }
+
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
           chargeStudy.getNo(), 
           chargeStudy.getTitle(), 
