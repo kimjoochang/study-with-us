@@ -16,10 +16,10 @@ public class SignUpHandler extends AbstractLoginHandler {
 
   @Override
   public void execute() {
-    String name = Prompt.inputString("이름? ");
-    String id = Prompt.inputString("아이디? ");
-    String password = Prompt.inputString("비밀번호? ");
-    String phoneNumber = Prompt.inputString("핸드폰번호? ");
+    String name = Prompt.inputString("이름: ");
+    String id = Prompt.inputString("아이디: ");
+    String password = Prompt.inputString("비밀번호: ");
+    String phoneNumber = Prompt.inputString("휴대폰 번호: ");
 
     System.out.println();
 
