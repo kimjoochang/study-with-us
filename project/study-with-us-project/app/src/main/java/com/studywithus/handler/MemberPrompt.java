@@ -34,11 +34,13 @@ public class MemberPrompt {
   public Member promptMember(String label) {
     while (true) {
       String memberName = Prompt.inputString(label);
+
       if (memberName.length() == 0) {
         return null;
       }
 
       Member member = findByName(memberName);
+
       if (member != null) {
         return member;
       }
@@ -50,11 +52,13 @@ public class MemberPrompt {
   public static Member promptMember(String label, List<Member> memberList) {
     while (true) {
       String memberName = Prompt.inputString(label);
+
       if (memberName.length() == 0) {
         return null;
       }
 
       Member member = findByName(memberName, memberList);
+
       if (member != null) {
         return member;
       }
@@ -69,9 +73,11 @@ public class MemberPrompt {
     while (true) {
       String memberName = Prompt.inputString(label);
       Member member = findByName(memberName);
+
       if (member != null) {
         members.add(member);
         continue;
+
       } else if (memberName.length() == 0) {
         break;
       } 
