@@ -10,16 +10,14 @@ public class JobsCalendarDeleteHandler extends AbstractJobsCalendarHandler {
     super(jobsCalendarList);
   }
 
-  // 이달의 채용공고 삭제
   @Override
   public void execute() {
     System.out.println("[이달의 채용공고 / 삭제]\n");
 
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호: ");
+    Calendar jobsCalendar = findByNo(no);
 
     System.out.println();
-
-    Calendar jobsCalendar = findByNo(no);
 
     if (jobsCalendar == null) {
       System.out.println();

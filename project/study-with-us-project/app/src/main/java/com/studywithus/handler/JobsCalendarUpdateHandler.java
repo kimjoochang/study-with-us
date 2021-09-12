@@ -10,15 +10,14 @@ public class JobsCalendarUpdateHandler extends AbstractJobsCalendarHandler {
     super(jobsCalendarList);
   }
 
-  // 이달의 채용공고 수정
   @Override
   public void execute() {
     System.out.println("[이달의 채용공고 / 수정]\n");
 
-    int no = Prompt.inputInt("번호? ");
-    System.out.println();
-
+    int no = Prompt.inputInt("번호: ");
     Calendar jobsCalendar = findByNo(no);
+
+    System.out.println();
 
     if (jobsCalendar == null) {
       System.out.println();
