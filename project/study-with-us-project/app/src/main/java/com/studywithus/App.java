@@ -39,6 +39,7 @@ import com.studywithus.handler.CommunityUpdateHandler;
 import com.studywithus.handler.ExamCalendarAddHandler;
 import com.studywithus.handler.ExamCalendarDeleteHandler;
 import com.studywithus.handler.ExamCalendarDetailHandler;
+import com.studywithus.handler.ExamCalendarListHandler;
 import com.studywithus.handler.ExamCalendarUpdateHandler;
 import com.studywithus.handler.FreeStudyAddHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
@@ -49,6 +50,7 @@ import com.studywithus.handler.FreeStudyUpdateHandler;
 import com.studywithus.handler.JobsCalendarAddHandler;
 import com.studywithus.handler.JobsCalendarDeleteHandler;
 import com.studywithus.handler.JobsCalendarDetailHandler;
+import com.studywithus.handler.JobsCalendarListHandler;
 import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MemberPrompt;
 import com.studywithus.handler.MembershipWithdrawalHandler;
@@ -84,7 +86,6 @@ public class App {
 
   List<Calendar> jobsCalendarList = new ArrayList<>();
   List<Calendar> examCalendarList = new ArrayList<>();
-
 
   HashMap<String, Command> commandMap = new HashMap<>();
 
@@ -163,11 +164,13 @@ public class App {
     commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
 
     commandMap.put("/jobsCalendar/add", new JobsCalendarAddHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/list", new JobsCalendarListHandler(jobsCalendarList));
     commandMap.put("/jobsCalendar/detail", new JobsCalendarDetailHandler(jobsCalendarList));
     commandMap.put("/jobsCalendar/update", new JobsCalendarUpdateHandler(jobsCalendarList));
     commandMap.put("/jobsCalendar/delete", new JobsCalendarDeleteHandler(jobsCalendarList));
 
     commandMap.put("/examCalendar/add", new ExamCalendarAddHandler(examCalendarList));
+    commandMap.put("/examCalendar/list", new ExamCalendarListHandler(examCalendarList));
     commandMap.put("/examCalendar/detail", new ExamCalendarDetailHandler(examCalendarList));
     commandMap.put("/examCalendar/update", new ExamCalendarUpdateHandler(examCalendarList));
     commandMap.put("/examCalendar/delete", new ExamCalendarDeleteHandler(examCalendarList));

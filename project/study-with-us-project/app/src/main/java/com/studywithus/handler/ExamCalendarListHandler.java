@@ -14,7 +14,7 @@ public class ExamCalendarListHandler extends AbstractExamCalendarHandler {
     System.out.println("[이달의 시험일정 / 조회]\n");
 
     for (Calendar calendar : examCalendarList) {
-      System.out.printf("%d, %s, %s, %s\n", 
+      System.out.printf("[번호 = %d, 제목 = %s, 시험일 = %s]\n", 
           calendar.getNo(),
           calendar.getTitle(), 
           calendar.getExamDate());
