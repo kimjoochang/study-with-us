@@ -10,7 +10,6 @@ public class CommunityDeleteHandler extends AbstractCommunityHandler{
     super(communityList);
   }
 
-  // 게시글 삭제
   @Override
   public void execute() {
     System.out.println("[커뮤니티 / 삭제] \n");
@@ -37,5 +36,4 @@ public class CommunityDeleteHandler extends AbstractCommunityHandler{
     System.out.println();
     System.out.println("게시글을 삭제하였습니다.\n");
   }
-
 }

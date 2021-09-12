@@ -9,7 +9,6 @@ public class ChargeStudyListHandler extends AbstractChargeStudyHandler{
     super(chargeStudyList);	
   }
 
-  // 유료 스터디 조회
   @Override
   public void execute() {
     System.out.println("[유료 스터디 / 조회]\n");

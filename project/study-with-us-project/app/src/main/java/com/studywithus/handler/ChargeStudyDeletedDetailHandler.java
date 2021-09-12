@@ -13,7 +13,6 @@ public class ChargeStudyDeletedDetailHandler extends AbstractChargeStudyHandler{
     this.chargeDetailRequestList = chargeDetailRequestList;
   }
 
-  // 삭제 요청된 유료 스터디 상세보기
   @Override
   public void execute() {
     System.out.println("[스터디 삭제 요청 내역 / 상세보기]\n");

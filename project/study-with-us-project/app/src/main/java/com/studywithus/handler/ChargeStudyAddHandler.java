@@ -11,7 +11,6 @@ public class ChargeStudyAddHandler extends AbstractChargeStudyHandler{
     super(chargeStudyList);	
   }
 
-  // 유료 스터디 생성
   @Override
   public void execute() {
     System.out.println("[유료 스터디 / 생성]\n");

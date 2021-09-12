@@ -9,8 +9,6 @@ public class CommunityListHandler extends AbstractCommunityHandler{
     super(communityList);
   }
 
-  // 게시글 조회
-
   @Override
   public void execute() {
     System.out.println("[커뮤니티 / 조회]\n");
@@ -23,8 +21,8 @@ public class CommunityListHandler extends AbstractCommunityHandler{
           community.getRegisteredDate(), 
           community.getViewCount(),
           community.getLike());
+
       System.out.println();
     }
   }
-
 }

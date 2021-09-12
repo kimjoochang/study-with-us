@@ -10,7 +10,6 @@ public class CommunityUpdateHandler extends AbstractCommunityHandler{
     super(communityList);
   }
 
-  // 게시글 수정
   @Override
   public void execute() {
     System.out.println("[커뮤니티 / 수정] \n");
@@ -29,6 +28,7 @@ public class CommunityUpdateHandler extends AbstractCommunityHandler{
     String content = Prompt.inputString(String.format("[%s] 수정할 내용: ", community.getContent()));
 
     String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
+
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("게시글 수정을 취소하였습니다.\n");
       return;
@@ -40,5 +40,4 @@ public class CommunityUpdateHandler extends AbstractCommunityHandler{
     System.out.println();
     System.out.println("게시글을 수정하였습니다.\n");
   }
-
 }

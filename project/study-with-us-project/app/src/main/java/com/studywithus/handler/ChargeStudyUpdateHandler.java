@@ -10,7 +10,6 @@ public class ChargeStudyUpdateHandler extends AbstractChargeStudyHandler{
     super(chargeStudyList);	
   }
 
-  // 유료 스터디 수정
   @Override
   public void execute() {
     System.out.println("[유료 스터디 / 수정]");
@@ -28,6 +27,7 @@ public class ChargeStudyUpdateHandler extends AbstractChargeStudyHandler{
     String content = Prompt.inputString(String.format("[%s] 유료 스터디 / 수정된 내용: ", study.getContent()));
 
     String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
+
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println();
       System.out.println("유료 스터디 수정을 취소하였습니다.\n");
@@ -36,6 +36,7 @@ public class ChargeStudyUpdateHandler extends AbstractChargeStudyHandler{
 
     study.setTitle(title);
     study.setContent(content);
+
     System.out.println();
     System.out.println("유료 스터디를 수정하였습니다.\n");
   }

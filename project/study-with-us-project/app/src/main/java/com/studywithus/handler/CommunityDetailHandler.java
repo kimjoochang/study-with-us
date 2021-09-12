@@ -10,7 +10,6 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
     super(communityList);
   }
 
-  // 스몰톡 게시글 상세보기
   @Override
   public void execute() {
     System.out.println("[커뮤니티 / 상세보기] \n");
@@ -31,7 +30,7 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
 
     community.setViewCount(community.getViewCount() + 1);
     System.out.printf("조회수: %d\n", community.getViewCount());
+
     System.out.println();
   }
-
 }
