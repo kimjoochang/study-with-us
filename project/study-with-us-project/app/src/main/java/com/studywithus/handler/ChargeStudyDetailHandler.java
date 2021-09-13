@@ -11,19 +11,19 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
   Study chargestudy;
 
   // 유료스터디 관심목록 리스트 (회원 관점)
-  List<Study> interests;
+  List<Study> chargeInterestList;
 
   // 유료스터디 결제내역 리스트 (회원 관점)
   List<Payment> paymentList;
 
   // 유료스터디 결제한 사람 내역 (멘토 관점)
-  List<Member> applicant;
+  List<Member> chargeApplicantList;
 
-  public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> interests, List<Payment> paymentList, List<Member> applicant ) {
+  public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> chargeInterestList, List<Payment> paymentList, List<Member> chargeApplicantList) {
     super(chargeStudyList);
-    this.interests = interests;
+    this.chargeInterestList = chargeInterestList;
     this.paymentList = paymentList;
-    this.applicant = applicant;
+    this.chargeApplicantList = chargeApplicantList;
   }
 
   @Override
@@ -53,7 +53,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     System.out.println("1. 결제하기");
 
     //  해당 스터디의 관심목록 존재 유/무에 따라 관심목록 삭제하기 추가하기로 나눔
-    for(Study nowStudy : interests) {
+    for(Study nowStudy : chargeInterestList) {
       if(study.equals(nowStudy)) {
         no = 0;
         break;
@@ -133,7 +133,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
       AuthLoginHandler.loginUser.setPayment(paymentList);
 
       // 유료스터디 결제한 사람 내역 (멘토 관점)
-      applicant.add(AuthLoginHandler.loginUser);
+      chargeApplicantList.add(AuthLoginHandler.loginUser);
     }
     return;
   }
@@ -147,7 +147,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     }
 
     // 유료스터디 관심목록 리스트 (회원 관점)
-    interests.add(chargeStudy);
+    chargeInterestList.add(chargeStudy);
 
     System.out.println();
     System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
@@ -161,7 +161,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
       return;
     }
 
-    interests.remove(chargestudy);
+    chargeInterestList.remove(chargestudy);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");

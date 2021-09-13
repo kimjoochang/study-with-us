@@ -13,11 +13,11 @@ public class FreeInterestListHandler extends AbstractFreeInterestHandler {
   public void execute() {
     System.out.println("[무료 스터디 관심목록 / 조회]");
 
-    for (Study freeStudy : freeInterestList) {
+    for (Study freeInterest : freeInterestList) {
       System.out.println();
-      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", freeStudy.getNo(), freeStudy.getTitle(),
-          freeStudy.getWriter().getName(), freeStudy.getRegisteredDate(),
-          freeStudy.getViewCount(), freeStudy.getLike());
+      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", freeInterest.getNo(), freeInterest.getTitle(),
+          freeInterest.getWriter().getName(), freeInterest.getRegisteredDate(),
+          freeInterest.getViewCount(), freeInterest.getLike());
     }
   }
 }

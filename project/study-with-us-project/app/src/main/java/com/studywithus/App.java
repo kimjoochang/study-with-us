@@ -21,6 +21,8 @@ import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
+import com.studywithus.handler.ChargeInterestDeleteHandler;
+import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.ChargeStudyDeletedDetailHandler;
@@ -70,9 +72,10 @@ public class App {
   List<Member> applicant = new ArrayList<>();
   List<Member> mentorList = new ArrayList<>();
 
+  List<Study> freeInterestList = new ArrayList<>();
+  List<Study> chargeInterestList = new ArrayList<>();
   List<Study> freeStudyList = new ArrayList<>();
   List<Study> freeApplicationList = new ArrayList<>();
-  List<Study> freeInterestList = new ArrayList<>();
   List<Study> chargeStudyList = new ArrayList<>();
   List<Study> chargeDeleteRequestList = new ArrayList<>();
   List<Study> interests = new ArrayList<>();
@@ -123,6 +126,8 @@ public class App {
 
     commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
+    commandMap.put("/chargeInterest/list", new ChargeInterestListHandler(chargeInterestList));
+    commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationForm));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationForm, mentorList));
