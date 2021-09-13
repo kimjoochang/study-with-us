@@ -215,6 +215,7 @@ public class App {
     mainMenuGroup.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipwithdrawal"));
 
     mainMenuGroup.add(createMyPageMenu());
+    mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
     mainMenuGroup.add(createMentorApplyMenu());
@@ -227,7 +228,6 @@ public class App {
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL | ACCESS_ADMIN);
 
-    myPageMenu.add(createAdminMenu());
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createFreeStudyApplyMenu());
     myPageMenu.add(createMentorApplyMenu());
@@ -236,7 +236,7 @@ public class App {
   }
 
   private Menu createAdminMenu() {
-    MenuGroup adminMenu = new MenuGroup("관리자", ACCESS_ADMIN);
+    MenuGroup adminMenu = new MenuGroup("관리자 페이지", ACCESS_ADMIN);
 
     adminMenu.add(createMemberMenu());
     adminMenu.add(createMentorApplicantMenu());

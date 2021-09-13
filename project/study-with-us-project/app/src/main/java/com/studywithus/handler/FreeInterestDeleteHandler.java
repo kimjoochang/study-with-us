@@ -15,8 +15,8 @@ public class FreeInterestDeleteHandler extends AbstractFreeInterestHandler {
     System.out.println("[무료 스터디 관심목록 / 삭제]\n");
 
     for (Study freeInterest : freeInterestList) {
-      System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", freeInterest.getNo(), freeInterest.getTitle(),
-          freeInterest.getWriter(), freeInterest.getRegisteredDate(),
+      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", freeInterest.getNo(), freeInterest.getTitle(),
+          freeInterest.getWriter().getName(), freeInterest.getRegisteredDate(),
           freeInterest.getViewCount(), freeInterest.getLike());
     }
 

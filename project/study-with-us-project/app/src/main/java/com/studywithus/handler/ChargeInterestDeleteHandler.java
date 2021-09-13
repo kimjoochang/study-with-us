@@ -15,8 +15,8 @@ public class ChargeInterestDeleteHandler extends AbstractChargeInterestHandler {
     System.out.println("[유료 스터디 관심목록 / 삭제]\n");
 
     for (Study chargeInterest : chargeInterestList) {
-      System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", chargeInterest.getNo(), chargeInterest.getTitle(),
-          chargeInterest.getWriter(), chargeInterest.getRegisteredDate(),
+      System.out.printf("[번호 = %d, 제목 = %s, 멘토 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", chargeInterest.getNo(), chargeInterest.getTitle(),
+          chargeInterest.getWriter().getName(), chargeInterest.getRegisteredDate(),
           chargeInterest.getViewCount(), chargeInterest.getLike());
     }
 
