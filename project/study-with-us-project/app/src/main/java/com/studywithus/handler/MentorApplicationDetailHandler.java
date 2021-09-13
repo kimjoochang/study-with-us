@@ -71,7 +71,7 @@ public class MentorApplicationDetailHandler implements Command {
     mentorList.add(mentorApplicant);
     this.mentorApplicationForm.remove(mentorApplication);
 
-    mentorApplicant.setUserAccessLevel(mentorApplicant.getUserAccessLevel() + Menu.ACCESS_MENTOR);
+    AuthLoginHandler.userAccessLevel |= Menu.ACCESS_MENTOR;
 
     System.out.println("멘토 승인이 완료되었습니다.");
   }

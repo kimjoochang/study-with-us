@@ -8,8 +8,6 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
-  Study chargestudy;
-
   // 유료스터디 관심목록 리스트 (회원 관점)
   List<Study> chargeInterestList;
 
@@ -148,6 +146,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
     // 유료 스터디 관심목록 리스트 (회원 관점)
     chargeInterestList.add(chargeStudy);
+    chargeStudy.setViewCount(chargeStudy.getLike() + 1);
 
     System.out.println();
     System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
@@ -163,6 +162,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     }
 
     chargeInterestList.remove(chargestudy);
+    chargestudy.setViewCount(chargestudy.getLike() - 1);
 
     System.out.println();
     System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");

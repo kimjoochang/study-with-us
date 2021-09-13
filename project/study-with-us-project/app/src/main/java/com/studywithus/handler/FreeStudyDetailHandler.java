@@ -146,6 +146,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
     // 무료 스터디 관심 목록에 좋아요한 무료 스터디 추가 (회원 관점)
     freeInterestList.add(freeStudy);
+    freeStudy.setViewCount(freeStudy.getLike() + 1);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록에 추가되었습니다.\n");
@@ -161,6 +162,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     }
 
     freeInterestList.remove(freeStudy);
+    freeStudy.setViewCount(freeStudy.getLike() - 1);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");

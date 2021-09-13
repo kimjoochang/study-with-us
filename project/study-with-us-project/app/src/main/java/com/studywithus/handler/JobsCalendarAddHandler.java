@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Calendar;
 import com.studywithus.util.Prompt;
 
-public class JobsCalendarAddHandler extends AbstractJobsCalendarHandler {
+public class JobsCalendarAddHandler extends AbstractCalendarHandler {
 
   public JobsCalendarAddHandler(List<Calendar> jobsCalendarList) {
     super(jobsCalendarList);
@@ -22,7 +22,7 @@ public class JobsCalendarAddHandler extends AbstractJobsCalendarHandler {
     jobsCalendar.setStartDate(Prompt.inputString("시작일: "));
     jobsCalendar.setEndDate(Prompt.inputString("종료일: "));
 
-    jobsCalendarList.add(jobsCalendar);
+    calendarList.add(jobsCalendar);
 
     System.out.println();
     System.out.println("이달의 채용공고 등록이 완료되었습니다.\n");
