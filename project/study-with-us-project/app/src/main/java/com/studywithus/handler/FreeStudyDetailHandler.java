@@ -57,7 +57,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
     //  해당 스터디의 관심목록 존재 유/무에 따라 관심목록 삭제/추가로 나뉨
     for (Study freeInterest : freeInterestList) {
-      if (freeInterest.equals(freeInterestList)) {
+      if (freeInterest.equals(freeInterest)) {
         System.out.println("2. 관심목록 삭제");
         break;
       }
@@ -72,15 +72,15 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     while (true) {
       int input = Prompt.inputInt("선택> ");
 
-      if(input == 1) {
-        payHandler();
+      if (input == 1) {
+        apply();
 
       } else if (input == 2) {
         if (no == 0) {
-          interestDelete(study);
+          interestDelete();
           return;
         }
-        interestAddHandler(study);
+        interest();
 
       } else if (input == 0) {
         return;
@@ -92,23 +92,23 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
       return;
     }
 
-    if (freeInterestList == null) {
-      System.out.println("2. 관심목록 추가");
-    }
-
-    else if () {
-      System.out.println("2. 관심목록 삭제");
-    }
-
-    System.out.println("0. 이전 메뉴");
-
-    int input = Prompt.inputInt("선택 > ");
-
-    switch (input) {
-      case 1: apply(); break;
-      case 2: interest(); break;
-      default: return;
-    }
+    //    if (freeInterestList == null) {
+    //      System.out.println("2. 관심목록 추가");
+    //    }
+    //
+    //    else if () {
+    //      System.out.println("2. 관심목록 삭제");
+    //    }
+    //
+    //    System.out.println("0. 이전 메뉴");
+    //
+    //    int input = Prompt.inputInt("선택 > ");
+    //
+    //    switch (input) {
+    //      case 1: apply(); break;
+    //      case 2: interest(); break;
+    //      default: return;
+    //    }
   }
 
   // 무료 스터디 신청
@@ -150,7 +150,8 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     System.out.println("무료 스터디 관심 목록에 추가되었습니다.\n");
   }
 
-  private void interestDelete(Study freeStudy) {
+  // 무료 스터디 관심목록 삭제
+  private void interestDelete() {
     String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
