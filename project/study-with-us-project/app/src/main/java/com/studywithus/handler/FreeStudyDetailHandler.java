@@ -64,6 +64,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
       else {
         System.out.println("2. 관심목록 추가");
+        break;
       }
     }
 
