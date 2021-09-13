@@ -52,8 +52,9 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     System.out.println();
     System.out.println("1. 결제하기");
 
+    //  해당 스터디의 관심목록 존재 유/무에 따라 관심목록 삭제하기 추가하기로 나눔
     for(Study nowStudy : interests) {
-      if(!study.equals(nowStudy)) {
+      if(study.equals(nowStudy)) {
         no = 0;
         break;
       }
@@ -61,12 +62,12 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     }
 
     if (no == 0) {
-      System.out.println("2. 관심목록 삭제하기");
+      System.out.println("2. 관심목록 추가하기");
 
     } else if (no == 1) {
-      System.out.println("2. 관심목록 추가하기");
-    }
+      System.out.println("2. 관심목록 삭제하기");
 
+    }
     System.out.println("0. 이전\n");
 
     while(true) {
