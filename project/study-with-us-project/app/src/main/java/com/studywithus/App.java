@@ -69,7 +69,7 @@ public class App {
   List<Member> memberList = new LinkedList<>();
   List<Member> freeApplicantList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
-  List<Member> applicant = new ArrayList<>();
+  List<Member> chargeApplicantList = new ArrayList<>();
   List<Member> mentorList = new ArrayList<>();
 
   List<Study> freeInterestList = new ArrayList<>();
@@ -78,7 +78,6 @@ public class App {
   List<Study> freeApplicationList = new ArrayList<>();
   List<Study> chargeStudyList = new ArrayList<>();
   List<Study> chargeDeleteRequestList = new ArrayList<>();
-  List<Study> interests = new ArrayList<>();
 
   List<MentorApplicationForm> mentorApplicationForm = new ArrayList<>();
 
@@ -143,7 +142,7 @@ public class App {
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, interests, paymentList, applicant));
+    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList, paymentList, chargeApplicantList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
@@ -488,7 +487,7 @@ public class App {
     try (ObjectInputStream in = new ObjectInputStream(
         new FileInputStream("chargeInterest.data"))) {
 
-      interests.addAll((List<Study>) in.readObject());
+      chargeInterestList.addAll((List<Study>) in.readObject());
 
       System.out.println("유료 스터디 관심목록 정보 로딩이 완료되었습니다.");
 
@@ -502,7 +501,7 @@ public class App {
     try (ObjectOutputStream out = new ObjectOutputStream(
         new FileOutputStream("chargeInterest.data"))) {
 
-      out.writeObject(interests);
+      out.writeObject(chargeInterestList);
 
       System.out.println("유료 스터디 관심목록 정보 저장이 완료되었습니다.");
 

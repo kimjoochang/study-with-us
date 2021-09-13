@@ -16,7 +16,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
   // 유료스터디 결제내역 리스트 (회원 관점)
   List<Payment> paymentList;
 
-  // 유료스터디 결제한 사람 내역 (멘토 관점)
+  // 유료스터디 결제자 내역 (멘토 관점)
   List<Member> chargeApplicantList;
 
   public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> chargeInterestList, List<Payment> paymentList, List<Member> chargeApplicantList) {
@@ -39,8 +39,8 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
       return;
     }
 
-    System.out.printf("스터디 제목: %s\n", study.getTitle());
-    System.out.printf("스터디 설명: %s\n", study.getContent());
+    System.out.printf("제목: %s\n", study.getTitle());
+    System.out.printf("설명: %s\n", study.getContent());
     System.out.printf("지역: %s\n", study.getArea());
     System.out.printf("멘토: %s\n", study.getWriter().getName());
     System.out.printf("가격: %s\n", study.getPrice());
@@ -52,7 +52,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     System.out.println();
     System.out.println("1. 결제하기");
 
-    //  해당 스터디의 관심목록 존재 유/무에 따라 관심목록 삭제하기 추가하기로 나눔
+    //  해당 스터디의 관심목록 존재 유/무에 따라 관심목록 삭제/추가로 나뉨
     for (Study chargeInterest : chargeInterestList) {
       if (study.equals(chargeInterest)) {
         System.out.println("2. 관심목록 삭제하기");
@@ -66,7 +66,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
     System.out.println("0. 이전\n");
 
-    while(true) {
+    while (true) {
       int input = Prompt.inputInt("선택> ");
 
       if(input == 1) {
@@ -74,7 +74,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
       } else if (input == 2) {
         if (no == 0) {
-          interestDeleteHandler(study);
+          interestDelete(study);
           return;
         }
         interestAddHandler(study);
@@ -123,18 +123,21 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
       System.out.println();
       System.out.println("유료 스터디 결제가 완료 되었습니다.\n");
 
-      // 유료스터디 결제내역 리스트 (회원 관점)
+      // 유료 스터디 결제내역 리스트 (회원 관점)
       Payment payment = new Payment();
       paymentList.add(payment);
       AuthLoginHandler.loginUser.setPayment(paymentList);
 
-      // 유료스터디 결제한 사람 내역 (멘토 관점)
+      // 유료 스터디 결제한 사람 내역 (멘토 관점)
       chargeApplicantList.add(AuthLoginHandler.loginUser);
     }
     return;
   }
 
+  // 유료 스터디 관심목록 추가
   private void interestAddHandler(Study chargeStudy) {
+    System.out.println("[유료 스터디 / 상세보기 / 관심 목록]\n");
+
     String input = Prompt.inputString("관심 목록에 추가하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -142,14 +145,14 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
       return;
     }
 
-    // 유료스터디 관심목록 리스트 (회원 관점)
+    // 유료 스터디 관심목록 리스트 (회원 관점)
     chargeInterestList.add(chargeStudy);
 
     System.out.println();
     System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
   }
 
-  private void interestDeleteHandler(Study chargestudy) {
+  private void interestDelete(Study chargestudy) {
     String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
