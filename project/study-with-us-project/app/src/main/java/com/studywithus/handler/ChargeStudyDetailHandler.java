@@ -53,21 +53,17 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     System.out.println("1. 결제하기");
 
     //  해당 스터디의 관심목록 존재 유/무에 따라 관심목록 삭제하기 추가하기로 나눔
-    for(Study nowStudy : chargeInterestList) {
-      if(study.equals(nowStudy)) {
-        no = 0;
+    for (Study chargeInterest : chargeInterestList) {
+      if (study.equals(chargeInterest)) {
+        System.out.println("2. 관심목록 삭제하기");
         break;
       }
-      no = 1;
+
+      else {
+        System.out.println("2. 관심목록 추가하기");
+      }
     }
 
-    if (no == 0) {
-      System.out.println("2. 관심목록 추가하기");
-
-    } else if (no == 1) {
-      System.out.println("2. 관심목록 삭제하기");
-
-    }
     System.out.println("0. 이전\n");
 
     while(true) {
@@ -157,13 +153,13 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("무료 스터디 관심 목록을 취소하였습니다.\n");
+      System.out.println("유료 스터디 관심 목록을 취소하였습니다.\n");
       return;
     }
 
     chargeInterestList.remove(chargestudy);
 
     System.out.println();
-    System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");
+    System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");
   }
 }
