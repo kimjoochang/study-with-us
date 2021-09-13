@@ -12,10 +12,12 @@ public class SignUpHandler extends AbstractLoginHandler {
     super(memberList);
   }
 
-  Member member = new Member();
 
   @Override
   public void execute() {
+
+    Member member = new Member();
+
     String name = Prompt.inputString("이름: ");
     String id = Prompt.inputString("아이디: ");
     String password = Prompt.inputString("비밀번호: ");
