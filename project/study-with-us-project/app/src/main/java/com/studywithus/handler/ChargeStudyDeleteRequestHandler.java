@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
-public class ChargeStudyDeleteRequestHandler extends AbstractChargeStudyHandler{
+public class ChargeStudyDeleteRequestHandler extends AbstractStudyHandler {
 
   Study chargeStudy;
   List<Study> chargeDeleteRequestList;

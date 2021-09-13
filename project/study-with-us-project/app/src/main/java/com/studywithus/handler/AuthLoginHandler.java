@@ -41,6 +41,9 @@ public class AuthLoginHandler implements Command {
       loginUser = root;
       userAccessLevel = Menu.ACCESS_ADMIN;
 
+      System.out.println();
+      System.out.printf("%s님 환영합니다.\n", root.getName());
+
       return;
     } 
 

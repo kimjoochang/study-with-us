@@ -6,7 +6,7 @@ import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
-public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler {
+public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
   Study chargestudy;
 
@@ -29,8 +29,8 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler {
   @Override
   public void execute() {
     System.out.println("[유료 스터디 / 상세보기]\n");
-    int no = Prompt.inputInt("번호? ");
 
+    int no = Prompt.inputInt("번호? ");
     Study study = findByNo(no);
 
     if (study == null) {
@@ -42,7 +42,7 @@ public class ChargeStudyDetailHandler extends AbstractChargeStudyHandler {
     System.out.printf("스터디 제목: %s\n", study.getTitle());
     System.out.printf("스터디 설명: %s\n", study.getContent());
     System.out.printf("지역: %s\n", study.getArea());
-    System.out.printf("멘토: %s\n", study.getWriter());
+    System.out.printf("멘토: %s\n", study.getWriter().getName());
     System.out.printf("가격: %s\n", study.getPrice());
     System.out.printf("등록일: %s\n", study.getRegisteredDate());
 

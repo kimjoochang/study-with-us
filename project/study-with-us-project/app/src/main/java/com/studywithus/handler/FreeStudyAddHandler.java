@@ -6,7 +6,7 @@ import com.studywithus.domain.Study;
 import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
+public class FreeStudyAddHandler extends AbstractStudyHandler {
 
   public FreeStudyAddHandler(List<Study> freeStudyList) {
     super(freeStudyList);
@@ -21,7 +21,6 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
     freeStudy.setWriter(AuthLoginHandler.getLoginUser());
 
     freeStudy.setNo(Prompt.inputInt("번호: "));
-
     System.out.println("온/오프라인");
     System.out.println("1. 온라인");
     System.out.println("2. 오프라인");
@@ -39,7 +38,7 @@ public class FreeStudyAddHandler extends AbstractFreeStudyHandler {
     freeStudy.setRule(Prompt.inputString("규칙: "));
     freeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    freeStudyList.add(freeStudy);
+    studyList.add(freeStudy);
 
     AuthLoginHandler.userAccessLevel = Menu.ACCESS_GENERAL | Menu.ACCESS_LEADER;
 

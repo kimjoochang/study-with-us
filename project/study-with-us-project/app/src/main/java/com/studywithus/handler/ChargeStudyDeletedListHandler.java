@@ -3,7 +3,7 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.Study;
 
-public class ChargeStudyDeletedListHandler extends AbstractChargeStudyHandler{
+public class ChargeStudyDeletedListHandler extends AbstractStudyHandler {
 
   public ChargeStudyDeletedListHandler( List<Study> chargeDetailRequestList) {
     super(chargeDetailRequestList);
@@ -14,7 +14,7 @@ public class ChargeStudyDeletedListHandler extends AbstractChargeStudyHandler{
     System.out.println("[스터디 삭제 요청 내역 / 조회]\n");
     System.out.println("-----------------------------");
 
-    for(Study study : chargeStudyList) {
+    for(Study study : studyList) {
       System.out.println("스터디 제목: " + study.getTitle());
       System.out.println("멘토: " + study.getWriter().getName());
       System.out.println("---------------------------");

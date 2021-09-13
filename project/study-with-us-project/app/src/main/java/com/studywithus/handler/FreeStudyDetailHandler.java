@@ -5,7 +5,7 @@ import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyDetailHandler extends AbstractFreeStudyHandler {
+public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
   Study freeStudy;
 

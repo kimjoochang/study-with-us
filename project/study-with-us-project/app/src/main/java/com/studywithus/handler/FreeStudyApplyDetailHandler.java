@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyApplyDetailHandler extends AbstractFreeStudyHandler{
+public class FreeStudyApplyDetailHandler extends AbstractStudyHandler {
 
   List<Study> freeStudyApplyList;
 

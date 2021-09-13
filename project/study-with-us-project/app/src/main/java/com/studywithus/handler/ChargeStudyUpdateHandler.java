@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
-public class ChargeStudyUpdateHandler extends AbstractChargeStudyHandler{
+public class ChargeStudyUpdateHandler extends AbstractStudyHandler {
 
   public ChargeStudyUpdateHandler(List<Study> chargeStudyList) {
     super(chargeStudyList);	

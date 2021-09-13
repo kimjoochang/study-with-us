@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
-public class ChargeStudyDeletedDetailHandler extends AbstractChargeStudyHandler{
+public class ChargeStudyDeletedDetailHandler extends AbstractStudyHandler {
 
   List<Study> chargeDetailRequestList;
 
@@ -51,7 +51,7 @@ public class ChargeStudyDeletedDetailHandler extends AbstractChargeStudyHandler{
       // 1. 삭제
       if (input == 1) {
         chargeDetailRequestList.remove(study);
-        chargeStudyList.remove(study);
+        studyList.remove(study);
 
         System.out.println("삭제가 완료되었습니다.");
 

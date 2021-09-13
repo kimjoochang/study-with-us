@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyDeleteHandler extends AbstractFreeStudyHandler {
+public class FreeStudyDeleteHandler extends AbstractStudyHandler {
 
   public FreeStudyDeleteHandler(List<Study> freeStudyList) {
     super(freeStudyList);
@@ -33,7 +33,7 @@ public class FreeStudyDeleteHandler extends AbstractFreeStudyHandler {
       return;
     }
 
-    freeStudyList.remove(freeStudy);
+    studyList.remove(freeStudy);
 
     System.out.println("게시글을 삭제하였습니다.");
   }
