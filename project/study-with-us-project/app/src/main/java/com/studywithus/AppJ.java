@@ -214,52 +214,49 @@ public class AppJ {
     MenuGroup mainMenuGroup = new MenuGroup("STUDY WITH US");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/auth/login"));
-    mainMenuGroup.add(new MenuItem("회원가입", ACCESS_LOGOUT, "/auth/signUp"));
+    mainMenuGroup.add(createSignUpMenu());
+    mainMenuGroup.add(createLogInMenu());
+    // mainMenuGroup.add(new MenuItem("회원가입", ACCESS_LOGOUT, "/auth/signUp"));
+    // mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/auth/login"));
     mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL | ACCESS_ADMIN, "/auth/logout"));
 
-    mainMenuGroup.add(createMyPageMenu());
-    mainMenuGroup.add(createAdminPageMenu());
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
-    mainMenuGroup.add(createMentorApplyMenu());
+
     mainMenuGroup.add(createCommunityMenu());
     mainMenuGroup.add(createCalendarManagementMenu());
+    mainMenuGroup.add(createMyPageMenu());
+    mainMenuGroup.add(createAdminPageMenu());
 
     return mainMenuGroup;
   }
 
+  // 메인 메뉴 / 회원가입
+  private Menu createSignUpMenu() {
+    MenuGroup signUpMenu = new MenuGroup("회원가입");
+
+    signUpMenu.add(new MenuItem("이메일로 가입하기", ACCESS_LOGOUT,"/auth/signUp"));
+
+    // SNS 계정별 로그인(ex. 카카오, 구글) 추가할지 논의하기
+    signUpMenu.add(new MenuItem("SNS로 시작하기", ACCESS_LOGOUT, "/")); 
+
+    return signUpMenu;
+  }
+
+  // 메인 메뉴 / 로그인
+  private Menu createLogInMenu() {
+    MenuGroup logInMenu = new MenuGroup("로그인");
+
+    logInMenu.add(new MenuItem("이메일 로그인", ACCESS_LOGOUT,"/auth/login"));
+
+    // 상동
+    logInMenu.add(new MenuItem("SNS 로그인", ACCESS_LOGOUT, "/"));
+
+    return logInMenu;
+  }
   // ------------------------------ 무료 스터디 -----------------------------------------
 
-  private Menu createFreeInterestMenu() {
-    MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
-
-    freeInterestMenu.add(new MenuItem("조회", "/freeInterest/list"));
-    freeInterestMenu.add(new MenuItem("삭제", "/freeInterest/delete"));
-
-    return freeInterestMenu;
-  }
-
-  private Menu createChargeInterestMenu() {
-    MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
-
-    chargeInterestMenu.add(new MenuItem("조회", "/chargeInterest/list"));
-    chargeInterestMenu.add(new MenuItem("삭제", "/chargeInterest/delete"));
-
-    return chargeInterestMenu;
-  }
-
-  private Menu createFreeStudyApplyMenu() {
-    MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
-
-    freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudyApply/list"));
-    freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
-    freeStudyApplyMenu.add(new MenuItem("수정", "/freeStudyApply/update"));
-    freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
-
-    return freeStudyApplyMenu;
-  }
-
+  //무료 스터디 메인 메뉴
   private Menu createFreeStudyMenu() {
     MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
 
@@ -275,6 +272,7 @@ public class AppJ {
 
   // ------------------------------ 유료 스터디 -----------------------------------------
 
+  // 유료 스터디 메인 메뉴
   private Menu createChargeStudyMenu() {
     MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
 
@@ -284,15 +282,9 @@ public class AppJ {
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
     chargeStudyMenu.add(new MenuItem("수정", ACCESS_MENTOR, "/chargeStudy/update"));
     chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_MENTOR, "/chargeStudy/deleteRequest"));
+    chargeStudyMenu.add(new MenuGroup("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
 
     return chargeStudyMenu;
-  }
-
-  private Menu createMentorApplyMenu() {
-    MenuGroup mentorApplyMenu = new MenuGroup("멘토 신청", ACCESS_GENERAL);
-    mentorApplyMenu.add(new MenuItem("신청", "/mentorApplicant/add"));
-
-    return mentorApplyMenu;
   }
 
   // ------------------------------ 커뮤니티 -----------------------------------------
@@ -322,7 +314,7 @@ public class AppJ {
     return communityInfoMenu;
   }
 
-  //커뮤니티 / 질문
+  // 커뮤니티 / 질문
   private Menu createCommunityQaMenu() {
     MenuGroup communityQaMenu = new MenuGroup("질문");
 
@@ -336,7 +328,7 @@ public class AppJ {
     return communityQaMenu;
   }
 
-  //커뮤니티 / 스몰톡
+  // 커뮤니티 / 스몰톡
   private Menu createCommunityTalkMenu() {
     MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
 
@@ -359,7 +351,6 @@ public class AppJ {
     myPageMenu.add(createMyInfoMenu());
     myPageMenu.add(createActivityDetailMenu());
     myPageMenu.add(createInterestMenu());
-    myPageMenu.add(createFreeStudyApplyMenu());
     myPageMenu.add(createPaymentListMenu());
     myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipwithdrawal"));
 
