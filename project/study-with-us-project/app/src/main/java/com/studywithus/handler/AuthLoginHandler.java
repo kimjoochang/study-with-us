@@ -43,12 +43,11 @@ public class AuthLoginHandler implements Command {
 
       System.out.println();
       System.out.printf("%s님 환영합니다.\n", root.getName());
-      System.out.println(userAccessLevel);
 
       return;
     } 
 
-    member = findByIdPassword(id, password);
+    //    member = findByIdPassword(id, password);
 
     if (member == null) {
       System.out.println("아이디와 비밀번호가 일치하는 회원을 찾을 수 없습니다.");
@@ -58,7 +57,6 @@ public class AuthLoginHandler implements Command {
 
       loginUser = member;
       userAccessLevel = member.getUserAccessLevel();
-      System.out.println(userAccessLevel);
     }
   }
 
