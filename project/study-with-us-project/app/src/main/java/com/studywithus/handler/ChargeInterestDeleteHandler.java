@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
-public class ChargeInterestDeleteHandler extends AbstractChargeInterestHandler {
+public class ChargeInterestDeleteHandler extends AbstractInterestHandler {
 
   public ChargeInterestDeleteHandler(List<Study> chargeInterestList) {
     super(chargeInterestList);
@@ -14,7 +14,7 @@ public class ChargeInterestDeleteHandler extends AbstractChargeInterestHandler {
   public void execute() {
     System.out.println("[유료 스터디 관심목록 / 삭제]\n");
 
-    for (Study chargeInterest : chargeInterestList) {
+    for (Study chargeInterest : interestList) {
       System.out.printf("[번호 = %d, 제목 = %s, 멘토 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", chargeInterest.getNo(), chargeInterest.getTitle(),
           chargeInterest.getWriter().getName(), chargeInterest.getRegisteredDate(),
           chargeInterest.getViewCount(), chargeInterest.getLike());
@@ -40,7 +40,7 @@ public class ChargeInterestDeleteHandler extends AbstractChargeInterestHandler {
       return;
     }
 
-    chargeInterestList.remove(chargeInterest);
+    interestList.remove(chargeInterest);
 
     System.out.println();
     System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");
