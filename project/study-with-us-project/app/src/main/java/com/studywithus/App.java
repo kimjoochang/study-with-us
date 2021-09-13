@@ -231,7 +231,7 @@ public class App {
   }
 
   private Menu createMyPageMenu() {
-    MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL | ACCESS_ADMIN);
+    MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
 
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createFreeStudyApplyMenu());
