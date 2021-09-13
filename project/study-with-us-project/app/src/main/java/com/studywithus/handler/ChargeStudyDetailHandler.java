@@ -61,6 +61,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
       else {
         System.out.println("2. 관심목록 추가하기");
+        break;
       }
     }
 
@@ -69,7 +70,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     while (true) {
       int input = Prompt.inputInt("선택> ");
 
-      if(input == 1) {
+      if (input == 1) {
         payHandler();
 
       } else if (input == 2) {
@@ -152,6 +153,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
   }
 
+  // 유료 스터디 관심목록 삭제
   private void interestDelete(Study chargestudy) {
     String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 

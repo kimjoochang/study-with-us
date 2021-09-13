@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Calendar;
 import com.studywithus.util.Prompt;
 
-public class JobsCalendarDeleteHandler extends AbstractJobsCalendarHandler {
+public class JobsCalendarDeleteHandler extends AbstractCalendarHandler {
 
   public JobsCalendarDeleteHandler(List<Calendar> jobsCalendarList) {
     super(jobsCalendarList);
@@ -33,7 +33,7 @@ public class JobsCalendarDeleteHandler extends AbstractJobsCalendarHandler {
       return;
     }
 
-    jobsCalendarList.remove(jobsCalendar);
+    calendarList.remove(jobsCalendar);
 
     System.out.println();
     System.out.println("이달의 채용공고를 삭제하였습니다.\n");
