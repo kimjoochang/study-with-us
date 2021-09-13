@@ -25,6 +25,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     this.freeInterestList = freeInterestList;
   }
 
+  @Override
   public void execute() {
     System.out.println("[무료 스터디 / 상세보기]\n");
 
@@ -125,6 +126,9 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
     // 무료 스터디 신청자 리스트에 회원 정보 추가 (멘토 관점)
     freeApplicantList.add(AuthLoginHandler.getLoginUser());
+
+    // 무료 스터디 정보에 스터디 신청자 리스트 추가 (팀장 관점)
+    freeStudy.setApplicants(freeApplicantList);
 
     // 무료 스터디 신청 리스트에 신청한 무료 스터디 추가 (회원 관점)
     freeApplicationList.add(freeStudy);

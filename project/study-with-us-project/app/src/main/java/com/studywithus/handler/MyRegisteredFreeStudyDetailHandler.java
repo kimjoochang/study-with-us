@@ -1,14 +1,16 @@
 package com.studywithus.handler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
+import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class MyRegisteredFreeStudyDetailHandler implements Command {
 
   HashMap<String, List<Study>> myStudyMap;
-
   public MyRegisteredFreeStudyDetailHandler(HashMap<String, List<Study>> myStudyMap) {
     this.myStudyMap = myStudyMap;
   }
@@ -20,11 +22,14 @@ public class MyRegisteredFreeStudyDetailHandler implements Command {
 
     System.out.println("[마이 페이지 / 내가 생성한 무료 스터디]\n");
 
+    // 내가 생성한 무료 스터디 리스트 출력
     for (Study freeStudy : myRegisteredFreeStudy) {
       System.out.println("스터디 제목:" + freeStudy.getTitle());
       System.out.println("등록일:" + freeStudy.getRegisteredDate());
       System.out.println();
     }
+
+    // 내가 생성한 무료 스터디 상세보기
     System.out.println();
     String title = Prompt.inputString("제목: ");
 
@@ -37,7 +42,6 @@ public class MyRegisteredFreeStudyDetailHandler implements Command {
     }
 
     System.out.printf("제목: %s\n", freeStudy.getTitle());
-    System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
 
     if (freeStudy.getArea() != null) {
       System.out.printf("지역: %s\n", freeStudy.getArea());
@@ -48,7 +52,59 @@ public class MyRegisteredFreeStudyDetailHandler implements Command {
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
 
+
+    // 내가 생성한 무료 스터디 상세보기 안에서 신청자 명단 출력
+    for (Member freeApplicant : freeStudy.getApplicants()) {
+      System.out.printf("신청자: %s\n",freeApplicant.getName());
+    }
+    System.out.println();
+    String name = Prompt.inputString("이름: ");
+
+    //freeStudy는 해당 스터디의 지원자 명단 확인을 위해 파라미터로 넘김
+    Member freeApplicant = findByName(name, freeStudy); 
+
+    if (freeApplicant == null) {
+      System.out.println();
+      System.out.println("입력하신 이름과 일치하는 회원이 없습니다.\n");
+      return;
+    }
+
+    System.out.printf("이름: %s\n", freeApplicant.getName());
+    System.out.printf("이메일: %s\n", freeApplicant.getEmail());
+    System.out.printf("아이디: %s\n", freeApplicant.getId());
+    System.out.printf("휴대폰 번호: %s\n", freeApplicant.getPhoneNumber());
+
+    System.out.println();
+    System.out.println("1. 승인");
+    System.out.println("2. 거절");
+    System.out.println("0. 이전\n");
+
+    while (true) {
+      int input = Prompt.inputInt("선택> ");
+
+      if (input == 1) {
+        /* freeStudy는 해당 스터디의 지원자 명단 확인, 
+         * freeApplicant는 해당 스터디 정보에 멤버로 추가하기 위해
+         *  파라미터로 넘김 */
+        studyMemberApproveHandler(freeApplicant, freeStudy);
+        System.out.println("팀원 승인이 완료되었습니다.");
+        break;
+
+      } else if (input == 2) {
+        freeStudy.getApplicants().remove(freeApplicant);
+        System.out.println("팀원 신청을 거절하였습니다.");
+        break;
+
+      } else if (input == 0) {
+        return;
+
+      } else {
+        System.out.println("잘못된 번호입니다.");
+        continue;
+      }
+    }
   }
+
 
   private Study findByName(String title, List<Study> myRegisteredFreeStudy) {
     for (Study freeStudy : myRegisteredFreeStudy) {
@@ -58,4 +114,28 @@ public class MyRegisteredFreeStudyDetailHandler implements Command {
     }
     return null;
   }
+
+  private Member findByName(String name, Study freeStudy) {
+    for (Member freeApplicant : freeStudy.getApplicants()) {
+      if (freeApplicant.getName().equals(name)) {
+        return freeApplicant;
+      }
+    }
+    return null;
+  }
+
+  private void studyMemberApproveHandler(Member freeApplicant, Study freeStudy) {
+    List<Member> studyMember = new ArrayList<>();
+    studyMember.add(freeApplicant);
+    freeStudy.getApplicants().remove(freeApplicant);
+
+    // 스터디 정보에 넣을 리스트 생성해서 추가
+    List<Member> studyMembers = new ArrayList<>();
+    studyMembers.add(freeApplicant);
+    freeStudy.setMembers(studyMembers);
+
+    AuthLoginHandler.userAccessLevel |= Menu.ACCESS_MEMBER;
+  }
 }
+
+

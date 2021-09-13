@@ -68,7 +68,7 @@ import com.studywithus.util.Prompt;
 
 public class App_KJC {
   List<Member> memberList = new LinkedList<>();
-  List<Member> freeApplicantList = new ArrayList<>();
+  List<Member> freeApplicantList = new ArrayList<>(); // 무료 스터디 신청자 리스트 (팀장 관점)
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Member> chargeApplicantList = new ArrayList<>();
   List<Member> mentorList = new ArrayList<>();
@@ -76,7 +76,7 @@ public class App_KJC {
   List<Study> freeInterestList = new ArrayList<>();
   List<Study> chargeInterestList = new ArrayList<>();
   List<Study> freeStudyList = new ArrayList<>();
-  List<Study> freeApplicationList = new ArrayList<>();
+  List<Study> freeApplicationList = new ArrayList<>();  // 무료 스터디 신청 리스트 (회원 관점)
   List<Study> chargeStudyList = new ArrayList<>();
   List<Study> chargeDeleteRequestList = new ArrayList<>();
 
