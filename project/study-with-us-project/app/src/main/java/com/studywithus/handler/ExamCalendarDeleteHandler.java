@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Calendar;
 import com.studywithus.util.Prompt;
 
-public class ExamCalendarDeleteHandler extends AbstractExamCalendarHandler {
+public class ExamCalendarDeleteHandler extends AbstractCalendarHandler {
 
   public ExamCalendarDeleteHandler(List<Calendar> examCalendarList) {
     super(examCalendarList);
@@ -34,7 +34,7 @@ public class ExamCalendarDeleteHandler extends AbstractExamCalendarHandler {
       return;
     }
 
-    examCalendarList.remove(examCalendar);
+    calendarList.remove(examCalendar);
 
     System.out.println();
     System.out.println("이달의 시험일정을 삭제하였습니다.\n");

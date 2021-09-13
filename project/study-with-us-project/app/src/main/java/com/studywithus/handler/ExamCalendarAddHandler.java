@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Calendar;
 import com.studywithus.util.Prompt;
 
-public class ExamCalendarAddHandler extends AbstractExamCalendarHandler {
+public class ExamCalendarAddHandler extends AbstractCalendarHandler {
 
   public ExamCalendarAddHandler(List<Calendar> examCalendarList) {
     super(examCalendarList);
@@ -21,7 +21,7 @@ public class ExamCalendarAddHandler extends AbstractExamCalendarHandler {
     examCalendar.setContent(Prompt.inputString("내용? "));
     examCalendar.setExamDate(Prompt.inputString("시험일? "));
 
-    examCalendarList.add(examCalendar);
+    calendarList.add(examCalendar);
 
     System.out.println();
     System.out.println("이달의 시험일정 등록이 완료되었습니다.\n");
