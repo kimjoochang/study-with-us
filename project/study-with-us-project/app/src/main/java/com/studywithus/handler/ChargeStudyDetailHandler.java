@@ -22,11 +22,12 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
   HashMap<String, List<Study>> participateChargeStudyMap;
   List<Study> participateChargeStudyList;
 
-  public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> chargeInterestList, List<Payment> paymentList, List<Member> chargeApplicantList) {
+  public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> chargeInterestList, List<Payment> paymentList, List<Member> chargeApplicantList, HashMap<String, List<Study>> participateChargeStudyMap) {
     super(chargeStudyList);
     this.chargeInterestList = chargeInterestList;
     this.paymentList = paymentList;
     this.chargeApplicantList = chargeApplicantList;
+    this.participateChargeStudyMap = participateChargeStudyMap;
   }
 
   @Override
