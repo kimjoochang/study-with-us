@@ -1,5 +1,6 @@
 package com.studywithus.handler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.studywithus.domain.Member;
@@ -8,6 +9,8 @@ import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler extends AbstractStudyHandler {
+
+  Study chargeStudy;
 
   // 유료 스터디 관심목록 리스트 (회원 관점)
   List<Study> chargeInterestList;
@@ -35,30 +38,30 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     System.out.println("[유료 스터디 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호? ");
-    Study study = findByNo(no);
+    chargeStudy = findByNo(no);
 
-    if (study == null) {
+    if (chargeStudy == null) {
       System.out.println();
       System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
       return;
     }
 
-    System.out.printf("제목: %s\n", study.getTitle());
-    System.out.printf("설명: %s\n", study.getContent());
-    System.out.printf("지역: %s\n", study.getArea());
-    System.out.printf("멘토: %s\n", study.getWriter().getName());
-    System.out.printf("가격: %s\n", study.getPrice());
-    System.out.printf("등록일: %s\n", study.getRegisteredDate());
+    System.out.printf("제목: %s\n", chargeStudy.getTitle());
+    System.out.printf("설명: %s\n", chargeStudy.getContent());
+    System.out.printf("지역: %s\n", chargeStudy.getArea());
+    System.out.printf("멘토: %s\n", chargeStudy.getWriter().getName());
+    System.out.printf("가격: %s\n", chargeStudy.getPrice());
+    System.out.printf("등록일: %s\n", chargeStudy.getRegisteredDate());
 
-    study.setViewCount(study.getViewCount() + 1);
-    System.out.printf("조회수: %d\n", study.getViewCount());
+    chargeStudy.setViewCount(chargeStudy.getViewCount() + 1);
+    System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
 
     System.out.println();
     System.out.println("1. 결제하기");
 
     //  해당 스터디의 관심목록 존재 유/무에 따라 관심목록 삭제/추가로 나뉨
     for (Study chargeInterest : chargeInterestList) {
-      if (study.equals(chargeInterest)) {
+      if (chargeStudy.equals(chargeInterest)) {
         System.out.println("2. 관심목록 삭제하기");
         break;
       }
@@ -79,10 +82,10 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
       } else if (input == 2) {
         if (no == 0) {
-          interestDelete(study);
+          interestDelete(chargeStudy);
           return;
         }
-        interestAddHandler(study);
+        interestAddHandler(chargeStudy);
 
       } else if (input == 0) {
         return;
@@ -133,8 +136,26 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
       chargePaymentList.add(payment);
       AuthLoginHandler.loginUser.setPayment(chargePaymentList);
 
-      // 회원의 참여 유료 스터디 리스트 / 아이디 저장
-      participateChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), participateChargeStudyList);
+      // 참여 유료 스터디에 해당 아이디 존재 O
+      if (participateChargeStudyMap.containsKey(AuthLoginHandler.getLoginUser().getId())) {
+        // 참여 유료 스터디에 아이디 호출 -> 참여 유료 스터디 리스트에 대입
+        participateChargeStudyList = participateChargeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
+
+        // 참여 유료 스터디 리스트에 유료 스터디 추가
+        participateChargeStudyList.add(chargeStudy);
+        // 참여 유료 스터디에 아이디 추가
+        participateChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), participateChargeStudyList);
+
+        // 참여 유료 스터디에 해당 아이디 존재 X
+      } else {
+        // 새로운 참여 유료 스터디 리스트 생성
+        participateChargeStudyList = new ArrayList<>();
+
+        // 참여 유료 스터디 리스트에 유료 스터디 추가
+        participateChargeStudyList.add(chargeStudy);
+        // 참여 유료 스터디에 아이디 추가
+        participateChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), participateChargeStudyList);
+      }
 
       // 유료 스터디 결제한 사람 내역 (멘토 관점)
       chargeApplicantList.add(AuthLoginHandler.loginUser);
