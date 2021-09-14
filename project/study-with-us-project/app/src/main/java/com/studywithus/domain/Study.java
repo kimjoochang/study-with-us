@@ -3,49 +3,19 @@ package com.studywithus.domain;
 import java.sql.Date;
 import java.util.List;
 
-@SuppressWarnings("serial")
 public class Study extends Content {
+  private static final long serialVersionUID = 1L;
 
-  // 팀장 or 멘토
-  private Member writer;
-
-  // 팀원 or 멘티
-  private List<Member> members;
-
-  // 무료 스터디 신청자
-  private List<Member> applicants;
-
-  // 멘토 설명
-  private String mentorExplanation;
-
-  // 스터디 규칙
-  private String rule;
-
-  // 유료 스터디 가격
-  private int price;
-
-  // 온라인 or 오프라인
-  private int onOffLine;
-
-  // 지역
-  private String area;
-
-  // 스터디 등록일
-  private Date registeredDate;
-
-  // 좋아요
-  private int like;
-
-  // 조회수
-  private int viewCount;
-
-  public Member getWriter() {
-    return writer;
-  }
-
-  public void setWriter(Member writer) {
-    this.writer = writer;
-  }
+  private List<Member> members; // 팀원 or 멘티
+  private List<Member> applicants; // 무료 스터디 신청자
+  private String mentorExplanation; // 멘토 설명
+  private String rule; // 스터디 규칙
+  private int price; // 유료 스터디 가격
+  private int onOffLine; // 온라인 or 오프라인
+  private String area; // 지역
+  private Date registeredDate; // 스터디 등록일
+  private int like; // 좋아요
+  private int viewCount; // 조회수
 
   public List<Member> getMembers() {
     return members;

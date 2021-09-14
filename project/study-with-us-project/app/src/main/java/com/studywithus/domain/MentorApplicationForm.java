@@ -1,26 +1,17 @@
 package com.studywithus.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class MentorApplicationForm {
+public class MentorApplicationForm implements Serializable {
+  private static final long serialVersionUID = 1L;
 
-  // 멘토 신청 양식 작성자
-  private String name;
-
-  // 멘토 신청 회원 자기소개
-  private String selfIntroduction;
-
-  //  유료 스터디 주제
-  private String chargeStudySubject;
-
-  // 유료 스터디 설명
-  private String chargeStudyExplanation;
-
-  // 등록일
-  private Date registeredDate;
-
-  // 멘토 신청자 정보
-  private Member mentorApplicantInfo;
+  private String name; // 멘토 신청 양식 작성자
+  private String selfIntroduction; // 멘토 신청 회원 자기소개
+  private String chargeStudySubject; //  유료 스터디 주제
+  private String chargeStudyExplanation; // 유료 스터디 설명
+  private Date registeredDate; // 등록일
+  private Member mentorApplicantInfo; // 멘토 신청자 정보
 
   public String getName() {
     return name;
