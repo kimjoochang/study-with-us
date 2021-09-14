@@ -1,5 +1,6 @@
 package com.studywithus.handler;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
@@ -7,20 +8,14 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
-  Study freeStudy;
-
-  // 무료 스터디 신청자 리스트 (팀장 관점)
-  List<Member> freeApplicantList;
-
   // 무료 스터디 신청 리스트 (회원 관점)
   List<Study> freeApplicationList;
 
   // 무료 스터디 관심목록 리스트 (회원 관점)
   List<Study> freeInterestList;
 
-  public FreeStudyDetailHandler(List<Study> freeStudyList, List<Member> freeApplicantList, List<Study> freeApplicationList, List<Study> freeInterestList) {
+  public FreeStudyDetailHandler(List<Study> freeStudyList, List<Study> freeApplicationList, List<Study> freeInterestList) {
     super(freeStudyList);
-    this.freeApplicantList = freeApplicantList;
     this.freeApplicationList = freeApplicationList;
     this.freeInterestList = freeInterestList;
   }
@@ -30,7 +25,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     System.out.println("[무료 스터디 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호? ");
-    freeStudy = findByNo(no);
+    Study freeStudy = findByNo(no);
 
     if (freeStudy == null) {
       System.out.println();
@@ -75,14 +70,14 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
       int input = Prompt.inputInt("선택> ");
 
       if (input == 1) {
-        apply();
+        apply(freeStudy);
 
       } else if (input == 2) {
         if (no == 0) {
-          interestDelete();
+          interestDelete(freeStudy);
           return;
         }
-        interest();
+        interest(freeStudy);
 
       } else if (input == 0) {
         return;
@@ -93,28 +88,10 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
       }
       return;
     }
-
-    //    if (freeInterestList == null) {
-    //      System.out.println("2. 관심목록 추가");
-    //    }
-    //
-    //    else if () {
-    //      System.out.println("2. 관심목록 삭제");
-    //    }
-    //
-    //    System.out.println("0. 이전 메뉴");
-    //
-    //    int input = Prompt.inputInt("선택 > ");
-    //
-    //    switch (input) {
-    //      case 1: apply(); break;
-    //      case 2: interest(); break;
-    //      default: return;
-    //    }
   }
 
   // 무료 스터디 신청
-  public void apply() {
+  public void apply(Study freeStudy) {
     System.out.println("[무료 스터디 / 상세보기 / 신청]\n");
 
     String input = Prompt.inputString("무료 스터디를 신청 하시겠습니까? (y/N) ");
@@ -123,6 +100,8 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
       System.out.println("무료 스터디 신청이 취소되었습니다.");
       return;
     }
+    // 무료 스터디 신청자 리스트 (팀장 관점)
+    List<Member> freeApplicantList = new ArrayList<>();
 
     // 무료 스터디 신청자 리스트에 회원 정보 추가 (멘토 관점)
     freeApplicantList.add(AuthLoginHandler.getLoginUser());
@@ -138,7 +117,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
   }
 
   // 무료 스터디 관심목록 추가
-  public void interest() {
+  public void interest(Study freeStudy) {
     System.out.println("[무료 스터디 / 상세보기 / 관심 목록]\n");
 
     String input = Prompt.inputString("무료 스터디 관심 목록에 추가하시겠습니까? (y/N) ");
@@ -157,7 +136,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
   }
 
   // 무료 스터디 관심목록 삭제
-  private void interestDelete() {
+  private void interestDelete(Study freeStudy) {
     String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {

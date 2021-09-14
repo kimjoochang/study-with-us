@@ -60,6 +60,7 @@ import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
 import com.studywithus.handler.MentorApplicationDetailHandler;
 import com.studywithus.handler.MentorApplicationFormListHandler;
+import com.studywithus.handler.MyParticipatedFreeStudyDetailHandler;
 import com.studywithus.handler.MyRegisteredFreeStudyDetailHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
@@ -68,7 +69,10 @@ import com.studywithus.util.Prompt;
 
 public class App_KJC {
   List<Member> memberList = new LinkedList<>();
-  List<Member> freeApplicantList = new ArrayList<>(); // 무료 스터디 신청자 리스트 (팀장 관점)
+
+  // [수정] 스터디 하나 하나가 신청자 리스트를 가져야 하므로 핸들러에서 생성
+  //  List<Member> freeApplicantList = new ArrayList<>();
+
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Member> chargeApplicantList = new ArrayList<>();
   List<Member> mentorList = new ArrayList<>();
@@ -91,8 +95,12 @@ public class App_KJC {
   List<Calendar> jobsCalendarList = new ArrayList<>();
   List<Calendar> examCalendarList = new ArrayList<>();
 
-  List<Study> myRegisteredFreeStudy = new ArrayList<>(); // [추가] 내가 생성한 무료 스터디 
-  HashMap<String, List<Study>> myStudyMap = new HashMap<>();// [추가] 내가 생성한 스터디랑 멤버 매칭하는 해쉬맵
+  List<Study> myRegisteredFreeStudy = new ArrayList<>(); // [추가] 내가 생성한 무료 스터디
+
+  //[추가] 개인이 생성한 무료스터디와 생성된 무료 스터디 리스트를 연결하는 해쉬맵
+  HashMap<String, List<Study>> myRegisteredFreeStudyMap = new HashMap<>();
+  //[추가] 개인과 개인이 참여한 무료 스터디 리스트를 연결하는 해쉬맵
+  HashMap<String, List<Study>> myParticipatedFreeStudyMap = new HashMap<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
 
@@ -137,13 +145,17 @@ public class App_KJC {
     commandMap.put("/mentorApplicant/detail", new MentorApplicationFormListHandler());
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, myStudyMap)); // [추가]
+    // [추가]
+    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, myRegisteredFreeStudyMap)); 
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicantList, freeApplicationList, freeInterestList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicationList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
-    commandMap.put("/myStudy/myRegisteredFreeStudy", new MyRegisteredFreeStudyDetailHandler(myStudyMap)); // [추가]
+    // [추가]
+    commandMap.put("/myStudy/myRegisteredFreeStudy", new MyRegisteredFreeStudyDetailHandler(myRegisteredFreeStudyMap, myParticipatedFreeStudyMap));
+    // [추가]
+    commandMap.put("/myStudy/myParticipatedFreeStudy", new MyParticipatedFreeStudyDetailHandler(myParticipatedFreeStudyMap));
 
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
@@ -220,6 +232,7 @@ public class App_KJC {
 
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(new MenuItem("내가 생성한 무료 스터디", ACCESS_LEADER, "/myStudy/myRegisteredFreeStudy")); // [추가 - 테스트용]
+    myPageMenu.add(new MenuItem("내가 참여한 무료 스터디", Menu.ACCESS_MEMBER, "/myStudy/myParticipatedFreeStudy")); // [추가 - 테스트용]
     myPageMenu.add(createFreeStudyApplyMenu());
     myPageMenu.add(createMentorApplyMenu());
 
