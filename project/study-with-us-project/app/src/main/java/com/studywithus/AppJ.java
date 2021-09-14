@@ -440,7 +440,8 @@ public class AppJ {
   // 마이 페이지 / 나의 결제 내역
   private Menu createPaymentListMenu() {
     MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
-    paymentListMenu.add(new MenuItem("", "/"));
+    paymentListMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/"));
+    paymentListMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/"));
     return paymentListMenu;
   }
 
