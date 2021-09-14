@@ -1,16 +1,11 @@
 package com.studywithus.domain;
 
-@SuppressWarnings("serial")
 public class Calendar extends Content {
+  private static final long serialVersionUID = 1L;
 
-  // 채용공고 시작일
-  private String startDate;
-
-  // 채용공고 종료일
-  private String endDate;
-
-  // 시험일
-  private String examDate;
+  private String startDate; // 채용공고 시작일
+  private String endDate; // 채용공고 종료일
+  private String examDate; // 시험일
 
   public String getStartDate() {
     return startDate;

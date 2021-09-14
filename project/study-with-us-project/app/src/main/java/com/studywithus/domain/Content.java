@@ -2,17 +2,13 @@ package com.studywithus.domain;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
 public class Content implements Serializable {
+  private static final long serialVersionUID = 1L;
 
-  // 게시글 번호
-  private int no;
-
-  // 게시글 제목
-  private String title;
-
-  // 게시글 내용
-  private String content;
+  private int no; // 게시글 번호
+  private Member writer; // 게시글 작성자
+  private String title; // 게시글 제목
+  private String content; // 게시글 내용
 
   public int getNo() {
     return no;
@@ -20,6 +16,14 @@ public class Content implements Serializable {
 
   public void setNo(int no) {
     this.no = no;
+  }
+
+  public Member getWriter() {
+    return writer;
+  }
+
+  public void setWriter(Member writer) {
+    this.writer = writer;
   }
 
   public String getTitle() {

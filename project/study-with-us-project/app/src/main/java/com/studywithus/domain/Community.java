@@ -2,28 +2,12 @@ package com.studywithus.domain;
 
 import java.sql.Date;
 
-@SuppressWarnings("serial")
 public class Community extends Content {
+  private static final long serialVersionUID = 1L;
 
-  // 게시글 작성자
-  private Member writer;
-
-  // 게시글 등록일
-  private Date registeredDate;
-
-  // 조회수
-  private int viewCount;
-
-  // 좋아요
-  private int like;
-
-  public Member getWriter() {
-    return writer;
-  }
-
-  public void setWriter(Member writer) {
-    this.writer = writer;
-  }
+  private Date registeredDate; // 게시글 등록일
+  private int viewCount; // 조회수
+  private int like; // 좋아요
 
   public Date getRegisteredDate() {
     return registeredDate;

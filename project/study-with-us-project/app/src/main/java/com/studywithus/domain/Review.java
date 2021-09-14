@@ -1,5 +1,5 @@
 package com.studywithus.domain;
 
-@SuppressWarnings("serial")
 public class Review extends Content {
+  private static final long serialVersionUID = 1L;
 }

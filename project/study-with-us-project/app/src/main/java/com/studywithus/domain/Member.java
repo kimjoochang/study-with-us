@@ -4,38 +4,19 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-@SuppressWarnings("serial")
 public class Member implements Serializable {
+  private static final long serialVersionUID = 1L;
 
-  // 권한
-  private int userAccessLevel;
-
-  // 회원 이름
-  private String name;
-
-  // 회원 이메일
-  private String email;
-
-  // 회원 아이디
-  private String id;
-
-  // 회원 비밀번호
-  private String password;
-
-  // 회원 휴대폰 번호
-  private String phoneNumber;
-
-  // 회원 가입일
-  private Date registeredDate;
-
-  // 무료 스터디 관심목록
-  private List<Study> freeInterest;
-
-  // 유료 스터디 관심목록
-  private List<Study> chargeInterest;
-
-  // 유료 스터디 결제목록
-  private List<Payment> payment;
+  private int userAccessLevel; // 권한
+  private String name; // 회원 이름
+  private String email; // 회원 이메일
+  private String id; // 회원 아이디
+  private String password; // 회원 비밀번호
+  private String phoneNumber; // 회원 휴대폰 번호
+  private Date registeredDate; // 회원 가입일
+  private List<Study> freeInterest; // 무료 스터디 관심목록
+  private List<Study> chargeInterest; // 유료 스터디 관심목록
+  private List<Payment> payment; // 유료 스터디 결제목록
 
   public int getUserAccessLevel() {
     return userAccessLevel;

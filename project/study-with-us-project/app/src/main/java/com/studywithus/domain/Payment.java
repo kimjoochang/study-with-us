@@ -1,21 +1,16 @@
 package com.studywithus.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-public class Payment {
+public class Payment implements Serializable {
+  private static final long serialVersionUID = 1L;
 
-  // 결제 스터디명
-  private String paidChargeStudy;
-
-  // 결제 수단
-  private String paymentMethod;
-
-  // 결제일
-  private Date registeredDate;
-
-  // 결제스터디 목록
-  private List<Study> paymentChargeStudyList;
+  private String paidChargeStudy; // 결제 스터디명
+  private String paymentMethod; // 결제 수단
+  private Date registeredDate; // 결제일
+  private List<Study> paymentChargeStudyList; // 결제스터디 목록
 
   public String getPaidChargeStudy() {
     return paidChargeStudy;

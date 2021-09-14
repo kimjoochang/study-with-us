@@ -6,6 +6,8 @@ import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MEMBER;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -184,39 +186,68 @@ public class App {
   }
 
   void service() {
-    loadMembers();
-    loadFreeInterests();
-    loadChargeInterests();
-    loadFreeStudies();
-    loadChargeStudies();
-    loadCommunityQas();
-    loadCommunityInfos();
-    loadCommunityTalks();
-    loadJobsCalendars();
-    loadExamCalendars();
+    loadObjects("member.data", memberList);
+    loadObjects("freeInterest.data", freeInterestList);
+    loadObjects("chargeInterest.data", chargeInterestList);
+    loadObjects("freeStudy.data", freeStudyList);
+    loadObjects("chargeStudy.data", chargeStudyList);
+    loadObjects("communityQa.data", communityQaList);
+    loadObjects("communityInfo.data", communityInfoList);
+    loadObjects("communityTalk.data", communityTalkList);
+    loadObjects("jobsCalendar.data", jobsCalendarList);
+    loadObjects("examCalendar.data", examCalendarList);
 
-    System.out.println("비회원 =>" + ACCESS_LOGOUT);
-    System.out.println("회원 =>" + ACCESS_GENERAL);
-    System.out.println("팀원 =>" + ACCESS_MEMBER);
-    System.out.println("팀장 =>" + ACCESS_LEADER);
-    System.out.println("멘토 =>" + ACCESS_MENTOR);
-    System.out.println("관리자 =>" + ACCESS_ADMIN);
+    System.out.println("비회원 => " + ACCESS_LOGOUT);
+    System.out.println("회원 => " + ACCESS_GENERAL);
+    System.out.println("팀원 => " + ACCESS_MEMBER);
+    System.out.println("팀장 => " + ACCESS_LEADER);
+    System.out.println("멘토 => " + ACCESS_MENTOR);
+    System.out.println("관리자 => " + ACCESS_ADMIN);
 
     createMainMenu().execute();
     Prompt.close();
 
-    saveMembers();
-    saveFreeInterests();
-    saveChargeInterests();
-    saveFreeStudies();
-    saveChargeStudies();
-    saveCommunityQas();
-    saveCommunityInfos();
-    saveCommunityTalks();
-    saveJobsalendars();
-    saveExamCalendars();
+    saveObjects("member.data", memberList);
+    saveObjects("freeInterest.data", freeInterestList);
+    saveObjects("chargeInterest.data", chargeInterestList);
+    saveObjects("freeStudy.data", freeStudyList);
+    saveObjects("chargeStudy.data", chargeStudyList);
+    saveObjects("communityQa.data", communityQaList);
+    saveObjects("communityInfo.data", communityInfoList);
+    saveObjects("communityTalk.data", communityTalkList);
+    saveObjects("jobsCalendar.data", jobsCalendarList);
+    saveObjects("examCalendar.data", examCalendarList);
+  }
 
+  @SuppressWarnings("unchecked")
+  private <E> void loadObjects(String filepath, List<E> list) {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new BufferedInputStream(
+            new FileInputStream(filepath)))) {
 
+      list.addAll((List<E>) in.readObject());
+
+      System.out.printf("%s 파일 로딩 완료!\n", filepath);
+
+    } catch (Exception e) {
+      System.out.printf("%s 파일에서 데이터를 읽어 오는 중 오류 발생!\n", filepath);
+      e.printStackTrace();
+    }
+  }
+
+  private <E> void saveObjects(String filepath, List<E> list) {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new BufferedOutputStream(
+            new FileOutputStream(filepath)))) {
+
+      out.writeObject(list);
+
+      System.out.printf("%s 파일 저장 완료!\n", filepath);
+
+    } catch (Exception e) {
+      System.out.printf("%s 파일에 데이터를 저장 중 오류 발생!\n", filepath);
+      e.printStackTrace();
+    }
   }
 
   Menu createMainMenu() {
@@ -436,275 +467,5 @@ public class App {
     examCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
 
     return examCalendarMenu;
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadMembers() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("member.data"))) {
-
-      memberList.addAll((List<Member>) in.readObject());
-
-    } catch (Exception e) {
-      System.out.println("파일에서 회원 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveMembers() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("member.data"))) {
-
-      out.writeObject(memberList);
-
-    } catch (Exception e) {
-      System.out.println("회원 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadFreeInterests() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("freeInterest.data"))) {
-
-      freeInterestList.addAll((List<Study>) in.readObject());
-
-      System.out.println("무료 스터디 관심목록 데이터 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 무료 스터디 관심목록 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveFreeInterests() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("freeInterest.data"))) {
-
-      out.writeObject(freeInterestList);
-
-      System.out.println("무료 스터디 관심목록 데이터 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("무료 스터디 관심목록 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadChargeInterests() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("chargeInterest.data"))) {
-
-      chargeInterestList.addAll((List<Study>) in.readObject());
-
-      System.out.println("유료 스터디 관심목록 정보 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 유료스터디 관심목록 정보를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveChargeInterests() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("chargeInterest.data"))) {
-
-      out.writeObject(chargeInterestList);
-
-      System.out.println("유료 스터디 관심목록 정보 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("유료 스터디 관심 목록 정보 저장하던 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadFreeStudies() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("freeStudy.data"))) {
-
-      freeStudyList.addAll((List<Study>) in.readObject());
-
-      System.out.println("무료 스터디 데이터 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 무료 스터디 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveFreeStudies() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("freeStudy.data"))) {
-
-      out.writeObject(freeStudyList);
-
-      System.out.println("무료 스터디 데이터 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("무료 스터디 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadChargeStudies() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("ChargeStudy.data"))) {
-
-      chargeStudyList.addAll((List<Study>) in.readObject());
-
-      System.out.println("유료 스터디 정보 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 유료 스터디 정보를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveChargeStudies() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("ChargeStudy.data"))) {
-
-      out.writeObject(chargeStudyList);
-
-      System.out.println("유료 스터디 정보 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("유료 스터디 정보를 파일에 저장하던 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCommunityQas() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("communityQa.data"))) {
-
-      communityQaList.addAll((List<Community>) in.readObject());
-
-    } catch (Exception e) {
-      System.out.println("파일에서 커뮤니티 질문 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCommunityQas() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("communityQa.data"))) {
-
-      out.writeObject(communityQaList);
-
-    } catch (Exception e) {
-      System.out.println("커뮤니티 질문 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCommunityInfos() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("communityInfo.data"))) {
-
-      communityInfoList.addAll((List<Community>) in.readObject());
-
-    } catch (Exception e) {
-      System.out.println("파일에서 커뮤니티 정보 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCommunityInfos() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("communityInfo.data"))) {
-
-      out.writeObject(communityInfoList);
-
-    } catch (Exception e) {
-      System.out.println("커뮤니티 정보 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCommunityTalks() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("communityTalk.data"))) {
-
-      communityTalkList.addAll((List<Community>) in.readObject());
-
-    } catch (Exception e) {
-      System.out.println("파일에서 커뮤니티 스몰톡 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCommunityTalks() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("communityTalk.data"))) {
-
-      out.writeObject(communityTalkList);
-
-    } catch (Exception e) {
-      System.out.println("커뮤니티 스몰톡 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadJobsCalendars() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("jobsCalendar.data"))) {
-
-      jobsCalendarList.addAll((List<Calendar>) in.readObject());
-
-      System.out.println("이달의 채용공고 데이터 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 이달의 채용공고 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-    }
-  }
-
-  private void saveJobsalendars() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("jobsCalendar.data"))) {
-
-      out.writeObject(jobsCalendarList);
-
-      System.out.println("이달의 채용공고 데이터 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("이달의 채용공고 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadExamCalendars() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("examCalendar.data"))) {
-
-      examCalendarList.addAll((List<Calendar>) in.readObject());
-
-      System.out.println("이달의 시험일정 데이터 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 이달의 시험일정 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-    }
-  }
-
-  private void saveExamCalendars() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("examCalendar.data"))) {
-
-      out.writeObject(examCalendarList);
-
-      System.out.println("이달의 시험일정 데이터 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("이달의 시험일정 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-    }
   }
 }
