@@ -8,12 +8,12 @@ import com.studywithus.domain.Study;
 import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
-public class MyRegisteredFreeStudyDetailHandler implements Command {
+public class RegisterFreeStudyDetailHandler implements Command {
 
   HashMap<String, List<Study>> myRegisteredFreeStudyMap;
   HashMap<String, List<Study>> myParticipatedFreeStudyMap;
 
-  public MyRegisteredFreeStudyDetailHandler(HashMap<String, List<Study>> myRegisteredFreeStudyMap, 
+  public RegisterFreeStudyDetailHandler(HashMap<String, List<Study>> myRegisteredFreeStudyMap, 
       HashMap<String, List<Study>> myParticipatedFreeStudyMap) {
     this.myRegisteredFreeStudyMap = myRegisteredFreeStudyMap;
     this.myParticipatedFreeStudyMap = myParticipatedFreeStudyMap;
@@ -29,9 +29,13 @@ public class MyRegisteredFreeStudyDetailHandler implements Command {
 
     // 내가 생성한 무료 스터디 리스트 출력
     for (Study freeStudy : myRegisteredFreeStudy) {
-      System.out.println("스터디 제목:" + freeStudy.getTitle());
-      System.out.println("등록일:" + freeStudy.getRegisteredDate());
-      System.out.println();
+      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
+          freeStudy.getNo(), 
+          freeStudy.getTitle(), 
+          freeStudy.getWriter().getName(),
+          freeStudy.getRegisteredDate(),
+          freeStudy.getViewCount(), 
+          freeStudy.getLike());
     }
 
     // 내가 생성한 무료 스터디 상세보기
