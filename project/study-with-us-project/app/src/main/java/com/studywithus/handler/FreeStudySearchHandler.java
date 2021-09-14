@@ -14,14 +14,14 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
   public void execute() {
     System.out.println("[무료 스터디 / 검색]");
 
-    String input = Prompt.inputString("검색어? ");
+    String input = Prompt.inputString("검색할 키워드를 입력하세요. > ");
 
     for (Study freeStudy : studyList) {
       if (!freeStudy.getTitle().contains(input) &&
           !freeStudy.getContent().contains(input) &&
           !freeStudy.getWriter().getName().contains(input)) {
 
-        System.out.println("입력하신 검색어가 포함된 게시물이 없습니다.");
+        System.out.println("입력하신 키워드가 포함된 게시글이 없습니다.");
         continue;
       }
 

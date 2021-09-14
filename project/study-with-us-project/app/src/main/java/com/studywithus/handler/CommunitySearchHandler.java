@@ -16,7 +16,7 @@ public class CommunitySearchHandler extends AbstractCommunityHandler {
   public void execute() {
     System.out.println("[커뮤니티 / 검색]");
 
-    String input = Prompt.inputString("검색어? ");
+    String input = Prompt.inputString("검색할 키워드를 입력하세요. > ");
     System.out.println();
 
     for (Community community : communityList) {
@@ -24,7 +24,7 @@ public class CommunitySearchHandler extends AbstractCommunityHandler {
           !community.getContent().contains(input) &&
           !community.getWriter().getName().contains(input)) {
 
-        System.out.println("입력하신 검색어가 포함된 게시물이 없습니다.");
+        System.out.println("입력하신 키워드가 포함된 게시글이 없습니다.");
         continue;
       }
 
