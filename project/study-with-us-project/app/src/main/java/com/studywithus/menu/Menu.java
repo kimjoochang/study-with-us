@@ -15,7 +15,7 @@ public abstract class Menu {
   public static final int ACCESS_MENTEE= 0x40;
 
   // 팀장
-  public static int ACCESS_LEADER = 0x08;
+  public static final int ACCESS_LEADER = 0x08;
 
   // 멘토
   public static final int ACCESS_MENTOR = 0x10;
