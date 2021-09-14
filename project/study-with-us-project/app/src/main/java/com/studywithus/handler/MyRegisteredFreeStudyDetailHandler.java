@@ -21,7 +21,6 @@ public class MyRegisteredFreeStudyDetailHandler implements Command {
 
   @Override
   public void execute() {
-
     /* 해쉬맵의 value값을 myRegisteredFreeStudy에 담음 
      * 전역변수로 둘 경우 App 실행 시 getLoginUser() nullPointer 에러뜸 */
     List<Study> myRegisteredFreeStudy = myRegisteredFreeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
@@ -65,7 +64,7 @@ public class MyRegisteredFreeStudyDetailHandler implements Command {
     System.out.println();
     String name = Prompt.inputString("이름: ");
 
-    //freeStudy는 해당 스터디의 지원자 명단 확인을 위해 파라미터로 넘김
+    //파라미터 값 freeStudy는 해당 스터디의 지원자 명단 확인을 위해 파라미터로 넘김
     Member freeApplicant = findByName(name, freeStudy); 
 
     if (freeApplicant == null) {
@@ -140,7 +139,7 @@ public class MyRegisteredFreeStudyDetailHandler implements Command {
     studyMembers.add(freeApplicant);
     freeStudy.setMembers(studyMembers);
 
-    List<Study> myParticipatedFreeStudy;
+    List<Study> myParticipatedFreeStudy; // 해쉬맵에 객체 담기 위한 임시 변수
 
     // 개개인이 참여한 무료 스터디
     /* 해쉬맵에 key값으로 신청한 회원 id , value값으로 회원이 참여한 스터디 리스트 

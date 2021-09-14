@@ -145,9 +145,11 @@ public class App_KJC {
     commandMap.put("/mentorApplicant/detail", new MentorApplicationFormListHandler());
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-    // [추가]
+    // [수정] 파라미터 1개 (myRegisteredFreeStudyMap) 추가함
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, myRegisteredFreeStudyMap)); 
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
+
+    // [수정] 파라미터 1개 삭제함 (App 73번째 줄에 설명있음)
     commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicationList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
