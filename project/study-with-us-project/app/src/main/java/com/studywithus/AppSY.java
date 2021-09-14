@@ -70,7 +70,7 @@ import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
 
-public class App {
+public class AppSY {
 	List<Member> memberList = new LinkedList<>();
 	List<Member> freeApplicantList = new ArrayList<>();
 	List<Member> mentorApplicantList = new ArrayList<>();
@@ -118,11 +118,11 @@ public class App {
 	}
 
 	public static void main(String[] args) {
-		App app = new App(); 
+		AppSY app = new AppSY(); 
 		app.service();
 	}
 
-	public App() {
+	public AppSY() {
 		commandMap.put("/auth/login", new AuthLoginHandler(memberList));
 		commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
 		commandMap.put("/auth/signUp", new SignUpHandler(memberList));
