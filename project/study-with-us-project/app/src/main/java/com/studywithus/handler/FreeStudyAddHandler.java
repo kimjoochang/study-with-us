@@ -1,6 +1,8 @@
 package com.studywithus.handler;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.studywithus.domain.Study;
 import com.studywithus.menu.Menu;
@@ -8,8 +10,11 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyAddHandler extends AbstractStudyHandler {
 
-  public FreeStudyAddHandler(List<Study> freeStudyList) {
+  HashMap<String, List<Study>> myRegisteredFreeStudyMap; // 팀장과 팀장 본인이 생성한 스터디 연결할 해쉬맵
+
+  public FreeStudyAddHandler(List<Study> freeStudyList, HashMap<String, List<Study>> myRegisteredFreeStudyMap) {
     super(freeStudyList);
+    this.myRegisteredFreeStudyMap = myRegisteredFreeStudyMap;
   }
 
   @Override
@@ -39,6 +44,22 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
     freeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     studyList.add(freeStudy);
+
+    List<Study> myRegisteredFreeStudy; // 해쉬맵에 객체 담기 위한 임시 변수
+
+
+    /* 해쉬맵에 key값으로 로그인한 회원 id , value값으로 팀장 본인이 생성한 스터디 리스트 
+     * 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디 추가 */
+    if (myRegisteredFreeStudyMap.containsKey(AuthLoginHandler.getLoginUser().getId())) {
+      myRegisteredFreeStudy = myRegisteredFreeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
+      myRegisteredFreeStudy.add(freeStudy);
+      myRegisteredFreeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), myRegisteredFreeStudy);
+      // 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
+    } else {
+      myRegisteredFreeStudy = new ArrayList<>();
+      myRegisteredFreeStudy.add(freeStudy);
+      myRegisteredFreeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), myRegisteredFreeStudy);
+    }
 
     AuthLoginHandler.userAccessLevel |= Menu.ACCESS_LEADER;
 

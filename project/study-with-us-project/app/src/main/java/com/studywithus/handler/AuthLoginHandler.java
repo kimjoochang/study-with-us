@@ -47,7 +47,7 @@ public class AuthLoginHandler implements Command {
       return;
     } 
 
-    member = findByIdPassword(id, password);
+    //    member = findByIdPassword(id, password);
 
     if (member == null) {
       System.out.println("아이디와 비밀번호가 일치하는 회원을 찾을 수 없습니다.");
