@@ -4,7 +4,6 @@ import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
-import static com.studywithus.menu.Menu.ACCESS_MEMBER;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -206,13 +205,6 @@ public class App {
     loadObjects("communityTalk.data", communityTalkList);
     loadObjects("jobsCalendar.data", jobsCalendarList);
     loadObjects("examCalendar.data", examCalendarList);
-
-    System.out.println("비회원 => " + ACCESS_LOGOUT);
-    System.out.println("회원 => " + ACCESS_GENERAL);
-    System.out.println("팀원 => " + ACCESS_MEMBER);
-    System.out.println("팀장 => " + ACCESS_LEADER);
-    System.out.println("멘토 => " + ACCESS_MENTOR);
-    System.out.println("관리자 => " + ACCESS_ADMIN);
 
     createMainMenu().execute();
     Prompt.close();
