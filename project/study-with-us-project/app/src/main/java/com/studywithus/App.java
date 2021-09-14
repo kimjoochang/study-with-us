@@ -76,6 +76,10 @@ public class App {
   List<Member> chargeApplicantList = new ArrayList<>();
   List<Member> mentorList = new ArrayList<>();
 
+  List<Study> registerFreeStudyList = new ArrayList<>();
+  List<Study> participateFreeStudyList = new ArrayList<>();
+  List<Study> registerChargeStudyList = new ArrayList<>();
+  List<Study> participateChargeStudyList = new ArrayList<>();
   List<Study> freeInterestList = new ArrayList<>();
   List<Study> chargeInterestList = new ArrayList<>();
   List<Study> freeStudyList = new ArrayList<>();
@@ -85,7 +89,7 @@ public class App {
 
   List<MentorApplicationForm> mentorApplicationForm = new ArrayList<>();
 
-  List<Payment> paymentList = new ArrayList<>();
+  List<Payment> chargePaymentList = new ArrayList<>();
 
   List<Community> communityInfoList = new ArrayList<>();
   List<Community> communityQaList = new ArrayList<>();
@@ -95,6 +99,10 @@ public class App {
   List<Calendar> examCalendarList = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
+  HashMap<String, List<Study>> participateFreeStudyMap = new HashMap<>();
+  HashMap<String, List<Study>> participateChargeStudyMap = new HashMap<>();
+  HashMap<String, List<Study>> registerFreeStudyMap = new HashMap<>();
+  HashMap<String, List<Study>> registerChargeStudyMap = new HashMap<>();
 
   class MenuItem extends Menu {
     String menuId;
@@ -138,16 +146,16 @@ public class App {
     commandMap.put("/mentorApplicant/detail", new MentorApplicationFormListHandler());
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
+    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicantList, freeApplicationList, freeInterestList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicationList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList, paymentList, chargeApplicantList));
+    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));

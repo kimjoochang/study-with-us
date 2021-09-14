@@ -10,11 +10,11 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyAddHandler extends AbstractStudyHandler {
 
-  HashMap<String, List<Study>> myRegisteredFreeStudyMap; // 팀장과 팀장 본인이 생성한 스터디 연결할 해쉬맵
+  HashMap<String, List<Study>> registerFreeStudyMap; // 팀장과 팀장 본인이 생성한 스터디 연결할 해쉬맵
 
-  public FreeStudyAddHandler(List<Study> freeStudyList, HashMap<String, List<Study>> myRegisteredFreeStudyMap) {
+  public FreeStudyAddHandler(List<Study> freeStudyList, HashMap<String, List<Study>> registerFreeStudyMap) {
     super(freeStudyList);
-    this.myRegisteredFreeStudyMap = myRegisteredFreeStudyMap;
+    this.registerFreeStudyMap = registerFreeStudyMap;
   }
 
   @Override
@@ -45,20 +45,23 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
     studyList.add(freeStudy);
 
-    List<Study> myRegisteredFreeStudy; // 해쉬맵에 객체 담기 위한 임시 변수
+    List<Study> registerFreeStudyList; // 해쉬맵에 객체 담기 위한 임시 변수
 
 
     /* 해쉬맵에 key값으로 로그인한 회원 id , value값으로 팀장 본인이 생성한 스터디 리스트 
      * 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디 추가 */
-    if (myRegisteredFreeStudyMap.containsKey(AuthLoginHandler.getLoginUser().getId())) {
-      myRegisteredFreeStudy = myRegisteredFreeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
-      myRegisteredFreeStudy.add(freeStudy);
-      myRegisteredFreeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), myRegisteredFreeStudy);
+    if (registerFreeStudyMap.containsKey(AuthLoginHandler.getLoginUser().getId())) {
+      registerFreeStudyList = registerFreeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
+
+      registerFreeStudyList.add(freeStudy);
+      registerFreeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), registerFreeStudyList);
+
       // 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
     } else {
-      myRegisteredFreeStudy = new ArrayList<>();
-      myRegisteredFreeStudy.add(freeStudy);
-      myRegisteredFreeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), myRegisteredFreeStudy);
+      registerFreeStudyList = new ArrayList<>();
+
+      registerFreeStudyList.add(freeStudy);
+      registerFreeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), registerFreeStudyList);
     }
 
     AuthLoginHandler.userAccessLevel |= Menu.ACCESS_LEADER;
