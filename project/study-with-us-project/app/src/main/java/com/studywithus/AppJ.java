@@ -4,18 +4,19 @@ import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
+import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import com.studywithus.domain.Calendar;
 import com.studywithus.domain.Community;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
@@ -45,9 +46,7 @@ import com.studywithus.handler.ExamCalendarListHandler;
 import com.studywithus.handler.ExamCalendarUpdateHandler;
 import com.studywithus.handler.FreeInterestDeleteHandler;
 import com.studywithus.handler.FreeInterestListHandler;
-import com.studywithus.handler.FreeStudyAddHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
-import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudySearchHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
@@ -113,8 +112,8 @@ public class AppJ {
   }
 
   public static void main(String[] args) {
-    App app = new App(); 
-    app.service();
+    AppJ appJ = new AppJ(); 
+    appJ.service();
   }
 
   public AppJ() {
@@ -133,9 +132,9 @@ public class AppJ {
     commandMap.put("/mentorApplicant/detail", new MentorApplicationFormListHandler());
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
+    //  commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicantList, freeApplicationList, freeInterestList));
+    //  commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicantList, freeApplicationList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
@@ -282,7 +281,7 @@ public class AppJ {
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
     chargeStudyMenu.add(new MenuItem("수정", ACCESS_MENTOR, "/chargeStudy/update"));
     chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_MENTOR, "/chargeStudy/deleteRequest"));
-    chargeStudyMenu.add(new MenuGroup("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
+    //chargeStudyMenu.add(new MenuGroup("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
 
     return chargeStudyMenu;
   }

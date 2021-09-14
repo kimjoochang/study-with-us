@@ -13,14 +13,21 @@ public class JobsCalendarListHandler extends AbstractCalendarHandler {
   public void execute() {
     System.out.println("[이달의 채용공고 / 조회]\n");
 
-    for (Calendar calendar : calendarList) {
-      System.out.printf("[번호 = %d, 제목 = %s, 시작일 = %s, 종료일 = %s]\n", 
-          calendar.getNo(),
-          calendar.getTitle(), 
-          calendar.getStartDate(),
-          calendar.getEndDate());
+    if (calendarList != null) {
 
-      System.out.println();
+      for (Calendar calendar : calendarList) {
+        System.out.printf("[번호 = %d, 제목 = %s, 시작일 = %s, 종료일 = %s]\n", 
+            calendar.getNo(),
+            calendar.getTitle(), 
+            calendar.getStartDate(),
+            calendar.getEndDate());
+        System.out.println();
+        return;
+      }
     }
+
+    System.out.println();
+    System.out.println("이달의 채용공고 게시글이 존재하지 않습니다.\n");
   }
 }
+

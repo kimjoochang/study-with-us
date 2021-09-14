@@ -14,7 +14,7 @@ public class ChargeStudySearchHandler extends AbstractStudyHandler {
   public void execute() {
     System.out.println("[유료스터디 / 검색]");
 
-    String input = Prompt.inputString("검색어? ");
+    String input = Prompt.inputString("검색할 키워드를 입력하세요. > ");
     System.out.println();
 
     for (Study chargeStudy : studyList) {
@@ -22,7 +22,7 @@ public class ChargeStudySearchHandler extends AbstractStudyHandler {
           !chargeStudy.getContent().contains(input) &&
           !chargeStudy.getWriter().getName().contains(input)) {
 
-        System.out.println("입력하신 검색어가 포함된 게시물이 없습니다.");
+        System.out.println("입력하신 키워드가 포함된 게시글이 없습니다.");
         continue;
       }
 
