@@ -195,16 +195,16 @@ public class App {
   }
 
   void service() {
-    loadObjects("member.data", memberList);
-    loadObjects("freeInterest.data", freeInterestList);
-    loadObjects("chargeInterest.data", chargeInterestList);
-    loadObjects("freeStudy.data", freeStudyList);
-    loadObjects("chargeStudy.data", chargeStudyList);
-    loadObjects("communityQa.data", communityQaList);
-    loadObjects("communityInfo.data", communityInfoList);
-    loadObjects("communityTalk.data", communityTalkList);
-    loadObjects("jobsCalendar.data", jobsCalendarList);
-    loadObjects("examCalendar.data", examCalendarList);
+    //    loadObjects("member.data", memberList);
+    //    loadObjects("freeInterest.data", freeInterestList);
+    //    loadObjects("chargeInterest.data", chargeInterestList);
+    //    loadObjects("freeStudy.data", freeStudyList);
+    //    loadObjects("chargeStudy.data", chargeStudyList);
+    //    loadObjects("communityQa.data", communityQaList);
+    //    loadObjects("communityInfo.data", communityInfoList);
+    //    loadObjects("communityTalk.data", communityTalkList);
+    //    loadObjects("jobsCalendar.data", jobsCalendarList);
+    //    loadObjects("examCalendar.data", examCalendarList);
 
     createMainMenu().execute();
     Prompt.close();
