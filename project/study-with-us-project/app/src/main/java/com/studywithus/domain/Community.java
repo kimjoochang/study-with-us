@@ -13,6 +13,7 @@ public class Community extends Content {
     return registeredDate;
   }
 
+
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
@@ -32,4 +33,5 @@ public class Community extends Content {
   public void setLike(int like) {
     this.like = like;
   }
+
 }
