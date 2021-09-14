@@ -62,7 +62,6 @@ import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
 import com.studywithus.handler.MentorApplicationDetailHandler;
-import com.studywithus.handler.MentorApplicationFormListHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -142,7 +141,6 @@ public class App {
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationForm));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationForm, mentorList));
-    commandMap.put("/mentorApplicant/detail", new MentorApplicationFormListHandler());
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
@@ -195,16 +193,16 @@ public class App {
   }
 
   void service() {
-    loadObjects("member.data", memberList);
-    loadObjects("freeInterest.data", freeInterestList);
-    loadObjects("chargeInterest.data", chargeInterestList);
-    loadObjects("freeStudy.data", freeStudyList);
-    loadObjects("chargeStudy.data", chargeStudyList);
-    loadObjects("communityQa.data", communityQaList);
-    loadObjects("communityInfo.data", communityInfoList);
-    loadObjects("communityTalk.data", communityTalkList);
-    loadObjects("jobsCalendar.data", jobsCalendarList);
-    loadObjects("examCalendar.data", examCalendarList);
+    //    loadObjects("member.data", memberList);
+    //    loadObjects("freeInterest.data", freeInterestList);
+    //    loadObjects("chargeInterest.data", chargeInterestList);
+    //    loadObjects("freeStudy.data", freeStudyList);
+    //    loadObjects("chargeStudy.data", chargeStudyList);
+    //    loadObjects("communityQa.data", communityQaList);
+    //    loadObjects("communityInfo.data", communityInfoList);
+    //    loadObjects("communityTalk.data", communityTalkList);
+    //    loadObjects("jobsCalendar.data", jobsCalendarList);
+    //    loadObjects("examCalendar.data", examCalendarList);
 
     createMainMenu().execute();
     Prompt.close();

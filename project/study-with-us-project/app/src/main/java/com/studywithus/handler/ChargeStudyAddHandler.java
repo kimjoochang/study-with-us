@@ -1,6 +1,7 @@
 package com.studywithus.handler;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.studywithus.domain.Study;
@@ -33,8 +34,26 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
 
     studyList.add(chargeStudy);
 
-    // 멘토의 생성 유료 스터디 리스트 / 아이디 저장
-    registerChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), registerChargeStudyList);
+    // 생성 유료 스터디에 해당 아이디 존재 O
+    if (registerChargeStudyMap.containsKey(AuthLoginHandler.getLoginUser().getId())) {
+      // 생성 유료 스터디에 아이디 호출 -> 생성 유료 스터디 리스트에 대입
+      registerChargeStudyList = registerChargeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
+
+      // 생성 유료 스터디 리스트에 유료 스터디 추가
+      registerChargeStudyList.add(chargeStudy);
+      // 생성 유료 스터디에 아이디 추가
+      registerChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), registerChargeStudyList);
+
+      // 생성 유료 스터디에 해당 아이디 존재 X
+    } else {
+      // 새로운 생성 유료 스터디 리스트 생성
+      registerChargeStudyList = new ArrayList<>();
+
+      // 생성 유료 스터디 리스트에 유료 스터디 추가
+      registerChargeStudyList.add(chargeStudy);
+      // 생성 유료 스터디에 아이디 추가
+      registerChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), registerChargeStudyList);
+    }
 
     System.out.println();
     System.out.println("유료스터디 등록이 완료되었습니다.\n");

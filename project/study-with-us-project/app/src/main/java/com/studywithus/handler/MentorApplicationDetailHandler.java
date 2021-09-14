@@ -50,11 +50,11 @@ public class MentorApplicationDetailHandler implements Command {
       int input = Prompt.inputInt("선택> ");
 
       if (input == 1) {
-        mentorApproveHandler(mentorApplication, mentorApplication.getMentorApplicantInfo());
+        mentorApprove(mentorApplication, mentorApplication.getMentorApplicantInfo());
         break;
 
       } else if (input == 2) {
-        mentorRejectHandler(mentorApplication);
+        mentorReject(mentorApplication);
         break;
 
       } else if (input == 0) {
@@ -67,7 +67,7 @@ public class MentorApplicationDetailHandler implements Command {
     }
   }
 
-  private void mentorApproveHandler(MentorApplicationForm mentorApplication, Member mentorApplicant) {
+  private void mentorApprove(MentorApplicationForm mentorApplication, Member mentorApplicant) {
     mentorList.add(mentorApplicant);
     this.mentorApplicationForm.remove(mentorApplication);
 
@@ -76,7 +76,7 @@ public class MentorApplicationDetailHandler implements Command {
     System.out.println("멘토 승인이 완료되었습니다.");
   }
 
-  private void mentorRejectHandler(MentorApplicationForm mentorApplication) {
+  private void mentorReject(MentorApplicationForm mentorApplication) {
     this.mentorApplicationForm.remove(mentorApplication);
 
     System.out.println("멘토 신청을 거절하였습니다.");
