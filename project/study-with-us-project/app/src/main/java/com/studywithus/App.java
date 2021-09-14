@@ -62,7 +62,6 @@ import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
 import com.studywithus.handler.MentorApplicationDetailHandler;
-import com.studywithus.handler.MentorApplicationFormListHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -142,7 +141,6 @@ public class App {
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationForm));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationForm, mentorList));
-    commandMap.put("/mentorApplicant/detail", new MentorApplicationFormListHandler());
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
