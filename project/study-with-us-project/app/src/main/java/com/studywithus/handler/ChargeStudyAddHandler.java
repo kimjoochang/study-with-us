@@ -1,14 +1,20 @@
 package com.studywithus.handler;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyAddHandler extends AbstractStudyHandler {
 
-  public ChargeStudyAddHandler(List<Study> chargeStudyList) {
-    super(chargeStudyList);	
+  // 각 멘토의 생성 유료 스터디 리스트
+  HashMap<String, List<Study>> registerChargeStudyMap;
+  List<Study> registerChargeStudyList;
+
+  public ChargeStudyAddHandler(List<Study> chargeStudyList, HashMap<String, List<Study>> registerChargeStudyMap) {
+    super(chargeStudyList);
+    this.registerChargeStudyMap = registerChargeStudyMap;
   }
 
   @Override
@@ -26,6 +32,9 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
     chargeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     studyList.add(chargeStudy);
+
+    // 멘토의 생성 유료 스터디 리스트 / 아이디 저장
+    registerChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), registerChargeStudyList);
 
     System.out.println();
     System.out.println("유료스터디 등록이 완료되었습니다.\n");

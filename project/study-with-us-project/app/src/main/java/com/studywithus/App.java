@@ -4,7 +4,6 @@ import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
-import static com.studywithus.menu.Menu.ACCESS_MEMBER;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -24,6 +23,7 @@ import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
+import com.studywithus.handler.AuthUserInfoHandler;
 import com.studywithus.handler.ChargeInterestDeleteHandler;
 import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
@@ -75,6 +75,10 @@ public class App {
   List<Member> chargeApplicantList = new ArrayList<>();
   List<Member> mentorList = new ArrayList<>();
 
+  List<Study> registerFreeStudyList = new ArrayList<>();
+  List<Study> participateFreeStudyList = new ArrayList<>();
+  List<Study> registerChargeStudyList = new ArrayList<>();
+  List<Study> participateChargeStudyList = new ArrayList<>();
   List<Study> freeInterestList = new ArrayList<>();
   List<Study> chargeInterestList = new ArrayList<>();
   List<Study> freeStudyList = new ArrayList<>();
@@ -84,7 +88,7 @@ public class App {
 
   List<MentorApplicationForm> mentorApplicationForm = new ArrayList<>();
 
-  List<Payment> paymentList = new ArrayList<>();
+  List<Payment> chargePaymentList = new ArrayList<>();
 
   List<Community> communityInfoList = new ArrayList<>();
   List<Community> communityQaList = new ArrayList<>();
@@ -94,6 +98,10 @@ public class App {
   List<Calendar> examCalendarList = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
+  HashMap<String, List<Study>> participateFreeStudyMap = new HashMap<>();
+  HashMap<String, List<Study>> participateChargeStudyMap = new HashMap<>();
+  HashMap<String, List<Study>> registerFreeStudyMap = new HashMap<>();
+  HashMap<String, List<Study>> registerChargeStudyMap = new HashMap<>();
 
   class MenuItem extends Menu {
     String menuId;
@@ -125,6 +133,7 @@ public class App {
     commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
     commandMap.put("/auth/signUp", new SignUpHandler(memberList));
     commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
+    commandMap.put("/auth/userinfo", new AuthUserInfoHandler(memberList));
 
     commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
@@ -136,16 +145,16 @@ public class App {
     commandMap.put("/mentorApplicant/detail", new MentorApplicationFormListHandler());
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
+    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicantList, freeApplicationList, freeInterestList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicationList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList, paymentList, chargeApplicantList));
+    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
@@ -196,13 +205,6 @@ public class App {
     loadObjects("communityTalk.data", communityTalkList);
     loadObjects("jobsCalendar.data", jobsCalendarList);
     loadObjects("examCalendar.data", examCalendarList);
-
-    System.out.println("비회원 => " + ACCESS_LOGOUT);
-    System.out.println("회원 => " + ACCESS_GENERAL);
-    System.out.println("팀원 => " + ACCESS_MEMBER);
-    System.out.println("팀장 => " + ACCESS_LEADER);
-    System.out.println("멘토 => " + ACCESS_MENTOR);
-    System.out.println("관리자 => " + ACCESS_ADMIN);
 
     createMainMenu().execute();
     Prompt.close();
@@ -272,6 +274,8 @@ public class App {
 
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
+
+    myPageMenu.add(new MenuItem("내정보", ACCESS_GENERAL, "/auth/userinfo"));
 
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createFreeStudyApplyMenu());

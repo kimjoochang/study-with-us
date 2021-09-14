@@ -1,5 +1,6 @@
 package com.studywithus.handler;
 
+import java.util.HashMap;
 import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Payment;
@@ -8,20 +9,25 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
-  // 유료스터디 관심목록 리스트 (회원 관점)
+  // 유료 스터디 관심목록 리스트 (회원 관점)
   List<Study> chargeInterestList;
 
-  // 유료스터디 결제내역 리스트 (회원 관점)
-  List<Payment> paymentList;
+  // 유료 스터디 결제내역 리스트 (회원 관점)
+  List<Payment> chargePaymentList;
 
-  // 유료스터디 결제자 내역 (멘토 관점)
+  // 유료 스터디 결제자 내역 (멘토 관점)
   List<Member> chargeApplicantList;
 
-  public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> chargeInterestList, List<Payment> paymentList, List<Member> chargeApplicantList) {
+  // 각 회원의 참여 유료 스터디 리스트
+  HashMap<String, List<Study>> participateChargeStudyMap;
+  List<Study> participateChargeStudyList;
+
+  public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> chargeInterestList, List<Payment> chargePaymentList, List<Member> chargeApplicantList, HashMap<String, List<Study>> participateChargeStudyMap) {
     super(chargeStudyList);
     this.chargeInterestList = chargeInterestList;
-    this.paymentList = paymentList;
+    this.chargePaymentList = chargePaymentList;
     this.chargeApplicantList = chargeApplicantList;
+    this.participateChargeStudyMap = participateChargeStudyMap;
   }
 
   @Override
@@ -124,8 +130,11 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
       // 유료 스터디 결제내역 리스트 (회원 관점)
       Payment payment = new Payment();
-      paymentList.add(payment);
-      AuthLoginHandler.loginUser.setPayment(paymentList);
+      chargePaymentList.add(payment);
+      AuthLoginHandler.loginUser.setPayment(chargePaymentList);
+
+      // 회원의 참여 유료 스터디 리스트 / 아이디 저장
+      participateChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), participateChargeStudyList);
 
       // 유료 스터디 결제한 사람 내역 (멘토 관점)
       chargeApplicantList.add(AuthLoginHandler.loginUser);
