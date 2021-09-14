@@ -60,8 +60,8 @@ import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
 import com.studywithus.handler.MentorApplicationDetailHandler;
 import com.studywithus.handler.MentorApplicationFormListHandler;
-import com.studywithus.handler.MyParticipatedFreeStudyDetailHandler;
-import com.studywithus.handler.MyRegisteredFreeStudyDetailHandler;
+import com.studywithus.handler.ParticipateFreeStudyListHandler;
+import com.studywithus.handler.RegisterFreeStudyDetailHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -155,9 +155,9 @@ public class App_KJC {
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
     // [추가]
-    commandMap.put("/myStudy/myRegisteredFreeStudy", new MyRegisteredFreeStudyDetailHandler(myRegisteredFreeStudyMap, myParticipatedFreeStudyMap));
+    commandMap.put("/myStudy/myRegisteredFreeStudy", new RegisterFreeStudyDetailHandler(myRegisteredFreeStudyMap, myParticipatedFreeStudyMap));
     // [추가]
-    commandMap.put("/myStudy/myParticipatedFreeStudy", new MyParticipatedFreeStudyDetailHandler(myParticipatedFreeStudyMap));
+    commandMap.put("/myStudy/myParticipatedFreeStudy", new ParticipateFreeStudyListHandler(myParticipatedFreeStudyMap));
 
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
