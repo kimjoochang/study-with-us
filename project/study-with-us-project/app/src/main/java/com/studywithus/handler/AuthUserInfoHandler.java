@@ -21,27 +21,27 @@ public class AuthUserInfoHandler implements Command {
 		}
 
 		switch(loginUser.getUserAccessLevel()) {
-		case 0x02: // 회원
+		case 0x02: 
 			System.out.println("등급: 회원");
 			break;
 
-		case 0x04: // 팀원
+		case 0x04:
 			System.out.println("등급: 회원");
 			break;
 
-		case 0x08: // 팀장
+		case 0x08: 
 			System.out.println("등급: 회원");
 			break;
 
-		case 0x40: // 멘티
+		case 0x40:
 			System.out.println("등급: 회원");
 			break;
 
-		case 0x10: // 멘토
+		case 0x10: 
 			System.out.println("등급: 멘토");
 			break;
 
-		case 0x20: // 관리자
+		case 0x20: 
 			System.out.println("등급: 관리자");
 			break;
 		}
