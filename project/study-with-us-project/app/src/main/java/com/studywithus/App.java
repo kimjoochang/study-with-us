@@ -26,6 +26,7 @@ import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
+import com.studywithus.handler.AuthUserInfoHandler;
 import com.studywithus.handler.ChargeInterestDeleteHandler;
 import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
@@ -127,6 +128,7 @@ public class App {
 		commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
 		commandMap.put("/auth/signUp", new SignUpHandler(memberList));
 		commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
+		commandMap.put("/auth/userinfo", new AuthUserInfoHandler(memberList));
 
 		commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
 		commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
