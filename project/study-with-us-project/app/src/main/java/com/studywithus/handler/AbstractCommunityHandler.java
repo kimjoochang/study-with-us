@@ -2,14 +2,12 @@ package com.studywithus.handler;
 
 import java.util.List;
 import com.studywithus.domain.Community;
-import com.studywithus.domain.Member;
 
 public abstract class AbstractCommunityHandler implements Command {
 
   protected List<Community> communityList;
-  protected List<Member> myPostList;
 
-  public AbstractCommunityHandler(List<Community> communityList, List<Community> myPostList) {
+  public AbstractCommunityHandler(List<Community> communityList) {
     this.communityList = communityList;
   }
 
