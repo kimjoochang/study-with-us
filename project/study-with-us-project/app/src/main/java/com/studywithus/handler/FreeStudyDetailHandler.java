@@ -91,7 +91,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
   }
 
   // 무료 스터디 신청
-  public void apply(Study freeStudy) {
+  private void apply(Study freeStudy) {
     System.out.println("[무료 스터디 / 상세보기 / 신청]\n");
 
     String input = Prompt.inputString("무료 스터디를 신청 하시겠습니까? (y/N) ");
@@ -118,7 +118,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
   }
 
   // 무료 스터디 관심목록 추가
-  public void interest(Study freeStudy) {
+  private void interest(Study freeStudy) {
     System.out.println("[무료 스터디 / 상세보기 / 관심 목록]\n");
 
     String input = Prompt.inputString("무료 스터디 관심 목록에 추가하시겠습니까? (y/N) ");

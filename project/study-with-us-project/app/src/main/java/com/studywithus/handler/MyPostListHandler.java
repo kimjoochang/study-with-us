@@ -3,7 +3,7 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.Community;
 
-public class MyPostListHandler implements Command {
+public class MyPostListHandler extends Community {
 
   List<Community> myPostList;
 
@@ -33,4 +33,15 @@ public class MyPostListHandler implements Command {
     System.out.println();
     System.out.println("내 게시글이 존재하지 않습니다.\n");
   }
+
+  // ID로 회원별 게시글 조회
+  protected Member findById(String Id) {
+    for (Member member : communityList) {
+      if (member.getId() == Id) {
+        return member;
+      }
+    }
+    return null;
+  }
+
 }
