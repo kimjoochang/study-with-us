@@ -3,7 +3,6 @@ package com.studywithus.domain;
 import java.sql.Date;
 import java.util.List;
 import com.studywithus.csv.CsvValue;
-import jdk.internal.org.jline.utils.ShutdownHooks.Task;
 
 public class Study extends Content implements CsvValue {
   private List<Member> members; // 팀원 or 멘티
@@ -17,7 +16,7 @@ public class Study extends Content implements CsvValue {
   private int like; // 좋아요
   private int viewCount; // 조회수
 
-  //다음 메서드는 CsvValue 규칙에 따라 정의한 메서드다.
+  // 다음 메서드는 CsvValue 규칙에 따라 정의한 메서드다.
   @Override
   public String toCsvString() {
     // 스터디 정보를 CSV로 출력할 때 스터디 정보를 포함한다.
@@ -50,7 +49,7 @@ public class Study extends Content implements CsvValue {
 
     // => 신청자들의 정보를 저장한다.
     for (Member applicants : this.getApplicants()) {
-      strBuilder.append(String.format("%s,%s,%d,%d,%s,%s,%d,%d,", 
+      strBuilder.append(String.format("%s,", 
           applicants.getId()));
     }
 
@@ -73,18 +72,24 @@ public class Study extends Content implements CsvValue {
     this.setLike(Integer.valueOf(values[6]));
     this.setViewCount(Integer.valueOf(values[7]));
 
-    // 2) 스터디 참여자 정보 로딩
+    // 2) 스터디 생성자 정보 로딩
+    Member writer = new Member();
+    writer.setName(values[8]);
+
+    this.setWriter(writer);
+
+    // 3) 스터디 참여자 정보 로딩
     // => 스터디 참여자가 몇 명인지 읽어 온다.
-    int memberSize = Integer.valueOf(values[8]);
+    int membersSize = Integer.valueOf(values[9]);
 
     int lastIndex = 0;
-    for (int i = 0, offset = 9; i < memberSize; i++, offset += 2) {
+    for (int i = 0, offset = 10; i < membersSize; i++, offset += 1) {
       // => 파일에서 참여자 이름을 로딩한다.
-      Member member = new Member();
-      member.setName(values[offset]);
+      Member members = new Member();
+      members.setName(values[offset]);
 
       // => 스터디에 참여자를 추가한다.
-      this.getMembers().add(member);
+      this.getMembers().add(members);
 
       // => 신청자 데이터를 읽을 때 사용할 마지막 인덱스 번호를 저장해 둔다.
       lastIndex = offset + 1;
@@ -92,26 +97,18 @@ public class Study extends Content implements CsvValue {
 
     // 4) 스터디 신청자 정보 로딩
     // => 스터디 신청자가 몇 명인지 읽어 온다.
-    int taskSize = Integer.valueOf(values[lastIndex + 1]);
+    int applicantsSize = Integer.valueOf(values[lastIndex + 1]);
 
-    for (int i = 0, offset = lastIndex + 2; i < taskSize; i++, offset += 6) {
-      // => 파일에서 작업 데이터를 로딩한다.
-      Task t = new Task();
-      t.setNo(Integer.valueOf(values[offset]));
-      t.setContent(values[offset + 1]);
-      t.setDeadline(Date.valueOf(values[offset + 2]));
-      t.setStatus(Integer.valueOf(values[offset + 3]));
+    for (int i = 0, offset = lastIndex + 1; i < applicantsSize; i++, offset += 1) {
+      // => 파일에서 신청자 이름을 로딩한다.
+      Member applicants = new Member();
+      applicants.setName(values[offset]);
 
-      // => 작업자 데이터 로딩
-      Member worker = new Member();
-      worker.setNo(Integer.valueOf(values[offset + 4]));
-      worker.setName(values[offset + 5]);
+      // => 신청자 정보를 등록한다.
+      setWriter(applicants);
 
-      // => 작업에 작업자 정보를 등록한다.
-      t.setOwner(worker);
-
-      // => 스터디에 작업을 추가한다.
-      this.getApplicants().add(t);
+      // => 스터디에 신청자를 추가한다.
+      this.getApplicants().add(applicants);
     }
   }
 
