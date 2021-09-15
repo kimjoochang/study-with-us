@@ -20,26 +20,28 @@ public class Community extends Content {
   public void loadCsv(String csv) {
     String[] values = csv.split(",");
 
+    // CSV 문자열에서 추출한 값을 객체의 필드에 저장한다.
     this.setRegisteredDate(Date.valueOf(values[0]));
     this.setViewCount(Integer.valueOf(values[1]));
     this.setLike(Integer.valueOf(values[2]));
   }
 
   public static Community valueOfCsv(String csv) {
-
+    // 1) 한 줄의 문자열을 콤마(,)로 분리한다.
     String[] values = csv.split(",");
 
-    Community cmn = new Community();
-    cmn.setRegisteredDate(Date.valueOf(values[0]));
-    cmn.setViewCount(Integer.valueOf(values[1]));
-    cmn.setLike(Integer.valueOf(values[2]));
+    // 2) 콤마로 분리한 값을 Community 객체에 담는다.
+    Community cmnt = new Community();
+    cmnt.setRegisteredDate(Date.valueOf(values[0]));
+    cmnt.setViewCount(Integer.valueOf(values[1]));
+    cmnt.setLike(Integer.valueOf(values[2]));
 
+    return cmnt;
   }
 
   public Date getRegisteredDate() {
     return registeredDate;
   }
-
 
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
