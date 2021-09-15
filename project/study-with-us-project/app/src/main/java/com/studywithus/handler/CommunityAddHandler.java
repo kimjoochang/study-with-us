@@ -7,8 +7,8 @@ import com.studywithus.util.Prompt;
 
 public class CommunityAddHandler extends AbstractCommunityHandler{
 
-  public CommunityAddHandler(List<Community> communityList, List<Community> myPostList) {
-    super(communityList, myPostList);
+  public CommunityAddHandler(List<Community> communityList) {
+    super(communityList);
   }
 
   @Override
@@ -16,7 +16,7 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
     System.out.println("[커뮤니티 / 생성] \n");
 
     Community community = new Community();
-    Community myPost = new Community();
+    // Community myPost = new Community();
 
     community.setNo(Prompt.inputInt("번호? "));
     community.setTitle(Prompt.inputString("제목? "));
@@ -25,7 +25,7 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
     community.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     communityList.add(community);
-    myPostList.add(myPost);
+    // myPostList.add(myPost);
 
     System.out.println();
     System.out.println("게시글 등록이 완료되었습니다.\n");
