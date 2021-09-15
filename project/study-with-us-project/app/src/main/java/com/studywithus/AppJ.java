@@ -95,6 +95,10 @@ public class AppJ {
   List<Community> communityQaList = new ArrayList<>();
   List<Community> communityTalkList = new ArrayList<>();
 
+  // 추가중 for 내 게시글
+  List<Community> myPostist = new ArrayList<>();
+
+
   List<Calendar> jobsCalendarList = new ArrayList<>();
   List<Calendar> examCalendarList = new ArrayList<>();
 
@@ -194,6 +198,12 @@ public class AppJ {
     commandMap.put("/examCalendar/detail", new ExamCalendarDetailHandler(examCalendarList));
     commandMap.put("/examCalendar/update", new ExamCalendarUpdateHandler(examCalendarList));
     commandMap.put("/examCalendar/delete", new ExamCalendarDeleteHandler(examCalendarList));
+
+    // 추가중 for 내 게시글
+    commandMap.put("/myPost/list", new CommunityListHandler(myPostList));
+    commandMap.put("/myPost/detail", new CommunityDetailHandler(myPostList));
+    commandMap.put("/myPost/update", new CommunityUpdateHandler(myPostList));
+    commandMap.put("/myPost/delete", new CommunityDeleteHandler(myPostList));
   }
 
   void service() {
@@ -208,6 +218,8 @@ public class AppJ {
     loadObjects("jobsCalendar.data", jobsCalendarList);
     loadObjects("examCalendar.data", examCalendarList);
 
+    loadObjects("myPost.data", myPostList);
+
     createMainMenu().execute();
     Prompt.close();
 
@@ -221,6 +233,8 @@ public class AppJ {
     saveObjects("communityTalk.data", communityTalkList);
     saveObjects("jobsCalendar.data", jobsCalendarList);
     saveObjects("examCalendar.data", examCalendarList);
+
+    saveObjects("myPost.data", myPostList);
   }
 
   @SuppressWarnings("unchecked")
@@ -432,11 +446,13 @@ public class AppJ {
 
   // 마이 페이지 / 나의 활동 / 내 스터디 / 무료 스터디 신청 내역
   private Menu createFreeStudyApplyMenu() {
+
     MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
     freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudyApply/list"));
     freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
     freeStudyApplyMenu.add(new MenuItem("수정", "/freeStudyApply/update"));
     freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
+
     return freeStudyApplyMenu;
   }
 
@@ -444,10 +460,10 @@ public class AppJ {
   private Menu createMyPostMenu() {
 
     MenuGroup myPostMenu = new MenuGroup("내 게시글");
-    myPostMenu.add(new MenuItem("조회", "//list"));
-    myPostMenu.add(new MenuItem("상세보기", "//detail"));
-    myPostMenu.add(new MenuItem("수정", "//update"));
-    myPostMenu.add(new MenuItem("삭제", "//delete"));
+    myPostMenu.add(new MenuItem("조회", "/myPost/list"));
+    myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
+    myPostMenu.add(new MenuItem("수정", "/myPost/update"));
+    myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
 
     return myPostMenu;
   }
