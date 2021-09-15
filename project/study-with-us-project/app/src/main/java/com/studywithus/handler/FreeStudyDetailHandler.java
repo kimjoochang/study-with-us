@@ -100,6 +100,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
       System.out.println("무료 스터디 신청이 취소되었습니다.");
       return;
     }
+
     // 무료 스터디 신청자 리스트 (팀장 관점)
     List<Member> freeApplicantList = new ArrayList<>();
 

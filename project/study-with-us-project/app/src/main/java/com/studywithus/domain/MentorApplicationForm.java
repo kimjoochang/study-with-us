@@ -1,6 +1,7 @@
 package com.studywithus.domain;
 
 import java.sql.Date;
+import java.util.List;
 import com.studywithus.csv.CsvValue;
 
 public class MentorApplicationForm implements CsvValue {
@@ -10,6 +11,8 @@ public class MentorApplicationForm implements CsvValue {
   private String chargeStudySubject; //  유료 스터디 주제
   private String chargeStudyExplanation; // 유료 스터디 설명
   private Date registeredDate; // 등록일
+  private List<Member> memberList;
+  private List<String> mentorApplicationFormList;
 
   // 다음 메서드는 CsvValue 규칙에 따라 정의한 메서드다.
   @Override
@@ -50,6 +53,17 @@ public class MentorApplicationForm implements CsvValue {
     maf.setRegisteredDate(Date.valueOf(values[4]));
 
     return maf;
+  }
+
+  protected Member findById(String id, List<String> mentorApplicationFormList) {
+    for (Member member : memberList) {
+      for (String mentorId : mentorApplicationFormList) {
+        if (member.getId().equalsIgnoreCase(id)) {
+          return mentorId;
+        }
+      }
+      return null;
+    }
   }
 
   public String getId() {

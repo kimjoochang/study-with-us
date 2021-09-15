@@ -85,7 +85,7 @@ public class App {
   List<Study> chargeStudyList = new ArrayList<>();
   List<Study> chargeDeleteRequestList = new ArrayList<>();
 
-  List<MentorApplicationForm> mentorApplicationForm = new ArrayList<>();
+  List<MentorApplicationForm> mentorApplicationFormList = new ArrayList<>();
 
   List<Payment> chargePaymentList = new ArrayList<>();
 
@@ -139,8 +139,8 @@ public class App {
     commandMap.put("/chargeInterest/list", new ChargeInterestListHandler(chargeInterestList));
     commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
 
-    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationForm));
-    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationForm, mentorList));
+    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
+    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
