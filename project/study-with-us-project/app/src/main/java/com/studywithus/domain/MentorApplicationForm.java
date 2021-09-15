@@ -3,6 +3,7 @@ package com.studywithus.domain;
 import java.sql.Date;
 import java.util.List;
 import com.studywithus.csv.CsvValue;
+import com.studywithus.util.Prompt;
 
 public class MentorApplicationForm implements CsvValue {
   private String id; // 멘토 아이디
@@ -40,30 +41,33 @@ public class MentorApplicationForm implements CsvValue {
     this.setRegisteredDate(Date.valueOf(values[4]));
   }
 
-  public static MentorApplicationForm valueOfCsv(String csv) {
+  public MentorApplicationForm valueOfCsv(String csv) {
     // 1) 한 줄의 문자열을 콤마(,)로 분리한다.
     String[] values = csv.split(",");
 
-    // 2) 콤마로 분리한 값을 MentorApplicationForm 객체에 담는다.
-    MentorApplicationForm maf = new MentorApplicationForm();
-    maf.setName(values[0]);
-    maf.setSelfIntroduction(values[1]);
-    maf.setChargeStudySubject(values[2]);
-    maf.setChargeStudyExplanation(values[3]);
-    maf.setRegisteredDate(Date.valueOf(values[4]));
+    String id = Prompt.inputString("아이디: ");
+    MentorApplicationForm mentorApplicationForm = findById(id);
 
-    return maf;
+    mentorApplicationFormList.add(id);
+
+    // 2) 콤마로 분리한 값을 MentorApplicationForm 객체에 담는다.
+    //    MentorApplicationForm maf = new MentorApplicationForm();
+    //    maf.setName(values[0]);
+    //    maf.setSelfIntroduction(values[1]);
+    //    maf.setChargeStudySubject(values[2]);
+    //    maf.setChargeStudyExplanation(values[3]);
+    //    maf.setRegisteredDate(Date.valueOf(values[4]));
+
+    //    return maf;
   }
 
-  protected Member findById(String id, List<String> mentorApplicationFormList) {
+  protected MentorApplicationForm findById(String id) {
     for (Member member : memberList) {
-      for (String mentorId : mentorApplicationFormList) {
-        if (member.getId().equalsIgnoreCase(id)) {
-          return mentorId;
-        }
+      if (member.getId().equalsIgnoreCase(id)) {
+        return member;
       }
-      return null;
     }
+    return null;
   }
 
   public String getId() {
