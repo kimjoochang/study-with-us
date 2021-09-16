@@ -52,8 +52,8 @@ public class Member implements CsvValue {
           chargeInterest.getViewCount(),
           chargeInterest.getLike()));
     }
-    //    결제내역 리스트 완성 시 완성하기
 
+    //    결제내역 리스트 완성 시 완성하기
     //    strBuilder.append(String.format("%d,", this.getPayment().size()));
     //
     //    for (Payment payment : this.getPayment()) {
@@ -203,5 +203,4 @@ public class Member implements CsvValue {
   public void setPayment(List<Payment> payment) {
     this.payment = payment;
   }
-
 }

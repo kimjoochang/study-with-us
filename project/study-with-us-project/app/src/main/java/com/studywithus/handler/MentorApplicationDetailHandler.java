@@ -1,18 +1,18 @@
 package com.studywithus.handler;
 
 import java.util.List;
-import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class MentorApplicationDetailHandler implements Command {
 
-  List<MentorApplicationForm> mentorApplicationForm;
-  List<Member> mentorList;
+  MentorApplicationForm mentorApplicationForm;
+  List<MentorApplicationForm> mentorApplicationFormList;
+  List<String> mentorList;
 
-  public MentorApplicationDetailHandler (List<MentorApplicationForm> mentorApplicationForm, List<Member> mentorList) {
-    this.mentorApplicationForm = mentorApplicationForm;
+  public MentorApplicationDetailHandler (List<MentorApplicationForm> mentorApplicationFormList, List<String> mentorList) {
+    this.mentorApplicationFormList = mentorApplicationFormList;
     this.mentorList = mentorList;
   }
 
@@ -20,8 +20,8 @@ public class MentorApplicationDetailHandler implements Command {
   public void execute() {
     System.out.println("[멘토 신청 내역 / 상세보기]\n");
 
-    for (MentorApplicationForm mentorApplication : mentorApplicationForm) {
-      System.out.printf("%s, %s, %s\n",mentorApplication.getName(), mentorApplication.getChargeStudySubject(), mentorApplication.getRegisteredDate());
+    for (MentorApplicationForm mentorApplication : mentorApplicationFormList) {
+      System.out.printf("[멘토 신청자 = %s, 유료 스터디 주제 = %s, 등록일 = %s]\n", mentorApplication.getName(), mentorApplication.getChargeStudySubject(), mentorApplication.getRegisteredDate());
     }
 
     System.out.println();
@@ -68,22 +68,23 @@ public class MentorApplicationDetailHandler implements Command {
   }
 
   private void mentorApprove(MentorApplicationForm mentorApplication) {
-    mentorList.add(AuthLoginHandler.getLoginUser());
-    this.mentorApplicationForm.remove(mentorApplication);
+    this.mentorList.add(mentorApplicationForm.getId());
+    this.mentorApplicationFormList.remove(mentorApplication);
 
     AuthLoginHandler.userAccessLevel |= Menu.ACCESS_MENTOR;
 
+    System.out.println(mentorList);
     System.out.println("멘토 승인이 완료되었습니다.");
   }
 
   private void mentorReject(MentorApplicationForm mentorApplication) {
-    this.mentorApplicationForm.remove(mentorApplication);
+    this.mentorApplicationFormList.remove(mentorApplication);
 
     System.out.println("멘토 신청을 거절하였습니다.");
   }
 
   protected MentorApplicationForm findByName(String name) {
-    for (MentorApplicationForm mentorApplication : mentorApplicationForm) {
+    for (MentorApplicationForm mentorApplication : mentorApplicationFormList) {
       if (mentorApplication.getName().equals(name)) {
         return mentorApplication;
       }

@@ -76,7 +76,8 @@ public class App {
   List<Member> freeApplicantList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Member> chargeApplicantList = new ArrayList<>();
-  List<Member> mentorList = new ArrayList<>();
+
+  List<String> mentorList = new ArrayList<>();
 
   List<Study> registerFreeStudyList = new ArrayList<>();
   List<Study> participateFreeStudyList = new ArrayList<>();
