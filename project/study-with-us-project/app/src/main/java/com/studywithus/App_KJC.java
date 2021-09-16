@@ -10,12 +10,15 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import com.studywithus.csv.CsvValue;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.studywithus.domain.Calendar;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.Member;
@@ -194,34 +197,34 @@ public class App_KJC {
   }
 
   void service() {
-    loadObjects("member.csv", memberList, Member.class);
-    loadObjects("freeInterest.csv", freeInterestList, Study.class);
-    loadObjects("chargeInterest.csv", chargeInterestList, Study.class);
-    loadObjects("freeStudy.csv", freeStudyList, Study.class);
-    loadObjects("chargeStudy.csv", chargeStudyList, Study.class);
-    loadObjects("communityQa.csv", communityQaList, Community.class);
-    loadObjects("communityInfo.csv", communityInfoList, Community.class);
-    loadObjects("communityTalk.csv", communityTalkList, Community.class);
-    loadObjects("jobsCalendar.csv", jobsCalendarList, Calendar.class);
-    loadObjects("examCalendar.csv", examCalendarList, Calendar.class);
+    loadObjects("member.json", memberList, Member.class);
+    loadObjects("freeInterest.json", freeInterestList, Study.class);
+    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+    loadObjects("freeStudy.json", freeStudyList, Study.class);
+    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+    loadObjects("communityQa.json", communityQaList, Community.class);
+    loadObjects("communityInfo.json", communityInfoList, Community.class);
+    loadObjects("communityTalk.json", communityTalkList, Community.class);
+    loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
+    loadObjects("examCalendar.json", examCalendarList, Calendar.class);
 
     createMainMenu().execute();
     Prompt.close();
 
-    saveObjects("member.csv", memberList);
-    saveObjects("freeInterest.csv", freeInterestList);
-    saveObjects("chargeInterest.csv", chargeInterestList);
-    saveObjects("freeStudy.csv", freeStudyList);
-    saveObjects("chargeStudy.csv", chargeStudyList);
-    saveObjects("communityQa.csv", communityQaList);
-    saveObjects("communityInfo.csv", communityInfoList);
-    saveObjects("communityTalk.csv", communityTalkList);
-    saveObjects("jobsCalendar.csv", jobsCalendarList);
-    saveObjects("examCalendar.csv", examCalendarList);
+    saveObjects("member.json", memberList);
+    saveObjects("freeInterest.json", freeInterestList);
+    saveObjects("chargeInterest.json", chargeInterestList);
+    saveObjects("freeStudy.json", freeStudyList);
+    saveObjects("chargeStudy.json", chargeStudyList);
+    saveObjects("communityQa.json", communityQaList);
+    saveObjects("communityInfo.json", communityInfoList);
+    saveObjects("communityTalk.json", communityTalkList);
+    saveObjects("jobsCalendar.json", jobsCalendarList);
+    saveObjects("examCalendar.json", examCalendarList);
   }
 
   @SuppressWarnings("unchecked")
-  private <E extends CsvValue> void loadObjects(
+  private <E> void loadObjects(
       String filepath, 
       List<E> list,
       Class<E> domainType) {
@@ -229,12 +232,17 @@ public class App_KJC {
     try (BufferedReader in = new BufferedReader(
         new FileReader(filepath,Charset.forName("UTF-8")))) {
 
-      String csvStr = null;
-      while ((csvStr = in.readLine()) != null) {
-        E obj = domainType.getConstructor().newInstance();
-        obj.loadCsv(csvStr);
-        list.add(obj);
-      } 
+      StringBuilder strBuilder = new StringBuilder();
+      String str;
+      while ((str = in.readLine()) != null) {
+        strBuilder.append(str);
+      }
+
+      Type type = TypeToken.getParameterized(Collection.class, domainType).getType();
+      Collection<E> collection = new Gson().fromJson(strBuilder.toString(),type);
+
+      list.addAll(collection);
+
       System.out.printf("%s 데이터 로딩 완료!\n", filepath);
 
     }catch (Exception e) {
@@ -242,14 +250,13 @@ public class App_KJC {
     }
   }
 
-  private <E> void saveObjects(String filepath, List<? extends CsvValue> list) {
+  private <E> void saveObjects(String filepath, List<?> list) {
     try (PrintWriter out = new PrintWriter(
         new BufferedWriter(
             new FileWriter(filepath, Charset.forName("UTF-8"))))) {
 
-      for (CsvValue obj : list) {
-        out.println(obj.toCsvString());
-      }
+      out.print(new Gson().toJson(list));
+
       System.out.printf("%s 데이터 출력 완료!\n", filepath);
 
     } catch (Exception e) {
