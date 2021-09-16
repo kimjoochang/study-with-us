@@ -30,6 +30,7 @@ public class MentorApplicationAddHandler implements Command {
 
       } else {
         mentorApplication.setName(AuthLoginHandler.loginUser.getName());
+        mentorApplication.setId(AuthLoginHandler.loginUser.getId());
         mentorApplication.setSelfIntroduction(selfIntro);
         mentorApplication.setChargeStudySubject(subject);
         mentorApplication.setChargeStudyExplanation(explanation);

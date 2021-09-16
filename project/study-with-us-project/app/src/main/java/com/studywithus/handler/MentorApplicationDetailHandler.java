@@ -1,15 +1,18 @@
 package com.studywithus.handler;
 
 import java.util.List;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class MentorApplicationDetailHandler implements Command {
 
-  MentorApplicationForm mentorApplicationForm;
+  MentorApplicationForm mentorApplication;
+
   List<MentorApplicationForm> mentorApplicationFormList;
   List<String> mentorList;
+  List<Member> memberList;
 
   public MentorApplicationDetailHandler (List<MentorApplicationForm> mentorApplicationFormList, List<String> mentorList) {
     this.mentorApplicationFormList = mentorApplicationFormList;
@@ -20,13 +23,18 @@ public class MentorApplicationDetailHandler implements Command {
   public void execute() {
     System.out.println("[멘토 신청 내역 / 상세보기]\n");
 
+    // 멘토 신청자 List
     for (MentorApplicationForm mentorApplication : mentorApplicationFormList) {
-      System.out.printf("[멘토 신청자 = %s, 유료 스터디 주제 = %s, 등록일 = %s]\n", mentorApplication.getName(), mentorApplication.getChargeStudySubject(), mentorApplication.getRegisteredDate());
+      System.out.printf("[멘토 신청자 = %s, 유료 스터디 주제 = %s, 등록일 = %s]\n",
+          mentorApplication.getName(),
+          mentorApplication.getChargeStudySubject(),
+          mentorApplication.getRegisteredDate());
     }
 
     System.out.println();
+
     String name = Prompt.inputString("이름: ");
-    MentorApplicationForm mentorApplication = findByName(name);
+    mentorApplication = findByName(name);
 
     if (mentorApplication == null) {
       System.out.println();
@@ -36,6 +44,7 @@ public class MentorApplicationDetailHandler implements Command {
 
     System.out.println();
     System.out.printf("신청자 이름: %s\n", mentorApplication.getName());
+    System.out.printf("신청자 아이디: %s\n", mentorApplication.getId());
     System.out.printf("자기소개: %s\n", mentorApplication.getSelfIntroduction());
     System.out.printf("스터디 주제: %s\n", mentorApplication.getChargeStudySubject());
     System.out.printf("스터디 설명: %s\n", mentorApplication.getChargeStudyExplanation());
@@ -50,7 +59,7 @@ public class MentorApplicationDetailHandler implements Command {
       int input = Prompt.inputInt("선택> ");
 
       if (input == 1) {
-        mentorApprove(mentorApplication);
+        mentorApprove();
         break;
 
       } else if (input == 2) {
@@ -67,16 +76,18 @@ public class MentorApplicationDetailHandler implements Command {
     }
   }
 
-  private void mentorApprove(MentorApplicationForm mentorApplication) {
-    this.mentorList.add(mentorApplicationForm.getId());
+  // 멘토 승인
+  private void mentorApprove() {
+    String id = mentorApplication.getId();
+    findById(id).setUserAccessLevel(Menu.ACCESS_MENTOR);
+
+    this.mentorList.add(mentorApplication.getId());
     this.mentorApplicationFormList.remove(mentorApplication);
 
-    AuthLoginHandler.userAccessLevel |= Menu.ACCESS_MENTOR;
-
-    System.out.println(mentorList);
     System.out.println("멘토 승인이 완료되었습니다.");
   }
 
+  // 멘토 거절
   private void mentorReject(MentorApplicationForm mentorApplication) {
     this.mentorApplicationFormList.remove(mentorApplication);
 
@@ -87,6 +98,15 @@ public class MentorApplicationDetailHandler implements Command {
     for (MentorApplicationForm mentorApplication : mentorApplicationFormList) {
       if (mentorApplication.getName().equals(name)) {
         return mentorApplication;
+      }
+    }
+    return null;
+  }
+
+  protected Member findById(String id) {
+    for (Member member : memberList) {
+      if (member.getId().equals(id)) {
+        return member;
       }
     }
     return null;
