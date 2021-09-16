@@ -197,16 +197,16 @@ public class App {
   }
 
   void service() {
-    loadObjects("member.json", memberList, Member.class);
-    loadObjects("freeInterest.json", freeInterestList, Study.class);
-    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
-    loadObjects("freeStudy.json", freeStudyList, Study.class);
-    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
-    loadObjects("communityQa.json", communityQaList, Community.class);
-    loadObjects("communityInfo.json", communityInfoList, Community.class);
-    loadObjects("communityTalk.json", communityTalkList, Community.class);
-    loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
-    loadObjects("examCalendar.json", examCalendarList, Calendar.class);
+    //    loadObjects("member.json", memberList, Member.class);
+    //    loadObjects("freeInterest.json", freeInterestList, Study.class);
+    //    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+    //    loadObjects("freeStudy.json", freeStudyList, Study.class);
+    //    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+    //    loadObjects("communityQa.json", communityQaList, Community.class);
+    //    loadObjects("communityInfo.json", communityInfoList, Community.class);
+    //    loadObjects("communityTalk.json", communityTalkList, Community.class);
+    //    loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
+    //    loadObjects("examCalendar.json", examCalendarList, Calendar.class);
 
     createMainMenu().execute();
     Prompt.close();
