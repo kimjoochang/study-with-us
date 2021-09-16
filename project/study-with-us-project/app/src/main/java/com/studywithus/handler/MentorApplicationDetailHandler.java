@@ -50,7 +50,7 @@ public class MentorApplicationDetailHandler implements Command {
       int input = Prompt.inputInt("선택> ");
 
       if (input == 1) {
-        mentorApprove(mentorApplication, mentorApplication.getMentorApplicantInfo());
+        mentorApprove(mentorApplication);
         break;
 
       } else if (input == 2) {
@@ -67,8 +67,8 @@ public class MentorApplicationDetailHandler implements Command {
     }
   }
 
-  private void mentorApprove(MentorApplicationForm mentorApplication, Member mentorApplicant) {
-    mentorList.add(mentorApplicant);
+  private void mentorApprove(MentorApplicationForm mentorApplication) {
+    mentorList.add(AuthLoginHandler.getLoginUser());
     this.mentorApplicationForm.remove(mentorApplication);
 
     AuthLoginHandler.userAccessLevel |= Menu.ACCESS_MENTOR;
