@@ -30,11 +30,11 @@ public class MentorApplicationAddHandler implements Command {
 
       } else {
         mentorApplication.setName(AuthLoginHandler.loginUser.getName());
+        mentorApplication.setId(AuthLoginHandler.loginUser.getId());
         mentorApplication.setSelfIntroduction(selfIntro);
         mentorApplication.setChargeStudySubject(subject);
         mentorApplication.setChargeStudyExplanation(explanation);
         mentorApplication.setRegisteredDate(new Date(System.currentTimeMillis()));
-        mentorApplication.setMentorApplicantInfo(AuthLoginHandler.getLoginUser());
 
         System.out.println("멘토 신청이 완료되었습니다.");
 

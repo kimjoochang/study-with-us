@@ -5,16 +5,20 @@ import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.studywithus.domain.Calendar;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.Member;
@@ -72,7 +76,8 @@ public class App {
   List<Member> freeApplicantList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Member> chargeApplicantList = new ArrayList<>();
-  List<Member> mentorList = new ArrayList<>();
+
+  List<String> mentorList = new ArrayList<>();
 
   List<Study> registerFreeStudyList = new ArrayList<>();
   List<Study> participateFreeStudyList = new ArrayList<>();
@@ -85,7 +90,7 @@ public class App {
   List<Study> chargeStudyList = new ArrayList<>();
   List<Study> chargeDeleteRequestList = new ArrayList<>();
 
-  List<MentorApplicationForm> mentorApplicationForm = new ArrayList<>();
+  List<MentorApplicationForm> mentorApplicationFormList = new ArrayList<>();
 
   List<Payment> chargePaymentList = new ArrayList<>();
 
@@ -139,8 +144,8 @@ public class App {
     commandMap.put("/chargeInterest/list", new ChargeInterestListHandler(chargeInterestList));
     commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
 
-    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationForm));
-    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationForm, mentorList));
+    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
+    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
@@ -193,59 +198,75 @@ public class App {
   }
 
   void service() {
-    //    loadObjects("member.data", memberList);
-    //    loadObjects("freeInterest.data", freeInterestList);
-    //    loadObjects("chargeInterest.data", chargeInterestList);
-    //    loadObjects("freeStudy.data", freeStudyList);
-    //    loadObjects("chargeStudy.data", chargeStudyList);
-    //    loadObjects("communityQa.data", communityQaList);
-    //    loadObjects("communityInfo.data", communityInfoList);
-    //    loadObjects("communityTalk.data", communityTalkList);
-    //    loadObjects("jobsCalendar.data", jobsCalendarList);
-    //    loadObjects("examCalendar.data", examCalendarList);
+    //    loadObjects("member.json", memberList, Member.class);
+    //    loadObjects("freeInterest.json", freeInterestList, Study.class);
+    //    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+    //    loadObjects("freeStudy.json", freeStudyList, Study.class);
+    //    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+    //    loadObjects("communityQa.json", communityQaList, Community.class);
+    //    loadObjects("communityInfo.json", communityInfoList, Community.class);
+    //    loadObjects("communityTalk.json", communityTalkList, Community.class);
+    //    loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
+    //    loadObjects("examCalendar.json", examCalendarList, Calendar.class);
 
     createMainMenu().execute();
     Prompt.close();
 
-    saveObjects("member.data", memberList);
-    saveObjects("freeInterest.data", freeInterestList);
-    saveObjects("chargeInterest.data", chargeInterestList);
-    saveObjects("freeStudy.data", freeStudyList);
-    saveObjects("chargeStudy.data", chargeStudyList);
-    saveObjects("communityQa.data", communityQaList);
-    saveObjects("communityInfo.data", communityInfoList);
-    saveObjects("communityTalk.data", communityTalkList);
-    saveObjects("jobsCalendar.data", jobsCalendarList);
-    saveObjects("examCalendar.data", examCalendarList);
+    saveObjects("member.json", memberList);
+    saveObjects("freeInterest.json", freeInterestList);
+    saveObjects("chargeInterest.json", chargeInterestList);
+    saveObjects("freeStudy.json", freeStudyList);
+    saveObjects("chargeStudy.json", chargeStudyList);
+    saveObjects("communityQa.json", communityQaList);
+    saveObjects("communityInfo.json", communityInfoList);
+    saveObjects("communityTalk.json", communityTalkList);
+    saveObjects("jobsCalendar.json", jobsCalendarList);
+    saveObjects("examCalendar.json", examCalendarList);
   }
 
-  @SuppressWarnings("unchecked")
-  private <E> void loadObjects(String filepath, List<E> list) {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new BufferedInputStream(
-            new FileInputStream(filepath)))) {
+  // JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.
+  private <E> void loadObjects(
+      String filepath, // 데이터를 읽어 올 파일 경로
+      List<E> list, // 로딩한 데이터를 객체로 만든 후 저장할 목록
+      Class<E> domainType // 생성할 객체의 타입 정보
+      ) {
 
-      list.addAll((List<E>) in.readObject());
+    try (BufferedReader in = new BufferedReader(
+        new FileReader(filepath, Charset.forName("UTF-8")))) {
 
-      System.out.printf("%s 파일 로딩 완료!\n", filepath);
+      StringBuilder strBuilder = new StringBuilder();
+      String str;
+
+      while ((str = in.readLine()) != null) { // 파일 전체를 읽는다.
+        strBuilder.append(str);
+      }
+
+      // StringBuilder로 읽어 온 JSON 문자열을 객체로 바꾼다.
+      Type type = TypeToken.getParameterized(Collection.class, domainType).getType(); 
+      Collection<E> collection = new Gson().fromJson(strBuilder.toString(), type);
+
+      // JSON 데이터로 읽어온 목록을 파라미터로 받은 List 에 저장한다.
+      list.addAll(collection);
+
+      System.out.printf("%s 데이터 로딩 완료!\n", filepath);
 
     } catch (Exception e) {
-      System.out.printf("%s 파일에서 데이터를 읽어 오는 중 오류 발생!\n", filepath);
-      e.printStackTrace();
+      System.out.printf("%s 데이터 로딩 오류!\n", filepath);
     }
   }
 
-  private <E> void saveObjects(String filepath, List<E> list) {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new BufferedOutputStream(
-            new FileOutputStream(filepath)))) {
+  // 객체를 JSON 형식으로 저장한다.
+  private void saveObjects(String filepath, List<?> list) {
+    try (PrintWriter out = new PrintWriter(
+        new BufferedWriter(
+            new FileWriter(filepath, Charset.forName("UTF-8"))))) {
 
-      out.writeObject(list);
+      out.print(new Gson().toJson(list));
 
-      System.out.printf("%s 파일 저장 완료!\n", filepath);
+      System.out.printf("%s 데이터 출력 완료!\n", filepath);
 
     } catch (Exception e) {
-      System.out.printf("%s 파일에 데이터를 저장 중 오류 발생!\n", filepath);
+      System.out.printf("%s 데이터 출력 오류!\n", filepath);
       e.printStackTrace();
     }
   }
@@ -263,7 +284,6 @@ public class App {
     mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
-    mainMenuGroup.add(createMentorApplyMenu());
     mainMenuGroup.add(createCommunityMenu());
     mainMenuGroup.add(createCalendarMenu());
 
@@ -277,7 +297,6 @@ public class App {
 
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createFreeStudyApplyMenu());
-    myPageMenu.add(createMentorApplyMenu());
 
     return myPageMenu;
   }
@@ -309,7 +328,6 @@ public class App {
     return mentorApplicantMenu;
   }
 
-  // 관리자 관점
   private Menu createDeleteRequestStudyMenu() {
     MenuGroup deletedRequestMenu = new MenuGroup("삭제 요청 스터디 관리");
 
@@ -356,13 +374,6 @@ public class App {
     return freeStudyApplyMenu;
   }
 
-  private Menu createMentorApplyMenu() {
-    MenuGroup mentorApplyMenu = new MenuGroup("멘토 신청", ACCESS_GENERAL);
-    mentorApplyMenu.add(new MenuItem("신청", "/mentorApplicant/add"));
-
-    return mentorApplyMenu;
-  }
-
   private Menu createFreeStudyMenu() {
     MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
 
@@ -380,6 +391,7 @@ public class App {
     MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
 
     chargeStudyMenu.add(new MenuItem("검색", "/chargeStudy/search"));
+    chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
     chargeStudyMenu.add(new MenuItem("생성", ACCESS_MENTOR, "/chargeStudy/add"));
     chargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/list"));
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));

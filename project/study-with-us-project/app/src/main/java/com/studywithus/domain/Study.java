@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.util.List;
 
 public class Study extends Content {
-  private static final long serialVersionUID = 1L;
-
   private List<Member> members; // 팀원 or 멘티
   private List<Member> applicants; // 무료 스터디 신청자
   private String mentorExplanation; // 멘토 설명
