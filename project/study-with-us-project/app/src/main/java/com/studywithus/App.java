@@ -327,7 +327,6 @@ public class App {
     return mentorApplicantMenu;
   }
 
-  // 관리자 관점
   private Menu createDeleteRequestStudyMenu() {
     MenuGroup deletedRequestMenu = new MenuGroup("삭제 요청 스터디 관리");
 
