@@ -283,7 +283,6 @@ public class App {
     mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
-    mainMenuGroup.add(createMentorApplyMenu());
     mainMenuGroup.add(createCommunityMenu());
     mainMenuGroup.add(createCalendarMenu());
 
@@ -297,7 +296,6 @@ public class App {
 
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createFreeStudyApplyMenu());
-    myPageMenu.add(createMentorApplyMenu());
 
     return myPageMenu;
   }
@@ -376,13 +374,6 @@ public class App {
     return freeStudyApplyMenu;
   }
 
-  private Menu createMentorApplyMenu() {
-    MenuGroup mentorApplyMenu = new MenuGroup("멘토 신청", ACCESS_GENERAL);
-    mentorApplyMenu.add(new MenuItem("신청", "/mentorApplicant/add"));
-
-    return mentorApplyMenu;
-  }
-
   private Menu createFreeStudyMenu() {
     MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
 
@@ -400,6 +391,7 @@ public class App {
     MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
 
     chargeStudyMenu.add(new MenuItem("검색", "/chargeStudy/search"));
+    chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
     chargeStudyMenu.add(new MenuItem("생성", ACCESS_MENTOR, "/chargeStudy/add"));
     chargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/list"));
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
