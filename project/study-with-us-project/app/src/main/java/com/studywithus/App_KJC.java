@@ -5,14 +5,20 @@ import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.studywithus.domain.Calendar;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.Member;
@@ -21,6 +27,7 @@ import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.AuthLoginHandler;
 import com.studywithus.handler.AuthLogoutHandler;
+import com.studywithus.handler.AuthUserInfoHandler;
 import com.studywithus.handler.ChargeInterestDeleteHandler;
 import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
@@ -59,9 +66,6 @@ import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
 import com.studywithus.handler.MentorApplicationDetailHandler;
-import com.studywithus.handler.MentorApplicationFormListHandler;
-import com.studywithus.handler.ParticipateFreeStudyListHandler;
-import com.studywithus.handler.RegisterFreeStudyDetailHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -69,24 +73,25 @@ import com.studywithus.util.Prompt;
 
 public class App_KJC {
   List<Member> memberList = new LinkedList<>();
-
-  // [수정] 스터디 하나 하나가 신청자 리스트를 가져야 하므로 핸들러에서 생성
-  //  List<Member> freeApplicantList = new ArrayList<>();
-
+  List<Member> freeApplicantList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Member> chargeApplicantList = new ArrayList<>();
   List<Member> mentorList = new ArrayList<>();
 
+  List<Study> registerFreeStudyList = new ArrayList<>();
+  List<Study> participateFreeStudyList = new ArrayList<>();
+  List<Study> registerChargeStudyList = new ArrayList<>();
+  List<Study> participateChargeStudyList = new ArrayList<>();
   List<Study> freeInterestList = new ArrayList<>();
   List<Study> chargeInterestList = new ArrayList<>();
   List<Study> freeStudyList = new ArrayList<>();
-  List<Study> freeApplicationList = new ArrayList<>();  // 무료 스터디 신청 리스트 (회원 관점)
+  List<Study> freeApplicationList = new ArrayList<>();
   List<Study> chargeStudyList = new ArrayList<>();
   List<Study> chargeDeleteRequestList = new ArrayList<>();
 
-  List<MentorApplicationForm> mentorApplicationForm = new ArrayList<>();
+  List<MentorApplicationForm> mentorApplicationFormList = new ArrayList<>();
 
-  List<Payment> paymentList = new ArrayList<>();
+  List<Payment> chargePaymentList = new ArrayList<>();
 
   List<Community> communityInfoList = new ArrayList<>();
   List<Community> communityQaList = new ArrayList<>();
@@ -95,14 +100,11 @@ public class App_KJC {
   List<Calendar> jobsCalendarList = new ArrayList<>();
   List<Calendar> examCalendarList = new ArrayList<>();
 
-  List<Study> myRegisteredFreeStudy = new ArrayList<>(); // [추가] 내가 생성한 무료 스터디
-
-  //[추가] 개인이 생성한 무료스터디와 생성된 무료 스터디 리스트를 연결하는 해쉬맵
-  HashMap<String, List<Study>> myRegisteredFreeStudyMap = new HashMap<>();
-  //[추가] 개인과 개인이 참여한 무료 스터디 리스트를 연결하는 해쉬맵
-  HashMap<String, List<Study>> myParticipatedFreeStudyMap = new HashMap<>();
-
   HashMap<String, Command> commandMap = new HashMap<>();
+  HashMap<String, List<Study>> participateFreeStudyMap = new HashMap<>();
+  HashMap<String, List<Study>> participateChargeStudyMap = new HashMap<>();
+  HashMap<String, List<Study>> registerFreeStudyMap = new HashMap<>();
+  HashMap<String, List<Study>> registerChargeStudyMap = new HashMap<>();
 
   class MenuItem extends Menu {
     String menuId;
@@ -134,35 +136,27 @@ public class App_KJC {
     commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
     commandMap.put("/auth/signUp", new SignUpHandler(memberList));
     commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
+    commandMap.put("/auth/userinfo", new AuthUserInfoHandler(memberList));
 
     commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
     commandMap.put("/chargeInterest/list", new ChargeInterestListHandler(chargeInterestList));
     commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
 
-    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationForm));
-    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationForm, mentorList));
-    commandMap.put("/mentorApplicant/detail", new MentorApplicationFormListHandler());
+    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
+    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-    // [수정] 파라미터 1개 (myRegisteredFreeStudyMap) 추가함
-    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, myRegisteredFreeStudyMap)); 
+    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-
-    // [수정] 파라미터 1개 삭제함 (App 73번째 줄에 설명있음)
     commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicationList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
-    // [추가]
-    commandMap.put("/myStudy/myRegisteredFreeStudy", new RegisterFreeStudyDetailHandler(myRegisteredFreeStudyMap, myParticipatedFreeStudyMap));
-    // [추가]
-    commandMap.put("/myStudy/myParticipatedFreeStudy", new ParticipateFreeStudyListHandler(myParticipatedFreeStudyMap));
-
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList, paymentList, chargeApplicantList));
+    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
@@ -203,10 +197,72 @@ public class App_KJC {
   }
 
   void service() {
+    loadObjects("member.json", memberList, Member.class);
+    loadObjects("freeInterest.json", freeInterestList, Study.class);
+    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+    loadObjects("freeStudy.json", freeStudyList, Study.class);
+    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+    loadObjects("communityQa.json", communityQaList, Community.class);
+    loadObjects("communityInfo.json", communityInfoList, Community.class);
+    loadObjects("communityTalk.json", communityTalkList, Community.class);
+    loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
+    loadObjects("examCalendar.json", examCalendarList, Calendar.class);
 
     createMainMenu().execute();
     Prompt.close();
 
+    saveObjects("member.json", memberList);
+    saveObjects("freeInterest.json", freeInterestList);
+    saveObjects("chargeInterest.json", chargeInterestList);
+    saveObjects("freeStudy.json", freeStudyList);
+    saveObjects("chargeStudy.json", chargeStudyList);
+    saveObjects("communityQa.json", communityQaList);
+    saveObjects("communityInfo.json", communityInfoList);
+    saveObjects("communityTalk.json", communityTalkList);
+    saveObjects("jobsCalendar.json", jobsCalendarList);
+    saveObjects("examCalendar.json", examCalendarList);
+  }
+
+  @SuppressWarnings("unchecked")
+  private <E> void loadObjects(
+      String filepath, 
+      List<E> list,
+      Class<E> domainType) {
+
+    try (BufferedReader in = new BufferedReader(
+        new FileReader(filepath,Charset.forName("UTF-8")))) {
+
+      StringBuilder strBuilder = new StringBuilder();
+      String str;
+      while ((str = in.readLine()) != null) {
+        strBuilder.append(str);
+      }
+
+      Type type = TypeToken.getParameterized(Collection.class, domainType).getType();
+      Collection<E> collection = new Gson().fromJson(strBuilder.toString(),type);
+
+      list.addAll(collection);
+
+      System.out.printf("%s 데이터 로딩 완료!\n", filepath);
+
+    }catch (Exception e) {
+      System.out.printf("%s 데이터 로딩 오류!\n", filepath);
+    }
+  }
+
+  private <E> void saveObjects(String filepath, List<?> list) {
+    try (PrintWriter out = new PrintWriter(
+        new BufferedWriter(
+            new FileWriter(filepath, Charset.forName("UTF-8"))))) {
+
+      out.print(new Gson().toJson(list));
+
+      System.out.printf("%s 데이터 출력 완료!\n", filepath);
+
+    } catch (Exception e) {
+      System.out.printf("%s 데이터 출력 오류!\n", filepath);
+      e.printStackTrace();
+    }
   }
 
   Menu createMainMenu() {
@@ -232,9 +288,9 @@ public class App_KJC {
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
 
+    myPageMenu.add(new MenuItem("내정보", ACCESS_GENERAL, "/auth/userinfo"));
+
     myPageMenu.add(createInterestMenu());
-    myPageMenu.add(new MenuItem("내가 생성한 무료 스터디", ACCESS_LEADER, "/myStudy/myRegisteredFreeStudy")); // [추가 - 테스트용]
-    myPageMenu.add(new MenuItem("내가 참여한 무료 스터디", Menu.ACCESS_MEMBER, "/myStudy/myParticipatedFreeStudy")); // [추가 - 테스트용]
     myPageMenu.add(createFreeStudyApplyMenu());
     myPageMenu.add(createMentorApplyMenu());
 
@@ -428,275 +484,5 @@ public class App_KJC {
     examCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
 
     return examCalendarMenu;
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadMembers() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("member.data"))) {
-
-      memberList.addAll((List<Member>) in.readObject());
-
-    } catch (Exception e) {
-      System.out.println("파일에서 회원 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveMembers() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("member.data"))) {
-
-      out.writeObject(memberList);
-
-    } catch (Exception e) {
-      System.out.println("회원 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadFreeInterests() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("freeInterest.data"))) {
-
-      freeInterestList.addAll((List<Study>) in.readObject());
-
-      System.out.println("무료 스터디 관심목록 데이터 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 무료 스터디 관심목록 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveFreeInterests() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("freeInterest.data"))) {
-
-      out.writeObject(freeInterestList);
-
-      System.out.println("무료 스터디 관심목록 데이터 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("무료 스터디 관심목록 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadChargeInterests() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("chargeInterest.data"))) {
-
-      chargeInterestList.addAll((List<Study>) in.readObject());
-
-      System.out.println("유료 스터디 관심목록 정보 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 유료스터디 관심목록 정보를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveChargeInterests() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("chargeInterest.data"))) {
-
-      out.writeObject(chargeInterestList);
-
-      System.out.println("유료 스터디 관심목록 정보 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("유료 스터디 관심 목록 정보 저장하던 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadFreeStudies() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("freeStudy.data"))) {
-
-      freeStudyList.addAll((List<Study>) in.readObject());
-
-      System.out.println("무료 스터디 데이터 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 무료 스터디 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveFreeStudies() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("freeStudy.data"))) {
-
-      out.writeObject(freeStudyList);
-
-      System.out.println("무료 스터디 데이터 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("무료 스터디 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadChargeStudies() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("ChargeStudy.data"))) {
-
-      chargeStudyList.addAll((List<Study>) in.readObject());
-
-      System.out.println("유료 스터디 정보 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 유료 스터디 정보를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveChargeStudies() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("ChargeStudy.data"))) {
-
-      out.writeObject(chargeStudyList);
-
-      System.out.println("유료 스터디 정보 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("유료 스터디 정보를 파일에 저장하던 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCommunityQas() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("communityQa.data"))) {
-
-      communityQaList.addAll((List<Community>) in.readObject());
-
-    } catch (Exception e) {
-      System.out.println("파일에서 커뮤니티 질문 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCommunityQas() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("communityQa.data"))) {
-
-      out.writeObject(communityQaList);
-
-    } catch (Exception e) {
-      System.out.println("커뮤니티 질문 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCommunityInfos() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("communityInfo.data"))) {
-
-      communityInfoList.addAll((List<Community>) in.readObject());
-
-    } catch (Exception e) {
-      System.out.println("파일에서 커뮤니티 정보 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCommunityInfos() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("communityInfo.data"))) {
-
-      out.writeObject(communityInfoList);
-
-    } catch (Exception e) {
-      System.out.println("커뮤니티 정보 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCommunityTalks() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("communityTalk.data"))) {
-
-      communityTalkList.addAll((List<Community>) in.readObject());
-
-    } catch (Exception e) {
-      System.out.println("파일에서 커뮤니티 스몰톡 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCommunityTalks() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("communityTalk.data"))) {
-
-      out.writeObject(communityTalkList);
-
-    } catch (Exception e) {
-      System.out.println("커뮤니티 스몰톡 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadJobsCalendars() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("jobsCalendar.data"))) {
-
-      jobsCalendarList.addAll((List<Calendar>) in.readObject());
-
-      System.out.println("이달의 채용공고 데이터 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 이달의 채용공고 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-    }
-  }
-
-  private void saveJobsalendars() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("jobsCalendar.data"))) {
-
-      out.writeObject(jobsCalendarList);
-
-      System.out.println("이달의 채용공고 데이터 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("이달의 채용공고 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadExamCalendars() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("examCalendar.data"))) {
-
-      examCalendarList.addAll((List<Calendar>) in.readObject());
-
-      System.out.println("이달의 시험일정 데이터 로딩이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 이달의 시험일정 데이터를 읽어 오는 중 오류가 발생하였습니다.");
-    }
-  }
-
-  private void saveExamCalendars() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("examCalendar.data"))) {
-
-      out.writeObject(examCalendarList);
-
-      System.out.println("이달의 시험일정 데이터 저장이 완료되었습니다.");
-
-    } catch (Exception e) {
-      System.out.println("이달의 시험일정 데이터를 파일에 저장 중 오류가 발생하였습니다.");
-    }
   }
 }
