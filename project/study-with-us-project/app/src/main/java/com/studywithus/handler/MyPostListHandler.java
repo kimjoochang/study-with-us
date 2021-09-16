@@ -3,24 +3,25 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.Community;
 
-public class MyPostListHandler extends Community {
+public class MyPostListHandler extends AbstractCommunityHandler {
 
-  List<Community> myPostList;
+  List<Community> communityList;
 
-  public MyPostListHandler(List<Community> myPostList) {
-    this.myPostList = myPostList;
+  public MyPostListHandler(List<Community> communityList) {
+    super(communityList);
   }
 
   @Override
   public void execute() {
-    System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]");
+    System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]\n");
 
-    if (myPostList != null) {
+    if (community.getWriter().getId() == AuthLoginHandler.getLoginUser()) {
 
-      for (Community community : myPostList.get(AuthLoginHandler.getLoginUser().getId())) {
+      for (Community community : communityList) {
+
         System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
             community.getNo(),
-            community.getTitle(), 
+            community.getTitle(),
             community.getWriter().getName(),
             community.getRegisteredDate(), 
             community.getViewCount(),
@@ -35,13 +36,5 @@ public class MyPostListHandler extends Community {
   }
 
   // ID로 회원별 게시글 조회
-  protected Member findById(String Id) {
-    for (Member member : communityList) {
-      if (member.getId() == Id) {
-        return member;
-      }
-    }
-    return null;
-  }
 
 }
