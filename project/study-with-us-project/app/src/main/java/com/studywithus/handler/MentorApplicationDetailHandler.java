@@ -8,7 +8,7 @@ import com.studywithus.util.Prompt;
 
 public class MentorApplicationDetailHandler implements Command {
 
-  MentorApplicationForm mentorApplication;
+  //  MentorApplicationForm mentorApplication;
 
   List<MentorApplicationForm> mentorApplicationFormList;
   List<String> mentorList;
@@ -34,7 +34,7 @@ public class MentorApplicationDetailHandler implements Command {
     System.out.println();
 
     String name = Prompt.inputString("이름: ");
-    mentorApplication = findByName(name);
+    MentorApplicationForm mentorApplication = findByName(name);
 
     if (mentorApplication == null) {
       System.out.println();
@@ -59,7 +59,7 @@ public class MentorApplicationDetailHandler implements Command {
       int input = Prompt.inputInt("선택> ");
 
       if (input == 1) {
-        mentorApprove();
+        mentorApprove(mentorApplication);
         break;
 
       } else if (input == 2) {
@@ -76,8 +76,8 @@ public class MentorApplicationDetailHandler implements Command {
     }
   }
 
-  // 멘토 승인
-  private void mentorApprove() {
+  // [NullPoint 오류] 멘토 승인
+  private void mentorApprove(MentorApplicationForm mentorApplication) {
     String id = mentorApplication.getId();
     findById(id).setUserAccessLevel(Menu.ACCESS_MENTOR);
 
@@ -87,7 +87,7 @@ public class MentorApplicationDetailHandler implements Command {
     System.out.println("멘토 승인이 완료되었습니다.");
   }
 
-  // 멘토 거절
+  // [NullPoint 오류] 멘토 거절
   private void mentorReject(MentorApplicationForm mentorApplication) {
     this.mentorApplicationFormList.remove(mentorApplication);
 
