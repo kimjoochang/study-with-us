@@ -11,14 +11,15 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.studywithus.domain.Calendar;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.Member;
@@ -66,7 +67,6 @@ import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
 import com.studywithus.handler.MentorApplicationDetailHandler;
-import com.studywithus.handler.MentorApplicationFormListHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -90,17 +90,13 @@ public class AppJ {
   List<Study> chargeStudyList = new ArrayList<>();
   List<Study> chargeDeleteRequestList = new ArrayList<>();
 
-  List<MentorApplicationForm> mentorApplicationForm = new ArrayList<>();
+  List<MentorApplicationForm> mentorApplicationFormList = new ArrayList<>();
 
   List<Payment> chargePaymentList = new ArrayList<>();
 
   List<Community> communityInfoList = new ArrayList<>();
   List<Community> communityQaList = new ArrayList<>();
   List<Community> communityTalkList = new ArrayList<>();
-
-  // 추가중 for 내 게시글
-  List<Community> myPostist = new ArrayList<>();
-
 
   List<Calendar> jobsCalendarList = new ArrayList<>();
   List<Calendar> examCalendarList = new ArrayList<>();
@@ -149,9 +145,8 @@ public class AppJ {
     commandMap.put("/chargeInterest/list", new ChargeInterestListHandler(chargeInterestList));
     commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
 
-    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationForm));
-    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationForm, mentorList));
-    commandMap.put("/mentorApplicant/detail", new MentorApplicationFormListHandler());
+    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
+    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
@@ -202,26 +197,19 @@ public class AppJ {
     commandMap.put("/examCalendar/update", new ExamCalendarUpdateHandler(examCalendarList));
     commandMap.put("/examCalendar/delete", new ExamCalendarDeleteHandler(examCalendarList));
 
-    // 추가중 for 내 게시글
-    commandMap.put("/myPost/list", new CommunityListHandler(myPostList));
-    commandMap.put("/myPost/detail", new CommunityDetailHandler(myPostList));
-    commandMap.put("/myPost/update", new CommunityUpdateHandler(myPostList));
-    commandMap.put("/myPost/delete", new CommunityDeleteHandler(myPostList));
   }
 
   void service() {
-    loadObjects("member.json", memberList);
-    loadObjects("freeInterest.json", freeInterestList);
-    loadObjects("chargeInterest.json", chargeInterestList);
-    loadObjects("freeStudy.json", freeStudyList);
-    loadObjects("chargeStudy.json", chargeStudyList);
-    loadObjects("communityQa.json", communityQaList);
-    loadObjects("communityInfo.json", communityInfoList);
-    loadObjects("communityTalk.json", communityTalkList);
-    loadObjects("jobsCalendar.json", jobsCalendarList);
-    loadObjects("examCalendar.json", examCalendarList);
-
-    //loadObjects("myPost.json", myPostList);
+    //  loadObjects("member.json", memberList, Member.class);
+    //    loadObjects("freeInterest.json", freeInterestList, Study.class);
+    //    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+    //    loadObjects("freeStudy.json", freeStudyList, Study.class);
+    //    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+    //    loadObjects("communityQa.json", communityQaList, Community.class);
+    //    loadObjects("communityInfo.json", communityInfoList, Community.class);
+    //    loadObjects("communityTalk.json", communityTalkList, Community.class);
+    //    loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
+    //    loadObjects("examCalendar.json", examCalendarList, Calendar.class);
 
     createMainMenu().execute();
     Prompt.close();
@@ -236,11 +224,9 @@ public class AppJ {
     saveObjects("communityTalk.json", communityTalkList);
     saveObjects("jobsCalendar.json", jobsCalendarList);
     saveObjects("examCalendar.json", examCalendarList);
-
-    //saveObjects("myPost.json", myPostList);
   }
 
-  //JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.
+  // JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.
   private <E> void loadObjects(
       String filepath, // 데이터를 읽어 올 파일 경로 
       List<E> list, // 로딩한 데이터를 객체로 만든 후 저장할 목록 
@@ -314,7 +300,7 @@ public class AppJ {
 
     signUpMenu.add(new MenuItem("이메일로 가입하기", ACCESS_LOGOUT,"/auth/signUp"));
 
-    // SNS 계정별 로그인(ex. 카카오, 구글) 추가할지 논의하기
+    // SNS 계정별 로그인(ex. 카카오, 구글) 추가할지 논의하기 -> 추가하랭
     signUpMenu.add(new MenuItem("SNS로 시작하기", ACCESS_LOGOUT, "/")); 
 
     return signUpMenu;
@@ -562,14 +548,26 @@ public class AppJ {
     return memberManagementMenu;
   }
 
-  // 관리자 페이지 / 회원 관리 / 멘토 신청 내역 관리
+  // 관리자 페이지 / 회원 관리
   private Menu createMentorManagementMenu() {
 
     MenuGroup mentorManagementMenu = new MenuGroup("회원 관리");
-    mentorManagementMenu.add(new MenuItem("조회", "/mentorApplicant/list"));
-    mentorManagementMenu.add(new MenuItem("상세보기", "/mentorApplicant/detail"));
+
+    mentorManagementMenu.add(createMentorApplicantMenu());
+    mentorManagementMenu.add(createBlackListMenu());
 
     return mentorManagementMenu;
+  }
+
+  // 관리자 페이지 / 회원 관리 / 멘토 신청 내역 관리
+  private Menu createMentorApplicantMenu() {
+    MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
+
+    mentorApplicantMenu.add(new MenuItem("조회", "/mentorApplicant/list"));
+    mentorApplicantMenu.add(new MenuItem("상세보기", "/mentorApplicant/detail"));
+
+    return mentorApplicantMenu;
+
   }
 
   //관리자 페이지 / 회원 관리 / 블랙리스트 관리

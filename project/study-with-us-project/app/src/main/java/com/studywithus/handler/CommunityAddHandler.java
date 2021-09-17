@@ -9,9 +9,9 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
 
   List<Community> communityWriterList;
 
-  public CommunityAddHandler(List<Community> communityList, List<Community> communityWriterList) {
+  public CommunityAddHandler(List<Community> communityList) {
     super(communityList);
-    this.communityWriterList = communityWriterList;
+
   }
 
   @Override

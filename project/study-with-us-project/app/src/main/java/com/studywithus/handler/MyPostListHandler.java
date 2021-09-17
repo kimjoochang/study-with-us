@@ -2,17 +2,13 @@ package com.studywithus.handler;
 
 import java.util.List;
 import com.studywithus.domain.Community;
-import com.studywithus.domain.MentorApplicationForm;
-import com.studywithus.domain.Member;
 
 public class MyPostListHandler extends AbstractCommunityHandler {
 
   List<Community> communityList;
-  List<Member> communityWriterList;
 
-  public MyPostListHandler(List<Community> communityList, List<Member> communityWriterList) {
+  public MyPostListHandler(List<Community> communityList) {
     super(communityList);
-    this.communityWriterList = communityWriterList;
   }
 
   // ver1
@@ -48,34 +44,33 @@ public class MyPostListHandler extends AbstractCommunityHandler {
     System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]\n");
 
 
-    Member id = AuthLoginHandler.getLoginUser();
-    Community community = findById(id);
+    String id = AuthLoginHandler.getLoginUser().getId();
+    Community cmnt = findById(id);
 
-    if () {
-
-      for (Community community : communityList) {
+    if (cmnt != null) {
+      for (Community myPost : communityList) {
 
         System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
-            community.getNo(),
-            community.getTitle(),
-            community.getWriter().getName(),
-            community.getRegisteredDate(), 
-            community.getViewCount(),
-            community.getLike());
+            myPost.getNo(),
+            myPost.getTitle(),
+            myPost.getWriter().getId(),
+            myPost.getRegisteredDate(), 
+            myPost.getViewCount(),
+            myPost.getLike());
         System.out.println();
-        return;
       } 
+    } else {
+      System.out.println();
+      System.out.println("내 게시글이 존재하지 않습니다.\n");
+      return;
     }
-
-    System.out.println();
-    System.out.println("내 게시글이 존재하지 않습니다.\n");
   }
 
   // ID로 회원별 커뮤니티 게시글 조회
   public Community findById(String id) {
-    for (Community cmnt : communityList) {
-      if (cmnt.getWriter().getId().equals(id)) {
-        return cmnt;
+    for (Community writer : communityList) {
+      if (writer.getWriter().getId().equals(id)) {
+        return writer;
       }
     }
     return null;
