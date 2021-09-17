@@ -10,7 +10,7 @@ public class FreeStudyListHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 조회]\n");
 
     if (studyList != null) {

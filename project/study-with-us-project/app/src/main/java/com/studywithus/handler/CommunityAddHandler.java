@@ -15,7 +15,7 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[커뮤니티 / 생성] \n");
 
     Community community = new Community();

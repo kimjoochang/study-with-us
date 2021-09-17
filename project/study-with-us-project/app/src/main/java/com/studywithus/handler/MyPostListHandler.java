@@ -40,7 +40,7 @@ public class MyPostListHandler extends AbstractCommunityHandler {
   // ver2
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]\n");
 
 

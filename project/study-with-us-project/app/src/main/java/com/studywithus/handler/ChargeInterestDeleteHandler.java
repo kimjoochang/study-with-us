@@ -11,7 +11,7 @@ public class ChargeInterestDeleteHandler extends AbstractInterestHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[유료 스터디 관심목록 / 삭제]\n");
 
     for (Study chargeInterest : interestList) {

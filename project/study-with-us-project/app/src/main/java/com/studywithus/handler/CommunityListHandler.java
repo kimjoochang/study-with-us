@@ -10,7 +10,7 @@ public class CommunityListHandler extends AbstractCommunityHandler{
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[커뮤니티 / 조회]\n");
 
     if (communityList != null) {

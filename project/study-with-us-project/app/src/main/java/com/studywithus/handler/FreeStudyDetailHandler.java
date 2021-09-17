@@ -21,7 +21,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호? ");

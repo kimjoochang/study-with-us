@@ -10,7 +10,7 @@ public class FreeStudyUpdateHandler extends AbstractStudyHandler {
     super(freeStudyList);
   }
 
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 수정]\n");
 
     int no = Prompt.inputInt("번호: ");

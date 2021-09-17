@@ -10,7 +10,7 @@ public class ChargeStudyDeletedListHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[스터디 삭제 요청 내역 / 조회]\n");
     System.out.println("-----------------------------");
 

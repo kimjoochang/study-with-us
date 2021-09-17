@@ -20,7 +20,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     /* 해쉬맵의 value값을 myRegisteredFreeStudy에 담음 
      * 전역변수로 둘 경우 App 실행 시 getLoginUser() nullPointer 에러뜸 */
     List<Study> myRegisteredFreeStudy = myRegisteredFreeStudyMap.get(AuthLoginHandler.getLoginUser().getId());

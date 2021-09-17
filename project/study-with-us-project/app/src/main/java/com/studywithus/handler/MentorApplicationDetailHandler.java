@@ -20,7 +20,7 @@ public class MentorApplicationDetailHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[멘토 신청 내역 / 상세보기]\n");
 
     // 멘토 신청자 List

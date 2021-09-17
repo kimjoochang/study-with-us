@@ -11,7 +11,7 @@ public class CommunityUpdateHandler extends AbstractCommunityHandler{
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[커뮤니티 / 수정] \n");
 
     int no = Prompt.inputInt("번호? ");

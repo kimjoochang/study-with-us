@@ -17,7 +17,7 @@ public class FindPasswordHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
 
     System.out.println("[비밀번호 변경]\n");
     String name = Prompt.inputString("이름? ");

@@ -11,7 +11,7 @@ public class JobsCalendarUpdateHandler extends AbstractCalendarHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[이달의 채용공고 / 수정]\n");
 
     int no = Prompt.inputInt("번호: ");

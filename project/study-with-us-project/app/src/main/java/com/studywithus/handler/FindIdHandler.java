@@ -18,7 +18,7 @@ public class FindIdHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[아이디 찾기]\n");
 
     String name = Prompt.inputString("이름? ");

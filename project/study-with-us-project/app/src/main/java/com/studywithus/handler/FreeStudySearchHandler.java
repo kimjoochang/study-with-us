@@ -11,7 +11,7 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 검색]");
 
     String input = Prompt.inputString("검색할 키워드를 입력하세요. > ");

@@ -11,7 +11,7 @@ public class ChargeStudyUpdateHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[유료 스터디 / 수정]");
     int no = Prompt.inputInt("번호? ");
 
