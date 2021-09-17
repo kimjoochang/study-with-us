@@ -29,7 +29,7 @@ public class MyPostListHandlerSY extends Community {
         System.out.println();
         return;
       } 
-    }
+    } 
 
     System.out.println();
     System.out.println("내 게시글이 존재하지 않습니다.\n");

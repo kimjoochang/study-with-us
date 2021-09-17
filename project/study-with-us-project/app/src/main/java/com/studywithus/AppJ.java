@@ -40,6 +40,7 @@ import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudySearchHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
 import com.studywithus.handler.Command;
+import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.CommunityAddHandler;
 import com.studywithus.handler.CommunityDeleteHandler;
 import com.studywithus.handler.CommunityDetailHandler;
@@ -66,7 +67,6 @@ import com.studywithus.handler.JobsCalendarListHandler;
 import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
-import com.studywithus.handler.MentorApplicationDetailHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -78,6 +78,7 @@ public class AppJ {
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Member> chargeApplicantList = new ArrayList<>();
   List<Member> mentorList = new ArrayList<>();
+  List<Member> memberList2 = new ArrayList<>();
 
   List<Study> registerFreeStudyList = new ArrayList<>();
   List<Study> participateFreeStudyList = new ArrayList<>();
@@ -124,7 +125,12 @@ public class AppJ {
     @Override
     public void execute() {
       Command command = commandMap.get(menuId);
-      command.execute();
+      try {
+        command.execute(new CommandRequest(commandMap));
+      } catch (Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
+        e.printStackTrace();
+      }
     }
   }
 
@@ -135,10 +141,20 @@ public class AppJ {
 
   public AppJ() {
     commandMap.put("/auth/login", new AuthLoginHandler(memberList));
+    commandMap.put("/google/login", new AuthLoginHandler(memberList));
+    commandMap.put("/facebook/login", new AuthLoginHandler(memberList));
+    commandMap.put("/kakao/login", new AuthLoginHandler(memberList));
+    commandMap.put("/naver/login", new AuthLoginHandler(memberList));
+
     commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
+
     commandMap.put("/auth/signUp", new SignUpHandler(memberList));
+    commandMap.put("/google/signUp", new SignUpHandler(memberList));
+    commandMap.put("/facebook/signUp", new SignUpHandler(memberList));
+    commandMap.put("/kakao/signUp", new SignUpHandler(memberList));
+    commandMap.put("/naver/signUp", new SignUpHandler(memberList));
     commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
-    commandMap.put("/auth/userinfo", new AuthUserInfoHandler(memberList));
+    commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberList));
 
     commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
@@ -146,7 +162,7 @@ public class AppJ {
     commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
-    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
+    // commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
@@ -238,6 +254,7 @@ public class AppJ {
 
       StringBuilder strBuilder = new StringBuilder();
       String str;
+
       while ((str = in.readLine()) != null) { // 파일 전체를 읽는다.
         strBuilder.append(str);
       }
@@ -296,27 +313,50 @@ public class AppJ {
 
   // 메인 메뉴 / 회원가입
   private Menu createSignUpMenu() {
-    MenuGroup signUpMenu = new MenuGroup("회원가입");
+    MenuGroup signUpMenu = new MenuGroup("회원가입", ACCESS_LOGOUT);
 
-    signUpMenu.add(new MenuItem("이메일로 가입하기", ACCESS_LOGOUT,"/auth/signUp"));
+    signUpMenu.add(new MenuItem("이메일로 가입하기", "/auth/signUp"));
 
     // SNS 계정별 로그인(ex. 카카오, 구글) 추가할지 논의하기 -> 추가하랭
-    signUpMenu.add(new MenuItem("SNS로 시작하기", ACCESS_LOGOUT, "/")); 
+    signUpMenu.add(createSnsSignUpMenu()); 
 
     return signUpMenu;
   }
 
+  // 메인 메뉴 / 회원가입 / SNS로 시작하기
+  private Menu createSnsSignUpMenu() {
+    MenuGroup snsSignUpMenu = new MenuGroup("SNS로 시작하기", ACCESS_LOGOUT);
+    // 메뉴 명칭 논의할 것
+    snsSignUpMenu.add(new MenuItem("구글로 시작하기","/google/signUp"));
+    snsSignUpMenu.add(new MenuItem("페이스북으로 시작하기","/facebook/signUp"));
+    snsSignUpMenu.add(new MenuItem("카카오로 시작하기","/kakao/signUp"));
+    snsSignUpMenu.add(new MenuItem("네이버로 시작하기","/naver/signUp"));
+
+    return snsSignUpMenu;
+  }
+
   // 메인 메뉴 / 로그인
   private Menu createLogInMenu() {
-    MenuGroup logInMenu = new MenuGroup("로그인");
+    MenuGroup logInMenu = new MenuGroup("로그인", ACCESS_LOGOUT);
 
-    logInMenu.add(new MenuItem("이메일 로그인", ACCESS_LOGOUT,"/auth/login"));
-
-    // 상동
-    logInMenu.add(new MenuItem("SNS 로그인", ACCESS_LOGOUT, "/"));
+    logInMenu.add(new MenuItem("이메일 로그인", "/auth/login"));
+    logInMenu.add(createSnsLogInMenu()); 
 
     return logInMenu;
   }
+
+  // 메인 메뉴 / 로그인 / SNS로 시작하기
+  private Menu createSnsLogInMenu() {
+    MenuGroup createSnsLogInMenu = new MenuGroup("SNS 로그인", ACCESS_LOGOUT);
+    // 상동
+    createSnsLogInMenu.add(new MenuItem("구글로 로그인","/google/login"));
+    createSnsLogInMenu.add(new MenuItem("페이스북으로 로그인","/facebook/login"));
+    createSnsLogInMenu.add(new MenuItem("카카오로 로그인","/kakao/login"));
+    createSnsLogInMenu.add(new MenuItem("네이버로 로그인","/naver/login"));
+
+    return createSnsLogInMenu;
+  }
+
   // ------------------------------ 무료 스터디 -----------------------------------------
 
   //무료 스터디 메인 메뉴
@@ -345,7 +385,7 @@ public class AppJ {
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
     chargeStudyMenu.add(new MenuItem("수정", ACCESS_MENTOR, "/chargeStudy/update"));
     chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_MENTOR, "/chargeStudy/deleteRequest"));
-    //chargeStudyMenu.add(new MenuGroup("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
+    chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
 
     return chargeStudyMenu;
   }
@@ -411,23 +451,24 @@ public class AppJ {
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
 
-    myPageMenu.add(createMyInfoMenu());
+    //    myPageMenu.add(createMyInfoMenu());
     myPageMenu.add(createActivityDetailMenu());
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createPaymentListMenu());
     myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipwithdrawal"));
+    myPageMenu.add(new MenuItem("나의 정보", "auth/userInfo"));
 
     return myPageMenu;
   }
 
-  // 마이 페이지 / 나의 정보
-  private Menu createMyInfoMenu() {
-    MenuGroup myInfoMenu = new MenuGroup("나의 정보");
-
-    myInfoMenu.add(new MenuItem("", "/"));
-
-    return myInfoMenu;
-  }
+  //  // 마이 페이지 / 나의 정보
+  //  private Menu createMyInfoMenu() {
+  //    MenuGroup myInfoMenu = new MenuGroup("나의 정보");
+  //
+  //    myInfoMenu.add(new MenuItem("", "/"));
+  //
+  //    return myInfoMenu;
+  //  }
 
   // 마이 페이지 / 나의 활동
   private Menu createActivityDetailMenu() {
@@ -506,7 +547,7 @@ public class AppJ {
   private Menu createPaymentListMenu() {
     MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
     paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "/"));
-    paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "/"));
+    paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "/"));
     return paymentListMenu;
   }
 
