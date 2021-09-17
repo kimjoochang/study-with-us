@@ -17,18 +17,20 @@ public class SnsSignUpHandler extends AbstractLoginHandler {
 
     Member member = new Member();
 
-    String id = Prompt.inputString("SNS 계정: ");
+    String name = Prompt.inputString("이름: ");
+    String snsId = Prompt.inputString("SNS 계정: ");
     String password = Prompt.inputString("비밀번호: ");
 
     System.out.println();
 
-    id = findById(id);
+    snsId = findBySnsId(snsId);
 
-    if (id == null) {
+    if (snsId == null) {
       System.out.println("이미 연동된 SNS 계정입니다.");
 
     } else {
-      member.setId(id);
+      member.setName(name);
+      member.setId(snsId);
       member.setPassword(password);
       member.setRegisteredDate((new Date(System.currentTimeMillis())));
       member.setUserAccessLevel(Menu.ACCESS_GENERAL);
@@ -41,12 +43,12 @@ public class SnsSignUpHandler extends AbstractLoginHandler {
     }
   }
 
-  private String findById(String id) {
+  private String findBySnsId(String snsId) {
     for (Member member : memberList) {
-      if (id.equalsIgnoreCase(member.getId())) {
+      if (snsId.equalsIgnoreCase(member.getId())) {
         return null;
       }
     }
-    return id;
+    return snsId;
   }
 }

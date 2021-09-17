@@ -68,6 +68,8 @@ import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
 import com.studywithus.handler.SignUpHandler;
+import com.studywithus.handler.SnsLogInHandler;
+import com.studywithus.handler.SnsSignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
@@ -140,21 +142,27 @@ public class AppJ {
   }
 
   public AppJ() {
+    // AuthLogInHandler로 수정 필요
     commandMap.put("/auth/login", new AuthLoginHandler(memberList));
-    commandMap.put("/google/login", new AuthLoginHandler(memberList));
-    commandMap.put("/facebook/login", new AuthLoginHandler(memberList));
-    commandMap.put("/kakao/login", new AuthLoginHandler(memberList));
-    commandMap.put("/naver/login", new AuthLoginHandler(memberList));
+    commandMap.put("/google/login", new SnsLogInHandler(memberList));
+    commandMap.put("/facebook/login", new SnsLogInHandler(memberList));
+    commandMap.put("/kakao/login", new SnsLogInHandler(memberList));
+    commandMap.put("/naver/login", new SnsLogInHandler(memberList));
 
     commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
 
     commandMap.put("/auth/signUp", new SignUpHandler(memberList));
-    commandMap.put("/google/signUp", new SignUpHandler(memberList));
-    commandMap.put("/facebook/signUp", new SignUpHandler(memberList));
-    commandMap.put("/kakao/signUp", new SignUpHandler(memberList));
-    commandMap.put("/naver/signUp", new SignUpHandler(memberList));
+    commandMap.put("/google/signUp", new SnsSignUpHandler(memberList));
+    commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberList));
+    commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberList));
+    commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
+
     commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
-    commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberList));
+
+    // MyInfoHandler로 수정 필요
+    // (회원 전체의 정보가 담기는 게 아니라, 마이페이지에서 본인의 정보를 보는 기능을 다루는 핸들러라서)
+    commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberList)); 
+
 
     commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));

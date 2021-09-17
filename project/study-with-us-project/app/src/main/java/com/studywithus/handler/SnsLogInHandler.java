@@ -5,7 +5,7 @@ import com.studywithus.domain.Member;
 import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
-public class SnsLoginHandler implements Command {
+public class SnsLogInHandler implements Command {
 
   List<Member> memberList;
 
@@ -20,7 +20,7 @@ public class SnsLoginHandler implements Command {
     return userAccessLevel;
   }
 
-  public SnsLoginHandler(List<Member> memberList) {
+  public SnsLogInHandler(List<Member> memberList) {
     this.memberList = memberList;
   }
 
@@ -28,10 +28,10 @@ public class SnsLoginHandler implements Command {
   public void execute(CommandRequest request) {
     System.out.println("[SNS 로그인]");
 
-    String id = Prompt.inputString("아이디: ");
+    String snsId = Prompt.inputString("아이디: ");
     String password = Prompt.inputString("비밀번호: ");
 
-    Member member = findByIdPassword(id, password);
+    Member member = findBySnsIdPassword(snsId, password);
 
     if (member == null) {
       System.out.println("연동된 SNS 계정이 존재하지 않습니다.");
@@ -44,7 +44,7 @@ public class SnsLoginHandler implements Command {
     }
   }
 
-  private Member findByIdPassword(String id, String password) {
+  private Member findBySnsIdPassword(String id, String password) {
     for (Member member : memberList) {
       if (member.getId().equalsIgnoreCase(id) && member.getPassword().equals(password)) {
         return member;
