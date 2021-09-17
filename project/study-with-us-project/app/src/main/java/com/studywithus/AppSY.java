@@ -4,20 +4,21 @@ import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
-import static com.studywithus.menu.Menu.ACCESS_MEMBER;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.google.common.reflect.TypeToken;
 import com.studywithus.domain.Calendar;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.Member;
@@ -29,9 +30,11 @@ import com.studywithus.handler.AuthLogoutHandler;
 import com.studywithus.handler.AuthUserInfoHandler;
 import com.studywithus.handler.ChargeInterestDeleteHandler;
 import com.studywithus.handler.ChargeInterestListHandler;
+import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.ChargeStudyDeletedDetailHandler;
 import com.studywithus.handler.ChargeStudyDeletedListHandler;
+import com.studywithus.handler.ChargeStudyDetailHandler;
 import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudySearchHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
@@ -49,7 +52,9 @@ import com.studywithus.handler.ExamCalendarListHandler;
 import com.studywithus.handler.ExamCalendarUpdateHandler;
 import com.studywithus.handler.FreeInterestDeleteHandler;
 import com.studywithus.handler.FreeInterestListHandler;
+import com.studywithus.handler.FreeStudyAddHandler;
 import com.studywithus.handler.FreeStudyDeleteHandler;
+import com.studywithus.handler.FreeStudyDetailHandler;
 import com.studywithus.handler.FreeStudyListHandler;
 import com.studywithus.handler.FreeStudySearchHandler;
 import com.studywithus.handler.FreeStudyUpdateHandler;
@@ -61,7 +66,6 @@ import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
 import com.studywithus.handler.MentorApplicationDetailHandler;
-import com.studywithus.handler.MentorApplicationFormListHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -74,6 +78,10 @@ public class AppSY {
 	List<Member> chargeApplicantList = new ArrayList<>();
 	List<Member> mentorList = new ArrayList<>();
 
+	List<Study> registerFreeStudyList = new ArrayList<>();
+	List<Study> participateFreeStudyList = new ArrayList<>();
+	List<Study> registerChargeStudyList = new ArrayList<>();
+	List<Study> participateChargeStudyList = new ArrayList<>();
 	List<Study> freeInterestList = new ArrayList<>();
 	List<Study> chargeInterestList = new ArrayList<>();
 	List<Study> freeStudyList = new ArrayList<>();
@@ -133,19 +141,18 @@ public class AppSY {
 
 		commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationForm));
 		commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationForm, mentorList));
-		commandMap.put("/mentorApplicant/detail", new MentorApplicationFormListHandler());
 
 		commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-		//		commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
+		commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList));
 		commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-		//		commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicantList, freeApplicationList, freeInterestList));
+		commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicantList, freeApplicationList, freeInterestList));
 		commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
 		commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
 		commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
-		//		commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
+		commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList));
 		commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-		//		commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList, paymentList, chargeApplicantList));
+		commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList, paymentList, chargeApplicantList));
 		commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
 		commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
 		commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
@@ -186,23 +193,16 @@ public class AppSY {
 	}
 
 	void service() {
-		loadObjects("member.data", memberList);
-		loadObjects("freeInterest.data", freeInterestList);
-		loadObjects("chargeInterest.data", chargeInterestList);
-		loadObjects("freeStudy.data", freeStudyList);
-		loadObjects("chargeStudy.data", chargeStudyList);
-		loadObjects("communityQa.data", communityQaList);
-		loadObjects("communityInfo.data", communityInfoList);
-		loadObjects("communityTalk.data", communityTalkList);
-		loadObjects("jobsCalendar.data", jobsCalendarList);
-		loadObjects("examCalendar.data", examCalendarList);
-
-		System.out.println("비회원 => " + ACCESS_LOGOUT);
-		System.out.println("회원 => " + ACCESS_GENERAL);
-		System.out.println("팀원 => " + ACCESS_MEMBER);
-		System.out.println("팀장 => " + ACCESS_LEADER);
-		System.out.println("멘토 => " + ACCESS_MENTOR);
-		System.out.println("관리자 => " + ACCESS_ADMIN);
+		loadObjects("member.json", memberList, Member.class);
+		loadObjects("freeInterest.json", freeInterestList, Study.class);
+		loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+		loadObjects("freeStudy.json", freeStudyList, Study.class);
+		loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+		loadObjects("communityQa.json", communityQaList, Community.class);
+		loadObjects("communityInfo.json", communityInfoList, Community.class);
+		loadObjects("communityTalk.json", communityTalkList, Community.class);
+		loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
+		loadObjects("examCalendar.json", examCalendarList, Calendar.class);
 
 		createMainMenu().execute();
 		Prompt.close();
@@ -219,36 +219,53 @@ public class AppSY {
 		saveObjects("examCalendar.data", examCalendarList);
 	}
 
-	@SuppressWarnings("unchecked")
-	private <E> void loadObjects(String filepath, List<E> list) {
-		try (ObjectInputStream in = new ObjectInputStream(
-				new BufferedInputStream(
-						new FileInputStream(filepath)))) {
 
-			list.addAll((List<E>) in.readObject());
+	// JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.
+	private <E> void loadObjects(
+			String filepath, // 데이터를 읽어 올 파일 경로 
+			List<E> list, // 로딩한 데이터를 객체로 만든 후 저장할 목록 
+			Class<E> domainType // 생성할 객체의 타입정보
+			) {
 
-			System.out.printf("%s 파일 로딩 완료!\n", filepath);
+		try (BufferedReader in = new BufferedReader(
+				new FileReader(filepath, Charset.forName("UTF-8")))) {
+
+			StringBuilder strBuilder = new StringBuilder();
+			String str;
+			while ((str = in.readLine()) != null) { // 파일 전체를 읽는다.
+				strBuilder.append(str);
+			}
+
+			// StringBuilder로 읽어 온 JSON 문자열을 객체로 바꾼다.
+			Type type = TypeToken.getParameterized(Collection.class, domainType).getType(); 
+			Collection<E> collection = new Gson().fromJson(strBuilder.toString(), type);
+
+			// JSON 데이터로 읽어온 목록을 파라미터로 받은 List 에 저장한다.
+			list.addAll(collection);
+
+			System.out.printf("%s 데이터 로딩 완료!\n", filepath);
 
 		} catch (Exception e) {
-			System.out.printf("%s 파일에서 데이터를 읽어 오는 중 오류 발생!\n", filepath);
+			System.out.printf("%s 데이터 로딩 오류!\n", filepath);
+		}
+	}
+
+	// 객체를 JSON 형식으로 저장한다.
+	private void saveObjects(String filepath, List<?> list) {
+		try (PrintWriter out = new PrintWriter(
+				new BufferedWriter(
+						new FileWriter(filepath, Charset.forName("UTF-8"))))) {
+
+			out.print(new Gson().toJson(list));
+
+			System.out.printf("%s 데이터 출력 완료!\n", filepath);
+
+		} catch (Exception e) {
+			System.out.printf("%s 데이터 출력 오류!\n", filepath);
 			e.printStackTrace();
 		}
 	}
 
-	private <E> void saveObjects(String filepath, List<E> list) {
-		try (ObjectOutputStream out = new ObjectOutputStream(
-				new BufferedOutputStream(
-						new FileOutputStream(filepath)))) {
-
-			out.writeObject(list);
-
-			System.out.printf("%s 파일 저장 완료!\n", filepath);
-
-		} catch (Exception e) {
-			System.out.printf("%s 파일에 데이터를 저장 중 오류 발생!\n", filepath);
-			e.printStackTrace();
-		}
-	}
 
 	Menu createMainMenu() {
 		MenuGroup mainMenuGroup = new MenuGroup("STUDY WITH US");

@@ -24,12 +24,13 @@ public class FreeStudyListHandler extends AbstractStudyHandler {
             freeStudy.getViewCount(), 
             freeStudy.getLike());
         System.out.println();
-        return;
-      }
-    }
 
-    System.out.println();
-    System.out.println("무료 스터디 게시글이 존재하지 않습니다.\n");
+      }
+    } else {
+      System.out.println();
+      System.out.println("무료 스터디 게시글이 존재하지 않습니다.\n");
+      return;
+    }
   }
 }
 

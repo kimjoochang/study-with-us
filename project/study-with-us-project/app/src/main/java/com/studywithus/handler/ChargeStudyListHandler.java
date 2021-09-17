@@ -24,11 +24,11 @@ public class ChargeStudyListHandler extends AbstractStudyHandler {
             chargeStudy.getViewCount(),
             chargeStudy.getLike());
         System.out.println();
-        return;
       }
+    } else {
+      System.out.println();
+      System.out.println("유료 스터디 게시글이 존재하지 않습니다.\n");
+      return;
     }
-
-    System.out.println();
-    System.out.println("유료 스터디 게시글이 존재하지 않습니다.\n");
   }
 }
