@@ -10,7 +10,7 @@ public class JobsCalendarListHandler extends AbstractCalendarHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[이달의 채용공고 / 조회]\n");
 
     if (calendarList != null) {

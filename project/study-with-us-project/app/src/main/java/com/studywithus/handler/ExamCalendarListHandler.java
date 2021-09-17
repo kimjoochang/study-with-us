@@ -10,7 +10,7 @@ public class ExamCalendarListHandler extends AbstractCalendarHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[이달의 시험일정 / 조회]\n");
 
     if (calendarList != null) {
@@ -21,13 +21,11 @@ public class ExamCalendarListHandler extends AbstractCalendarHandler {
             calendar.getTitle(), 
             calendar.getExamDate());
         System.out.println();
-        return;
       }
+    } else {
+      System.out.println();
+      System.out.println("이달의 시험일정 게시글이 존재하지 않습니다.\n");
+      return;
     }
-
-    System.out.println();
-    System.out.println("이달의 시험일정 게시글이 존재하지 않습니다.\n");
   }
 }
-
-

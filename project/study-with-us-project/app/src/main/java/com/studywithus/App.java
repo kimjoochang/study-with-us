@@ -39,6 +39,7 @@ import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudySearchHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
 import com.studywithus.handler.Command;
+import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.CommunityAddHandler;
 import com.studywithus.handler.CommunityDeleteHandler;
 import com.studywithus.handler.CommunityDetailHandler;
@@ -123,7 +124,12 @@ public class App {
     @Override
     public void execute() {
       Command command = commandMap.get(menuId);
-      command.execute();
+      try {
+        command.execute(new CommandRequest(commandMap));
+      } catch (Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
+        e.printStackTrace();
+      }
     }
   }
 

@@ -14,7 +14,7 @@ public class MentorApplicationAddHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     MentorApplicationForm mentorApplication = new MentorApplicationForm();
 
     System.out.println("[멘토 신청하기]");
@@ -30,6 +30,7 @@ public class MentorApplicationAddHandler implements Command {
 
       } else {
         mentorApplication.setName(AuthLoginHandler.loginUser.getName());
+        mentorApplication.setId(AuthLoginHandler.loginUser.getId());
         mentorApplication.setSelfIntroduction(selfIntro);
         mentorApplication.setChargeStudySubject(subject);
         mentorApplication.setChargeStudyExplanation(explanation);

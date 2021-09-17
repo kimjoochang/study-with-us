@@ -14,7 +14,7 @@ public class SignUpHandler extends AbstractLoginHandler {
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
 
     Member member = new Member();
 

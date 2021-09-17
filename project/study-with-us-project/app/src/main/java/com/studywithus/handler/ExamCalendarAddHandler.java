@@ -11,7 +11,7 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("이달의 시험일정 / 등록]\n");
 
     Calendar examCalendar = new Calendar();

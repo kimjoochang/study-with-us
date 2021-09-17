@@ -12,7 +12,7 @@ public class MembershipWithdrawalHandler extends AbstractLoginHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[회원 탈퇴]");
 
     Member member = findById();

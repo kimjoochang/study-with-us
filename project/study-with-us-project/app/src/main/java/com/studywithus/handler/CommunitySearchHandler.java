@@ -13,7 +13,7 @@ public class CommunitySearchHandler extends AbstractCommunityHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[커뮤니티 / 검색]");
 
     String input = Prompt.inputString("검색할 키워드를 입력하세요. > ");

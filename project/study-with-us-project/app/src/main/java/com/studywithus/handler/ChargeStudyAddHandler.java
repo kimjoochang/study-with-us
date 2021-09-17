@@ -19,7 +19,7 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[유료 스터디 / 생성]\n");
 
     Study chargeStudy = new Study();

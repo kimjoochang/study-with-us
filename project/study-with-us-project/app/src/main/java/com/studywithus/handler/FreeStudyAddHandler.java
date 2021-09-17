@@ -18,7 +18,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 등록]\n");
 
     Study freeStudy = new Study();

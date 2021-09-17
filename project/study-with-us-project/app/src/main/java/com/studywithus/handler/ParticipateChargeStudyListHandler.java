@@ -14,7 +14,7 @@ public class ParticipateChargeStudyListHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 나의 활동 / 내 스터디 / 참여 유료 스터디]");
 
     // 회원 아이디로 값 호출

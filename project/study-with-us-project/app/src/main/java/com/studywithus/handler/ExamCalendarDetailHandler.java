@@ -6,14 +6,14 @@ import com.studywithus.util.Prompt;
 
 public class ExamCalendarDetailHandler extends AbstractCalendarHandler {
 
-  Calendar examCalendar;
+  List<Calendar> examCalendar;
 
   public ExamCalendarDetailHandler(List<Calendar> examCalendarList) {
     super(examCalendarList);
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println("[이달의 시험일정 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호? ");
