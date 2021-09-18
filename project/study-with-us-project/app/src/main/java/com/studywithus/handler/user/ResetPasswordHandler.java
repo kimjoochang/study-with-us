@@ -42,7 +42,7 @@ public class ResetPasswordHandler implements Command {
 
       // 현재 비밀번호와 새 비밀번호의 입력값이 같다면,
       if (newPassword1.equals(member.getPassword())) {
-        System.out.println("현재와 동일한 비밀번호로 변경하실 수 없습니다.");
+        System.out.println("현재와 동일한 비밀번호로 변경하실 수 없습니다.\n");
         continue;
       }
 
@@ -65,7 +65,7 @@ public class ResetPasswordHandler implements Command {
       member.setPassword(newPassword1);
 
       System.out.println(" ");
-      System.out.println("비밀번호 변경이 완료되었습니다. 변경된 비밀번호로 로그인 해 주세요.");
+      System.out.println("비밀번호 변경이 완료되었습니다.");
       return;
     }
   }

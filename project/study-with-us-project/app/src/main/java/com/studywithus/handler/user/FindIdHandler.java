@@ -23,8 +23,8 @@ public class FindIdHandler implements Command {
   public void execute(CommandRequest request) {
     System.out.println("[아이디 찾기]\n");
 
-    String name = Prompt.inputString("이름? ");
-    String phoneNumber = Prompt.inputString("핸드폰 번호? ");
+    String name = Prompt.inputString("이름을 입력하세요. > ");
+    String phoneNumber = Prompt.inputString("핸드폰 번호를 입력하세요. > ");
 
     Member member = findIdByName(name, phoneNumber);
 
@@ -33,7 +33,7 @@ public class FindIdHandler implements Command {
       System.out.println("해당 이름으로 가입된 아이디가 없습니다.\n");
       return;
     }
-    System.out.printf("아이디: %s\n", member.getId());
+    System.out.println(name + " 회원님의 아이디는 " + member.getId() + " 입니다.");
   }
 
   // 아이디 찾기용
