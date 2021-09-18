@@ -1,7 +1,9 @@
-package com.studywithus.handler;
+package com.studywithus.handler.freestudy;
 
 import java.util.List;
 import com.studywithus.domain.Study;
+import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.abstract.AbstractStudyHandler;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {

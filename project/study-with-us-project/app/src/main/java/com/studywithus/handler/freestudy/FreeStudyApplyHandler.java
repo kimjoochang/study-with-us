@@ -1,11 +1,13 @@
+package com.studywithus.handler.freestudy;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
-import com.studywithus.handler.AbstractStudyHandler;
-import com.studywithus.handler.AuthLogInHandler;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.abstract.AbstractStudyHandler;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 

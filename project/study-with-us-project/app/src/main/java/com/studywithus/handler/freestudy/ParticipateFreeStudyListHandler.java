@@ -1,8 +1,11 @@
-package com.studywithus.handler;
+package com.studywithus.handler.freestudy;
 
 import java.util.HashMap;
 import java.util.List;
 import com.studywithus.domain.Study;
+import com.studywithus.handler.Command;
+import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 
 public class ParticipateFreeStudyListHandler implements Command {
 

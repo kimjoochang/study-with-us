@@ -1,8 +1,10 @@
-package com.studywithus.handler;
+package com.studywithus.handler.community;
 
 import java.sql.Date;
 import java.util.List;
 import com.studywithus.domain.Community;
+import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class CommunityAddHandler extends AbstractCommunityHandler{

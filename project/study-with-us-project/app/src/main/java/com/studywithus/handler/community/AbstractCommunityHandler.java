@@ -1,7 +1,8 @@
-package com.studywithus.handler;
+package com.studywithus.handler.community;
 
 import java.util.List;
 import com.studywithus.domain.Community;
+import com.studywithus.handler.Command;
 
 public abstract class AbstractCommunityHandler implements Command {
 
