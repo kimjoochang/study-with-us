@@ -11,7 +11,7 @@ public abstract class AbstractStudyHandler implements Command {
     this.studyList = studyList;
   }
 
-  // 스터디 게시글 번호 조회
+  // 스터디 게시글 번호 조회 (상세보기용)
   protected Study findByNo(int no) {
     for (Study study : studyList) {
       if (study.getNo() == no) {
