@@ -145,7 +145,6 @@ public class App {
   }
 
   public App() {
-
     commandMap.put("/auth/logIn", new AuthLogInHandler(memberList));
     commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
     commandMap.put("/facebook/logIn", new SnsLogInHandler(memberList));
@@ -308,15 +307,16 @@ public class App {
     mainMenuGroup.add(createSignUpMenu());
     mainMenuGroup.add(createLogInMenu());
     mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL | ACCESS_ADMIN, "/auth/logOut"));
+
     // 마이페이지로 이동 예정
     // mainMenuGroup.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipwithdrawal"));
 
+    mainMenuGroup.add(createMyPageMenu());
+    mainMenuGroup.add(createCalendarManagementMenu());
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
     mainMenuGroup.add(createCommunityMenu());
-    mainMenuGroup.add(createCalendarManagementMenu());
-    mainMenuGroup.add(createMyPageMenu());
-    mainMenuGroup.add(createAdminPageMenu());
+    mainMenuGroup.add(createCalendarMenu());
 
     return mainMenuGroup;
   }
@@ -455,9 +455,44 @@ public class App {
     return communityTalkMenu;
   }
 
+  // ------------------------------ 캘린더 -----------------------------------------
+
+  private Menu createCalendarMenu() {
+    MenuGroup calendarMenu = new MenuGroup("캘린더");
+
+    calendarMenu.add(createJobsCalendarMenu());
+    calendarMenu.add(createExamCalendarMenu());
+
+    return calendarMenu;
+  }
+
+  private Menu createJobsCalendarMenu() {
+    MenuGroup jobsCalendarMenu = new MenuGroup("이달의 채용공고");
+
+    jobsCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalendar/add"));
+    jobsCalendarMenu.add(new MenuItem("조회", "/jobsCalendar/list"));
+    jobsCalendarMenu.add(new MenuItem("상세보기", "/jobsCalendar/detail"));
+    jobsCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalendar/update"));
+    jobsCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalendar/delete"));
+
+    return jobsCalendarMenu;
+  }
+
+  private Menu createExamCalendarMenu() {
+    MenuGroup examCalendarMenu = new MenuGroup("이달의 시험일정");
+
+    examCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalendar/add"));
+    examCalendarMenu.add(new MenuItem("조회", "/examCalendar/list"));
+    examCalendarMenu.add(new MenuItem("상세보기", "/examCalendar/detail"));
+    examCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalendar/update"));
+    examCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
+
+    return examCalendarMenu;
+  }
+
   // ------------------------------ 마이 페이지 -----------------------------------------
 
-  //마이 페이지 메인
+  // 마이 페이지 메인
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
 
@@ -855,39 +890,6 @@ public class App {
     communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN, "/communityTalk/delete"));
 
     return communityTalkMenu;
-  }
-
-  private Menu createCalendarMenu() {
-    MenuGroup calendarMenu = new MenuGroup("캘린더");
-
-    calendarMenu.add(createJobsCalendarMenu());
-    calendarMenu.add(createExamCalendarMenu());
-
-    return calendarMenu;
-  }
-
-  private Menu createJobsCalendarMenu() {
-    MenuGroup jobsCalendarMenu = new MenuGroup("이달의 채용공고");
-
-    jobsCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalendar/add"));
-    jobsCalendarMenu.add(new MenuItem("조회", "/jobsCalendar/list"));
-    jobsCalendarMenu.add(new MenuItem("상세보기", "/jobsCalendar/detail"));
-    jobsCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalendar/update"));
-    jobsCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalendar/delete"));
-
-    return jobsCalendarMenu;
-  }
-
-  private Menu createExamCalendarMenu() {
-    MenuGroup examCalendarMenu = new MenuGroup("이달의 시험일정");
-
-    examCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalendar/add"));
-    examCalendarMenu.add(new MenuItem("조회", "/examCalendar/list"));
-    examCalendarMenu.add(new MenuItem("상세보기", "/examCalendar/detail"));
-    examCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalendar/update"));
-    examCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
-
-    return examCalendarMenu;
   }
    */
 

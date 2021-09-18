@@ -20,9 +20,9 @@ public class ExamCalendarListHandler extends AbstractCalendarHandler {
     }
 
     for (Calendar calendar : calendarList) {
-      System.out.printf("[번호 = %d, 제목 = %s, 시험일 = %s]", 
+      System.out.printf("[번호 = %d, 제목 = %s, 시험일 = %s]\n",
           calendar.getNo(),
-          calendar.getTitle(), 
+          calendar.getTitle(),
           calendar.getExamDate());
     }
     System.out.println();

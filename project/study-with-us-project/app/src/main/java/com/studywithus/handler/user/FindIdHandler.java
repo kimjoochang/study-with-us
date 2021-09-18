@@ -25,6 +25,7 @@ public class FindIdHandler implements Command {
 
     String name = Prompt.inputString("이름을 입력하세요. > ");
     String phoneNumber = Prompt.inputString("핸드폰 번호를 입력하세요. > ");
+    System.out.println(" ");
 
     Member member = findIdByName(name, phoneNumber);
 
