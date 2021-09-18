@@ -298,6 +298,7 @@ public class App {
     }
   }
 
+  //------------------------------ STUDY WITH US -----------------------------------------
 
   // 메인 메뉴
   Menu createMainMenu() {
@@ -319,8 +320,6 @@ public class App {
 
     return mainMenuGroup;
   }
-
-  //------------------------------ STUDY WITH US -----------------------------------------
 
   // 메인 메뉴 / 회원가입
   private Menu createSignUpMenu() {

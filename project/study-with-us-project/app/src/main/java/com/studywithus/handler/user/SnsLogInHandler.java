@@ -41,8 +41,8 @@ public class SnsLogInHandler implements Command {
     } else {
       System.out.printf("%s님 환영합니다.\n", member.getName());
 
-      loginUser = member;
-      userAccessLevel = member.getUserAccessLevel();
+      AuthLogInHandler.loginUser = member;
+      AuthLogInHandler.userAccessLevel = member.getUserAccessLevel();
     }
   }
 
