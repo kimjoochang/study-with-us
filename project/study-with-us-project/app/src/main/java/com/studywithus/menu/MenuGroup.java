@@ -3,7 +3,7 @@ package com.studywithus.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import com.studywithus.handler.AuthLogInHandler;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class MenuGroup extends Menu {

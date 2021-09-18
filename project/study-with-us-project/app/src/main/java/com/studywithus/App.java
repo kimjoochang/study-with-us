@@ -4,6 +4,7 @@ import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
+import static com.studywithus.menu.Menu.ACCESS_MEMBER;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.io.BufferedReader;
