@@ -11,8 +11,8 @@ public class AuthLogInHandler implements Command {
 
   List<Member> memberList;
 
-  static Member loginUser;
-  static int userAccessLevel = Menu.ACCESS_LOGOUT;
+  public static Member loginUser;
+  public static int userAccessLevel = Menu.ACCESS_LOGOUT;
 
   public static Member getLoginUser() {
     return loginUser;
@@ -48,8 +48,6 @@ public class AuthLogInHandler implements Command {
 
       return;
     } 
-
-    //    member = findByIdPassword(id, password);
 
     if (member == null) {
       System.out.println("아이디와 비밀번호가 일치하는 회원을 찾을 수 없습니다.");
