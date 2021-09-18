@@ -72,7 +72,7 @@ import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
 
-public class App_KJC {
+public class AppJC {
   List<Member> memberList = new LinkedList<>();
   List<Member> freeApplicantList = new ArrayList<>(); // 팀장 관점
   List<Member> mentorApplicantList = new ArrayList<>();
