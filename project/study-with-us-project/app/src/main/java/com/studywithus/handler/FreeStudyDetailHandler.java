@@ -6,15 +6,10 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
-  // 무료 스터디 신청 리스트 (회원 관점)
-  List<Study> freeApplicationList;
+  List<Study> freeInterestList; // 무료 스터디 관심목록 리스트 (회원 관점)
 
-  // 무료 스터디 관심목록 리스트 (회원 관점)
-  List<Study> freeInterestList;
-
-  public FreeStudyDetailHandler(List<Study> freeStudyList, List<Study> freeApplicationList, List<Study> freeInterestList) {
+  public FreeStudyDetailHandler(List<Study> freeStudyList, List<Study> freeInterestList) {
     super(freeStudyList);
-    this.freeApplicationList = freeApplicationList;
     this.freeInterestList = freeInterestList;
   }
 
@@ -22,7 +17,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[무료 스터디 / 상세보기]\n");
 
-    int type = 0; // 관심목록 추가 여부에 따라 실행메서드 구분하기 위한 변수
+    int type = 0; // 관심목록 추가 여부에 따라 실행 메서드 구분하기 위한 변수
 
     int no = Prompt.inputInt("번호? ");
     Study freeStudy = findByNo(no);
@@ -48,37 +43,49 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
     System.out.println();
 
-    System.out.println("1. 신청");
+    request.setAttribute("no", no);
 
-    //  해당 스터디의 관심목록 존재 유/무에 따라 관심목록 삭제/추가로 나뉨
-    for (Study freeInterest : freeInterestList) {
-      if (freeInterest.equals(freeInterest)) {
-        System.out.println("2. 관심목록 삭제");
-        break;
-      }
+    // 본인이 작성한 글인 경우
+    if (freeStudy.getWriter() == AuthLoginHandler.getLoginUser()) {
+      System.out.println("1. 수정");
+      System.out.println("2. 삭제");
 
-      else {
-        System.out.println("2. 관심목록 추가");
-        type = 1;
-        break;
+      // 타인이 작성한 글인 경우
+    } else {
+      System.out.println("1. 신청");
+
+      //  관심목록 존재 여부에 따라 메뉴 출력
+      for (Study freeInterest : freeInterestList) {
+
+        // 관심 목록이 있는 경우
+        if (freeStudy.equals(freeInterest)) {
+          System.out.println("2. 관심목록 삭제");
+          break;
+        }
+
+        // 관심 목록이 없는 경우
+        else {
+          System.out.println("2. 관심목록 추가");
+          break;
+        }
       }
     }
 
     System.out.println("0. 이전\n");
 
-    request.setAttribute("no", no);
-
     while (true) {
       int input = Prompt.inputInt("선택> ");
 
       if (input == 1) {
-        request.getRequestDispatcher("신청하기 핸들러 정해야됨").forward(request);
+        request.getRequestDispatcher("/freeStudy/application").forward(request);
+
       } else if (input == 2) {
         if (type == 0) {
-          request.getRequestDispatcher("관심목록 삭제 정해야됨").forward(request);
+          request.getRequestDispatcher("/freeStudy/interestDelete").forward(request);
           return;
+
         } else if (type == 1) {
-          request.getRequestDispatcher("관심목록 추가 정해야됨").forward(request);
+          request.getRequestDispatcher("/freeStudy/interestAdd").forward(request);
         }
 
       } else if (input == 0) {
