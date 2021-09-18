@@ -35,7 +35,9 @@ import com.studywithus.handler.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.ChargeStudyDeletedDetailHandler;
 import com.studywithus.handler.ChargeStudyDeletedListHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
+import com.studywithus.handler.ChargeStudyInterestAddHandler;
 import com.studywithus.handler.ChargeStudyListHandler;
+import com.studywithus.handler.ChargeStudyPaymentHandler;
 import com.studywithus.handler.ChargeStudySearchHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
 import com.studywithus.handler.Command;
@@ -168,6 +170,9 @@ public class App {
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteDetail", new ChargeStudyDeletedDetailHandler(chargeStudyList, chargeDeleteRequestList));
+    commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
+    commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList, chargeInterestList));
+    commandMap.put("/chargeStudy/InterestList", new ChargeInterestListHandler(chargeInterestList));
 
     commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
     commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));

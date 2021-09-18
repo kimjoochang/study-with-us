@@ -9,6 +9,7 @@ public class ChargeStudyDeletedListHandler extends AbstractStudyHandler {
     super(chargeDetailRequestList);
   }
 
+  // 관리자 관점
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[스터디 삭제 요청 내역 / 조회]\n");

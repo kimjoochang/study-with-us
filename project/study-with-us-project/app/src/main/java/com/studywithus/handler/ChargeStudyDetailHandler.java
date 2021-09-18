@@ -1,6 +1,5 @@
 package com.studywithus.handler;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.studywithus.domain.Member;
@@ -96,105 +95,5 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
       }
       return;
     }
-  }
-
-  private void payHandler() {
-    System.out.println("[유료 스터디 / 결제]\n");
-
-    String input1 = Prompt.inputString("유료 스터디를 결제 하시겠습니까? (y/N) ");
-
-    if (input1.equalsIgnoreCase("n") || input1.length() == 0) {
-      System.out.println(" 유료 스터디 결제를 취소하셨습니다.");
-    }
-
-    else {
-      StringBuffer heart = new StringBuffer("");
-
-      System.out.print("------------------------------------");
-      System.out.println("\n"
-          + "(＼(＼     \n"
-          + "(  -.- )~♥\n"
-          + " O_(\")(\")");
-      System.out.println("------------------------------------");
-      System.out.print("결제중");
-
-      for(int i = 0; i < 5; i++) {
-        try {
-          Thread.sleep(1000);
-
-        } catch (InterruptedException e) {
-        }
-        System.out.print(heart.append("♡♥"));
-      }
-
-      System.out.println();
-      System.out.println();
-      System.out.println("유료 스터디 결제가 완료 되었습니다.\n");
-
-      // 유료 스터디 결제내역 리스트 (회원 관점)
-      Payment payment = new Payment();
-      chargePaymentList.add(payment);
-      AuthLoginHandler.loginUser.setPayment(chargePaymentList);
-
-      // 참여 유료 스터디에 해당 아이디 존재 O
-      if (participateChargeStudyMap.containsKey(AuthLoginHandler.getLoginUser().getId())) {
-        // 참여 유료 스터디에 아이디 호출 -> 참여 유료 스터디 리스트에 대입
-        participateChargeStudyList = participateChargeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
-
-        // 참여 유료 스터디 리스트에 유료 스터디 추가
-        participateChargeStudyList.add(chargeStudy);
-        // 참여 유료 스터디에 아이디 추가
-        participateChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), participateChargeStudyList);
-
-        // 참여 유료 스터디에 해당 아이디 존재 X
-      } else {
-        // 새로운 참여 유료 스터디 리스트 생성
-        participateChargeStudyList = new ArrayList<>();
-
-        // 참여 유료 스터디 리스트에 유료 스터디 추가
-        participateChargeStudyList.add(chargeStudy);
-        // 참여 유료 스터디에 아이디 추가
-        participateChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), participateChargeStudyList);
-      }
-
-      // 유료 스터디 결제한 사람 내역 (멘토 관점)
-      chargeApplicantList.add(AuthLoginHandler.loginUser);
-    }
-    return;
-  }
-
-  // 유료 스터디 관심목록 추가
-  private void interestAddHandler(Study chargeStudy) {
-    System.out.println("[유료 스터디 / 상세보기 / 관심 목록]\n");
-
-    String input = Prompt.inputString("관심 목록에 추가하시겠습니까? (y/N) ");
-
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("유료 스터디 관심 목록 추가를 취소하였습니다.\n");
-      return;
-    }
-
-    // 유료 스터디 관심목록 리스트 (회원 관점)
-    chargeInterestList.add(chargeStudy);
-    chargeStudy.setViewCount(chargeStudy.getLike() + 1);
-
-    System.out.println();
-    System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
-  }
-
-  // 유료 스터디 관심목록 삭제
-  private void interestDelete(Study chargestudy) {
-    String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
-
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("유료 스터디 관심 목록을 취소하였습니다.\n");
-      return;
-    }
-
-    chargeInterestList.remove(chargestudy);
-    chargestudy.setViewCount(chargestudy.getLike() - 1);
-
-    System.out.println();
-    System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");
   }
 }
