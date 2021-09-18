@@ -1,7 +1,9 @@
-package com.studywithus.handler;
+package com.studywithus.handler.user;
 
 import java.util.List;
 import com.studywithus.domain.Member;
+import com.studywithus.handler.Command;
+import com.studywithus.handler.CommandRequest;
 import com.studywithus.menu.Menu;
 
 public class AuthLogOutHandler implements Command {

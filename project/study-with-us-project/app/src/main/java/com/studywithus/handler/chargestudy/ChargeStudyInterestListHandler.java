@@ -1,7 +1,8 @@
-package com.studywithus.handler;
+package com.studywithus.handler.chargestudy;
 
 import java.util.List;
 import com.studywithus.domain.Study;
+import com.studywithus.handler.CommandRequest;
 
 public class ChargeStudyInterestListHandler extends AbstractInterestHandler {
 

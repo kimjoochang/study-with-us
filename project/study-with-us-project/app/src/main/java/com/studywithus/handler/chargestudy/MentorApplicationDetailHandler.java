@@ -1,8 +1,10 @@
-package com.studywithus.handler;
+package com.studywithus.handler.chargestudy;
 
 import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
+import com.studywithus.handler.Command;
+import com.studywithus.handler.CommandRequest;
 import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 

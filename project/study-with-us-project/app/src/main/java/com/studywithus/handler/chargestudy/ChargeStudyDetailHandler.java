@@ -1,8 +1,10 @@
-package com.studywithus.handler;
+package com.studywithus.handler.chargestudy;
 
 import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
+import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler extends AbstractStudyHandler {
