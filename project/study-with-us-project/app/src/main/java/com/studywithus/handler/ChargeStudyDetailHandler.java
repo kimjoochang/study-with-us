@@ -33,7 +33,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[유료 스터디 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호? ");
@@ -54,19 +54,28 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
     chargeStudy.setViewCount(chargeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
-
     System.out.println();
-    System.out.println("1. 결제하기");
+
+    Member loginUser = AuthLoginHandler.getLoginUser(); 
+    if (loginUser == null || chargeStudy.getWriter() != loginUser) {
+      return;
+    }
+
+    request.setAttribute("no", no);
+
+    System.out.println("1. 수정");
+    System.out.println("2. 삭제");
+    System.out.println("3. 결제");
 
     //  해당 스터디의 관심목록 존재 유/무에 따라 관심목록 삭제/추가로 나뉨
     for (Study chargeInterest : chargeInterestList) {
       if (chargeStudy.equals(chargeInterest)) {
-        System.out.println("2. 관심목록 삭제하기");
+        System.out.println("4. 관심목록 삭제");
         break;
       }
 
       else {
-        System.out.println("2. 관심목록 추가하기");
+        System.out.println("4. 관심목록 추가");
         break;
       }
     }
@@ -77,14 +86,23 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
       int input = Prompt.inputInt("선택> ");
 
       if (input == 1) {
-        payHandler();
+        request.getRequestDispatcher("/chargeStudy/update").forward(request);
+        return;
 
       } else if (input == 2) {
+        request.getRequestDispatcher("/chargeStudy/deleteRequest").forward(request);
+        return;
+
+      } else if (input == 3) {
+        request.getRequestDispatcher("/chargeStudy/payment").forward(request);
+        return;
+
+      } else if (input == 4) {
         if (no == 0) {
-          interestDelete(chargeStudy);
+          request.getRequestDispatcher("/chargeStudy/interestDelete").forward(request);
           return;
         }
-        interestAddHandler(chargeStudy);
+        request.getRequestDispatcher("/chargeStudy/interestAdd").forward(request);
 
       } else if (input == 0) {
         return;
