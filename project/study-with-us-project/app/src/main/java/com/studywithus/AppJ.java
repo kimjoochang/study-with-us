@@ -116,7 +116,7 @@ public class AppJ {
   HashMap<String, List<Study>> registerFreeStudyMap = new HashMap<>();
   HashMap<String, List<Study>> registerChargeStudyMap = new HashMap<>();
 
-
+  //
   class MenuItem extends Menu {
     String menuId;
 
