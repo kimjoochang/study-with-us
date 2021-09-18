@@ -5,6 +5,7 @@ import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MEMBER;
+import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -506,14 +507,14 @@ public class AppJ {
   private Menu createRegisterFreeStudyMenu() {
 
     MenuGroup registerFreeStudyMenu = new MenuGroup("내가 생성한 무료 스터디", ACCESS_LEADER);
-    registerFreeStudyMenu.add(new MenuItem("조회", "/registerFreeStudyApply/list"));
-    registerFreeStudyMenu.add(new MenuItem("상세보기", "/registerFreeStudyApply/detail"));
-    registerFreeStudyMenu.add(new MenuItem("삭제", "/registerFreeStudyApply/delete"));
+    registerFreeStudyMenu.add(new MenuItem("조회", "/registerFreeStudy/list"));
+    registerFreeStudyMenu.add(new MenuItem("상세보기", "/registerFreeStudy/detail"));
+    registerFreeStudyMenu.add(new MenuItem("삭제", "/registerFreeStudy/delete"));
 
     return registerFreeStudyMenu;
   }
 
-  //마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 무료 스터디(팀원 관점)
+  // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 무료 스터디(팀원 관점)
   private Menu createParticipateFreeStudyMenu() {
 
     MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", ACCESS_MEMBER);
@@ -521,6 +522,30 @@ public class AppJ {
     participateFreeStudyMenu.add(new MenuItem("상세보기", "/participateFreeStudy/detail"));
 
     return participateFreeStudyMenu;
+  }
+
+  //마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디(멘토 관점)
+  // - "신청자 명단" -> 상세보기(승인/삭제) 추가해야 함
+  private Menu createRegisterChargeStudyMenu() {
+
+    MenuGroup registerChargeStudyMenu = new MenuGroup("내가 생성한 유료 스터디", ACCESS_MENTOR);
+    registerChargeStudyMenu.add(new MenuItem("조회", "/registerChargeStudyy/list"));
+    registerChargeStudyMenu.add(new MenuItem("상세보기", "/registerChargeStudy/detail"));
+    registerChargeStudyMenu.add(new MenuItem("삭제", "/registerChargeStudy/delete"));
+
+    return registerChargeStudyMenu;
+  }
+
+  // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 유료 스터디(멘티 관점)
+  private Menu createParticipateChargeStudyMenu() {
+
+    MenuGroup participateChargeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", ACCESS_MENTEE);
+    participateChargeStudyMenu.add(new MenuItem("조회", "/participateChargeStudy/list"));
+
+    // - 상세보기에 '후기' 메뉴 추가하고 관련 핸들러 생성해야 함
+    participateChargeStudyMenu.add(new MenuItem("상세보기", "/participateChargeStudy/detail"));
+
+    return participateChargeStudyMenu;
   }
 
   // 마이 페이지 / 나의 활동 / 나의 게시글
@@ -568,12 +593,6 @@ public class AppJ {
 
 
   /* 적용 예정 메뉴
-
-   *마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 무료 스터디(팀원~)
-
-   *마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디(멘토)
-
-   *마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 유료 스터디(팀원~)
 
    *마이 페이지 / 스터디 후기
 
