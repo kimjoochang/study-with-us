@@ -28,13 +28,12 @@ import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.AuthLogInHandler;
 import com.studywithus.handler.AuthLogOutHandler;
-// import com.studywithus.handler.ChargeInterestDeleteHandler;
-// import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.ChargeStudyDeletedDetailHandler;
 import com.studywithus.handler.ChargeStudyDeletedListHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
+import com.studywithus.handler.ChargeStudyInterestListHandler;
 import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudySearchHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
@@ -66,6 +65,7 @@ import com.studywithus.handler.JobsCalendarListHandler;
 import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
+import com.studywithus.handler.MentorApplicationDetailHandler;
 import com.studywithus.handler.MyInfoHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.handler.SnsLogInHandler;
@@ -79,7 +79,7 @@ public class AppJ {
   List<Member> freeApplicantList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Member> chargeApplicantList = new ArrayList<>();
-  List<Member> mentorList = new ArrayList<>();
+  List<String> mentorList = new ArrayList<>();
   List<Member> memberList2 = new ArrayList<>();
 
   List<Study> registerFreeStudyList = new ArrayList<>();
@@ -163,11 +163,10 @@ public class AppJ {
 
     commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
-    //commandMap.put("/chargeInterest/list", new ChargeInterestListHandler(chargeInterestList));
-    //commandMap.put("/chargeInterest/delete", new ChargeInterestDeleteHandler(chargeInterestList));
+    commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeInterestList));
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
-    // commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
+    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
@@ -298,15 +297,14 @@ public class AppJ {
     MenuGroup mainMenuGroup = new MenuGroup("STUDY WITH US");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    mainMenuGroup.add(createSignUpMenu());
-    mainMenuGroup.add(createLogInMenu());
     //    mainMenuGroup.add(new MenuItem("회원가입", ACCESS_LOGOUT, "/auth/signUp"));
     //    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/auth/logIn"));
+    mainMenuGroup.add(createSignUpMenu());
+    mainMenuGroup.add(createLogInMenu());
     mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL | ACCESS_ADMIN, "/auth/logOut"));
 
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
-
     mainMenuGroup.add(createCommunityMenu());
     mainMenuGroup.add(createCalendarManagementMenu());
     mainMenuGroup.add(createMyPageMenu());
@@ -354,7 +352,7 @@ public class AppJ {
   // 메인 메뉴 / 로그인 / SNS로 시작하기
   private Menu createSnsLogInMenu() {
     MenuGroup createSnsLogInMenu = new MenuGroup("SNS 로그인", ACCESS_LOGOUT);
-    // 상동
+
     createSnsLogInMenu.add(new MenuItem("구글로 로그인","/google/logIn"));
     createSnsLogInMenu.add(new MenuItem("페이스북으로 로그인","/facebook/logIn"));
     createSnsLogInMenu.add(new MenuItem("카카오로 로그인","/kakao/logIn"));
