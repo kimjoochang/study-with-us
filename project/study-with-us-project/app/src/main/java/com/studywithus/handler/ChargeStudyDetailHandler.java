@@ -39,7 +39,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
     System.out.println();
 
-    Member loginUser = AuthLogInHandler.getLoginUser(); 
+    Member loginUser = AuthLoginHandler.getLoginUser(); 
     if (loginUser == null || chargeStudy.getWriter() != loginUser) {
       return;
     }
