@@ -3,16 +3,16 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.Member;
 
-public class AuthUserInfoHandler implements Command {
+public class MyInfoHandler implements Command {
 
-  public AuthUserInfoHandler(List<Member> memberList2) {
+  public MyInfoHandler(List<Member> memberList2) {
   }
 
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[내정보]");
 
-    Member loginUser = AuthLoginHandler.getLoginUser();
+    Member loginUser = AuthLogInHandler.getLoginUser();
 
     if (loginUser == null) {
       System.out.println("로그인 하지 않았습니다.");

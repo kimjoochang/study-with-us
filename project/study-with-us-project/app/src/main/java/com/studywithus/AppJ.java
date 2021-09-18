@@ -1,5 +1,5 @@
 package com.studywithus;
-//
+
 import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
@@ -26,11 +26,10 @@ import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
-import com.studywithus.handler.AuthLoginHandler;
-import com.studywithus.handler.AuthLogoutHandler;
-import com.studywithus.handler.AuthUserInfoHandler;
-//import com.studywithus.handler.ChargeInterestDeleteHandler;
-//import com.studywithus.handler.ChargeInterestListHandler;
+import com.studywithus.handler.AuthLogInHandler;
+import com.studywithus.handler.AuthLogOutHandler;
+// import com.studywithus.handler.ChargeInterestDeleteHandler;
+// import com.studywithus.handler.ChargeInterestListHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.ChargeStudyDeletedDetailHandler;
@@ -67,6 +66,7 @@ import com.studywithus.handler.JobsCalendarListHandler;
 import com.studywithus.handler.JobsCalendarUpdateHandler;
 import com.studywithus.handler.MembershipWithdrawalHandler;
 import com.studywithus.handler.MentorApplicationAddHandler;
+import com.studywithus.handler.MyInfoHandler;
 import com.studywithus.handler.SignUpHandler;
 import com.studywithus.handler.SnsLogInHandler;
 import com.studywithus.handler.SnsSignUpHandler;
@@ -142,14 +142,14 @@ public class AppJ {
   }
 
   public AppJ() {
-    // AuthLogInHandler로 수정 필요
-    commandMap.put("/auth/login", new AuthLoginHandler(memberList));
+
+    commandMap.put("/auth/logIn", new AuthLogInHandler(memberList));
     commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
     commandMap.put("/facebook/logIn", new SnsLogInHandler(memberList));
     commandMap.put("/kakao/logIn", new SnsLogInHandler(memberList));
     commandMap.put("/naver/logIn", new SnsLogInHandler(memberList));
 
-    commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
+    commandMap.put("/auth/logOut", new AuthLogOutHandler(memberList));
 
     commandMap.put("/auth/signUp", new SignUpHandler(memberList));
     commandMap.put("/google/signUp", new SnsSignUpHandler(memberList));
@@ -157,12 +157,9 @@ public class AppJ {
     commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberList));
     commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
 
-    commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
+    commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
 
-    // MyInfoHandler로 수정 필요
-    // (회원 전체의 정보가 담기는 게 아니라, 마이페이지에서 본인의 정보를 보는 기능을 다루는 핸들러라서)
-    commandMap.put("/auth/userInfo", new AuthUserInfoHandler(memberList)); 
-
+    commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
 
     commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
@@ -175,8 +172,7 @@ public class AppJ {
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", 
-        new FreeStudyDetailHandlerJ(freeStudyList, freeApplicationList, freeInterestList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandlerJ(freeStudyList, freeApplicationList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
@@ -251,7 +247,7 @@ public class AppJ {
   }
 
   // JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.
-  private <E> void loadObjects(
+  private <E> void loadObjects (
       String filepath, // 데이터를 읽어 올 파일 경로 
       List<E> list, // 로딩한 데이터를 객체로 만든 후 저장할 목록 
       Class<E> domainType // 생성할 객체의 타입정보
@@ -305,8 +301,8 @@ public class AppJ {
     mainMenuGroup.add(createSignUpMenu());
     mainMenuGroup.add(createLogInMenu());
     //    mainMenuGroup.add(new MenuItem("회원가입", ACCESS_LOGOUT, "/auth/signUp"));
-    //    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/auth/login"));
-    mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL | ACCESS_ADMIN, "/auth/logout"));
+    //    mainMenuGroup.add(new MenuItem("로그인", ACCESS_LOGOUT, "/auth/logIn"));
+    mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL | ACCESS_ADMIN, "/auth/logOut"));
 
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
@@ -347,7 +343,7 @@ public class AppJ {
   private Menu createLogInMenu() {
     MenuGroup logInMenu = new MenuGroup("로그인", ACCESS_LOGOUT);
 
-    logInMenu.add(new MenuItem("이메일 로그인", "/auth/login"));
+    logInMenu.add(new MenuItem("이메일 로그인", "/auth/logIn"));
     logInMenu.add(createSnsLogInMenu()); 
     logInMenu.add(new MenuItem("아이디 찾기", "/find/id"));
     logInMenu.add(new MenuItem("비밀번호 변경", "/reset/password"));
@@ -461,24 +457,14 @@ public class AppJ {
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
 
-    //    myPageMenu.add(createMyInfoMenu());
     myPageMenu.add(createActivityDetailMenu());
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createPaymentListMenu());
-    myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipwithdrawal"));
+    myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
     myPageMenu.add(new MenuItem("나의 정보", "auth/userInfo"));
 
     return myPageMenu;
   }
-
-  //  // 마이 페이지 / 나의 정보
-  //  private Menu createMyInfoMenu() {
-  //    MenuGroup myInfoMenu = new MenuGroup("나의 정보");
-  //
-  //    myInfoMenu.add(new MenuItem("", "/"));
-  //
-  //    return myInfoMenu;
-  //  }
 
   // 마이 페이지 / 나의 활동
   private Menu createActivityDetailMenu() {
@@ -537,8 +523,8 @@ public class AppJ {
   private Menu createFreeInterestMenu() {
 
     MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
-    freeInterestMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/freeInterest/list"));
-    freeInterestMenu.add(new MenuItem("삭제", ACCESS_GENERAL,"/freeInterest/delete"));
+    freeInterestMenu.add(new MenuItem("조회", "/freeInterest/list"));
+    freeInterestMenu.add(new MenuItem("삭제", "/freeInterest/delete"));
 
     return freeInterestMenu;
   }
@@ -547,21 +533,23 @@ public class AppJ {
   private Menu createChargeInterestMenu() {
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
-    chargeInterestMenu.add(new MenuItem("조회", ACCESS_GENERAL, "/chargeInterest/list"));
-    chargeInterestMenu.add(new MenuItem("삭제", ACCESS_GENERAL, "/chargeInterest/delete"));
+    chargeInterestMenu.add(new MenuItem("조회", "/chargeInterest/list"));
+    chargeInterestMenu.add(new MenuItem("삭제", "/chargeInterest/delete"));
 
     return chargeInterestMenu;
   }
 
   // 마이 페이지 / 나의 결제 내역
   private Menu createPaymentListMenu() {
+
     MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
-    paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "/"));
-    paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "/"));
+    paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "myPayment/list"));
+    paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "myPayment/detail"));
+
     return paymentListMenu;
   }
 
-  /* 09/14 수업 이후 적용 예정 메뉴
+  /* 적용 예정 메뉴
 
    *마이 페이지 / 나의 활동 / 내 스터디 / 내가 생성한 무료 스터디(팀장)
    - 팀원 수락 / 거절
@@ -573,6 +561,7 @@ public class AppJ {
    *마이 페이지 / 나의 활동 / 내 스터디 / 내가 참여한 유료 스터디(팀원~)
 
    *마이 페이지 / 스터디 후기
+
    */
 
 
@@ -670,7 +659,7 @@ public class AppJ {
     return jobsCalendarManagementMenu;
   }
 
-  //관리자 페이지 / 캘린더 관리 / 이달의 시험일정 관리
+  // 관리자 페이지 / 캘린더 관리 / 이달의 시험일정 관리
   private Menu createExamCalendarManagementMenu() {
 
     MenuGroup examcalendarManagementMenu = new MenuGroup("이달의 시험일정");

@@ -16,7 +16,7 @@ public class ParticipateFreeStudyListHandler implements Command {
   public void execute(CommandRequest request) {
     /* 해쉬맵의 value값을 myParticipatedFreeStudy에 담음 
      * 전역변수로 둘 경우 App 실행 시 getLoginUser() nullPointer 에러뜸 */
-    List<Study> myParticipatedFreeStudy = myParticipatedFreeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
+    List<Study> myParticipatedFreeStudy = myParticipatedFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
     System.out.println("[마이 페이지 / 내가 참여한 무료 스터디]\n");
 
     if (myParticipatedFreeStudy.isEmpty() == true) {

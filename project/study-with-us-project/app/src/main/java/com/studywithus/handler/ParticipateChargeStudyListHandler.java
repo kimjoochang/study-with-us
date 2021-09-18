@@ -23,7 +23,7 @@ public class ParticipateChargeStudyListHandler implements Command {
     }
 
     // 회원 아이디로 값 호출
-    for (Study chargeStudy : participateChargeStudyMap.get(AuthLoginHandler.getLoginUser().getId())) {
+    for (Study chargeStudy : participateChargeStudyMap.get(AuthLogInHandler.getLoginUser().getId())) {
       System.out.printf("[번호 = %d, 제목 = %s, 멘토 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]",
           chargeStudy.getNo(),
           chargeStudy.getTitle(),

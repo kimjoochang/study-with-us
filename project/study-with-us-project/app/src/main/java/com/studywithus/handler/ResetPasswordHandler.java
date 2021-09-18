@@ -3,7 +3,7 @@ import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.util.Prompt;
 
-public class FindPasswordHandler implements Command {
+public class ResetPasswordHandler implements Command {
 
   List<Member> memberList;
 
@@ -12,7 +12,7 @@ public class FindPasswordHandler implements Command {
     return loginUser;
   }
 
-  public FindPasswordHandler(List<Member> memberList) {
+  public ResetPasswordHandler(List<Member> memberList) {
     this.memberList = memberList;
   }
 
@@ -24,7 +24,7 @@ public class FindPasswordHandler implements Command {
     String id = Prompt.inputString("아이디? ");
     String phoneNumber = Prompt.inputString("핸드폰 번호? ");
 
-    Member member = updatePwdById(name, id, phoneNumber);
+    Member member = resetPwdById(name, id, phoneNumber);
 
     if (member == null) {
       System.out.println(" ");
@@ -49,7 +49,7 @@ public class FindPasswordHandler implements Command {
   }
 
   // 비밀번호 변경용
-  private Member updatePwdById(String name, String id, String phoneNumber) {
+  private Member resetPwdById(String name, String id, String phoneNumber) {
     for (Member member : memberList) {
       if (member.getName().equals(name) && member.getId().equals(id)
           && member.getPhoneNumber().equals(phoneNumber)) {

@@ -4,7 +4,7 @@ import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.AbstractStudyHandler;
-import com.studywithus.handler.AuthLoginHandler;
+import com.studywithus.handler.AuthLogInHandler;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.util.Prompt;
 
@@ -45,21 +45,21 @@ public class FreeStudyApplyHandler extends AbstractStudyHandler {
     List<Study> freeApplicationList;
 
     // 무료 스터디 신청자 리스트에 회원 정보 추가 (멘토 관점)
-    freeApplicantList.add(AuthLoginHandler.getLoginUser());
+    freeApplicantList.add(AuthLogInHandler.getLoginUser());
     freeStudy.setApplicants(freeApplicantList);
 
-    if (applyFreeStudyMap.containsKey(AuthLoginHandler.getLoginUser().getId())) {
-      freeApplicationList = applyFreeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
+    if (applyFreeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getId())) {
+      freeApplicationList = applyFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
       freeApplicationList.add(freeStudy);
-      applyFreeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), freeApplicationList);
+      applyFreeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), freeApplicationList);
 
       // 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
     } else {
       freeApplicationList = new ArrayList<>();
 
       freeApplicationList.add(freeStudy);
-      applyFreeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), freeApplicationList);
+      applyFreeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), freeApplicationList);
     }
 
     System.out.println();

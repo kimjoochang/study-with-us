@@ -24,7 +24,7 @@ public class MembershipWithdrawalHandler extends AbstractLoginHandler {
     }
 
     memberList.remove(member);
-    AuthLoginHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
+    AuthLogInHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
 
     System.out.println();
     System.out.println("회원 탈퇴가 완료되었습니다.");
@@ -34,7 +34,7 @@ public class MembershipWithdrawalHandler extends AbstractLoginHandler {
 
   private Member findById() {
     for (Member member : memberList) {
-      if (member.getId().equalsIgnoreCase(AuthLoginHandler.getLoginUser().getId())) {
+      if (member.getId().equalsIgnoreCase(AuthLogInHandler.getLoginUser().getId())) {
         return member;
       }
       return null;

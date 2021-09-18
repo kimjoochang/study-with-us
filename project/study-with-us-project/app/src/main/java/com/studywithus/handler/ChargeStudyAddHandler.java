@@ -24,7 +24,7 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
 
     Study chargeStudy = new Study();
 
-    chargeStudy.setWriter(AuthLoginHandler.getLoginUser());
+    chargeStudy.setWriter(AuthLogInHandler.getLoginUser());
     chargeStudy.setNo(Prompt.inputInt("번호: "));
     chargeStudy.setArea(Prompt.inputString("지역: "));
     chargeStudy.setTitle(Prompt.inputString("스터디 제목: "));
@@ -35,14 +35,14 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
     studyList.add(chargeStudy);
 
     // 생성 유료 스터디에 해당 아이디 존재 O
-    if (registerChargeStudyMap.containsKey(AuthLoginHandler.getLoginUser().getId())) {
+    if (registerChargeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getId())) {
       // 생성 유료 스터디에 아이디 호출 -> 생성 유료 스터디 리스트에 대입
-      registerChargeStudyList = registerChargeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
+      registerChargeStudyList = registerChargeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
       // 생성 유료 스터디 리스트에 유료 스터디 추가
       registerChargeStudyList.add(chargeStudy);
       // 생성 유료 스터디에 아이디 추가
-      registerChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), registerChargeStudyList);
+      registerChargeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), registerChargeStudyList);
 
       // 생성 유료 스터디에 해당 아이디 존재 X
     } else {
@@ -52,7 +52,7 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
       // 생성 유료 스터디 리스트에 유료 스터디 추가
       registerChargeStudyList.add(chargeStudy);
       // 생성 유료 스터디에 아이디 추가
-      registerChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), registerChargeStudyList);
+      registerChargeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), registerChargeStudyList);
     }
 
     System.out.println();

@@ -25,8 +25,8 @@ import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
-import com.studywithus.handler.AuthLoginHandler;
-import com.studywithus.handler.AuthLogoutHandler;
+import com.studywithus.handler.AuthLogInHandler;
+import com.studywithus.handler.AuthLogOutHandler;
 import com.studywithus.handler.AuthUserInfoHandler;
 import com.studywithus.handler.ChargeStudyAddHandler;
 import com.studywithus.handler.ChargeStudyDeleteRequestHandler;
@@ -141,8 +141,8 @@ public class App {
   }
 
   public App() {
-    commandMap.put("/auth/login", new AuthLoginHandler(memberList));
-    commandMap.put("/auth/logout", new AuthLogoutHandler(memberList));
+    commandMap.put("/auth/login", new AuthLogInHandler(memberList));
+    commandMap.put("/auth/logout", new AuthLogOutHandler(memberList));
     commandMap.put("/auth/signUp", new SignUpHandler(memberList));
     commandMap.put("/auth/membershipwithdrawal", new MembershipWithdrawalHandler(memberList));
     commandMap.put("/auth/userinfo", new AuthUserInfoHandler(memberList));
