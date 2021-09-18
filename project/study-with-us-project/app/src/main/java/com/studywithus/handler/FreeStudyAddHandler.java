@@ -23,7 +23,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
     Study freeStudy = new Study();
 
-    freeStudy.setWriter(AuthLoginHandler.getLoginUser());
+    freeStudy.setWriter(AuthLogInHandler.getLoginUser());
 
     freeStudy.setNo(Prompt.inputInt("번호: "));
     System.out.println("온/오프라인");
@@ -50,21 +50,21 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
     /* 해쉬맵에 key값으로 로그인한 회원 id , value값으로 팀장 본인이 생성한 스터디 리스트 
      * 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디 추가 */
-    if (registerFreeStudyMap.containsKey(AuthLoginHandler.getLoginUser().getId())) {
-      registerFreeStudyList = registerFreeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
+    if (registerFreeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getId())) {
+      registerFreeStudyList = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
       registerFreeStudyList.add(freeStudy);
-      registerFreeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), registerFreeStudyList);
+      registerFreeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), registerFreeStudyList);
 
       // 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
     } else {
       registerFreeStudyList = new ArrayList<>();
 
       registerFreeStudyList.add(freeStudy);
-      registerFreeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), registerFreeStudyList);
+      registerFreeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), registerFreeStudyList);
     }
 
-    AuthLoginHandler.userAccessLevel |= Menu.ACCESS_LEADER;
+    AuthLogInHandler.userAccessLevel |= Menu.ACCESS_LEADER;
 
     System.out.println();
     System.out.println("무료 스터디 등록이 완료되었습니다.\n");

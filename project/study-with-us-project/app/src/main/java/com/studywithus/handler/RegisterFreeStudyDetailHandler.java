@@ -22,7 +22,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
 	public void execute(CommandRequest request) {
 		/* 해쉬맵의 value값을 myRegisteredFreeStudy에 담음 
 		 * 전역변수로 둘 경우 App 실행 시 getLoginUser() nullPointer 에러뜸 */
-		List<Study> myRegisteredFreeStudy = myRegisteredFreeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
+		List<Study> myRegisteredFreeStudy = myRegisteredFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
 		System.out.println("[마이 페이지 / 내가 생성한 무료 스터디]\n");
 

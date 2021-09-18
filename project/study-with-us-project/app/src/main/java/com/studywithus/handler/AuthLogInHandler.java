@@ -5,7 +5,7 @@ import com.studywithus.domain.Member;
 import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
-public class AuthLoginHandler implements Command {
+public class AuthLogInHandler implements Command {
 
   List<Member> memberList;
 
@@ -20,7 +20,7 @@ public class AuthLoginHandler implements Command {
     return userAccessLevel;
   }
 
-  public AuthLoginHandler(List<Member> memberList) {
+  public AuthLogInHandler(List<Member> memberList) {
     this.memberList = memberList;
   }
 

@@ -42,7 +42,7 @@ public class MyPostListHandler extends AbstractCommunityHandler {
   public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]\n");
 
-    String id = AuthLoginHandler.getLoginUser().getId();
+    String id = AuthLogInHandler.getLoginUser().getId();
     Community cmnt = findById(id);
 
     if (cmnt == null) {

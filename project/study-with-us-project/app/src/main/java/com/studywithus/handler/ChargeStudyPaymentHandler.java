@@ -66,17 +66,17 @@ public class ChargeStudyPaymentHandler extends AbstractStudyHandler {
       // 유료 스터디 결제내역 리스트 (회원 관점)
       Payment payment = new Payment();
       chargePaymentList.add(payment);
-      AuthLoginHandler.loginUser.setPayment(chargePaymentList);
+      AuthLogInHandler.loginUser.setPayment(chargePaymentList);
 
       // 참여 유료 스터디에 해당 아이디 존재 O
-      if (participateChargeStudyMap.containsKey(AuthLoginHandler.getLoginUser().getId())) {
+      if (participateChargeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getId())) {
         // 참여 유료 스터디에 아이디 호출 -> 참여 유료 스터디 리스트에 대입
-        participateChargeStudyList = participateChargeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
+        participateChargeStudyList = participateChargeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
         // 참여 유료 스터디 리스트에 유료 스터디 추가
         participateChargeStudyList.add(chargeStudy);
         // 참여 유료 스터디에 아이디 추가
-        participateChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), participateChargeStudyList);
+        participateChargeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), participateChargeStudyList);
 
         // 참여 유료 스터디에 해당 아이디 존재 X
       } else {
@@ -86,11 +86,11 @@ public class ChargeStudyPaymentHandler extends AbstractStudyHandler {
         // 참여 유료 스터디 리스트에 유료 스터디 추가
         participateChargeStudyList.add(chargeStudy);
         // 참여 유료 스터디에 아이디 추가
-        participateChargeStudyMap.put(AuthLoginHandler.getLoginUser().getId(), participateChargeStudyList);
+        participateChargeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), participateChargeStudyList);
       }
 
       // 유료 스터디 결제한 사람 내역 (멘토 관점)
-      chargeApplicantList.add(AuthLoginHandler.loginUser);
+      chargeApplicantList.add(AuthLogInHandler.loginUser);
     }
     return;
   }

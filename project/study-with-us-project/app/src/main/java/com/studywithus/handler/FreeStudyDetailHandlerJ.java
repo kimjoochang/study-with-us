@@ -47,7 +47,7 @@ public class FreeStudyDetailHandlerJ extends AbstractStudyHandler {
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
     System.out.println();
 
-    Member loginUser = AuthLoginHandler.getLoginUser(); 
+    Member loginUser = AuthLogInHandler.getLoginUser(); 
     if (loginUser == null || freeStudy.getWriter().getId() != loginUser.getId()) {
       return;
     }

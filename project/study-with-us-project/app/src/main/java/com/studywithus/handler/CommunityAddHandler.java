@@ -23,7 +23,7 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
     community.setNo(Prompt.inputInt("번호? "));
     community.setTitle(Prompt.inputString("제목? "));
     community.setContent(Prompt.inputString("내용? "));
-    community.setWriter(AuthLoginHandler.getLoginUser());
+    community.setWriter(AuthLogInHandler.getLoginUser());
     community.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     communityList.add(community);

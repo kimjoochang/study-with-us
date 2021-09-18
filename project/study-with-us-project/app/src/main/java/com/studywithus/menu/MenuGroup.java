@@ -3,7 +3,7 @@ package com.studywithus.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import com.studywithus.handler.AuthLoginHandler;
+import com.studywithus.handler.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class MenuGroup extends Menu {
@@ -117,7 +117,7 @@ public class MenuGroup extends Menu {
     ArrayList<Menu> menuList = new ArrayList<>();
 
     for (Menu menu : childs) {
-      if ((menu.accessScope & AuthLoginHandler.getUserAccessLevel()) > 0 ) {
+      if ((menu.accessScope & AuthLogInHandler.getUserAccessLevel()) > 0 ) {
         menuList.add(menu);
       }
     }

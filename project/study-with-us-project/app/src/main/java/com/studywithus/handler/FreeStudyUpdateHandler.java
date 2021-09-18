@@ -23,7 +23,7 @@ public class FreeStudyUpdateHandler extends AbstractStudyHandler {
       return;
     }
 
-    if (freeStudy.getWriter() != AuthLoginHandler.getLoginUser()) {
+    if (freeStudy.getWriter() != AuthLogInHandler.getLoginUser()) {
       System.out.println("변경 권한이 없습니다.");
       return;
     }
