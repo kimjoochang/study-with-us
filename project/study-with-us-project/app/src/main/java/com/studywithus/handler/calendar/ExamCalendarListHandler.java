@@ -1,7 +1,8 @@
-package com.studywithus.handler;
+package com.studywithus.handler.calendar;
 
 import java.util.List;
 import com.studywithus.domain.Calendar;
+import com.studywithus.handler.CommandRequest;
 
 public class ExamCalendarListHandler extends AbstractCalendarHandler {
 
