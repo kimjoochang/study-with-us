@@ -8,8 +8,8 @@ import com.studywithus.util.Prompt;
 public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {
   List<Study> freeInterestList;
 
-  public FreeStudyInterestDeleteHandler(List<Study> studyList, List<Study> freeInterestList) {
-    super(studyList);
+  public FreeStudyInterestDeleteHandler(List<Study> freeStudyList, List<Study> freeInterestList) {
+    super(freeStudyList);
     this.freeInterestList = freeInterestList;
   }
 
