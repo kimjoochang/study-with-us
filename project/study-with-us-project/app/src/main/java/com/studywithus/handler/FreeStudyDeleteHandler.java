@@ -13,8 +13,8 @@ public class FreeStudyDeleteHandler extends AbstractStudyHandler {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 삭제]");
+    int no = (int) request.getAttribute("no");
 
-    int no = Prompt.inputInt("번호: ");
     Study freeStudy = findByNo(no);
 
     if (freeStudy == null) {

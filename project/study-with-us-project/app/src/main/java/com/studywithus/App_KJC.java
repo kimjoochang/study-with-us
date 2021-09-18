@@ -39,6 +39,7 @@ import com.studywithus.handler.ChargeStudyListHandler;
 import com.studywithus.handler.ChargeStudySearchHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
 import com.studywithus.handler.Command;
+import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.CommunityAddHandler;
 import com.studywithus.handler.CommunityDeleteHandler;
 import com.studywithus.handler.CommunityDetailHandler;
@@ -73,10 +74,11 @@ import com.studywithus.util.Prompt;
 
 public class App_KJC {
   List<Member> memberList = new LinkedList<>();
-  List<Member> freeApplicantList = new ArrayList<>();
+  List<Member> freeApplicantList = new ArrayList<>(); // 팀장 관점
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Member> chargeApplicantList = new ArrayList<>();
-  List<Member> mentorList = new ArrayList<>();
+
+  List<String> mentorList = new ArrayList<>();
 
   List<Study> registerFreeStudyList = new ArrayList<>();
   List<Study> participateFreeStudyList = new ArrayList<>();
@@ -85,7 +87,7 @@ public class App_KJC {
   List<Study> freeInterestList = new ArrayList<>();
   List<Study> chargeInterestList = new ArrayList<>();
   List<Study> freeStudyList = new ArrayList<>();
-  List<Study> freeApplicationList = new ArrayList<>();
+  List<Study> freeApplicationList = new ArrayList<>(); // 회원 관점
   List<Study> chargeStudyList = new ArrayList<>();
   List<Study> chargeDeleteRequestList = new ArrayList<>();
 
@@ -101,6 +103,8 @@ public class App_KJC {
   List<Calendar> examCalendarList = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
+  // [추가] 개개인이 신청한 무료스터디
+  HashMap<String, List<Study>> applyFreeStudyMap = new HashMap<>();
   HashMap<String, List<Study>> participateFreeStudyMap = new HashMap<>();
   HashMap<String, List<Study>> participateChargeStudyMap = new HashMap<>();
   HashMap<String, List<Study>> registerFreeStudyMap = new HashMap<>();
@@ -122,7 +126,12 @@ public class App_KJC {
     @Override
     public void execute() {
       Command command = commandMap.get(menuId);
-      command.execute();
+      try {
+        command.execute(new CommandRequest(commandMap));
+      } catch (Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
+        e.printStackTrace();
+      }
     }
   }
 
@@ -197,16 +206,16 @@ public class App_KJC {
   }
 
   void service() {
-    loadObjects("member.json", memberList, Member.class);
-    loadObjects("freeInterest.json", freeInterestList, Study.class);
-    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
-    loadObjects("freeStudy.json", freeStudyList, Study.class);
-    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
-    loadObjects("communityQa.json", communityQaList, Community.class);
-    loadObjects("communityInfo.json", communityInfoList, Community.class);
-    loadObjects("communityTalk.json", communityTalkList, Community.class);
-    loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
-    loadObjects("examCalendar.json", examCalendarList, Calendar.class);
+    //    loadObjects("member.json", memberList, Member.class);
+    //    loadObjects("freeInterest.json", freeInterestList, Study.class);
+    //    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+    //    loadObjects("freeStudy.json", freeStudyList, Study.class);
+    //    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+    //    loadObjects("communityQa.json", communityQaList, Community.class);
+    //    loadObjects("communityInfo.json", communityInfoList, Community.class);
+    //    loadObjects("communityTalk.json", communityTalkList, Community.class);
+    //    loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
+    //    loadObjects("examCalendar.json", examCalendarList, Calendar.class);
 
     createMainMenu().execute();
     Prompt.close();
@@ -223,34 +232,39 @@ public class App_KJC {
     saveObjects("examCalendar.json", examCalendarList);
   }
 
-  @SuppressWarnings("unchecked")
+  // JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.
   private <E> void loadObjects(
-      String filepath, 
-      List<E> list,
-      Class<E> domainType) {
+      String filepath, // 데이터를 읽어 올 파일 경로
+      List<E> list, // 로딩한 데이터를 객체로 만든 후 저장할 목록
+      Class<E> domainType // 생성할 객체의 타입 정보
+      ) {
 
     try (BufferedReader in = new BufferedReader(
-        new FileReader(filepath,Charset.forName("UTF-8")))) {
+        new FileReader(filepath, Charset.forName("UTF-8")))) {
 
       StringBuilder strBuilder = new StringBuilder();
       String str;
-      while ((str = in.readLine()) != null) {
+
+      while ((str = in.readLine()) != null) { // 파일 전체를 읽는다.
         strBuilder.append(str);
       }
 
-      Type type = TypeToken.getParameterized(Collection.class, domainType).getType();
-      Collection<E> collection = new Gson().fromJson(strBuilder.toString(),type);
+      // StringBuilder로 읽어 온 JSON 문자열을 객체로 바꾼다.
+      Type type = TypeToken.getParameterized(Collection.class, domainType).getType(); 
+      Collection<E> collection = new Gson().fromJson(strBuilder.toString(), type);
 
+      // JSON 데이터로 읽어온 목록을 파라미터로 받은 List 에 저장한다.
       list.addAll(collection);
 
       System.out.printf("%s 데이터 로딩 완료!\n", filepath);
 
-    }catch (Exception e) {
+    } catch (Exception e) {
       System.out.printf("%s 데이터 로딩 오류!\n", filepath);
     }
   }
 
-  private <E> void saveObjects(String filepath, List<?> list) {
+  // 객체를 JSON 형식으로 저장한다.
+  private void saveObjects(String filepath, List<?> list) {
     try (PrintWriter out = new PrintWriter(
         new BufferedWriter(
             new FileWriter(filepath, Charset.forName("UTF-8"))))) {
@@ -278,7 +292,6 @@ public class App_KJC {
     mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
-    mainMenuGroup.add(createMentorApplyMenu());
     mainMenuGroup.add(createCommunityMenu());
     mainMenuGroup.add(createCalendarMenu());
 
@@ -292,7 +305,6 @@ public class App_KJC {
 
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createFreeStudyApplyMenu());
-    myPageMenu.add(createMentorApplyMenu());
 
     return myPageMenu;
   }
@@ -324,7 +336,6 @@ public class App_KJC {
     return mentorApplicantMenu;
   }
 
-  // 관리자 관점
   private Menu createDeleteRequestStudyMenu() {
     MenuGroup deletedRequestMenu = new MenuGroup("삭제 요청 스터디 관리");
 
@@ -371,13 +382,6 @@ public class App_KJC {
     return freeStudyApplyMenu;
   }
 
-  private Menu createMentorApplyMenu() {
-    MenuGroup mentorApplyMenu = new MenuGroup("멘토 신청", ACCESS_GENERAL);
-    mentorApplyMenu.add(new MenuItem("신청", "/mentorApplicant/add"));
-
-    return mentorApplyMenu;
-  }
-
   private Menu createFreeStudyMenu() {
     MenuGroup freeStudyMenu = new MenuGroup("무료 스터디");
 
@@ -395,6 +399,7 @@ public class App_KJC {
     MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
 
     chargeStudyMenu.add(new MenuItem("검색", "/chargeStudy/search"));
+    chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
     chargeStudyMenu.add(new MenuItem("생성", ACCESS_MENTOR, "/chargeStudy/add"));
     chargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/list"));
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
