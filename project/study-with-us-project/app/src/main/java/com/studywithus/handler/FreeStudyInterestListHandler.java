@@ -3,9 +3,9 @@ package com.studywithus.handler;
 import java.util.List;
 import com.studywithus.domain.Study;
 
-public class FreeInterestListHandler extends AbstractInterestHandler {
+public class FreeStudyInterestListHandler extends AbstractInterestHandler {
 
-  public FreeInterestListHandler(List<Study> freeInterestList) {
+  public FreeStudyInterestListHandler(List<Study> freeInterestList) {
     super(freeInterestList);
   }
 
