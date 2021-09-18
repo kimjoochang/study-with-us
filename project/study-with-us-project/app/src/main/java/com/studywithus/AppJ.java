@@ -4,7 +4,6 @@ import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
-import static com.studywithus.menu.Menu.ACCESS_MEMBER;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.io.BufferedReader;
@@ -27,53 +26,53 @@ import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
-import com.studywithus.handler.AuthLogInHandler;
-import com.studywithus.handler.AuthLogOutHandler;
-import com.studywithus.handler.ChargeStudyAddHandler;
-import com.studywithus.handler.ChargeStudyDeleteRequestHandler;
-import com.studywithus.handler.ChargeStudyDeletedDetailHandler;
-import com.studywithus.handler.ChargeStudyDeletedListHandler;
-import com.studywithus.handler.ChargeStudyDetailHandler;
-import com.studywithus.handler.ChargeStudyInterestAddHandler;
-import com.studywithus.handler.ChargeStudyInterestDeleteHandler;
-import com.studywithus.handler.ChargeStudyInterestListHandler;
-import com.studywithus.handler.ChargeStudyListHandler;
-import com.studywithus.handler.ChargeStudyPaymentHandler;
-import com.studywithus.handler.ChargeStudySearchHandler;
-import com.studywithus.handler.ChargeStudyUpdateHandler;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.handler.CommunityAddHandler;
-import com.studywithus.handler.CommunityDeleteHandler;
-import com.studywithus.handler.CommunityDetailHandler;
-import com.studywithus.handler.CommunityListHandler;
-import com.studywithus.handler.CommunitySearchHandler;
-import com.studywithus.handler.CommunityUpdateHandler;
-import com.studywithus.handler.ExamCalendarAddHandler;
-import com.studywithus.handler.ExamCalendarDeleteHandler;
-import com.studywithus.handler.ExamCalendarDetailHandler;
-import com.studywithus.handler.ExamCalendarListHandler;
-import com.studywithus.handler.ExamCalendarUpdateHandler;
-import com.studywithus.handler.FreeInterestDeleteHandler;
-import com.studywithus.handler.FreeInterestListHandler;
-import com.studywithus.handler.FreeStudyAddHandler;
-import com.studywithus.handler.FreeStudyDeleteHandler;
-import com.studywithus.handler.FreeStudyDetailHandlerJ;
-import com.studywithus.handler.FreeStudyListHandler;
-import com.studywithus.handler.FreeStudySearchHandler;
-import com.studywithus.handler.FreeStudyUpdateHandler;
-import com.studywithus.handler.JobsCalendarAddHandler;
-import com.studywithus.handler.JobsCalendarDeleteHandler;
-import com.studywithus.handler.JobsCalendarDetailHandler;
-import com.studywithus.handler.JobsCalendarListHandler;
-import com.studywithus.handler.JobsCalendarUpdateHandler;
-import com.studywithus.handler.MembershipWithdrawalHandler;
-import com.studywithus.handler.MentorApplicationAddHandler;
-import com.studywithus.handler.MentorApplicationDetailHandler;
-import com.studywithus.handler.MyInfoHandler;
-import com.studywithus.handler.SignUpHandler;
-import com.studywithus.handler.SnsLogInHandler;
-import com.studywithus.handler.SnsSignUpHandler;
+import com.studywithus.handler.calendar.ExamCalendarAddHandler;
+import com.studywithus.handler.calendar.ExamCalendarDeleteHandler;
+import com.studywithus.handler.calendar.ExamCalendarDetailHandler;
+import com.studywithus.handler.calendar.ExamCalendarListHandler;
+import com.studywithus.handler.calendar.ExamCalendarUpdateHandler;
+import com.studywithus.handler.calendar.JobsCalendarAddHandler;
+import com.studywithus.handler.calendar.JobsCalendarDeleteHandler;
+import com.studywithus.handler.calendar.JobsCalendarDetailHandler;
+import com.studywithus.handler.calendar.JobsCalendarListHandler;
+import com.studywithus.handler.calendar.JobsCalendarUpdateHandler;
+import com.studywithus.handler.community.CommunityAddHandler;
+import com.studywithus.handler.community.CommunityDeleteHandler;
+import com.studywithus.handler.community.CommunityDetailHandler;
+import com.studywithus.handler.community.CommunityListHandler;
+import com.studywithus.handler.community.CommunitySearchHandler;
+import com.studywithus.handler.community.CommunityUpdateHandler;
+import com.studywithus.handler.study.ChargeStudyAddHandler;
+import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
+import com.studywithus.handler.study.ChargeStudyDeletedDetailHandler;
+import com.studywithus.handler.study.ChargeStudyDeletedListHandler;
+import com.studywithus.handler.study.ChargeStudyDetailHandler;
+import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
+import com.studywithus.handler.study.ChargeStudyInterestDeleteHandler;
+import com.studywithus.handler.study.ChargeStudyInterestListHandler;
+import com.studywithus.handler.study.ChargeStudyListHandler;
+import com.studywithus.handler.study.ChargeStudyPaymentHandler;
+import com.studywithus.handler.study.ChargeStudySearchHandler;
+import com.studywithus.handler.study.ChargeStudyUpdateHandler;
+import com.studywithus.handler.study.FreeStudyAddHandler;
+import com.studywithus.handler.study.FreeStudyDeleteHandler;
+import com.studywithus.handler.study.FreeStudyDetailHandlerJ;
+import com.studywithus.handler.study.FreeStudyInterestDeleteHandler;
+import com.studywithus.handler.study.FreeStudyInterestListHandler;
+import com.studywithus.handler.study.FreeStudyListHandler;
+import com.studywithus.handler.study.FreeStudySearchHandler;
+import com.studywithus.handler.study.FreeStudyUpdateHandler;
+import com.studywithus.handler.study.MentorApplicationAddHandler;
+import com.studywithus.handler.study.MentorApplicationDetailHandler;
+import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.handler.user.AuthLogOutHandler;
+import com.studywithus.handler.user.MembershipWithdrawalHandler;
+import com.studywithus.handler.user.MyInfoHandler;
+import com.studywithus.handler.user.SignUpHandler;
+import com.studywithus.handler.user.SnsLogInHandler;
+import com.studywithus.handler.user.SnsSignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
@@ -165,8 +164,8 @@ public class AppJ {
 
     commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
 
-    commandMap.put("/freeInterest/list", new FreeInterestListHandler(freeInterestList));
-    commandMap.put("/freeInterest/delete", new FreeInterestDeleteHandler(freeInterestList));
+    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeInterestList));
+    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList, freeInterestList));
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeInterestList));
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
@@ -182,7 +181,7 @@ public class AppJ {
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
+    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
@@ -325,8 +324,6 @@ public class AppJ {
     MenuGroup signUpMenu = new MenuGroup("회원가입", ACCESS_LOGOUT);
 
     signUpMenu.add(new MenuItem("이메일로 가입하기", "/auth/signUp"));
-
-    // SNS 계정별 로그인(ex. 카카오, 구글) 추가할지 논의하기 -> 추가하랭
     signUpMenu.add(createSnsSignUpMenu()); 
 
     return signUpMenu;
@@ -589,14 +586,6 @@ public class AppJ {
 
     return chargeInterestMenu;
   }
-
-
-
-  /* 적용 예정 메뉴
-
-   *마이 페이지 / 스터디 후기
-
-   */
 
 
   // ------------------------------ 관리자 페이지 -----------------------------------------

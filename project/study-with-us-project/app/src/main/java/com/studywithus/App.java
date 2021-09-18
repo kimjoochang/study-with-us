@@ -319,6 +319,8 @@ public class App {
     return mainMenuGroup;
   }
 
+  //------------------------------ STUDY WITH US -----------------------------------------
+
   // 메인 메뉴 / 회원가입
   private Menu createSignUpMenu() {
     MenuGroup signUpMenu = new MenuGroup("회원가입", ACCESS_LOGOUT);
@@ -455,13 +457,14 @@ public class App {
 
   // ------------------------------ 마이 페이지 -----------------------------------------
 
-  // 마이 페이지 메인
+  //마이 페이지 메인
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
 
     myPageMenu.add(createActivityDetailMenu());
     myPageMenu.add(createInterestMenu());
-    myPageMenu.add(createPaymentListMenu());
+    // 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
+    myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
     myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
     myPageMenu.add(new MenuItem("나의 정보", "auth/userInfo"));
 
@@ -478,31 +481,76 @@ public class App {
     return activityDetailMenu;
   }
 
-  // 마이 페이지 / 나의 활동 / 내 스터디
+  // 마이 페이지 / 나의 활동 / 나의 스터디
   private Menu createMyStudyMenu() {
 
-    MenuGroup myStudyMenu = new MenuGroup("내 스터디");
+    MenuGroup myStudyMenu = new MenuGroup("나의 스터디");
     myStudyMenu.add(createFreeStudyApplyMenu());
 
     return myStudyMenu;
   }
 
-  // 마이 페이지 / 나의 활동 / 내 스터디 / 무료 스터디 신청 내역
+  // 마이 페이지 / 나의 활동 / 나의 스터디 / 무료 스터디 신청 내역
   private Menu createFreeStudyApplyMenu() {
 
     MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
     freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudyApply/list"));
     freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
-    freeStudyApplyMenu.add(new MenuItem("수정", "/freeStudyApply/update"));
     freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
 
     return freeStudyApplyMenu;
   }
 
-  // 마이 페이지 / 나의 활동 / 내 게시글
+  // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 무료 스터디(팀장 관점)
+  // - "신청자 명단" -> 상세보기(승인/삭제) 추가해야 함
+  private Menu createRegisterFreeStudyMenu() {
+
+    MenuGroup registerFreeStudyMenu = new MenuGroup("내가 생성한 무료 스터디", ACCESS_LEADER);
+    registerFreeStudyMenu.add(new MenuItem("조회", "/registerFreeStudy/list"));
+    registerFreeStudyMenu.add(new MenuItem("상세보기", "/registerFreeStudy/detail"));
+    registerFreeStudyMenu.add(new MenuItem("삭제", "/registerFreeStudy/delete"));
+
+    return registerFreeStudyMenu;
+  }
+
+  // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 무료 스터디(팀원 관점)
+  private Menu createParticipateFreeStudyMenu() {
+
+    MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", ACCESS_MEMBER);
+    participateFreeStudyMenu.add(new MenuItem("조회", "/participateFreeStudy/list"));
+    participateFreeStudyMenu.add(new MenuItem("상세보기", "/participateFreeStudy/detail"));
+
+    return participateFreeStudyMenu;
+  }
+
+  //마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디(멘토 관점)
+  // - "신청자 명단" -> 상세보기(승인/삭제) 추가해야 함
+  private Menu createRegisterChargeStudyMenu() {
+
+    MenuGroup registerChargeStudyMenu = new MenuGroup("내가 생성한 유료 스터디", ACCESS_MENTOR);
+    registerChargeStudyMenu.add(new MenuItem("조회", "/registerChargeStudyy/list"));
+    registerChargeStudyMenu.add(new MenuItem("상세보기", "/registerChargeStudy/detail"));
+    registerChargeStudyMenu.add(new MenuItem("삭제", "/registerChargeStudy/delete"));
+
+    return registerChargeStudyMenu;
+  }
+
+  // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 유료 스터디(멘티 관점)
+  private Menu createParticipateChargeStudyMenu() {
+
+    MenuGroup participateChargeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", ACCESS_MENTEE);
+    participateChargeStudyMenu.add(new MenuItem("조회", "/participateChargeStudy/list"));
+
+    // - 상세보기에 '후기' 메뉴 추가하고 관련 핸들러 생성해야 함
+    participateChargeStudyMenu.add(new MenuItem("상세보기", "/participateChargeStudy/detail"));
+
+    return participateChargeStudyMenu;
+  }
+
+  // 마이 페이지 / 나의 활동 / 나의 게시글
   private Menu createMyPostMenu() {
 
-    MenuGroup myPostMenu = new MenuGroup("내 게시글");
+    MenuGroup myPostMenu = new MenuGroup("나의 게시글");
     myPostMenu.add(new MenuItem("조회", "/myPost/list"));
     myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
     myPostMenu.add(new MenuItem("수정", "/myPost/update"));
@@ -511,17 +559,17 @@ public class App {
     return myPostMenu;
   }
 
-  // 마이 페이지 / 내 관심목록
+  // 마이 페이지 / 나의 관심목록
   private Menu createInterestMenu() {
 
-    MenuGroup interestMenu = new MenuGroup("내 관심목록");
+    MenuGroup interestMenu = new MenuGroup("나의 관심목록");
     interestMenu.add(createFreeInterestMenu());
     interestMenu.add(createChargeInterestMenu());
 
     return interestMenu;
   }
 
-  // 마이 페이지 / 내 관심목록 / 무료 스터디 관심목록
+  // 마이 페이지 / 나의 관심목록 / 무료 스터디 관심목록
   private Menu createFreeInterestMenu() {
 
     MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
@@ -531,7 +579,7 @@ public class App {
     return freeInterestMenu;
   }
 
-  // 마이 페이지 / 내 관심목록 / 유료 스터디 관심목록
+  // 마이 페이지 / 나의 관심목록 / 유료 스터디 관심목록
   private Menu createChargeInterestMenu() {
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
@@ -540,32 +588,6 @@ public class App {
 
     return chargeInterestMenu;
   }
-
-  // 마이 페이지 / 나의 결제 내역
-  private Menu createPaymentListMenu() {
-
-    MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
-    paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "myPayment/list"));
-    paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "myPayment/detail"));
-
-    return paymentListMenu;
-  }
-
-  /* 적용 예정 메뉴
-
-   *마이 페이지 / 나의 활동 / 내 스터디 / 내가 생성한 무료 스터디(팀장)
- - 팀원 수락 / 거절
-
-   *마이 페이지 / 나의 활동 / 내 스터디 / 내가 참여한 무료 스터디(팀원~)
-
-   *마이 페이지 / 나의 활동 / 내 스터디 / 내가 생성한 유료 스터디(멘토)
-
-   *마이 페이지 / 나의 활동 / 내 스터디 / 내가 참여한 유료 스터디(팀원~)
-
-   *마이 페이지 / 스터디 후기
-
-   */
-
 
   // ------------------------------ 관리자 페이지 -----------------------------------------
 
