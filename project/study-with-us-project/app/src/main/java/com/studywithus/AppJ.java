@@ -349,6 +349,8 @@ public class AppJ {
 
     logInMenu.add(new MenuItem("이메일 로그인", "/auth/login"));
     logInMenu.add(createSnsLogInMenu()); 
+    logInMenu.add(new MenuItem("아이디 찾기", "/find/id"));
+    logInMenu.add(new MenuItem("비밀번호 변경", "/reset/password"));
 
     return logInMenu;
   }
