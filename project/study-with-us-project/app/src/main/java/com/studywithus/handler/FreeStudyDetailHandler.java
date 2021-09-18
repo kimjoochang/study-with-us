@@ -46,7 +46,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     request.setAttribute("no", no);
 
     // 본인이 작성한 글인 경우
-    if (freeStudy.getWriter() == AuthLoginHandler.getLoginUser()) {
+    if (freeStudy.getWriter() == AuthLogInHandler.getLoginUser()) {
       System.out.println("1. 수정");
       System.out.println("2. 삭제");
 
