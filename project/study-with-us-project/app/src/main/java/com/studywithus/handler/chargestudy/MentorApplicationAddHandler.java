@@ -1,8 +1,11 @@
-package com.studywithus.handler;
+package com.studywithus.handler.chargestudy;
 
 import java.sql.Date;
 import java.util.List;
 import com.studywithus.domain.MentorApplicationForm;
+import com.studywithus.handler.Command;
+import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class MentorApplicationAddHandler implements Command {

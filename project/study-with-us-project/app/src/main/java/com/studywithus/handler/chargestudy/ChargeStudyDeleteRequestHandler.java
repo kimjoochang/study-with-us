@@ -1,42 +1,42 @@
-package com.studywithus.handler;
+package com.studywithus.handler.chargestudy;
 
 import java.util.List;
-
 import com.studywithus.domain.Study;
+import com.studywithus.handler.CommandRequest;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDeleteRequestHandler extends AbstractStudyHandler {
 
-	Study chargeStudy;
-	List<Study> chargeDeleteRequestList;
+  Study chargeStudy;
+  List<Study> chargeDeleteRequestList;
 
-	public ChargeStudyDeleteRequestHandler(List<Study> chargeStudyList, List<Study> chargeDeleteRequestList) {
-		super(chargeStudyList);
-		this.chargeDeleteRequestList = chargeDeleteRequestList;
-	}
+  public ChargeStudyDeleteRequestHandler(List<Study> chargeStudyList, List<Study> chargeDeleteRequestList) {
+    super(chargeStudyList);
+    this.chargeDeleteRequestList = chargeDeleteRequestList;
+  }
 
-	@Override
-	public void execute(CommandRequest request) {
-		System.out.println("[유료 스터디 / 삭제 요청]");
-		int no = (int) request.getAttribute("no");
+  @Override
+  public void execute(CommandRequest request) {
+    System.out.println("[유료 스터디 / 삭제 요청]");
+    int no = (int) request.getAttribute("no");
 
-		chargeStudy = findByNo(no);
+    chargeStudy = findByNo(no);
 
-		if (chargeStudy == null) {
-			System.out.println();
-			System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
-			return;
-		}
+    if (chargeStudy == null) {
+      System.out.println();
+      System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
+      return;
+    }
 
-		String input = Prompt.inputString("정말 삭제 요청 하시겠습니까? (y/N) ");
+    String input = Prompt.inputString("정말 삭제 요청 하시겠습니까? (y/N) ");
 
-		if (input.equalsIgnoreCase("n") || input.length() == 0) {
-			System.out.println();
-			System.out.println("유료 스터디 삭제 요청을 취소하였습니다.\n");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println();
+      System.out.println("유료 스터디 삭제 요청을 취소하였습니다.\n");
 
-			return;
-		}
-		chargeDeleteRequestList.add(chargeStudy);
-		System.out.println("삭제 요청이 완료되었습니다.\n");
-	}
+      return;
+    }
+    chargeDeleteRequestList.add(chargeStudy);
+    System.out.println("삭제 요청이 완료되었습니다.\n");
+  }
 }

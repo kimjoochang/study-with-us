@@ -1,7 +1,9 @@
-package com.studywithus.handler;
+package com.studywithus.handler.mypage;
 
 import java.util.List;
 import com.studywithus.domain.Community;
+import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 
 public class MyPostListHandler extends AbstractCommunityHandler {
 
