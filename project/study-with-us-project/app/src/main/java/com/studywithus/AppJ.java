@@ -4,7 +4,7 @@ import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
-import static com.studywithus.menu.Menu.ACCESS_MENTEE;
+import static com.studywithus.menu.Menu.ACCESS_MEMBER;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -33,8 +33,11 @@ import com.studywithus.handler.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.ChargeStudyDeletedDetailHandler;
 import com.studywithus.handler.ChargeStudyDeletedListHandler;
 import com.studywithus.handler.ChargeStudyDetailHandler;
+import com.studywithus.handler.ChargeStudyInterestAddHandler;
+import com.studywithus.handler.ChargeStudyInterestDeleteHandler;
 import com.studywithus.handler.ChargeStudyInterestListHandler;
 import com.studywithus.handler.ChargeStudyListHandler;
+import com.studywithus.handler.ChargeStudyPaymentHandler;
 import com.studywithus.handler.ChargeStudySearchHandler;
 import com.studywithus.handler.ChargeStudyUpdateHandler;
 import com.studywithus.handler.Command;
@@ -183,6 +186,9 @@ public class AppJ {
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteDetail", new ChargeStudyDeletedDetailHandler(chargeStudyList, chargeDeleteRequestList));
+    commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
+    commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList, chargeInterestList));
+    commandMap.put("/chargeStudy/InterestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyList, chargeInterestList));
 
     commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
     commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
@@ -457,7 +463,8 @@ public class AppJ {
 
     myPageMenu.add(createActivityDetailMenu());
     myPageMenu.add(createInterestMenu());
-    myPageMenu.add(createPaymentListMenu());
+    // 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
+    myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
     myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
     myPageMenu.add(new MenuItem("나의 정보", "auth/userInfo"));
 
@@ -474,31 +481,52 @@ public class AppJ {
     return activityDetailMenu;
   }
 
-  // 마이 페이지 / 나의 활동 / 내 스터디
+  // 마이 페이지 / 나의 활동 / 나의 스터디
   private Menu createMyStudyMenu() {
 
-    MenuGroup myStudyMenu = new MenuGroup("내 스터디");
+    MenuGroup myStudyMenu = new MenuGroup("나의 스터디");
     myStudyMenu.add(createFreeStudyApplyMenu());
 
     return myStudyMenu;
   }
 
-  // 마이 페이지 / 나의 활동 / 내 스터디 / 무료 스터디 신청 내역
+  // 마이 페이지 / 나의 활동 / 나의 스터디 / 무료 스터디 신청 내역
   private Menu createFreeStudyApplyMenu() {
 
     MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
     freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudyApply/list"));
     freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
-    freeStudyApplyMenu.add(new MenuItem("수정", "/freeStudyApply/update"));
     freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
 
     return freeStudyApplyMenu;
   }
 
-  // 마이 페이지 / 나의 활동 / 내 게시글
+  // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 무료 스터디(팀장 관점)
+  // - "신청자 명단" -> 상세보기(승인/삭제) 추가해야 함
+  private Menu createRegisterFreeStudyMenu() {
+
+    MenuGroup registerFreeStudyMenu = new MenuGroup("내가 생성한 무료 스터디", ACCESS_LEADER);
+    registerFreeStudyMenu.add(new MenuItem("조회", "/registerFreeStudyApply/list"));
+    registerFreeStudyMenu.add(new MenuItem("상세보기", "/registerFreeStudyApply/detail"));
+    registerFreeStudyMenu.add(new MenuItem("삭제", "/registerFreeStudyApply/delete"));
+
+    return registerFreeStudyMenu;
+  }
+
+  //마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 무료 스터디(팀원 관점)
+  private Menu createParticipateFreeStudyMenu() {
+
+    MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", ACCESS_MEMBER);
+    participateFreeStudyMenu.add(new MenuItem("조회", "/participateFreeStudy/list"));
+    participateFreeStudyMenu.add(new MenuItem("상세보기", "/participateFreeStudy/detail"));
+
+    return participateFreeStudyMenu;
+  }
+
+  // 마이 페이지 / 나의 활동 / 나의 게시글
   private Menu createMyPostMenu() {
 
-    MenuGroup myPostMenu = new MenuGroup("내 게시글");
+    MenuGroup myPostMenu = new MenuGroup("나의 게시글");
     myPostMenu.add(new MenuItem("조회", "/myPost/list"));
     myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
     myPostMenu.add(new MenuItem("수정", "/myPost/update"));
@@ -507,17 +535,17 @@ public class AppJ {
     return myPostMenu;
   }
 
-  // 마이 페이지 / 내 관심목록
+  // 마이 페이지 / 나의 관심목록
   private Menu createInterestMenu() {
 
-    MenuGroup interestMenu = new MenuGroup("내 관심목록");
+    MenuGroup interestMenu = new MenuGroup("나의 관심목록");
     interestMenu.add(createFreeInterestMenu());
     interestMenu.add(createChargeInterestMenu());
 
     return interestMenu;
   }
 
-  // 마이 페이지 / 내 관심목록 / 무료 스터디 관심목록
+  // 마이 페이지 / 나의 관심목록 / 무료 스터디 관심목록
   private Menu createFreeInterestMenu() {
 
     MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
@@ -527,7 +555,7 @@ public class AppJ {
     return freeInterestMenu;
   }
 
-  // 마이 페이지 / 내 관심목록 / 유료 스터디 관심목록
+  // 마이 페이지 / 나의 관심목록 / 유료 스터디 관심목록
   private Menu createChargeInterestMenu() {
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
@@ -537,26 +565,15 @@ public class AppJ {
     return chargeInterestMenu;
   }
 
-  // 마이 페이지 / 나의 결제 내역
-  private Menu createPaymentListMenu() {
 
-    MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
-    paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "myPayment/list"));
-    paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "myPayment/detail"));
-
-    return paymentListMenu;
-  }
 
   /* 적용 예정 메뉴
 
-   *마이 페이지 / 나의 활동 / 내 스터디 / 내가 생성한 무료 스터디(팀장)
-   - 팀원 수락 / 거절
+   *마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 무료 스터디(팀원~)
 
-   *마이 페이지 / 나의 활동 / 내 스터디 / 내가 참여한 무료 스터디(팀원~)
+   *마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디(멘토)
 
-   *마이 페이지 / 나의 활동 / 내 스터디 / 내가 생성한 유료 스터디(멘토)
-
-   *마이 페이지 / 나의 활동 / 내 스터디 / 내가 참여한 유료 스터디(팀원~)
+   *마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 유료 스터디(팀원~)
 
    *마이 페이지 / 스터디 후기
 
