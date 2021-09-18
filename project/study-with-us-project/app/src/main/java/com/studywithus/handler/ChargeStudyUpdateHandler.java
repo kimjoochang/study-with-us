@@ -1,44 +1,45 @@
 package com.studywithus.handler;
 
 import java.util.List;
+
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyUpdateHandler extends AbstractStudyHandler {
 
-  public ChargeStudyUpdateHandler(List<Study> chargeStudyList) {
-    super(chargeStudyList);	
-  }
+	public ChargeStudyUpdateHandler(List<Study> chargeStudyList) {
+		super(chargeStudyList);	
+	}
 
-  @Override
-  public void execute(CommandRequest request) {
-    System.out.println("[유료 스터디 / 수정]");
-    int no = Prompt.inputInt("번호? ");
+	@Override
+	public void execute(CommandRequest request) {
+		System.out.println("[유료 스터디 / 수정]");
+		int no = (int) request.getAttribute("no");
 
-    Study study = findByNo(no);
+		Study study = findByNo(no);
 
-    if (study == null) {
-      System.out.println();
-      System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
-      return;
-    }
+		if (study == null) {
+			System.out.println();
+			System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
+			return;
+		}
 
-    String title = Prompt.inputString(String.format("[%s] 수정된 스터디 제목: ", study.getTitle()));
-    String content = Prompt.inputString(String.format("[%s] 수정된 내용: ", study.getContent()));
+		String title = Prompt.inputString(String.format("[%s] 수정된 스터디 제목: ", study.getTitle()));
+		String content = Prompt.inputString(String.format("[%s] 수정된 내용: ", study.getContent()));
 
-    String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
+		String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
 
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println();
-      System.out.println("유료 스터디 수정을 취소하였습니다.\n");
-      return;
-    }
+		if (input.equalsIgnoreCase("n") || input.length() == 0) {
+			System.out.println();
+			System.out.println("유료 스터디 수정을 취소하였습니다.\n");
+			return;
+		}
 
-    study.setTitle(title);
-    study.setContent(content);
+		study.setTitle(title);
+		study.setContent(content);
 
-    System.out.println();
-    System.out.println("유료 스터디를 수정하였습니다.\n");
-  }
+		System.out.println();
+		System.out.println("유료 스터디를 수정하였습니다.\n");
+	}
 
 }
