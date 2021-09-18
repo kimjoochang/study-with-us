@@ -19,7 +19,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
 	}
 
 	@Override
-	public void execute(CommandRequest request) throws Exception {
+	public void execute(CommandRequest request) {
 		/* 해쉬맵의 value값을 myRegisteredFreeStudy에 담음 
 		 * 전역변수로 둘 경우 App 실행 시 getLoginUser() nullPointer 에러뜸 */
 		List<Study> myRegisteredFreeStudy = myRegisteredFreeStudyMap.get(AuthLoginHandler.getLoginUser().getId());
@@ -38,8 +38,6 @@ public class RegisterFreeStudyDetailHandler implements Command {
 		}
 
 		// 내가 생성한 무료 스터디 상세보기
-
-		request.setAttribute(null, myRegisteredFreeStudy);
 		String title = Prompt.inputString("제목: ");
 
 		Study freeStudy = findByName(title, myRegisteredFreeStudy);
@@ -95,7 +93,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
 				/* freeStudy는 해당 스터디의 지원자 명단 확인, 
 				 * freeApplicant는 해당 스터디 정보에 멤버로 추가하기 위해
 				 *  파라미터로 넘김 */
-				request.getRequestDispatcher("//add").forward(request);
+				studyMemberApproveHandler(freeApplicant, freeStudy);
 				System.out.println("팀원 승인이 완료되었습니다.");
 				break;
 
