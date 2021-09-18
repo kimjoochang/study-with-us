@@ -6,7 +6,7 @@ import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyDetailHandler extends AbstractStudyHandler {
+public class FreeStudyDetailHandlerJ extends AbstractStudyHandler {
 
   // 무료 스터디 신청 리스트 (회원 관점)
   List<Study> freeApplicationList;
@@ -14,14 +14,14 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
   // 무료 스터디 관심목록 리스트 (회원 관점)
   List<Study> freeInterestList;
 
-  public FreeStudyDetailHandler(List<Study> freeStudyList, List<Study> freeApplicationList, List<Study> freeInterestList) {
+  public FreeStudyDetailHandlerJ(List<Study> freeStudyList, List<Study> freeApplicationList, List<Study> freeInterestList) {
     super(freeStudyList);
     this.freeApplicationList = freeApplicationList;
     this.freeInterestList = freeInterestList;
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[무료 스터디 / 상세보기]\n");
     int no = Prompt.inputInt("번호? ");
 

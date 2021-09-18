@@ -22,12 +22,11 @@ public class JobsCalendarListHandler extends AbstractCalendarHandler {
             calendar.getStartDate(),
             calendar.getEndDate());
         System.out.println();
-        return;
       }
+    } else {
+      System.out.println();
+      System.out.println("이달의 채용공고 게시글이 존재하지 않습니다.\n");
+      return;
     }
-
-    System.out.println();
-    System.out.println("이달의 채용공고 게시글이 존재하지 않습니다.\n");
   }
 }
-
