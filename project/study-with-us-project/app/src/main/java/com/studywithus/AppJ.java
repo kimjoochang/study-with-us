@@ -4,6 +4,7 @@ import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
+import static com.studywithus.menu.Menu.ACCESS_MEMBER;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -515,7 +516,7 @@ public class AppJ {
   //마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 무료 스터디(팀원 관점)
   private Menu createParticipateFreeStudyMenu() {
 
-    MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", ACCESS_GENERAL);
+    MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", ACCESS_MEMBER);
     participateFreeStudyMenu.add(new MenuItem("조회", "/participateFreeStudy/list"));
     participateFreeStudyMenu.add(new MenuItem("상세보기", "/participateFreeStudy/detail"));
 
