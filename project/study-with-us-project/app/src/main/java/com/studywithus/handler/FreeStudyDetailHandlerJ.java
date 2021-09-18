@@ -1,6 +1,5 @@
 package com.studywithus.handler;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
@@ -46,109 +45,33 @@ public class FreeStudyDetailHandlerJ extends AbstractStudyHandler {
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-
     System.out.println();
 
-    System.out.println("1. 신청");
-
-    //  해당 스터디의 관심목록 존재 유/무에 따라 관심목록 삭제/추가로 나뉨
-    for (Study freeInterest : freeInterestList) {
-      if (freeInterest.equals(freeInterest)) {
-        System.out.println("2. 관심목록 삭제");
-        break;
-      }
-
-      else {
-        System.out.println("2. 관심목록 추가");
-        break;
-      }
+    Member loginUser = AuthLoginHandler.getLoginUser(); 
+    if (loginUser == null || freeStudy.getWriter().getId() != loginUser.getId()) {
+      return;
     }
 
-    System.out.println("0. 이전\n");
+    // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때 
+    // 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
+    request.setAttribute("no", no);
 
     while (true) {
-      int input = Prompt.inputInt("선택> ");
-
-      if (input == 1) {
-        apply(freeStudy);
-
-      } else if (input == 2) {
-        if (no == 0) {
-          interestDelete(freeStudy);
+      String input = Prompt.inputString("변경(U), 삭제(D), 이전(0)>");
+      switch (input) {
+        case "U":
+        case "u":
+          request.getRequestDispatcher("/freeStudy/update").forward(request);
           return;
-        }
-        interest(freeStudy);
-
-      } else if (input == 0) {
-        return;
-
-      } else {
-        System.out.println("잘못된 번호입니다.");
-        continue;
+        case "D":
+        case "d":
+          request.getRequestDispatcher("/freeStudy/delete").forward(request);
+          return;
+        case "0":
+          return;
+        default:
+          System.out.println("명령어가 올바르지 않습니다!");
       }
-      return;
     }
-  }
-
-  // 무료 스터디 신청
-  private void apply(Study freeStudy) {
-    System.out.println("[무료 스터디 / 상세보기 / 신청]\n");
-
-    String input = Prompt.inputString("무료 스터디를 신청 하시겠습니까? (y/N) ");
-
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("무료 스터디 신청이 취소되었습니다.");
-      return;
-    }
-
-    // 무료 스터디 신청자 리스트 (팀장 관점)
-    List<Member> freeApplicantList = new ArrayList<>();
-
-    // 무료 스터디 신청자 리스트에 회원 정보 추가 (멘토 관점)
-    freeApplicantList.add(AuthLoginHandler.getLoginUser());
-
-    // 무료 스터디 정보에 스터디 신청자 리스트 추가 (팀장 관점)
-    freeStudy.setApplicants(freeApplicantList);
-
-    // 무료 스터디 신청 리스트에 신청한 무료 스터디 추가 (회원 관점)
-    freeApplicationList.add(freeStudy);
-
-    System.out.println();
-    System.out.println("무료 스터디 신청이 완료되었습니다.\n");
-  }
-
-  // 무료 스터디 관심목록 추가
-  private void interest(Study freeStudy) {
-    System.out.println("[무료 스터디 / 상세보기 / 관심 목록]\n");
-
-    String input = Prompt.inputString("무료 스터디 관심 목록에 추가하시겠습니까? (y/N) ");
-
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("무료 스터디 관심 목록 추가를 취소하였습니다.\n");
-      return;
-    }
-
-    // 무료 스터디 관심 목록에 좋아요한 무료 스터디 추가 (회원 관점)
-    freeInterestList.add(freeStudy);
-    freeStudy.setViewCount(freeStudy.getLike() + 1);
-
-    System.out.println();
-    System.out.println("무료 스터디 관심 목록에 추가되었습니다.\n");
-  }
-
-  // 무료 스터디 관심목록 삭제
-  private void interestDelete(Study freeStudy) {
-    String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
-
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("무료 스터디 관심 목록을 취소하였습니다.\n");
-      return;
-    }
-
-    freeInterestList.remove(freeStudy);
-    freeStudy.setViewCount(freeStudy.getLike() - 1);
-
-    System.out.println();
-    System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");
   }
 }
