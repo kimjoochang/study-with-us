@@ -15,7 +15,7 @@ public class StudyMemberApproveHandler extends RegisterFreeStudyDetailHandler{
 		super(myRegisteredFreeStudyMap, myParticipatedFreeStudyMap);
 	}
 
-	public void studyMemberexeApproveHandler(Member freeApplicant, Study freeStudy) {
+	public void studyMemberApproveHandler(Member freeApplicant, Study freeStudy) {
 		List<Member> studyMember = new ArrayList<>();
 		studyMember.add(freeApplicant);
 		freeStudy.getApplicants().remove(freeApplicant);
