@@ -45,14 +45,14 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
       return;
     }
 
+    chargeStudy.setViewCount(chargeStudy.getViewCount() + 1);
+
     System.out.printf("제목: %s\n", chargeStudy.getTitle());
     System.out.printf("설명: %s\n", chargeStudy.getContent());
     System.out.printf("지역: %s\n", chargeStudy.getArea());
     System.out.printf("멘토: %s\n", chargeStudy.getWriter().getName());
     System.out.printf("가격: %s\n", chargeStudy.getPrice());
     System.out.printf("등록일: %s\n", chargeStudy.getRegisteredDate());
-
-    chargeStudy.setViewCount(chargeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
     System.out.println();
 
