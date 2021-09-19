@@ -3,7 +3,6 @@ package com.studywithus.handler.study;
 import java.util.List;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler extends AbstractStudyHandler {
@@ -46,6 +45,29 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     System.out.println();
 
     request.setAttribute("no", no);
+
+    // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때 
+    // 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
+    while (true) {
+      String input = Prompt.inputString("변경(U), 삭제(D), 이전(0) > ");
+      System.out.println(" ");
+      switch (input) {
+        case "U":
+        case "u":
+          request.getRequestDispatcher("/freeStudy/update").forward(request);
+          return;
+        case "D":
+        case "d":
+          request.getRequestDispatcher("/freeStudy/delete").forward(request);
+          return;
+        case "0":
+          return;
+        default:
+          System.out.println("명령어가 올바르지 않습니다!");
+      }
+    }
+
+    /* 기존 소스
 
     // 본인이 작성한 글인 경우
     if (freeStudy.getWriter() == AuthLogInHandler.getLoginUser()) {
@@ -99,5 +121,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
       }
       return;
     }
+     */
+
   }
 }
