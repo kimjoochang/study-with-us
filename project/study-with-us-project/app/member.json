@@ -1,9 +1,1 @@
-<<<<<<< HEAD
-[{"userAccessLevel":18,"name":"1","email":"1","id":"1","password":"1","phoneNumber":"1","registeredDate":"9월 19, 2021"},{"userAccessLevel":2,"name":"2","email":"2","id":"2","password":"2","phoneNumber":"2","registeredDate":"9월 19, 2021"},{"userAccessLevel":2,"name":"3","email":"23","id":"3","password":"3","phoneNumber":"3","registeredDate":"9월 19, 2021"}]
-=======
-<<<<<<< HEAD
-[{"userAccessLevel":2,"name":"kim","email":"1","id":"je","password":"2","phoneNumber":"1","registeredDate":"9월 19, 2021"},{"userAccessLevel":2,"name":"naver","id":"n","password":"n","registeredDate":"9월 19, 2021"}]
-=======
-[{"userAccessLevel":2,"name":"1","email":"1","id":"1","password":"1","phoneNumber":"1","registeredDate":"9월 19, 2021"}]
->>>>>>> cf12965b403a6945fde5a8785d725175d7164e56
->>>>>>> c88265bc9856fc79f950480a2a9727cba4d4b644
+[]

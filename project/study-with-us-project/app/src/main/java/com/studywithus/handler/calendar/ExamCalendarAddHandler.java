@@ -3,6 +3,7 @@ package com.studywithus.handler.calendar;
 import java.util.List;
 import com.studywithus.domain.Calendar;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class ExamCalendarAddHandler extends AbstractCalendarHandler {
@@ -17,10 +18,11 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
 
     Calendar examCalendar = new Calendar();
 
-    examCalendar.setNo(Prompt.inputInt("번호? "));
-    examCalendar.setTitle(Prompt.inputString("제목? "));
-    examCalendar.setContent(Prompt.inputString("내용? "));
-    examCalendar.setExamDate(Prompt.inputString("시험일? "));
+    examCalendar.setNo(Prompt.inputInt("번호: "));
+    examCalendar.setTitle(Prompt.inputString("제목: "));
+    examCalendar.setContent(Prompt.inputString("내용: "));
+    examCalendar.setExamDate(Prompt.inputString("시험일: "));
+    examCalendar.setWriter(AuthLogInHandler.getLoginUser());
 
     calendarList.add(examCalendar);
 
