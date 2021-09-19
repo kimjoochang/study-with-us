@@ -3,6 +3,7 @@ package com.studywithus.handler.calendar;
 import java.util.List;
 import com.studywithus.domain.Calendar;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class JobsCalendarAddHandler extends AbstractCalendarHandler {
@@ -22,6 +23,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
     jobsCalendar.setContent(Prompt.inputString("내용: "));
     jobsCalendar.setStartDate(Prompt.inputString("시작일: "));
     jobsCalendar.setEndDate(Prompt.inputString("종료일: "));
+    jobsCalendar.setWriter(AuthLogInHandler.getLoginUser());
 
     calendarList.add(jobsCalendar);
 

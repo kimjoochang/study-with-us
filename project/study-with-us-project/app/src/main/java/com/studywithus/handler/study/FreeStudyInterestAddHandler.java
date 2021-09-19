@@ -1,17 +1,17 @@
 package com.studywithus.handler.study;
 
 import java.util.List;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyInterestAddHandler extends AbstractStudyHandler {
 
-  List<Study> freeInterestList;
 
-  public FreeStudyInterestAddHandler(List<Study> studyList, List<Study> freeInterestList) {
-    super(studyList);
-    this.freeInterestList = freeInterestList;
+  public FreeStudyInterestAddHandler(List<Study> freeStudyList) {
+    super(freeStudyList);
   }
 
   @Override
@@ -33,8 +33,9 @@ public class FreeStudyInterestAddHandler extends AbstractStudyHandler {
       System.out.println("무료 스터디 관심 목록 추가를 취소하였습니다.\n");
       return;
     }
-
-    freeInterestList.add(freeInterest);
+    List<Member> likeMember = freeInterest.getLikeMembers();
+    likeMember.add(AuthLogInHandler.getLoginUser());
+    freeInterest.setLikeMembers(likeMember);
 
     // 무료 스터디 관심 목록에 좋아요한 무료 스터디 추가 (회원 관점)
     freeInterest.setLike(freeInterest.getLike() + 1);

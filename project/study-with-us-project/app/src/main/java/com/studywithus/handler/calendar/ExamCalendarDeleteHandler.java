@@ -27,7 +27,7 @@ public class ExamCalendarDeleteHandler extends AbstractCalendarHandler {
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println();
