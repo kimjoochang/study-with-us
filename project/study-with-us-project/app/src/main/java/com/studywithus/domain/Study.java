@@ -1,14 +1,20 @@
 package com.studywithus.domain;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Study extends Content {
   //[추가] 
   private String ONLINE = "온라인";
   private String OFFLINE = "오프라인";
+
   private List<Member> members; // 팀원 or 멘티
   private List<Member> applicants; // 무료 스터디 신청자
+
+  //[추가]
+  private List<Member> likeMembers = new ArrayList<>(); // 무료 스터디 신청자
+
   private String mentorExplanation; // 멘토 설명
   private String rule; // 스터디 규칙
   private int price; // 유료 스터디 가격
@@ -40,6 +46,14 @@ public class Study extends Content {
 
   public void setApplicants(List<Member> applicants) {
     this.applicants = applicants;
+  }
+
+  public List<Member> getLikeMembers() {
+    return likeMembers;
+  }
+
+  public void setLikeMembers(List<Member> likeMembers) {
+    this.likeMembers = likeMembers;
   }
 
   public String getMentorExplanation() {

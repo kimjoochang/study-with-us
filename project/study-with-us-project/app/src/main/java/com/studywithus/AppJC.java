@@ -91,7 +91,8 @@ public class AppJC {
   List<Study> participateFreeStudyList = new ArrayList<>();
   List<Study> registerChargeStudyList = new ArrayList<>();
   List<Study> participateChargeStudyList = new ArrayList<>();
-  List<Study> freeInterestList = new ArrayList<>();
+  //  [수정] 스터디 도메인에서 다루려고 삭제
+  //  List<Study> freeInterestList = new ArrayList<>();
   List<Study> chargeInterestList = new ArrayList<>();
   List<Study> freeStudyList = new ArrayList<>();
   List<Study> freeApplicationList = new ArrayList<>();
@@ -168,8 +169,8 @@ public class AppJC {
 
     commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
 
-    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeInterestList));
-    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList, freeInterestList));
+    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
+    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeInterestList));
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
@@ -178,13 +179,13 @@ public class AppJC {
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeInterestList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
     // [추가]
     commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyList, applyFreeStudyMap));
-    commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(freeStudyList, freeInterestList));
-    commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(freeStudyList, freeInterestList));
+    commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(freeStudyList));
+    commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(freeStudyList));
 
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
@@ -234,7 +235,7 @@ public class AppJC {
 
   void service() {
     loadObjects("member_test.json", memberList, Member.class);
-    loadObjects("freeInterest_test.json", freeInterestList, Study.class);
+    //    loadObjects("freeInterest_test.json", freeInterestList, Study.class);
     loadObjects("chargeInterest_test.json", chargeInterestList, Study.class);
     loadObjects("freeStudy_test.json", freeStudyList, Study.class);
     loadObjects("chargeStudy_test.json", chargeStudyList, Study.class);
@@ -248,7 +249,7 @@ public class AppJC {
     Prompt.close();
 
     saveObjects("member_test.json", memberList);
-    saveObjects("freeInterest_test.json", freeInterestList);
+    //    saveObjects("freeInterest_test.json", freeInterestList);
     saveObjects("chargeInterest_test.json", chargeInterestList);
     saveObjects("freeStudy_test.json", freeStudyList);
     saveObjects("chargeStudy_test.json", chargeStudyList);
