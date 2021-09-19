@@ -27,10 +27,10 @@ public class ChargeStudySearchHandler extends AbstractStudyHandler {
         continue;
       }
 
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+      System.out.printf("[번호 = %d, 제목 = %s, 멘토 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
           chargeStudy.getNo(), 
           chargeStudy.getTitle(), 
-          chargeStudy.getWriter(),
+          chargeStudy.getWriter().getName(),
           chargeStudy.getRegisteredDate(),
           chargeStudy.getViewCount(), 
           chargeStudy.getLike());

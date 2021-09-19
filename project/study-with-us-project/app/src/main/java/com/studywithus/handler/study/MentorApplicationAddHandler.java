@@ -2,6 +2,7 @@ package com.studywithus.handler.study;
 
 import java.sql.Date;
 import java.util.List;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,17 +11,20 @@ import com.studywithus.util.Prompt;
 
 public class MentorApplicationAddHandler implements Command {
 
-  List<MentorApplicationForm> mentorApplicationForm;
+  List<MentorApplicationForm> mentorApplicationFormList;
+  List<Member> memberList;
 
-  public MentorApplicationAddHandler (List<MentorApplicationForm> mentorApplicationForm) {
-    this.mentorApplicationForm = mentorApplicationForm;
+  public MentorApplicationAddHandler(List<MentorApplicationForm> mentorApplicationFormList, List<Member> memberList) {
+    this.mentorApplicationFormList = mentorApplicationFormList;
+    this.memberList = memberList;
   }
 
   @Override
   public void execute(CommandRequest request) {
-    MentorApplicationForm mentorApplication = new MentorApplicationForm();
-
     System.out.println("[멘토 신청하기]");
+
+    MentorApplicationForm applyMentor = new MentorApplicationForm();
+    Member member = AuthLogInHandler.loginUser;
 
     while (true) {
       String selfIntro = Prompt.inputString("자기 소개: ");
@@ -32,16 +36,15 @@ public class MentorApplicationAddHandler implements Command {
         continue;
 
       } else {
-        mentorApplication.setName(AuthLogInHandler.loginUser.getName());
-        mentorApplication.setId(AuthLogInHandler.loginUser.getId());
-        mentorApplication.setSelfIntroduction(selfIntro);
-        mentorApplication.setChargeStudySubject(subject);
-        mentorApplication.setChargeStudyExplanation(explanation);
-        mentorApplication.setRegisteredDate(new Date(System.currentTimeMillis()));
+        applyMentor.setMentorMember(member);
+        applyMentor.setSelfIntroduction(selfIntro);
+        applyMentor.setChargeStudySubject(subject);
+        applyMentor.setChargeStudyExplanation(explanation);
+        applyMentor.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+        mentorApplicationFormList.add(applyMentor);
 
         System.out.println("멘토 신청이 완료되었습니다.");
-
-        mentorApplicationForm.add(mentorApplication);
       }
       break;
     }

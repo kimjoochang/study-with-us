@@ -57,6 +57,8 @@ public class AuthLogInHandler implements Command {
 
       loginUser = member;
       userAccessLevel = member.getUserAccessLevel();
+
+      return;
     }
   }
 

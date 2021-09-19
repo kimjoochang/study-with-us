@@ -7,12 +7,12 @@ import com.studywithus.handler.CommandRequest;
 
 public class MyInfoHandler implements Command {
 
-  public MyInfoHandler(List<Member> memberList2) {
+  public MyInfoHandler(List<Member> memberList) {
   }
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[내정보]");
+    System.out.println("[나의 정보]");
 
     Member loginUser = AuthLogInHandler.getLoginUser();
 
