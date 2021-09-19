@@ -1,13 +1,11 @@
-package com.studywithus.handler.study;
+package com.studywithus.handler;
 
 import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
-import com.studywithus.handler.CommandRequest;
-import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyDetailHandlerJ extends AbstractStudyHandler {
+public class FreeStudyDetailHandlerJ2 extends AbstractStudyHandler {
 
   // 무료 스터디 신청 리스트 (회원 관점)
   List<Study> freeApplicationList;
@@ -15,7 +13,7 @@ public class FreeStudyDetailHandlerJ extends AbstractStudyHandler {
   // 무료 스터디 관심목록 리스트 (회원 관점)
   List<Study> freeInterestList;
 
-  public FreeStudyDetailHandlerJ(List<Study> freeStudyList, List<Study> freeApplicationList, List<Study> freeInterestList) {
+  public FreeStudyDetailHandlerJ2(List<Study> freeStudyList, List<Study> freeApplicationList, List<Study> freeInterestList) {
     super(freeStudyList);
     this.freeApplicationList = freeApplicationList;
     this.freeInterestList = freeInterestList;
@@ -49,7 +47,7 @@ public class FreeStudyDetailHandlerJ extends AbstractStudyHandler {
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
     System.out.println();
 
-    Member loginUser = AuthLogInHandler.getLoginUser(); 
+    Member loginUser = AuthLoginHandler.getLoginUser(); 
     if (loginUser == null || freeStudy.getWriter().getId() != loginUser.getId()) {
       return;
     }
