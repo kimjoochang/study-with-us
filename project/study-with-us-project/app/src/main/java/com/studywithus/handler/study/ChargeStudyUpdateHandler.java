@@ -1,45 +1,55 @@
 package com.studywithus.handler.study;
 
 import java.util.List;
+
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyUpdateHandler extends AbstractStudyHandler {
 
-  public ChargeStudyUpdateHandler(List<Study> chargeStudyList) {
-    super(chargeStudyList);	
-  }
+	Study chargeStudy;
 
-  @Override
-  public void execute(CommandRequest request) {
-    System.out.println("[유료 스터디 / 수정]");
-    int no = (int) request.getAttribute("no");
+	public ChargeStudyUpdateHandler(List<Study> chargeStudyList) {
+		super(chargeStudyList);	
+	}
 
-    Study study = findByNo(no);
+	@Override
+	public void execute(CommandRequest request) {
 
-    if (study == null) {
-      System.out.println();
-      System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
-      return;
-    }
+		Member loginUser = AuthLogInHandler.getLoginUser(); 
+if (chargeStudy.getWriter() == loginUser) {
+		System.out.println("[유료 스터디 / 수정]");
+		int no = (int) request.getAttribute("no");
 
-    String title = Prompt.inputString(String.format("[%s] 수정된 스터디 제목: ", study.getTitle()));
-    String content = Prompt.inputString(String.format("[%s] 수정된 내용: ", study.getContent()));
+		Study study = findByNo(no);
 
-    String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
+		if (study == null) {
+			System.out.println();
+			System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
+			return;
+		} else {
+			}
+		}
 
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println();
-      System.out.println("유료 스터디 수정을 취소하였습니다.\n");
-      return;
-    }
+		String title = Prompt.inputString(String.format("[%s] 수정된 스터디 제목: ", study.getTitle()));
+		String content = Prompt.inputString(String.format("[%s] 수정된 내용: ", study.getContent()));
 
-    study.setTitle(title);
-    study.setContent(content);
+		String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
 
-    System.out.println();
-    System.out.println("유료 스터디를 수정하였습니다.\n");
-  }
+		if (input.equalsIgnoreCase("n") || input.length() == 0) {
+			System.out.println();
+			System.out.println("유료 스터디 수정을 취소하였습니다.\n");
+			return;
+		}
+
+		study.setTitle(title);
+		study.setContent(content);
+
+		System.out.println();
+		System.out.println("유료 스터디를 수정하였습니다.\n");
+	}
 
 }
