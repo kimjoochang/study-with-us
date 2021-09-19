@@ -42,10 +42,11 @@ public class FreeStudyApplyHandler extends AbstractStudyHandler {
       return;
     }
     // 회원 개개인의 신청한 스터디
-    List<Member> freeApplicantList = new ArrayList<>();
+    List<Member> freeApplicantList;
     List<Study> freeApplicationList;
 
     // 무료 스터디 신청자 리스트에 회원 정보 추가 (멘토 관점)
+    freeApplicantList = freeStudy.getApplicants();
     freeApplicantList.add(AuthLogInHandler.getLoginUser());
     freeStudy.setApplicants(freeApplicantList);
 

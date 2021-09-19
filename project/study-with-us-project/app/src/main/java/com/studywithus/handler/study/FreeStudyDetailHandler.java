@@ -33,8 +33,9 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     if (freeStudy.getArea() != null) {
       System.out.printf("온/오프라인: %s\n", freeStudy.getOFFLINE());
       System.out.printf("지역: %s\n", freeStudy.getArea());
+    } else {
+      System.out.printf("온/오프라인: %s\n", freeStudy.getONLINE());
     }
-    System.out.printf("온/오프라인: %s\n", freeStudy.getONLINE());
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("규칙: %s\n", freeStudy.getRule());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());

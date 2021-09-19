@@ -5,16 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
+import com.studywithus.handler.Command;
+import com.studywithus.handler.CommandRequest;
 import com.studywithus.menu.Menu;
 
-public class StudyMemberApproveHandler extends RegisterFreeStudyDetailHandler {
+public class StudyMemberApproveHandler implements Command{
 
-  public StudyMemberApproveHandler(HashMap<String, List<Study>> myRegisteredFreeStudyMap,
-      HashMap<String, List<Study>> myParticipatedFreeStudyMap) {
-    super(myRegisteredFreeStudyMap, myParticipatedFreeStudyMap);
+  HashMap<String, List<Study>> registerFreeStudyMap;
+  HashMap<String, List<Study>> participateFreeStudyMap;
+
+  public StudyMemberApproveHandler(HashMap<String, List<Study>> registerFreeStudyMap,
+      HashMap<String, List<Study>> participateFreeStudyMap) {
+    this.registerFreeStudyMap = registerFreeStudyMap;
+    this.participateFreeStudyMap = participateFreeStudyMap;
   }
 
-  public void studyMemberApproveHandler(Member freeApplicant, Study freeStudy) {
+  @Override
+  public void execute(CommandRequest request) {
     List<Member> studyMember = new ArrayList<>();
     studyMember.add(freeApplicant);
     freeStudy.getApplicants().remove(freeApplicant);
@@ -29,18 +36,19 @@ public class StudyMemberApproveHandler extends RegisterFreeStudyDetailHandler {
     // 개개인이 참여한 무료 스터디
     /* 해쉬맵에 key값으로 신청한 회원 id , value값으로 회원이 참여한 스터디 리스트 
      * 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디 추가 */
-    if (myParticipatedFreeStudyMap.containsKey(freeApplicant.getId())) {
-      myParticipatedFreeStudy = myParticipatedFreeStudyMap.get(freeApplicant.getId());
+    if (participateFreeStudyMap.containsKey(freeApplicant.getId())) {
+      myParticipatedFreeStudy = participateFreeStudyMap.get(freeApplicant.getId());
       myParticipatedFreeStudy.add(freeStudy);
-      myParticipatedFreeStudyMap.put(freeApplicant.getId(), myParticipatedFreeStudy);
+      participateFreeStudyMap.put(freeApplicant.getId(), myParticipatedFreeStudy);
 
       // 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
     } else {
       myParticipatedFreeStudy = new ArrayList<>();
       myParticipatedFreeStudy.add(freeStudy);
-      myParticipatedFreeStudyMap.put(freeApplicant.getId(), myParticipatedFreeStudy);
+      participateFreeStudyMap.put(freeApplicant.getId(), myParticipatedFreeStudy);
     }
 
     freeApplicant.setUserAccessLevel(freeApplicant.getUserAccessLevel() | Menu.ACCESS_MEMBER);
   }
+
 }

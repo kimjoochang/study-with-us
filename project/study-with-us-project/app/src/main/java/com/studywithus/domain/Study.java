@@ -10,7 +10,7 @@ public class Study extends Content {
   private String OFFLINE = "오프라인";
 
   private List<Member> members; // 팀원 or 멘티
-  private List<Member> applicants; // 무료 스터디 신청자
+  private List<Member> applicants = new ArrayList<>();; // 무료 스터디 신청자
 
   //[추가]
   private List<Member> likeMembers = new ArrayList<>(); // 무료 스터디 신청자

@@ -66,8 +66,9 @@ import com.studywithus.handler.study.FreeStudyInterestListHandler;
 import com.studywithus.handler.study.FreeStudyListHandler;
 import com.studywithus.handler.study.FreeStudySearchHandler;
 import com.studywithus.handler.study.FreeStudyUpdateHandler;
-import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
+import com.studywithus.handler.study.ParticipateFreeStudyListHandler;
+import com.studywithus.handler.study.RegisterFreeStudyDetailHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
@@ -173,7 +174,7 @@ public class AppJC {
     commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeInterestList));
 
-    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
+    //    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
@@ -186,6 +187,8 @@ public class AppJC {
     commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyList, applyFreeStudyMap));
     commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(freeStudyList));
     commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(freeStudyList));
+    commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(registerFreeStudyMap, participateFreeStudyMap));
+    commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(participateFreeStudyMap));
 
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
@@ -495,6 +498,8 @@ public class AppJC {
   private Menu createMyStudyMenu() {
 
     MenuGroup myStudyMenu = new MenuGroup("나의 스터디");
+    myStudyMenu.add(createRegisterFreeStudyMenu());
+    myStudyMenu.add(createParticipateFreeStudyMenu());
     myStudyMenu.add(createFreeStudyApplyMenu());
 
     return myStudyMenu;
@@ -516,9 +521,9 @@ public class AppJC {
   private Menu createRegisterFreeStudyMenu() {
 
     MenuGroup registerFreeStudyMenu = new MenuGroup("내가 생성한 무료 스터디", ACCESS_LEADER);
-    registerFreeStudyMenu.add(new MenuItem("조회", "/registerFreeStudy/list"));
-    registerFreeStudyMenu.add(new MenuItem("상세보기", "/registerFreeStudy/detail"));
-    registerFreeStudyMenu.add(new MenuItem("삭제", "/registerFreeStudy/delete"));
+    registerFreeStudyMenu.add(new MenuItem("조회 [상세보기랑 합침]", "/freeStudy/registerStudyList"));
+    registerFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/registerStudyList"));
+    registerFreeStudyMenu.add(new MenuItem("삭제[삭제를 여기서?]", "/registerFreeStudy/delete"));
 
     return registerFreeStudyMenu;
   }
@@ -527,8 +532,8 @@ public class AppJC {
   private Menu createParticipateFreeStudyMenu() {
 
     MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", Menu.ACCESS_MEMBER);
-    participateFreeStudyMenu.add(new MenuItem("조회", "/participateFreeStudy/list"));
-    participateFreeStudyMenu.add(new MenuItem("상세보기", "/participateFreeStudy/detail"));
+    participateFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/participateStudyList"));
+    participateFreeStudyMenu.add(new MenuItem("상세보기[안하기로함]", "/participateFreeStudy/detail"));
 
     return participateFreeStudyMenu;
   }
