@@ -10,6 +10,7 @@ import com.studywithus.util.Prompt;
 public class CommunityAddHandler extends AbstractCommunityHandler{
 
   List<Community> communityWriterList;
+  Community community;
 
   public CommunityAddHandler(List<Community> communityList) {
     super(communityList);
