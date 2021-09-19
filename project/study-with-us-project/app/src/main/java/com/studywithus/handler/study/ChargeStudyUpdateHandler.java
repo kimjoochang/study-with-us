@@ -34,7 +34,7 @@ public class ChargeStudyUpdateHandler extends AbstractStudyHandler {
 		String title = Prompt.inputString(String.format("[%s] 수정된 스터디 제목: ", chargeStudy.getTitle()));
 		String content = Prompt.inputString(String.format("[%s] 수정된 내용: ", chargeStudy.getContent()));
 
-		String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
+		String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) "); 
 
 		if (input.equalsIgnoreCase("n") || input.length() == 0) {
 			System.out.println();

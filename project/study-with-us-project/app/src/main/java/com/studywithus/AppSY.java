@@ -85,7 +85,6 @@ public class AppSY {
 	List<Member> mentorApplicantList = new ArrayList<>();
 	List<Member> chargeApplicantList = new ArrayList<>();
 	List<String> mentorList = new ArrayList<>();
-	List<Member> memberList2 = new ArrayList<>();
 
 	List<Study> registerFreeStudyList = new ArrayList<>();
 	List<Study> participateFreeStudyList = new ArrayList<>();
@@ -141,8 +140,8 @@ public class AppSY {
 	}
 
 	public static void main(String[] args) {
-		AppSY app = new AppSY(); 
-		app.service();
+		AppSY appSY = new AppSY(); 
+		appSY.service();
 	}
 
 	public AppSY() {
@@ -299,7 +298,6 @@ public class AppSY {
 		}
 	}
 
-
 	// 메인 메뉴
 	Menu createMainMenu() {
 		MenuGroup mainMenuGroup = new MenuGroup("STUDY WITH US");
@@ -308,6 +306,7 @@ public class AppSY {
 		mainMenuGroup.add(createSignUpMenu());
 		mainMenuGroup.add(createLogInMenu());
 		mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL | ACCESS_ADMIN, "/auth/logOut"));
+
 		// 마이페이지로 이동 예정
 		// mainMenuGroup.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipwithdrawal"));
 
@@ -320,6 +319,8 @@ public class AppSY {
 
 		return mainMenuGroup;
 	}
+
+	//------------------------------ STUDY WITH US -----------------------------------------
 
 	// 메인 메뉴 / 회원가입
 	private Menu createSignUpMenu() {
@@ -393,8 +394,8 @@ public class AppSY {
 		chargeStudyMenu.add(new MenuItem("생성", ACCESS_MENTOR, "/chargeStudy/add"));
 		chargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/list"));
 		chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
-		chargeStudyMenu.add(new MenuItem("수정", ACCESS_MENTOR, "/chargeStudy/update"));
-		chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_MENTOR, "/chargeStudy/deleteRequest"));
+		//		chargeStudyMenu.add(new MenuItem("수정", ACCESS_MENTOR, "/chargeStudy/update")); // 스터디 메인 메뉴 통일***
+		//		chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_MENTOR, "/chargeStudy/deleteRequest")); // 스터디 메인 메뉴 통일***
 		chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
 
 		return chargeStudyMenu;
@@ -455,6 +456,41 @@ public class AppSY {
 		return communityTalkMenu;
 	}
 
+	// ------------------------------ 캘린더 -----------------------------------------
+
+	private Menu createCalendarMenu() {
+		MenuGroup calendarMenu = new MenuGroup("캘린더");
+
+		calendarMenu.add(createJobsCalendarMenu());
+		calendarMenu.add(createExamCalendarMenu());
+
+		return calendarMenu;
+	}
+
+	private Menu createJobsCalendarMenu() {
+		MenuGroup jobsCalendarMenu = new MenuGroup("이달의 채용공고");
+
+		jobsCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalendar/add"));
+		jobsCalendarMenu.add(new MenuItem("조회", "/jobsCalendar/list"));
+		jobsCalendarMenu.add(new MenuItem("상세보기", "/jobsCalendar/detail"));
+		//    jobsCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalendar/update"));
+		//    jobsCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalendar/delete"));
+
+		return jobsCalendarMenu;
+	}
+
+	private Menu createExamCalendarMenu() {
+		MenuGroup examCalendarMenu = new MenuGroup("이달의 시험일정");
+
+		examCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalendar/add"));
+		examCalendarMenu.add(new MenuItem("조회", "/examCalendar/list"));
+		examCalendarMenu.add(new MenuItem("상세보기", "/examCalendar/detail"));
+		//    examCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalendar/update"));
+		//    examCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
+
+		return examCalendarMenu;
+	}
+
 	// ------------------------------ 마이 페이지 -----------------------------------------
 
 	// 마이 페이지 메인
@@ -463,7 +499,8 @@ public class AppSY {
 
 		myPageMenu.add(createActivityDetailMenu());
 		myPageMenu.add(createInterestMenu());
-		myPageMenu.add(createPaymentListMenu());
+		// 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
+		myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
 		myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
 		myPageMenu.add(new MenuItem("나의 정보", "auth/userInfo"));
 
@@ -575,8 +612,6 @@ public class AppSY {
 
 		return paymentListMenu;
 	}
-
-
 
 	// ------------------------------ 관리자 페이지 -----------------------------------------
 
