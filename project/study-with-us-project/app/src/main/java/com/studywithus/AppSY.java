@@ -390,16 +390,12 @@ public class AppSY {
 		MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
 
 		chargeStudyMenu.add(new MenuItem("검색", "/chargeStudy/search"));
-		//    chargeStudyMenu.add(new MenuItem("생성", ACCESS_MENTOR, "/chargeStudy/add"));
-		chargeStudyMenu.add(new MenuItem("생성", "/chargeStudy/add"));
+		chargeStudyMenu.add(new MenuItem("생성", ACCESS_MENTOR, "/chargeStudy/add"));
 		chargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/list"));
 		chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
-		//    chargeStudyMenu.add(new MenuItem("수정", ACCESS_MENTOR, "/chargeStudy/update"));
-		chargeStudyMenu.add(new MenuItem("수정", "/chargeStudy/update"));
-		//    chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_MENTOR, "/chargeStudy/deleteRequest"));
-		chargeStudyMenu.add(new MenuItem("삭제 요청", "/chargeStudy/deleteRequest"));
-		//    chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
-		chargeStudyMenu.add(new MenuItem("멘토 신청", "/mentorApplicant/add"));
+		chargeStudyMenu.add(new MenuItem("수정", ACCESS_MENTOR, "/chargeStudy/update"));
+		chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_MENTOR, "/chargeStudy/deleteRequest"));
+		chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
 
 		return chargeStudyMenu;
 	}
@@ -511,7 +507,7 @@ public class AppSY {
 	private Menu createRegisterChargeStudyMenu() {
 
 		MenuGroup registerChargeStudyMenu = new MenuGroup("내가 생성한 유료 스터디", ACCESS_MENTOR);
-		registerChargeStudyMenu.add(new MenuItem("조회", "/registerChargeStudyy/list"));
+		registerChargeStudyMenu.add(new MenuItem("조회", "/registerChargeStudy/list"));
 		registerChargeStudyMenu.add(new MenuItem("상세보기", "/registerChargeStudy/detail"));
 		registerChargeStudyMenu.add(new MenuItem("삭제", "/registerChargeStudy/delete"));
 
@@ -521,7 +517,7 @@ public class AppSY {
 	// 마이 페이지 / 나의 활동 / 내 스터디 / 내가 참여한 유료 스터디(팀원~)***
 	private Menu createParticipateChargeStudyMenu() {
 
-		MenuGroup participateChargeStudyMenu = new MenuGroup("내가 생성한 유료 스터디", ACCESS_MENTEE);
+		MenuGroup participateChargeStudyMenu = new MenuGroup("내가 참여한 유료 스터디", ACCESS_MENTEE);
 		participateChargeStudyMenu.add(new MenuItem("조회", "/participateChargeStudy/list"));
 		participateChargeStudyMenu.add(new MenuItem("상세보기", "/participateChargeStudy/detail"));
 		// 상세보기 / 후기 작성 추가하기 ***
