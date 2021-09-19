@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.util.List;
 
 public class Study extends Content {
+  //[추가] 
+  private String ONLINE = "온라인";
+  private String OFFLINE = "오프라인";
   private List<Member> members; // 팀원 or 멘티
   private List<Member> applicants; // 무료 스터디 신청자
   private String mentorExplanation; // 멘토 설명
@@ -14,6 +17,14 @@ public class Study extends Content {
   private Date registeredDate; // 스터디 등록일
   private int like; // 좋아요
   private int viewCount; // 조회수
+
+  public String getONLINE() {
+    return ONLINE;
+  }
+
+  public String getOFFLINE() {
+    return OFFLINE;
+  }
 
   public List<Member> getMembers() {
     return members;

@@ -30,6 +30,8 @@ public class FreeStudyDeleteHandler extends AbstractStudyHandler {
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
+    System.out.println(" ");
+
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("게시글 삭제를 취소하였습니다.");
       return;

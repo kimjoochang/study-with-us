@@ -18,10 +18,8 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[무료 스터디 / 상세보기]\n");
-
-    int type = 0; // 관심목록 추가 여부에 따라 실행 메서드 구분하기 위한 변수
-
     int no = Prompt.inputInt("번호? ");
+
     Study freeStudy = findByNo(no);
 
     if (freeStudy == null) {
@@ -30,74 +28,99 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
       return;
     }
 
-    freeStudy.setViewCount(freeStudy.getViewCount() + 1);
-
     System.out.printf("제목: %s\n", freeStudy.getTitle());
     System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
 
     if (freeStudy.getArea() != null) {
+      System.out.printf("온/오프라인: %s\n", freeStudy.getOFFLINE());
       System.out.printf("지역: %s\n", freeStudy.getArea());
     }
-
+    System.out.printf("온/오프라인: %s\n", freeStudy.getONLINE());
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("규칙: %s\n", freeStudy.getRule());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
+
+    freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
     System.out.println();
 
+    // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때 
+    // 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
     request.setAttribute("no", no);
 
-    // 본인이 작성한 글인 경우
-    if (freeStudy.getWriter() == AuthLogInHandler.getLoginUser()) {
-      System.out.println("1. 수정");
-      System.out.println("2. 삭제");
+    // 내가 쓴 글일 경우
+    if (freeStudy.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+      while (true) {
+        System.out.println("1. 수정");
+        System.out.println("2. 삭제");
+        System.out.println("0. 이전");
+        System.out.println();
+        int num = Prompt.inputInt("번호? "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
 
-      // 타인이 작성한 글인 경우
+        if (num == 1) {
+          request.getRequestDispatcher("/freeStudy/update").forward(request);
+        } else if (num == 2) {
+          request.getRequestDispatcher("/freeStudy/delete").forward(request);
+        } else if (num == 0) {
+          return;
+        } else {
+          System.out.println("명령어가 올바르지 않습니다!");
+          continue;
+        }
+        return;
+      } 
+      // 내가 쓴 글이 아닐경우
     } else {
-      System.out.println("1. 신청");
+      int type = 0; // 메서드 호출할 때, 관심목록 존재 여부 구분을 위한 변수
+      while (true) {
+        System.out.println("1. 신청하기");
 
-      //  관심목록 존재 여부에 따라 메뉴 출력
-      for (Study freeInterest : freeInterestList) {
-
-        // 관심 목록이 있는 경우
-        if (freeStudy.equals(freeInterest)) {
-          System.out.println("2. 관심목록 삭제");
-          break;
+        // 관심목록에 있는지 확인
+        for (Study freeInterest : freeInterestList) {
+          // 관심 목록에 없는 경우
+          if (freeInterest != freeStudy) {
+            type = 0;
+          } else {
+            // 관심 목록에 있는 경우
+            type = 1;
+            break;
+          }
         }
 
-        // 관심 목록이 없는 경우
-        else {
-          System.out.println("2. 관심목록 추가");
-          break;
-        }
-      }
-    }
-
-    System.out.println("0. 이전\n");
-
-    while (true) {
-      int input = Prompt.inputInt("선택> ");
-
-      if (input == 1) {
-        request.getRequestDispatcher("/freeStudy/application").forward(request);
-
-      } else if (input == 2) {
+        // 관심목록 존재 여부에 따라 출력문 출력
         if (type == 0) {
-          request.getRequestDispatcher("/freeStudy/interestDelete").forward(request);
+          System.out.println("2. 관심목록 추가");
+
+        } else {
+          System.out.println("2. 관심목록 삭제");
+        }
+        System.out.println("0. 이전");
+        System.out.println();
+
+        int num = Prompt.inputInt("번호? "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
+
+        if (num == 1) {
+          request.getRequestDispatcher("/freeStudy/apply").forward(request);
+
+        } else if (num == 2) {
+
+          if (type == 0) {
+            // 관심목록에 없는 경우
+            request.getRequestDispatcher("/freeStudy/addInterest").forward(request);
+          } else {
+            // 관심목록에 이미 있는 경우
+            request.getRequestDispatcher("/freeStudy/deleteInterest").forward(request); 
+          }
+
+        } else if (num == 0) {
           return;
 
-        } else if (type == 1) {
-          request.getRequestDispatcher("/freeStudy/interestAdd").forward(request);
+        } else {
+          System.out.println("명령어가 올바르지 않습니다!");
+          continue;
         }
-
-      } else if (input == 0) {
         return;
-
-      } else {
-        System.out.println("잘못된 번호입니다.");
-        continue;
-      }
-      return;
+      } 
     }
   }
 }

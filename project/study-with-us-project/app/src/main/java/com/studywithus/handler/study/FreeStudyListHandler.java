@@ -21,13 +21,26 @@ public class FreeStudyListHandler extends AbstractStudyHandler {
     }
 
     for (Study freeStudy : studyList) {
-      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]", 
-          freeStudy.getNo(), 
-          freeStudy.getTitle(), 
-          freeStudy.getWriter().getName(),
-          freeStudy.getRegisteredDate(),
-          freeStudy.getViewCount(), 
-          freeStudy.getLike());
+      if (freeStudy.getOnOffLine() == 1) {
+        System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
+            freeStudy.getNo(), 
+            freeStudy.getTitle(), 
+            freeStudy.getWriter().getName(),
+            freeStudy.getONLINE(),
+            freeStudy.getRegisteredDate(),
+            freeStudy.getViewCount(), 
+            freeStudy.getLike());
+      } else {
+        System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
+            freeStudy.getNo(), 
+            freeStudy.getTitle(), 
+            freeStudy.getWriter().getName(),
+            freeStudy.getOFFLINE() ,
+            freeStudy.getArea(),
+            freeStudy.getRegisteredDate(),
+            freeStudy.getViewCount(), 
+            freeStudy.getLike());
+      }
     }
     System.out.println();
   }

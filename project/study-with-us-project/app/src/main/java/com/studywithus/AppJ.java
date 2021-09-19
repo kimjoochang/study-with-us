@@ -69,8 +69,10 @@ import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
+import com.studywithus.handler.user.FindIdHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
 import com.studywithus.handler.user.MyInfoHandler;
+import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
 import com.studywithus.handler.user.SnsSignUpHandler;
@@ -114,7 +116,7 @@ public class AppJ {
   HashMap<String, List<Study>> registerFreeStudyMap = new HashMap<>();
   HashMap<String, List<Study>> registerChargeStudyMap = new HashMap<>();
 
-
+  //
   class MenuItem extends Menu {
     String menuId;
 
@@ -160,6 +162,11 @@ public class AppJ {
     commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberList));
     commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberList));
     commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
+
+    // [추가] 아이디 찾기 / 비밀번호 변경용 & import
+    commandMap.put("/find/id", new FindIdHandler(memberList));
+    commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
+
 
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
 
@@ -298,6 +305,8 @@ public class AppJ {
       e.printStackTrace();
     }
   }
+
+  //------------------------------ STUDY WITH US -----------------------------------------
 
   // 메인 메뉴
   Menu createMainMenu() {
