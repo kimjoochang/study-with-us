@@ -50,7 +50,7 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
 
     // CommunityUpdateHandler나 CommunityStudyDeleteHandler를 실행할 때 
     // 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
-    request.setAttribute("no", no);
+    request.setAttribute("communityNo", no);
 
     while (true) {
 
