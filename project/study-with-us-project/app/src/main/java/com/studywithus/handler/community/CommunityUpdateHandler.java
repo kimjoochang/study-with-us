@@ -16,7 +16,7 @@ public class CommunityUpdateHandler extends AbstractCommunityHandler{
   public void execute(CommandRequest request) {
     System.out.println("[커뮤니티 / 수정] \n");
 
-    int no = (int) request.getAttribute("commuinityNo");
+    int no = (int) request.getAttribute("communityNo");
 
     Community community = findByNo(no);
 
