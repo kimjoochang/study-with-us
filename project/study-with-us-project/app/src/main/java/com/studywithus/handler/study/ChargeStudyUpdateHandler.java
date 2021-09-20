@@ -16,7 +16,7 @@ public class ChargeStudyUpdateHandler extends AbstractStudyHandler {
 	@Override
 	public void execute(CommandRequest request) {
 		System.out.println("[유료 스터디 / 수정]");
-		int no = (int) request.getAttribute("no");
+		int no = (int) request.getAttribute("ChargeNo");
 
 		Study chargeStudy = findByNo(no);
 
