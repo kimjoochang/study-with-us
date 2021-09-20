@@ -21,7 +21,7 @@ public class ChargeStudyInterestAddHandler extends AbstractStudyHandler {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[유료 스터디 / 상세보기 / 관심 목록]\n");
+    System.out.println("[마이페이지 / 유료 스터디 / 관심 목록 / 추가]\n");
     int no = (int) request.getAttribute("no");
 
     chargeStudy = findByNo(no);
