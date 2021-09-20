@@ -193,21 +193,21 @@ public class AppGR {
 
     commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
     commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
-    commandMap.put("/communityQa/detail", new CommunityDetailHandler(communityQaList));
+    commandMap.put("/communityQa/detail", new CommunityDetailHandler(communityQaList,"/communityQa/update", "/communityQa/delete"));
     commandMap.put("/communityQa/update", new CommunityUpdateHandler(communityQaList));
     commandMap.put("/communityQa/delete", new CommunityDeleteHandler(communityQaList));
     commandMap.put("/communityQa/search", new CommunitySearchHandler(communityQaList));
 
     commandMap.put("/communityInfo/add", new CommunityAddHandler(communityInfoList));
     commandMap.put("/communityInfo/list", new CommunityListHandler(communityInfoList));
-    commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList));
+    commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList, "/communityInfo/update", "/communityInfo/delete"));
     commandMap.put("/communityInfo/update", new CommunityUpdateHandler(communityInfoList));
     commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(communityInfoList));
     commandMap.put("/communityInfo/search", new CommunitySearchHandler(communityInfoList));
 
     commandMap.put("/communityTalk/add", new CommunityAddHandler(communityTalkList));
     commandMap.put("/communityTalk/list", new CommunityListHandler(communityTalkList));
-    commandMap.put("/communityTalk/detail", new CommunityDetailHandler(communityTalkList));
+    commandMap.put("/communityTalk/detail", new CommunityDetailHandler(communityTalkList,"/communityTalk/update", "/communityTalk/delete"));
     commandMap.put("/communityTalk/update", new CommunityUpdateHandler(communityTalkList));
     commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityTalkList));
     commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
