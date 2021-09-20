@@ -61,6 +61,7 @@ import com.studywithus.handler.study.ChargeStudyUpdateHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
 import com.studywithus.handler.study.FreeStudyDeleteHandler;
 import com.studywithus.handler.study.FreeStudyDetailHandler;
+import com.studywithus.handler.study.FreeStudyInterestAddHandler;
 import com.studywithus.handler.study.FreeStudyInterestDeleteHandler;
 import com.studywithus.handler.study.FreeStudyInterestListHandler;
 import com.studywithus.handler.study.FreeStudyListHandler;
@@ -68,6 +69,8 @@ import com.studywithus.handler.study.FreeStudySearchHandler;
 import com.studywithus.handler.study.FreeStudyUpdateHandler;
 import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
+import com.studywithus.handler.study.ParticipateChargeStudyListHandler;
+import com.studywithus.handler.study.RegisterChargeStudyListHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
@@ -189,6 +192,16 @@ public class AppSY {
 		commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
 		commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList, chargeInterestList));
 		commandMap.put("/chargeStudy/InterestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyList, chargeInterestList));
+
+		// 선영 추가
+		commandMap.put("/chargeStudy/registerChargeStudy", new RegisterChargeStudyListHandler(registerChargeStudyMap)); // 내가 참여한 유료 스터디***
+		commandMap.put("/chargeStudy/participateChargeStudt", new ParticipateChargeStudyListHandler(participateChargeStudyMap)); // 내가 생성한 유료 스터디***
+
+		// 주창 추가
+		//		commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyList, applyFreeStudyMap));
+		commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(freeStudyList));
+		commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(freeStudyList));
+
 
 		commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
 		commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
