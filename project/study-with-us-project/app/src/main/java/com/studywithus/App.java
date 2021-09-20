@@ -44,6 +44,7 @@ import com.studywithus.handler.community.CommunityDetailHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
+import com.studywithus.handler.community.MyPostListHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.study.ChargeStudyDeletedDetailHandler;
@@ -74,8 +75,10 @@ import com.studywithus.handler.study.RegisterChargeStudyListHandler;
 import com.studywithus.handler.study.RegisterFreeStudyDetailHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
+import com.studywithus.handler.user.FindIdHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
 import com.studywithus.handler.user.MyInfoHandler;
+import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
 import com.studywithus.handler.user.SnsSignUpHandler;
@@ -163,6 +166,9 @@ public class App {
     commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberList));
     commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
 
+    commandMap.put("/find/id", new FindIdHandler(memberList));
+    commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
+
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
 
     commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
@@ -204,24 +210,26 @@ public class App {
 
     commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
     commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
-    commandMap.put("/communityQa/detail", new CommunityDetailHandler(communityQaList));
+    commandMap.put("/communityQa/detail", new CommunityDetailHandler(communityQaList, "/communityQa/update", "/communityQa/delete"));
     commandMap.put("/communityQa/update", new CommunityUpdateHandler(communityQaList));
     commandMap.put("/communityQa/delete", new CommunityDeleteHandler(communityQaList));
     commandMap.put("/communityQa/search", new CommunitySearchHandler(communityQaList));
 
     commandMap.put("/communityInfo/add", new CommunityAddHandler(communityInfoList));
     commandMap.put("/communityInfo/list", new CommunityListHandler(communityInfoList));
-    commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList));
+    commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList, "/communityInfo/update", "/communityInfo/delete"));
     commandMap.put("/communityInfo/update", new CommunityUpdateHandler(communityInfoList));
     commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(communityInfoList));
     commandMap.put("/communityInfo/search", new CommunitySearchHandler(communityInfoList));
 
     commandMap.put("/communityTalk/add", new CommunityAddHandler(communityTalkList));
     commandMap.put("/communityTalk/list", new CommunityListHandler(communityTalkList));
-    commandMap.put("/communityTalk/detail", new CommunityDetailHandler(communityTalkList));
+    commandMap.put("/communityTalk/detail", new CommunityDetailHandler(communityTalkList, "/communityTalk/update", "/communityTalk/delete"));
     commandMap.put("/communityTalk/update", new CommunityUpdateHandler(communityTalkList));
     commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityTalkList));
     commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
+
+    commandMap.put("/myPost/list", new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));
 
     commandMap.put("/jobsCalendar/add", new JobsCalendarAddHandler(jobsCalendarList));
     commandMap.put("/jobsCalendar/list", new JobsCalendarListHandler(jobsCalendarList));
@@ -320,10 +328,6 @@ public class App {
     mainMenuGroup.add(createSignUpMenu());
     mainMenuGroup.add(createLogInMenu());
     mainMenuGroup.add(new MenuItem("로그아웃", ACCESS_GENERAL | ACCESS_ADMIN, "/auth/logOut"));
-
-    // 마이페이지로 이동 예정
-    // mainMenuGroup.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipwithdrawal"));
-
     mainMenuGroup.add(createMyPageMenu());
     mainMenuGroup.add(createCalendarManagementMenu());
     mainMenuGroup.add(createFreeStudyMenu());
@@ -426,20 +430,6 @@ public class App {
     return communityMenu;
   }
 
-  // 커뮤니티 / 정보
-  private Menu createCommunityInfoMenu() {
-    MenuGroup communityInfoMenu = new MenuGroup("정보");
-
-    communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
-    communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
-    communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
-    communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
-    communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityInfo/update"));
-    communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN, "/communityInfo/delete"));
-
-    return communityInfoMenu;
-  }
-
   // 커뮤니티 / 질문
   private Menu createCommunityQaMenu() {
     MenuGroup communityQaMenu = new MenuGroup("질문");
@@ -452,6 +442,20 @@ public class App {
     communityQaMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN, "/communityQa/delete"));
 
     return communityQaMenu;
+  }
+
+  // 커뮤니티 / 정보
+  private Menu createCommunityInfoMenu() {
+    MenuGroup communityInfoMenu = new MenuGroup("정보");
+
+    communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
+    communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
+    communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
+    communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
+    communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityInfo/update"));
+    communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN, "/communityInfo/delete"));
+
+    return communityInfoMenu;
   }
 
   // 커뮤니티 / 스몰톡
@@ -600,11 +604,11 @@ public class App {
   // 마이 페이지 / 나의 활동 / 나의 게시글
   private Menu createMyPostMenu() {
 
-    MenuGroup myPostMenu = new MenuGroup("나의 게시글");
+    MenuGroup myPostMenu = new MenuGroup("나의 게시글", ACCESS_GENERAL);
     myPostMenu.add(new MenuItem("조회", "/myPost/list"));
-    myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
-    myPostMenu.add(new MenuItem("수정", "/myPost/update"));
-    myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
+    //    myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
+    //    myPostMenu.add(new MenuItem("수정", "/myPost/update"));
+    //    myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
 
     return myPostMenu;
   }

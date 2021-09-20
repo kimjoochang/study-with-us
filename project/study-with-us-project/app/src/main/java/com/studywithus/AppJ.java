@@ -116,7 +116,7 @@ public class AppJ {
   HashMap<String, List<Study>> registerFreeStudyMap = new HashMap<>();
   HashMap<String, List<Study>> registerChargeStudyMap = new HashMap<>();
 
-  //
+
   class MenuItem extends Menu {
     String menuId;
 
@@ -218,6 +218,7 @@ public class AppJ {
     commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityTalkList));
     commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
 
+    // [추가]
     commandMap.put("/myPost/list", new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));
     //    commandMap.put("/myInfoPost/list", new MyPostListHandler(communityInfoList));
     //    commandMap.put("/myTalkPost/list", new MyPostListHandler(communityTalkList));
