@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[]
-=======
-[{"userAccessLevel":18,"name":"1","email":"1","id":"1","password":"1","phoneNumber":"1","registeredDate":"9월 19, 2021"},{"userAccessLevel":2,"name":"2","email":"2","id":"2","password":"2","phoneNumber":"2","registeredDate":"9월 19, 2021"}]
->>>>>>> 9428872423f927b11c9d691d5b14b7f547a59fe5
+[{"userAccessLevel":18,"name":"1","email":"1","id":"1","password":"1","phoneNumber":"1","registeredDate":"9월 20, 2021"},{"userAccessLevel":2,"name":"2","email":"2","id":"2","password":"2","phoneNumber":"2","registeredDate":"9월 20, 2021"}]

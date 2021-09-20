@@ -41,71 +41,89 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
     System.out.println();
 
-    Member loginUser = AuthLogInHandler.getLoginUser(); 
+    Member loginUser = AuthLogInHandler.getLoginUser();
     if (loginUser == null || chargeStudy.getWriter() != loginUser) {
-      return;
+      // return;
     }
 
     request.setAttribute("no", no);
 
-    // 본인이 작성한 글인 경우
-    if (chargeStudy.getWriter() == loginUser) {
-      System.out.println("1. 수정");
-      System.out.println("2. 삭제");
-
-      // 타인이 작성한 글인 경우
-    } else {
-      System.out.println("1. 결제");
-
-      //  관심목록 존재 여부에 따라 메뉴 출력
-      for (Study chargeInterest : chargeInterestList) {
-
-        // 관심 목록이 있는 경우
-        if (chargeStudy.equals(chargeInterest)) {
-          System.out.println("2. 관심목록 삭제");
-          break;
-        }
-
-        // 관심 목록이 없는 경우
-        else {
-          System.out.println("2. 관심목록 추가");
-          break;
-        }
-      }
-    }
-
-    System.out.println("0. 이전\n");
-
     while (true) {
-      int input = Prompt.inputInt("선택> ");
+      // 본인이 작성한 글인 경우
+      if (chargeStudy.getWriter() == loginUser) {
+        System.out.println("1. 수정");
+        System.out.println("2. 삭제");
+        System.out.println("0. 이전\n");
 
-      if (input == 1) {
-        request.getRequestDispatcher("/chargeStudy/update").forward(request);
-        return;
+        int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
 
-      } else if (input == 2) {
-        request.getRequestDispatcher("/chargeStudy/deleteRequest").forward(request);
-        return;
+        if (input == 1) {
+          request.getRequestDispatcher("/chargeStudy/update").forward(request);
+          return;
 
-      } else if (input == 3) {
-        request.getRequestDispatcher("/chargeStudy/payment").forward(request);
-        return;
+        } else if (input == 2) {
+          request.getRequestDispatcher("/chargeStudy/deleteRequest").forward(request);
+          return;
 
-      } else if (input == 4) {
-        if (no == 0) {
-          request.getRequestDispatcher("/chargeStudy/interestDelete").forward(request);
+        } else if (input == 0) {
           return;
         }
-        request.getRequestDispatcher("/chargeStudy/interestAdd").forward(request);
 
-      } else if (input == 0) {
-        return;
-
+        // 타인이 작성한 글인 경우
       } else {
-        System.out.println("잘못된 번호입니다.");
-        continue;
+        int type = 0;
+        System.out.println("1. 결제");
+
+        //  관심목록 존재 여부에 따라 메뉴 출력
+        for (Member member : chargeStudy.getLikeMembers()) {
+          if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+            type = 1;
+            break;
+          }
+        }
+
+        // 관심 목록이 있는 경우
+        if (type == 0) {
+          System.out.println("2. 관심목록 삭제");
+          //          break;
+
+          // 관심 목록이 없는 경우
+        } else {
+          System.out.println("2. 관심목록 추가");
+          //          break;
+        }
+        System.out.println("0. 이전\n");
+        System.out.println();
+
+        int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
+
+        if (input == 1) {
+          request.getRequestDispatcher("/chargeStudy/payment").forward(request);
+          return;
+
+        } else if (input == 2) {
+          // 관심 목록이 있는 경우
+          if (type == 1) {
+            request.getRequestDispatcher("/chargeStudy/interestDelete").forward(request);
+            return;
+
+            // 관심 목록이 없는 경우
+          } else {
+            request.getRequestDispatcher("/chargeStudy/interestAdd").forward(request);
+            return;
+          }
+
+        } else if (input == 0) {
+          return;
+
+          //      if (chargeStudy.getWriter() == loginUser) {}
+          //      else if (chargeStudy.getWriter() != loginUser) {}
+
+        } else {
+          System.out.println("존재하지 않는 메뉴 번호입니다.");
+          continue;
+        }
       }
-      return;
     }
   }
 }

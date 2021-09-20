@@ -15,7 +15,7 @@ public class ChargeStudyInterestListHandler extends AbstractInterestHandler {
     System.out.println("[유료 스터디 관심목록 / 조회]\n");
 
     if (interestList.isEmpty() == true) {
-      System.out.println("유료 스터디 게시글이 존재하지 않습니다.\n");
+      System.out.println("유료 스터디 관심목록이 존재하지 않습니다.\n");
       return;
     }
 

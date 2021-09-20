@@ -23,7 +23,7 @@ public class ExamCalendarDetailHandler extends AbstractCalendarHandler {
 
     if (examCalendar == null) {
       System.out.println();
-      System.out.println("해당 번호의 시험일정이 없습니다.");
+      System.out.println("해당 번호의 시험일정이 없습니다.\n");
       return;
     }
 

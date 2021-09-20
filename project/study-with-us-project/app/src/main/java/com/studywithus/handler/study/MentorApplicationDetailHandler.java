@@ -87,7 +87,6 @@ public class MentorApplicationDetailHandler implements Command {
     Member mentorAccess = mentorName.getMentorMember();
     mentorAccess.setUserAccessLevel(Menu.ACCESS_MENTOR | Menu.ACCESS_GENERAL);
 
-    System.out.println(applyMentor.toString());
     System.out.println("멘토 승인이 완료되었습니다.");
   }
 
