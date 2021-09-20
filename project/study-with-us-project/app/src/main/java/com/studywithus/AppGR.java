@@ -166,6 +166,7 @@ public class AppGR {
     commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeInterestList));
+    // commandMap.put("/chargeInterest/delete", new ChargeStudyInterestDeleteHandler(chargeInterestList));
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList, memberList));
     commandMap.put("/mentorApplicant/list", new MentorApplicationListHandler(mentorApplicationFormList));
