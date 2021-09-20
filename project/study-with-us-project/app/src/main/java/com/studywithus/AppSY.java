@@ -42,7 +42,6 @@ import com.studywithus.handler.calendar.JobsCalendarListHandler;
 import com.studywithus.handler.calendar.JobsCalendarUpdateHandler;
 import com.studywithus.handler.community.CommunityAddHandler;
 import com.studywithus.handler.community.CommunityDeleteHandler;
-import com.studywithus.handler.community.CommunityDetailHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
@@ -184,14 +183,17 @@ public class AppSY {
 		commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
 		commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
 		commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-		commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList));
+		// 수정
+		commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList));
 		commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
 		commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
 		commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
 		commandMap.put("/chargeStudy/deleteDetail", new ChargeStudyDeletedDetailHandler(chargeStudyList, chargeDeleteRequestList));
 		commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
-		commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList, chargeInterestList));
-		commandMap.put("/chargeStudy/InterestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyList, chargeInterestList));
+		//
+		commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList));  // 
+		commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyList)); //
+
 
 		// 선영 추가
 		commandMap.put("/chargeStudy/registerChargeStudy", new RegisterChargeStudyListHandler(registerChargeStudyMap)); // 내가 참여한 유료 스터디***
@@ -205,21 +207,21 @@ public class AppSY {
 
 		commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
 		commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
-		commandMap.put("/communityQa/detail", new CommunityDetailHandler(communityQaList));
+		//		commandMap.put("/communityQa/detail", new CommunityDetailHandler(communityQaList));
 		commandMap.put("/communityQa/update", new CommunityUpdateHandler(communityQaList));
 		commandMap.put("/communityQa/delete", new CommunityDeleteHandler(communityQaList));
 		commandMap.put("/communityQa/search", new CommunitySearchHandler(communityQaList));
 
 		commandMap.put("/communityInfo/add", new CommunityAddHandler(communityInfoList));
 		commandMap.put("/communityInfo/list", new CommunityListHandler(communityInfoList));
-		commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList));
+		//		commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList));
 		commandMap.put("/communityInfo/update", new CommunityUpdateHandler(communityInfoList));
 		commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(communityInfoList));
 		commandMap.put("/communityInfo/search", new CommunitySearchHandler(communityInfoList));
 
 		commandMap.put("/communityTalk/add", new CommunityAddHandler(communityTalkList));
 		commandMap.put("/communityTalk/list", new CommunityListHandler(communityTalkList));
-		commandMap.put("/communityTalk/detail", new CommunityDetailHandler(communityTalkList));
+		//		commandMap.put("/communityTalk/detail", new CommunityDetailHandler(communityTalkList));
 		commandMap.put("/communityTalk/update", new CommunityUpdateHandler(communityTalkList));
 		commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityTalkList));
 		commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));

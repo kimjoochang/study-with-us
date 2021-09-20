@@ -10,14 +10,12 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyInterestAddHandler extends AbstractStudyHandler {
 
-	Study chargeStudy;
 
 	// 유료 스터디 관심목록 리스트 (회원 관점)
-	List<Study> chargeInterestList;
+	//	List<Study> chargeInterestList;
 
-	public ChargeStudyInterestAddHandler(List<Study> chargeStudyList, List<Study> chargeInterestList) {
+	public ChargeStudyInterestAddHandler(List<Study> chargeStudyList) {
 		super(chargeStudyList);
-		this.chargeInterestList = chargeInterestList;
 	}
 
 	@Override
@@ -25,7 +23,7 @@ public class ChargeStudyInterestAddHandler extends AbstractStudyHandler {
 		System.out.println("[마이페이지 / 유료 스터디 / 관심 목록 / 추가]\n");
 		int no = (int) request.getAttribute("ChargeNo");
 
-		chargeStudy = findByNo(no);
+		Study chargeStudy = findByNo(no);
 
 		if (chargeStudy == null) {
 			System.out.println("해당 번호의 게시글이 없습니다.");

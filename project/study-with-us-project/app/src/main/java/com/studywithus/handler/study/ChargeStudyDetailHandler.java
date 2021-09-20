@@ -10,12 +10,11 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
-	Study chargeStudy;
-	List<Study> chargeInterestList; // 유료 스터디 관심목록 리스트 (회원 관점)
+//	Study chargeStudy;
+//	List<Study> chargeInterestList; // 유료 스터디 관심목록 리스트 (회원 관점)
 
-	public ChargeStudyDetailHandler(List<Study> chargeStudyList, List<Study> chargeInterestList) {
+	public ChargeStudyDetailHandler(List<Study> chargeStudyList) {
 		super(chargeStudyList);
-		this.chargeInterestList = chargeInterestList;
 	}
 
 	@Override
@@ -23,7 +22,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 		System.out.println("[유료 스터디 / 상세보기]\n");
 
 		int no = Prompt.inputInt("번호? ");
-		chargeStudy = findByNo(no);
+		Study chargeStudy = findByNo(no);
 
 		if (chargeStudy == null) {
 			System.out.println();

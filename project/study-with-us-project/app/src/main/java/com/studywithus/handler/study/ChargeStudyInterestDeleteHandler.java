@@ -13,11 +13,10 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 	Study chargeStudy;
 
 	// 유료 스터디 관심목록 리스트 (회원 관점)
-	List<Study> chargeInterestList;
+	//	List<Study> chargeInterestList;
 
-	public ChargeStudyInterestDeleteHandler(List<Study> chargeStudyList, List<Study> chargeInterestList) {
+	public ChargeStudyInterestDeleteHandler(List<Study> chargeStudyList) {
 		super(chargeStudyList);
-		this.chargeInterestList = chargeInterestList;
 	}
 
 	@Override
@@ -31,7 +30,7 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 		if (request.getAttribute("no") == null) {
 			int no = Prompt.inputInt("메뉴 번호를 입력하세요. > ");
 
-			chargeStudy = findByNo(no);
+			Study chargeStudy = findByNo(no);
 
 			for (Member member : chargeStudy.getLikeMembers()) {
 				if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
