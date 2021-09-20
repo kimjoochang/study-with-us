@@ -22,7 +22,7 @@ public class JobsCalendarDetailHandler extends AbstractCalendarHandler {
 
     if (jobsCalendar == null) {
       System.out.println();
-      System.out.println("해당 번호의 채용공고가 없습니다.");
+      System.out.println("해당 번호의 채용공고가 없습니다.\n");
       return;
     }
 
