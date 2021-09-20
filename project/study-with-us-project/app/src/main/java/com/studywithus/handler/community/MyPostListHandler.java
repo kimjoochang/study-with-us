@@ -9,8 +9,7 @@ import com.studywithus.handler.user.AuthLogInHandler;
 
 public class MyPostListHandler implements Command {
 
-  List<Community> myPostList = new ArrayList<>();
-
+  List<Community> myPostList;
   List<Community> communityQaList;
   List<Community> communityInfoList;
   List<Community> communityTalkList;
@@ -24,6 +23,8 @@ public class MyPostListHandler implements Command {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]\n");
+
+    myPostList = new ArrayList<>();
 
     myPostList.addAll(communityQaList);
     myPostList.addAll(communityInfoList);

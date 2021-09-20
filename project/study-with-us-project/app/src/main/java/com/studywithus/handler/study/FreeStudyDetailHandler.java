@@ -47,7 +47,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
     // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때 
     // 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
-    request.setAttribute("no", no);
+    request.setAttribute("FreeNo", no);
 
     // 내가 쓴 글일 경우
     if (freeStudy.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {

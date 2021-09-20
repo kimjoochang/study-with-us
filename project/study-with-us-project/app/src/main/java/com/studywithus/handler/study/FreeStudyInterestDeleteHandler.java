@@ -15,12 +15,12 @@ public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[무료 스터디 / 상세보기 / 관심 목록]\n");
+    System.out.println("[마이페이지 / 무료 스터디 / 관심 목록 / 삭제]\n");
 
     // 일치하는 값이 없을경우, 게시글 없다는 출력만 한 번만 출력되게 하기 위한 변수
     int type = 0;
 
-    if (request.getAttribute("no") == null) {
+    if (request.getAttribute("freeNo") == null) {
       int no = Prompt.inputInt("번호? ");
 
       Study freeInterest = findByNo(no);
