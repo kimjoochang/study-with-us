@@ -69,6 +69,8 @@ import com.studywithus.handler.study.FreeStudySearchHandler;
 import com.studywithus.handler.study.FreeStudyUpdateHandler;
 import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
+import com.studywithus.handler.study.ParticipateChargeStudyListHandler;
+import com.studywithus.handler.study.RegisterChargeStudyListHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
@@ -189,6 +191,9 @@ public class App {
 		commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
 		commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList, chargeInterestList));
 		commandMap.put("/chargeStudy/InterestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyList, chargeInterestList));
+
+		commandMap.put("/chargeStudy/registerChargeStudy", new RegisterChargeStudyListHandler(registerChargeStudyMap)); // 내가 참여한 유료 스터디***
+		commandMap.put("/chargeStudy/participateChargeStudt", new ParticipateChargeStudyListHandler(participateChargeStudyMap)); // 내가 생성한 유료 스터디***
 
 		commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
 		commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
@@ -395,8 +400,8 @@ public class App {
 		chargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/list"));
 		chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
 		chargeStudyMenu.add(new MenuItem("수정", ACCESS_MENTOR, "/chargeStudy/update"));
-		chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_MENTOR, "/chargeStudy/deleteRequest"));
-		chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
+		//		chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_MENTOR, "/chargeStudy/deleteRequest"));
+		//		chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
 
 		return chargeStudyMenu;
 	}
@@ -522,6 +527,8 @@ public class App {
 
 		MenuGroup myStudyMenu = new MenuGroup("나의 스터디");
 		myStudyMenu.add(createFreeStudyApplyMenu());
+		myStudyMenu.add(createRegisterChargeStudyMenu()); // 내 스터디 / 내가 생성한 유료스터디 추가***
+		myStudyMenu.add(createParticipateChargeStudyMenu()); // 내 스터디 / 내가 참여한 유료스터디 추가***
 
 		return myStudyMenu;
 	}
@@ -625,6 +632,16 @@ public class App {
 		return chargeInterestMenu;
 	}
 
+	// 마이 페이지 / 나의 결제 내역
+	private Menu createPaymentListMenu() {
+
+		MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
+		paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "myPayment/list"));
+		paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "myPayment/detail"));
+
+		return paymentListMenu;
+	}
+
 	// ------------------------------ 관리자 페이지 -----------------------------------------
 
 	// 관리자 페이지 메인
@@ -652,7 +669,6 @@ public class App {
 	private Menu createMentorManagementMenu() {
 
 		MenuGroup mentorManagementMenu = new MenuGroup("회원 관리");
-
 		mentorManagementMenu.add(createMentorApplicantMenu());
 		mentorManagementMenu.add(createBlackListMenu());
 
@@ -661,8 +677,8 @@ public class App {
 
 	// 관리자 페이지 / 회원 관리 / 멘토 신청 내역 관리
 	private Menu createMentorApplicantMenu() {
-		MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
 
+		MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
 		mentorApplicantMenu.add(new MenuItem("조회", "/mentorApplicant/list"));
 		mentorApplicantMenu.add(new MenuItem("상세보기", "/mentorApplicant/detail"));
 
