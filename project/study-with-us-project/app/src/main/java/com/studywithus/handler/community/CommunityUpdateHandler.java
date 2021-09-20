@@ -3,6 +3,7 @@ package com.studywithus.handler.community;
 import java.util.List;
 import com.studywithus.domain.Community;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class CommunityUpdateHandler extends AbstractCommunityHandler{
@@ -15,13 +16,18 @@ public class CommunityUpdateHandler extends AbstractCommunityHandler{
   public void execute(CommandRequest request) {
     System.out.println("[커뮤니티 / 수정] \n");
 
-    int no = Prompt.inputInt("번호? ");
+    int no = (int) request.getAttribute("commuinityNo");
 
     Community community = findByNo(no);
 
     if (community == null) {
       System.out.println();
       System.out.println("해당 번호의 게시글이 없습니다.\n");
+      return;
+    }
+
+    if (community.getWriter() != AuthLogInHandler.getLoginUser()) {
+      System.out.println("변경 권한이 없습니다.");
       return;
     }
 

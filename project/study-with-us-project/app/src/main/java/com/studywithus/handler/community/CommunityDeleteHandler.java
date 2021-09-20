@@ -15,7 +15,7 @@ public class CommunityDeleteHandler extends AbstractCommunityHandler{
   public void execute(CommandRequest request) {
     System.out.println("[커뮤니티 / 삭제] \n");
 
-    int no = Prompt.inputInt("번호? ");
+    int no = (int) request.getAttribute("commuinityNo");
 
     Community community = findByNo(no);
 
