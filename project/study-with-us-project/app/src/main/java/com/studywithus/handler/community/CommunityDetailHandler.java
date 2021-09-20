@@ -17,7 +17,7 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
   public CommunityDetailHandler(List<Community> communityList, String updateKey, String deleteKey) {
     super(communityList);
     this.updateKey = updateKey;
-    this.updateKey = updateKey;
+    this.deleteKey = deleteKey;
   }
 
   @Override
