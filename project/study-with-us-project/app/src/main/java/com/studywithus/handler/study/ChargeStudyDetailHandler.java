@@ -74,7 +74,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
         int type = 0;
         System.out.println("1. 결제");
 
-        //  관심목록 존재 여부에 따라 메뉴 출력
+        //  관심목록이 있는 경우
         for (Member member : chargeStudy.getLikeMembers()) {
           if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
             type = 1;
@@ -83,7 +83,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
         }
 
         // 관심 목록이 있는 경우
-        if (type == 0) {
+        if (type == 1) {
           System.out.println("2. 관심목록 삭제");
           //          break;
 
@@ -97,10 +97,12 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
         int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
 
+        // 1. 결제
         if (input == 1) {
           request.getRequestDispatcher("/chargeStudy/payment").forward(request);
           return;
 
+          // 2. 관심목록 추가 or 삭제
         } else if (input == 2) {
           // 관심 목록이 있는 경우
           if (type == 1) {
