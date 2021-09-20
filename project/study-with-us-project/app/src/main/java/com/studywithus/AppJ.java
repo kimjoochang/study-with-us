@@ -60,13 +60,13 @@ import com.studywithus.handler.study.ChargeStudySearchHandler;
 import com.studywithus.handler.study.ChargeStudyUpdateHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
 import com.studywithus.handler.study.FreeStudyDeleteHandler;
-import com.studywithus.handler.study.FreeStudyDetailHandler;
-import com.studywithus.handler.study.FreeStudyInterestDeleteHandler;
+//import com.studywithus.handler.study.FreeStudyDetailHandler;
+//import com.studywithus.handler.study.FreeStudyInterestDeleteHandler;
 import com.studywithus.handler.study.FreeStudyInterestListHandler;
 import com.studywithus.handler.study.FreeStudyListHandler;
 import com.studywithus.handler.study.FreeStudySearchHandler;
 import com.studywithus.handler.study.FreeStudyUpdateHandler;
-import com.studywithus.handler.study.MentorApplicationAddHandler;
+//import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
@@ -87,7 +87,6 @@ public class AppJ {
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Member> chargeApplicantList = new ArrayList<>();
   List<String> mentorList = new ArrayList<>();
-  List<Member> memberList2 = new ArrayList<>();
 
   List<Study> registerFreeStudyList = new ArrayList<>();
   List<Study> participateFreeStudyList = new ArrayList<>();
@@ -173,16 +172,16 @@ public class AppJ {
     commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
 
     commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeInterestList));
-    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList, freeInterestList));
+    // commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList, freeInterestList));
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeInterestList));
 
-    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
+    // commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
 
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicationList, freeInterestList));
+    // commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicationList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
@@ -200,28 +199,28 @@ public class AppJ {
 
     commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
     commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
-    commandMap.put("/communityQa/detail", new CommunityDetailHandler(communityQaList));
+    commandMap.put("/communityQa/detail", new CommunityDetailHandler(communityQaList,"/communityQa/update", "/communityQa/delete"));
     commandMap.put("/communityQa/update", new CommunityUpdateHandler(communityQaList));
     commandMap.put("/communityQa/delete", new CommunityDeleteHandler(communityQaList));
     commandMap.put("/communityQa/search", new CommunitySearchHandler(communityQaList));
 
     commandMap.put("/communityInfo/add", new CommunityAddHandler(communityInfoList));
     commandMap.put("/communityInfo/list", new CommunityListHandler(communityInfoList));
-    commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList));
+    commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList,"/communityInfo/update", "/communityInfo/delete"));
     commandMap.put("/communityInfo/update", new CommunityUpdateHandler(communityInfoList));
     commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(communityInfoList));
     commandMap.put("/communityInfo/search", new CommunitySearchHandler(communityInfoList));
 
     commandMap.put("/communityTalk/add", new CommunityAddHandler(communityTalkList));
     commandMap.put("/communityTalk/list", new CommunityListHandler(communityTalkList));
-    commandMap.put("/communityTalk/detail", new CommunityDetailHandler(communityTalkList));
+    commandMap.put("/communityTalk/detail", new CommunityDetailHandler(communityTalkList,"/communityTalk/update", "/communityTalk/delete" ));
     commandMap.put("/communityTalk/update", new CommunityUpdateHandler(communityTalkList));
     commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityTalkList));
     commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
 
-    commandMap.put("/myPost/list", new MyPostListHandler(communityQaList));
-    commandMap.put("/myPost/list", new MyPostListHandler(communityInfoList));
-    commandMap.put("/myPost/list", new MyPostListHandler(communityTalkList));
+    commandMap.put("/myPost/list", new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));
+    //    commandMap.put("/myInfoPost/list", new MyPostListHandler(communityInfoList));
+    //    commandMap.put("/myTalkPost/list", new MyPostListHandler(communityTalkList));
 
     commandMap.put("/jobsCalendar/add", new JobsCalendarAddHandler(jobsCalendarList));
     commandMap.put("/jobsCalendar/list", new JobsCalendarListHandler(jobsCalendarList));
@@ -310,9 +309,9 @@ public class AppJ {
     }
   }
 
-  // 09.19 재확인 -  
+  // 09.19 재확인 - 
   // 메뉴별로 기존 app과 다른 부분 & 이유 주석에 설명함
-  // 주석 없는 부분은 기존 app에 없는데 새롭게 추가 대비해서 만든 메뉴이거나]
+  // 주석 없는 부분은 기존 app에 없는데 새롭게 추가 대비해서 만든 메뉴이거나
   // 기존 app과 동일한 경우임
 
   //------------------------------ STUDY WITH US -----------------------------------------
@@ -486,12 +485,14 @@ public class AppJ {
 
     myPageMenu.add(createActivityDetailMenu());
     myPageMenu.add(createInterestMenu());
-    // 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
+
 
     // 09.19 재확인 -  
     // 기존 app과 다른 부분 & 이유:
-    // 마이페이지 메뉴 자체가 ACCESS_GENERAL이라 하위 메뉴에 권한x
+    // 마이페이지 메뉴 자체가 ACCESS_GENERAL이라 하위 메뉴에 권한 x
     // -> 하위메뉴에도 권한 추가함
+
+    // 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
     myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
     myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
     myPageMenu.add(new MenuItem("나의 정보", ACCESS_GENERAL,"auth/userInfo"));
