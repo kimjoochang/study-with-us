@@ -15,7 +15,7 @@ public class CommunitySearchHandler extends AbstractCommunityHandler {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[커뮤니티 / 검색]");
+    System.out.println("[커뮤니티 / 검색]\n");
 
     String input = Prompt.inputString("검색할 키워드를 입력하세요. > ");
     System.out.println();
@@ -24,17 +24,14 @@ public class CommunitySearchHandler extends AbstractCommunityHandler {
       if (!community.getTitle().contains(input) &&
           !community.getContent().contains(input) &&
           !community.getWriter().getName().contains(input)) {
-
-        System.out.println("입력하신 키워드가 포함된 게시글이 없습니다.");
         continue;
       }
-
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
           community.getNo(), 
           community.getTitle(), 
           community.getWriter().getName(),
           community.getRegisteredDate(),
-          community.getViewCount(), 
+          community.getViewCount(),
           community.getLike());
     }
   }

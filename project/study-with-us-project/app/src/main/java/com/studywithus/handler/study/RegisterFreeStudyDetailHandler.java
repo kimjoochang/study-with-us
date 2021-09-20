@@ -1,5 +1,6 @@
 package com.studywithus.handler.study;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.studywithus.domain.Member;
@@ -7,24 +8,25 @@ import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class RegisterFreeStudyDetailHandler implements Command {
 
-  HashMap<String, List<Study>> myRegisteredFreeStudyMap;
-  HashMap<String, List<Study>> myParticipatedFreeStudyMap;
+  HashMap<String, List<Study>> registerFreeStudyMap;
+  HashMap<String, List<Study>> participateFreeStudyMap;
 
-  public RegisterFreeStudyDetailHandler(HashMap<String, List<Study>> myRegisteredFreeStudyMap, 
-      HashMap<String, List<Study>> myParticipatedFreeStudyMap) {
-    this.myRegisteredFreeStudyMap = myRegisteredFreeStudyMap;
-    this.myParticipatedFreeStudyMap = myParticipatedFreeStudyMap;
+  public RegisterFreeStudyDetailHandler(HashMap<String, List<Study>> registerFreeStudyMap, 
+      HashMap<String, List<Study>> participateFreeStudyMap) {
+    this.registerFreeStudyMap = registerFreeStudyMap;
+    this.participateFreeStudyMap = participateFreeStudyMap;
   }
 
   @Override
   public void execute(CommandRequest request) {
     /* 해쉬맵의 value값을 myRegisteredFreeStudy에 담음 
      * 전역변수로 둘 경우 App 실행 시 getLoginUser() nullPointer 에러뜸 */
-    List<Study> myRegisteredFreeStudy = myRegisteredFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
+    List<Study> myRegisteredFreeStudy = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
     System.out.println("[마이 페이지 / 내가 생성한 무료 스터디]\n");
 
@@ -51,18 +53,28 @@ public class RegisterFreeStudyDetailHandler implements Command {
     }
 
     System.out.printf("제목: %s\n", freeStudy.getTitle());
+    System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
 
     if (freeStudy.getArea() != null) {
+      System.out.printf("온/오프라인: %s\n", freeStudy.getOFFLINE());
       System.out.printf("지역: %s\n", freeStudy.getArea());
+    } else {
+      System.out.printf("온/오프라인: %s\n", freeStudy.getONLINE());
     }
-
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("규칙: %s\n", freeStudy.getRule());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
+
+    freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
+    System.out.printf("좋아요수: %d\n", freeStudy.getLike());
+    System.out.println();
 
-
-    // 내가 생성한 무료 스터디 상세보기 안에서 신청자 명단 출력
+    if (freeStudy.getApplicants().isEmpty()) {
+      System.out.println("스터디를 신청한 회원이 없습니다.");
+      return;
+    }
+    // 내가 생성한 무료 스터디 상세보기 안에서 신청자 명단 출력1
     for (Member freeApplicant : freeStudy.getApplicants()) {
       System.out.printf("신청자: %s\n",freeApplicant.getName());
     }
@@ -115,8 +127,8 @@ public class RegisterFreeStudyDetailHandler implements Command {
   }
 
   // 내가 생성한 무료 스터디 상세보기 할 때 사용하는 메서드
-  private Study findByName(String title, List<Study> myRegisteredFreeStudy) {
-    for (Study freeStudy : myRegisteredFreeStudy) {
+  private Study findByName(String title, List<Study> registerFreeStudyMap) {
+    for (Study freeStudy : registerFreeStudyMap) {
       if (freeStudy.getTitle().equals(title)) {
         return freeStudy;
       }
@@ -132,5 +144,35 @@ public class RegisterFreeStudyDetailHandler implements Command {
       }
     }
     return null;
+  }
+
+  private void studyMemberApproveHandler(Member freeApplicant, Study freeStudy) {
+    List<Member> studyMember = new ArrayList<>();
+    studyMember.add(freeApplicant);
+    freeStudy.getApplicants().remove(freeApplicant);
+
+    // 스터디 도메인 members에 넣을 회원리스트 생성해서 추가
+    List<Member> studyMembers = new ArrayList<>();
+    studyMembers.add(freeApplicant);
+    freeStudy.setMembers(studyMembers);
+
+    List<Study> myParticipatedFreeStudy; // 해쉬맵에 객체 담기 위한 임시 변수
+
+    // 개개인이 참여한 무료 스터디
+    /* 해쉬맵에 key값으로 신청한 회원 id , value값으로 회원이 참여한 스터디 리스트 
+     * 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디 추가 */
+    if (participateFreeStudyMap.containsKey(freeApplicant.getId())) {
+      myParticipatedFreeStudy = participateFreeStudyMap.get(freeApplicant.getId());
+      myParticipatedFreeStudy.add(freeStudy);
+      participateFreeStudyMap.put(freeApplicant.getId(), myParticipatedFreeStudy);
+
+      // 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
+    } else {
+      myParticipatedFreeStudy = new ArrayList<>();
+      myParticipatedFreeStudy.add(freeStudy);
+      participateFreeStudyMap.put(freeApplicant.getId(), myParticipatedFreeStudy);
+    }
+
+    freeApplicant.setUserAccessLevel(freeApplicant.getUserAccessLevel() | Menu.ACCESS_MEMBER);
   }
 }

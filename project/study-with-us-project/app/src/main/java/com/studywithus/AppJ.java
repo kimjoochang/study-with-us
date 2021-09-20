@@ -45,6 +45,7 @@ import com.studywithus.handler.community.CommunityDetailHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
+import com.studywithus.handler.community.MyPostListHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.study.ChargeStudyDeletedDetailHandler;
@@ -59,7 +60,7 @@ import com.studywithus.handler.study.ChargeStudySearchHandler;
 import com.studywithus.handler.study.ChargeStudyUpdateHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
 import com.studywithus.handler.study.FreeStudyDeleteHandler;
-import com.studywithus.handler.study.FreeStudyDetailHandlerJ;
+import com.studywithus.handler.study.FreeStudyDetailHandler;
 import com.studywithus.handler.study.FreeStudyInterestDeleteHandler;
 import com.studywithus.handler.study.FreeStudyInterestListHandler;
 import com.studywithus.handler.study.FreeStudyListHandler;
@@ -167,7 +168,6 @@ public class AppJ {
     commandMap.put("/find/id", new FindIdHandler(memberList));
     commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
 
-
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
 
     commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
@@ -182,7 +182,7 @@ public class AppJ {
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandlerJ(freeStudyList, freeApplicationList, freeInterestList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeApplicationList, freeInterestList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
@@ -218,6 +218,10 @@ public class AppJ {
     commandMap.put("/communityTalk/update", new CommunityUpdateHandler(communityTalkList));
     commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityTalkList));
     commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
+
+    commandMap.put("/myPost/list", new MyPostListHandler(communityQaList));
+    commandMap.put("/myPost/list", new MyPostListHandler(communityInfoList));
+    commandMap.put("/myPost/list", new MyPostListHandler(communityTalkList));
 
     commandMap.put("/jobsCalendar/add", new JobsCalendarAddHandler(jobsCalendarList));
     commandMap.put("/jobsCalendar/list", new JobsCalendarListHandler(jobsCalendarList));
@@ -306,7 +310,18 @@ public class AppJ {
     }
   }
 
+  // 09.19 재확인 -  
+  // 메뉴별로 기존 app과 다른 부분 & 이유 주석에 설명함
+  // 주석 없는 부분은 기존 app에 없는데 새롭게 추가 대비해서 만든 메뉴이거나]
+  // 기존 app과 동일한 경우임
+
   //------------------------------ STUDY WITH US -----------------------------------------
+
+  // 09.19 재확인 -  
+  // 기존 app과 다른 부분 & 이유:
+  // 메인 메뉴 구성이 전체적으로 바뀌었음. (단일 메뉴 -> 중첩 메뉴)
+  // 위 변경사항으로 인해 메인 메뉴가 바로 출력되지 않고 직전의 메뉴가 출력되는 것으로 바뀜
+  // 메인메뉴로 이동하는 방법 함께 논의해봐야 함
 
   // 메인 메뉴
   Menu createMainMenu() {
@@ -342,7 +357,7 @@ public class AppJ {
   // 메인 메뉴 / 회원가입 / SNS로 시작하기
   private Menu createSnsSignUpMenu() {
     MenuGroup snsSignUpMenu = new MenuGroup("SNS로 시작하기", ACCESS_LOGOUT);
-    // 메뉴 명칭 논의할 것
+    // 메뉴 명칭 논의할 것 -> 일단 지금 체제로, 이후 의견 있을 시 변경 예정
     snsSignUpMenu.add(new MenuItem("구글로 시작하기","/google/signUp"));
     snsSignUpMenu.add(new MenuItem("페이스북으로 시작하기","/facebook/signUp"));
     snsSignUpMenu.add(new MenuItem("카카오로 시작하기","/kakao/signUp"));
@@ -414,25 +429,11 @@ public class AppJ {
   private Menu createCommunityMenu() {
     MenuGroup communityMenu = new MenuGroup("커뮤니티");
 
-    communityMenu.add(createCommunityInfoMenu());
     communityMenu.add(createCommunityQaMenu());
+    communityMenu.add(createCommunityInfoMenu());
     communityMenu.add(createCommunityTalkMenu());
 
     return communityMenu;
-  }
-
-  // 커뮤니티 / 정보
-  private Menu createCommunityInfoMenu() {
-    MenuGroup communityInfoMenu = new MenuGroup("정보");
-
-    communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
-    communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
-    communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
-    communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
-    communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityInfo/update"));
-    communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN, "/communityInfo/delete"));
-
-    return communityInfoMenu;
   }
 
   // 커뮤니티 / 질문
@@ -447,6 +448,20 @@ public class AppJ {
     communityQaMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN, "/communityQa/delete"));
 
     return communityQaMenu;
+  }
+
+  // 커뮤니티 / 정보
+  private Menu createCommunityInfoMenu() {
+    MenuGroup communityInfoMenu = new MenuGroup("정보");
+
+    communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
+    communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
+    communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
+    communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
+    communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityInfo/update"));
+    communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN, "/communityInfo/delete"));
+
+    return communityInfoMenu;
   }
 
   // 커뮤니티 / 스몰톡
@@ -472,9 +487,14 @@ public class AppJ {
     myPageMenu.add(createActivityDetailMenu());
     myPageMenu.add(createInterestMenu());
     // 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
+
+    // 09.19 재확인 -  
+    // 기존 app과 다른 부분 & 이유:
+    // 마이페이지 메뉴 자체가 ACCESS_GENERAL이라 하위 메뉴에 권한x
+    // -> 하위메뉴에도 권한 추가함
     myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
     myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
-    myPageMenu.add(new MenuItem("나의 정보", "auth/userInfo"));
+    myPageMenu.add(new MenuItem("나의 정보", ACCESS_GENERAL,"auth/userInfo"));
 
     return myPageMenu;
   }
@@ -482,7 +502,8 @@ public class AppJ {
   // 마이 페이지 / 나의 활동
   private Menu createActivityDetailMenu() {
 
-    MenuGroup activityDetailMenu = new MenuGroup("나의 활동");
+    // 09.19 재확인 - 상동(line 481)
+    MenuGroup activityDetailMenu = new MenuGroup("나의 활동", ACCESS_GENERAL);
     activityDetailMenu.add(createMyStudyMenu());
     activityDetailMenu.add(createMyPostMenu());
 
@@ -502,6 +523,10 @@ public class AppJ {
   private Menu createFreeStudyApplyMenu() {
 
     MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
+
+    // 09.19 재확인 -  
+    // 기존 app과 다른 부분 & 이유:
+    // 무료 스터디 신청내역에 수정 필요 없어서 삭제하고 메뉴 구성함
     freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudyApply/list"));
     freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
     freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
@@ -560,9 +585,9 @@ public class AppJ {
 
     MenuGroup myPostMenu = new MenuGroup("나의 게시글");
     myPostMenu.add(new MenuItem("조회", "/myPost/list"));
-    myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
-    myPostMenu.add(new MenuItem("수정", "/myPost/update"));
-    myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
+    //    myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
+    //    myPostMenu.add(new MenuItem("수정", "/myPost/update"));
+    //    myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
 
     return myPostMenu;
   }
@@ -681,6 +706,11 @@ public class AppJ {
   }
 
   // 관리자 페이지 / 캘린더 관리 / 이달의 채용공고 관리
+
+  // 09.19 
+  // - 기존 App과 다른 부분: 조회 메뉴 없음
+  // - 이유: 메뉴 작성 당시 캘린더 조회 메뉴 미완성, web에서 구현할지 안 할지 논의중이었음
+  // - 추가해야할 사항: 관리자메뉴의 조회 추가 및 메인메뉴에서 캘린더2 조회/상세보기 메뉴 구성
   private Menu createJobsCalendarManagementMenu() {
     MenuGroup jobsCalendarManagementMenu = new MenuGroup("이달의 채용공고");
 

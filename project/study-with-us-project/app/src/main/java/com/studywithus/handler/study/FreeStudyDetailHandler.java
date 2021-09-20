@@ -1,6 +1,7 @@
 package com.studywithus.handler.study;
 
 import java.util.List;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
@@ -8,11 +9,9 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
-  List<Study> freeInterestList; // 무료 스터디 관심목록 리스트 (회원 관점)
 
-  public FreeStudyDetailHandler(List<Study> freeStudyList, List<Study> freeInterestList) {
+  public FreeStudyDetailHandler(List<Study> freeStudyList) {
     super(freeStudyList);
-    this.freeInterestList = freeInterestList;
   }
 
   @Override
@@ -34,14 +33,16 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     if (freeStudy.getArea() != null) {
       System.out.printf("온/오프라인: %s\n", freeStudy.getOFFLINE());
       System.out.printf("지역: %s\n", freeStudy.getArea());
+    } else {
+      System.out.printf("온/오프라인: %s\n", freeStudy.getONLINE());
     }
-    System.out.printf("온/오프라인: %s\n", freeStudy.getONLINE());
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("규칙: %s\n", freeStudy.getRule());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
+    System.out.printf("좋아요수: %d\n", freeStudy.getLike());
     System.out.println();
 
     // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때 
@@ -75,13 +76,8 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
       while (true) {
         System.out.println("1. 신청하기");
 
-        // 관심목록에 있는지 확인
-        for (Study freeInterest : freeInterestList) {
-          // 관심 목록에 없는 경우
-          if (freeInterest != freeStudy) {
-            type = 0;
-          } else {
-            // 관심 목록에 있는 경우
+        for (Member member : freeStudy.getLikeMembers()) {
+          if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
             type = 1;
             break;
           }
@@ -101,7 +97,6 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
         if (num == 1) {
           request.getRequestDispatcher("/freeStudy/apply").forward(request);
-
         } else if (num == 2) {
 
           if (type == 0) {
