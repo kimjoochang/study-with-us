@@ -173,8 +173,8 @@ public class App {
 
     commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
 
-    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeInterestList));
-    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList, freeInterestList));
+    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
+    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeInterestList));
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList, memberList));
@@ -183,7 +183,7 @@ public class App {
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList, freeInterestList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
@@ -246,7 +246,6 @@ public class App {
 
   void service() {
     //    loadObjects("member.json", memberList, Member.class);
-    //    loadObjects("freeInterest.json", freeInterestList, Study.class);
     //    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
     //    loadObjects("freeStudy.json", freeStudyList, Study.class);
     //    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
@@ -260,7 +259,6 @@ public class App {
     Prompt.close();
 
     saveObjects("member.json", memberList);
-    saveObjects("freeInterest.json", freeInterestList);
     saveObjects("chargeInterest.json", chargeInterestList);
     saveObjects("freeStudy.json", freeStudyList);
     saveObjects("chargeStudy.json", chargeStudyList);
