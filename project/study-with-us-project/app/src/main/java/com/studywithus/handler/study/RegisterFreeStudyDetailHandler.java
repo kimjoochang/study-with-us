@@ -32,13 +32,30 @@ public class RegisterFreeStudyDetailHandler implements Command {
 
     // 내가 생성한 무료 스터디 리스트 출력
     for (Study freeStudy : myRegisteredFreeStudy) {
-      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
-          freeStudy.getNo(), 
-          freeStudy.getTitle(), 
-          freeStudy.getWriter().getName(),
-          freeStudy.getRegisteredDate(),
-          freeStudy.getViewCount(), 
-          freeStudy.getLike());
+      if (freeStudy.getOnOffLine() == 1) {
+        System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
+            freeStudy.getNo(), 
+            freeStudy.getTitle(), 
+            freeStudy.getWriter().getName(),
+            freeStudy.getONLINE(),
+            freeStudy.getMembers().size(),
+            freeStudy.getMaxMembers(),
+            freeStudy.getRegisteredDate(),
+            freeStudy.getViewCount(), 
+            freeStudy.getLikeMembers().size());
+      } else {
+        System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
+            freeStudy.getNo(), 
+            freeStudy.getTitle(), 
+            freeStudy.getWriter().getName(),
+            freeStudy.getOFFLINE() ,
+            freeStudy.getArea(),
+            freeStudy.getMembers().size(),
+            freeStudy.getMaxMembers(),
+            freeStudy.getRegisteredDate(),
+            freeStudy.getViewCount(), 
+            freeStudy.getLikeMembers().size());
+      }
     }
 
     // 내가 생성한 무료 스터디 상세보기
@@ -63,11 +80,12 @@ public class RegisterFreeStudyDetailHandler implements Command {
     }
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("규칙: %s\n", freeStudy.getRule());
+    System.out.printf("모집인원 = %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-    System.out.printf("좋아요수: %d\n", freeStudy.getLike());
+    System.out.printf("좋아요수: %d\n", freeStudy.getLikeMembers().size());
     System.out.println();
 
     if (freeStudy.getApplicants().isEmpty()) {
@@ -147,12 +165,13 @@ public class RegisterFreeStudyDetailHandler implements Command {
   }
 
   private void studyMemberApproveHandler(Member freeApplicant, Study freeStudy) {
-    List<Member> studyMember = new ArrayList<>();
-    studyMember.add(freeApplicant);
-    freeStudy.getApplicants().remove(freeApplicant);
+    // 승인한 신청자의 정보를 신청자 리스트에서 삭제
+    List<Member> studyApplicants = freeStudy.getApplicants();
+    studyApplicants.remove(freeApplicant);
+    freeStudy.setApplicants(studyApplicants);
 
-    // 스터디 도메인 members에 넣을 회원리스트 생성해서 추가
-    List<Member> studyMembers = new ArrayList<>();
+    // 스터디 도메인 members에 회원 정보 추가
+    List<Member> studyMembers = freeStudy.getMembers();
     studyMembers.add(freeApplicant);
     freeStudy.setMembers(studyMembers);
 

@@ -29,14 +29,31 @@ public class ParticipateFreeStudyListHandler implements Command {
 
     // 내가 참여한 무료 스터디 리스트 출력
     for (Study freeStudy : myParticipatedFreeStudy) {
-      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]", 
-          freeStudy.getNo(), 
-          freeStudy.getTitle(), 
-          freeStudy.getWriter().getName(),
-          freeStudy.getRegisteredDate(),
-          freeStudy.getViewCount(), 
-          freeStudy.getLike());
+      if (freeStudy.getOnOffLine() == 1) {
+        System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
+            freeStudy.getNo(), 
+            freeStudy.getTitle(), 
+            freeStudy.getWriter().getName(),
+            freeStudy.getONLINE(),
+            freeStudy.getMembers().size(),
+            freeStudy.getMaxMembers(),
+            freeStudy.getRegisteredDate(),
+            freeStudy.getViewCount(), 
+            freeStudy.getLikeMembers().size());
+      } else {
+        System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
+            freeStudy.getNo(), 
+            freeStudy.getTitle(), 
+            freeStudy.getWriter().getName(),
+            freeStudy.getOFFLINE() ,
+            freeStudy.getArea(),
+            freeStudy.getMembers().size(),
+            freeStudy.getMaxMembers(),
+            freeStudy.getRegisteredDate(),
+            freeStudy.getViewCount(), 
+            freeStudy.getLikeMembers().size());
+      }
+      System.out.println();
     }
-    System.out.println();
   }
 }

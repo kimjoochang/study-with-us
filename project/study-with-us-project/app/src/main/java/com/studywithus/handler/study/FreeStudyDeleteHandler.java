@@ -15,7 +15,7 @@ public class FreeStudyDeleteHandler extends AbstractStudyHandler {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 삭제]");
-    int no = (int) request.getAttribute("no");
+    int no = (int) request.getAttribute("freeNo");
 
     Study freeStudy = findByNo(no);
 
@@ -24,7 +24,7 @@ public class FreeStudyDeleteHandler extends AbstractStudyHandler {
       return;
     }
 
-    if (freeStudy.getWriter() != AuthLogInHandler.getLoginUser()) {
+    if (freeStudy.getWriter().getId() != AuthLogInHandler.getLoginUser().getId()) {
       System.out.println("삭제 권한이 없습니다.");
       return;
     }

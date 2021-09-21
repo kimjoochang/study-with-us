@@ -9,10 +9,12 @@ import com.studywithus.handler.user.AuthLogInHandler;
 
 public class MyPostListHandler implements Command {
 
-  List<Community> myPostList;
+
   List<Community> communityQaList;
   List<Community> communityInfoList;
   List<Community> communityTalkList;
+
+
 
   public MyPostListHandler(List<Community> communityQaList, List<Community> communityInfoList, List<Community> communityTalkList) {
     this.communityQaList = communityQaList;
@@ -22,13 +24,11 @@ public class MyPostListHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]\n");
-
-    myPostList = new ArrayList<>();
-
-    myPostList.addAll(communityQaList);
+    List<Community> myPostList = new ArrayList<>();
     myPostList.addAll(communityInfoList);
+    myPostList.addAll(communityQaList);
     myPostList.addAll(communityTalkList);
+    System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]\n");
 
     for (Community myPost : myPostList) {
       System.out.println(myPost.getWriter().getName());
@@ -42,7 +42,7 @@ public class MyPostListHandler implements Command {
             myPost.getLike());
       } else {
         System.out.println("나의 게시글이 존재하지 않습니다.\n");
-        return;
+        //        return;
       }
     } 
   }

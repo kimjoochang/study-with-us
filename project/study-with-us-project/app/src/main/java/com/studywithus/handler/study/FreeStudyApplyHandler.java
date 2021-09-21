@@ -25,7 +25,7 @@ public class FreeStudyApplyHandler extends AbstractStudyHandler {
   public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 상세보기 / 신청]\n");
 
-    int no = (int) request.getAttribute("no");
+    int no = (int) request.getAttribute("freeNo");
 
     Study freeStudy = findByNo(no);
 

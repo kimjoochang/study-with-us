@@ -38,16 +38,17 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     }
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("규칙: %s\n", freeStudy.getRule());
+    System.out.printf("모집인원 = %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-    System.out.printf("좋아요수: %d\n", freeStudy.getLike());
+    System.out.printf("좋아요수: %d\n", freeStudy.getLikeMembers().size());
     System.out.println();
 
     // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때 
     // 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
-    request.setAttribute("FreeNo", no);
+    request.setAttribute("freeNo", no);
 
     // 내가 쓴 글일 경우
     if (freeStudy.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {
