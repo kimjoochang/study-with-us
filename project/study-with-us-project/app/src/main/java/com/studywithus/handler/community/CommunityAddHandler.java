@@ -9,9 +9,6 @@ import com.studywithus.util.Prompt;
 
 public class CommunityAddHandler extends AbstractCommunityHandler{
 
-  List<Community> communityWriterList;
-  Community community;
-
   public CommunityAddHandler(List<Community> communityList) {
     super(communityList);
 
@@ -30,7 +27,6 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
     community.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     communityList.add(community);
-    // communityWriterList.add();
 
     System.out.println();
     System.out.println("게시글 등록이 완료되었습니다.\n");

@@ -22,7 +22,7 @@ public class MyPostListHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]\n");
+    System.out.println("[마이 페이지 / 나의 활동 / 나의 게시글]\n");
 
     myPostList = new ArrayList<>();
 
@@ -31,8 +31,8 @@ public class MyPostListHandler implements Command {
     myPostList.addAll(communityTalkList);
 
     for (Community myPost : myPostList) {
-      System.out.println(myPost.getWriter().getName());
       if (myPost.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+
         System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
             myPost.getNo(),
             myPost.getTitle(),
@@ -42,19 +42,9 @@ public class MyPostListHandler implements Command {
             myPost.getLike());
       } else {
         System.out.println("나의 게시글이 존재하지 않습니다.\n");
-        return;
       }
-    } 
+    }
   }
-
-  // ID로 회원별 커뮤니티 게시글 조회
-  //  public Community findmyPostById(String id) {
-  //    for (Community writer : communityList) {
-  //      if (writer.getWriter().getId().equals(id)) {
-  //        return writer;
-  //      }
-  //    }
-  //    return null;
-  //  }
 }
+
 
