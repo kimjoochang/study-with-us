@@ -22,7 +22,12 @@ public class MentorApplicationDetailHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[멘토 신청 내역 / 상세보기]\n");
+    System.out.println("[멘토 승인 내역 / 상세보기]\n");
+
+    if (mentorApplicationFormList.isEmpty()) {
+      System.out.println("신청한 멘토가 존재하지 않습니다.");
+      return;
+    }
 
     // 멘토 신청자 조회
     for (MentorApplicationForm mentorApplication : mentorApplicationFormList) {
@@ -35,6 +40,7 @@ public class MentorApplicationDetailHandler implements Command {
     System.out.println();
     String name = Prompt.inputString("이름을 입력하세요. > ");
     MentorApplicationForm mentorName = findByName(name);
+    System.out.println();
 
     if (mentorName == null) {
       System.out.println("입력하신 이름과 일치하는 신청 내역이 없습니다.");
