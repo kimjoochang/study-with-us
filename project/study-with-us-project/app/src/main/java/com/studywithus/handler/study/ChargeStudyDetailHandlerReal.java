@@ -8,12 +8,12 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class ChargeStudyDetailHandler extends AbstractStudyHandler {
+public class ChargeStudyDetailHandlerReal extends AbstractStudyHandler {
 
 	//	Study chargeStudy;
 	//	List<Study> chargeInterestList; // 유료 스터디 관심목록 리스트 (회원 관점)
 
-	public ChargeStudyDetailHandler(List<Study> chargeStudyList) {
+	public ChargeStudyDetailHandlerReal(List<Study> chargeStudyList) {
 		super(chargeStudyList);
 	}
 
@@ -113,12 +113,10 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 					// 관심 목록이 있는 경우
 					if (type == 1) {
 						request.getRequestDispatcher("/chargeStudy/interestDelete").forward(request);
-						return;
 
 						// 관심 목록이 없는 경우
 					} else {
 						request.getRequestDispatcher("/chargeStudy/interestAdd").forward(request);
-						return;
 					}
 
 				} else if (input == 0) {
