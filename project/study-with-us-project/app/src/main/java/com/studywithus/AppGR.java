@@ -161,7 +161,7 @@ public class AppGR {
 
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
 
-    commandMap.put("/auth/userInfo", new MyInfoHandler(memberList));
+    commandMap.put("/auth/userInfo", new MyInfoHandler());
 
     commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeInterestList));
     commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));

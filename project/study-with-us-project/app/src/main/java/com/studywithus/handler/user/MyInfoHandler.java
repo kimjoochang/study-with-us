@@ -8,7 +8,7 @@ public class MyInfoHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[나의 정보]");
+    System.out.println("[나의 정보]\n");
 
     Member loginUser = AuthLogInHandler.getLoginUser();
 
