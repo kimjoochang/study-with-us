@@ -79,7 +79,7 @@ public class MenuGroup extends Menu {
         Menu menu = selectMenu(menuList);
 
         if (menu == null) {
-          System.out.println("무효한 메뉴 번호입니다.");
+          System.out.println("무효한 메뉴 번호입니다.\n");
           continue;
         }
 

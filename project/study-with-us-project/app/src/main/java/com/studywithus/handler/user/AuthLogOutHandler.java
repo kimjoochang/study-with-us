@@ -14,7 +14,7 @@ public class AuthLogOutHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[로그아웃]");
+    System.out.println("[로그아웃]\n");
 
     String input = Prompt.inputString("로그아웃하시겠습니까? (y/N) ");
 
@@ -29,6 +29,6 @@ public class AuthLogOutHandler implements Command {
     AuthLogInHandler.loginUser = null;
     AuthLogInHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
 
-    System.out.println("로그아웃이 완료되었습니다.");
+    System.out.println("로그아웃이 완료되었습니다.\n");
   }
 }
