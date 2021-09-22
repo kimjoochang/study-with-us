@@ -28,6 +28,7 @@ public class ChargeStudyListHandler extends AbstractStudyHandler {
 					chargeStudy.getWriter().getName(),
 					chargeStudy.getRegisteredDate(),
 					chargeStudy.getMembers().size(),
+					chargeStudy.getMaxMembers(),
 					chargeStudy.getViewCount(),
 					chargeStudy.getLikeMembers().size());
 		}

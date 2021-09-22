@@ -10,8 +10,6 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 
-	Study chargeStudy;
-
 	// 유료 스터디 관심목록 리스트 (회원 관점)
 	//	List<Study> chargeInterestList;
 
@@ -63,7 +61,7 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 		} else {
 			int no = (int) request.getAttribute("ChargeNo");
 
-			chargeStudy = findByNo(no);
+			Study chargeStudy = findByNo(no);
 
 			if (chargeStudy == null) {
 				System.out.println("해당 번호의 게시글이 없습니다.");

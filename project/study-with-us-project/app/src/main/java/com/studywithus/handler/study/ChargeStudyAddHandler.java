@@ -15,7 +15,6 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
 
 	// 각 멘토의 생성 유료 스터디 리스트
 	HashMap<String, List<Study>> registerChargeStudyMap;
-	List<Study> registerChargeStudyList;
 
 	public ChargeStudyAddHandler(List<Study> chargeStudyList, HashMap<String, List<Study>> registerChargeStudyMap) {
 		super(chargeStudyList);
@@ -29,6 +28,7 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
 		Study chargeStudy = new Study();
 
 		chargeStudy.setWriter(AuthLogInHandler.getLoginUser());
+
 		chargeStudy.setNo(Prompt.inputInt("번호: "));
 		chargeStudy.setArea(Prompt.inputString("지역: "));
 		chargeStudy.setTitle(Prompt.inputString("스터디 제목: "));
