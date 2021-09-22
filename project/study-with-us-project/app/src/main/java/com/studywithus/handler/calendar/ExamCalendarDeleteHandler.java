@@ -16,10 +16,9 @@ public class ExamCalendarDeleteHandler extends AbstractCalendarHandler {
     System.out.println("[이달의 시험일정 / 삭제]\n");
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
+    Calendar examCalendar = findByNo(no);
 
     System.out.println();
-
-    Calendar examCalendar = findByNo(no);
 
     if (examCalendar == null) {
       System.out.println();

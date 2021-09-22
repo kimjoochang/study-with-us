@@ -17,7 +17,6 @@ public class JobsCalendarDetailHandler extends AbstractCalendarHandler {
     System.out.println("[이달의 채용공고 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
-
     Calendar jobsCalendar = findByNo(no);
 
     if (jobsCalendar == null) {
@@ -27,9 +26,10 @@ public class JobsCalendarDetailHandler extends AbstractCalendarHandler {
     }
 
     System.out.printf("제목: %s\n", jobsCalendar.getTitle());
+    System.out.printf("작성자: %s\n", jobsCalendar.getWriter().getName());
     System.out.printf("내용: %s\n", jobsCalendar.getContent());
-    System.out.printf("시작일: %s\n", jobsCalendar.getStartDate());
-    System.out.printf("종료일: %s\n", jobsCalendar.getEndDate());
+    System.out.printf("시작일: %d-%d-%d\n", jobsCalendar.getStartYyyy(), jobsCalendar.getStartMm(), jobsCalendar.getStartDd());
+    System.out.printf("종료일: %d-%d-%d\n", jobsCalendar.getYyyy(), jobsCalendar.getMm(), jobsCalendar.getDd());
     System.out.println();
 
     request.setAttribute("no", no);
@@ -42,7 +42,7 @@ public class JobsCalendarDetailHandler extends AbstractCalendarHandler {
     }
 
     while (true) {
-      int input = Prompt.inputInt("선택> ");
+      int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
 
       if (input == 1) {
         request.getRequestDispatcher("/jobsCalendar/update").forward(request);
@@ -56,7 +56,7 @@ public class JobsCalendarDetailHandler extends AbstractCalendarHandler {
         return;
 
       } else {
-        System.out.println("잘못된 번호입니다.");
+        System.out.println("잘못된 메뉴 번호입니다.");
         continue;
       }
     }

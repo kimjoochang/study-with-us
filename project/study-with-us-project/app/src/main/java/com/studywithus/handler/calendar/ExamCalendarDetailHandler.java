@@ -28,8 +28,9 @@ public class ExamCalendarDetailHandler extends AbstractCalendarHandler {
     }
 
     System.out.printf("제목: %s\n", examCalendar.getTitle());
+    System.out.printf("작성자: %s\n", examCalendar.getWriter().getName());
     System.out.printf("내용: %s\n", examCalendar.getContent());
-    System.out.printf("시험일: %s\n", examCalendar.getExamDate());
+    System.out.printf("시험일: %d-%d-%d\n", examCalendar.getYyyy(), examCalendar.getMm(), examCalendar.getDd());
     System.out.println();
 
     request.setAttribute("no", no);

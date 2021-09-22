@@ -16,9 +16,9 @@ public class ExamCalendarUpdateHandler extends AbstractCalendarHandler {
     System.out.println("[이달의 시험일정 / 변경]\n");
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
-    System.out.println();
-
     Calendar examCalendar = findByNo(no);
+
+    System.out.println();
 
     if (examCalendar == null) {
       System.out.println();

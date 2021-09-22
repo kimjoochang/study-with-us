@@ -20,9 +20,13 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
 
     examCalendar.setNo(Prompt.inputInt("번호를 입력하세요. > "));
     examCalendar.setTitle(Prompt.inputString("제목을 입력하세요. > "));
-    examCalendar.setContent(Prompt.inputString("내용을 입력하세요. > "));
-    examCalendar.setExamDate(Prompt.inputString("시험일을 입력하세요. > "));
     examCalendar.setWriter(AuthLogInHandler.getLoginUser());
+    examCalendar.setContent(Prompt.inputString("내용을 입력하세요. > "));
+
+    System.out.println("시험일을 입력하세요.");
+    examCalendar.setYyyy(Prompt.inputInt("YYYY > "));
+    examCalendar.setMm(Prompt.inputInt("MM > "));
+    examCalendar.setDd(Prompt.inputInt("DD > "));
 
     calendarList.add(examCalendar);
 

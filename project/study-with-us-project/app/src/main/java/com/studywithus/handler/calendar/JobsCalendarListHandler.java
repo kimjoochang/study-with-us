@@ -19,12 +19,16 @@ public class JobsCalendarListHandler extends AbstractCalendarHandler {
       return;
     }
 
-    for (Calendar calendar : calendarList) {
-      System.out.printf("[번호 = %d, 제목 = %s, 시작일 = %s, 종료일 = %s]\n",
-          calendar.getNo(),
-          calendar.getTitle(),
-          calendar.getStartDate(),
-          calendar.getEndDate());
+    for (Calendar jobsCalendar : calendarList) {
+      System.out.printf("[번호 = %d, 제목 = %s, 시작일 = %d-%d-%d, 종료일 = %d-%d-%d]\n",
+          jobsCalendar.getNo(),
+          jobsCalendar.getTitle(),
+          jobsCalendar.getStartYyyy(),
+          jobsCalendar.getStartMm(),
+          jobsCalendar.getStartDd(),
+          jobsCalendar.getYyyy(),
+          jobsCalendar.getMm(),
+          jobsCalendar.getDd());
     }
     System.out.println();
   }
