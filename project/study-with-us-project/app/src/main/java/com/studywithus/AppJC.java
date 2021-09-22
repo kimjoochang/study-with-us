@@ -59,6 +59,7 @@ import com.studywithus.handler.study.ChargeStudySearchHandler;
 import com.studywithus.handler.study.ChargeStudyUpdateHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
 import com.studywithus.handler.study.FreeStudyApplyHandler;
+import com.studywithus.handler.study.FreeStudyApplyListHandler;
 import com.studywithus.handler.study.FreeStudyDeleteHandler;
 import com.studywithus.handler.study.FreeStudyDetailHandler;
 import com.studywithus.handler.study.FreeStudyInterestAddHandler;
@@ -188,6 +189,7 @@ public class AppJC {
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
     commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyList, applyFreeStudyMap));
+    commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(freeStudyList));
     commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(freeStudyList));
     commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(freeStudyList));
     commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(registerFreeStudyMap, participateFreeStudyMap));
@@ -550,9 +552,9 @@ public class AppJC {
   private Menu createFreeStudyApplyMenu() {
 
     MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
-    freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudyApply/list"));
-    freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
-    freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
+    freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudy/applyList"));
+    //    freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
+    //    freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
 
     return freeStudyApplyMenu;
   }
