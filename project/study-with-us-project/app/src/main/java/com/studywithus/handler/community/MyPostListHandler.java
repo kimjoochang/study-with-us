@@ -30,9 +30,7 @@ public class MyPostListHandler implements Command {
     myPostList.addAll(communityQaList);
     myPostList.addAll(communityTalkList);
 
-    System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]\n");
-
-    // 커뮤니티 게시판 자체가 비어있을 시, 아무것도 출력되지 않아서 아래의 조건문 추가함
+    // [추가] 커뮤니티 게시판 자체가 비어있을 시, 아무것도 출력되지 않아서 아래의 조건문 추가함
     if (myPostList.isEmpty() == true) {
       System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");
       return;
@@ -43,7 +41,7 @@ public class MyPostListHandler implements Command {
       // 로그인한 회원의 정보와 커뮤니티 게시글의 작성자가 일치한다면,
       if (myPost.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {
 
-        // 아래의 정보를 출력함
+        // 내가 작성한 커뮤니티 게시글을 아래의 형식으로 출력함
         System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
             myPost.getNo(),
             myPost.getTitle(),
@@ -57,5 +55,5 @@ public class MyPostListHandler implements Command {
     }
   }
 }
-
+// ** 출력문 무한반복 수정하기 **
 

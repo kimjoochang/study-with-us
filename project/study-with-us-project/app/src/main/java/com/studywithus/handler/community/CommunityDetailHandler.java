@@ -32,7 +32,7 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
       System.out.println("해당 번호의 게시글이 없습니다.\n");
       return;
     }
-
+    System.out.println("");
     System.out.printf("제목: %s\n", community.getTitle());
     System.out.printf("내용: %s\n", community.getContent());
     System.out.printf("작성자: %s\n", community.getWriter().getName());
@@ -70,6 +70,7 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
         case 0:
           return;
         default:
+          System.out.println("");
           System.out.println("무효한 메뉴 번호입니다.\n");
       }
     }
