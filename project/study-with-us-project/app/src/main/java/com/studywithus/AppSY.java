@@ -524,8 +524,8 @@ public class AppSY {
 
 		myPageMenu.add(createActivityDetailMenu());
 		myPageMenu.add(createInterestMenu());
-		// 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
-		myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
+		// 선영 추가
+		myPageMenu.add(createChargePaymentListMenu()); 
 		myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
 		myPageMenu.add(new MenuItem("나의 정보", "auth/userInfo"));
 
@@ -555,6 +555,18 @@ public class AppSY {
 
 		return myStudyMenu;
 	}
+
+	// 추가
+	// 마이페이지 / 나의 결제 내역
+	private Menu createChargePaymentListMenu() {
+
+		MenuGroup chargePaymentListMenu = new MenuGroup("나의 결제 내역");
+		chargePaymentListMenu.add(new MenuItem("조회", "payment/list"));
+		chargePaymentListMenu.add(new MenuItem("상세보기", "/payment/detail"));
+
+		return chargePaymentListMenu;
+	}
+
 
 	// 마이 페이지 / 나의 활동 / 나의 스터디 / 무료 스터디 신청 내역
 	private Menu createFreeStudyApplyMenu() {
@@ -597,7 +609,7 @@ public class AppSY {
 	// 선영 추가
 	private Menu createRegisterChargeStudyMenu() {
 
-		MenuGroup registerChargeStudyMenu = new MenuGroup("내가 생성한 유료 스터디", ACCESS_GENERAL);
+		MenuGroup registerChargeStudyMenu = new MenuGroup("내가 생성한 유료 스터디", ACCESS_MENTOR);
 		registerChargeStudyMenu.add(new MenuItem("조회", "/registerChargeStudy/list"));
 		registerChargeStudyMenu.add(new MenuItem("상세보기", "/registerChargeStudy/detail"));
 		registerChargeStudyMenu.add(new MenuItem("삭제", "/registerChargeStudy/delete"));
@@ -608,32 +620,31 @@ public class AppSY {
 	// 마이 페이지 / 나의 활동 / 내 스터디 / 내가 참여한 유료 스터디(팀원~)***
 	private Menu createParticipateChargeStudyMenu() {
 
-		MenuGroup participateChargeStudyMenu = new MenuGroup("내가 참여한 유료 스터디", ACCESS_GENERAL);
+		MenuGroup participateChargeStudyMenu = new MenuGroup("내가 참여한 유료 스터디", ACCESS_MENTEE);
 		participateChargeStudyMenu.add(new MenuItem("조회", "/participateChargeStudy/list"));
 		participateChargeStudyMenu.add(new MenuItem("상세보기", "/participateChargeStudy/detail"));
 		// 상세보기 / 후기 작성 추가하기 // 보류
 
 		return participateChargeStudyMenu;
 	}
-
-	// 마이 페이지 / 나의 활동 / 내 게시글
+	// 마이 페이지 / 나의 활동 / 나의 게시글
 	private Menu createMyPostMenu() {
 
-		MenuGroup myPostMenu = new MenuGroup("내 게시글");
+		MenuGroup myPostMenu = new MenuGroup("나의 게시글", ACCESS_GENERAL);
 		myPostMenu.add(new MenuItem("조회", "/myPost/list"));
-		myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
-		myPostMenu.add(new MenuItem("수정", "/myPost/update"));
-		myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
+		//    myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
+		//    myPostMenu.add(new MenuItem("수정", "/myPost/update"));
+		//    myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
 
 		return myPostMenu;
 	}
 
-	// 마이 페이지 / 내 관심목록
+	// 마이 페이지 / 나의 관심목록
 	private Menu createInterestMenu() {
 
-		MenuGroup interestMenu = new MenuGroup("내 관심목록");
+		MenuGroup interestMenu = new MenuGroup("나의 관심목록");
 		interestMenu.add(createFreeInterestMenu());
-		interestMenu.add(createChargeInterestMenu()); 
+		interestMenu.add(createChargeInterestMenu());
 
 		return interestMenu;
 	}
@@ -656,16 +667,6 @@ public class AppSY {
 		chargeInterestMenu.add(new MenuItem("삭제", "/chargeInterest/delete"));
 
 		return chargeInterestMenu;
-	}
-
-	// 마이 페이지 / 나의 결제 내역
-	private Menu createPaymentListMenu() {
-
-		MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
-		paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "myPayment/list"));
-		paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "myPayment/detail"));
-
-		return paymentListMenu;
 	}
 
 	// ------------------------------ 관리자 페이지 -----------------------------------------
