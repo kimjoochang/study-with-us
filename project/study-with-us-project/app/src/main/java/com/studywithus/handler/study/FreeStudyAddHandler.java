@@ -43,6 +43,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
     freeStudy.setTitle(Prompt.inputString("제목: "));
     freeStudy.setContent(Prompt.inputString("설명: "));
     freeStudy.setRule(Prompt.inputString("규칙: "));
+    freeStudy.setMaxMembers(Prompt.inputInt("모집 인원: "));
     freeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     studyList.add(freeStudy);

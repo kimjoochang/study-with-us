@@ -32,7 +32,7 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
           freeStudy.getWriter().getName(),
           freeStudy.getRegisteredDate(),
           freeStudy.getViewCount(), 
-          freeStudy.getLike());
+          freeStudy.getLikeMembers().size());
     }
     if (type == 1) {
       System.out.println("입력하신 키워드가 포함된 게시글이 없습니다.");

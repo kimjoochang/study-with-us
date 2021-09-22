@@ -17,7 +17,7 @@ public class FreeStudyInterestAddHandler extends AbstractStudyHandler {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 상세보기 / 관심 목록]\n");
-    int no = (int) request.getAttribute("no");
+    int no = (int) request.getAttribute("freeNo");
 
     Study freeInterest = findByNo(no);
 
@@ -36,9 +36,6 @@ public class FreeStudyInterestAddHandler extends AbstractStudyHandler {
     List<Member> likeMember = freeInterest.getLikeMembers();
     likeMember.add(AuthLogInHandler.getLoginUser());
     freeInterest.setLikeMembers(likeMember);
-
-    // 무료 스터디 관심 목록에 좋아요한 무료 스터디 추가 (회원 관점)
-    freeInterest.setLike(freeInterest.getLike() + 1);
 
     System.out.println();
     System.out.println("무료 스터디 관심 목록에 추가되었습니다.\n");

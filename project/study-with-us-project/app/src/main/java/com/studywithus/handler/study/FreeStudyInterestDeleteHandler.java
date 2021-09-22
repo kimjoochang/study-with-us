@@ -47,13 +47,11 @@ public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {
       likeMember.remove(AuthLogInHandler.getLoginUser());
       freeInterest.setLikeMembers(likeMember);
 
-      freeInterest.setLike(freeInterest.getLike() - 1);
-
       System.out.println();
       System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");
 
     } else {
-      int no = (int) request.getAttribute("no");
+      int no = (int) request.getAttribute("freeNo");
 
       Study freeInterest = findByNo(no);
 
@@ -77,8 +75,6 @@ public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {
       List<Member> likeMember = freeInterest.getLikeMembers();
       likeMember.remove(AuthLogInHandler.getLoginUser());
       freeInterest.setLikeMembers(likeMember);
-
-      freeInterest.setLike(freeInterest.getLike() - 1);
 
       System.out.println();
       System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");

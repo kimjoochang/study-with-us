@@ -25,7 +25,7 @@ public class FreeStudyApplyHandler extends AbstractStudyHandler {
   public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 상세보기 / 신청]\n");
 
-    int no = (int) request.getAttribute("no");
+    int no = (int) request.getAttribute("freeNo");
 
     Study freeStudy = findByNo(no);
 
@@ -35,12 +35,29 @@ public class FreeStudyApplyHandler extends AbstractStudyHandler {
       return;
     }
 
+    // 중복신청 확인 
+    for (Member member : freeStudy.getApplicants()) {
+      if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+        System.out.println("이미 신청하셨습니다.");
+        return;
+      }
+    }
+
+    // 모집인원 다 찼을경우
+    if (freeStudy.getMembers().size() == freeStudy.getMaxMembers()) {
+      System.out.println("모집 인원이 다 찼습니다.");
+      return;
+    }
+
     String input = Prompt.inputString("무료 스터디를 신청 하시겠습니까? (y/N) ");
+
 
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("무료 스터디 신청이 취소되었습니다.");
       return;
     }
+
+
     // 회원 개개인의 신청한 스터디
     List<Member> freeApplicantList;
     List<Study> freeApplicationList;
