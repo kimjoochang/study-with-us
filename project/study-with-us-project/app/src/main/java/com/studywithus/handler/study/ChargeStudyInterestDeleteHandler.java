@@ -56,9 +56,6 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 			likeMember.remove(AuthLogInHandler.getLoginUser());
 			chargeStudy.setLikeMembers(likeMember);
 
-			// 유료 스터디 관심 목록에 좋아요한 유료 스터디 추가 (회원 관점)
-			chargeStudy.setLike(chargeStudy.getLike() - 1);
-
 			System.out.println();
 			System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");
 
@@ -89,9 +86,6 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 			List<Member> likeMember = chargeStudy.getLikeMembers();
 			likeMember.remove(AuthLogInHandler.getLoginUser());
 			chargeStudy.setLikeMembers(likeMember);
-
-			// 유료 스터디 관심 목록에 좋아요한 유료 스터디 추가 (회원 관점)
-			chargeStudy.setLike(chargeStudy.getLike() - 1);
 
 			System.out.println();
 			System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");

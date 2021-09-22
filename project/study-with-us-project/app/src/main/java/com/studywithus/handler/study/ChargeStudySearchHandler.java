@@ -34,7 +34,7 @@ public class ChargeStudySearchHandler extends AbstractStudyHandler {
 					chargeStudy.getWriter().getName(),
 					chargeStudy.getRegisteredDate(),
 					chargeStudy.getViewCount(), 
-					chargeStudy.getLike());
+					chargeStudy.getLikeMembers());
 		} 
 		if (type == 1) {
 			System.out.println("입력하신 키워드가 포함된 게시글이 없습니다.");
