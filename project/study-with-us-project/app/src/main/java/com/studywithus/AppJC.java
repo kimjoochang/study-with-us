@@ -58,6 +58,7 @@ import com.studywithus.handler.study.ChargeStudyPaymentHandler;
 import com.studywithus.handler.study.ChargeStudySearchHandler;
 import com.studywithus.handler.study.ChargeStudyUpdateHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
+import com.studywithus.handler.study.FreeStudyApplyCancelHandler;
 import com.studywithus.handler.study.FreeStudyApplyHandler;
 import com.studywithus.handler.study.FreeStudyApplyListHandler;
 import com.studywithus.handler.study.FreeStudyDeleteHandler;
@@ -78,7 +79,6 @@ import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindIdHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
-import com.studywithus.handler.user.MyInfoHandler;
 import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
@@ -172,7 +172,7 @@ public class AppJC {
 
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
 
-    commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
+    //    commandMap.put("/myinfo/list", new MyInfoHandler(memberList));
 
     commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
     commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
@@ -189,6 +189,7 @@ public class AppJC {
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
 
     commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyList, applyFreeStudyMap));
+    commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(freeStudyList, applyFreeStudyMap));
     commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(freeStudyList));
     commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(freeStudyList));
     commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(freeStudyList));

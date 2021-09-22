@@ -86,11 +86,9 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
     String year;
     String month;
     String date;
-    // 입력받은 연도, 월, 일을 합친 변수
-    String fullDate;
-    // 리턴하기 위한 임시 변수
-    String temp = "";
-    String[] arr = new String[2];
+    String fullDate; // 입력받은 연도, 월, 일을 합친 변수
+    String temp = ""; // 리턴하기 위한 임시 변수
+    String[] arr = new String[2]; // 시작일을 split으로 자르고 담을 배열
     int type = 0; // 시작일과 종료일 구분하기 위한 변수
 
     if (freeStudy.getStartDate() != null) {
@@ -102,11 +100,16 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
     while (true) {
       year = Prompt.inputString("YYYY > ");
 
+      if (year.length() != 4) {
+        System.out.println("유효한 연도를 입력하시오.");
+        continue;
+      }
+
       // 종료일 입력받을 때
       // 시작일 년도보다 빠르면 재입력 받도록 함
       if (type == 1) {
         if (Integer.parseInt(year) < Integer.parseInt(arr[0])) {
-          System.out.println("스터디 시작일과 비교했을 때 유효한 값이 아닙니다.");
+          System.out.println("유효한 연도를 입력하시오.");
           continue;
         }
       }
@@ -134,7 +137,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
       // 시작일 년도보다 빠르면 재입력 받도록 함
       if (type == 1) {
         if (Integer.parseInt(year + month) < Integer.parseInt(arr[0] + arr[1])) {
-          System.out.println("스터디 시작일과 비교했을 때 유효한 값이 아닙니다.");
+          System.out.println("유효한 월을 입력하시오");
           continue;
         }
       }
@@ -175,7 +178,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
       if (type == 1) {
         if (Integer.parseInt(year + month + date) < Integer.parseInt(arr[0] + arr[1] + arr[2])) {
-          System.out.println("스터디 시작일과 비교했을 때 유효한 값이 아닙니다.");
+          System.out.println("유효한 일을 입력하시오");
           continue;
         }
       }
