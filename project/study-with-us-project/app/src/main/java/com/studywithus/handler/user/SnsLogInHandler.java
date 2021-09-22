@@ -48,9 +48,9 @@ public class SnsLogInHandler implements Command {
     }
   }
 
-  private Member findBySnsIdPassword(String id, String password) {
+  private Member findBySnsIdPassword(String SnsId, String SnsPassword) {
     for (Member member : memberList) {
-      if (member.getId().equalsIgnoreCase(id) && member.getPassword().equals(password)) {
+      if (member.getId().equalsIgnoreCase(SnsId) && member.getPassword().equals(SnsPassword)) {
         return member;
       }
     }
