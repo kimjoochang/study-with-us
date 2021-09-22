@@ -10,10 +10,8 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyInterestAddHandler extends AbstractStudyHandler {
 
-
 	// 유료 스터디 관심목록 리스트 (회원 관점)
 	//	List<Study> chargeInterestList;
-
 	public ChargeStudyInterestAddHandler(List<Study> chargeStudyList) {
 		super(chargeStudyList);
 	}
@@ -30,11 +28,19 @@ public class ChargeStudyInterestAddHandler extends AbstractStudyHandler {
 			return;
 		}
 
-		String input = Prompt.inputString("관심 목록에 추가하시겠습니까? (y/N) ");
+		while(true) {
+			String input = Prompt.inputString("유료 스터디 관심 목록에 추가하시겠습니까? (y/N) ");
 
-		if (input.equalsIgnoreCase("n") || input.length() == 0) {
-			System.out.println("유료 스터디 관심 목록 추가를 취소하였습니다.\n");
-			return;
+			if (input.equalsIgnoreCase("n") || input.length() == 0) {
+				System.out.println("유료 스터디 관심 목록 추가를 취소하였습니다.\n");
+				return;
+			}else if (!input.equalsIgnoreCase("y")) {
+				System.out.println("다시 입력하시오.\n");
+				continue;
+
+			} else {
+				break;
+			}
 		}
 
 		// 유료 스터디 관심목록 리스트 (회원 관점)
@@ -46,4 +52,3 @@ public class ChargeStudyInterestAddHandler extends AbstractStudyHandler {
 		System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
 	}
 }
-// ♡  ♡  ♡ 

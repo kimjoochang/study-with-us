@@ -56,7 +56,8 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 				System.out.println("2. 삭제");
 				System.out.println("0. 이전\n");
 
-				int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
+				int input = Prompt.inputInt("메뉴 번호를 선택하세요. > "); 
+				System.out.println();
 
 				if (input == 1) {
 					request.getRequestDispatcher("/chargeStudy/update").forward(request);
@@ -72,28 +73,27 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 			}
 			// 타인이 작성한 글인 경우
 		} else {
-			int type = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
+			int interestType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
+			int paymentType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
 			while (true) {
 				for (Member member : chargeStudy.getLikeMembers()) {
 					if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
-						type = 1;
+						paymentType = 1;
 						break;
 					}
 				}
-				if (type == 0) {
+				if (paymentType == 0) {
 					System.out.println("1. 결제");
-				}
-
-				type = 0;
+				} 
 				for (Member member : chargeStudy.getLikeMembers()) {
 					if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
-						type = 1;
+						interestType = 1;
 						break;
 					}
 				}
 
 				// 관심 목록이 없는 경우
-				if (type == 0) {
+				if (interestType == 0) {
 					System.out.println("2. 관심목록 추가");
 
 					// 관심 목록이 있는 경우
@@ -105,26 +105,28 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
 				int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
 
-				// 1. 결제
+				// 1. 결제 or 결제 취소
 				if (input == 1) {
-					request.getRequestDispatcher("/chargeStudy/payment").forward(request);
+					// 1. 결제를 아직 안 한 경우
+					if (paymentType == 0) {
+						request.getRequestDispatcher("/chargeStudy/payment").forward(request);
+
+					} 
 
 					// 2. 관심목록 추가 or 삭제
 				} else if (input == 2) {
-					// 관심 목록이 없는 경우
-					if (type == 0) {
+
+					// 2. 관심 목록이 없는 경우
+					if (interestType == 0) {
 						request.getRequestDispatcher("/chargeStudy/interestAdd").forward(request);
 
-						// 관심 목록이 없는 경우
+						// 2. 관심 목록이 이미 있는 경우
 					} else {
 						request.getRequestDispatcher("/chargeStudy/interestDelete").forward(request);
 					}
 
 				} else if (input == 0) {
 					return;
-
-					//      if (chargeStudy.getWriter() == loginUser) {}
-					//      else if (chargeStudy.getWriter() != loginUser) {}
 
 				} else {
 					System.out.println("존재하지 않는 메뉴 번호입니다.");
@@ -135,5 +137,4 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 		}
 	}
 }
-// ♡  ♡  ♡ 
 
