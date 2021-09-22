@@ -29,6 +29,7 @@ public class MyPostListHandler implements Command {
     myPostList.addAll(communityInfoList);
     myPostList.addAll(communityQaList);
     myPostList.addAll(communityTalkList);
+
     System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]\n");
 
     // 커뮤니티 게시판 자체가 비어있을 시, 아무것도 출력되지 않아서 아래의 조건문 추가함
@@ -36,7 +37,6 @@ public class MyPostListHandler implements Command {
       System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");
       return;
     }
-
 
     for (Community myPost : myPostList) {
 

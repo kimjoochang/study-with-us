@@ -70,7 +70,7 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
         case 0:
           return;
         default:
-          System.out.println("명령어가 올바르지 않습니다!");
+          System.out.println("무효한 메뉴 번호입니다.\n");
       }
     }
   }

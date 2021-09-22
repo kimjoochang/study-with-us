@@ -34,7 +34,7 @@ public class CommunitySearchHandler extends AbstractCommunityHandler {
         type = 1; 
         continue;
       }
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+      System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
           community.getNo(), 
           community.getTitle(), 
           community.getWriter().getName(),
@@ -44,7 +44,7 @@ public class CommunitySearchHandler extends AbstractCommunityHandler {
     }
 
     if (type == 1) {
-      System.out.println("입력하신 키워드가 포함된 게시글이 없습니다.");
+      System.out.println("입력하신 키워드가 포함된 게시글이 없습니다.\n");
     }
   }
 }

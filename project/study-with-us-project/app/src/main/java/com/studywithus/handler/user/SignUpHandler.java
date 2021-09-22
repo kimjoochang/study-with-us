@@ -19,10 +19,9 @@ public class SignUpHandler extends AbstractLoginHandler {
     Member member = new Member();
 
     String name = Prompt.inputString("이름을 입력하세요. > ");
-    String phoneNumber = Prompt.inputString("휴대폰 번호를 입력하세요. > ");
-    String id = Prompt.inputString("사용할 아이디를 입력하세요. > ");
+    String phoneNumber = Prompt.inputString("휴대폰 번호를 입력하세요.\n('-'를 제외한 숫자 11자) > ");
+    String id = Prompt.inputString("사용할 아이디를 입력하세요.\n(이메일 형식의 아이디) >");
     String password = Prompt.inputString("사용할 비밀번호를 입력하세요.\n(특수문자 !,@,$,^ 포함 8자 이상 16자 이하) > ");
-    // String email = Prompt.inputString("이메일 주소를 입력하세요. > ");
 
     System.out.println();
 
@@ -46,7 +45,7 @@ public class SignUpHandler extends AbstractLoginHandler {
     }  else if (password.contains(phoneNumber) == true) {
       System.out.println("휴대폰 번호를 포함한 비밀번호는 사용하실 수 없습니다. \n");
 
-    } else if (phoneNumber.length() < 11) {
+    } else if (phoneNumber.length() != 11) {
       System.out.println("올바른 형식의 휴대폰 번호를 입력하세요.\n");
 
     } else {
@@ -54,7 +53,6 @@ public class SignUpHandler extends AbstractLoginHandler {
       member.setId(id);
       member.setPassword(password);
       member.setPhoneNumber(phoneNumber);
-      // member.setEmail(email);
       member.setRegisteredDate((new Date(System.currentTimeMillis())));
       member.setUserAccessLevel(Menu.ACCESS_GENERAL);
       member.setRegisteredDate(new Date(System.currentTimeMillis()));

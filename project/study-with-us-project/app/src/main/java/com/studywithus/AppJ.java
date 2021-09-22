@@ -479,10 +479,9 @@ public class AppJ {
   // 마이 페이지 메인
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
-
-    myPageMenu.add(createActivityDetailMenu());
+    // [09.23 추가] 나의 게시글 하위 메뉴 구성 안 하기로 하면서 여기로 이동함
+    myPageMenu.add(new MenuItem("나의 게시글", ACCESS_GENERAL, "/myPost/list"));
     myPageMenu.add(createInterestMenu());
-
 
     // 09.19 재확인 -  
     // 기존 app과 다른 부분 & 이유:
@@ -578,6 +577,7 @@ public class AppJ {
     return participateChargeStudyMenu;
   }
 
+  /*
   // 마이 페이지 / 나의 활동 / 나의 게시글
   private Menu createMyPostMenu() {
 
@@ -589,6 +589,7 @@ public class AppJ {
 
     return myPostMenu;
   }
+   */
 
   // 마이 페이지 / 나의 관심목록
   private Menu createInterestMenu() {
