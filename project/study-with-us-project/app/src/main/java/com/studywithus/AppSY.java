@@ -60,6 +60,9 @@ import com.studywithus.handler.study.ChargeStudyPaymentHandler;
 import com.studywithus.handler.study.ChargeStudySearchHandler;
 import com.studywithus.handler.study.ChargeStudyUpdateHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
+import com.studywithus.handler.study.FreeStudyApplyCancelHandler;
+import com.studywithus.handler.study.FreeStudyApplyHandler;
+import com.studywithus.handler.study.FreeStudyApplyListHandler;
 import com.studywithus.handler.study.FreeStudyDeleteHandler;
 import com.studywithus.handler.study.FreeStudyDetailHandler;
 import com.studywithus.handler.study.FreeStudyInterestAddHandler;
@@ -71,7 +74,9 @@ import com.studywithus.handler.study.FreeStudyUpdateHandler;
 import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
 import com.studywithus.handler.study.ParticipateChargeStudyListHandler;
+import com.studywithus.handler.study.ParticipateFreeStudyListHandler;
 import com.studywithus.handler.study.RegisterChargeStudyListHandler;
+import com.studywithus.handler.study.RegisterFreeStudyDetailHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindIdHandler;
@@ -147,8 +152,8 @@ public class AppSY {
 	}
 
 	public static void main(String[] args) {
-		AppSY appSY = new AppSY(); 
-		appSY.service();
+		AppSY app = new AppSY(); 
+		app.service();
 	}
 
 	public AppSY() {
@@ -167,18 +172,18 @@ public class AppSY {
 		commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberList));
 		commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
 
-		commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
-
 		commandMap.put("/find/id", new FindIdHandler(memberList));
 		commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
 
+		commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
+
 		//		commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
 
-		commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeInterestList));
+		commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
 		commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
-		commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeInterestList));
+		commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeStudyList)); // 변경
 		// 추가
-		commandMap.put("/chargeInterest/delete", new ChargeStudyInterestDeleteHandler(chargeStudyList));
+		commandMap.put("/chargeInterest/delete", new ChargeStudyInterestDeleteHandler(chargeStudyList)); // 변경
 
 		commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList, chargeApplicantList));
 		commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
@@ -189,6 +194,14 @@ public class AppSY {
 		commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList));
 		commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
 		commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
+
+		commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyList, applyFreeStudyMap));
+		commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(freeStudyList, applyFreeStudyMap));
+		commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(freeStudyList));
+		commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(freeStudyList));
+		commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(freeStudyList));
+		commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(registerFreeStudyMap, participateFreeStudyMap));
+		commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(participateFreeStudyMap));
 
 		commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
 		commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
@@ -202,12 +215,8 @@ public class AppSY {
 		commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList));  // 
 		commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyList)); //
 
-		commandMap.put("/chargeStudy/registerChargeStudy", new RegisterChargeStudyListHandler(registerChargeStudyMap)); // 내가 참여한 유료 스터디***
-		commandMap.put("/chargeStudy/participateChargeStudt", new ParticipateChargeStudyListHandler(participateChargeStudyMap)); // 내가 생성한 유료 스터디***
-
-		commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(freeStudyList));
-		commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(freeStudyList));
-
+		commandMap.put("/chargeStudy/registerChargeStudy", new RegisterChargeStudyListHandler(registerChargeStudyMap)); 
+		commandMap.put("/chargeStudy/participateChargeStudt", new ParticipateChargeStudyListHandler(participateChargeStudyMap)); 
 
 		commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
 		commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
