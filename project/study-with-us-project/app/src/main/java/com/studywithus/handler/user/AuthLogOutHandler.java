@@ -5,7 +5,6 @@ import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.menu.Menu;
-import com.studywithus.util.Prompt;
 
 public class AuthLogOutHandler implements Command {
 
@@ -15,13 +14,6 @@ public class AuthLogOutHandler implements Command {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[로그아웃]\n");
-
-    String input = Prompt.inputString("로그아웃하시겠습니까? (y/N) ");
-
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("로그아웃을 취소하였습니다.\n");
-      return;
-    } 
 
     // 현재 로그인된 회원의 권한을 setUserAccessLevel에 저장 후 로그아웃
     AuthLogInHandler.loginUser.setUserAccessLevel(AuthLogInHandler.userAccessLevel);
