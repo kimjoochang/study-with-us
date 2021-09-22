@@ -9,7 +9,6 @@ import com.studywithus.handler.user.AuthLogInHandler;
 
 public class MyPostListHandler implements Command {
 
-  List<Community> myPostList;
   List<Community> communityQaList;
   List<Community> communityInfoList;
   List<Community> communityTalkList;
@@ -22,13 +21,15 @@ public class MyPostListHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) {
+
     System.out.println("[마이 페이지 / 나의 활동 / 나의 게시글]\n");
 
-    myPostList = new ArrayList<>();
+    List<Community> myPostList = new ArrayList<>();
 
-    myPostList.addAll(communityQaList);
     myPostList.addAll(communityInfoList);
+    myPostList.addAll(communityQaList);
     myPostList.addAll(communityTalkList);
+    System.out.println("[마이 페이지 / 나의 활동 / 내 게시글 / 내 게시글 조회]\n");
 
     if (myPostList.isEmpty() == true) {
       System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");

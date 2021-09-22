@@ -1,31 +1,58 @@
 package com.studywithus.domain;
 
 public class Calendar extends Content {
-  private String startDate; // 채용공고 시작일
-  private String endDate; // 채용공고 종료일
-  private String examDate; // 시험일
+  private int yyyy; // 년
+  private int mm; // 월
+  private int dd; // 일
+  private int startYyyy; // 시작일 년
+  private int startMm; // 시작일 월
+  private int startDd; // 시작일 일
 
-  public String getStartDate() {
-    return startDate;
+  public int getYyyy() {
+    return yyyy;
   }
 
-  public void setStartDate(String startDate) {
-    this.startDate = startDate;
+  public void setYyyy(int yyyy) {
+    this.yyyy = yyyy;
   }
 
-  public String getEndDate() {
-    return endDate;
+  public int getMm() {
+    return mm;
   }
 
-  public void setEndDate(String endDate) {
-    this.endDate = endDate;
+  public void setMm(int mm) {
+    this.mm = mm;
   }
 
-  public String getExamDate() {
-    return examDate;
+  public int getDd() {
+    return dd;
   }
 
-  public void setExamDate(String examDate) {
-    this.examDate = examDate;
+  public void setDd(int dd) {
+    this.dd = dd;
+  }
+
+  public int getStartYyyy() {
+    return startYyyy;
+  }
+
+  public void setStartYyyy(int startYyyy) {
+    this.startYyyy = startYyyy;
+  }
+
+  public int getStartMm() {
+    return startMm;
+  }
+
+  public void setStartMm(int startMm) {
+    this.startMm = startMm;
+  }
+
+  public int getStartDd() {
+    return startDd;
+  }
+
+  public void setStartDd(int startDd) {
+    this.startDd = startDd;
   }
 }

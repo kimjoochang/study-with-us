@@ -15,7 +15,7 @@ public class FreeStudyUpdateHandler extends AbstractStudyHandler {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 수정]\n");
-    int no = (int) request.getAttribute("no");
+    int no = (int) request.getAttribute("freeNo");
 
     Study freeStudy = findByNo(no);
 

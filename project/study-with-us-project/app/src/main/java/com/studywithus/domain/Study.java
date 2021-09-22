@@ -5,24 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Study extends Content {
-  //[추가] 
   private String ONLINE = "온라인";
   private String OFFLINE = "오프라인";
-
-  private List<Member> members; // 팀원 or 멘티
+  private List<Member> members = new ArrayList<>(); // 팀원 or 멘티
   private List<Member> applicants = new ArrayList<>(); // 무료 스터디 신청자
-
-  //[추가]
   private List<Member> likeMembers = new ArrayList<>(); // 무료 스터디 신청자
-
   private String mentorExplanation; // 멘토 설명
   private String rule; // 스터디 규칙
   private int price; // 유료 스터디 가격
   private int onOffLine; // 온라인 or 오프라인
   private String area; // 지역
   private Date registeredDate; // 스터디 등록일
-  private int like; // 좋아요
   private int viewCount; // 조회수
+  // [추가] 
+  private int maxMembers; // 스터디 최대 모집인원 수
+  private String startDate; // 스터디 시작일
+  private String endDate; // 스터디 종료일
+
+  //  [삭제]
+  //  private int like; // 좋아요  -> 좋아요 수를 likeMembers의 인덱스 수로 변경
 
   public String getONLINE() {
     return ONLINE;
@@ -104,14 +105,6 @@ public class Study extends Content {
     this.registeredDate = registeredDate;
   }
 
-  public int getLike() {
-    return like;
-  }
-
-  public void setLike(int like) {
-    this.like = like;
-  }
-
   public int getViewCount() {
     return viewCount;
   }
@@ -119,4 +112,29 @@ public class Study extends Content {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+
+  public int getMaxMembers() {
+    return maxMembers;
+  }
+
+  public void setMaxMembers(int maxMember) {
+    this.maxMembers = maxMember;
+  }
+
+  public String getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(String startDate) {
+    this.startDate = startDate;
+  }
+
+  public String getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(String endDate) {
+    this.endDate = endDate;
+  }
+
 }

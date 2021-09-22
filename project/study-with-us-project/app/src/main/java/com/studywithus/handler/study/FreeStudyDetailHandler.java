@@ -38,16 +38,17 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     }
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("규칙: %s\n", freeStudy.getRule());
+    System.out.printf("모집인원 = %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-    System.out.printf("좋아요수: %d\n", freeStudy.getLike());
+    System.out.printf("좋아요수: %d\n", freeStudy.getLikeMembers().size());
     System.out.println();
 
     // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때 
     // 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
-    request.setAttribute("FreeNo", no);
+    request.setAttribute("freeNo", no);
 
     // 내가 쓴 글일 경우
     if (freeStudy.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {
@@ -74,13 +75,25 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     } else {
       int type = 0; // 메서드 호출할 때, 관심목록 존재 여부 구분을 위한 변수
       while (true) {
-        System.out.println("1. 신청하기");
-
-        for (Member member : freeStudy.getLikeMembers()) {
+        for (Member member : freeStudy.getApplicants()) {
           if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
             type = 1;
             break;
           }
+        }
+
+        if (type == 0) {
+          System.out.println("1. 신청하기");
+        } else {
+          System.out.println("1. 신청 취소하기");
+        }
+
+        type = 0;
+        for (Member member : freeStudy.getLikeMembers()) {
+          if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+            type = 1;
+            break;
+          } 
         }
 
         // 관심목록 존재 여부에 따라 출력문 출력

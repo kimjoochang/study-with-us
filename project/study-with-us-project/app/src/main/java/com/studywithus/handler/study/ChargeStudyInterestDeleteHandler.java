@@ -10,14 +10,11 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 
-	Study chargeStudy;
-
 	// 유료 스터디 관심목록 리스트 (회원 관점)
-	List<Study> chargeInterestList;
+	//	List<Study> chargeInterestList;
 
-	public ChargeStudyInterestDeleteHandler(List<Study> chargeStudyList, List<Study> chargeInterestList) {
+	public ChargeStudyInterestDeleteHandler(List<Study> chargeStudyList) {
 		super(chargeStudyList);
-		this.chargeInterestList = chargeInterestList;
 	}
 
 	@Override
@@ -31,9 +28,9 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 		if (request.getAttribute("no") == null) {
 			int no = Prompt.inputInt("메뉴 번호를 입력하세요. > ");
 
-			chargeStudy = findByNo(no);
+			Study chargeStudy = findByNo(no);
 
-			for (Member member : chargeStudy.getLikeMembers()) {
+			for (Member member : chargeStudy.getLikeMembers()) { // [마이페이지 / 2. 내관심목록 / 2.유료스터디관심목록 / 2.삭제] X 오류 
 				if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
 					type = 1;
 					break;
@@ -57,9 +54,6 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 			likeMember.remove(AuthLogInHandler.getLoginUser());
 			chargeStudy.setLikeMembers(likeMember);
 
-			// 유료 스터디 관심 목록에 좋아요한 유료 스터디 추가 (회원 관점)
-			chargeStudy.setLike(chargeStudy.getLike() - 1);
-
 			System.out.println();
 			System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");
 
@@ -67,7 +61,7 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 		} else {
 			int no = (int) request.getAttribute("ChargeNo");
 
-			chargeStudy = findByNo(no);
+			Study chargeStudy = findByNo(no);
 
 			if (chargeStudy == null) {
 				System.out.println("해당 번호의 게시글이 없습니다.");
@@ -90,9 +84,6 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 			List<Member> likeMember = chargeStudy.getLikeMembers();
 			likeMember.remove(AuthLogInHandler.getLoginUser());
 			chargeStudy.setLikeMembers(likeMember);
-
-			// 유료 스터디 관심 목록에 좋아요한 유료 스터디 추가 (회원 관점)
-			chargeStudy.setLike(chargeStudy.getLike() - 1);
 
 			System.out.println();
 			System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");

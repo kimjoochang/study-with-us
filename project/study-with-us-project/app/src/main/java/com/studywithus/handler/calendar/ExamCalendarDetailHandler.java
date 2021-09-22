@@ -18,31 +18,33 @@ public class ExamCalendarDetailHandler extends AbstractCalendarHandler {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[이달의 시험일정 / 상세보기]\n");
 
-    int no = Prompt.inputInt("번호: ");
+    int no = Prompt.inputInt("번호를 입력하세요. > ");
     Calendar examCalendar = findByNo(no);
 
+    System.out.println();
+
     if (examCalendar == null) {
-      System.out.println();
-      System.out.println("해당 번호의 시험일정이 없습니다.\n");
+      System.out.println("해당 번호의 시험일정이 없습니다.");
       return;
     }
 
     System.out.printf("제목: %s\n", examCalendar.getTitle());
+    System.out.printf("작성자: %s\n", examCalendar.getWriter().getName());
     System.out.printf("내용: %s\n", examCalendar.getContent());
-    System.out.printf("시험일: %s\n", examCalendar.getExamDate());
+    System.out.printf("시험일: %d-%d-%d\n", examCalendar.getYyyy(), examCalendar.getMm(), examCalendar.getDd());
     System.out.println();
 
     request.setAttribute("no", no);
 
     // 관리자인 경우
     if (examCalendar.getWriter() == AuthLogInHandler.getLoginUser()) {
-      System.out.println("1. 수정");
+      System.out.println("1. 변경");
       System.out.println("2. 삭제");
       System.out.println("0. 이전\n");
     }
 
     while (true) {
-      int input = Prompt.inputInt("선택> ");
+      int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
 
       if (input == 1) {
         request.getRequestDispatcher("/examCalendar/update").forward(request);
@@ -56,7 +58,7 @@ public class ExamCalendarDetailHandler extends AbstractCalendarHandler {
         return;
 
       } else {
-        System.out.println("잘못된 번호입니다.");
+        System.out.println("잘못된 메뉴 번호입니다.\n");
         continue;
       }
     }
