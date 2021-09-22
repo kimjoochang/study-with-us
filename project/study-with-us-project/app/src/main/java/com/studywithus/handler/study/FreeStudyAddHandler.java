@@ -30,23 +30,23 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
     freeStudy.setWriter(AuthLogInHandler.getLoginUser());
 
-    freeStudy.setNo(Prompt.inputInt("번호: "));
-    System.out.println("온/오프라인");
+    freeStudy.setNo(Prompt.inputInt("번호를 입력하세요. > "));
+    System.out.println("온/오프라인을 입력하세요. > ");
     System.out.println("1. 온라인");
     System.out.println("2. 오프라인");
     freeStudy.setOnOffLine(Prompt.inputInt("> "));
 
     if (freeStudy.getOnOffLine() == 2) {
-      freeStudy.setArea(Prompt.inputString("지역: "));
+      freeStudy.setArea(Prompt.inputString("지역을 입력하세요. > "));
 
     } else {
       freeStudy.setArea(null);
     }
 
-    freeStudy.setTitle(Prompt.inputString("제목: "));
-    freeStudy.setContent(Prompt.inputString("설명: "));
-    freeStudy.setRule(Prompt.inputString("규칙: "));
-    freeStudy.setMaxMembers(Prompt.inputInt("모집 인원: "));
+    freeStudy.setTitle(Prompt.inputString("제목을 입력하세요. > "));
+    freeStudy.setContent(Prompt.inputString("설명을 입력하세요. > "));
+    freeStudy.setRule(Prompt.inputString("규칙을 입력하세요. > "));
+    freeStudy.setMaxMembers(Prompt.inputInt("모집 인원을 입력하세요. > "));
     System.out.println("시작일을 입력하세요.");
     freeStudy.setStartDate(setDate(freeStudy));
     System.out.println("종료일을 입력하세요.");
@@ -77,7 +77,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
     AuthLogInHandler.userAccessLevel |= Menu.ACCESS_LEADER;
 
     System.out.println();
-    System.out.println("무료 스터디 등록이 완료되었습니다.\n");
+    System.out.println("무료 스터디 등록이 완료되었습니다.");
   }
 
   private String setDate(Study freeStudy) {
@@ -101,7 +101,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
       year = Prompt.inputString("YYYY > ");
 
       if (year.length() != 4) {
-        System.out.println("유효한 연도를 입력하시오.");
+        System.out.println("유효한 연도를 입력하시오.\n");
         continue;
       }
 
@@ -109,7 +109,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
       // 시작일 년도보다 빠르면 재입력 받도록 함
       if (type == 1) {
         if (Integer.parseInt(year) < Integer.parseInt(arr[0])) {
-          System.out.println("유효한 연도를 입력하시오.");
+          System.out.println("유효한 연도를 입력하시오.\n");
           continue;
         }
       }
@@ -117,7 +117,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
       // 현재 연도와 비교해서 현재년도와 다음년도까지만 유효한 값으로 허용
       if (Integer.parseInt(year) < cal.get(Calendar.YEAR)  
           || Integer.parseInt(year) > cal.get(Calendar.YEAR) + 1) {
-        System.out.println("유효한 연도를 입력하시오.");
+        System.out.println("유효한 연도를 입력하시오.\n");
         continue;
 
       } else {
@@ -137,7 +137,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
       // 시작일 년도보다 빠르면 재입력 받도록 함
       if (type == 1) {
         if (Integer.parseInt(year + month) < Integer.parseInt(arr[0] + arr[1])) {
-          System.out.println("유효한 월을 입력하시오");
+          System.out.println("유효한 월을 입력하시오.\n");
           continue;
         }
       }
@@ -147,7 +147,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
         // 현재 월과 12까지만 유효한 값으로 허용
         // cal.get(Calendar.MONTH)은 1월이 0이므로 +1 해줌
         if (Integer.parseInt(month) < cal.get(Calendar.MONTH) + 1  || Integer.parseInt(month) > 12) {
-          System.out.println("유효한 월을 입력하시오");
+          System.out.println("유효한 월을 입력하시오.\n");
           continue;
 
         } else {
@@ -159,7 +159,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
         cal.set(Calendar.YEAR, Integer.parseInt(year));
         // 1월부터 12월까지를 유효한 값으로 허용
         if (Integer.parseInt(month) < 1 || Integer.parseInt(month) > 12) {
-          System.out.println("유효한 월을 입력하시오");
+          System.out.println("유효한 월을 입력하시오.\n");
           continue;
         } else {
           //          cal.set(Calendar.MONTH, Integer.parseInt(month) - 1);
@@ -178,7 +178,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
       if (type == 1) {
         if (Integer.parseInt(year + month + date) < Integer.parseInt(arr[0] + arr[1] + arr[2])) {
-          System.out.println("유효한 일을 입력하시오");
+          System.out.println("유효한 일을 입력하시오.\n");
           continue;
         }
       }
@@ -188,7 +188,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
         // 현재 날짜보다 크고 현재 월의 말일보다 작은 값만 유효한 값으로 허용
         if (Integer.parseInt(date) < cal.get(Calendar.DATE) + 1
             || Integer.parseInt(date) > cal.getActualMaximum(Calendar.DAY_OF_MONTH)) {
-          System.out.println("유효한 일을 입력하시오");
+          System.out.println("유효한 일을 입력하시오.\n");
           continue;
         } else {
           break;
@@ -200,7 +200,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
         // 1보다 크고 입력 월의 말일보다 작은 값만 유효한 값으로 허용
         if ((Integer.parseInt(date) > cal.getActualMaximum(Calendar.DAY_OF_MONTH)
             || Integer.parseInt(date) < 1)) {
-          System.out.println("유효한 일을 입력하시오");
+          System.out.println("유효한 일을 입력하시오\n");
           continue;
         } else {
           break;

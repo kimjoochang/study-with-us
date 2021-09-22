@@ -172,8 +172,6 @@ public class AppSY {
 		commandMap.put("/find/id", new FindIdHandler(memberList));
 		commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
 
-		commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
-
 		//		commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
 
 		commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeInterestList));

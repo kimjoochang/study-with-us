@@ -59,13 +59,15 @@ public class RegisterFreeStudyDetailHandler implements Command {
     }
 
     // 내가 생성한 무료 스터디 상세보기
-    String title = Prompt.inputString("제목: ");
+    System.out.println();
+    String title = Prompt.inputString("제목을 입력하세요. > ");
+    System.out.println();
 
     Study freeStudy = findByName(title, myRegisteredFreeStudy);
 
     if (freeStudy == null) {
       System.out.println();
-      System.out.println("입력하신 제목과 일치하는 스터디가 없습니다.\n");
+      System.out.println("입력하신 제목과 일치하는 스터디가 없습니다.");
       return;
     }
 
@@ -99,14 +101,14 @@ public class RegisterFreeStudyDetailHandler implements Command {
       System.out.printf("신청자: %s\n",freeApplicant.getName());
     }
     System.out.println();
-    String name = Prompt.inputString("이름: ");
+    String name = Prompt.inputString("이름을 입력하세요. > ");
 
     //파라미터 값 freeStudy는 해당 스터디의 지원자 명단 확인을 위해 파라미터로 넘김
     Member freeApplicant = findByName(name, freeStudy); 
 
     if (freeApplicant == null) {
       System.out.println();
-      System.out.println("입력하신 이름과 일치하는 회원이 없습니다.\n");
+      System.out.println("입력하신 이름과 일치하는 회원이 없습니다.");
       return;
     }
 
@@ -121,7 +123,8 @@ public class RegisterFreeStudyDetailHandler implements Command {
     System.out.println("0. 이전\n");
 
     while (true) {
-      int input = Prompt.inputInt("선택> ");
+      int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
+      System.out.println();
 
       if (input == 1) {
         /* freeStudy는 해당 스터디의 지원자 명단 확인, 

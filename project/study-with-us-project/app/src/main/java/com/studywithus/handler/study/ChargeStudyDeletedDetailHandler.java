@@ -66,7 +66,7 @@ public class ChargeStudyDeletedDetailHandler extends AbstractStudyHandler {
 			}
 
 			else {
-				System.out.println("잘못된 번호입니다.");
+				System.out.println("다시 입력하시오.");
 				continue;
 			}
 		}

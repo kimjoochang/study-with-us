@@ -36,12 +36,21 @@ public class FreeStudyUpdateHandler extends AbstractStudyHandler {
 
     System.out.println();
 
-    String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
+    while(true) {
+      String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
 
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println();
-      System.out.println("무료 스터디 수정을 취소하였습니다.\n");
-      return;
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println();
+        System.out.println("무료 스터디 수정을 취소하였습니다.\n");
+        return;
+
+      }else if (!input.equalsIgnoreCase("y")) {
+        System.out.println("다시 입력하시오.\n");
+        continue;
+
+      } else {
+        break;
+      }
     }
 
     freeStudy.setTitle(title);
@@ -49,6 +58,6 @@ public class FreeStudyUpdateHandler extends AbstractStudyHandler {
     freeStudy.setRule(rule);
 
     System.out.println();
-    System.out.println("무료 스터디를 수정하였습니다.\n");
+    System.out.println("무료 스터디를 수정하였습니다.");
   }
 }
