@@ -21,9 +21,10 @@ public class ExamCalendarDetailHandler extends AbstractCalendarHandler {
     int no = Prompt.inputInt("번호를 입력하세요. > ");
     Calendar examCalendar = findByNo(no);
 
+    System.out.println();
+
     if (examCalendar == null) {
-      System.out.println();
-      System.out.println("해당 번호의 시험일정이 없습니다.\n");
+      System.out.println("해당 번호의 시험일정이 없습니다.");
       return;
     }
 
@@ -37,7 +38,7 @@ public class ExamCalendarDetailHandler extends AbstractCalendarHandler {
 
     // 관리자인 경우
     if (examCalendar.getWriter() == AuthLogInHandler.getLoginUser()) {
-      System.out.println("1. 수정");
+      System.out.println("1. 변경");
       System.out.println("2. 삭제");
       System.out.println("0. 이전\n");
     }
@@ -57,7 +58,7 @@ public class ExamCalendarDetailHandler extends AbstractCalendarHandler {
         return;
 
       } else {
-        System.out.println("잘못된 메뉴 번호입니다.");
+        System.out.println("잘못된 메뉴 번호입니다.\n");
         continue;
       }
     }

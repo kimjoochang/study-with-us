@@ -33,7 +33,7 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
       examCalendar.setYyyy(Prompt.inputInt("YYYY > "));
 
       if (examCalendar.getYyyy() < 2021) {
-        System.out.println("유효한 연도를 입력하시오.");
+        System.out.println("유효한 연도를 입력하시오.\n");
         continue;
 
       } else {
@@ -46,7 +46,7 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
       examCalendar.setMm(Prompt.inputInt("MM > "));
 
       if (!(1 <= examCalendar.getMm() && examCalendar.getMm() <= 12)) {
-        System.out.println("유효한 월을 입력하시오.");
+        System.out.println("유효한 월을 입력하시오.\n");
         continue;
 
       } else {
@@ -69,7 +69,7 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
         case 12:
 
           if (!(examCalendar.getDd() >= 1 && examCalendar.getDd() <= 31)) {
-            System.out.println("유효한 일을 입력하시오.");
+            System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
           } else {
@@ -85,7 +85,7 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
         case 11:
 
           if (!(examCalendar.getDd() >= 1 && examCalendar.getDd() <= 30)) {
-            System.out.println("유효한 일을 입력하시오.");
+            System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
           } else {
@@ -98,7 +98,7 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
         case 2:
 
           if (!(examCalendar.getDd() >= 1 && examCalendar.getDd() <= 28)) {
-            System.out.println("유효한 일을 입력하시오.");
+            System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
           } else {
@@ -111,6 +111,6 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
     calendarList.add(examCalendar);
 
     System.out.println();
-    System.out.println("이달의 시험일정 등록이 완료되었습니다.\n");
+    System.out.println("이달의 시험일정 등록이 완료되었습니다.");
   }
 }

@@ -12,7 +12,7 @@ public class JobsCalendarUpdateHandler extends AbstractCalendarHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[이달의 채용공고 / 수정]\n");
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
@@ -21,27 +21,32 @@ public class JobsCalendarUpdateHandler extends AbstractCalendarHandler {
     System.out.println();
 
     if (jobsCalendar == null) {
-      System.out.println();
       System.out.println("해당 번호의 채용공고가 없습니다.");
       return;
     }
 
     String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", jobsCalendar.getTitle()));
     String content = Prompt.inputString(String.format("[%s] 수정할 내용: ", jobsCalendar.getContent()));
-    String input = Prompt.inputString("정말 수정하시겠습니까?(y/N) ");
-
     System.out.println();
 
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println();
-      System.out.println("채용공고 수정을 취소하였습니다.");
-      return;
+    while (true) {
+      String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
+
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("채용공고 수정을 취소하였습니다.");
+        return;
+
+      } else if (input.equalsIgnoreCase("y")) {
+        jobsCalendar.setTitle(title);
+        jobsCalendar.setContent(content);
+
+        System.out.println("채용 공고를 수정하였습니다.");
+        return;
+
+      } else {
+        System.out.println("다시 입력하시오.\n");
+        continue;
+      }
     }
-
-    jobsCalendar.setTitle(title);
-    jobsCalendar.setContent(content);
-
-    System.out.println();
-    System.out.println("채용 공고를 수정하였습니다.");
   }
 }

@@ -30,7 +30,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
       jobsCalendar.setStartYyyy(Prompt.inputInt("YYYY > "));
 
       if (jobsCalendar.getStartYyyy() < 2021) {
-        System.out.println("유효한 연도를 입력하시오.");
+        System.out.println("유효한 연도를 입력하시오.\n");
         continue;
 
       } else {
@@ -43,7 +43,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
       jobsCalendar.setStartMm(Prompt.inputInt("MM > "));
 
       if (!(1 <= jobsCalendar.getStartMm() && jobsCalendar.getStartMm() <= 12)) {
-        System.out.println("유효한 월을 입력하시오.");
+        System.out.println("유효한 월을 입력하시오.\n");
         continue;
 
       } else {
@@ -66,7 +66,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
         case 12:
 
           if (!(jobsCalendar.getStartDd() >= 1 && jobsCalendar.getStartDd() <= 31)) {
-            System.out.println("유효한 일을 입력하시오.");
+            System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
           } else {
@@ -82,7 +82,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
         case 11:
 
           if (!(jobsCalendar.getStartDd() >= 1 && jobsCalendar.getStartDd() <= 30)) {
-            System.out.println("유효한 일을 입력하시오.");
+            System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
           } else {
@@ -95,7 +95,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
         case 2:
 
           if (!(jobsCalendar.getStartDd() >= 1 && jobsCalendar.getStartDd() <= 28)) {
-            System.out.println("유효한 일을 입력하시오.");
+            System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
           } else {
@@ -112,7 +112,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
       jobsCalendar.setYyyy(Prompt.inputInt("YYYY > "));
 
       if (jobsCalendar.getYyyy() < 2021) {
-        System.out.println("유효한 연도를 입력하시오.");
+        System.out.println("유효한 연도를 입력하시오.\n");
         continue;
 
       } else {
@@ -125,7 +125,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
       jobsCalendar.setMm(Prompt.inputInt("MM > "));
 
       if (!(1 <= jobsCalendar.getMm() && jobsCalendar.getMm() <= 12)) {
-        System.out.println("유효한 월을 입력하시오.");
+        System.out.println("유효한 월을 입력하시오.\n");
         continue;
 
       } else {
@@ -148,7 +148,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
         case 12:
 
           if (!(jobsCalendar.getDd() >= 1 && jobsCalendar.getDd() <= 31)) {
-            System.out.println("유효한 일을 입력하시오.");
+            System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
           } else {
@@ -164,7 +164,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
         case 11:
 
           if (!(jobsCalendar.getDd() >= 1 && jobsCalendar.getDd() <= 30)) {
-            System.out.println("유효한 일을 입력하시오.");
+            System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
           } else {
@@ -177,7 +177,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
         case 2:
 
           if (!(jobsCalendar.getDd() >= 1 && jobsCalendar.getDd() <= 28)) {
-            System.out.println("유효한 일을 입력하시오.");
+            System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
           } else {
@@ -190,6 +190,6 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
     calendarList.add(jobsCalendar);
 
     System.out.println();
-    System.out.println("이달의 채용공고 등록이 완료되었습니다.\n");
+    System.out.println("이달의 채용공고 등록이 완료되었습니다.");
   }
 }

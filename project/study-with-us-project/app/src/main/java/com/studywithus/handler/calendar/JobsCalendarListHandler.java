@@ -15,7 +15,7 @@ public class JobsCalendarListHandler extends AbstractCalendarHandler {
     System.out.println("[이달의 채용공고 / 조회]\n");
 
     if (calendarList.isEmpty() == true) {
-      System.out.println("이달의 채용공고가 존재하지 않습니다.\n");
+      System.out.println("이달의 채용공고가 존재하지 않습니다.");
       return;
     }
 
@@ -30,6 +30,5 @@ public class JobsCalendarListHandler extends AbstractCalendarHandler {
           jobsCalendar.getMm(),
           jobsCalendar.getDd());
     }
-    System.out.println();
   }
 }

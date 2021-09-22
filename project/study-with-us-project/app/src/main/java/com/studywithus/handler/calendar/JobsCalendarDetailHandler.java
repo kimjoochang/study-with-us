@@ -19,9 +19,10 @@ public class JobsCalendarDetailHandler extends AbstractCalendarHandler {
     int no = Prompt.inputInt("번호를 입력하세요. > ");
     Calendar jobsCalendar = findByNo(no);
 
+    System.out.println();
+
     if (jobsCalendar == null) {
-      System.out.println();
-      System.out.println("해당 번호의 채용공고가 없습니다.\n");
+      System.out.println("해당 번호의 채용공고가 없습니다.");
       return;
     }
 
@@ -56,7 +57,7 @@ public class JobsCalendarDetailHandler extends AbstractCalendarHandler {
         return;
 
       } else {
-        System.out.println("잘못된 메뉴 번호입니다.");
+        System.out.println("잘못된 메뉴 번호입니다.\n");
         continue;
       }
     }
