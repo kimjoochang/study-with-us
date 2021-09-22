@@ -28,7 +28,7 @@ public class SnsLogInHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[SNS 로그인]");
+    System.out.println("[SNS 로그인]\n");
 
     String snsId = Prompt.inputString("아이디: ");
     String password = Prompt.inputString("비밀번호: ");
@@ -36,9 +36,11 @@ public class SnsLogInHandler implements Command {
     Member member = findBySnsIdPassword(snsId, password);
 
     if (member == null) {
-      System.out.println("연동된 SNS 계정이 존재하지 않습니다.");
+      System.out.println("");
+      System.out.println("연동된 SNS 계정이 존재하지 않습니다.\n");
 
     } else {
+      System.out.println("");
       System.out.printf("%s님 환영합니다.\n", member.getName());
 
       AuthLogInHandler.loginUser = member;

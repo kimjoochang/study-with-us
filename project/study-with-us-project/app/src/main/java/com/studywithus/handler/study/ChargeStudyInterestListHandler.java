@@ -21,13 +21,15 @@ public class ChargeStudyInterestListHandler extends AbstractInterestHandler {
 		}
 
 		for (Study chargeInterest : interestList) {
-			System.out.printf("[번호 = %d, 제목 = %s, 멘토 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]",
+			System.out.printf("[번호 = %d, 제목 = %s, 멘토 = %s, 등록일 = %s, 모집인원 = %d / %d, 조회수 = %d, 좋아요 = %d]\n",
 					chargeInterest.getNo(),
 					chargeInterest.getTitle(),
 					chargeInterest.getWriter().getName(),
 					chargeInterest.getRegisteredDate(),
+					chargeInterest.getMembers().size(),
+					chargeInterest.getMaxMembers(),
 					chargeInterest.getViewCount(),
-					chargeInterest.getLikeMembers());
+					chargeInterest.getLikeMembers().size());
 		}
 		System.out.println();
 	}

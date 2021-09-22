@@ -27,7 +27,7 @@ public class CommunityUpdateHandler extends AbstractCommunityHandler{
     }
 
     if (community.getWriter() != AuthLogInHandler.getLoginUser()) {
-      System.out.println("변경 권한이 없습니다.");
+      System.out.println("변경 권한이 없습니다.\n");
       return;
     }
 

@@ -8,20 +8,20 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class ChargeStudyDetailHandler extends AbstractStudyHandler {
+public class ChargeStudyDetailHandlerReal extends AbstractStudyHandler {
 
 	//	Study chargeStudy;
 	//	List<Study> chargeInterestList; // 유료 스터디 관심목록 리스트 (회원 관점)
 
-	public ChargeStudyDetailHandler(List<Study> chargeStudyList) {
+	public ChargeStudyDetailHandlerReal(List<Study> chargeStudyList) {
 		super(chargeStudyList);
 	}
 
 	@Override
 	public void execute(CommandRequest request) throws Exception {
 		System.out.println("[유료 스터디 / 상세보기]\n");
-		int no = Prompt.inputInt("번호? ");
 
+		int no = Prompt.inputInt("번호? ");
 		Study chargeStudy = findByNo(no);
 
 		if (chargeStudy == null) {
@@ -45,13 +45,18 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 		System.out.printf("좋아요수: %d\n", chargeStudy.getLikeMembers().size());
 		System.out.println();
 
+		Member loginUser = AuthLogInHandler.getLoginUser();
+		if (loginUser == null || chargeStudy.getWriter() != loginUser) {
+			// return;
+		}
+
 		// ChargeStudyUpdateHandler나 ChargeStudyDeleteHandler를 실행할 때 
 		// 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
 		request.setAttribute("ChargeNo", no);
 
-		// 본인이 작성한 글인 경우
-		if (chargeStudy.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {
-			while (true) {
+		while (true) {
+			// 본인이 작성한 글인 경우
+			if (chargeStudy.getWriter() == loginUser) {
 				System.out.println("1. 수정");
 				System.out.println("2. 삭제");
 				System.out.println("0. 이전\n");
@@ -60,31 +65,22 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
 				if (input == 1) {
 					request.getRequestDispatcher("/chargeStudy/update").forward(request);
+					return;
+
 				} else if (input == 2) {
 					request.getRequestDispatcher("/chargeStudy/deleteRequest").forward(request);
+					return;
+
 				} else if (input == 0) {
 					return;
-				} else {
-					System.out.println("존재하지 않는 메뉴 번호 입니다.");
-					continue;
-				}
-				return;
-			}
-			// 타인이 작성한 글인 경우
-		} else {
-			int type = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
-			while (true) {
-				for (Member member : chargeStudy.getLikeMembers()) {
-					if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
-						type = 1;
-						break;
-					}
-				}
-				if (type == 0) {
-					System.out.println("1. 결제");
 				}
 
-				type = 0;
+				// 타인이 작성한 글인 경우
+			} else {
+				int type = 0;
+				System.out.println("1. 결제");
+
+				//  관심목록이 있는 경우
 				for (Member member : chargeStudy.getLikeMembers()) {
 					if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
 						type = 1;
@@ -92,13 +88,15 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 					}
 				}
 
-				// 관심 목록이 없는 경우
-				if (type == 0) {
-					System.out.println("2. 관심목록 추가");
-
-					// 관심 목록이 있는 경우
-				} else {
+				// 관심 목록이 있는 경우
+				if (type == 1) {
 					System.out.println("2. 관심목록 삭제");
+					//          break;
+
+					// 관심 목록이 없는 경우
+				} else {
+					System.out.println("2. 관심목록 추가");
+					//          break;
 				}
 				System.out.println("0. 이전\n");
 				System.out.println();
@@ -108,16 +106,17 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 				// 1. 결제
 				if (input == 1) {
 					request.getRequestDispatcher("/chargeStudy/payment").forward(request);
+					return;
 
 					// 2. 관심목록 추가 or 삭제
 				} else if (input == 2) {
-					// 관심 목록이 없는 경우
-					if (type == 0) {
-						request.getRequestDispatcher("/chargeStudy/interestAdd").forward(request);
+					// 관심 목록이 있는 경우
+					if (type == 1) {
+						request.getRequestDispatcher("/chargeStudy/interestDelete").forward(request);
 
 						// 관심 목록이 없는 경우
 					} else {
-						request.getRequestDispatcher("/chargeStudy/interestDelete").forward(request);
+						request.getRequestDispatcher("/chargeStudy/interestAdd").forward(request);
 					}
 
 				} else if (input == 0) {
@@ -130,9 +129,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 					System.out.println("존재하지 않는 메뉴 번호입니다.");
 					continue;
 				}
-				return;
 			}
 		}
 	}
 }
-

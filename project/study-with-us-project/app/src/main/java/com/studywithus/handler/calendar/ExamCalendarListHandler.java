@@ -15,7 +15,7 @@ public class ExamCalendarListHandler extends AbstractCalendarHandler {
     System.out.println("[이달의 시험일정 / 조회]\n");
 
     if (calendarList.isEmpty() == true) {
-      System.out.println("이달의 시험일정이 존재하지 않습니다.\n");
+      System.out.println("이달의 시험일정이 존재하지 않습니다.");
       return;
     }
 
@@ -27,6 +27,5 @@ public class ExamCalendarListHandler extends AbstractCalendarHandler {
           examCalendar.getMm(),
           examCalendar.getDd());
     }
-    System.out.println();
   }
 }

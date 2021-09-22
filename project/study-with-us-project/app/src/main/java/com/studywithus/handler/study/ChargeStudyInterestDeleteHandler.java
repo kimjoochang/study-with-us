@@ -10,8 +10,6 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 
-	Study chargeStudy;
-
 	// 유료 스터디 관심목록 리스트 (회원 관점)
 	//	List<Study> chargeInterestList;
 
@@ -32,7 +30,7 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 
 			Study chargeStudy = findByNo(no);
 
-			for (Member member : chargeStudy.getLikeMembers()) {
+			for (Member member : chargeStudy.getLikeMembers()) { // [마이페이지 / 2. 내관심목록 / 2.유료스터디관심목록 / 2.삭제] X 오류 
 				if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
 					type = 1;
 					break;
@@ -63,7 +61,7 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 		} else {
 			int no = (int) request.getAttribute("ChargeNo");
 
-			chargeStudy = findByNo(no);
+			Study chargeStudy = findByNo(no);
 
 			if (chargeStudy == null) {
 				System.out.println("해당 번호의 게시글이 없습니다.");

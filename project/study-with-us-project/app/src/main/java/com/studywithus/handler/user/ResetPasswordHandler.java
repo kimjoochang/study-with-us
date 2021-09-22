@@ -65,7 +65,7 @@ public class ResetPasswordHandler implements Command {
       member.setPassword(newPassword1);
 
       System.out.println(" ");
-      System.out.println("비밀번호 변경이 완료되었습니다.");
+      System.out.println("비밀번호 변경이 완료되었습니다.\n");
       return;
     }
   }

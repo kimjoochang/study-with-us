@@ -24,7 +24,7 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[커뮤니티 / 상세보기] \n");
 
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력하세요. > ");
     Community community = findByNo(no);
 
     if (community == null) {
