@@ -32,7 +32,7 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 
 			Study chargeStudy = findByNo(no);
 
-			for (Member member : chargeStudy.getLikeMembers()) {
+			for (Member member : chargeStudy.getLikeMembers()) { // [마이페이지 / 2. 내관심목록 / 2.유료스터디관심목록 / 2.삭제] X 오류 
 				if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
 					type = 1;
 					break;
