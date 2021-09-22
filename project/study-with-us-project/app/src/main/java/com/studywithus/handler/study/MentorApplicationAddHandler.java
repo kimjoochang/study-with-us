@@ -21,7 +21,7 @@ public class MentorApplicationAddHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[멘토 신청하기]");
+    System.out.println("[유료 스터디 / 멘토 신청]\n");
 
     MentorApplicationForm applyMentor = new MentorApplicationForm();
     Member member = AuthLogInHandler.loginUser;
@@ -32,12 +32,13 @@ public class MentorApplicationAddHandler implements Command {
 
     else {
       while (true) {
-        String selfIntro = Prompt.inputString("자기 소개: ");
-        String subject = Prompt.inputString("개설할 스터디 주제: ");
-        String explanation = Prompt.inputString("스터디 설명: ");
+        String selfIntro = Prompt.inputString("자기 소개를 입력하세요. > ");
+        String subject = Prompt.inputString("개설할 스터디 주제를 입력하세요. > ");
+        String explanation = Prompt.inputString("스터디 설명을 입력하세요. > ");
+        System.out.println();
 
         if (selfIntro.equals("") || subject.equals("") || explanation.equals("")) {
-          System.out.println("모두 필수입력 항목입니다.");
+          System.out.println("모두 필수입력 항목입니다.\n");
           continue;
 
         } else {

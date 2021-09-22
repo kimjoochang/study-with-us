@@ -33,17 +33,14 @@ public class MentorApplicationDetailHandler implements Command {
     }
 
     System.out.println();
-
-    String name = Prompt.inputString("이름: ");
+    String name = Prompt.inputString("이름을 입력하세요. > ");
     MentorApplicationForm mentorName = findByName(name);
 
     if (mentorName == null) {
-      System.out.println();
-      System.out.println("입력하신 이름과 일치하는 신청 내역이 없습니다.\n");
+      System.out.println("입력하신 이름과 일치하는 신청 내역이 없습니다.");
       return;
     }
 
-    System.out.println();
     System.out.printf("신청자 이름: %s\n", mentorName.getMentorMember().getName());
     System.out.printf("신청자 아이디: %s\n", mentorName.getMentorMember().getId());
     System.out.printf("자기소개: %s\n", mentorName.getSelfIntroduction());
@@ -54,10 +51,11 @@ public class MentorApplicationDetailHandler implements Command {
     System.out.println();
     System.out.println("1. 승인");
     System.out.println("2. 거절");
-    System.out.println("0. 이전");
+    System.out.println("0. 이전\n");
 
     while (true) {
-      int input = Prompt.inputInt("선택> ");
+      int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
+      System.out.println();
 
       if (input == 1) {
         mentorApprove(mentorName);
@@ -71,7 +69,7 @@ public class MentorApplicationDetailHandler implements Command {
         return;
 
       } else {
-        System.out.println("잘못된 번호입니다.");
+        System.out.println("무효한 메뉴 번호입니다.\n");
         continue;
       }
     }
@@ -92,7 +90,7 @@ public class MentorApplicationDetailHandler implements Command {
 
   // 멘토 거절
   private void mentorReject(MentorApplicationForm mentorApplication) {
-    this.mentorApplicationFormList.remove(mentorApplication);
+    mentorApplicationFormList.remove(mentorApplication);
 
     System.out.println("멘토 신청을 거절하였습니다.");
   }
