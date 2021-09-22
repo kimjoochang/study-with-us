@@ -25,7 +25,7 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 		int type = 0;
 
 		// [마이 페이지]
-		if (request.getAttribute("no") == null) {
+		if (request.getAttribute("chargeNo") == null) {
 			int no = Prompt.inputInt("메뉴 번호를 입력하세요. > ");
 
 			Study chargeStudy = findByNo(no);
