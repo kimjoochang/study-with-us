@@ -15,7 +15,7 @@ public class ExamCalendarUpdateHandler extends AbstractCalendarHandler {
   public void execute(CommandRequest request) {
     System.out.println("[이달의 시험일정 / 변경]\n");
 
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력하세요. > ");
     System.out.println();
 
     Calendar examCalendar = findByNo(no);
@@ -28,7 +28,7 @@ public class ExamCalendarUpdateHandler extends AbstractCalendarHandler {
 
     String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", examCalendar.getTitle()));
     String content = Prompt.inputString(String.format("[%s] 수정할 내용: ", examCalendar.getContent()));
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+    String input = Prompt.inputString("정말 변경하시겠습니까? (y/N) ");
 
     System.out.println();
 

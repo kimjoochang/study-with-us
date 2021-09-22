@@ -18,11 +18,11 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
 
     Calendar jobsCalendar= new Calendar();
 
-    jobsCalendar.setNo(Prompt.inputInt("번호: "));
-    jobsCalendar.setTitle(Prompt.inputString("제목: "));
-    jobsCalendar.setContent(Prompt.inputString("내용: "));
-    jobsCalendar.setStartDate(Prompt.inputString("시작일: "));
-    jobsCalendar.setEndDate(Prompt.inputString("종료일: "));
+    jobsCalendar.setNo(Prompt.inputInt("번호를 입력하세요. > "));
+    jobsCalendar.setTitle(Prompt.inputString("제목을 입력하세요. > "));
+    jobsCalendar.setContent(Prompt.inputString("내용을 입력하세요. > "));
+    jobsCalendar.setStartDate(Prompt.inputString("시작일을 입력하세요. > "));
+    jobsCalendar.setEndDate(Prompt.inputString("종료일을 입력하세요. > "));
     jobsCalendar.setWriter(AuthLogInHandler.getLoginUser());
 
     calendarList.add(jobsCalendar);

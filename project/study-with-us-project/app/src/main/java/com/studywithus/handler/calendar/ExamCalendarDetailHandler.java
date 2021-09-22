@@ -18,7 +18,7 @@ public class ExamCalendarDetailHandler extends AbstractCalendarHandler {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[이달의 시험일정 / 상세보기]\n");
 
-    int no = Prompt.inputInt("번호: ");
+    int no = Prompt.inputInt("번호를 입력하세요. > ");
     Calendar examCalendar = findByNo(no);
 
     if (examCalendar == null) {
@@ -42,7 +42,7 @@ public class ExamCalendarDetailHandler extends AbstractCalendarHandler {
     }
 
     while (true) {
-      int input = Prompt.inputInt("선택> ");
+      int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
 
       if (input == 1) {
         request.getRequestDispatcher("/examCalendar/update").forward(request);
@@ -56,7 +56,7 @@ public class ExamCalendarDetailHandler extends AbstractCalendarHandler {
         return;
 
       } else {
-        System.out.println("잘못된 번호입니다.");
+        System.out.println("잘못된 메뉴 번호입니다.");
         continue;
       }
     }

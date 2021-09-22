@@ -26,27 +26,33 @@ public class MentorApplicationAddHandler implements Command {
     MentorApplicationForm applyMentor = new MentorApplicationForm();
     Member member = AuthLogInHandler.loginUser;
 
-    while (true) {
-      String selfIntro = Prompt.inputString("자기 소개: ");
-      String subject = Prompt.inputString("개설할 스터디 주제: ");
-      String explanation = Prompt.inputString("스터디 설명: ");
+    if (!mentorApplicationFormList.isEmpty()) {
+      System.out.println("이미 멘토 신청이 완료되었습니다.");
+    }
 
-      if (selfIntro.equals("") || subject.equals("") || explanation.equals("")) {
-        System.out.println("모두 필수입력 항목입니다.");
-        continue;
+    else {
+      while (true) {
+        String selfIntro = Prompt.inputString("자기 소개: ");
+        String subject = Prompt.inputString("개설할 스터디 주제: ");
+        String explanation = Prompt.inputString("스터디 설명: ");
 
-      } else {
-        applyMentor.setMentorMember(member);
-        applyMentor.setSelfIntroduction(selfIntro);
-        applyMentor.setChargeStudySubject(subject);
-        applyMentor.setChargeStudyExplanation(explanation);
-        applyMentor.setRegisteredDate(new Date(System.currentTimeMillis()));
+        if (selfIntro.equals("") || subject.equals("") || explanation.equals("")) {
+          System.out.println("모두 필수입력 항목입니다.");
+          continue;
 
-        mentorApplicationFormList.add(applyMentor);
+        } else {
+          applyMentor.setMentorMember(member);
+          applyMentor.setSelfIntroduction(selfIntro);
+          applyMentor.setChargeStudySubject(subject);
+          applyMentor.setChargeStudyExplanation(explanation);
+          applyMentor.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-        System.out.println("멘토 신청이 완료되었습니다.");
+          mentorApplicationFormList.add(applyMentor);
+
+          System.out.println("멘토 신청이 완료되었습니다.");
+        }
+        break;
       }
-      break;
     }
   }
 }
