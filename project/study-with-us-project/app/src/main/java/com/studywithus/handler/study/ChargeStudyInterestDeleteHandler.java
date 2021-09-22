@@ -86,6 +86,7 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 				if (input.equalsIgnoreCase("n") || input.length() == 0) {
 					System.out.println("유료 스터디 관심 목록을 취소하였습니다.\n");
 					return;
+
 				} else if (!input.equalsIgnoreCase("y")) {
 					System.out.println("다시 입력하시오.\n");
 					continue;
