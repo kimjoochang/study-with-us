@@ -75,13 +75,25 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     } else {
       int type = 0; // 메서드 호출할 때, 관심목록 존재 여부 구분을 위한 변수
       while (true) {
-        System.out.println("1. 신청하기");
-
-        for (Member member : freeStudy.getLikeMembers()) {
+        for (Member member : freeStudy.getApplicants()) {
           if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
             type = 1;
             break;
           }
+        }
+
+        if (type == 0) {
+          System.out.println("1. 신청하기");
+        } else {
+          System.out.println("1. 신청 취소하기");
+        }
+
+        type = 0;
+        for (Member member : freeStudy.getLikeMembers()) {
+          if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+            type = 1;
+            break;
+          } 
         }
 
         // 관심목록 존재 여부에 따라 출력문 출력
