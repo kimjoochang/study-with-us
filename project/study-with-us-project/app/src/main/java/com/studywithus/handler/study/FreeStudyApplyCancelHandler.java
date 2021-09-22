@@ -34,15 +34,21 @@ public class FreeStudyApplyCancelHandler extends AbstractStudyHandler {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
+    while (true) {
+      String input = Prompt.inputString("무료 스터디를 신청을 취소 하시겠습니까? (y/N) ");
 
-    String input = Prompt.inputString("무료 스터디를 신청을 취소 하시겠습니까? (y/N) ");
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("무료 스터디 신청 취소가 취소되었습니다.");
+        return;
 
+      } else if (!input.equalsIgnoreCase("y")) {
+        System.out.println("다시 입력하시오.\n");
+        continue;
 
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("무료 스터디 신청 취소가 취소되었습니다.");
-      return;
+      } else {
+        break;
+      }
     }
-
 
     // 회원 개개인의 신청한 스터디
     List<Member> freeApplicantList;
@@ -68,6 +74,6 @@ public class FreeStudyApplyCancelHandler extends AbstractStudyHandler {
     }
 
     System.out.println();
-    System.out.println("무료 스터디 신청 취소가 완료되었습니다.\n");
+    System.out.println("무료 스터디 신청 취소가 완료되었습니다.");
   }
 }

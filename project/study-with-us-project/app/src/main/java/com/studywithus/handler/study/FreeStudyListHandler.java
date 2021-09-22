@@ -13,7 +13,6 @@ public class FreeStudyListHandler extends AbstractStudyHandler {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 조회]\n");
-    System.out.println();
 
     if (studyList.isEmpty() == true) {
       System.out.println("무료 스터디 게시글이 존재하지 않습니다.\n");
@@ -46,6 +45,5 @@ public class FreeStudyListHandler extends AbstractStudyHandler {
             freeStudy.getLikeMembers().size());
       }
     }
-    System.out.println();
   }
 }

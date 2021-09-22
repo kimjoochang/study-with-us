@@ -21,7 +21,7 @@ public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {
     int type = 0;
 
     if (request.getAttribute("freeNo") == null) {
-      int no = Prompt.inputInt("번호? ");
+      int no = Prompt.inputInt("번호를 입력하세요. > ");
 
       Study freeInterest = findByNo(no);
 
@@ -36,13 +36,22 @@ public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {
         System.out.println("해당 번호의 관심목록이 없습니다.");
         return;
       }
+      while(true) {
+        String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
-      String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
+        if (input.equalsIgnoreCase("n") || input.length() == 0) {
+          System.out.println("무료 스터디 관심 목록을 취소하였습니다.\n");
+          return;
 
-      if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println("무료 스터디 관심 목록을 취소하였습니다.\n");
-        return;
+        } else if (!input.equalsIgnoreCase("y")) {
+          System.out.println("다시 입력하시오.\n");
+          continue;
+
+        } else {
+          break;
+        }
       }
+
       List<Member> likeMember = freeInterest.getLikeMembers();
       likeMember.remove(AuthLogInHandler.getLoginUser());
       freeInterest.setLikeMembers(likeMember);
@@ -64,12 +73,20 @@ public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {
         System.out.println("무료 스터디 관심목록이 존재하지 않습니다.\n");
         return;
       }
+      while(true) {
+        String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
-      String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
+        if (input.equalsIgnoreCase("n") || input.length() == 0) {
+          System.out.println("무료 스터디 관심 목록을 취소하였습니다.\n");
+          return;
 
-      if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println("무료 스터디 관심 목록을 취소하였습니다.\n");
-        return;
+        } else if (!input.equalsIgnoreCase("y")) {
+          System.out.println("다시 입력하시오.\n");
+          continue;
+
+        } else {
+          break;
+        }
       }
 
       List<Member> likeMember = freeInterest.getLikeMembers();
@@ -77,7 +94,7 @@ public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {
       freeInterest.setLikeMembers(likeMember);
 
       System.out.println();
-      System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");
+      System.out.println("무료 스터디 관심 목록을 삭제하였습니다.");
     }
   }
 }

@@ -43,7 +43,6 @@ public class FreeStudyApplyListHandler extends AbstractStudyHandler {
           freeStudy.setViewCount(freeStudy.getViewCount() + 1);
           System.out.printf("조회수: %d\n", freeStudy.getViewCount());
           System.out.printf("좋아요수: %d\n", freeStudy.getLikeMembers().size());
-          System.out.println();
         } else {
           if (type == 1) {
             continue;

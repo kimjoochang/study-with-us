@@ -17,7 +17,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[무료 스터디 / 상세보기]\n");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력하세요. > ");
 
     Study freeStudy = findByNo(no);
 
@@ -59,7 +59,8 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
         System.out.println("2. 삭제");
         System.out.println("0. 이전");
         System.out.println();
-        int num = Prompt.inputInt("번호? "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
+        int num = Prompt.inputInt("번호를 입력하세요. > "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
+        System.out.println();
 
         if (num == 1) {
           request.getRequestDispatcher("/freeStudy/update").forward(request);
@@ -68,7 +69,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
         } else if (num == 0) {
           return;
         } else {
-          System.out.println("명령어가 올바르지 않습니다!");
+          System.out.println("잘못된 메뉴 번호입니다.\n");
           continue;
         }
         return;
@@ -108,7 +109,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
         System.out.println("0. 이전");
         System.out.println();
 
-        int num = Prompt.inputInt("번호? "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
+        int num = Prompt.inputInt("메뉴 번호를 선택하세요. > "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
 
         if (num == 1) {
           // 신청하기를 아직 안 한 경우
@@ -133,7 +134,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
           return;
 
         } else {
-          System.out.println("명령어가 올바르지 않습니다!");
+          System.out.println("잘못된 메뉴 번호입니다.\n");
           continue;
         }
         return;

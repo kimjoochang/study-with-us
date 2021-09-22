@@ -23,8 +23,11 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
       if (!freeStudy.getTitle().contains(input) &&
           !freeStudy.getContent().contains(input) &&
           !freeStudy.getWriter().getName().contains(input)) {
-        type = 1; 
-        continue;
+        if (type == 0) {
+          type = 2; 
+        } else {
+          continue;
+        }
       }
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
           freeStudy.getNo(), 
@@ -33,6 +36,7 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
           freeStudy.getRegisteredDate(),
           freeStudy.getViewCount(), 
           freeStudy.getLikeMembers().size());
+      type = 1;
     }
     if (type == 1) {
       System.out.println("입력하신 키워드가 포함된 게시글이 없습니다.");
