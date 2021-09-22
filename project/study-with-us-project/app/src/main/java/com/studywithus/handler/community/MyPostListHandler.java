@@ -30,6 +30,11 @@ public class MyPostListHandler implements Command {
     myPostList.addAll(communityInfoList);
     myPostList.addAll(communityTalkList);
 
+    if (myPostList.isEmpty() == true) {
+      System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");
+      return;
+    }
+
     for (Community myPost : myPostList) {
       if (myPost.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {
 

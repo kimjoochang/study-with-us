@@ -37,7 +37,7 @@ public class SnsLogInHandler implements Command {
 
     if (member == null) {
       System.out.println("");
-      System.out.println("연동된 SNS 계정이 존재하지 않습니다.");
+      System.out.println("연동된 SNS 계정이 존재하지 않습니다.\n");
 
     } else {
       System.out.println("");
