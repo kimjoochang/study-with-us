@@ -232,17 +232,33 @@ public class AppJ {
     commandMap.put("/examCalendar/delete", new ExamScheduleDeleteHandler(examCalendarList));
   }
 
-  void service() {
-    //  loadObjects("member.json", memberList, Member.class);
-    //    loadObjects("freeInterest.json", freeInterestList, Study.class);
-    //    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
-    //    loadObjects("freeStudy.json", freeStudyList, Study.class);
-    //    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
-    //    loadObjects("communityQa.json", communityQaList, Community.class);
-    //    loadObjects("communityInfo.json", communityInfoList, Community.class);
-    //    loadObjects("communityTalk.json", communityTalkList, Community.class);
-    //    loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
-    //    loadObjects("examCalendar.json", examCalendarList, Calendar.class);
+  void service(){
+    
+    System.out.println("|         스터디위더스         |");
+    System.out.println("|          STUDYWITHUS         |");
+    System.out.println("     ￣￣￣￣∨￣￣￣￣￣￣￣   ");
+    System.out.println("　　　      ∧_,,∧");
+    System.out.println("　　　     (`･ω･´)");
+    System.out.println("　　　     Ｕ θ Ｕ");
+    System.out.println("　     ／￣￣｜￣￣＼");
+    System.out.println("　     |二二二二二二二|");
+    System.out.println("      ｜　　　　　　 ｜");
+    System.out.println("    찰칵       찰칵   찰");
+    System.out.println("         ∧∧└ 　∧∧     칵");
+    System.out.println("    　(　　)】 (　　)】");
+    System.out.println("    　/　/┘　/　/┘");
+    System.out.println("    ノ￣ヽ　ノ￣ヽ{ 돈은 준비 됐나요?!");
+    
+//        loadObjects("member.json", memberList, Member.class);
+//        loadObjects("freeInterest.json", freeInterestList, Study.class);
+//        loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+//        loadObjects("freeStudy.json", freeStudyList, Study.class);
+//        loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+//        loadObjects("communityQa.json", communityQaList, Community.class);
+//        loadObjects("communityInfo.json", communityInfoList, Community.class);
+//        loadObjects("communityTalk.json", communityTalkList, Community.class);
+//        loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
+//        loadObjects("examCalendar.json", examCalendarList, Calendar.class);
 
     createMainMenu().execute();
     Prompt.close();

@@ -36,11 +36,12 @@ public class MyPostListHandler implements Command {
       return;
     }
 
+    int count = 0;
     for (Community myPost : myPostList) {
 
       // 로그인한 회원의 정보와 커뮤니티 게시글의 작성자가 일치한다면,
       if (myPost.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {
-
+        count++;
         // 내가 작성한 커뮤니티 게시글을 아래의 형식으로 출력함
         System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
             myPost.getNo(),
@@ -49,9 +50,10 @@ public class MyPostListHandler implements Command {
             myPost.getRegisteredDate(), 
             myPost.getViewCount(),
             myPost.getLike());
-      } else {
-        System.out.println("나의 게시글이 존재하지 않습니다.\n");
       }
+    }
+    if (count == 0) {
+      System.out.println("나의 게시글이 존재하지 않습니다.\n");
     }
   }
 }
