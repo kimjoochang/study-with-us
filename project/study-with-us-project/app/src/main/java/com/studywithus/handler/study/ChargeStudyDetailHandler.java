@@ -13,8 +13,11 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 	//	Study chargeStudy;
 	//	List<Study> chargeInterestList; // 유료 스터디 관심목록 리스트 (회원 관점)
 
-	public ChargeStudyDetailHandler(List<Study> chargeStudyList) {
+	List<Member> chargeApplicantList;
+	public ChargeStudyDetailHandler(List<Study> chargeStudyList, 
+			List<Member> chargeApplicantList) {
 		super(chargeStudyList);
+		this.chargeApplicantList = chargeApplicantList;
 	}
 
 	@Override
@@ -47,7 +50,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
 		// ChargeStudyUpdateHandler나 ChargeStudyDeleteHandler를 실행할 때 
 		// 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
-		request.setAttribute("ChargeNo", no);
+		request.setAttribute("chargeNo", no);
 
 		// 본인이 작성한 글인 경우
 		if (chargeStudy.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {
@@ -76,17 +79,13 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 			int interestType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
 			int paymentType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
 			while (true) {
-				for (Member member : chargeStudy.getLikeMembers()) {
+				for (Member member : chargeApplicantList) {
 					if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
 						paymentType = 1;
 						break;
 					}
 				}
-				if (paymentType == 0) {
-					System.out.println("1. 결제");
-				} else {
-					System.out.println("1. 결제 취소하기");
-				}
+
 				for (Member member : chargeStudy.getLikeMembers()) {
 					if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
 						interestType = 1;
@@ -94,6 +93,11 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 					}
 				}
 
+				if (paymentType == 0) {
+					System.out.println("1. 결제");
+				} else {
+					System.out.println("1. 결제 취소하기");
+				}
 				// 관심 목록이 없는 경우
 				if (interestType == 0) {
 					System.out.println("2. 관심목록 추가");

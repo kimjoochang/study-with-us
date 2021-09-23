@@ -74,7 +74,6 @@ import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
 import com.studywithus.handler.study.ParticipateChargeStudyListHandler;
 import com.studywithus.handler.study.ParticipateFreeStudyListHandler;
-import com.studywithus.handler.study.RegisterChargeStudyListHandler;
 import com.studywithus.handler.study.RegisterFreeStudyDetailHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
@@ -182,7 +181,7 @@ public class AppSY {
 		commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
 		commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeStudyList)); // 변경
 		// 추가
-		commandMap.put("/chargeInterest/delete", new ChargeStudyInterestDeleteHandler(chargeStudyList)); // 변경
+		//		commandMap.put("/chargeInterest/delete", new ChargeStudyInterestDeleteHandler(chargeStudyList)); // 변경
 
 		commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationFormList, chargeApplicantList));
 		commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
@@ -205,7 +204,7 @@ public class AppSY {
 		commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
 		commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
 		commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-		commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList));
+		commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
 		commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
 		commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
 		commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
@@ -214,7 +213,7 @@ public class AppSY {
 		commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList));  // 
 		commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyList)); //
 
-		commandMap.put("/chargeStudy/registerChargeStudy", new RegisterChargeStudyListHandler(registerChargeStudyMap)); 
+		//		commandMap.put("/chargeStudy/registerChargeStudy", new RegisterChargeStudyListHandler(registerChargeStudyMap)); 
 		commandMap.put("/chargeStudy/participateChargeStudt", new ParticipateChargeStudyListHandler(participateChargeStudyMap)); 
 
 		commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
@@ -254,15 +253,15 @@ public class AppSY {
 	}
 
 	void service() {
-		loadObjects("member_jc.json", memberList, Member.class);
-		loadObjects("chargeInterest_jc.json", chargeInterestList, Study.class);
-		loadObjects("freeStudy_jc.json", freeStudyList, Study.class);
-		loadObjects("chargeStudy_jc.json", chargeStudyList, Study.class);
-		loadObjects("communityQa_jc.json", communityQaList, Community.class);
-		loadObjects("communityInfo_jc.json", communityInfoList, Community.class);
-		loadObjects("communityTalk_jc.json", communityTalkList, Community.class);
-		//				loadObjects("jobsCalendar_jc.json", jobsCalendarList, Calendar.class);
-		//				loadObjects("examCalendar_jc.json", examCalendarList, Calendar.class);
+		loadObjects("member.json", memberList, Member.class);
+		loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+		loadObjects("freeStudy.json", freeStudyList, Study.class);
+		loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+		loadObjects("communityQa.json", communityQaList, Community.class);
+		loadObjects("communityInfo.json", communityInfoList, Community.class);
+		loadObjects("communityTalk.json", communityTalkList, Community.class);
+		//		loadObjects("jobsCalendar_sy.json", jobsCalendarList, Calendar.class);
+		//		loadObjects("examCalendar_sy.json", examCalendarList, Calendar.class);
 
 		createMainMenu().execute();
 		Prompt.close();
