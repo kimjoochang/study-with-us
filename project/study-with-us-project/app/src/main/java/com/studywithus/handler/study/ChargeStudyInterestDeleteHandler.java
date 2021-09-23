@@ -104,4 +104,4 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 			System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");
 		}
 	}
-}
+} // ♡
