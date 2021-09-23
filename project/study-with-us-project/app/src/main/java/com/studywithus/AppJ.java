@@ -21,11 +21,11 @@ import java.util.LinkedList;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.studywithus.domain.Schedule;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.domain.Payment;
+import com.studywithus.domain.Schedule;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -233,7 +233,7 @@ public class AppJ {
   }
 
   void service(){
-    
+
     System.out.println("|         스터디위더스         |");
     System.out.println("|          STUDYWITHUS         |");
     System.out.println("     ￣￣￣￣∨￣￣￣￣￣￣￣   ");
@@ -244,21 +244,21 @@ public class AppJ {
     System.out.println("　     |二二二二二二二|");
     System.out.println("      ｜　　　　　　 ｜");
     System.out.println("    찰칵       찰칵   찰");
-    System.out.println("         ∧∧└ 　∧∧     칵");
+    System.out.println("        ∧∧└ 　   ∧∧   칵");
     System.out.println("    　(　　)】 (　　)】");
-    System.out.println("    　/　/┘　/　/┘");
-    System.out.println("    ノ￣ヽ　ノ￣ヽ{ 돈은 준비 됐나요?!");
-    
-//        loadObjects("member.json", memberList, Member.class);
-//        loadObjects("freeInterest.json", freeInterestList, Study.class);
-//        loadObjects("chargeInterest.json", chargeInterestList, Study.class);
-//        loadObjects("freeStudy.json", freeStudyList, Study.class);
-//        loadObjects("chargeStudy.json", chargeStudyList, Study.class);
-//        loadObjects("communityQa.json", communityQaList, Community.class);
-//        loadObjects("communityInfo.json", communityInfoList, Community.class);
-//        loadObjects("communityTalk.json", communityTalkList, Community.class);
-//        loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
-//        loadObjects("examCalendar.json", examCalendarList, Calendar.class);
+    System.out.println("    　/　/┘　  /　/┘");
+    System.out.println("    ノ￣ヽ　  ノ￣ヽ{ 돈은 준비 됐나요?!");
+
+    //        loadObjects("member.json", memberList, Member.class);
+    //        loadObjects("freeInterest.json", freeInterestList, Study.class);
+    //        loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+    //        loadObjects("freeStudy.json", freeStudyList, Study.class);
+    //        loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+    //        loadObjects("communityQa.json", communityQaList, Community.class);
+    //        loadObjects("communityInfo.json", communityInfoList, Community.class);
+    //        loadObjects("communityTalk.json", communityTalkList, Community.class);
+    //        loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
+    //        loadObjects("examCalendar.json", examCalendarList, Calendar.class);
 
     createMainMenu().execute();
     Prompt.close();

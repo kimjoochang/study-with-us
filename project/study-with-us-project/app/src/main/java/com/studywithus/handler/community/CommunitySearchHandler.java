@@ -41,6 +41,7 @@ public class CommunitySearchHandler extends AbstractCommunityHandler {
           community.getRegisteredDate(),
           community.getViewCount(),
           community.getLike());
+      return;
     }
 
     if (type == 1) {
@@ -48,8 +49,3 @@ public class CommunitySearchHandler extends AbstractCommunityHandler {
     }
   }
 }
-
-
-
-
-

@@ -37,6 +37,7 @@ public class MyPostListHandler implements Command {
     }
 
     int count = 0;
+
     for (Community myPost : myPostList) {
 
       // 로그인한 회원의 정보와 커뮤니티 게시글의 작성자가 일치한다면,
@@ -52,10 +53,11 @@ public class MyPostListHandler implements Command {
             myPost.getLike());
       }
     }
+
     if (count == 0) {
       System.out.println("나의 게시글이 존재하지 않습니다.\n");
     }
   }
 }
-// ** 출력문 무한반복 수정하기 **
+
 
