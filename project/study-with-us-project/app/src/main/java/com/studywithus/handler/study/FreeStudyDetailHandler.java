@@ -17,7 +17,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[무료 스터디 / 상세보기]\n");
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력하세요. > ");
 
     Study freeStudy = findByNo(no);
 
@@ -38,7 +38,9 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     }
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("규칙: %s\n", freeStudy.getRule());
-    System.out.printf("모집인원 = %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
+    System.out.printf("모집인원 : %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
+    System.out.printf("시작일 : %s\n", freeStudy.getStartDate());
+    System.out.printf("종료일 : %s\n", freeStudy.getEndDate());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
@@ -57,7 +59,8 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
         System.out.println("2. 삭제");
         System.out.println("0. 이전");
         System.out.println();
-        int num = Prompt.inputInt("번호? "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
+        int num = Prompt.inputInt("번호를 입력하세요. > "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
+        System.out.println();
 
         if (num == 1) {
           request.getRequestDispatcher("/freeStudy/update").forward(request);
@@ -66,38 +69,38 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
         } else if (num == 0) {
           return;
         } else {
-          System.out.println("명령어가 올바르지 않습니다!");
+          System.out.println("잘못된 메뉴 번호입니다.\n");
           continue;
         }
         return;
       } 
       // 내가 쓴 글이 아닐경우
     } else {
-      int type = 0; // 메서드 호출할 때, 관심목록 존재 여부 구분을 위한 변수
+      int interestType = 0; // 메서드 호출할 때, 관심목록 존재 여부 구분을 위한 변수
+      int applyType = 0; // 메서드 호출할 때, 관심목록 존재 여부 구분을 위한 변수
       while (true) {
         for (Member member : freeStudy.getApplicants()) {
           if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
-            type = 1;
+            applyType = 1;
             break;
           }
         }
 
-        if (type == 0) {
+        if (applyType == 0) {
           System.out.println("1. 신청하기");
         } else {
           System.out.println("1. 신청 취소하기");
         }
 
-        type = 0;
         for (Member member : freeStudy.getLikeMembers()) {
           if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
-            type = 1;
+            interestType = 1;
             break;
           } 
         }
 
         // 관심목록 존재 여부에 따라 출력문 출력
-        if (type == 0) {
+        if (interestType == 0) {
           System.out.println("2. 관심목록 추가");
 
         } else {
@@ -106,13 +109,20 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
         System.out.println("0. 이전");
         System.out.println();
 
-        int num = Prompt.inputInt("번호? "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
+        int num = Prompt.inputInt("메뉴 번호를 선택하세요. > "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
 
         if (num == 1) {
-          request.getRequestDispatcher("/freeStudy/apply").forward(request);
+          // 신청하기를 아직 안 한 경우
+          if (applyType == 0) {
+            request.getRequestDispatcher("/freeStudy/apply").forward(request);
+          } else {
+            // 신청하기를 이미 한 경우
+            request.getRequestDispatcher("/freeStudy/applyCancel").forward(request);
+          }
+
         } else if (num == 2) {
 
-          if (type == 0) {
+          if (interestType == 0) {
             // 관심목록에 없는 경우
             request.getRequestDispatcher("/freeStudy/addInterest").forward(request);
           } else {
@@ -124,7 +134,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
           return;
 
         } else {
-          System.out.println("명령어가 올바르지 않습니다!");
+          System.out.println("잘못된 메뉴 번호입니다.\n");
           continue;
         }
         return;

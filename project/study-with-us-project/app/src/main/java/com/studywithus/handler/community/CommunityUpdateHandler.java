@@ -27,24 +27,34 @@ public class CommunityUpdateHandler extends AbstractCommunityHandler{
     }
 
     if (community.getWriter() != AuthLogInHandler.getLoginUser()) {
-      System.out.println("변경 권한이 없습니다.");
+      System.out.println("변경 권한이 없습니다.\n");
       return;
     }
 
-    String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", community.getTitle()));
-    String content = Prompt.inputString(String.format("[%s] 수정할 내용: ", community.getContent()));
-
-    String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
-
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("게시글 수정을 취소하였습니다.\n");
-      return;
-    }
-
-    community.setTitle(title);
-    community.setContent(content);
-
+    String title = Prompt.inputString(String.format("[%s] 수정할 제목을 입력하세요. > ", community.getTitle()));
+    String content = Prompt.inputString(String.format("[%s] 수정할 내용을 입력하세요. > ", community.getContent()));
     System.out.println();
-    System.out.println("게시글을 수정하였습니다.\n");
+
+    while (true) {
+      String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
+
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("게시글 수정을 취소하였습니다.\n");
+        return;
+
+      } else if (input.equalsIgnoreCase("y")){
+
+        community.setTitle(title);
+        community.setContent(content);
+
+        System.out.println("");
+        System.out.println("게시글을 수정하였습니다.\n");
+        return;
+
+      } else {
+        System.out.println("올바른 값을 입력하세요.\n");
+        continue;
+      }
+    }
   }
 }

@@ -9,9 +9,6 @@ import com.studywithus.util.Prompt;
 
 public class CommunityAddHandler extends AbstractCommunityHandler{
 
-  List<Community> communityWriterList;
-  Community community;
-
   public CommunityAddHandler(List<Community> communityList) {
     super(communityList);
 
@@ -23,14 +20,13 @@ public class CommunityAddHandler extends AbstractCommunityHandler{
 
     Community community = new Community();
 
-    community.setNo(Prompt.inputInt("번호? "));
-    community.setTitle(Prompt.inputString("제목? "));
-    community.setContent(Prompt.inputString("내용? "));
+    community.setNo(Prompt.inputInt("번호를 입력하세요. > "));
+    community.setTitle(Prompt.inputString("제목을 입력하세요. > "));
+    community.setContent(Prompt.inputString("내용을 입력하세요. > "));
     community.setWriter(AuthLogInHandler.getLoginUser());
     community.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     communityList.add(community);
-    // communityWriterList.add();
 
     System.out.println();
     System.out.println("게시글 등록이 완료되었습니다.\n");

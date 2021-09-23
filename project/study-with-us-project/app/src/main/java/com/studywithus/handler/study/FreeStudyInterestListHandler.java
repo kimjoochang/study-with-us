@@ -60,7 +60,6 @@ public class FreeStudyInterestListHandler extends AbstractStudyHandler {
     if (type == 1) { // 일치하는 값 없을 경우, 출력
       System.out.println("무료 스터디 관심목록이 존재하지 않습니다.\n");
     }
-
     System.out.println();
   }
 }

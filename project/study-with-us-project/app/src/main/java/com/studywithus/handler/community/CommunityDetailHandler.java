@@ -24,7 +24,7 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[커뮤니티 / 상세보기] \n");
 
-    int no = Prompt.inputInt("번호? ");
+    int no = Prompt.inputInt("번호를 입력하세요. > ");
     Community community = findByNo(no);
 
     if (community == null) {
@@ -32,7 +32,7 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
       System.out.println("해당 번호의 게시글이 없습니다.\n");
       return;
     }
-
+    System.out.println("");
     System.out.printf("제목: %s\n", community.getTitle());
     System.out.printf("내용: %s\n", community.getContent());
     System.out.printf("작성자: %s\n", community.getWriter().getName());
@@ -70,7 +70,8 @@ public class CommunityDetailHandler extends AbstractCommunityHandler{
         case 0:
           return;
         default:
-          System.out.println("명령어가 올바르지 않습니다!");
+          System.out.println("");
+          System.out.println("무효한 메뉴 번호입니다.\n");
       }
     }
   }

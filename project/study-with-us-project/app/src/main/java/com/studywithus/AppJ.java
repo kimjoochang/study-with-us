@@ -50,9 +50,6 @@ import com.studywithus.handler.study.ChargeStudyAddHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.study.ChargeStudyDeletedDetailHandler;
 import com.studywithus.handler.study.ChargeStudyDeletedListHandler;
-import com.studywithus.handler.study.ChargeStudyDetailHandler;
-import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
-import com.studywithus.handler.study.ChargeStudyInterestDeleteHandler;
 import com.studywithus.handler.study.ChargeStudyInterestListHandler;
 import com.studywithus.handler.study.ChargeStudyListHandler;
 import com.studywithus.handler.study.ChargeStudyPaymentHandler;
@@ -72,7 +69,6 @@ import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindIdHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
-import com.studywithus.handler.user.MyInfoHandler;
 import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
@@ -169,7 +165,7 @@ public class AppJ {
 
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
 
-    commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
+    // commandMap.put("/myinfo/list", new MyInfoHandler(memberList)); 
 
     commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeInterestList));
     // commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList, freeInterestList));
@@ -188,14 +184,14 @@ public class AppJ {
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList));
+    //  commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeInterestList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteDetail", new ChargeStudyDeletedDetailHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
-    commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList, chargeInterestList));
-    commandMap.put("/chargeStudy/InterestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyList, chargeInterestList));
+    // commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList, chargeInterestList));
+    // commandMap.put("/chargeStudy/InterestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyList, chargeInterestList));
 
     commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
     commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
@@ -483,10 +479,9 @@ public class AppJ {
   // 마이 페이지 메인
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
-
-    myPageMenu.add(createActivityDetailMenu());
+    // [09.23 추가] 나의 게시글 하위 메뉴 구성 안 하기로 하면서 여기로 이동함
+    myPageMenu.add(new MenuItem("나의 게시글", ACCESS_GENERAL, "/myPost/list"));
     myPageMenu.add(createInterestMenu());
-
 
     // 09.19 재확인 -  
     // 기존 app과 다른 부분 & 이유:
@@ -582,6 +577,7 @@ public class AppJ {
     return participateChargeStudyMenu;
   }
 
+  /*
   // 마이 페이지 / 나의 활동 / 나의 게시글
   private Menu createMyPostMenu() {
 
@@ -593,6 +589,7 @@ public class AppJ {
 
     return myPostMenu;
   }
+   */
 
   // 마이 페이지 / 나의 관심목록
   private Menu createInterestMenu() {

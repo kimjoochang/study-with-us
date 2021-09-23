@@ -53,7 +53,6 @@ public class ParticipateFreeStudyListHandler implements Command {
             freeStudy.getViewCount(), 
             freeStudy.getLikeMembers().size());
       }
-      System.out.println();
     }
   }
 }

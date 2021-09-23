@@ -25,16 +25,23 @@ public class CommunityDeleteHandler extends AbstractCommunityHandler{
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
+    while(true) {
+      String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("게시글 삭제를 취소하였습니다.\n");
-      return;
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println("게시글 삭제를 취소하였습니다.\n");
+        return;
+
+      } else if (input.equalsIgnoreCase("y")) {
+
+        communityList.remove(community);
+        System.out.println("게시글을 삭제하였습니다.\n");
+        return;
+
+      } else {
+        System.out.println("올바른 값을 입력하세요.\n");
+        continue;
+      }
     }
-
-    communityList.remove(community);
-
-    System.out.println();
-    System.out.println("게시글을 삭제하였습니다.\n");
   }
 }
