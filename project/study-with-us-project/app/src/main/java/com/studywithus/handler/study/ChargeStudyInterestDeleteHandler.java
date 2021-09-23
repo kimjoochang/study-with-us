@@ -66,7 +66,7 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 
 			// [유료 스터디 / 상세보기]
 		} else {
-			int no = (int) request.getAttribute("ChargeNo");
+			int no = (int) request.getAttribute("chargeNo");
 
 			Study chargeInterest = findByNo(no);
 
