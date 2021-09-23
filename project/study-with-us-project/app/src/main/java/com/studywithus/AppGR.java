@@ -21,11 +21,11 @@ import java.util.LinkedList;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.studywithus.domain.Schedule;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.domain.Payment;
+import com.studywithus.domain.Schedule;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -226,30 +226,30 @@ public class AppGR {
   }
 
   void service() {
-    //    loadObjects("member.json", memberList, Member.class);
-    //    loadObjects("freeInterest.json", freeInterestList, Study.class);
-    //    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
-    //    loadObjects("freeStudy.json", freeStudyList, Study.class);
-    //    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
-    //    loadObjects("communityQa.json", communityQaList, Community.class);
-    //    loadObjects("communityInfo.json", communityInfoList, Community.class);
-    //    loadObjects("communityTalk.json", communityTalkList, Community.class);
-    //    loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
-    //    loadObjects("examCalendar.json", examCalendarList, Calendar.class);
+    //    loadObjects("member_gr.json", memberList, Member.class);
+    //    loadObjects("freeInterest_gr.json", freeInterestList, Study.class);
+    //    loadObjects("chargeInterest_gr.json", chargeInterestList, Study.class);
+    //    loadObjects("freeStudy_gr.json", freeStudyList, Study.class);
+    //    loadObjects("chargeStudy_gr.json", chargeStudyList, Study.class);
+    //    loadObjects("communityQa_gr.json", communityQaList, Community.class);
+    //    loadObjects("communityInfo_gr.json", communityInfoList, Community.class);
+    //    loadObjects("communityTalk_gr.json", communityTalkList, Community.class);
+    //    loadObjects("jobsCalendar_gr.json", jobsCalendarList, Calendar.class);
+    //    loadObjects("examCalendar_gr.json", examCalendarList, Calendar.class);
 
     createMainMenu().execute();
     Prompt.close();
 
-    saveObjects("member.json", memberList);
-    saveObjects("freeInterest.json", freeInterestList);
-    saveObjects("chargeInterest.json", chargeInterestList);
-    saveObjects("freeStudy.json", freeStudyList);
-    saveObjects("chargeStudy.json", chargeStudyList);
-    saveObjects("communityQa.json", communityQaList);
-    saveObjects("communityInfo.json", communityInfoList);
-    saveObjects("communityTalk.json", communityTalkList);
-    saveObjects("jobsCalendar.json", jobsCalendarList);
-    saveObjects("examCalendar.json", examCalendarList);
+    saveObjects("member_gr.json", memberList);
+    saveObjects("freeInterest_gr.json", freeInterestList);
+    saveObjects("chargeInterest_gr.json", chargeInterestList);
+    saveObjects("freeStudy_gr.json", freeStudyList);
+    saveObjects("chargeStudy_gr.json", chargeStudyList);
+    saveObjects("communityQa_gr.json", communityQaList);
+    saveObjects("communityInfo_gr.json", communityInfoList);
+    saveObjects("communityTalk_gr.json", communityTalkList);
+    saveObjects("jobsCalendar_gr.json", jobsCalendarList);
+    saveObjects("examCalendar_gr.json", examCalendarList);
   }
 
   // JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.
