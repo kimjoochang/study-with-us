@@ -245,15 +245,15 @@ public class App {
   }
 
   void service() {
-    //    loadObjects("member.json", memberList, Member.class);
-    //    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
-    //    loadObjects("freeStudy.json", freeStudyList, Study.class);
-    //    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
-    //    loadObjects("communityQa.json", communityQaList, Community.class);
-    //    loadObjects("communityInfo.json", communityInfoList, Community.class);
-    //    loadObjects("communityTalk.json", communityTalkList, Community.class);
-    //    loadObjects("jobsSchedule.json", jobsScheduleList, Schedule.class);
-    //    loadObjects("examSchedule.json", examScheduleList, Schedule.class);
+    loadObjects("member.json", memberList, Member.class);
+    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+    loadObjects("freeStudy.json", freeStudyList, Study.class);
+    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+    loadObjects("communityQa.json", communityQaList, Community.class);
+    loadObjects("communityInfo.json", communityInfoList, Community.class);
+    loadObjects("communityTalk.json", communityTalkList, Community.class);
+    loadObjects("jobsSchedule.json", jobsScheduleList, Schedule.class);
+    loadObjects("examSchedule.json", examScheduleList, Schedule.class);
 
     createMainMenu().execute();
     Prompt.close();
@@ -513,8 +513,9 @@ public class App {
 
     myPageMenu.add(createActivityDetailMenu());
     myPageMenu.add(createInterestMenu());
+    myPageMenu.add(createPaymentListMenu());
     // 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
-    myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
+    //		myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
     myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
     myPageMenu.add(new MenuItem("나의 정보", "/auth/userInfo"));
 
@@ -526,7 +527,7 @@ public class App {
 
     MenuGroup activityDetailMenu = new MenuGroup("나의 활동");
     activityDetailMenu.add(createMyStudyMenu());
-    activityDetailMenu.add(createMyPostMenu());
+    activityDetailMenu.add(new MenuItem("나의 게시글", "/myPost/list"));
 
     return activityDetailMenu;
   }
@@ -536,6 +537,8 @@ public class App {
 
     MenuGroup myStudyMenu = new MenuGroup("나의 스터디");
     myStudyMenu.add(createFreeStudyApplyMenu());
+    myStudyMenu.add(createRegisterFreeStudyMenu());
+    myStudyMenu.add(createParticipateFreeStudyMenu());
     myStudyMenu.add(createRegisterChargeStudyMenu()); // 내 스터디 / 내가 생성한 유료스터디 추가***
     myStudyMenu.add(createParticipateChargeStudyMenu()); // 내 스터디 / 내가 참여한 유료스터디 추가***
 
@@ -597,18 +600,6 @@ public class App {
     participateChargeStudyMenu.add(new MenuItem("상세보기", "/participateChargeStudy/detail"));
 
     return participateChargeStudyMenu;
-  }
-
-  // 마이 페이지 / 나의 활동 / 나의 게시글
-  private Menu createMyPostMenu() {
-
-    MenuGroup myPostMenu = new MenuGroup("나의 게시글", ACCESS_GENERAL);
-    myPostMenu.add(new MenuItem("조회", "/myPost/list"));
-    //    myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
-    //    myPostMenu.add(new MenuItem("수정", "/myPost/update"));
-    //    myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
-
-    return myPostMenu;
   }
 
   // 마이 페이지 / 나의 관심목록
