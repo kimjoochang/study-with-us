@@ -26,7 +26,7 @@ public class MembershipWithdrawalHandler extends AbstractLoginHandler {
 
     if (!loginUser.getId().equals(id)) {
       System.out.println();
-      System.out.println("현재 로그인한 아이디와 일치하지 않습니다.\n");
+      System.out.println("현재 로그인한 회원 정보와 일치하지 않습니다.\n");
       return;
     }
     else if (member == null) {
