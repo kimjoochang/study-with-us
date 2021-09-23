@@ -1,5 +1,6 @@
 package com.studywithus.handler.schedule;
 
+import java.util.Calendar;
 import java.util.List;
 import com.studywithus.domain.Schedule;
 import com.studywithus.handler.CommandRequest;
@@ -17,6 +18,8 @@ public class ExamScheduleAddHandler extends AbstractScheduleHandler {
     System.out.println("이달의 시험일정 / 등록]\n");
 
     Schedule examSchedule = new Schedule();
+    Calendar calendar = Calendar.getInstance();
+    //    calendar.setTime(new Date());
 
     examSchedule.setNo(Prompt.inputInt("번호를 입력하세요. > "));
     examSchedule.setTitle(Prompt.inputString("제목을 입력하세요. > "));
@@ -29,7 +32,7 @@ public class ExamScheduleAddHandler extends AbstractScheduleHandler {
     while (true) {
       examSchedule.setYyyy(Prompt.inputInt("YYYY > "));
 
-      if (examSchedule.getYyyy() < 2021) {
+      if (examSchedule.getYyyy() < calendar.get(Calendar.YEAR)) {
         System.out.println("유효한 연도를 입력하시오.\n");
         continue;
 

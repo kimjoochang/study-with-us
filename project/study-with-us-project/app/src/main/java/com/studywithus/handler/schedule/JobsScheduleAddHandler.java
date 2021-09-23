@@ -1,5 +1,6 @@
 package com.studywithus.handler.schedule;
 
+import java.util.Calendar;
 import java.util.List;
 import com.studywithus.domain.Schedule;
 import com.studywithus.handler.CommandRequest;
@@ -17,6 +18,7 @@ public class JobsScheduleAddHandler extends AbstractScheduleHandler {
     System.out.println("[이달의 채용공고 / 등록]\n");
 
     Schedule jobsCalendar= new Schedule();
+    Calendar calendar = Calendar.getInstance();
 
     jobsCalendar.setNo(Prompt.inputInt("번호를 입력하세요. > "));
     jobsCalendar.setTitle(Prompt.inputString("제목을 입력하세요. > "));
@@ -29,7 +31,7 @@ public class JobsScheduleAddHandler extends AbstractScheduleHandler {
     while (true) {
       jobsCalendar.setStartYyyy(Prompt.inputInt("YYYY > "));
 
-      if (jobsCalendar.getStartYyyy() < 2021) {
+      if (jobsCalendar.getStartYyyy() < calendar.get(Calendar.YEAR)) {
         System.out.println("유효한 연도를 입력하시오.\n");
         continue;
 
