@@ -20,14 +20,24 @@ import java.util.LinkedList;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.studywithus.domain.Calendar;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.domain.Payment;
-import com.studywithus.domain.Schedule;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.calendar.ExamCalendarAddHandler;
+import com.studywithus.handler.calendar.ExamCalendarDeleteHandler;
+import com.studywithus.handler.calendar.ExamCalendarDetailHandler;
+import com.studywithus.handler.calendar.ExamCalendarListHandler;
+import com.studywithus.handler.calendar.ExamCalendarUpdateHandler;
+import com.studywithus.handler.calendar.JobsCalendarAddHandler;
+import com.studywithus.handler.calendar.JobsCalendarDeleteHandler;
+import com.studywithus.handler.calendar.JobsCalendarDetailHandler;
+import com.studywithus.handler.calendar.JobsCalendarListHandler;
+import com.studywithus.handler.calendar.JobsCalendarUpdateHandler;
 import com.studywithus.handler.community.CommunityAddHandler;
 import com.studywithus.handler.community.CommunityDeleteHandler;
 import com.studywithus.handler.community.CommunityDetailHandler;
@@ -35,16 +45,6 @@ import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
 import com.studywithus.handler.community.MyPostListHandler;
-import com.studywithus.handler.schedule.ExamScheduleAddHandler;
-import com.studywithus.handler.schedule.ExamScheduleDeleteHandler;
-import com.studywithus.handler.schedule.ExamScheduleDetailHandler;
-import com.studywithus.handler.schedule.ExamScheduleListHandler;
-import com.studywithus.handler.schedule.ExamScheduleUpdateHandler;
-import com.studywithus.handler.schedule.JobsScheduleAddHandler;
-import com.studywithus.handler.schedule.JobsScheduleDeleteHandler;
-import com.studywithus.handler.schedule.JobsScheduleDetailHandler;
-import com.studywithus.handler.schedule.JobsScheduleListHandler;
-import com.studywithus.handler.schedule.JobsScheduleUpdateHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.study.ChargeStudyDeletedDetailHandler;
@@ -86,7 +86,7 @@ import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.util.Prompt;
 
-public class App {
+public class App2 {
   List<Member> memberList = new LinkedList<>();
   List<Member> freeApplicantList = new ArrayList<>();
   List<Member> mentorApplicantList = new ArrayList<>();
@@ -111,8 +111,8 @@ public class App {
   List<Community> communityQaList = new ArrayList<>();
   List<Community> communityTalkList = new ArrayList<>();
 
-  List<Schedule> jobsScheduleList = new ArrayList<>();
-  List<Schedule> examScheduleList = new ArrayList<>();
+  List<Calendar> jobsCalendarList = new ArrayList<>();
+  List<Calendar> examCalendarList = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
   HashMap<String, List<Study>> participateFreeStudyMap = new HashMap<>();
@@ -147,11 +147,11 @@ public class App {
   }
 
   public static void main(String[] args) {
-    App app = new App(); 
+    App2 app = new App2(); 
     app.service();
   }
 
-  public App() {
+  public App2() {
     commandMap.put("/auth/logIn", new AuthLogInHandler(memberList));
     commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
     commandMap.put("/facebook/logIn", new SnsLogInHandler(memberList));
@@ -171,7 +171,7 @@ public class App {
 
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
 
-    commandMap.put("/myinfo/list", new MyInfoHandler());
+    commandMap.put("/myinfo/list", new MyInfoHandler()); 
 
     commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
     commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
@@ -231,17 +231,17 @@ public class App {
 
     commandMap.put("/myPost/list", new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));
 
-    commandMap.put("/jobsSchedule/add", new JobsScheduleAddHandler(jobsScheduleList));
-    commandMap.put("/jobsSchedule/list", new JobsScheduleListHandler(jobsScheduleList));
-    commandMap.put("/jobsSchedule/detail", new JobsScheduleDetailHandler(jobsScheduleList));
-    commandMap.put("/jobsSchedule/update", new JobsScheduleUpdateHandler(jobsScheduleList));
-    commandMap.put("/jobsSchedule/delete", new JobsScheduleDeleteHandler(jobsScheduleList));
+    commandMap.put("/jobsCalendar/add", new JobsCalendarAddHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/list", new JobsCalendarListHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/detail", new JobsCalendarDetailHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/update", new JobsCalendarUpdateHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/delete", new JobsCalendarDeleteHandler(jobsCalendarList));
 
-    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(examScheduleList));
-    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(examScheduleList));
-    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(examScheduleList));
-    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(examScheduleList));
-    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(examScheduleList));
+    commandMap.put("/examCalendar/add", new ExamCalendarAddHandler(examCalendarList));
+    commandMap.put("/examCalendar/list", new ExamCalendarListHandler(examCalendarList));
+    commandMap.put("/examCalendar/detail", new ExamCalendarDetailHandler(examCalendarList));
+    commandMap.put("/examCalendar/update", new ExamCalendarUpdateHandler(examCalendarList));
+    commandMap.put("/examCalendar/delete", new ExamCalendarDeleteHandler(examCalendarList));
   }
 
   void service() {
@@ -252,8 +252,8 @@ public class App {
     loadObjects("communityQa.json", communityQaList, Community.class);
     loadObjects("communityInfo.json", communityInfoList, Community.class);
     loadObjects("communityTalk.json", communityTalkList, Community.class);
-    loadObjects("jobsSchedule.json", jobsScheduleList, Schedule.class);
-    loadObjects("examSchedule.json", examScheduleList, Schedule.class);
+    loadObjects("jobsCalendar.json", jobsCalendarList, Calendar.class);
+    loadObjects("examCalendar.json", examCalendarList, Calendar.class);
 
     createMainMenu().execute();
     Prompt.close();
@@ -265,8 +265,8 @@ public class App {
     saveObjects("communityQa.json", communityQaList);
     saveObjects("communityInfo.json", communityInfoList);
     saveObjects("communityTalk.json", communityTalkList);
-    saveObjects("jobsSchedule.json", jobsScheduleList);
-    saveObjects("examSchedule.json", examScheduleList);
+    saveObjects("jobsCalendar.json", jobsCalendarList);
+    saveObjects("examCalendar.json", examCalendarList);
   }
 
   // JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.
@@ -331,7 +331,7 @@ public class App {
     mainMenuGroup.add(createFreeStudyMenu());
     mainMenuGroup.add(createChargeStudyMenu());
     mainMenuGroup.add(createCommunityMenu());
-    mainMenuGroup.add(createScheduleMenu());
+    mainMenuGroup.add(createCalendarMenu());
 
     return mainMenuGroup;
   }
@@ -470,39 +470,39 @@ public class App {
     return communityTalkMenu;
   }
 
-  // ------------------------------ 일정 -----------------------------------------
+  // ------------------------------ 캘린더 -----------------------------------------
 
-  private Menu createScheduleMenu() {
-    MenuGroup ScheduleMenu = new MenuGroup("일정");
+  private Menu createCalendarMenu() {
+    MenuGroup calendarMenu = new MenuGroup("캘린더");
 
-    ScheduleMenu.add(createJobsScheduleMenu());
-    ScheduleMenu.add(createExamScheduleMenu());
+    calendarMenu.add(createJobsCalendarMenu());
+    calendarMenu.add(createExamCalendarMenu());
 
-    return ScheduleMenu;
+    return calendarMenu;
   }
 
-  private Menu createJobsScheduleMenu() {
-    MenuGroup jobsScheduleMenu = new MenuGroup("이달의 채용공고");
+  private Menu createJobsCalendarMenu() {
+    MenuGroup jobsCalendarMenu = new MenuGroup("이달의 채용공고");
 
-    jobsScheduleMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsSchedule/add"));
-    jobsScheduleMenu.add(new MenuItem("조회", "/jobsSchedule/list"));
-    jobsScheduleMenu.add(new MenuItem("상세보기", "/jobsSchedule/detail"));
-    //    jobsScheduleMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsSchedule/update"));
-    //    jobsScheduleMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsSchedule/delete"));
+    jobsCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalendar/add"));
+    jobsCalendarMenu.add(new MenuItem("조회", "/jobsCalendar/list"));
+    jobsCalendarMenu.add(new MenuItem("상세보기", "/jobsCalendar/detail"));
+    //    jobsCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsCalendar/update"));
+    //    jobsCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalendar/delete"));
 
-    return jobsScheduleMenu;
+    return jobsCalendarMenu;
   }
 
-  private Menu createExamScheduleMenu() {
-    MenuGroup examScheduleMenu = new MenuGroup("이달의 시험일정");
+  private Menu createExamCalendarMenu() {
+    MenuGroup examCalendarMenu = new MenuGroup("이달의 시험일정");
 
-    examScheduleMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examSchedule/add"));
-    examScheduleMenu.add(new MenuItem("조회", "/examSchedule/list"));
-    examScheduleMenu.add(new MenuItem("상세보기", "/examSchedule/detail"));
-    //    examScheduleMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examSchedule/update"));
-    //    examScheduleMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examSchedule/delete"));
+    examCalendarMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalendar/add"));
+    examCalendarMenu.add(new MenuItem("조회", "/examCalendar/list"));
+    examCalendarMenu.add(new MenuItem("상세보기", "/examCalendar/detail"));
+    //    examCalendarMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examCalendar/update"));
+    //    examCalendarMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
 
-    return examScheduleMenu;
+    return examCalendarMenu;
   }
 
   // ------------------------------ 마이 페이지 -----------------------------------------
@@ -515,7 +515,7 @@ public class App {
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createPaymentListMenu());
     // 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
-    //		myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
+    //    myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
     myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
     myPageMenu.add(new MenuItem("나의 정보", "/auth/userInfo"));
 
@@ -650,7 +650,7 @@ public class App {
     MenuGroup adminPageMenu = new MenuGroup("관리자 페이지", ACCESS_ADMIN);
     adminPageMenu.add(createMemberManagementMenu());
     adminPageMenu.add(createStudyManagementMenu());
-    adminPageMenu.add(createScheduleManagementMenu());
+    adminPageMenu.add(createCalendarManagementMenu());
 
     return adminPageMenu;
   }
@@ -703,38 +703,38 @@ public class App {
     return deletedRequestMenu;
   }
 
-  // 관리자 페이지 / 일정 관리
-  private Menu createScheduleManagementMenu() {
+  // 관리자 페이지 / 캘린더 관리
+  private Menu createCalendarManagementMenu() {
 
-    MenuGroup ScheduleMenu = new MenuGroup("일정 관리", ACCESS_ADMIN);
-    ScheduleMenu.add(createJobsScheduleManagementMenu());
-    ScheduleMenu.add(createExamScheduleManagementMenu());
+    MenuGroup calendarMenu = new MenuGroup("캘린더 관리", ACCESS_ADMIN);
+    calendarMenu.add(createJobsCalendarManagementMenu());
+    calendarMenu.add(createExamCalendarManagementMenu());
 
-    return ScheduleMenu;
+    return calendarMenu;
   }
 
-  // 관리자 페이지 / 일정 관리 / 이달의 채용공고 관리
-  private Menu createJobsScheduleManagementMenu() {
-    MenuGroup jobsScheduleManagementMenu = new MenuGroup("이달의 채용공고");
+  // 관리자 페이지 / 캘린더 관리 / 이달의 채용공고 관리
+  private Menu createJobsCalendarManagementMenu() {
+    MenuGroup jobsCalendarManagementMenu = new MenuGroup("이달의 채용공고");
 
-    jobsScheduleManagementMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsSchedule/add"));
-    jobsScheduleManagementMenu.add(new MenuItem("상세보기", "/jobsSchedule/detail"));
-    //    jobsScheduleManagementMenu.add(new MenuItem("변경", ACCESS_ADMIN, "/jobsSchedule/update"));
-    //    jobsScheduleManagementMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsSchedule/delete"));
+    jobsCalendarManagementMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsCalendar/add"));
+    jobsCalendarManagementMenu.add(new MenuItem("상세보기", "/jobsCalendar/detail"));
+    //    jobsCalendarManagementMenu.add(new MenuItem("변경", ACCESS_ADMIN, "/jobsCalendar/update"));
+    //    jobsCalendarManagementMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsCalendar/delete"));
 
-    return jobsScheduleManagementMenu;
+    return jobsCalendarManagementMenu;
   }
 
-  // 관리자 페이지 / 일정 관리 / 이달의 시험일정 관리
-  private Menu createExamScheduleManagementMenu() {
+  // 관리자 페이지 / 캘린더 관리 / 이달의 시험일정 관리
+  private Menu createExamCalendarManagementMenu() {
 
-    MenuGroup examScheduleManagementMenu = new MenuGroup("이달의 시험일정");
-    examScheduleManagementMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examSchedule/add"));
-    examScheduleManagementMenu.add(new MenuItem("상세보기", "/examSchedule/detail"));
-    //    examScheduleManagementMenu.add(new MenuItem("변경", ACCESS_ADMIN, "/examSchedule/update"));
-    //    examScheduleManagementMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examSchedule/delete"));
+    MenuGroup examcalendarManagementMenu = new MenuGroup("이달의 시험일정");
+    examcalendarManagementMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examCalendar/add"));
+    examcalendarManagementMenu.add(new MenuItem("상세보기", "/examCalendar/detail"));
+    //    examcalendarManagementMenu.add(new MenuItem("변경", ACCESS_ADMIN, "/examCalendar/update"));
+    //    examcalendarManagementMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examCalendar/delete"));
 
-    return examScheduleManagementMenu;
+    return examcalendarManagementMenu;
   }
 
   /* 기존 App(09.18 ver) 메뉴
@@ -899,4 +899,5 @@ public class App {
     return communityTalkMenu;
   }
    */
+
 }
