@@ -7,6 +7,8 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
+// [09.24 merge by 제이] App에서 재확인 필요
+
 public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 
   public ChargeStudyInterestDeleteHandler(List<Study> chargeStudyList) {
@@ -103,7 +105,9 @@ public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
 }
 
 /*
- * 기존 소스 public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
+ * 기존 소스 
+ * 
+ * public class ChargeStudyInterestDeleteHandler extends AbstractStudyHandler {
  * 
  * // 유료 스터디 관심목록 리스트 (회원 관점) // List<Study> chargeInterestList;
  * 
