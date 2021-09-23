@@ -24,7 +24,6 @@ public class SignUpHandler extends AbstractLoginHandler {
       String phoneNumber = Prompt.inputString("휴대폰 번호를 입력하세요.('-'를 제외한 숫자 11자) > ");
       String id = Prompt.inputString("사용할 아이디를 입력하세요.(이메일 형식의 아이디) > ");
       String password = Prompt.inputString("사용할 비밀번호를 입력하세요.(특수문자 !,@,$,^ 포함 8자 이상 16자 이하) > ");
-      System.out.println();
 
       id = findById(id);
 
@@ -60,7 +59,6 @@ public class SignUpHandler extends AbstractLoginHandler {
 
         memberList.add(member);
 
-        System.out.println();
         System.out.println("회원가입이 완료되었습니다.\n");
         return;
       }

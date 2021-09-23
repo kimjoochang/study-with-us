@@ -541,7 +541,7 @@ public class App {
   // 마이 페이지 / 나의 활동
   private Menu createActivityDetailMenu() {
 
-    MenuGroup activityDetailMenu = new MenuGroup("나의 활동");
+    MenuGroup activityDetailMenu = new MenuGroup("나의 활동", ACCESS_GENERAL);
     activityDetailMenu.add(createMyStudyMenu());
     activityDetailMenu.add(new MenuItem("나의 게시글", "/myPost/list"));
 
@@ -643,7 +643,7 @@ public class App {
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
     chargeInterestMenu.add(new MenuItem("조회", "/chargeInterest/list"));
-    chargeInterestMenu.add(new MenuItem("삭제", "/chargeInterest/delete"));
+    chargeInterestMenu.add(new MenuItem("삭제", "/chargeStudy/interestDelete"));
 
     return chargeInterestMenu;
   }
@@ -689,7 +689,6 @@ public class App {
     mentorApplicantMenu.add(new MenuItem("상세보기", "/mentorApplicant/detail"));
 
     return mentorApplicantMenu;
-
   }
 
   //관리자 페이지 / 회원 관리 / 블랙리스트 관리
