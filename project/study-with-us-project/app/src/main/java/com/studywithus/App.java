@@ -470,10 +470,10 @@ public class App {
     return communityTalkMenu;
   }
 
-  // ------------------------------ 캘린더 -----------------------------------------
+  // ------------------------------ 일정 -----------------------------------------
 
   private Menu createScheduleMenu() {
-    MenuGroup ScheduleMenu = new MenuGroup("캘린더");
+    MenuGroup ScheduleMenu = new MenuGroup("일정");
 
     ScheduleMenu.add(createJobsScheduleMenu());
     ScheduleMenu.add(createExamScheduleMenu());
@@ -712,17 +712,17 @@ public class App {
     return deletedRequestMenu;
   }
 
-  // 관리자 페이지 / 캘린더 관리
+  // 관리자 페이지 / 일정 관리
   private Menu createScheduleManagementMenu() {
 
-    MenuGroup ScheduleMenu = new MenuGroup("캘린더 관리", ACCESS_ADMIN);
+    MenuGroup ScheduleMenu = new MenuGroup("일정 관리", ACCESS_ADMIN);
     ScheduleMenu.add(createJobsScheduleManagementMenu());
     ScheduleMenu.add(createExamScheduleManagementMenu());
 
     return ScheduleMenu;
   }
 
-  // 관리자 페이지 / 캘린더 관리 / 이달의 채용공고 관리
+  // 관리자 페이지 / 일정 관리 / 이달의 채용공고 관리
   private Menu createJobsScheduleManagementMenu() {
     MenuGroup jobsScheduleManagementMenu = new MenuGroup("이달의 채용공고");
 
@@ -734,7 +734,7 @@ public class App {
     return jobsScheduleManagementMenu;
   }
 
-  // 관리자 페이지 / 캘린더 관리 / 이달의 시험일정 관리
+  // 관리자 페이지 / 일정 관리 / 이달의 시험일정 관리
   private Menu createExamScheduleManagementMenu() {
 
     MenuGroup examScheduleManagementMenu = new MenuGroup("이달의 시험일정");
