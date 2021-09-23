@@ -1,38 +1,35 @@
-package com.studywithus.handler.calendar;
+package com.studywithus.handler.schedule;
 
-import java.util.GregorianCalendar;
 import java.util.List;
-import com.studywithus.domain.Calendar;
+import com.studywithus.domain.Schedule;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class ExamCalendarAddHandler extends AbstractCalendarHandler {
+public class ExamScheduleAddHandler extends AbstractScheduleHandler {
 
-  GregorianCalendar calendar = new GregorianCalendar();
-
-  public ExamCalendarAddHandler(List<Calendar> examCalendarList) {
-    super(examCalendarList);
+  public ExamScheduleAddHandler(List<Schedule> examScheduleList) {
+    super(examScheduleList);
   }
 
   @Override
   public void execute(CommandRequest request) {
     System.out.println("이달의 시험일정 / 등록]\n");
 
-    Calendar examCalendar = new Calendar();
+    Schedule examSchedule = new Schedule();
 
-    examCalendar.setNo(Prompt.inputInt("번호를 입력하세요. > "));
-    examCalendar.setTitle(Prompt.inputString("제목을 입력하세요. > "));
-    examCalendar.setWriter(AuthLogInHandler.getLoginUser());
-    examCalendar.setContent(Prompt.inputString("내용을 입력하세요. > "));
+    examSchedule.setNo(Prompt.inputInt("번호를 입력하세요. > "));
+    examSchedule.setTitle(Prompt.inputString("제목을 입력하세요. > "));
+    examSchedule.setWriter(AuthLogInHandler.getLoginUser());
+    examSchedule.setContent(Prompt.inputString("내용을 입력하세요. > "));
 
     System.out.println("시험일을 입력하세요.");
 
     // 년
     while (true) {
-      examCalendar.setYyyy(Prompt.inputInt("YYYY > "));
+      examSchedule.setYyyy(Prompt.inputInt("YYYY > "));
 
-      if (examCalendar.getYyyy() < 2021) {
+      if (examSchedule.getYyyy() < 2021) {
         System.out.println("유효한 연도를 입력하시오.\n");
         continue;
 
@@ -43,9 +40,9 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
 
     // 월
     while (true) {
-      examCalendar.setMm(Prompt.inputInt("MM > "));
+      examSchedule.setMm(Prompt.inputInt("MM > "));
 
-      if (!(1 <= examCalendar.getMm() && examCalendar.getMm() <= 12)) {
+      if (!(1 <= examSchedule.getMm() && examSchedule.getMm() <= 12)) {
         System.out.println("유효한 월을 입력하시오.\n");
         continue;
 
@@ -56,10 +53,10 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
 
     // 일
     while (true) {
-      examCalendar.setDd(Prompt.inputInt("DD > "));
+      examSchedule.setDd(Prompt.inputInt("DD > "));
 
       // 1 ~ 31일
-      switch (examCalendar.getMm()) {
+      switch (examSchedule.getMm()) {
         case 1:
         case 3:
         case 5:
@@ -68,7 +65,7 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
         case 10:
         case 12:
 
-          if (!(examCalendar.getDd() >= 1 && examCalendar.getDd() <= 31)) {
+          if (!(examSchedule.getDd() >= 1 && examSchedule.getDd() <= 31)) {
             System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
@@ -78,13 +75,13 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
       }
 
       // 1 ~ 30일
-      switch (examCalendar.getMm()) {
+      switch (examSchedule.getMm()) {
         case 4:
         case 6:
         case 9:
         case 11:
 
-          if (!(examCalendar.getDd() >= 1 && examCalendar.getDd() <= 30)) {
+          if (!(examSchedule.getDd() >= 1 && examSchedule.getDd() <= 30)) {
             System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
@@ -94,10 +91,10 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
       }
 
       // 1 ~ 28일
-      switch (examCalendar.getMm()) {
+      switch (examSchedule.getMm()) {
         case 2:
 
-          if (!(examCalendar.getDd() >= 1 && examCalendar.getDd() <= 28)) {
+          if (!(examSchedule.getDd() >= 1 && examSchedule.getDd() <= 28)) {
             System.out.println("유효한 일을 입력하시오.\n");
             continue;
 
@@ -108,7 +105,7 @@ public class ExamCalendarAddHandler extends AbstractCalendarHandler {
       break;
     }
 
-    calendarList.add(examCalendar);
+    scheduleList.add(examSchedule);
 
     System.out.println();
     System.out.println("이달의 시험일정 등록이 완료되었습니다.");

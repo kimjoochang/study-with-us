@@ -1,14 +1,14 @@
-package com.studywithus.handler.calendar;
+package com.studywithus.handler.schedule;
 
 import java.util.List;
-import com.studywithus.domain.Calendar;
+import com.studywithus.domain.Schedule;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.util.Prompt;
 
-public class ExamCalendarDeleteHandler extends AbstractCalendarHandler {
+public class ExamScheduleDeleteHandler extends AbstractScheduleHandler {
 
-  public ExamCalendarDeleteHandler(List<Calendar> examCalendarList) {
-    super(examCalendarList);
+  public ExamScheduleDeleteHandler(List<Schedule> examScheduleList) {
+    super(examScheduleList);
   }
 
   @Override
@@ -16,11 +16,11 @@ public class ExamCalendarDeleteHandler extends AbstractCalendarHandler {
     System.out.println("[이달의 시험일정 / 삭제]\n");
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
-    Calendar examCalendar = findByNo(no);
+    Schedule examSchedule = findByNo(no);
 
     System.out.println();
 
-    if (examCalendar == null) {
+    if (examSchedule == null) {
       System.out.println("해당 번호의 시험일정이 없습니다.");
       return;
     }
@@ -33,7 +33,7 @@ public class ExamCalendarDeleteHandler extends AbstractCalendarHandler {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        calendarList.remove(examCalendar);
+        scheduleList.remove(examSchedule);
         System.out.println("이달의 시험일정을 삭제하였습니다.");
         return;
       }

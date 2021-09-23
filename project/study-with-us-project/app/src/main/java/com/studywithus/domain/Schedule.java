@@ -1,6 +1,6 @@
 package com.studywithus.domain;
 
-public class Calendar extends Content {
+public class Schedule extends Content {
   private int yyyy; // 년
   private int mm; // 월
   private int dd; // 일

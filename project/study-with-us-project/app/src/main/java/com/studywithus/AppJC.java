@@ -20,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.studywithus.domain.Calendar;
+import com.studywithus.domain.Schedule;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
@@ -28,16 +28,6 @@ import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.handler.calendar.ExamCalendarAddHandler;
-import com.studywithus.handler.calendar.ExamCalendarDeleteHandler;
-import com.studywithus.handler.calendar.ExamCalendarDetailHandler;
-import com.studywithus.handler.calendar.ExamCalendarListHandler;
-import com.studywithus.handler.calendar.ExamCalendarUpdateHandler;
-import com.studywithus.handler.calendar.JobsCalendarAddHandler;
-import com.studywithus.handler.calendar.JobsCalendarDeleteHandler;
-import com.studywithus.handler.calendar.JobsCalendarDetailHandler;
-import com.studywithus.handler.calendar.JobsCalendarListHandler;
-import com.studywithus.handler.calendar.JobsCalendarUpdateHandler;
 import com.studywithus.handler.community.CommunityAddHandler;
 import com.studywithus.handler.community.CommunityDeleteHandler;
 import com.studywithus.handler.community.CommunityDetailHandler;
@@ -45,6 +35,16 @@ import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
 import com.studywithus.handler.community.MyPostListHandler;
+import com.studywithus.handler.schedule.ExamScheduleAddHandler;
+import com.studywithus.handler.schedule.ExamScheduleDeleteHandler;
+import com.studywithus.handler.schedule.ExamScheduleDetailHandler;
+import com.studywithus.handler.schedule.ExamScheduleListHandler;
+import com.studywithus.handler.schedule.ExamScheduleUpdateHandler;
+import com.studywithus.handler.schedule.JobsScheduleAddHandler;
+import com.studywithus.handler.schedule.JobsScheduleDeleteHandler;
+import com.studywithus.handler.schedule.JobsScheduleDetailHandler;
+import com.studywithus.handler.schedule.JobsScheduleListHandler;
+import com.studywithus.handler.schedule.JobsScheduleUpdateHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.study.ChargeStudyDeletedDetailHandler;
@@ -111,8 +111,8 @@ public class AppJC {
   List<Community> communityQaList = new ArrayList<>();
   List<Community> communityTalkList = new ArrayList<>();
 
-  List<Calendar> jobsCalendarList = new ArrayList<>();
-  List<Calendar> examCalendarList = new ArrayList<>();
+  List<Schedule> jobsCalendarList = new ArrayList<>();
+  List<Schedule> examCalendarList = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
   HashMap<String, List<Study>> participateFreeStudyMap = new HashMap<>();
@@ -231,17 +231,17 @@ public class AppJC {
 
     commandMap.put("/myPost/list", new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));
 
-    commandMap.put("/jobsCalendar/add", new JobsCalendarAddHandler(jobsCalendarList));
-    commandMap.put("/jobsCalendar/list", new JobsCalendarListHandler(jobsCalendarList));
-    commandMap.put("/jobsCalendar/detail", new JobsCalendarDetailHandler(jobsCalendarList));
-    commandMap.put("/jobsCalendar/update", new JobsCalendarUpdateHandler(jobsCalendarList));
-    commandMap.put("/jobsCalendar/delete", new JobsCalendarDeleteHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/add", new JobsScheduleAddHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/list", new JobsScheduleListHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/detail", new JobsScheduleDetailHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/update", new JobsScheduleUpdateHandler(jobsCalendarList));
+    commandMap.put("/jobsCalendar/delete", new JobsScheduleDeleteHandler(jobsCalendarList));
 
-    commandMap.put("/examCalendar/add", new ExamCalendarAddHandler(examCalendarList));
-    commandMap.put("/examCalendar/list", new ExamCalendarListHandler(examCalendarList));
-    commandMap.put("/examCalendar/detail", new ExamCalendarDetailHandler(examCalendarList));
-    commandMap.put("/examCalendar/update", new ExamCalendarUpdateHandler(examCalendarList));
-    commandMap.put("/examCalendar/delete", new ExamCalendarDeleteHandler(examCalendarList));
+    commandMap.put("/examCalendar/add", new ExamScheduleAddHandler(examCalendarList));
+    commandMap.put("/examCalendar/list", new ExamScheduleListHandler(examCalendarList));
+    commandMap.put("/examCalendar/detail", new ExamScheduleDetailHandler(examCalendarList));
+    commandMap.put("/examCalendar/update", new ExamScheduleUpdateHandler(examCalendarList));
+    commandMap.put("/examCalendar/delete", new ExamScheduleDeleteHandler(examCalendarList));
   }
 
   void service() {
@@ -252,8 +252,8 @@ public class AppJC {
     loadObjects("communityQa_jc.json", communityQaList, Community.class);
     loadObjects("communityInfo_jc.json", communityInfoList, Community.class);
     loadObjects("communityTalk_jc.json", communityTalkList, Community.class);
-    loadObjects("jobsCalendar_jc.json", jobsCalendarList, Calendar.class);
-    loadObjects("examCalendar_jc.json", examCalendarList, Calendar.class);
+    loadObjects("jobsCalendar_jc.json", jobsCalendarList, Schedule.class);
+    loadObjects("examCalendar_jc.json", examCalendarList, Schedule.class);
 
     createMainMenu().execute();
     Prompt.close();

@@ -1,13 +1,13 @@
-package com.studywithus.handler.calendar;
+package com.studywithus.handler.schedule;
 
 import java.util.List;
-import com.studywithus.domain.Calendar;
+import com.studywithus.domain.Schedule;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.util.Prompt;
 
-public class JobsCalendarDeleteHandler extends AbstractCalendarHandler {
+public class JobsScheduleDeleteHandler extends AbstractScheduleHandler {
 
-  public JobsCalendarDeleteHandler(List<Calendar> jobsCalendarList) {
+  public JobsScheduleDeleteHandler(List<Schedule> jobsCalendarList) {
     super(jobsCalendarList);
   }
 
@@ -16,7 +16,7 @@ public class JobsCalendarDeleteHandler extends AbstractCalendarHandler {
     System.out.println("[이달의 채용공고 / 삭제]\n");
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
-    Calendar jobsCalendar = findByNo(no);
+    Schedule jobsCalendar = findByNo(no);
 
     System.out.println();
 
@@ -34,7 +34,7 @@ public class JobsCalendarDeleteHandler extends AbstractCalendarHandler {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        calendarList.remove(jobsCalendar);
+        scheduleList.remove(jobsCalendar);
         System.out.println("이달의 채용공고를 삭제하였습니다.");
         return;
       }

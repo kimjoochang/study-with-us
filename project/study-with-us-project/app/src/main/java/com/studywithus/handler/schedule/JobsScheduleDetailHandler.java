@@ -1,14 +1,14 @@
-package com.studywithus.handler.calendar;
+package com.studywithus.handler.schedule;
 
 import java.util.List;
-import com.studywithus.domain.Calendar;
+import com.studywithus.domain.Schedule;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class JobsCalendarDetailHandler extends AbstractCalendarHandler {
+public class JobsScheduleDetailHandler extends AbstractScheduleHandler {
 
-  public JobsCalendarDetailHandler(List<Calendar> jobsCalendarList) {
+  public JobsScheduleDetailHandler(List<Schedule> jobsCalendarList) {
     super(jobsCalendarList);
   }
 
@@ -17,7 +17,7 @@ public class JobsCalendarDetailHandler extends AbstractCalendarHandler {
     System.out.println("[이달의 채용공고 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
-    Calendar jobsCalendar = findByNo(no);
+    Schedule jobsCalendar = findByNo(no);
 
     System.out.println();
 

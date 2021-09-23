@@ -1,14 +1,14 @@
-package com.studywithus.handler.calendar;
+package com.studywithus.handler.schedule;
 
 import java.util.List;
-import com.studywithus.domain.Calendar;
+import com.studywithus.domain.Schedule;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class JobsCalendarAddHandler extends AbstractCalendarHandler {
+public class JobsScheduleAddHandler extends AbstractScheduleHandler {
 
-  public JobsCalendarAddHandler(List<Calendar> jobsCalendarList) {
+  public JobsScheduleAddHandler(List<Schedule> jobsCalendarList) {
     super(jobsCalendarList);
   }
 
@@ -16,7 +16,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
   public void execute(CommandRequest request) {
     System.out.println("[이달의 채용공고 / 등록]\n");
 
-    Calendar jobsCalendar= new Calendar();
+    Schedule jobsCalendar= new Schedule();
 
     jobsCalendar.setNo(Prompt.inputInt("번호를 입력하세요. > "));
     jobsCalendar.setTitle(Prompt.inputString("제목을 입력하세요. > "));
@@ -111,8 +111,8 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
     while (true) {
       jobsCalendar.setYyyy(Prompt.inputInt("YYYY > "));
 
-      if (jobsCalendar.getYyyy() < 2021) {
-        System.out.println("유효한 연도를 입력하시오.\n");
+      if (jobsCalendar.getStartYyyy() > jobsCalendar.getYyyy()) {
+        System.out.println("종료일은 시작일 이후로 설정하시오.\n");
         continue;
 
       } else {
@@ -187,7 +187,7 @@ public class JobsCalendarAddHandler extends AbstractCalendarHandler {
       break;
     }
 
-    calendarList.add(jobsCalendar);
+    scheduleList.add(jobsCalendar);
 
     System.out.println();
     System.out.println("이달의 채용공고 등록이 완료되었습니다.");
