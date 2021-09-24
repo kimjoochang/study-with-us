@@ -1,4 +1,6 @@
-package com.studywithus.handler.study;
+/* [ 09.24 수정 소스]
+ package com.studywithus.handler.study;
+
 
 import java.util.List;
 import com.studywithus.domain.Study;
@@ -13,21 +15,24 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[무료 스터디 / 검색]");
+    System.out.println("[무료 스터디 / 검색]\n");
 
     String input = Prompt.inputString("검색할 키워드를 입력하세요. > ");
     System.out.println();
 
+    if (studyList.isEmpty() == true) {
+      System.out.println("무료 스터디 게시글이 존재하지 않습니다.\n");
+      return;
+    }
+
     int type = 0; // 일치하는 값이 없을경우, 게시글 없다는 출력만 한 번만 출력되게 하기 위한 변수
+
     for (Study freeStudy : studyList) {
       if (!freeStudy.getTitle().contains(input) &&
           !freeStudy.getContent().contains(input) &&
           !freeStudy.getWriter().getName().contains(input)) {
-        if (type == 0) {
-          type = 2; 
-        } else {
-          continue;
-        }
+        type = 1; 
+        continue;
       }
       System.out.printf("%d, %s, %s, %s, %d, %d\n", 
           freeStudy.getNo(), 
@@ -36,10 +41,12 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
           freeStudy.getRegisteredDate(),
           freeStudy.getViewCount(), 
           freeStudy.getLikeMembers().size());
-      type = 1;
+      return;
     }
+
     if (type == 1) {
       System.out.println("입력하신 키워드가 포함된 게시글이 없습니다.");
     }
   }
 }
+ */
