@@ -537,7 +537,7 @@ public class App {
     // 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
     //		myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
     myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
-    myPageMenu.add(new MenuItem("나의 정보", "/auth/userInfo"));
+    myPageMenu.add(new MenuItem("나의 정보", "/myinfo/list"));
 
     return myPageMenu;
   }
