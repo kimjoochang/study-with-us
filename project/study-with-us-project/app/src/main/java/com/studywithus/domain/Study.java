@@ -5,22 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Study extends Content {
-  private String ONLINE = "온라인";
-  private String OFFLINE = "오프라인";
   private List<Member> members = new ArrayList<>(); // 팀원 or 멘티
   private List<Member> applicants = new ArrayList<>(); // 무료 스터디 신청자
-  private List<Member> likeMembers = new ArrayList<>(); // 무료 스터디 신청자
+  private List<Member> likeMembers = new ArrayList<>(); // 관심목록 추가한 자
   private String mentorExplanation; // 멘토 설명
   private String rule; // 스터디 규칙
   private int price; // 유료 스터디 가격
   private int onOffLine; // 온라인 or 오프라인
+  private String ONLINE = "온라인";
+  private String OFFLINE = "오프라인";
   private String area; // 지역
   private Date registeredDate; // 스터디 등록일
   private int viewCount; // 조회수
   // [추가] 
   private int maxMembers; // 스터디 최대 모집인원 수
-  private String startDate; // 스터디 시작일
-  private String endDate; // 스터디 종료일
+  private Date startDate; // 스터디 시작일
+  private Date endDate; // 스터디 종료일
 
   //  [삭제]
   //  private int like; // 좋아요  -> 좋아요 수를 likeMembers의 인덱스 수로 변경
@@ -121,20 +121,19 @@ public class Study extends Content {
     this.maxMembers = maxMember;
   }
 
-  public String getStartDate() {
+  public Date getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(String startDate) {
+  public void setStartDate(Date startDate) {
     this.startDate = startDate;
   }
 
-  public String getEndDate() {
+  public Date getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(String endDate) {
+  public void setEndDate(Date endDate) {
     this.endDate = endDate;
   }
-
 }
