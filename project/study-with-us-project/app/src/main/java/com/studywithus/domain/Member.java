@@ -2,7 +2,7 @@ package com.studywithus.domain;
 
 import java.sql.Date;
 import java.util.List;
-
+//
 public class Member {
   private int userAccessLevel; // 권한
   private String name; // 회원 이름
