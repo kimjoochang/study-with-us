@@ -34,7 +34,17 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
         type = 1; 
         continue;
       }
-      System.out.printf("번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d\n", 
+
+      /* 기존
+        if (type == 1) {
+          continue;
+        } else {
+          type = 0;
+        }
+      }
+       */
+
+      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
           freeStudy.getNo(), 
           freeStudy.getTitle(), 
           freeStudy.getWriter().getName(),
@@ -45,8 +55,9 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
     }
 
     if (type == 1) {
+      // if (type == 0) {
       System.out.println("입력하신 키워드가 포함된 게시글이 없습니다.");
     }
   }
 }
-//*/
+
