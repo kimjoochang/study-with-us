@@ -1,5 +1,5 @@
-/* [ 09.24 수정 소스]
- package com.studywithus.handler.study;
+//* [ 09.24 수정 소스]
+package com.studywithus.handler.study;
 
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
         type = 1; 
         continue;
       }
-      System.out.printf("%d, %s, %s, %s, %d, %d\n", 
+      System.out.printf("번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d\n", 
           freeStudy.getNo(), 
           freeStudy.getTitle(), 
           freeStudy.getWriter().getName(),
@@ -49,4 +49,4 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
     }
   }
 }
- */
+//*/
