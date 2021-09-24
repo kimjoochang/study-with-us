@@ -40,6 +40,7 @@ public class ParticipateFreeStudyListHandler implements Command {
             freeStudy.getRegisteredDate(),
             freeStudy.getViewCount(), 
             freeStudy.getLikeMembers().size());
+
       } else {
         System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
             freeStudy.getNo(), 
