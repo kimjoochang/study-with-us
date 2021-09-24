@@ -38,7 +38,7 @@ public class MentorApplicationDetailHandler implements Command {
     }
 
     System.out.println();
-    String name = Prompt.inputString("이름을 입력하세요. > ");
+    String name = Prompt.inputString("멘토 신청자 이름을 입력하세요. > ");
     MentorApplicationForm mentorName = findByName(name);
     System.out.println();
 
