@@ -31,7 +31,7 @@ public class ExamScheduleDetailHandler extends AbstractScheduleHandler {
     System.out.printf("제목: %s\n", examSchedule.getTitle());
     System.out.printf("작성자: %s\n", examSchedule.getWriter().getName());
     System.out.printf("내용: %s\n", examSchedule.getContent());
-    System.out.printf("시험일: %d-%d-%d\n", examSchedule.getYyyy(), examSchedule.getMm(), examSchedule.getDd());
+    System.out.printf("시험일: %s\n", examSchedule.getStartDate());
     System.out.println();
 
     request.setAttribute("no", no);

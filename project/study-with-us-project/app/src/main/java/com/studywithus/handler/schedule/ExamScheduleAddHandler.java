@@ -1,5 +1,6 @@
 package com.studywithus.handler.schedule;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import com.studywithus.domain.Schedule;
@@ -20,7 +21,10 @@ public class ExamScheduleAddHandler extends AbstractScheduleHandler {
     System.out.println("이달의 시험일정 / 등록]\n");
 
     Schedule examSchedule = new Schedule();
+    LocalDate now = LocalDate.now();
     Calendar calendar = Calendar.getInstance();
+    // calendar 인스턴스의 월 정보를 지금 현재 월로 세팅
+    calendar.set(Calendar.MONTH, now.getMonthValue() - 1);
 
     examSchedule.setNo(Prompt.inputInt("번호를 입력하세요. > "));
     examSchedule.setTitle(Prompt.inputString("제목을 입력하세요. > "));
@@ -29,14 +33,15 @@ public class ExamScheduleAddHandler extends AbstractScheduleHandler {
 
     while(true) {
       String date = Prompt.inputString("시험일을 입력하세요. > " 
-          + Calendar.YEAR + "-" + Calendar.MONTH + "-");
+          + Integer.toString(now.getYear()) + "-" + Integer.toString(now.getMonthValue())+ "-");
 
-      if (Integer.parseInt(date ) > Calendar.DAY_OF_MONTH) {
+      // 만약 calendar 인스턴스에 세팅된 월의 최대 일보다 입력값이 크다면 잘못된 날짜 출력
+      if (Integer.parseInt(date) > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
         System.out.println("잘못된 날짜입니다.");
         continue;
       }
-      examSchedule.setStartDate(Integer.toString(Calendar.YEAR)+"-" + 
-          Integer.toString(Calendar.YEAR) + "-" 
+      examSchedule.setStartDate(Integer.toString(now.getYear())+"-" + 
+          Integer.toString(now.getMonthValue()) + "-" 
           + date);
       break;
     }
