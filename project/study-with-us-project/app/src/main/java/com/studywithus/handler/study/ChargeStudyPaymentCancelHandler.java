@@ -1,6 +1,5 @@
 package com.studywithus.handler.study;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +17,9 @@ public class ChargeStudyPaymentCancelHandler extends AbstractStudyHandler {
 	// 유료 스터디 결제내역 리스트 (회원 관점)
 	List<Payment> chargePaymentList;
 
+	//	유료 스터디 결제자 내역 (멘토 관점)
+	List<Member> chargeApplicantList;
+
 	// 각 회원의 참여 유료 스터디 리스트
 	HashMap<String, List<Study>> participateChargeStudyMap;
 	List<Study> participateChargeStudyList;
@@ -26,6 +28,7 @@ public class ChargeStudyPaymentCancelHandler extends AbstractStudyHandler {
 		super(chargeStudyList);
 		this.chargePaymentList = chargePaymentList;
 		this.participateChargeStudyMap = participateChargeStudyMap;
+		this.chargeApplicantList = chargeApplicantList;
 	}
 
 	@Override
@@ -52,13 +55,15 @@ public class ChargeStudyPaymentCancelHandler extends AbstractStudyHandler {
 				continue;
 
 			} else {
+				System.out.println();
+				System.out.println("결제 취소가 완료되었습니다.");
 				break;
 			}
 		}
 
 		// 유료 스터디 결제내역 리스트 (회원 관점)
 		Payment payment = new Payment();
-		chargePaymentList.add(payment);
+		chargePaymentList.remove(payment);
 		AuthLogInHandler.loginUser.setPayment(chargePaymentList);
 
 		// 참여 유료 스터디에 해당 아이디 존재 O
@@ -66,21 +71,12 @@ public class ChargeStudyPaymentCancelHandler extends AbstractStudyHandler {
 			// 참여 유료 스터디에 아이디 호출 -> 참여 유료 스터디 리스트에 대입
 			participateChargeStudyList = participateChargeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
-			// 참여 유료 스터디 리스트에 유료 스터디 추가
-			participateChargeStudyList.add(chargeStudy);
+			// 참여 유료 스터디 리스트에 유료 스터디 삭제
+			participateChargeStudyList.remove(chargeStudy);
 			// 참여 유료 스터디에 아이디 추가
 			participateChargeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), participateChargeStudyList);
-
-			// 참여 유료 스터디에 해당 아이디 존재 X
-		} else {
-			// 새로운 참여 유료 스터디 리스트 생성
-			participateChargeStudyList = new ArrayList<>();
-
-			// 참여 유료 스터디 리스트에 유료 스터디 추가
-			participateChargeStudyList.add(chargeStudy);
-			// 참여 유료 스터디에 아이디 추가
-			participateChargeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), participateChargeStudyList);
-		}
-
+		} 
+		// 유료 스터디 결제한 사람 내역 (멘토 관점)
+		chargeApplicantList.remove(AuthLogInHandler.loginUser);
 	}
 }

@@ -211,16 +211,16 @@ public class AppSY {
 		// 
 		commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
 		commandMap.put("/chargeStudy/deleteDetail", new ChargeStudyDeletedDetailHandler(chargeStudyList, chargeDeleteRequestList));
-		commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList, chargePaymentList, participateChargeStudyMap));
+		commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
 		// 추가
-		commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentCancelHandler(chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
-		commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentListHandler(chargeStudyList));
+		commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
+		commandMap.put("/chargeStudy/paymentList", new ChargeStudyPaymentListHandler(chargeStudyList, participateChargeStudyMap));
 		commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList));
 		commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyList));
 
 		//
 		commandMap.put("/chargeStudy/registerChargeStudy", new RegisterChargeStudyDetailHandler(registerChargeStudyMap, participateChargeStudyMap)); 
-		commandMap.put("/chargeStudy/participateChargeStudt", new ParticipateChargeStudyListHandler(participateChargeStudyMap)); 
+		commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(participateChargeStudyMap)); 
 
 		commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
 		commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
@@ -546,8 +546,6 @@ public class AppSY {
 		myPageMenu.add(createActivityDetailMenu());
 		myPageMenu.add(createInterestMenu());
 		myPageMenu.add(createPaymentListMenu());
-		// 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
-		//		myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
 		myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
 		myPageMenu.add(new MenuItem("나의 정보", "/myinfo/list"));
 
@@ -626,13 +624,13 @@ public class AppSY {
 	private Menu createParticipateChargeStudyMenu() {
 		// 수정
 		MenuGroup participateChargeStudyMenu = new MenuGroup("내가 참여한 유료 스터디", ACCESS_GENERAL);
-		participateChargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/participateChargeStudylist"));
+		participateChargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/participateChargeStudyList"));
 
 		// - 상세보기에 '후기' 메뉴, 결제 취소 추가하고 관련 핸들러 생성해야 함
 		// 모집중,진행중-> 결제 취소 //  진행완료->후기작성
-		participateChargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/participateChargeStudydetail"));
+		participateChargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/participateChargeStudyDetail"));
 		// 추가
-		participateChargeStudyMenu.add(new MenuItem("삭제", "/chargeStudy/participateChargeStudydetail"));
+		participateChargeStudyMenu.add(new MenuItem("삭제", "/chargeStudy/participateChargeStudyDetail"));
 
 		return participateChargeStudyMenu;
 	}
@@ -684,8 +682,8 @@ public class AppSY {
 	private Menu createPaymentListMenu() {
 
 		MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
-		paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "chargeStudy/paymentList"));
-		paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "chargeStudy/paymentDetail"));
+		paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "/chargeStudy/paymentList"));
+		paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "/chargeStudy/paymentCancel"));
 		// 상세보기 / 결제 취소 // 추가하기
 
 		return paymentListMenu;
