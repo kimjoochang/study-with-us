@@ -29,8 +29,8 @@ public class JobsScheduleDetailHandler extends AbstractScheduleHandler {
     System.out.printf("제목: %s\n", jobsCalendar.getTitle());
     System.out.printf("작성자: %s\n", jobsCalendar.getWriter().getName());
     System.out.printf("내용: %s\n", jobsCalendar.getContent());
-    System.out.printf("시작일: %d-%d-%d\n", jobsCalendar.getStartYyyy(), jobsCalendar.getStartMm(), jobsCalendar.getStartDd());
-    System.out.printf("종료일: %d-%d-%d\n", jobsCalendar.getYyyy(), jobsCalendar.getMm(), jobsCalendar.getDd());
+    System.out.printf("시작일: %s\n", jobsCalendar.getStartDate());
+    System.out.printf("종료일: %s\n", jobsCalendar.getEndDate());
     System.out.println();
 
     request.setAttribute("no", no);

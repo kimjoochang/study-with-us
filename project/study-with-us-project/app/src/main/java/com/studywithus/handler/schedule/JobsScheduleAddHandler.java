@@ -1,5 +1,6 @@
 package com.studywithus.handler.schedule;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import com.studywithus.domain.Schedule;
@@ -19,175 +20,83 @@ public class JobsScheduleAddHandler extends AbstractScheduleHandler {
 
     Schedule jobsCalendar= new Schedule();
     Calendar calendar = Calendar.getInstance();
+    String[] arr = new String[2];
+    LocalDate now = LocalDate.now();
+    // calendar 인스턴스의 월 정보를 지금 현재 월로 세팅
+    calendar.set(Calendar.MONTH, now.getMonthValue() - 1);
+    String startDate;
+    String endDate;
 
     jobsCalendar.setNo(Prompt.inputInt("번호를 입력하세요. > "));
     jobsCalendar.setTitle(Prompt.inputString("제목을 입력하세요. > "));
     jobsCalendar.setWriter(AuthLogInHandler.getLoginUser());
     jobsCalendar.setContent(Prompt.inputString("내용을 입력하세요. > "));
 
-    System.out.println("시작일을 입력하세요.");
+    // 시작일 입력
+    while(true) {
+      startDate = Prompt.inputString("채용공고 시작일을 입력하세요. > " 
+          + Integer.toString(now.getYear()) + "-" + Integer.toString(now.getMonthValue())+ "-");
 
-    // 년
-    while (true) {
-      jobsCalendar.setStartYyyy(Prompt.inputInt("YYYY > "));
-
-      if (jobsCalendar.getStartYyyy() < calendar.get(Calendar.YEAR)) {
-        System.out.println("유효한 연도를 입력하시오.\n");
+      // 만약 calendar 인스턴스에 세팅된 월의 최대 일보다 입력값이 크다면 잘못된 날짜 출력
+      if (Integer.parseInt(startDate) > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+        System.out.println("잘못된 날짜입니다.");
         continue;
-
-      } else {
-        break;
       }
-    }
-
-    // 월
-    while (true) {
-      jobsCalendar.setStartMm(Prompt.inputInt("MM > "));
-
-      if (!(1 <= jobsCalendar.getStartMm() && jobsCalendar.getStartMm() <= 12)) {
-        System.out.println("유효한 월을 입력하시오.\n");
-        continue;
-
-      } else {
-        break;
-      }
-    }
-
-    // 일
-    while (true) {
-      jobsCalendar.setStartDd(Prompt.inputInt("DD > "));
-
-      // 1 ~ 31일
-      switch (jobsCalendar.getStartMm()) {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-
-          if (!(jobsCalendar.getStartDd() >= 1 && jobsCalendar.getStartDd() <= 31)) {
-            System.out.println("유효한 일을 입력하시오.\n");
-            continue;
-
-          } else {
-            break;
-          }
-      }
-
-      // 1 ~ 30일
-      switch (jobsCalendar.getStartMm()) {
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-
-          if (!(jobsCalendar.getStartDd() >= 1 && jobsCalendar.getStartDd() <= 30)) {
-            System.out.println("유효한 일을 입력하시오.\n");
-            continue;
-
-          } else {
-            break;
-          }
-      }
-
-      // 1 ~ 28일
-      switch (jobsCalendar.getStartMm()) {
-        case 2:
-
-          if (!(jobsCalendar.getStartDd() >= 1 && jobsCalendar.getStartDd() <= 28)) {
-            System.out.println("유효한 일을 입력하시오.\n");
-            continue;
-
-          } else {
-            break;
-          }
-      }
+      jobsCalendar.setStartDate(Integer.toString(now.getYear())+"-" + 
+          Integer.toString(now.getMonthValue()) + "-" 
+          + startDate);
       break;
     }
 
-    System.out.println("종료일을 입력하세요.");
+    // 종료일 입력
+    while(true) {
+      endDate = Prompt.inputString("채용공고 종료일을 입력하세요. > " 
+          + Integer.toString(now.getYear()) + "-" );
 
-    // 년
-    while (true) {
-      jobsCalendar.setYyyy(Prompt.inputInt("YYYY > "));
-
-      if (jobsCalendar.getStartYyyy() > jobsCalendar.getYyyy()) {
-        System.out.println("종료일은 시작일 이후로 설정하시오.\n");
+      if (!endDate.contains("-") || endDate.length() != 5) {
+        System.out.println("입력 형태가 올바르지 않습니다. ex) MM-DD");
         continue;
+      }
 
-      } else {
+      arr = endDate.split("-");
+
+      // 입력값의 월이 현재 월과 같을 때,
+      if (Integer.parseInt(arr[0]) == now.getMonthValue()) {
+
+        // 만약 calendar 인스턴스에 세팅된 월의 최대 일보다 입력값의 일이 크다면 잘못된 날짜 출력
+        if (Integer.parseInt(arr[1]) > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+          System.out.println("잘못된 날짜입니다.");
+          continue;
+        }
+
+        // 만약 시작일보다 종료일이 빠르다면
+        if(Integer.parseInt(arr[1]) < Integer.parseInt(startDate)) {
+          System.out.println("종료일은 시작일 이후로 입력해주세요. ");
+          continue;
+        }
+        jobsCalendar.setEndDate(Integer.toString(now.getYear())+"-" + 
+            Integer.toString(now.getMonthValue()) + "-" 
+            + endDate);
         break;
-      }
-    }
 
-    // 월
-    while (true) {
-      jobsCalendar.setMm(Prompt.inputInt("MM > "));
-
-      if (!(1 <= jobsCalendar.getMm() && jobsCalendar.getMm() <= 12)) {
-        System.out.println("유효한 월을 입력하시오.\n");
-        continue;
-
-      } else {
+        // 입력값의 월이 현재 월보다 클 경우,
+      } else if (Integer.parseInt(arr[0]) > now.getMonthValue()){
+        // calendar 인스턴스의 월 정보를  입력 값으로 세팅 
+        calendar.set(Calendar.MONTH, Integer.parseInt(arr[1]) - 1);
+        // 만약 calendar 인스턴스에 세팅된 월의 최대 일보다 입력값이 크다면 잘못된 날짜 출력
+        if (Integer.parseInt(arr[1]) > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
+          System.out.println("잘못된 날짜입니다.");
+          continue;
+        }
+        jobsCalendar.setEndDate(Integer.toString(now.getYear())+ "-" + endDate);
         break;
+
+        // 입력값의 월이 현재 월보다 작을 경우,
+      } else {
+        System.out.println("종료일은 시작일 이후로 입력해주세요. ");
       }
     }
 
-    // 일
-    while (true) {
-      jobsCalendar.setDd(Prompt.inputInt("DD > "));
-
-      // 1 ~ 31일
-      switch (jobsCalendar.getMm()) {
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-
-          if (!(jobsCalendar.getDd() >= 1 && jobsCalendar.getDd() <= 31)) {
-            System.out.println("유효한 일을 입력하시오.\n");
-            continue;
-
-          } else {
-            break;
-          }
-      }
-
-      // 1 ~ 30일
-      switch (jobsCalendar.getMm()) {
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-
-          if (!(jobsCalendar.getDd() >= 1 && jobsCalendar.getDd() <= 30)) {
-            System.out.println("유효한 일을 입력하시오.\n");
-            continue;
-
-          } else {
-            break;
-          }
-      }
-
-      // 1 ~ 28일
-      switch (jobsCalendar.getMm()) {
-        case 2:
-
-          if (!(jobsCalendar.getDd() >= 1 && jobsCalendar.getDd() <= 28)) {
-            System.out.println("유효한 일을 입력하시오.\n");
-            continue;
-
-          } else {
-            break;
-          }
-      }
-      break;
-    }
 
     scheduleList.add(jobsCalendar);
 
