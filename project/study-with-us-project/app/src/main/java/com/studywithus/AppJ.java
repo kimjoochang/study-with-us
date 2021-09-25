@@ -265,6 +265,7 @@ public class AppJ {
     loadObjects("jobsSchedule.json", jobsScheduleList, Schedule.class);
     loadObjects("examSchedule.json", examScheduleList, Schedule.class);
 
+    System.out.println();
     System.out.println("|         스터디위더스         |");
     System.out.println("|          STUDYWITHUS         |");
     System.out.println("     ￣￣￣￣∨￣￣￣￣￣￣￣   ");
@@ -564,8 +565,8 @@ public class AppJ {
   private Menu createActivityDetailMenu() {
 
     MenuGroup activityDetailMenu = new MenuGroup("나의 활동", ACCESS_GENERAL);
-    activityDetailMenu.add(createMyPostMenu());
     //[09.25 수정]
+    activityDetailMenu.add(createMyPostMenu());
     activityDetailMenu.add(createMyStudyMenu());
 
     return activityDetailMenu;

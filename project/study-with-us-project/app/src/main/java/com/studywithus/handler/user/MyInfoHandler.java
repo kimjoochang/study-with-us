@@ -13,7 +13,7 @@ public class MyInfoHandler implements Command {
     Member loginUser = AuthLogInHandler.getLoginUser();
 
     if (loginUser == null) {
-      System.out.println("로그인 후 이용 바랍니다.");
+      System.out.println("로그인 후 이용 바랍니다.\n");
       return;
     }
 
@@ -45,7 +45,6 @@ public class MyInfoHandler implements Command {
 
     System.out.printf("이름: %s\n", loginUser.getName());
     System.out.printf("아이디: %s\n", loginUser.getId());
-    System.out.printf("이메일: %s\n", loginUser.getEmail());
     System.out.printf("휴대폰 번호: %s\n", loginUser.getPhoneNumber());
     System.out.printf("가입일: %s\n", loginUser.getRegisteredDate());
   }
