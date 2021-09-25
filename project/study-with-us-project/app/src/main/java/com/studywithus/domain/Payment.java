@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Payment {
 	private String paidChargeStudy; // 결제 스터디명
-	private String paymentMethod; // 결제 수단
+	private String paymentMethod; // 결제 수단 // 보류
 	private Date registeredDate; // 결제일
 
 	public String getPaidChargeStudy() {

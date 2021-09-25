@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.studywithus.domain.Member;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.CommandRequest;
@@ -18,17 +17,17 @@ public class ChargeStudyPaymentHandler extends AbstractStudyHandler {
 	// 유료 스터디 결제내역 리스트 (회원 관점)
 	List<Payment> chargePaymentList;
 
-	// 유료 스터디 결제자 내역 (멘토 관점)
-	List<Member> chargeApplicantList;
+	//	// 유료 스터디 결제자 내역 (멘토 관점) 
+	//	List<Member> chargeApplicantList;
 
 	// 각 회원의 참여 유료 스터디 리스트
 	HashMap<String, List<Study>> participateChargeStudyMap;
 	List<Study> participateChargeStudyList;
 
-	public ChargeStudyPaymentHandler(List<Study> chargeStudyList, List<Payment> chargePaymentList, List<Member> chargeApplicantList, HashMap<String, List<Study>> participateChargeStudyMap) {
+	public ChargeStudyPaymentHandler(List<Study> chargeStudyList, List<Payment> chargePaymentList, HashMap<String, List<Study>> participateChargeStudyMap) {
 		super(chargeStudyList);
 		this.chargePaymentList = chargePaymentList;
-		this.chargeApplicantList = chargeApplicantList;
+		//		this.chargeApplicantList = chargeApplicantList;
 		this.participateChargeStudyMap = participateChargeStudyMap;
 	}
 
@@ -92,8 +91,8 @@ public class ChargeStudyPaymentHandler extends AbstractStudyHandler {
 				participateChargeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), participateChargeStudyList);
 			}
 
-			// 유료 스터디 결제한 사람 내역 (멘토 관점)
-			chargeApplicantList.add(AuthLogInHandler.loginUser);
+			//			// 유료 스터디 결제한 사람 내역 (멘토 관점)
+			//			chargeApplicantList.add(AuthLogInHandler.loginUser);
 		}
 		return;
 	}
