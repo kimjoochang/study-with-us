@@ -70,6 +70,8 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
 
 		System.out.println();
 		System.out.println("유료스터디 등록이 완료되었습니다.\n");
+		AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MENTOR;
+
 	}
 
 	private String setDate(Study chargeStudy) {
@@ -85,7 +87,7 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
 
 		if (chargeStudy.getStartDate() != null) {
 			type = 1; // type이 1이라면 종료일
-			arr = chargeStudy.getStartDate().split("-");
+			//			arr = chargeStudy.getStartDate().split("-");
 		}
 
 		// 연도
