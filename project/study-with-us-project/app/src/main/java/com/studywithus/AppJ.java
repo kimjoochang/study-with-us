@@ -34,6 +34,7 @@ import com.studywithus.handler.community.CommunityDetailHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
+import com.studywithus.handler.community.MyPostDetailHandler;
 import com.studywithus.handler.community.MyPostListHandler;
 import com.studywithus.handler.schedule.ExamScheduleAddHandler;
 import com.studywithus.handler.schedule.ExamScheduleDeleteHandler;
@@ -235,6 +236,8 @@ public class AppJ {
     commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
 
     commandMap.put("/myPost/list", new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));
+    //[09.24 추가]
+    commandMap.put("/myPost/detail", new MyPostDetailHandler(communityQaList, communityInfoList, communityTalkList));
 
     commandMap.put("/jobsSchedule/add", new JobsScheduleAddHandler(jobsScheduleList));
     commandMap.put("/jobsSchedule/list", new JobsScheduleListHandler(jobsScheduleList));
@@ -561,10 +564,24 @@ public class AppJ {
   private Menu createActivityDetailMenu() {
 
     MenuGroup activityDetailMenu = new MenuGroup("나의 활동", ACCESS_GENERAL);
+    activityDetailMenu.add(createMyPostMenu());
+    //[09.25 수정]
     activityDetailMenu.add(createMyStudyMenu());
-    activityDetailMenu.add(new MenuItem("나의 게시글", "/myPost/list"));
 
     return activityDetailMenu;
+  }
+
+  //[09.25 수정]
+  // 마이 페이지 / 나의 활동 / 나의 게시글
+  private Menu createMyPostMenu() {
+
+    MenuGroup myPostMenu = new MenuGroup("나의 게시글");
+    myPostMenu.add(new MenuItem("조회", "/myPost/list"));
+    myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
+    //    myPostMenu.add(new MenuItem("수정", "/myPost/update"));
+    //    myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
+
+    return myPostMenu;
   }
 
   // 마이 페이지 / 나의 활동 / 나의 스터디
@@ -676,20 +693,6 @@ public class AppJ {
 
     return paymentListMenu;
   }
-
-  /*
-  // 마이 페이지 / 나의 활동 / 나의 게시글
-  private Menu createMyPostMenu() {
-
-    MenuGroup myPostMenu = new MenuGroup("나의 게시글");
-    myPostMenu.add(new MenuItem("조회", "/myPost/list"));
-    //    myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
-    //    myPostMenu.add(new MenuItem("수정", "/myPost/update"));
-    //    myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
-
-    return myPostMenu;
-  }
-   */
 
   // ------------------------------ 관리자 페이지 -----------------------------------------
 

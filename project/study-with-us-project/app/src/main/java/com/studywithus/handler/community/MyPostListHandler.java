@@ -22,7 +22,7 @@ public class MyPostListHandler implements Command {
   @Override
   public void execute(CommandRequest request) {
 
-    System.out.println("[마이 페이지 / 나의 활동 / 나의 게시글]\n");
+    System.out.println("[마이 페이지 / 나의 활동 / 나의 게시글 / 조회]\n");
 
     List<Community> myPostList = new ArrayList<>();
 
@@ -36,21 +36,32 @@ public class MyPostListHandler implements Command {
       return;
     }
 
-    int count = 0;
+    // line66 무한출력 방지용으로 임의의 변수 선언
+    int count = 0; 
+
+    // 나의 게시글 일련번호 (나의 게시글 상세보기 시 prompt값으로 사용함)
+    int myPostNo = 1; 
 
     for (Community myPost : myPostList) {
 
       // 로그인한 회원의 정보와 커뮤니티 게시글의 작성자가 일치한다면,
       if (myPost.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+
         count++;
+        // 나의 게시글 번호 설정
+        myPost.setMyPostNo(myPostNo);
+
         // 내가 작성한 커뮤니티 게시글을 아래의 형식으로 출력함
-        System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
+        System.out.printf("[나의 게시글 번호 = %d, 커뮤니티 게시글 번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
+            myPost.getMyPostNo(),
             myPost.getNo(),
             myPost.getTitle(),
             myPost.getWriter().getName(),
             myPost.getRegisteredDate(), 
             myPost.getViewCount(),
             myPost.getLike());
+
+        myPostNo++;
       }
     }
 
