@@ -18,6 +18,7 @@ public class JobsScheduleAddHandler extends AbstractScheduleHandler {
   public void execute(CommandRequest request) {
     System.out.println("[이달의 채용공고 / 등록]\n");
 
+    Schedule lastElement = null;
     Schedule jobsCalendar= new Schedule();
     Calendar calendar = Calendar.getInstance();
     String[] arr = new String[2];
@@ -26,8 +27,12 @@ public class JobsScheduleAddHandler extends AbstractScheduleHandler {
     calendar.set(Calendar.MONTH, now.getMonthValue() - 1);
     String startDate;
     String endDate;
-
-    jobsCalendar.setNo(Prompt.inputInt("번호를 입력하세요. > "));
+    if (!scheduleList.isEmpty()) {
+      lastElement = scheduleList.get(scheduleList.size() - 1);
+      jobsCalendar.setNo(lastElement.getNo() + 1);
+    } else {
+      jobsCalendar.setNo(1);
+    }
     jobsCalendar.setTitle(Prompt.inputString("제목을 입력하세요. > "));
     jobsCalendar.setWriter(AuthLogInHandler.getLoginUser());
     jobsCalendar.setContent(Prompt.inputString("내용을 입력하세요. > "));
@@ -53,7 +58,7 @@ public class JobsScheduleAddHandler extends AbstractScheduleHandler {
       endDate = Prompt.inputString("채용공고 종료일을 입력하세요. > " 
           + Integer.toString(now.getYear()) + "-" );
 
-      if (!endDate.contains("-") || endDate.length() != 5) {
+      if (!endDate.contains("-")) {
         System.out.println("입력 형태가 올바르지 않습니다. ex) MM-DD");
         continue;
       }
@@ -74,9 +79,7 @@ public class JobsScheduleAddHandler extends AbstractScheduleHandler {
           System.out.println("종료일은 시작일 이후로 입력해주세요. ");
           continue;
         }
-        jobsCalendar.setEndDate(Integer.toString(now.getYear())+"-" + 
-            Integer.toString(now.getMonthValue()) + "-" 
-            + endDate);
+        jobsCalendar.setEndDate(Integer.toString(now.getYear())+"-" + endDate);
         break;
 
         // 입력값의 월이 현재 월보다 클 경우,

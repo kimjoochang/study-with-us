@@ -15,7 +15,7 @@ public class ExamScheduleUpdateHandler extends AbstractScheduleHandler {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[이달의 시험일정 / 변경]\n");
 
-    int no = Prompt.inputInt("번호를 입력하세요. > ");
+    int no = (int) request.getAttribute("scheduleNo");
     Schedule examSchedule = findByNo(no);
 
     System.out.println();
