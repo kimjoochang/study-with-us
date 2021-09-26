@@ -9,3 +9,5 @@
 
 rootProject.name = 'study-with-us'
 include('app')
+include('app-client')
+include('app-server')
