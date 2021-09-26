@@ -33,7 +33,7 @@ public class JobsScheduleDetailHandler extends AbstractScheduleHandler {
     System.out.printf("종료일: %s\n", jobsCalendar.getEndDate());
     System.out.println();
 
-    request.setAttribute("no", no);
+    request.setAttribute("sheduleNo", no);
 
     // 관리자인 경우
     if (jobsCalendar.getWriter() == AuthLogInHandler.getLoginUser()) {

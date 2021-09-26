@@ -20,13 +20,20 @@ public class ExamScheduleAddHandler extends AbstractScheduleHandler {
   public void execute(CommandRequest request) {
     System.out.println("이달의 시험일정 / 등록]\n");
 
+    Schedule lastElement = null;
     Schedule examSchedule = new Schedule();
     LocalDate now = LocalDate.now();
     Calendar calendar = Calendar.getInstance();
     // calendar 인스턴스의 월 정보를 지금 현재 월로 세팅
     calendar.set(Calendar.MONTH, now.getMonthValue() - 1);
 
-    examSchedule.setNo(Prompt.inputInt("번호를 입력하세요. > "));
+    if (!scheduleList.isEmpty()) {
+      lastElement = scheduleList.get(scheduleList.size() - 1);
+      examSchedule.setNo(lastElement.getNo() + 1);
+    } else {
+      examSchedule.setNo(1);
+    }
+
     examSchedule.setTitle(Prompt.inputString("제목을 입력하세요. > "));
     examSchedule.setWriter(AuthLogInHandler.getLoginUser());
     examSchedule.setContent(Prompt.inputString("내용을 입력하세요. > "));
