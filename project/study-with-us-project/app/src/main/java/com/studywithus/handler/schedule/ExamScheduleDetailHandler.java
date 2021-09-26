@@ -34,7 +34,7 @@ public class ExamScheduleDetailHandler extends AbstractScheduleHandler {
     System.out.printf("시험일: %s\n", examSchedule.getStartDate());
     System.out.println();
 
-    request.setAttribute("no", no);
+    request.setAttribute("scheduleNo", no);
 
     // 관리자인 경우
     if (examSchedule.getWriter() == AuthLogInHandler.getLoginUser()) {

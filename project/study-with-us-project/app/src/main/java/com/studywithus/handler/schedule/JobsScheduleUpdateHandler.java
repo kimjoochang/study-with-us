@@ -15,7 +15,7 @@ public class JobsScheduleUpdateHandler extends AbstractScheduleHandler {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[이달의 채용공고 / 수정]\n");
 
-    int no = Prompt.inputInt("번호를 입력하세요. > ");
+    int no = (int) request.getAttribute("scheduleNo");
     Schedule jobsCalendar = findByNo(no);
 
     System.out.println();
