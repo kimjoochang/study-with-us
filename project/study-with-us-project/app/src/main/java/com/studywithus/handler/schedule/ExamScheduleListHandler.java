@@ -20,12 +20,10 @@ public class ExamScheduleListHandler extends AbstractScheduleHandler {
     }
 
     for (Schedule examSchedule : scheduleList) {
-      System.out.printf("[번호 = %d, 제목 = %s, 시험일 = %d-%d-%d]\n",
+      System.out.printf("[번호 = %d, 제목 = %s, 시험일 = %s]\n",
           examSchedule.getNo(),
           examSchedule.getTitle(),
-          examSchedule.getYyyy(),
-          examSchedule.getMm(),
-          examSchedule.getDd());
+          examSchedule.getStartDate());
     }
   }
 }

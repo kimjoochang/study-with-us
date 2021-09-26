@@ -20,7 +20,7 @@ public class ChargeStudyDeleteRequestHandler extends AbstractStudyHandler {
 	@Override
 	public void execute(CommandRequest request) {
 		System.out.println("[유료 스터디 / 삭제 요청]\n");
-		int no = (int) request.getAttribute("ChargeNo");
+		int no = (int) request.getAttribute("chargeNo");
 
 		Study chargeStudy = findByNo(no);
 

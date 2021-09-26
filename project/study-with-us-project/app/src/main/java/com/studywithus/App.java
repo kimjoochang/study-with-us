@@ -34,6 +34,7 @@ import com.studywithus.handler.community.CommunityDetailHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
+import com.studywithus.handler.community.MyPostDetailHandler;
 import com.studywithus.handler.community.MyPostListHandler;
 import com.studywithus.handler.schedule.ExamScheduleAddHandler;
 import com.studywithus.handler.schedule.ExamScheduleDeleteHandler;
@@ -172,7 +173,7 @@ public class App {
 
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
 
-    commandMap.put("/myinfo/list", new MyInfoHandler());
+    commandMap.put("/myInfo/list", new MyInfoHandler()); 
 
     commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
     commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
@@ -233,6 +234,7 @@ public class App {
     commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
 
     commandMap.put("/myPost/list", new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));
+    commandMap.put("/myPost/detail", new MyPostDetailHandler(communityQaList, communityInfoList, communityTalkList));
 
     commandMap.put("/jobsSchedule/add", new JobsScheduleAddHandler(jobsScheduleList));
     commandMap.put("/jobsSchedule/list", new JobsScheduleListHandler(jobsScheduleList));
@@ -259,7 +261,7 @@ public class App {
     loadObjects("jobsSchedule.json", jobsScheduleList, Schedule.class);
     loadObjects("examSchedule.json", examScheduleList, Schedule.class);
 
-    System.out.println("");
+    System.out.println();
     System.out.println("|         스터디위더스         |");
     System.out.println("|          STUDYWITHUS         |");
     System.out.println("     ￣￣￣￣∨￣￣￣￣￣￣￣   ");
@@ -536,8 +538,8 @@ public class App {
     myPageMenu.add(createPaymentListMenu());
     // 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가 예정
     //		myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment")); 
+    myPageMenu.add(new MenuItem("나의 정보", "/myInfo/list"));
     myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
-    myPageMenu.add(new MenuItem("나의 정보", "/auth/userInfo"));
 
     return myPageMenu;
   }
@@ -547,7 +549,7 @@ public class App {
 
     MenuGroup activityDetailMenu = new MenuGroup("나의 활동", ACCESS_GENERAL);
     activityDetailMenu.add(createMyStudyMenu());
-    activityDetailMenu.add(new MenuItem("나의 게시글", "/myPost/list"));
+    activityDetailMenu.add(createMyPostMenu());
 
     return activityDetailMenu;
   }
@@ -563,6 +565,18 @@ public class App {
     myStudyMenu.add(createParticipateChargeStudyMenu()); // 내 스터디 / 내가 참여한 유료스터디 추가***
 
     return myStudyMenu;
+  }
+
+  // 마이 페이지 / 나의 활동 / 나의 게시글
+  private Menu createMyPostMenu() {
+
+    MenuGroup myPostMenu = new MenuGroup("나의 게시글");
+    myPostMenu.add(new MenuItem("조회", "/myPost/list"));
+    myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
+    //    myPostMenu.add(new MenuItem("수정", "/myPost/update"));
+    //    myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
+
+    return myPostMenu;
   }
 
   // 마이 페이지 / 나의 활동 / 나의 스터디 / 무료 스터디 신청 내역
@@ -598,7 +612,7 @@ public class App {
     return participateFreeStudyMenu;
   }
 
-  //마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디(멘토 관점)
+  // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디(멘토 관점)
   // - "신청자 명단" -> 상세보기(승인/삭제) 추가해야 함
   private Menu createRegisterChargeStudyMenu() {
 
