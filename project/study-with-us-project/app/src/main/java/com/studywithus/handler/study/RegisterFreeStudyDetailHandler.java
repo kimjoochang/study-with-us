@@ -15,23 +15,21 @@ import com.studywithus.util.Prompt;
 public class RegisterFreeStudyDetailHandler implements Command {
 
   Study freeStudy;
-  List<Study> myRegisteredFreeStudy;
+  List<Study> myRegisteredFreeStudyList;
   HashMap<String, List<Study>> registerFreeStudyMap;
   HashMap<String, List<Study>> participateFreeStudyMap;
 
   public RegisterFreeStudyDetailHandler(HashMap<String, List<Study>> registerFreeStudyMap, 
-      HashMap<String, List<Study>> participateFreeStudyMap, List<Study> myRegisteredFreeStudy) {
+      HashMap<String, List<Study>> participateFreeStudyMap, List<Study> myRegisteredFreeStudyList) {
     this.registerFreeStudyMap = registerFreeStudyMap;
+    this.myRegisteredFreeStudyList = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
     this.participateFreeStudyMap = participateFreeStudyMap;
-    this.myRegisteredFreeStudy = myRegisteredFreeStudy;
   }
 
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 내가 생성한 무료 스터디]\n");
-    /* 해쉬맵의 value값을 myRegisteredFreeStudy에 담음
-     * 전역변수로 둘 경우 App 실행 시 getLoginUser() nullPointer 에러뜸 */
-    myRegisteredFreeStudy = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
+
     Date nowDate = new Date(System.currentTimeMillis());
 
     //    if (myRegisteredFreeStudy.isEmpty() == true) {
@@ -39,23 +37,23 @@ public class RegisterFreeStudyDetailHandler implements Command {
     //      return;
     //    }
 
-    for (int i = 0; i < myRegisteredFreeStudy.size(); i++) {
+    for (int i = 0; i < myRegisteredFreeStudyList.size(); i++) {
       // 모집 인원 = 참여 인원 && 현재 시간 < 시작일
-      if (myRegisteredFreeStudy.get(i).getMembers().size() == myRegisteredFreeStudy.get(i).getMaxMembers() && myRegisteredFreeStudy.get(i).getStartDate().compareTo(nowDate) == 1) {
+      if (myRegisteredFreeStudyList.get(i).getMembers().size() == myRegisteredFreeStudyList.get(i).getMaxMembers() && myRegisteredFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
         System.out.println("<<모집 완료>>");
-        list(myRegisteredFreeStudy);
+        list(myRegisteredFreeStudyList);
         System.out.println();
 
         // 현재 시간 < 시작일
-      } else if (myRegisteredFreeStudy.get(i).getStartDate().compareTo(nowDate) == 1) {
+      } else if (myRegisteredFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
         System.out.println("<<모집 중>>");
-        list(myRegisteredFreeStudy);
+        list(myRegisteredFreeStudyList);
         System.out.println();
 
         // 현재 시간 >= 시작일
-      } else if (myRegisteredFreeStudy.get(i).getStartDate().compareTo(nowDate) != 1) {
+      } else if (myRegisteredFreeStudyList.get(i).getStartDate().compareTo(nowDate) != 1) {
         System.out.println("<<진행 중>>");
-        list(myRegisteredFreeStudy);
+        list(myRegisteredFreeStudyList);
         System.out.println();
       }
     }
@@ -65,7 +63,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
     String title = Prompt.inputString("제목을 입력하세요. > ");
     System.out.println();
 
-    Study freeStudy = findByName(title, myRegisteredFreeStudy);
+    Study freeStudy = findByName(title, myRegisteredFreeStudyList);
 
     if (freeStudy == null) {
       System.out.println();

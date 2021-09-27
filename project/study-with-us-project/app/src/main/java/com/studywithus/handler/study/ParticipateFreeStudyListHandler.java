@@ -14,17 +14,14 @@ public class ParticipateFreeStudyListHandler implements Command {
   List<Study> myParticipatedFreeStudyList;
   HashMap<String, List<Study>> participateFreeStudyMap;
 
-  public ParticipateFreeStudyListHandler(HashMap<String, List<Study>> participateFreeStudyMap, List<Study> myParticipatedFreeStudyList) {
+  public ParticipateFreeStudyListHandler(HashMap<String, List<Study>> participateFreeStudyMap) {
     this.participateFreeStudyMap = participateFreeStudyMap;
-    this.myParticipatedFreeStudyList = myParticipatedFreeStudyList;
+    this.myParticipatedFreeStudyList = participateFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
   }
 
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 내가 참여한 무료 스터디]\n");
-    /* 해쉬맵의 value값을 myParticipatedFreeStudy에 담음 
-     * 전역변수로 둘 경우 App 실행 시 getLoginUser() nullPointer 에러뜸 */
-    myParticipatedFreeStudyList = participateFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
     if (myParticipatedFreeStudyList.isEmpty()) {
       System.out.println("참여 무료 스터디가 존재하지 않습니다.\n");

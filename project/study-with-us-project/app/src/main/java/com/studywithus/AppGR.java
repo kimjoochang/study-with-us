@@ -96,9 +96,9 @@ public class AppGR {
   List<String> mentorList = new ArrayList<>();
 
   List<Study> myParticipatedFreeStudyList = new ArrayList<>();
-  List<Study> myRegisteredFreeStudy = new ArrayList<>();
-  List<Study> registerFreeStudyList = new ArrayList<>();
-  List<Study> participateFreeStudyList = new ArrayList<>();
+  //  List<Study> participateFreeStudyList = new ArrayList<>();
+  List<Study> myRegisteredFreeStudyList = new ArrayList<>();
+  //  List<Study> registerFreeStudyList = new ArrayList<>();
   List<Study> registerChargeStudyList = new ArrayList<>();
   List<Study> participateChargeStudyList = new ArrayList<>();
   List<Study> chargeInterestList = new ArrayList<>();
@@ -196,8 +196,8 @@ public class AppGR {
     commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(freeStudyList));
     commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(freeStudyList));
     commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(freeStudyList));
-    commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(registerFreeStudyMap, participateFreeStudyMap, myRegisteredFreeStudy));
-    commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(participateFreeStudyMap, myParticipatedFreeStudyList));
+    commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(registerFreeStudyMap, participateFreeStudyMap, myRegisteredFreeStudyList));
+    commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(participateFreeStudyMap));
 
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
