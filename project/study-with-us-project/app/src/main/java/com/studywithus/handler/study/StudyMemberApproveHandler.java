@@ -9,7 +9,7 @@ import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.menu.Menu;
 
-public class StudyMemberApproveHandler implements Command{
+public class StudyMemberApproveHandler implements Command {
 
   HashMap<String, List<Study>> registerFreeStudyMap;
   HashMap<String, List<Study>> participateFreeStudyMap;
@@ -34,8 +34,9 @@ public class StudyMemberApproveHandler implements Command{
     List<Study> myParticipatedFreeStudy; // 해쉬맵에 객체 담기 위한 임시 변수
 
     // 개개인이 참여한 무료 스터디
-    /* 해쉬맵에 key값으로 신청한 회원 id , value값으로 회원이 참여한 스터디 리스트 
-     * 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디 추가 */
+    /*
+     * 해쉬맵에 key값으로 신청한 회원 id , value값으로 회원이 참여한 스터디 리스트 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디 추가
+     */
     if (participateFreeStudyMap.containsKey(freeApplicant.getId())) {
       myParticipatedFreeStudy = participateFreeStudyMap.get(freeApplicant.getId());
       myParticipatedFreeStudy.add(freeStudy);

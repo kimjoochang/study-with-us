@@ -1,4 +1,4 @@
-//* [ 09.24 수정 소스]
+// * [ 09.24 수정 소스]
 package com.studywithus.handler.study;
 
 
@@ -28,28 +28,19 @@ public class FreeStudySearchHandler extends AbstractStudyHandler {
     int type = 0; // 일치하는 값이 없을경우, 게시글 없다는 출력만 한 번만 출력되게 하기 위한 변수
 
     for (Study freeStudy : studyList) {
-      if (!freeStudy.getTitle().contains(input) &&
-          !freeStudy.getContent().contains(input) &&
-          !freeStudy.getWriter().getName().contains(input)) {
-        type = 1; 
+      if (!freeStudy.getTitle().contains(input) && !freeStudy.getContent().contains(input)
+          && !freeStudy.getWriter().getName().contains(input)) {
+        type = 1;
         continue;
       }
 
-      /* 기존
-        if (type == 1) {
-          continue;
-        } else {
-          type = 0;
-        }
-      }
+      /*
+       * 기존 if (type == 1) { continue; } else { type = 0; } }
        */
 
-      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
-          freeStudy.getNo(), 
-          freeStudy.getTitle(), 
-          freeStudy.getWriter().getName(),
-          freeStudy.getRegisteredDate(),
-          freeStudy.getViewCount(), 
+      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+          freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
+          freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
           freeStudy.getLikeMembers().size());
       return;
     }

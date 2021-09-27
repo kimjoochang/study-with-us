@@ -18,7 +18,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
   HashMap<String, List<Study>> registerFreeStudyMap;
   HashMap<String, List<Study>> participateFreeStudyMap;
 
-  public RegisterFreeStudyDetailHandler(HashMap<String, List<Study>> registerFreeStudyMap, 
+  public RegisterFreeStudyDetailHandler(HashMap<String, List<Study>> registerFreeStudyMap,
       HashMap<String, List<Study>> participateFreeStudyMap) {
     this.registerFreeStudyMap = registerFreeStudyMap;
     this.participateFreeStudyMap = participateFreeStudyMap;
@@ -27,7 +27,8 @@ public class RegisterFreeStudyDetailHandler implements Command {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 내가 생성한 무료 스터디]\n");
-    List<Study> myRegisteredFreeStudyList = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
+    List<Study> myRegisteredFreeStudyList =
+        registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
     Date nowDate = new Date(System.currentTimeMillis());
 
@@ -38,7 +39,9 @@ public class RegisterFreeStudyDetailHandler implements Command {
 
     for (int i = 0; i < myRegisteredFreeStudyList.size(); i++) {
       // 모집 인원 = 참여 인원 && 현재 시간 < 시작일
-      if (myRegisteredFreeStudyList.get(i).getMembers().size() == myRegisteredFreeStudyList.get(i).getMaxMembers() && myRegisteredFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
+      if (myRegisteredFreeStudyList.get(i).getMembers().size() == myRegisteredFreeStudyList.get(i)
+          .getMaxMembers()
+          && myRegisteredFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
         System.out.println("<<모집 완료>>");
         list(myRegisteredFreeStudyList);
         System.out.println();
@@ -88,7 +91,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-    System.out.printf("좋아요수: %d\n", freeStudy.getLikeMembers().size());
+    System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
     System.out.println();
 
     if (freeStudy.getApplicants().isEmpty()) {
@@ -98,14 +101,14 @@ public class RegisterFreeStudyDetailHandler implements Command {
 
     // 내가 생성한 무료 스터디 상세보기 안에서 신청자 명단 출력1
     for (Member freeApplicant : freeStudy.getApplicants()) {
-      System.out.printf("신청자: %s\n",freeApplicant.getName());
+      System.out.printf("신청자: %s\n", freeApplicant.getName());
     }
 
     System.out.println();
     String name = Prompt.inputString("이름을 입력하세요. > ");
 
-    //파라미터 값 freeStudy는 해당 스터디의 지원자 명단 확인을 위해 파라미터로 넘김
-    Member freeApplicant = findByName(name, freeStudy); 
+    // 파라미터 값 freeStudy는 해당 스터디의 지원자 명단 확인을 위해 파라미터로 넘김
+    Member freeApplicant = findByName(name, freeStudy);
 
     if (freeApplicant == null) {
       System.out.println();
@@ -128,9 +131,9 @@ public class RegisterFreeStudyDetailHandler implements Command {
       System.out.println();
 
       if (input == 1) {
-        /* freeStudy는 해당 스터디의 지원자 명단 확인, 
-         * freeApplicant는 해당 스터디 정보에 멤버로 추가하기 위해
-         *  파라미터로 넘김 */
+        /*
+         * freeStudy는 해당 스터디의 지원자 명단 확인, freeApplicant는 해당 스터디 정보에 멤버로 추가하기 위해 파라미터로 넘김
+         */
         studyMemberApproveHandler(freeApplicant, freeStudy);
         freeApplicant.setUserAccessLevel(Menu.ACCESS_MEMBER | Menu.ACCESS_GENERAL);
         System.out.println("팀원 승인이 완료되었습니다.");
@@ -145,7 +148,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
         return;
 
       } else {
-        System.out.println("잘못된 번호입니다.");
+        System.out.println("다시 입력하세요.");
         continue;
       }
     }
@@ -154,22 +157,16 @@ public class RegisterFreeStudyDetailHandler implements Command {
   // 내가 참여한 무료 스터디 리스트 출력
   private void list(List<Study> myRegisteredFreeStudy) {
     for (Study freeStudy : myRegisteredFreeStudy) {
-      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, ", 
-          freeStudy.getNo(),
-          freeStudy.getTitle(),
-          freeStudy.getWriter().getName(),
-          freeStudy.getOFFLINE());
+      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, ", freeStudy.getNo(),
+          freeStudy.getTitle(), freeStudy.getWriter().getName(), freeStudy.getOFFLINE());
 
       if (freeStudy.getOFFLINE() == "오프라인") {
         System.out.printf("지역 = %s, ", freeStudy.getArea());
       }
 
       System.out.printf("모집 인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]",
-          freeStudy.getMembers().size(),
-          freeStudy.getMaxMembers(),
-          freeStudy.getRegisteredDate(),
-          freeStudy.getViewCount(),
-          freeStudy.getLikeMembers().size());
+          freeStudy.getMembers().size(), freeStudy.getMaxMembers(), freeStudy.getRegisteredDate(),
+          freeStudy.getViewCount(), freeStudy.getLikeMembers().size());
     }
   }
 
@@ -207,8 +204,9 @@ public class RegisterFreeStudyDetailHandler implements Command {
     List<Study> myParticipatedFreeStudy; // 해쉬맵에 객체 담기 위한 임시 변수
 
     // 개개인이 참여한 무료 스터디
-    /* 해쉬맵에 key값으로 신청한 회원 id , value값으로 회원이 참여한 스터디 리스트 
-     * 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디 추가 */
+    /*
+     * 해쉬맵에 key값으로 신청한 회원 id , value값으로 회원이 참여한 스터디 리스트 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디 추가
+     */
     if (participateFreeStudyMap.containsKey(freeApplicant.getId())) {
       myParticipatedFreeStudy = participateFreeStudyMap.get(freeApplicant.getId());
       myParticipatedFreeStudy.add(freeStudy);

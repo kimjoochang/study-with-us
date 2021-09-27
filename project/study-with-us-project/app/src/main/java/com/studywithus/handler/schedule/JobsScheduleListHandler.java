@@ -20,11 +20,8 @@ public class JobsScheduleListHandler extends AbstractScheduleHandler {
     }
 
     for (Schedule jobsCalendar : scheduleList) {
-      System.out.printf("[번호 = %d, 제목 = %s, 시작일 = %s, 종료일 = %s]\n",
-          jobsCalendar.getNo(),
-          jobsCalendar.getTitle(),
-          jobsCalendar.getStartDate(),
-          jobsCalendar.getEndDate());
+      System.out.printf("[번호 = %d, 제목 = %s, 시작일 = %s, 종료일 = %s]\n", jobsCalendar.getNo(),
+          jobsCalendar.getTitle(), jobsCalendar.getStartDate(), jobsCalendar.getEndDate());
     }
   }
 }

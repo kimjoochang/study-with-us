@@ -21,27 +21,18 @@ public class FreeStudyListHandler extends AbstractStudyHandler {
 
     for (Study freeStudy : studyList) {
       if (freeStudy.getOnOffLine() == 1) {
-        System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
-            freeStudy.getNo(), 
-            freeStudy.getTitle(), 
-            freeStudy.getWriter().getName(),
-            freeStudy.getONLINE(),
-            freeStudy.getMembers().size(),
-            freeStudy.getMaxMembers(),
-            freeStudy.getRegisteredDate(),
-            freeStudy.getViewCount(), 
+        System.out.printf(
+            "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+            freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
+            freeStudy.getONLINE(), freeStudy.getMembers().size(), freeStudy.getMaxMembers(),
+            freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
             freeStudy.getLikeMembers().size());
       } else {
-        System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", 
-            freeStudy.getNo(), 
-            freeStudy.getTitle(), 
-            freeStudy.getWriter().getName(),
-            freeStudy.getOFFLINE() ,
-            freeStudy.getArea(),
-            freeStudy.getMembers().size(),
-            freeStudy.getMaxMembers(),
-            freeStudy.getRegisteredDate(),
-            freeStudy.getViewCount(), 
+        System.out.printf(
+            "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+            freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
+            freeStudy.getOFFLINE(), freeStudy.getArea(), freeStudy.getMembers().size(),
+            freeStudy.getMaxMembers(), freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
             freeStudy.getLikeMembers().size());
       }
     }

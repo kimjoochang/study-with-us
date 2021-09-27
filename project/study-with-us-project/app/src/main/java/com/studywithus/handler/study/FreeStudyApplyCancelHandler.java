@@ -14,8 +14,7 @@ public class FreeStudyApplyCancelHandler extends AbstractStudyHandler {
   List<Member> freeApplicantList;
   HashMap<String, List<Study>> applyFreeStudyMap;
 
-  public FreeStudyApplyCancelHandler(
-      List<Study> freeStudyList,
+  public FreeStudyApplyCancelHandler(List<Study> freeStudyList,
       HashMap<String, List<Study>> applyFreeStudyMap) {
     super(freeStudyList);
     this.applyFreeStudyMap = applyFreeStudyMap;
