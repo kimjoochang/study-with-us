@@ -48,8 +48,8 @@ import com.studywithus.handler.schedule.JobsScheduleListHandler;
 import com.studywithus.handler.schedule.JobsScheduleUpdateHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
-import com.studywithus.handler.study.ChargeStudyDeletedDetailHandler;
-import com.studywithus.handler.study.ChargeStudyDeletedListHandler;
+import com.studywithus.handler.study.ChargeStudyDeleteRequestDetailHandler;
+import com.studywithus.handler.study.ChargeStudyDeleteRequestListHandler;
 import com.studywithus.handler.study.ChargeStudyDetailHandler;
 import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
 import com.studywithus.handler.study.ChargeStudyInterestDeleteHandler;
@@ -218,9 +218,9 @@ public class App {
         new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
 
     commandMap.put("/chargeStudy/deleteList",
-        new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
+        new ChargeStudyDeleteRequestListHandler(chargeDeleteRequestList));
     commandMap.put("/chargeStudy/deleteDetail",
-        new ChargeStudyDeletedDetailHandler(chargeStudyList, chargeDeleteRequestList));
+        new ChargeStudyDeleteRequestDetailHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList,
         chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(

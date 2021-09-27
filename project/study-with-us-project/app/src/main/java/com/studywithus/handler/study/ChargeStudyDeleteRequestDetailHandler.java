@@ -6,11 +6,11 @@ import com.studywithus.domain.Study;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.util.Prompt;
 
-public class ChargeStudyDeletedDetailHandler extends AbstractStudyHandler {
+public class ChargeStudyDeleteRequestDetailHandler extends AbstractStudyHandler {
 
 	List<Study> chargeDetailRequestList;
 
-	public ChargeStudyDeletedDetailHandler(List<Study> chargeStudyList, List<Study> chargeDetailRequestList) {
+	public ChargeStudyDeleteRequestDetailHandler(List<Study> chargeStudyList, List<Study> chargeDetailRequestList) {
 		super(chargeStudyList);
 		this.chargeDetailRequestList = chargeDetailRequestList;
 	}
