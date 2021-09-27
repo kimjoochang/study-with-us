@@ -1,11 +1,11 @@
-package com.studywithus.sms;
+package com.studywithus.handler.sms;
 
 import java.util.HashMap;
 import org.json.simple.JSONObject;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
-public class SendAdditionalRecruitmentSms {
+public class SendAdditionalRecruitmentSmsHandler {
 
   public static void main(String[] args) {
 
