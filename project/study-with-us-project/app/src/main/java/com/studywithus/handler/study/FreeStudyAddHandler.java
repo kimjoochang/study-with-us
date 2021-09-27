@@ -50,7 +50,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
       // 시작일 < 종료일이 아닌 경우
       if (freeStudy.getEndDate().compareTo(freeStudy.getStartDate()) != 1) {
-        System.out.println("종료일은 시작일 이후로 설정하시오.\n");
+        System.out.println("종료일은 시작일 이후로 설정하세요.\n");
         continue;
 
       } else {

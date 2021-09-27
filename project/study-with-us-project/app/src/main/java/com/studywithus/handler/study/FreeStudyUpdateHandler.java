@@ -45,7 +45,7 @@ public class FreeStudyUpdateHandler extends AbstractStudyHandler {
         return;
 
       }else if (!input.equalsIgnoreCase("y")) {
-        System.out.println("다시 입력하시오.\n");
+        System.out.println("다시 입력하세요.\n");
         continue;
 
       } else {

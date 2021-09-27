@@ -43,7 +43,7 @@ public class FreeStudyApplyHandler extends AbstractStudyHandler {
       }
     }
 
-    // 모집인원 다 찼을경우
+    // 모집인원 다 찼을 경우
     if (freeStudy.getMembers().size() == freeStudy.getMaxMembers()) {
       System.out.println("모집 인원이 다 찼습니다.");
       return;
@@ -56,7 +56,7 @@ public class FreeStudyApplyHandler extends AbstractStudyHandler {
         return;
 
       } else if (!input.equalsIgnoreCase("y")) {
-        System.out.println("다시 입력하시오.\n");
+        System.out.println("다시 입력하세요.\n");
         continue;
 
       } else {
@@ -79,7 +79,7 @@ public class FreeStudyApplyHandler extends AbstractStudyHandler {
       freeApplicationList.add(freeStudy);
       applyFreeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), freeApplicationList);
 
-      // 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
+      // 생성 리스트가 없는 회원이라면 새로운 생성 리스트에 스터디 추가
     } else {
       freeApplicationList = new ArrayList<>();
 

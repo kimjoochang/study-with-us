@@ -36,8 +36,8 @@ public class FreeStudyApplyListHandler extends AbstractStudyHandler {
           System.out.printf("설명: %s\n", freeStudy.getContent());
           System.out.printf("규칙: %s\n", freeStudy.getRule());
           System.out.printf("모집인원 = %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
-          System.out.printf("시작일 : %s\n", freeStudy.getStartDate());
-          System.out.printf("종료일 : %s\n", freeStudy.getEndDate());
+          System.out.printf("시작일: %s\n", freeStudy.getStartDate());
+          System.out.printf("종료일: %s\n", freeStudy.getEndDate());
           System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
           freeStudy.setViewCount(freeStudy.getViewCount() + 1);

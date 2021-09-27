@@ -95,15 +95,13 @@ public class AppGR {
   List<Member> chargeApplicantList = new ArrayList<>();
   List<String> mentorList = new ArrayList<>();
 
-  List<Study> myParticipatedFreeStudyList = new ArrayList<>();
   //  List<Study> participateFreeStudyList = new ArrayList<>();
-  List<Study> myRegisteredFreeStudyList = new ArrayList<>();
   //  List<Study> registerFreeStudyList = new ArrayList<>();
-  List<Study> registerChargeStudyList = new ArrayList<>();
-  List<Study> participateChargeStudyList = new ArrayList<>();
-  List<Study> chargeInterestList = new ArrayList<>();
+  //  List<Study> registerChargeStudyList = new ArrayList<>();
+  //  List<Study> participateChargeStudyList = new ArrayList<>();
+  //  List<Study> chargeInterestList = new ArrayList<>();
   List<Study> freeStudyList = new ArrayList<>();
-  List<Study> freeApplicationList = new ArrayList<>();
+  //  List<Study> freeApplicationList = new ArrayList<>();
   List<Study> chargeStudyList = new ArrayList<>();
   List<Study> chargeDeleteRequestList = new ArrayList<>();
 
@@ -211,7 +209,7 @@ public class AppGR {
     commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList));
     commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyList));
 
-    //		commandMap.put("/chargeStudy/registerChargeStudy", new RegisterChargeStudyListHandler(registerChargeStudyMap)); // 내가 참여한 유료 스터디***
+    //  commandMap.put("/chargeStudy/registerChargeStudy", new RegisterChargeStudyListHandler(registerChargeStudyMap)); // 내가 참여한 유료 스터디***
     commandMap.put("/chargeStudy/participateChargeStudt", new ParticipateChargeStudyListHandler(participateChargeStudyMap)); // 내가 생성한 유료 스터디***
 
     commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
@@ -254,7 +252,7 @@ public class AppGR {
   void service() {
 
     loadObjects("member.json", memberList, Member.class);
-    loadObjects("chargeInterest.json", chargeInterestList, Study.class);
+    //  loadObjects("chargeInterest.json", chargeInterestList, Study.class);
     loadObjects("freeStudy.json", freeStudyList, Study.class);
     loadObjects("chargeStudy.json", chargeStudyList, Study.class);
     loadObjects("communityQa.json", communityQaList, Community.class);
@@ -283,7 +281,7 @@ public class AppGR {
     Prompt.close();
 
     saveObjects("member.json", memberList);
-    saveObjects("chargeInterest.json", chargeInterestList);
+    //  saveObjects("chargeInterest.json", chargeInterestList);
     saveObjects("freeStudy.json", freeStudyList);
     saveObjects("chargeStudy.json", chargeStudyList);
     saveObjects("communityQa.json", communityQaList);
