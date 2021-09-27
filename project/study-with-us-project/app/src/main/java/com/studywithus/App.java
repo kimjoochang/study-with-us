@@ -569,8 +569,8 @@ public class App {
 		myStudyMenu.add(createFreeStudyApplyMenu());
 		myStudyMenu.add(createRegisterFreeStudyMenu());
 		myStudyMenu.add(createParticipateFreeStudyMenu());
-		myStudyMenu.add(createRegisterChargeStudyMenu()); // 내 스터디 / 내가 생성한 유료스터디 추가***
-		myStudyMenu.add(createParticipateChargeStudyMenu()); // 내 스터디 / 내가 참여한 유료스터디 추가***
+		myStudyMenu.add(createRegisterChargeStudyMenu());
+		myStudyMenu.add(createParticipateChargeStudyMenu());
 
 		return myStudyMenu;
 	}
