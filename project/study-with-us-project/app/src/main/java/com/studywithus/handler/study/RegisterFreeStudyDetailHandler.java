@@ -15,27 +15,26 @@ import com.studywithus.util.Prompt;
 public class RegisterFreeStudyDetailHandler implements Command {
 
   Study freeStudy;
-  List<Study> myRegisteredFreeStudyList;
   HashMap<String, List<Study>> registerFreeStudyMap;
   HashMap<String, List<Study>> participateFreeStudyMap;
 
   public RegisterFreeStudyDetailHandler(HashMap<String, List<Study>> registerFreeStudyMap, 
-      HashMap<String, List<Study>> participateFreeStudyMap, List<Study> myRegisteredFreeStudyList) {
+      HashMap<String, List<Study>> participateFreeStudyMap) {
     this.registerFreeStudyMap = registerFreeStudyMap;
-    this.myRegisteredFreeStudyList = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
     this.participateFreeStudyMap = participateFreeStudyMap;
   }
 
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 내가 생성한 무료 스터디]\n");
+    List<Study> myRegisteredFreeStudyList = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
     Date nowDate = new Date(System.currentTimeMillis());
 
-    //    if (myRegisteredFreeStudy.isEmpty() == true) {
-    //      System.out.println("내가 생성한 무료 스터디가 존재하지 않습니다.");
-    //      return;
-    //    }
+    if (myRegisteredFreeStudyList.isEmpty()) {
+      System.out.println("내가 생성한 무료 스터디가 존재하지 않습니다.");
+      return;
+    }
 
     for (int i = 0; i < myRegisteredFreeStudyList.size(); i++) {
       // 모집 인원 = 참여 인원 && 현재 시간 < 시작일

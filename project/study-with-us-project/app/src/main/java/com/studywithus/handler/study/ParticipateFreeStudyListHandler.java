@@ -11,17 +11,16 @@ import com.studywithus.handler.user.AuthLogInHandler;
 public class ParticipateFreeStudyListHandler implements Command {
 
   Study freeStudy;
-  List<Study> myParticipatedFreeStudyList;
   HashMap<String, List<Study>> participateFreeStudyMap;
 
   public ParticipateFreeStudyListHandler(HashMap<String, List<Study>> participateFreeStudyMap) {
     this.participateFreeStudyMap = participateFreeStudyMap;
-    this.myParticipatedFreeStudyList = participateFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
   }
 
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 내가 참여한 무료 스터디]\n");
+    List<Study> myParticipatedFreeStudyList = participateFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
     if (myParticipatedFreeStudyList.isEmpty()) {
       System.out.println("참여 무료 스터디가 존재하지 않습니다.\n");
