@@ -74,7 +74,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
           return;
 
         } else {
-          System.out.println("잘못된 메뉴 번호입니다.\n");
+          System.out.println("무효한 메뉴 번호입니다.\n");
           continue;
         }
         return;
@@ -143,7 +143,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
           return;
 
         } else {
-          System.out.println("잘못된 메뉴 번호입니다.\n");
+          System.out.println("무효한 메뉴 번호입니다.\n");
           continue;
         }
         return;
