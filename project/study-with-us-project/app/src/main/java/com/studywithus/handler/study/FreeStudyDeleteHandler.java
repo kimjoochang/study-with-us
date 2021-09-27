@@ -24,6 +24,7 @@ public class FreeStudyDeleteHandler extends AbstractStudyHandler {
       return;
     }
 
+    // [수정] 조건문에 관리자도 해당
     if (freeStudy.getWriter().getId() != AuthLogInHandler.getLoginUser().getId()) {
       System.out.println("삭제 권한이 없습니다.");
       return;

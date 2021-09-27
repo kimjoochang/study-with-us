@@ -282,14 +282,14 @@ public class AppGR {
 
     // [삭제] HashMap 적용
     // loadObjects("chargeInterest.json", chargeInterestList, Study.class);
-    loadObjects("member.json", memberList, Member.class);
-    loadObjects("freeStudy.json", freeStudyList, Study.class);
-    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
-    loadObjects("communityQa.json", communityQaList, Community.class);
-    loadObjects("communityInfo.json", communityInfoList, Community.class);
-    loadObjects("communityTalk.json", communityTalkList, Community.class);
-    loadObjects("jobsSchedule.json", jobsScheduleList, Schedule.class);
-    loadObjects("examSchedule.json", examScheduleList, Schedule.class);
+    loadObjects("member_gr.json", memberList, Member.class);
+    loadObjects("freeStudy_gr.json", freeStudyList, Study.class);
+    loadObjects("chargeStudy_gr.json", chargeStudyList, Study.class);
+    loadObjects("communityQa_gr.json", communityQaList, Community.class);
+    loadObjects("communityInfo_gr.json", communityInfoList, Community.class);
+    loadObjects("communityTalk_gr.json", communityTalkList, Community.class);
+    loadObjects("jobsSchedule_gr.json", jobsScheduleList, Schedule.class);
+    loadObjects("examSchedule_gr.json", examScheduleList, Schedule.class);
 
     System.out.println();
     System.out.println("|         스터디위더스         |");
@@ -312,14 +312,14 @@ public class AppGR {
 
     // [삭제] HashMap 적용
     // saveObjects("chargeInterest.json", chargeInterestList);
-    saveObjects("member.json", memberList);
-    saveObjects("freeStudy.json", freeStudyList);
-    saveObjects("chargeStudy.json", chargeStudyList);
-    saveObjects("communityQa.json", communityQaList);
-    saveObjects("communityInfo.json", communityInfoList);
-    saveObjects("communityTalk.json", communityTalkList);
-    saveObjects("jobsSchedule.json", jobsScheduleList);
-    saveObjects("examSchedule.json", examScheduleList);
+    saveObjects("member_gr.json", memberList);
+    saveObjects("freeStudy_gr.json", freeStudyList);
+    saveObjects("chargeStudy_gr.json", chargeStudyList);
+    saveObjects("communityQa_gr.json", communityQaList);
+    saveObjects("communityInfo_gr.json", communityInfoList);
+    saveObjects("communityTalk_gr.json", communityTalkList);
+    saveObjects("jobsSchedule_gr.json", jobsScheduleList);
+    saveObjects("examSchedule_gr.json", examScheduleList);
   }
 
   // JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.

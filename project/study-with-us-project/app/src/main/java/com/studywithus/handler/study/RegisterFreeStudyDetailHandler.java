@@ -91,7 +91,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-    System.out.printf("좋아요수: %d\n", freeStudy.getLikeMembers().size());
+    System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
     System.out.println();
 
     if (freeStudy.getApplicants().isEmpty()) {
@@ -148,7 +148,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
         return;
 
       } else {
-        System.out.println("잘못된 번호입니다.");
+        System.out.println("다시 입력하세요.");
         continue;
       }
     }
