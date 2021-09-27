@@ -38,18 +38,17 @@ public class ExamScheduleAddHandler extends AbstractScheduleHandler {
     examSchedule.setWriter(AuthLogInHandler.getLoginUser());
     examSchedule.setContent(Prompt.inputString("내용을 입력하세요. > "));
 
-    while(true) {
-      String date = Prompt.inputString("시험일을 입력하세요. > " 
-          + Integer.toString(now.getYear()) + "-" + Integer.toString(now.getMonthValue())+ "-");
+    while (true) {
+      String date = Prompt.inputString("시험일을 입력하세요. > " + Integer.toString(now.getYear()) + "-"
+          + Integer.toString(now.getMonthValue()) + "-");
 
       // 만약 calendar 인스턴스에 세팅된 월의 최대 일보다 입력값이 크다면 잘못된 날짜 출력
       if (Integer.parseInt(date) > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
         System.out.println("잘못된 날짜입니다.");
         continue;
       }
-      examSchedule.setStartDate(Integer.toString(now.getYear())+"-" + 
-          Integer.toString(now.getMonthValue()) + "-" 
-          + date);
+      examSchedule.setStartDate(Integer.toString(now.getYear()) + "-"
+          + Integer.toString(now.getMonthValue()) + "-" + date);
       break;
     }
 

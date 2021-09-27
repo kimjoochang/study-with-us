@@ -14,7 +14,7 @@ public abstract class AbstractScheduleHandler implements Command {
 
   // 일정 게시글 번호 검색
   protected Schedule findByNo(int no) {
-    for (Schedule schedule: scheduleList) {
+    for (Schedule schedule : scheduleList) {
       if (schedule.getNo() == no) {
         return schedule;
       }
@@ -23,12 +23,12 @@ public abstract class AbstractScheduleHandler implements Command {
   }
 
   // 일정 게시글 제목 검색
-  //  protected Schedule findByTitle(String title) {
-  //    for (Schedule schedule: scheduleList) {
-  //      if (schedule.getTitle() == title) {
-  //        return schedule;
-  //      }
-  //    }
-  //    return null;
-  //  }
+  // protected Schedule findByTitle(String title) {
+  // for (Schedule schedule: scheduleList) {
+  // if (schedule.getTitle() == title) {
+  // return schedule;
+  // }
+  // }
+  // return null;
+  // }
 }
