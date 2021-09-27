@@ -20,7 +20,8 @@ public class ParticipateFreeStudyListHandler implements Command {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 내가 참여한 무료 스터디]\n");
-    List<Study> myParticipatedFreeStudyList = participateFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
+    List<Study> myParticipatedFreeStudyList =
+        participateFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
     if (myParticipatedFreeStudyList.isEmpty()) {
       System.out.println("참여 무료 스터디가 존재하지 않습니다.\n");
@@ -34,7 +35,8 @@ public class ParticipateFreeStudyListHandler implements Command {
       if (myParticipatedFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
 
         // 모집 인원 = 참여 인원
-        if (myParticipatedFreeStudyList.get(i).getMembers().size() == myParticipatedFreeStudyList.get(i).getMaxMembers()) {
+        if (myParticipatedFreeStudyList.get(i).getMembers().size() == myParticipatedFreeStudyList
+            .get(i).getMaxMembers()) {
           System.out.println("<<모집 완료>>");
           list(myParticipatedFreeStudyList);
           System.out.println();
@@ -57,22 +59,16 @@ public class ParticipateFreeStudyListHandler implements Command {
   // 내가 참여한 무료 스터디 리스트 출력
   private void list(List<Study> myRegisteredFreeStudy) {
     for (Study freeStudy : myRegisteredFreeStudy) {
-      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, ", 
-          freeStudy.getNo(),
-          freeStudy.getTitle(),
-          freeStudy.getWriter().getName(),
-          freeStudy.getOFFLINE());
+      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, ", freeStudy.getNo(),
+          freeStudy.getTitle(), freeStudy.getWriter().getName(), freeStudy.getOFFLINE());
 
       if (freeStudy.getOFFLINE() == "오프라인") {
         System.out.printf("지역 = %s, ", freeStudy.getArea());
       }
 
       System.out.printf("모집 인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
-          freeStudy.getMembers().size(),
-          freeStudy.getMaxMembers(),
-          freeStudy.getRegisteredDate(),
-          freeStudy.getViewCount(),
-          freeStudy.getLikeMembers().size());
+          freeStudy.getMembers().size(), freeStudy.getMaxMembers(), freeStudy.getRegisteredDate(),
+          freeStudy.getViewCount(), freeStudy.getLikeMembers().size());
     }
   }
 }
