@@ -120,7 +120,9 @@ public class RegisterChargeStudyDetailHandler implements Command {
          * freeApplicant는 해당 스터디 정보에 멤버로 추가하기 위해
          *  파라미터로 넘김 */
         studyMemberApproveHandler(chargeApplicant, chargeStudy);
+        // [09.27 추가]
         chargeApplicant.setUserAccessLevel(Menu.ACCESS_MENTEE | Menu.ACCESS_GENERAL);
+
         System.out.println("팀원 승인이 완료되었습니다.");
         break;
 

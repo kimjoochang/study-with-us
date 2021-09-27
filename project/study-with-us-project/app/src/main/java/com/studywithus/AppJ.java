@@ -20,7 +20,6 @@ import java.util.LinkedList;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.studywithus.App.MenuItem;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
@@ -153,7 +152,7 @@ public class AppJ {
   }
 
   public static void main(String[] args) {
-    App app = new App(); 
+    AppJ app = new AppJ(); 
     app.service();
   }
 
@@ -780,3 +779,4 @@ public class AppJ {
 
     return examScheduleManagementMenu;
   }
+}
