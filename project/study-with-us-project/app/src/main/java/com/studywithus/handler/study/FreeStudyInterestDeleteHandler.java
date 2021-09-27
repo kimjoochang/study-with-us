@@ -25,8 +25,8 @@ public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {
 
       Study freeInterest = findByNo(no);
 
-      for(Member member : freeInterest.getLikeMembers()) {
-        if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+      for (Member member : freeInterest.getLikeMembers()) {
+        if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
           type = 1;
           break;
         }
@@ -36,7 +36,7 @@ public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {
         System.out.println("해당 번호의 관심목록이 없습니다.");
         return;
       }
-      while(true) {
+      while (true) {
         String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
         if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -73,7 +73,7 @@ public class FreeStudyInterestDeleteHandler extends AbstractStudyHandler {
         System.out.println("무료 스터디 관심목록이 존재하지 않습니다.\n");
         return;
       }
-      while(true) {
+      while (true) {
         String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
         if (input.equalsIgnoreCase("n") || input.length() == 0) {

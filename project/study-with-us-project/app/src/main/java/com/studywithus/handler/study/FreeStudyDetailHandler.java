@@ -49,7 +49,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
     System.out.println();
 
-    // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때 
+    // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때
     // 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
     request.setAttribute("freeNo", no);
 
@@ -78,7 +78,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
           continue;
         }
         return;
-      } 
+      }
 
       // 내가 쓴 글이 아닐경우
     } else {
@@ -87,7 +87,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
       while (true) {
         for (Member member : freeStudy.getApplicants()) {
-          if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+          if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
             applyType = 1;
             break;
           }
@@ -101,10 +101,10 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
         }
 
         for (Member member : freeStudy.getLikeMembers()) {
-          if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+          if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
             interestType = 1;
             break;
-          } 
+          }
         }
 
         // 관심목록 존재 여부에 따라 출력문 출력
@@ -136,7 +136,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
           } else {
             // 관심목록에 이미 있는 경우
-            request.getRequestDispatcher("/freeStudy/deleteInterest").forward(request); 
+            request.getRequestDispatcher("/freeStudy/deleteInterest").forward(request);
           }
 
         } else if (num == 0) {
@@ -147,7 +147,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
           continue;
         }
         return;
-      } 
+      }
     }
   }
 }

@@ -14,7 +14,8 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
   HashMap<String, List<Study>> registerFreeStudyMap; // 팀장과 팀장 본인이 생성한 스터디 연결할 해쉬맵
 
-  public FreeStudyAddHandler(List<Study> freeStudyList, HashMap<String, List<Study>> registerFreeStudyMap) {
+  public FreeStudyAddHandler(List<Study> freeStudyList,
+      HashMap<String, List<Study>> registerFreeStudyMap) {
     super(freeStudyList);
     this.registerFreeStudyMap = registerFreeStudyMap;
   }
@@ -64,8 +65,10 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
     List<Study> registerFreeStudyList; // 해쉬맵에 객체 담기 위한 임시 변수
 
-    /* 해쉬맵에 key값으로 로그인한 회원 id , value값으로 팀장 본인이 생성한 스터디 리스트 
-     * 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디 추가 */
+    /*
+     * 해쉬맵에 key값으로 로그인한 회원 id , value값으로 팀장 본인이 생성한 스터디 리스트 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디
+     * 추가
+     */
     if (registerFreeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getId())) {
       registerFreeStudyList = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 

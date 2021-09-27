@@ -14,8 +14,7 @@ public class FreeStudyApplyHandler extends AbstractStudyHandler {
   List<Member> freeApplicantList;
   HashMap<String, List<Study>> applyFreeStudyMap;
 
-  public FreeStudyApplyHandler(
-      List<Study> freeStudyList,
+  public FreeStudyApplyHandler(List<Study> freeStudyList,
       HashMap<String, List<Study>> applyFreeStudyMap) {
     super(freeStudyList);
     this.applyFreeStudyMap = applyFreeStudyMap;
@@ -35,7 +34,7 @@ public class FreeStudyApplyHandler extends AbstractStudyHandler {
       return;
     }
 
-    // 중복신청 확인 
+    // 중복신청 확인
     for (Member member : freeStudy.getApplicants()) {
       if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
         System.out.println("이미 신청하셨습니다.");
@@ -48,7 +47,7 @@ public class FreeStudyApplyHandler extends AbstractStudyHandler {
       System.out.println("모집 인원이 다 찼습니다.");
       return;
     }
-    while(true) {
+    while (true) {
       String input = Prompt.inputString("무료 스터디를 신청 하시겠습니까? (y/N) ");
 
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
