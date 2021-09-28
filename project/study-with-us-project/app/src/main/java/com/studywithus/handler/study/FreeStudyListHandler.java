@@ -14,7 +14,7 @@ public class FreeStudyListHandler extends AbstractStudyHandler {
   public void execute(CommandRequest request) {
     System.out.println("[무료 스터디 / 조회]\n");
 
-    if (studyList.isEmpty() == true) {
+    if (studyList.isEmpty()) {
       System.out.println("무료 스터디 게시글이 존재하지 않습니다.");
       return;
     }

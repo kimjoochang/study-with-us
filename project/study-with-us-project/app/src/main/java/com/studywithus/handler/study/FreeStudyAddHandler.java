@@ -26,7 +26,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
     Study freeStudy = new Study();
 
-    freeStudy.setNo(Prompt.inputInt("번호를 입력하세요. > "));
+    freeStudy.setNo(studyList.size() + 1);
     System.out.println("온/오프라인을 선택하세요.");
     System.out.println("1. 온라인");
     System.out.println("2. 오프라인");
