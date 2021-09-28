@@ -5,9 +5,9 @@ import java.util.List;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.CommandRequest;
 
-public class ChargeStudyDeletedListHandler extends AbstractStudyHandler {
+public class ChargeStudyDeleteRequestListHandler extends AbstractStudyHandler {
 
-	public ChargeStudyDeletedListHandler( List<Study> chargeDetailRequestList) {
+	public ChargeStudyDeleteRequestListHandler( List<Study> chargeDetailRequestList) {
 		super(chargeDetailRequestList);
 	}
 

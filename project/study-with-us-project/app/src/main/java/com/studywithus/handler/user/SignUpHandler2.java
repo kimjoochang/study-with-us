@@ -30,24 +30,6 @@ public class SignUpHandler2 extends AbstractLoginHandler {
     if (id == null) {
       System.out.println("중복된 아이디가 있습니다.\n");
 
-      //    } else if (!id.contains("@") || !id.contains(".com")){
-      //      System.out.println("이메일 형식의 아이디를 입력하세요.\n");
-      //
-      //    } else if (password.length() < 8 || password.length() > 16) {
-      //      System.out.println("비밀번호는 8자 이상 16자 이하로 설정 가능합니다.\n");
-      //
-      //    } else if (!password.contains("!") && !password.contains("@") && !password.contains("$") && !password.contains("^")) {
-      //      System.out.println("비밀번호는 다음의 특수문자를 하나 이상 포함해야 합니다.(!,@,$,^)\n");
-      //
-      //    }  else if (password.contains(id) == true) {
-      //      System.out.println("아이디를 포함한 비밀번호는 사용하실 수 없습니다.\n");
-      //
-      //    }  else if (password.contains(phoneNumber) == true) {
-      //      System.out.println("휴대폰 번호를 포함한 비밀번호는 사용하실 수 없습니다.\n");
-      //
-      //    } else if (phoneNumber.length() != 11) {
-      //      System.out.println("올바른 형식의 휴대폰 번호를 입력하세요.\n");
-
     } else {
       member.setName(name);
       member.setId(id);
