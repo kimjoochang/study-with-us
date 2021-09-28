@@ -18,7 +18,8 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
   // 각 멘토의 생성 유료 스터디 리스트
   HashMap<String, List<Study>> registerChargeStudyMap;
 
-  public ChargeStudyAddHandler(List<Study> chargeStudyList, HashMap<String, List<Study>> registerChargeStudyMap) {
+  public ChargeStudyAddHandler(List<Study> chargeStudyList, 
+      HashMap<String, List<Study>> registerChargeStudyMap) {
     super(chargeStudyList);
     this.registerChargeStudyMap = registerChargeStudyMap;
   }
@@ -29,7 +30,6 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
 
     Study chargeStudy = new Study();
 
-    chargeStudy.setWriter(AuthLogInHandler.getLoginUser());
 
     if (!studyList.isEmpty()) {
       Study lastElement = studyList.get(studyList.size() - 1);
@@ -38,6 +38,7 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
       chargeStudy.setNo(1);
     }
 
+    chargeStudy.setWriter(AuthLogInHandler.getLoginUser());
     chargeStudy.setArea(Prompt.inputString("지역: "));
     chargeStudy.setTitle(Prompt.inputString("스터디 제목: "));
     chargeStudy.setContent(Prompt.inputString("스터디 설명: "));
@@ -75,8 +76,6 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
 
     System.out.println();
     System.out.println("유료스터디 등록이 완료되었습니다.\n");
-    AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MENTOR;
-
   }
 
   private String setDate(Study chargeStudy) {

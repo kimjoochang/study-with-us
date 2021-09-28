@@ -19,7 +19,7 @@ public class RegisterChargeStudyListHandler implements Command {
   @Override
   public void execute(CommandRequest request) {
     /*
-     * 해쉬맵의 value값을 myParticipatedFreeStudy에 담음 전역변수로 둘 경우 App 실행 시 getLoginUser() nullPointer 에러뜸
+     * 해쉬맵의 value값을 myRegisterChargeStudyList에 담음. 전역변수로 둘 경우 App 실행 시 getLoginUser() nullPointer 에러뜸
      */
     List<Study> myRegisterChargeStudyList =
         registerChargeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
