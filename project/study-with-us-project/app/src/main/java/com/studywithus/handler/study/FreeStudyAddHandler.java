@@ -44,7 +44,19 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
     freeStudy.setContent(Prompt.inputString("설명을 입력하세요. > "));
     freeStudy.setRule(Prompt.inputString("규칙을 입력하세요. > "));
     freeStudy.setMaxMembers(Prompt.inputInt("모집 인원을 입력하세요. > "));
-    freeStudy.setStartDate(Prompt.inputDate("시작일을 입력하세요. ex) YYYY-MM-DD > "));
+
+    while (true) {
+      freeStudy.setStartDate(Prompt.inputDate("시작일을 입력하세요. ex) YYYY-MM-DD > "));
+
+      // 현재 날짜 > 시작일인 경우
+      if (new Date(System.currentTimeMillis()).compareTo(freeStudy.getStartDate()) == 1) {
+        System.out.println("다시 입력하세요.\n");
+        continue;
+
+      } else {
+        break;
+      }
+    }
 
     while (true) {
       freeStudy.setEndDate(Prompt.inputDate("종료일을 입력하세요. ex) YYYY-MM-DD > "));
@@ -52,11 +64,6 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
       // 시작일 < 종료일이 아닌 경우
       if (freeStudy.getEndDate().compareTo(freeStudy.getStartDate()) != 1) {
         System.out.println("종료일은 시작일 이후로 설정하세요.\n");
-        continue;
-
-        // 현재 날짜 > 시험일인 경우
-      } else if (new Date(System.currentTimeMillis()).compareTo(freeStudy.getStartDate()) == 1) {
-        System.out.println("다시 입력하세요.\n");
         continue;
 
       } else {

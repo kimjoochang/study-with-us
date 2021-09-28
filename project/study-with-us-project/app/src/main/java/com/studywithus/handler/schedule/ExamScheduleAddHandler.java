@@ -22,10 +22,9 @@ public class ExamScheduleAddHandler extends AbstractScheduleHandler {
     examSchedule.setTitle(Prompt.inputString("제목을 입력하세요. > "));
     examSchedule.setWriter(AuthLogInHandler.getLoginUser());
     examSchedule.setContent(Prompt.inputString("내용을 입력하세요. > "));
-    examSchedule.setStartDate(Prompt.inputDate("시험일을 입력하세요. ex) YYYY-MM-DD > "));
 
     while (true) {
-      examSchedule.setEndDate(Prompt.inputDate("종료일을 입력하세요. ex) YYYY-MM-DD > "));
+      examSchedule.setStartDate(Prompt.inputDate("시험일을 입력하세요. ex) YYYY-MM-DD > "));
 
       // 현재 날짜 > 시험일인 경우
       if (new Date(System.currentTimeMillis()).compareTo(examSchedule.getStartDate()) == 1) {
