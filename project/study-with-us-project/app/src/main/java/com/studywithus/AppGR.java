@@ -47,9 +47,8 @@ import com.studywithus.handler.schedule.JobsScheduleDetailHandler;
 import com.studywithus.handler.schedule.JobsScheduleListHandler;
 import com.studywithus.handler.schedule.JobsScheduleUpdateHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
-import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
-//import com.studywithus.handler.study.ChargeStudyDeletedDetailHandler;
-//import com.studywithus.handler.study.ChargeStudyDeletedListHandler;
+// import com.studywithus.handler.study.ChargeStudyDeletedDetailHandler;
+// import com.studywithus.handler.study.ChargeStudyDeletedListHandler;
 import com.studywithus.handler.study.ChargeStudyDetailHandler;
 import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
 import com.studywithus.handler.study.ChargeStudyInterestDeleteHandler;
@@ -213,14 +212,14 @@ public class AppGR {
     commandMap.put("/chargeStudy/detail",
         new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/deleteRequest",
-        new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
 
     // [에러]
-    //    commandMap.put("/chargeStudy/deleteList",
-    //        new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
-    //    commandMap.put("/chargeStudy/deleteDetail",
-    //        new ChargeStudyDeletedDetailHandler(chargeStudyList, chargeDeleteRequestList));
+    // commandMap.put("/chargeStudy/deleteRequest",
+    // new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
+    // commandMap.put("/chargeStudy/deleteList",
+    // new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
+    // commandMap.put("/chargeStudy/deleteDetail",
+    // new ChargeStudyDeletedDetailHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList,
         chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(
@@ -232,8 +231,8 @@ public class AppGR {
         new ChargeStudyInterestDeleteHandler(chargeStudyList));
 
     // [에러]
-    //    commandMap.put("/chargeStudy/registerChargeStudy",
-    //        new RegisterChargeStudyDetailHandler(registerChargeStudyMap, participateChargeStudyMap));
+    // commandMap.put("/chargeStudy/registerChargeStudy",
+    // new RegisterChargeStudyDetailHandler(registerChargeStudyMap, participateChargeStudyMap));
     commandMap.put("/chargeStudy/participateChargeStudyList",
         new ParticipateChargeStudyListHandler(participateChargeStudyMap));
 
