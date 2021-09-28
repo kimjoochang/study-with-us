@@ -96,7 +96,7 @@ public class AppJ {
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Member> chargeApplicantList = new ArrayList<>();
   List<String> mentorList = new ArrayList<>();
-
+  //
   //    List<Study> registerFreeStudyList = new ArrayList<>();
   //    List<Study> participateFreeStudyList = new ArrayList<>();
   //    List<Study> registerChargeStudyList = new ArrayList<>();
