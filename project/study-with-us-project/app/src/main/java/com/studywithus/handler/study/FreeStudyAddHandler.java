@@ -26,7 +26,7 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
     Study freeStudy = new Study();
 
-    freeStudy.setNo(Prompt.inputInt("번호를 입력하세요. > "));
+    freeStudy.setNo(studyList.size() + 1);
     System.out.println("온/오프라인을 선택하세요.");
     System.out.println("1. 온라인");
     System.out.println("2. 오프라인");
@@ -54,6 +54,11 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
         System.out.println("종료일은 시작일 이후로 설정하세요.\n");
         continue;
 
+        // 현재 날짜 > 시험일인 경우
+      } else if (new Date(System.currentTimeMillis()).compareTo(freeStudy.getStartDate()) == 1) {
+        System.out.println("다시 입력하세요.\n");
+        continue;
+
       } else {
         break;
       }
@@ -65,10 +70,8 @@ public class FreeStudyAddHandler extends AbstractStudyHandler {
 
     List<Study> registerFreeStudyList; // 해쉬맵에 객체 담기 위한 임시 변수
 
-    /*
-     * 해쉬맵에 key값으로 로그인한 회원 id , value값으로 팀장 본인이 생성한 스터디 리스트 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디
-     * 추가
-     */
+    // 해쉬맵에 key값으로 로그인한 회원 id , value값으로 팀장 본인이 생성한 스터디 리스트 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디
+    // 추가
     if (registerFreeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getId())) {
       registerFreeStudyList = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 

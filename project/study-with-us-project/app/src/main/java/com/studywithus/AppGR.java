@@ -47,9 +47,8 @@ import com.studywithus.handler.schedule.JobsScheduleDetailHandler;
 import com.studywithus.handler.schedule.JobsScheduleListHandler;
 import com.studywithus.handler.schedule.JobsScheduleUpdateHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
-import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
-import com.studywithus.handler.study.ChargeStudyDeleteRequestDetailHandler;
-import com.studywithus.handler.study.ChargeStudyDeleteRequestListHandler;
+// import com.studywithus.handler.study.ChargeStudyDeletedDetailHandler;
+// import com.studywithus.handler.study.ChargeStudyDeletedListHandler;
 import com.studywithus.handler.study.ChargeStudyDetailHandler;
 import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
 import com.studywithus.handler.study.ChargeStudyInterestDeleteHandler;
@@ -76,7 +75,6 @@ import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
 import com.studywithus.handler.study.ParticipateChargeStudyListHandler;
 import com.studywithus.handler.study.ParticipateFreeStudyListHandler;
-import com.studywithus.handler.study.RegisterChargeStudyDetailHandler;
 import com.studywithus.handler.study.RegisterFreeStudyDetailHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
@@ -214,13 +212,14 @@ public class AppGR {
     commandMap.put("/chargeStudy/detail",
         new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/deleteRequest",
-        new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
 
-    commandMap.put("/chargeStudy/deleteList",
-        new ChargeStudyDeleteRequestListHandler(chargeDeleteRequestList));
-    commandMap.put("/chargeStudy/deleteDetail",
-        new ChargeStudyDeleteRequestDetailHandler(chargeStudyList, chargeDeleteRequestList));
+    // [에러]
+    // commandMap.put("/chargeStudy/deleteRequest",
+    // new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
+    // commandMap.put("/chargeStudy/deleteList",
+    // new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
+    // commandMap.put("/chargeStudy/deleteDetail",
+    // new ChargeStudyDeletedDetailHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList,
         chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(
@@ -231,8 +230,9 @@ public class AppGR {
     commandMap.put("/chargeStudy/interestDelete",
         new ChargeStudyInterestDeleteHandler(chargeStudyList));
 
-    commandMap.put("/chargeStudy/registerChargeStudy",
-        new RegisterChargeStudyDetailHandler(registerChargeStudyMap, participateChargeStudyMap));
+    // [에러]
+    // commandMap.put("/chargeStudy/registerChargeStudy",
+    // new RegisterChargeStudyDetailHandler(registerChargeStudyMap, participateChargeStudyMap));
     commandMap.put("/chargeStudy/participateChargeStudyList",
         new ParticipateChargeStudyListHandler(participateChargeStudyMap));
 
@@ -650,8 +650,8 @@ public class AppGR {
 
     MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", Menu.ACCESS_MEMBER);
     participateFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/participateStudyList"));
-    // [삭제] 회의 후 안하기로 결정
-    // participateFreeStudyMenu.add(new MenuItem("상세보기", "/participateFreeStudy/detail"));
+    // [추가] 회의 후 추가하기로 결정
+    participateFreeStudyMenu.add(new MenuItem("상세보기", "/participateFreeStudy/detail"));
 
     return participateFreeStudyMenu;
   }
