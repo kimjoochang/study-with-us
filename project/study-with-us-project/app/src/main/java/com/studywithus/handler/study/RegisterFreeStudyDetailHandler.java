@@ -36,29 +36,63 @@ public class RegisterFreeStudyDetailHandler implements Command {
       return;
     }
 
+    int count1 = 0;
+    int count2 = 0;
+    int count3 = 0;
+
     // 모집 인원 = 참여 인원 && 현재 시간 < 시작일
+    System.out.println("<<모집 완료>>");
     for (int i = 0; i < LoginIdList.size(); i++) {
       if (LoginIdList.get(i).getMembers().size() == LoginIdList.get(i).getMaxMembers()
           && LoginIdList.get(i).getStartDate().compareTo(nowDate) == 1) {
-        System.out.println("<<모집 완료>>");
         list(LoginIdList);
+        count1++;
       }
+    }
+
+    if (count1 == 0) {
+      System.out.println("모집 완료된 스터디가 없습니다.");
     }
 
     // 현재 시간 < 시작일
+    System.out.println("<<모집 중>>");
     for (int i = 0; i < LoginIdList.size(); i++) {
       if (LoginIdList.get(i).getStartDate().compareTo(nowDate) == 1) {
-        System.out.println("<<모집 중>>");
-        list(LoginIdList);
+        if (LoginIdList.get(i).getOnOffLine() == 1) {
+          System.out.printf(
+              "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+              LoginIdList.get(i).getNo(), LoginIdList.get(i).getTitle(), LoginIdList.get(i).getWriter().getName(),
+              LoginIdList.get(i).getONLINE(), LoginIdList.get(i).getMembers().size(), LoginIdList.get(i).getMaxMembers(),
+              LoginIdList.get(i).getRegisteredDate(), LoginIdList.get(i).getViewCount(),
+              LoginIdList.get(i).getLikeMembers().size());
+        } else {
+          System.out.printf(
+              "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+              LoginIdList.get(i).getNo(), LoginIdList.get(i).getTitle(), LoginIdList.get(i).getWriter().getName(),
+              LoginIdList.get(i).getOFFLINE(), LoginIdList.get(i).getArea(), LoginIdList.get(i).getMembers().size(),
+              LoginIdList.get(i).getMaxMembers(), LoginIdList.get(i).getRegisteredDate(), LoginIdList.get(i).getViewCount(),
+              LoginIdList.get(i).getLikeMembers().size());
+        }
       }
+      System.out.println();
+      count2++;
+    }
+
+    if (count2 == 0) {
+      System.out.println("모집 중인 스터디가 없습니다.");
     }
 
     // 현재 시간 >= 시작일
+    System.out.println("<<진행 중>>");
     for (int i = 0; i < LoginIdList.size(); i++) {
       if (LoginIdList.get(i).getStartDate().compareTo(nowDate) != 1) {
-        System.out.println("<<진행 중>>");
         list(LoginIdList);
+        count3++;
       }
+    }
+
+    if (count3 == 0) {
+      System.out.println("진행 중인 스터디가 없습니다.");
     }
 
     // 내가 생성한 무료 스터디 상세보기

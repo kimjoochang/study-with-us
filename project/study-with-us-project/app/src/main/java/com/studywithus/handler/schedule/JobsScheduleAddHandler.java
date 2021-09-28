@@ -22,7 +22,19 @@ public class JobsScheduleAddHandler extends AbstractScheduleHandler {
     jobsSchedule.setTitle(Prompt.inputString("제목을 입력하세요. > "));
     jobsSchedule.setWriter(AuthLogInHandler.getLoginUser());
     jobsSchedule.setContent(Prompt.inputString("내용을 입력하세요. > "));
-    jobsSchedule.setStartDate(Prompt.inputDate("시작일을 입력하세요. ex) YYYY-MM-DD > "));
+
+    while (true) {
+      jobsSchedule.setStartDate(Prompt.inputDate("시작일을 입력하세요. ex) YYYY-MM-DD > "));
+
+      // 현재 날짜 > 시작일인 경우
+      if (new Date(System.currentTimeMillis()).compareTo(jobsSchedule.getStartDate()) == 1) {
+        System.out.println("다시 입력하세요.\n");
+        continue;
+
+      } else {
+        break;
+      }
+    }
 
     while (true) {
       jobsSchedule.setEndDate(Prompt.inputDate("종료일을 입력하세요. ex) YYYY-MM-DD > "));
