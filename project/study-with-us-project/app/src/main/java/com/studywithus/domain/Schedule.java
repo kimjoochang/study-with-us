@@ -1,24 +1,24 @@
 package com.studywithus.domain;
 
-public class Schedule extends Content {
-  private String startDate;
-  private String endDate;
+import java.sql.Date;
 
-  public String getStartDate() {
+public class Schedule extends Content {
+  private Date startDate; // 시험일 && 시작일
+  private Date endDate; // 종료일
+
+  public Date getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(String startDate) {
+  public void setStartDate(Date startDate) {
     this.startDate = startDate;
   }
 
-  public String getEndDate() {
+  public Date getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(String endDate) {
+  public void setEndDate(Date endDate) {
     this.endDate = endDate;
   }
-
-
 }

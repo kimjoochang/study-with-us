@@ -20,8 +20,7 @@ public class ParticipateFreeStudyListHandler implements Command {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 내가 참여한 무료 스터디]\n");
-    List<Study> LoginIdList =
-        participateFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
+    List<Study> LoginIdList = participateFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
     if (participateFreeStudyMap.isEmpty()) {
       System.out.println("참여 무료 스터디가 존재하지 않습니다.\n");
@@ -31,10 +30,9 @@ public class ParticipateFreeStudyListHandler implements Command {
     Date nowDate = new Date(System.currentTimeMillis());
 
     // 모집 인원 = 참여 인원 && 현재 시간 < 시작일
-    //    for (Study study : LoginIdList) {
+    // for (Study study : LoginIdList) {
     for (int i = 0; i < LoginIdList.size(); i++) {
-      if (LoginIdList.get(i).getMembers().size() == LoginIdList.get(i)
-          .getMaxMembers()
+      if (LoginIdList.get(i).getMembers().size() == LoginIdList.get(i).getMaxMembers()
           && LoginIdList.get(i).getStartDate().compareTo(nowDate) == 1) {
         System.out.println("<<모집 완료>>");
         list(LoginIdList);
@@ -61,32 +59,6 @@ public class ParticipateFreeStudyListHandler implements Command {
     }
   }
 
-  // Ver.1
-  //    for (int i = 0; i < myParticipatedFreeStudyList.size(); i++) {
-  //      // 현재 시간 < 시작일
-  //      if (myParticipatedFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
-  //
-  //        // 모집 인원 = 참여 인원
-  //        if (myParticipatedFreeStudyList.get(i).getMembers().size() == myParticipatedFreeStudyList
-  //            .get(i).getMaxMembers()) {
-  //          System.out.println("<<모집 완료>>");
-  //          list(myParticipatedFreeStudyList);
-  //          System.out.println();
-  //        }
-  //
-  //        System.out.println("<<모집 중>>");
-  //        list(myParticipatedFreeStudyList);
-  //        System.out.println();
-  //      }
-  //
-  //      // 현재 시간 >= 시작일
-  //      if (myParticipatedFreeStudyList.get(i).getStartDate().compareTo(nowDate) != 1) {
-  //        System.out.println("<<진행 중>>");
-  //        list(myParticipatedFreeStudyList);
-  //        System.out.println();
-  //      }
-  //    }
-
   // 내가 참여한 무료 스터디 리스트 출력
   private void list(List<Study> LoginIdList) {
     for (Study freeStudy : LoginIdList) {
@@ -108,3 +80,29 @@ public class ParticipateFreeStudyListHandler implements Command {
     }
   }
 }
+
+// ParticipateFreeStudyListHandler Ver.1
+// for (int i = 0; i < myParticipatedFreeStudyList.size(); i++) {
+// // 현재 시간 < 시작일
+// if (myParticipatedFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
+//
+// // 모집 인원 = 참여 인원
+// if (myParticipatedFreeStudyList.get(i).getMembers().size() == myParticipatedFreeStudyList
+// .get(i).getMaxMembers()) {
+// System.out.println("<<모집 완료>>");
+// list(myParticipatedFreeStudyList);
+// System.out.println();
+// }
+//
+// System.out.println("<<모집 중>>");
+// list(myParticipatedFreeStudyList);
+// System.out.println();
+// }
+//
+// // 현재 시간 >= 시작일
+// if (myParticipatedFreeStudyList.get(i).getStartDate().compareTo(nowDate) != 1) {
+// System.out.println("<<진행 중>>");
+// list(myParticipatedFreeStudyList);
+// System.out.println();
+// }
+// }
