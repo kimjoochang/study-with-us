@@ -17,13 +17,12 @@ public class Study extends Content {
   private String area; // 지역
   private Date registeredDate; // 스터디 등록일
   private int viewCount; // 조회수
-  // [추가] 
   private int maxMembers; // 스터디 최대 모집인원 수
   private Date startDate; // 스터디 시작일
   private Date endDate; // 스터디 종료일
 
-  //  [삭제]
-  //  private int like; // 좋아요  -> 좋아요 수를 likeMembers의 인덱스 수로 변경
+  //[추가]
+  private boolean deleteRequest; // 스터디 삭제요청 확인하기 위한 필드
 
   public String getONLINE() {
     return ONLINE;
@@ -135,5 +134,13 @@ public class Study extends Content {
 
   public void setEndDate(Date endDate) {
     this.endDate = endDate;
+  }
+
+  public boolean isDeleteRequest() {
+    return deleteRequest;
+  }
+
+  public void setDeleteRequest(boolean deleteRequest) {
+    this.deleteRequest = deleteRequest;
   }
 }
