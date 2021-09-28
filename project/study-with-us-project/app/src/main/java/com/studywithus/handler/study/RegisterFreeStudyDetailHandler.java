@@ -27,45 +27,115 @@ public class RegisterFreeStudyDetailHandler implements Command {
   @Override
   public void execute(CommandRequest request) {
     System.out.println("[마이 페이지 / 내가 생성한 무료 스터디]\n");
-    List<Study> myRegisteredFreeStudyList =
-        registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
+    List<Study> LoginIdList = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
     Date nowDate = new Date(System.currentTimeMillis());
 
-    if (myRegisteredFreeStudyList.isEmpty()) {
+    if (registerFreeStudyMap.isEmpty() == true) {
       System.out.println("내가 생성한 무료 스터디가 존재하지 않습니다.");
       return;
     }
 
-    for (int i = 0; i < myRegisteredFreeStudyList.size(); i++) {
-      // 모집 인원 = 참여 인원 && 현재 시간 < 시작일
-      if (myRegisteredFreeStudyList.get(i).getMembers().size() == myRegisteredFreeStudyList.get(i)
-          .getMaxMembers()
-          && myRegisteredFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
-        System.out.println("<<모집 완료>>");
-        list(myRegisteredFreeStudyList);
-        System.out.println();
-
-        // 현재 시간 < 시작일
-      } else if (myRegisteredFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
-        System.out.println("<<모집 중>>");
-        list(myRegisteredFreeStudyList);
-        System.out.println();
-
-        // 현재 시간 >= 시작일
-      } else if (myRegisteredFreeStudyList.get(i).getStartDate().compareTo(nowDate) != 1) {
-        System.out.println("<<진행 중>>");
-        list(myRegisteredFreeStudyList);
-        System.out.println();
+    // 모집 인원 = 참여 인원 && 현재 시간 < 시작일
+    if (freeStudy.getMembers().size() == freeStudy.getMaxMembers()
+        && freeStudy.getStartDate().compareTo(nowDate) == 1) {
+      System.out.println("<<모집 완료>>");
+      for (Study freeStudy : LoginIdList) {
+        if (freeStudy.getOnOffLine() == 1) {
+          System.out.printf(
+              "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+              freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
+              freeStudy.getONLINE(), freeStudy.getMembers().size(), freeStudy.getMaxMembers(),
+              freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
+              freeStudy.getLikeMembers().size());
+        } else {
+          System.out.printf(
+              "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+              freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
+              freeStudy.getOFFLINE(), freeStudy.getArea(), freeStudy.getMembers().size(),
+              freeStudy.getMaxMembers(), freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
+              freeStudy.getLikeMembers().size());
+        }
       }
+      System.out.println();
     }
+
+    // 현재 시간 < 시작일
+    if (freeStudy.getStartDate().compareTo(nowDate) == 1) {
+      System.out.println("<<모집 중>>");
+
+      for (Study freeStudy : LoginIdList) {
+        if (freeStudy.getOnOffLine() == 1) {
+          System.out.printf(
+              "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+              freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
+              freeStudy.getONLINE(), freeStudy.getMembers().size(), freeStudy.getMaxMembers(),
+              freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
+              freeStudy.getLikeMembers().size());
+        } else {
+          System.out.printf(
+              "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+              freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
+              freeStudy.getOFFLINE(), freeStudy.getArea(), freeStudy.getMembers().size(),
+              freeStudy.getMaxMembers(), freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
+              freeStudy.getLikeMembers().size());
+        }
+      }
+      System.out.println();
+    }
+
+    // 현재 시간 >= 시작일
+    if (freeStudy.getStartDate().compareTo(nowDate) != 1) {
+      System.out.println("<<진행 중>>");
+      for (Study freeStudy : LoginIdList) {
+        if (freeStudy.getOnOffLine() == 1) {
+          System.out.printf(
+              "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+              freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
+              freeStudy.getONLINE(), freeStudy.getMembers().size(), freeStudy.getMaxMembers(),
+              freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
+              freeStudy.getLikeMembers().size());
+        } else {
+          System.out.printf(
+              "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+              freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
+              freeStudy.getOFFLINE(), freeStudy.getArea(), freeStudy.getMembers().size(),
+              freeStudy.getMaxMembers(), freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
+              freeStudy.getLikeMembers().size());
+        }
+      }
+      System.out.println();
+    }
+
+    // for (int i = 0; i < myRegisteredFreeStudyList.size(); i++) {
+    // // 모집 인원 = 참여 인원 && 현재 시간 < 시작일
+    // if (myRegisteredFreeStudyList.get(i).getMembers().size() == myRegisteredFreeStudyList.get(i)
+    // .getMaxMembers()
+    // && myRegisteredFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
+    // System.out.println("<<모집 완료>>");
+    // list(myRegisteredFreeStudyList);
+    // System.out.println();
+    //
+    // // 현재 시간 < 시작일
+    // } else if (myRegisteredFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
+    // System.out.println("<<모집 중>>");
+    // list(myRegisteredFreeStudyList);
+    // System.out.println();
+    //
+    // // 현재 시간 >= 시작일
+    // } else if (myRegisteredFreeStudyList.get(i).getStartDate().compareTo(nowDate) != 1) {
+    // System.out.println("<<진행 중>>");
+    // list(myRegisteredFreeStudyList);
+    // System.out.println();
+    // }
+    // }
 
     // 내가 생성한 무료 스터디 상세보기
     System.out.println();
     String title = Prompt.inputString("제목을 입력하세요. > ");
     System.out.println();
 
-    Study freeStudy = findByName(title, myRegisteredFreeStudyList);
+    Study freeStudy = findByName(title, LoginIdList);
 
     if (freeStudy == null) {
       System.out.println();
@@ -155,20 +225,39 @@ public class RegisterFreeStudyDetailHandler implements Command {
   }
 
   // 내가 참여한 무료 스터디 리스트 출력
-  private void list(List<Study> myRegisteredFreeStudy) {
-    for (Study freeStudy : myRegisteredFreeStudy) {
-      System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, ", freeStudy.getNo(),
-          freeStudy.getTitle(), freeStudy.getWriter().getName(), freeStudy.getOFFLINE());
+  // private void list(int index) {
+  // for (Study freeStudy : myRegisteredFreeStudyList) {
+  // if (freeStudy.getOnOffLine() == 1) {
+  // System.out.printf(
+  // "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+  // freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
+  // freeStudy.getONLINE(), freeStudy.getMembers().size(), freeStudy.getMaxMembers(),
+  // freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
+  // freeStudy.getLikeMembers().size());
+  // } else {
+  // System.out.printf(
+  // "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 =
+  // %d]\n",
+  // freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
+  // freeStudy.getOFFLINE(), freeStudy.getArea(), freeStudy.getMembers().size(),
+  // freeStudy.getMaxMembers(), freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
+  // freeStudy.getLikeMembers().size());
+  // }
+  // }
+  // }
 
-      if (freeStudy.getOFFLINE() == "오프라인") {
-        System.out.printf("지역 = %s, ", freeStudy.getArea());
-      }
-
-      System.out.printf("모집 인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]",
-          freeStudy.getMembers().size(), freeStudy.getMaxMembers(), freeStudy.getRegisteredDate(),
-          freeStudy.getViewCount(), freeStudy.getLikeMembers().size());
-    }
-  }
+  // System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, ", freeStudy.getNo(),
+  // freeStudy.getTitle(), freeStudy.getWriter().getName(), freeStudy.getOFFLINE());
+  //
+  // if (freeStudy.getOFFLINE() == "오프라인") {
+  // System.out.printf("지역 = %s, ", freeStudy.getArea());
+  // }
+  //
+  // System.out.printf("모집 인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]",
+  // freeStudy.getMembers().size(), freeStudy.getMaxMembers(), freeStudy.getRegisteredDate(),
+  // freeStudy.getViewCount(), freeStudy.getLikeMembers().size());
+  // }
+  // }
 
   // 내가 생성한 무료 스터디 상세보기 할 때 사용하는 메서드
   private Study findByName(String title, List<Study> registerFreeStudyMap) {

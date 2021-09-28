@@ -23,31 +23,36 @@ public class ParticipateFreeStudyListHandler implements Command {
     List<Study> myParticipatedFreeStudyList =
         participateFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
-    if (myParticipatedFreeStudyList.isEmpty()) {
+    if (participateFreeStudyMap.isEmpty() == true) {
       System.out.println("참여 무료 스터디가 존재하지 않습니다.\n");
       return;
     }
 
     Date nowDate = new Date(System.currentTimeMillis());
 
+    // 모집 인원 = 참여 인원 && 현재 시간 < 시작일
+    //    for (Study study : myParticipatedFreeStudyList) {
     for (int i = 0; i < myParticipatedFreeStudyList.size(); i++) {
-      // 현재 시간 < 시작일
+      if (myParticipatedFreeStudyList.get(i).getMembers().size() == myParticipatedFreeStudyList.get(i)
+          .getMaxMembers()
+          && myParticipatedFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
+        System.out.println("<<모집 완료>>");
+        list(myParticipatedFreeStudyList);
+        System.out.println();
+      }
+    }
+
+    // 현재 시간 < 시작일
+    for (int i = 0; i < myParticipatedFreeStudyList.size(); i++) {
       if (myParticipatedFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
-
-        // 모집 인원 = 참여 인원
-        if (myParticipatedFreeStudyList.get(i).getMembers().size() == myParticipatedFreeStudyList
-            .get(i).getMaxMembers()) {
-          System.out.println("<<모집 완료>>");
-          list(myParticipatedFreeStudyList);
-          System.out.println();
-        }
-
         System.out.println("<<모집 중>>");
         list(myParticipatedFreeStudyList);
         System.out.println();
       }
+    }
 
-      // 현재 시간 >= 시작일
+    // 현재 시간 >= 시작일
+    for (int i = 0; i < myParticipatedFreeStudyList.size(); i++) {
       if (myParticipatedFreeStudyList.get(i).getStartDate().compareTo(nowDate) != 1) {
         System.out.println("<<진행 중>>");
         list(myParticipatedFreeStudyList);
@@ -55,6 +60,31 @@ public class ParticipateFreeStudyListHandler implements Command {
       }
     }
   }
+
+  //    for (int i = 0; i < myParticipatedFreeStudyList.size(); i++) {
+  //      // 현재 시간 < 시작일
+  //      if (myParticipatedFreeStudyList.get(i).getStartDate().compareTo(nowDate) == 1) {
+  //
+  //        // 모집 인원 = 참여 인원
+  //        if (myParticipatedFreeStudyList.get(i).getMembers().size() == myParticipatedFreeStudyList
+  //            .get(i).getMaxMembers()) {
+  //          System.out.println("<<모집 완료>>");
+  //          list(myParticipatedFreeStudyList);
+  //          System.out.println();
+  //        }
+  //
+  //        System.out.println("<<모집 중>>");
+  //        list(myParticipatedFreeStudyList);
+  //        System.out.println();
+  //      }
+  //
+  //      // 현재 시간 >= 시작일
+  //      if (myParticipatedFreeStudyList.get(i).getStartDate().compareTo(nowDate) != 1) {
+  //        System.out.println("<<진행 중>>");
+  //        list(myParticipatedFreeStudyList);
+  //        System.out.println();
+  //      }
+  //    }
 
   // 내가 참여한 무료 스터디 리스트 출력
   private void list(List<Study> myRegisteredFreeStudy) {
