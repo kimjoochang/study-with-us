@@ -7,7 +7,7 @@ import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
-
+//
 public class RegisterChargeStudyDetailHandler implements Command {
 
   HashMap<String, List<Study>> registerChargeStudyMap;
