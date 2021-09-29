@@ -47,7 +47,6 @@ import com.studywithus.handler.schedule.JobsScheduleDetailHandler;
 import com.studywithus.handler.schedule.JobsScheduleListHandler;
 import com.studywithus.handler.schedule.JobsScheduleUpdateHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
-import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.study.ChargeStudyDetailHandler;
 import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
 import com.studywithus.handler.study.ChargeStudyInterestDeleteHandler;
@@ -205,7 +204,7 @@ public class AppJ {
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
     commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
+    //commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
 
     //commandMap.put("/chargeStudy/deleteList", new ChargeStudyDeletedListHandler(chargeDeleteRequestList));
     //commandMap.put("/chargeStudy/deleteDetail", new ChargeStudyDeletedDetailHandler(chargeStudyList, chargeDeleteRequestList));

@@ -47,8 +47,6 @@ import com.studywithus.handler.schedule.JobsScheduleDetailHandler;
 import com.studywithus.handler.schedule.JobsScheduleListHandler;
 import com.studywithus.handler.schedule.JobsScheduleUpdateHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
-import com.studywithus.handler.study.ChargeStudyDeleteRequestDetailHandler;
-import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestListHandler;
 import com.studywithus.handler.study.ChargeStudyDetailHandler;
 import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
@@ -77,6 +75,7 @@ import com.studywithus.handler.study.MentorApplicationDetailHandler;
 import com.studywithus.handler.study.ParticipateChargeStudyListHandler;
 import com.studywithus.handler.study.ParticipateFreeStudyListHandler;
 import com.studywithus.handler.study.RegisterChargeStudyDetailHandler;
+import com.studywithus.handler.study.RegisterChargeStudyListHandler;
 import com.studywithus.handler.study.RegisterFreeStudyDetailHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
@@ -206,13 +205,13 @@ public class AppJ2 {
     commandMap.put("/chargeStudy/detail",
         new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/deleteRequest",
-        new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
+    //    commandMap.put("/chargeStudy/deleteRequest",
+    //        new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
 
     commandMap.put("/chargeStudy/deleteList",
         new ChargeStudyDeleteRequestListHandler(chargeDeleteRequestList));
-    commandMap.put("/chargeStudy/deleteDetail",
-        new ChargeStudyDeleteRequestDetailHandler(chargeStudyList, chargeDeleteRequestList));
+    //    commandMap.put("/chargeStudy/deleteDetail",
+    //        new ChargeStudyDeleteRequestDetailHandler(chargeStudyList, chargeDeleteRequestList));
     commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList,
         chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(
@@ -223,8 +222,15 @@ public class AppJ2 {
     commandMap.put("/chargeStudy/interestDelete",
         new ChargeStudyInterestDeleteHandler(chargeStudyList));
 
-    commandMap.put("/chargeStudy/registerChargeStudy",
-        new RegisterChargeStudyDetailHandler(registerChargeStudyMap, participateChargeStudyMap));
+    //    commandMap.put("/chargeStudy/registerChargeStudy",
+    //        new RegisterChargeStudyDetailHandler(registerChargeStudyMap, participateChargeStudyMap));
+
+    // [09.27 추가]
+    commandMap.put("/chargeStudy/registerChargeStudyList", new RegisterChargeStudyListHandler(registerChargeStudyMap)); 
+    // [09.28 수정]
+    commandMap.put("/chargeStudy/registerChargeStudyDetail", new RegisterChargeStudyDetailHandler(registerChargeStudyMap)); 
+
+
     commandMap.put("/chargeStudy/participateChargeStudyList",
         new ParticipateChargeStudyListHandler(participateChargeStudyMap));
 
@@ -651,11 +657,10 @@ public class AppJ2 {
   // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디(멘토 관점) [X]
   // - "신청자 명단" -> 상세보기(승인/삭제) 추가해야 함
   private Menu createRegisterChargeStudyMenu() {
-
-    MenuGroup registerChargeStudyMenu = new MenuGroup("내가 생성한 유료 스터디", ACCESS_GENERAL);
+    // [09.29 수정 - 키값, 메뉴 구성]
+    MenuGroup registerChargeStudyMenu = new MenuGroup("내가 생성한 유료 스터디", ACCESS_MENTOR);
     registerChargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/registerChargeStudyList"));
     registerChargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/registerChargeStudyDetail"));
-    registerChargeStudyMenu.add(new MenuItem("삭제", "/registerChargeStudy/delete"));
 
     return registerChargeStudyMenu;
   }
