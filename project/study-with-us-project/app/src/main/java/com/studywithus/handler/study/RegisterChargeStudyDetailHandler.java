@@ -1,50 +1,39 @@
 package com.studywithus.handler.study;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
-//
+
 public class RegisterChargeStudyDetailHandler implements Command {
 
   HashMap<String, List<Study>> registerChargeStudyMap;
-  HashMap<String, List<Study>> participateChargeStudyMap;
+  List<Study> myRegisterChargeStudyList;
 
-  public RegisterChargeStudyDetailHandler(HashMap<String, List<Study>> registerChargeStudyMap,
-      HashMap<String, List<Study>> participateChargeStudyMap) {
+  public RegisterChargeStudyDetailHandler(HashMap<String, List<Study>> registerChargeStudyMap) {
     this.registerChargeStudyMap = registerChargeStudyMap;
-    this.participateChargeStudyMap = participateChargeStudyMap;
   }
 
   @Override
-  public void execute(CommandRequest request) {
-    /* 해쉬맵의 value값을 myRegisteredChargeStudy에 담음 
-     * 전역변수로 둘 경우 App 실행 시 getLoginUser() nullPointer 에러뜸 */
-    //
-    List<Study> myRegisteredChargeStudyList = registerChargeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
+  public void execute(CommandRequest request) throws Exception  {
 
     System.out.println("[마이 페이지 / 내가 생성한 유료 스터디 / 상세보기]\n");
 
-    //myRegisterChargeStudyList = registerChargeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
+    myRegisterChargeStudyList = registerChargeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
 
-    // 내가 생성한 유료 스터디 상세보기
-    System.out.println();
-    String title = Prompt.inputString("제목을 입력하세요. > ");
-    System.out.println();
+    int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    Study chargeStudy = findByName(title, myRegisteredChargeStudyList);
+    Study chargeStudy = findByNo(no);
 
     if (chargeStudy == null) {
       System.out.println();
-      System.out.println("입력하신 제목과 일치하는 스터디가 없습니다.");
+      System.out.println("해당 번호의 내가 생성한 유료 스터디가 없습니다.\n");
       return;
     }
+
     chargeStudy.setViewCount(chargeStudy.getViewCount() + 1);
 
     System.out.printf("제목: %s\n", chargeStudy.getTitle());
@@ -60,114 +49,30 @@ public class RegisterChargeStudyDetailHandler implements Command {
     System.out.printf("좋아요수: %d\n", chargeStudy.getLikeMembers().size());
     System.out.println();
 
-    if (chargeStudy.getApplicants().isEmpty()) {
-      System.out.println("스터디를 신청한 회원이 없습니다.");
-      return;
-    }
-    // 내가 생성한 무료 스터디 상세보기 안에서 신청자 명단 출력1
-    for (Member chargeApplicant : chargeStudy.getApplicants()) {
-      System.out.printf("신청자: %s\n",chargeApplicant.getName());
-    }
-    System.out.println();
-    String name = Prompt.inputString("이름을 입력하세요. > ");
+    request.setAttribute("chargeNo", no);
 
-    //파라미터 값 freeStudy는 해당 스터디의 지원자 명단 확인을 위해 파라미터로 넘김
-    Member chargeApplicant = findByName(name, chargeStudy); 
-
-    if (chargeApplicant == null) {
-      System.out.println();
-      System.out.println("입력하신 이름과 일치하는 회원이 없습니다.");
-      return;
-    }
-
-    System.out.printf("이름: %s\n", chargeApplicant.getName());
-    System.out.printf("이메일: %s\n", chargeApplicant.getEmail());
-    System.out.printf("아이디: %s\n", chargeApplicant.getId());
-    System.out.printf("휴대폰 번호: %s\n", chargeApplicant.getPhoneNumber());
-
-    System.out.println();
-    System.out.println("1. 승인");
-    System.out.println("2. 거절");
+    System.out.println("1. 수정"); 
+    System.out.println("2. 삭제");
     System.out.println("0. 이전\n");
 
-    // add
-    while (true) {
-      int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
-      System.out.println();
+    int input = Prompt.inputInt("메뉴 번호를 선택하세요. > "); 
+    System.out.println();
 
-      if (input == 1) {
-        /* freeStudy는 해당 스터디의 지원자 명단 확인, 
-         * freeApplicant는 해당 스터디 정보에 멤버로 추가하기 위해
-         *  파라미터로 넘김 */
-        studyMemberApproveHandler(chargeApplicant, chargeStudy);
-        System.out.println("팀원 승인이 완료되었습니다.");
-        break;
-
-      } else if (input == 2) {
-        chargeStudy.getApplicants().remove(chargeApplicant);
-        System.out.println("팀원 신청을 거절하였습니다.");
-        break;
-
-      } else if (input == 0) {
-        return;
-
-      } else {
-        System.out.println("잘못된 번호입니다.");
-        continue;
-      }
+    if (input == 1) {
+      request.getRequestDispatcher("/chargeStudy/update").forward(request);
+    } else if (input == 2) {
+      request.getRequestDispatcher("/chargeStudy/deleteRequest").forward(request);
+    } else if (input == 0) {
+      return;
     }
   }
 
-  //내가 생성한 유료 스터디 상세보기 할 때 사용하는 메서드
-  private Study findByName(String title, List<Study> registerChargeStudyMap) {
-    for (Study chargeStudy : registerChargeStudyMap) {
-      if (chargeStudy.getTitle().equals(title)) {
-        return chargeStudy;
+  private Study findByNo(int no) {
+    for (Study myRegisterChargeStudy : myRegisterChargeStudyList) {
+      if (myRegisterChargeStudy.getNo() == no) {
+        return myRegisterChargeStudy;
       }
     }
     return null;
   }
-
-  // 내가 생성한 유료스터디 신청자 상세보기 할 때 사용하는 메서드
-  private Member findByName(String name, Study chargeStudy) {
-    for (Member chargeApplicant : chargeStudy.getApplicants()) {
-      if (chargeApplicant.getName().equals(name)) {
-        return chargeApplicant;
-      }
-    }
-    return null;
-  }
-
-  private void studyMemberApproveHandler(Member chargeApplicant, Study chargeStudy) {
-    // 승인한 신청자의 정보를 신청자 리스트에서 삭제
-    List<Member> studyApplicants = chargeStudy.getApplicants();
-    studyApplicants.remove(chargeApplicant);
-    chargeStudy.setApplicants(studyApplicants);
-
-    // 스터디 도메인 members에 회원 정보 추가
-    List<Member> studyMembers = chargeStudy.getMembers();
-    studyMembers.add(chargeApplicant);
-    chargeStudy.setMembers(studyMembers);
-
-    List<Study> myParticipatedChargeStudy; // 해쉬맵에 객체 담기 위한 임시 변수
-
-    // 개개인이 참여한 무료 스터디
-    /* 해쉬맵에 key값으로 신청한 회원 id , value값으로 회원이 참여한 스터디 리스트 
-     * 만약, 해당 아이디가 생성리스트를 갖고 있다면 기존 생성리스트에 스터디 추가 */
-    if (participateChargeStudyMap.containsKey(chargeApplicant.getId())) {
-      myParticipatedChargeStudy = participateChargeStudyMap.get(chargeApplicant.getId());
-      myParticipatedChargeStudy.add(chargeStudy);
-      participateChargeStudyMap.put(chargeApplicant.getId(), myParticipatedChargeStudy);
-
-      // 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
-    } else {
-      myParticipatedChargeStudy = new ArrayList<>();
-      myParticipatedChargeStudy.add(chargeStudy);
-      participateChargeStudyMap.put(chargeApplicant.getId(), myParticipatedChargeStudy);
-    }
-
-    chargeApplicant.setUserAccessLevel(chargeApplicant.getUserAccessLevel() | Menu.ACCESS_MENTEE);
-  }
-
 }
-

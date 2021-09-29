@@ -47,7 +47,6 @@ import com.studywithus.handler.schedule.JobsScheduleDetailHandler;
 import com.studywithus.handler.schedule.JobsScheduleListHandler;
 import com.studywithus.handler.schedule.JobsScheduleUpdateHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
-import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestListHandler;
 import com.studywithus.handler.study.ChargeStudyDetailHandler;
 import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
@@ -206,9 +205,9 @@ public class AppJ2 {
     commandMap.put("/chargeStudy/detail",
         new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
-    // [09.29 수정] 파라미터 삭제
-    commandMap.put("/chargeStudy/deleteRequest",
-        new ChargeStudyDeleteRequestHandler(chargeStudyList));
+
+    //    commandMap.put("/chargeStudy/deleteRequest",
+    //        new ChargeStudyDeleteRequestHandler(chargeStudyList, chargeDeleteRequestList));
 
     commandMap.put("/chargeStudy/deleteList",
         new ChargeStudyDeleteRequestListHandler(chargeDeleteRequestList));
@@ -230,7 +229,7 @@ public class AppJ2 {
     // [09.27 추가]
     commandMap.put("/chargeStudy/registerChargeStudyList", new RegisterChargeStudyListHandler(registerChargeStudyMap)); 
     // [09.28 수정]
-    commandMap.put("/chargeStudy/registerChargeStudyDetail", new RegisterChargeStudyDetailHandler(registerChargeStudyMap, participateChargeStudyMap)); 
+    commandMap.put("/chargeStudy/registerChargeStudyDetail", new RegisterChargeStudyDetailHandler(registerChargeStudyMap)); 
 
 
     commandMap.put("/chargeStudy/participateChargeStudyList",
