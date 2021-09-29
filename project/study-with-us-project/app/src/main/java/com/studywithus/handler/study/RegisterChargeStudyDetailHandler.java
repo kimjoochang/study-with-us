@@ -54,7 +54,7 @@ public class RegisterChargeStudyDetailHandler implements Command {
     request.setAttribute("chargeNo", no);
 
     System.out.println("1. 수정"); 
-    System.out.println("1. 삭제");
+    System.out.println("2. 삭제");
     System.out.println("0. 이전\n");
 
     int input = Prompt.inputInt("메뉴 번호를 선택하세요. > "); 
