@@ -230,7 +230,7 @@ public class AppJ2 {
     // [09.27 추가]
     commandMap.put("/chargeStudy/registerChargeStudyList", new RegisterChargeStudyListHandler(registerChargeStudyMap)); 
     // [09.28 수정]
-    commandMap.put("/chargeStudy/registerChargeStudyDetail", new RegisterChargeStudyDetailHandler(registerChargeStudyMap)); 
+    commandMap.put("/chargeStudy/registerChargeStudyDetail", new RegisterChargeStudyDetailHandler(registerChargeStudyMap, participateChargeStudyMap)); 
 
 
     commandMap.put("/chargeStudy/participateChargeStudyList",
