@@ -7,7 +7,7 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class NoticeUpdateHandler extends AbstractCommunityHandler{
+public class NoticeUpdateHandler extends AbstractCommunityHandler {
 
 	public NoticeUpdateHandler(List<Community> communityList) {
 		super(communityList);
@@ -43,7 +43,7 @@ public class NoticeUpdateHandler extends AbstractCommunityHandler{
 				System.out.println("공지 수정을 취소하였습니다.\n");
 				return;
 
-			} else if (input.equalsIgnoreCase("y")){
+			} else if (input.equalsIgnoreCase("y")) {
 
 				community.setTitle(title);
 				community.setContent(content);
@@ -53,7 +53,7 @@ public class NoticeUpdateHandler extends AbstractCommunityHandler{
 				return;
 
 			} else {
-				System.out.println("올바른 값을 입력하세요.\n");
+				System.out.println("다시 입력하세요.\n");
 				continue;
 			}
 		}

@@ -8,7 +8,7 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class NoticeAddHandler extends AbstractCommunityHandler{
+public class NoticeAddHandler extends AbstractCommunityHandler {
 
 	public NoticeAddHandler(List<Community> communityList) {
 		super(communityList);

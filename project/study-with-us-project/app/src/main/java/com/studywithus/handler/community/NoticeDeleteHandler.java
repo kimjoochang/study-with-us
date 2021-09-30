@@ -6,7 +6,7 @@ import com.studywithus.domain.Community;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.util.Prompt;
 
-public class NoticeDeleteHandler extends AbstractCommunityHandler{
+public class NoticeDeleteHandler extends AbstractCommunityHandler {
 
 	public NoticeDeleteHandler(List<Community> communityList) {
 		super(communityList);
@@ -26,7 +26,7 @@ public class NoticeDeleteHandler extends AbstractCommunityHandler{
 			return;
 		}
 
-		while(true) {
+		while (true) {
 			String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
 			if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -40,7 +40,7 @@ public class NoticeDeleteHandler extends AbstractCommunityHandler{
 				return;
 
 			} else {
-				System.out.println("올바른 값을 입력하세요.\n");
+				System.out.println("다시 입력하세요.\n");
 				continue;
 			}
 		}
