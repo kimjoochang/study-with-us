@@ -78,6 +78,8 @@ import com.studywithus.handler.study.ParticipateChargeStudyDetailHandler;
 import com.studywithus.handler.study.ParticipateChargeStudyListHandler;
 import com.studywithus.handler.study.ParticipateFreeStudyListHandler;
 import com.studywithus.handler.study.RegisterFreeStudyDetailHandler;
+import com.studywithus.handler.study.ReviewAddHandler;
+import com.studywithus.handler.study.ReviewListHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindIdHandler;
@@ -97,13 +99,7 @@ public class AppJC {
   List<Member> mentorApplicantList = new ArrayList<>();
   List<Member> chargeApplicantList = new ArrayList<>();
   List<String> mentorList = new ArrayList<>();
-  //	List<Study> registerFreeStudyList = new ArrayList<>();
-  //	List<Study> participateFreeStudyList = new ArrayList<>();
-  //	List<Study> registerChargeStudyList = new ArrayList<>();
-  //	List<Study> participateChargeStudyList = new ArrayList<>();
-  //	List<Study> chargeInterestList = new ArrayList<>();
   List<Study> freeStudyList = new ArrayList<>();
-  //	List<Study> freeApplicationList = new ArrayList<>();
   List<Study> chargeStudyList = new ArrayList<>();
 
   List<MentorApplicationForm> mentorApplicationFormList = new ArrayList<>();
@@ -201,16 +197,16 @@ public class AppJC {
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-    // [추가] 파라미터
     commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
     // [추가] 파라미터
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList));
 
-    // [추가] 파라미터
+    // [추가] 파라미터, 키값 변경
     commandMap.put("/chargeStudy/deleteRequestList", new ChargeStudyDeleteRequestListHandler(chargeStudyList));
-    // [추가] 파라미터
+    // [추가] 파라미터, 키값변경
     commandMap.put("/chargeStudy/deleteRequestDetail", new ChargeStudyDeleteRequestDetailHandler(chargeStudyList));
+
     commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     commandMap.put("/chargeStudy/paymentList", new ChargeStudyPaymentListHandler(chargeStudyList, participateChargeStudyMap));
@@ -221,6 +217,9 @@ public class AppJC {
     commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(participateChargeStudyMap)); 
     // [추가]
     commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(participateChargeStudyMap)); 
+    // [추가]
+    commandMap.put("/review/add", new ReviewAddHandler(chargeStudyList));
+    commandMap.put("/review/list", new ReviewListHandler(chargeStudyList));
 
     commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
     commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));

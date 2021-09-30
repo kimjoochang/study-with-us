@@ -1,1 +1,1 @@
-[{"userAccessLevel":18,"name":"1","id":"1","password":"1","phoneNumber":"1","registeredDate":"9월 23, 2021"},{"userAccessLevel":18,"name":"2","id":"2","password":"2","phoneNumber":"2","registeredDate":"9월 23, 2021"}]
+[{"userAccessLevel":18,"name":"1","id":"1","password":"1","phoneNumber":"1","registeredDate":"9월 23, 2021"},{"userAccessLevel":82,"name":"2","id":"2","password":"2","phoneNumber":"2","registeredDate":"9월 23, 2021","payment":[{}]},{"userAccessLevel":2,"name":"3","id":"3","password":"3","phoneNumber":"","registeredDate":"9월 30, 2021"}]

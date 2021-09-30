@@ -1,5 +1,6 @@
 package com.studywithus.handler.study;
 
+import java.sql.Date;
 import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
@@ -37,6 +38,9 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     System.out.printf("설명: %s\n", chargeStudy.getContent());
     System.out.printf("지역: %s\n", chargeStudy.getArea());
     System.out.printf("가격: %s\n", chargeStudy.getPrice());
+    System.out.printf("시작일: %s\n", chargeStudy.getStartDate());
+    System.out.printf("종료일: %s\n", chargeStudy.getEndDate());
+    System.out.printf("스터디 진행상태: %s\n", StudyStatus(chargeStudy));
     System.out.printf("등록일: %s\n", chargeStudy.getRegisteredDate());
 
     System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers().size(), chargeStudy.getMaxMembers());
@@ -55,6 +59,9 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
         System.out.println("1. 수정");
         System.out.println("2. "+ selectedMenu);
+        if (chargeStudy.getStudyStatus().equals("진행종료")) {
+          System.out.println("3. 후기 보기");
+        }
         System.out.println("0. 이전\n");
 
         int input = Prompt.inputInt("메뉴 번호를 선택하세요. > "); 
@@ -68,6 +75,15 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
 
         } else if (input == 0) {
           return;
+
+        } else if (input == 3) {
+          if (chargeStudy.getStudyStatus().equals("진행종료")) {
+            request.getRequestDispatcher("/review/list").forward(request);
+
+          } else {
+            System.out.println("존재하지 않는 메뉴 번호 입니다.");
+            continue;
+          }
 
         } else {
           System.out.println("존재하지 않는 메뉴 번호 입니다.");
@@ -112,6 +128,14 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
           System.out.println("2. 관심목록 삭제");
         }
 
+        if (chargeStudy.getStudyStatus().equals("진행종료")) {
+          System.out.println("3. 후기 보기");
+
+          if (findByName()) {
+            int reviewType = 1;
+            System.out.println("4. 후기 작성");
+          }
+        }
         System.out.println("0. 이전\n");
         System.out.println();
 
@@ -142,7 +166,26 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
             request.getRequestDispatcher("/chargeStudy/interestDelete").forward(request);
           }
 
-        } else if (input == 0) {
+        } else if (input == 3) { 
+
+          if (chargeStudy.getStudyStatus().equals("진행종료")) {
+            request.getRequestDispatcher("/review/list").forward(request);
+
+          } else {
+            System.out.println("존재하지 않는 메뉴 번호 입니다.");
+            continue;
+          }
+
+        } else if (input == 4) {
+          if (findByName()) {
+            request.getRequestDispatcher("/review/add").forward(request);
+
+          } else {
+            System.out.println("존재하지 않는 메뉴 번호 입니다.");
+            continue;
+          }
+
+        }else if (input == 0) {
           return;
 
         } else {
@@ -160,5 +203,32 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     }
     return "삭제요청";
   }
+
+  private String StudyStatus(Study chargeStudy) {
+    // 현재 날짜 < 시작일인 경우
+    if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == -1) {
+      chargeStudy.setStudyStatus("모집중");
+
+      // 현재 날짜 < 종료일
+    } else if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getEndDate()) == -1) {
+      chargeStudy.setStudyStatus("진행중");
+
+    } else {
+      chargeStudy.setStudyStatus("진행종료");
+    }
+    return chargeStudy.getStudyStatus();
+  }
+
+  private boolean findByName() {
+    for (Study study : studyList) {
+      for (Member member : study.getMembers()) {
+        if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
 }
 

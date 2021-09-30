@@ -44,6 +44,51 @@ public class ChargeStudyAddHandler extends AbstractStudyHandler {
     chargeStudy.setContent(Prompt.inputString("스터디 설명: "));
     chargeStudy.setMaxMembers(Prompt.inputInt("모집 인원: "));
     chargeStudy.setPrice(Prompt.inputInt("가격: " ));
+
+    while (true) {
+      try {
+        chargeStudy.setStartDate(Prompt.inputDate("시작일을 입력하세요. ex) YYYY-MM-DD > "));
+
+      } catch (IllegalArgumentException e) {
+        System.out.println("다시 입력하세요.\n");
+        continue;
+      }
+
+      // 현재 날짜 > 시작일인 경우
+      /*if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == 1) {
+        System.out.println("다시 입력하세요.\n");
+        continue;
+
+      } else {
+        break;
+      }*/
+      break;
+    }
+
+    while (true) {
+      try {
+        chargeStudy.setEndDate(Prompt.inputDate("종료일을 입력하세요. ex) YYYY-MM-DD > "));
+
+      } catch (IllegalArgumentException e) {
+        System.out.println("다시 입력하세요.\n");
+        continue;
+      }
+
+      /*if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getEndDate()) == 1) {
+        System.out.println("다시 입력하세요.\n");
+        continue;
+
+        // 시작일 < 종료일이 아닌 경우
+      }else if (chargeStudy.getEndDate().compareTo(chargeStudy.getStartDate()) != 1) {
+        System.out.println("종료일은 시작일 이후로 설정하세요.\n");
+        continue;
+
+      } else {
+        break;
+      }*/
+      break;
+    }
+
     chargeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     studyList.add(chargeStudy);

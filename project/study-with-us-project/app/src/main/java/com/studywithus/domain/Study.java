@@ -23,6 +23,8 @@ public class Study extends Content {
 
   //[추가]
   private boolean deleteRequest; // 스터디 삭제요청 확인하기 위한 필드
+  private String studyStatus;
+  private List<Review> reviewList = new ArrayList<>();
 
   public String getONLINE() {
     return ONLINE;
@@ -143,4 +145,21 @@ public class Study extends Content {
   public void setDeleteRequest(boolean deleteRequest) {
     this.deleteRequest = deleteRequest;
   }
+
+  public String getStudyStatus() {
+    return studyStatus;
+  }
+
+  public void setStudyStatus(String studyStatus) {
+    this.studyStatus = studyStatus;
+  }
+
+  public List<Review> getReviewList() {
+    return reviewList;
+  }
+
+  public void setReviewList(List<Review> reviewList) {
+    this.reviewList = reviewList;
+  }
+
 }
