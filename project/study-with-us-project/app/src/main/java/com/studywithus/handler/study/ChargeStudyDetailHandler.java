@@ -99,7 +99,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
       int paymentType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
 
       while (true) {
-        for (Member member : chargeApplicantList) {
+        for (Member member : chargeStudy.getMembers()) {
           if (member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
             paymentType = 1;
             break;
@@ -132,7 +132,6 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
           System.out.println("3. 후기 보기");
 
           if (findByName()) {
-            int reviewType = 1;
             System.out.println("4. 후기 작성");
           }
         }

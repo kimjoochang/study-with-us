@@ -23,7 +23,7 @@ public class ReviewListHandler extends AbstractStudyHandler {
 
     List<Review> reviewList = chargeStudy.getReviewList();
 
-    if (reviewList == null) {
+    if (chargeStudy.getReviewList().isEmpty()) {
       System.out.println("아직 등록된 후기가 없습니다.");
       return;
     }
