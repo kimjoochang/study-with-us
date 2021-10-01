@@ -43,7 +43,7 @@ public class ChargeStudyDetailHandler extends AbstractStudyHandler {
     System.out.printf("스터디 진행상태: %s\n", StudyStatus(chargeStudy));
     System.out.printf("등록일: %s\n", chargeStudy.getRegisteredDate());
 
-    System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers().size(), chargeStudy.getMaxMembers());
+    System.out.printf("모집인원: %d / %d\n", chargeStudy.getMembers().size(), chargeStudy.getMaxMembers());
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
     System.out.printf("좋아요수: %d\n", chargeStudy.getLikeMembers().size());
     System.out.println();
