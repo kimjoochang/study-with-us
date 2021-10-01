@@ -2,13 +2,11 @@ package com.studywithus.util.sms;
 
 import java.util.HashMap;
 import org.json.simple.JSONObject;
-import com.oracle.truffle.api.library.Message;
 import com.studywithus.handler.user.AuthLogInHandler;
+import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 public class SendPaymentSms {
-
-
 
   public static void main(String[] args) {
 
@@ -39,7 +37,5 @@ public class SendPaymentSms {
       System.out.println(e.getMessage());
       System.out.println(e.getCode());
     }
-
   }
 }
-
