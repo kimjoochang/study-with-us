@@ -743,20 +743,10 @@ public class App {
   private Menu createMemberManagementMenu() {
 
     MenuGroup memberManagementMenu = new MenuGroup("회원 관리");
-    memberManagementMenu.add(createMentorApplicantMenu());
+    memberManagementMenu.add(new MenuItem("멘토 승인 관리", "/mentorApplicant/list"));
     memberManagementMenu.add(createBlackListMenu());
 
     return memberManagementMenu;
-  }
-
-  // 관리자 페이지 / 회원 관리 / 멘토 신청 내역 관리
-  private Menu createMentorApplicantMenu() {
-
-    MenuGroup mentorApplicantMenu = new MenuGroup("멘토 승인 관리");
-    mentorApplicantMenu.add(new MenuItem("조회", "/mentorApplicant/list"));
-    mentorApplicantMenu.add(new MenuItem("상세보기", "/mentorApplicant/detail"));
-
-    return mentorApplicantMenu;
   }
 
   // 관리자 페이지 / 회원 관리 / 블랙리스트 관리

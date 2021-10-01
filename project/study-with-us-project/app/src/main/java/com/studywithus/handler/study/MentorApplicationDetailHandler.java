@@ -8,6 +8,7 @@ import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
+import com.studywithus.util.sms.SendMentorApprovalSms;
 
 public class MentorApplicationDetailHandler implements Command {
 
@@ -22,7 +23,7 @@ public class MentorApplicationDetailHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) {
-    System.out.println("[멘토 승인 내역 / 상세보기]\n");
+    System.out.println("[관리자 페이지 / 회원 관리 / 멘토 승인 관리]\n");
 
     if (mentorApplicationFormList.isEmpty()) {
       System.out.println("신청한 멘토가 존재하지 않습니다.");
@@ -92,6 +93,7 @@ public class MentorApplicationDetailHandler implements Command {
     mentorAccess.setUserAccessLevel(Menu.ACCESS_MENTOR | Menu.ACCESS_GENERAL);
 
     System.out.println("멘토 승인이 완료되었습니다.");
+    SendMentorApprovalSms.execute(mentorName);
   }
 
   // 멘토 거절

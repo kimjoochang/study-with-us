@@ -10,7 +10,6 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
-import com.studywithus.util.sms.SendPaymentSms;
 
 public class ChargeStudyPaymentHandler extends AbstractStudyHandler {
 
@@ -55,7 +54,7 @@ public class ChargeStudyPaymentHandler extends AbstractStudyHandler {
       System.out.println("------------------------------------");
       System.out.print("결제중");
 
-      for(int i = 0; i < 5; i++) {
+      for(int i = 0; i < 3; i++) {
         try {
           Thread.sleep(1000);
 
@@ -68,7 +67,7 @@ public class ChargeStudyPaymentHandler extends AbstractStudyHandler {
       System.out.println();
       System.out.println("유료 스터디 결제가 완료 되었습니다.\n");
 
-      SendPaymentSms.execute(chargeStudy);
+      //      SendPaymentSms.execute(chargeStudy);
 
       AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MENTEE;
 
