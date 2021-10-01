@@ -2,7 +2,6 @@ package com.studywithus.util.sms;
 
 import java.util.HashMap;
 import org.json.simple.JSONObject;
-import com.oracle.truffle.api.library.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 public class SendMentorApprovalSms {
@@ -12,7 +11,7 @@ public class SendMentorApprovalSms {
     String api_key = "NCSB18VU1KFIH5EX"; // 개인(개발자) 아이디
     String api_secret = "9MVAVYHXP23WHOXKZJ9MYXTXAFTXYMFX"; // 개인(개발자) 비밀번호
 
-    Message coolsms = new Message(api_key, api_secret);
+    net.nurigo.java_sdk.api.Message coolsms = new net.nurigo.java_sdk.api.Message(api_key, api_secret);
 
     // 4 params(to, from, type, text) are mandatory. must be filled
     HashMap<String, String> params = new HashMap<String, String>();
