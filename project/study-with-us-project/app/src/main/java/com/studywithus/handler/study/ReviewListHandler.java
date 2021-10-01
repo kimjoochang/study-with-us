@@ -10,9 +10,8 @@ public class ReviewListHandler extends AbstractStudyHandler {
   public ReviewListHandler(List<Study> chargeStudyList) {
     super(chargeStudyList);
   }
-  double count;
-  double sum;
-  double average;
+  int sum;
+  //  float average;
   String star;
 
   @Override
@@ -31,21 +30,23 @@ public class ReviewListHandler extends AbstractStudyHandler {
 
     for (Review review : reviewList) {
       sum += review.getScore();
-      count++;
       System.out.printf("[아이디 = %s, 후기 = %s, 평점 = %d, 등록일 = %s]\n",
           review.getId(),
           review.getReview(),
           review.getScore(),
           review.getRegisteredDate());
     }
-    average = Math.round(((sum / count) * 100) / 100);
+
+    double average = Math.floor((double)(sum / reviewList.size()) * 100 / 100.0);
 
     System.out.println();
+    System.out.println("합: " + sum);
+    System.out.println("갯수: " + reviewList.size());
     System.out.println("평점: " + average + "/" + 5);
-    System.out.println(getStar());
+    System.out.println(getStar(average));
   }
 
-  private String getStar() {
+  private String getStar(double average) {
     if (average < 1) {
       star = "☆☆☆☆☆";
     } else if (average < 2) {

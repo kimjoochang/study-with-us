@@ -2,7 +2,8 @@ package com.studywithus.util.sms;
 
 import java.util.HashMap;
 import org.json.simple.JSONObject;
-import net.nurigo.java_sdk.api.Message;
+import com.oracle.truffle.api.library.Message;
+import com.studywithus.handler.user.AuthLogInHandler;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 public class SendAdditionalRecruitmentSms {
@@ -17,13 +18,13 @@ public class SendAdditionalRecruitmentSms {
     // 4 params(to, from, type, text) are mandatory. must be filled
     HashMap<String, String> params = new HashMap<String, String>();
 
-    params.put("to", "01071629576"); // 수신인(회원)
+    params.put("to", AuthLogInHandler.getLoginUser().getPhoneNumber()); // 수신인(회원)
     params.put("from", "01055293734"); // 발신인(개발자, 위의 api_key 정보와 일치해야 함)
     params.put("type", "SMS"); // 문자메시지 타입(ex. SMS, MMS 등 지정 가능)
 
     // 발신할 문자 내용
     params.put("text", 
-        "[스터디위더스] 반계령님, 현재 대기중인 '엄진영의 코딩 스쿨' 신청이 가능합니다.");
+        "[스터디위더스] " + AuthLogInHandler.getLoginUser().getName() + "님, 현재 대기중인 '엄진영의 코딩 스쿨' 신청이 가능합니다.");
 
     params.put("app_version", "test app 1.2"); // application name and version
 
