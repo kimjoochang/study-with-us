@@ -10,7 +10,7 @@ import com.studywithus.handler.user.AuthLogInHandler;
 //import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class NoticeDetailHandler extends AbstractCommunityHandler{
+public class NoticeDetailHandler extends AbstractCommunityHandler {
 
 	String updateKey;
 	String deleteKey;
@@ -44,12 +44,12 @@ public class NoticeDetailHandler extends AbstractCommunityHandler{
 
 		System.out.println();
 
-		Member loginUser = AuthLogInHandler.getLoginUser(); 
+		Member loginUser = AuthLogInHandler.getLoginUser();
 		if (loginUser == null || community.getWriter().getId() != loginUser.getId()) {
 			return;
 		}
 
-		// CommunityUpdateHandler나 CommunityStudyDeleteHandler를 실행할 때 
+		// CommunityUpdateHandler나 CommunityStudyDeleteHandler를 실행할 때
 		// 공지 번호를 사용할 수 있도록 CommandRequest에 보관한다.
 		request.setAttribute("communityNo", no);
 
@@ -72,7 +72,7 @@ public class NoticeDetailHandler extends AbstractCommunityHandler{
 				return;
 			default:
 				System.out.println("");
-				System.out.println("무효한 메뉴 번호입니다.\n");
+				System.out.println("다시 입력하세요.\n");
 			}
 		}
 	}
