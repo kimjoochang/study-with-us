@@ -217,7 +217,6 @@ public class AppJC {
     commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(participateChargeStudyMap)); 
     // [추가]
     commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(participateChargeStudyMap)); 
-    // [추가]
     commandMap.put("/review/add", new ReviewAddHandler(chargeStudyList));
     commandMap.put("/review/list", new ReviewListHandler(chargeStudyList));
 
