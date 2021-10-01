@@ -231,7 +231,7 @@ public class App {
         new ChargeStudyInterestDeleteHandler(chargeStudyList));
 
     commandMap.put("/chargeStudy/registerChargeStudy",
-        new RegisterChargeStudyDetailHandler(registerChargeStudyMap, participateChargeStudyMap));
+        new RegisterChargeStudyDetailHandler(registerChargeStudyMap));
     commandMap.put("/chargeStudy/participateChargeStudyList",
         new ParticipateChargeStudyListHandler(participateChargeStudyMap));
     commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(participateChargeStudyMap)); 
