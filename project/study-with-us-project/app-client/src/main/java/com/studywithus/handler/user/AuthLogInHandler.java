@@ -1,6 +1,5 @@
 package com.studywithus.handler.user;
 
-import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -9,7 +8,8 @@ import com.studywithus.util.Prompt;
 
 public class AuthLogInHandler implements Command {
 
-  List<Member> memberList;
+  RequestAgent requestAgent;
+  //  List<Member> memberList;
 
   public static Member loginUser;
   public static int userAccessLevel = Menu.ACCESS_LOGOUT;
@@ -22,8 +22,8 @@ public class AuthLogInHandler implements Command {
     return userAccessLevel;
   }
 
-  public AuthLogInHandler(List<Member> memberList) {
-    this.memberList = memberList;
+  public AuthLogInHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
