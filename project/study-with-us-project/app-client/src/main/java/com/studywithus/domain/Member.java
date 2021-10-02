@@ -8,7 +8,6 @@ public class Member {
   private int no; // 회원 번호
   private String name; // 회원 이름
   private String email; // 회원 이메일
-  private String id; // 회원 아이디
   private String password; // 회원 비밀번호
   private String phoneNumber; // 회원 휴대폰 번호
   private Date registeredDate; // 회원 가입일
@@ -46,14 +45,6 @@ public class Member {
 
   public void setEmail(String email) {
     this.email = email;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
   }
 
   public String getPassword() {
