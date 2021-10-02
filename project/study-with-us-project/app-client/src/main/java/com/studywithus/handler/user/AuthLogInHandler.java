@@ -1,6 +1,6 @@
 package com.studywithus.handler.user;
 
-import java.util.Collection;
+import java.util.HashMap;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -29,13 +29,13 @@ public class AuthLogInHandler implements Command {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[로그인]\n");
 
     String email = Prompt.inputString("이메일: ");
     String password = Prompt.inputString("비밀번호: ");
 
-    Member member = findByEmailPassword(email, password);
+    //    Member member = findByEmailPassword(email, password);
 
     if (email.equals("root") && password.equals("0000")) {
       Member root = new Member();
@@ -51,12 +51,18 @@ public class AuthLogInHandler implements Command {
       return;
     } 
 
+    HashMap<String,String> params = new HashMap<>();
+    params.put("email", email);
+    params.put("password", password);
+
+    requestAgent.request("member.selectOneByEmailPassword", params);
+
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("아이디와 비밀번호가 일치하는 회원을 찾을 수 없습니다.\n");
 
     } else {
       System.out.println();
-      member = requestAgent.getObject(Member.class);
+      Member member = requestAgent.getObject(Member.class);
       System.out.printf("%s님 환영합니다.\n", member.getName());
 
       loginUser = member;
@@ -66,14 +72,14 @@ public class AuthLogInHandler implements Command {
     }
   }
 
-  private Member findByEmailPassword(String id, String password) {
-    Collection<Member> memberList = requestAgent.getObjects(Member.class);
-
-    for (Member member : memberList) {
-      if (member.getId().equalsIgnoreCase(id) && member.getPassword().equals(password)) {
-        return member;
-      }
-    }
-    return null;
-  }
+  //  private Member findByEmailPassword(String id, String password) {
+  //    Collection<Member> memberList = requestAgent.getObjects(Member.class);
+  //
+  //    for (Member member : memberList) {
+  //      if (member.getId().equalsIgnoreCase(id) && member.getPassword().equals(password)) {
+  //        return member;
+  //      }
+  //    }
+  //    return null;
+  //  }
 }

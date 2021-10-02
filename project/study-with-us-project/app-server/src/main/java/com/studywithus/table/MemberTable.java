@@ -18,12 +18,12 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "member.insert": insert(request, response); break;
-      case "member.selectList": selectList(request, response); break;
-      case "member.selectOne": selectOne(request, response); break;
+      //      case "member.selectList": selectList(request, response); break;
+      //      case "member.selectOne": selectOne(request, response); break;
       case "member.selectOneByEmailPassword": selectOneByEmailPassword(request, response); break;
-      case "member.selectOneByName": selectOneByName(request, response); break;
-      case "member.update": update(request, response); break;
-      case "member.delete": delete(request, response); break;
+      //      case "member.selectOneByName": selectOneByName(request, response); break;
+      //      case "member.update": update(request, response); break;
+      //      case "member.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");

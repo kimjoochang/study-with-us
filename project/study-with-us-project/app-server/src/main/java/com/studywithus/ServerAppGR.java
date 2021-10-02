@@ -9,7 +9,7 @@ import com.studywithus.server.RequestProcessor;
 import com.studywithus.table.JsonDataTable;
 import com.studywithus.table.MemberTable;
 
-public class ServerApp {
+public class ServerAppGR {
 
   public static void main(String[] args) throws Exception {
     System.out.println("서버 실행중");
