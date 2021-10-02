@@ -26,6 +26,7 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
       //      case "member.delete": delete(request, response); break;
       case "member.duplicateCheck": duplicateCheck(request, response); break;
       case "member.resetPassword" : matchMember(request, response); break;
+      case "member.myInfo" : matchMember(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -185,6 +186,10 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
     return -1;
   }
 
+  private void myInfo(Request request, Response response) throws Exception {
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
+  }
 }
 
 
