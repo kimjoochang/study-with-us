@@ -24,10 +24,11 @@ public class MemberTableJJ extends JsonDataTable<Member> implements DataProcesso
       case "member.selectOneByNamePhoneNumber": selectOneByNamePhoneNumber(request, response); break;
       //      case "member.selectOneByName": selectOneByName(request, response); break;
       //      case "member.update": update(request, response); break;
-      //      case "member.delete": delete(request, response); break;
+      case "member.delete": delete(request, response); break;
       case "member.duplicateCheck": duplicateCheck(request, response); break;
-      case "member.resetPassword" : matchMember(request, response); break;
-      case "member.myInfo" : matchMember(request, response); break;
+      case "member.findMemberForResetPassword" : findMemberForResetPassword(request, response); break;
+      case "member.resetPassword" : resetPassword(request, response); break;
+      //case "member.myInfo" : matchMember(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -77,28 +78,28 @@ public class MemberTableJJ extends JsonDataTable<Member> implements DataProcesso
     }
   }
 
-  private void matchMember(Request request, Response response) throws Exception {
-    String name = request.getParameter("name");
-    String email = request.getParameter("email");
-    String phoneNumber = request.getParameter("phoneNumber");
-
-    int type = 0;
-    for (Member m : list) {
-      if (m.getName().equals(name) && m.getEmail().equals(email)
-          && m.getPhoneNumber().equals(phoneNumber)) {
-        type = 1;
-        break;
-      } else {
-        continue;
-      }
-    }
-
-    if (type == 1) {
-      response.setStatus(Response.SUCCESS);
-    } else {
-      response.setStatus(Response.FAIL);
-    }
-  }
+  //  private void matchMember(Request request, Response response) throws Exception {
+  //    String name = request.getParameter("name");
+  //    String email = request.getParameter("email");
+  //    String phoneNumber = request.getParameter("phoneNumber");
+  //
+  //    int type = 0;
+  //    for (Member m : list) {
+  //      if (m.getName().equals(name) && m.getEmail().equals(email)
+  //          && m.getPhoneNumber().equals(phoneNumber)) {
+  //        type = 1;
+  //        break;
+  //      } else {
+  //        continue;
+  //      }
+  //    }
+  //
+  //    if (type == 1) {
+  //      response.setStatus(Response.SUCCESS);
+  //    } else {
+  //      response.setStatus(Response.FAIL);
+  //    }
+  //  }
 
   private void selectOneByEmailPassword(Request request, Response response) throws Exception {
     String email = request.getParameter("email");
@@ -125,26 +126,33 @@ public class MemberTableJJ extends JsonDataTable<Member> implements DataProcesso
     String name = request.getParameter("name");
     String phoneNumber = request.getParameter("phoneNumber");
     Member member = null;
-    int type = 0;
+    // int type = 0;
 
     for (Member m : list) {
       if (m.getName().equals(name) && m.getPhoneNumber().equals(phoneNumber)) {
         member = m;
-        type = 1;
+        //    type = 1;
         break;
-      } else {
-        continue;
+        //      } else {
+        //        continue;
       }
     }
-
-    if (type == 1) {
+    if (member != null) {
       response.setStatus(Response.SUCCESS);
       response.setValue(member);
     } else {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 정보와 일치하는 회원을 찾을 수 없습니다.");
+      response.setValue("해당 이름의 회원을 찾을 수 없습니다.");
     }
   }
+  //    if (type == 1) {
+  //      response.setStatus(Response.SUCCESS);
+  //      response.setValue(member);
+  //    } else {
+  //      response.setStatus(Response.FAIL);
+  //      response.setValue("해당 정보와 일치하는 회원을 찾을 수 없습니다.");
+  //    }
+  //  }
 
   private void selectOneByName(Request request, Response response) throws Exception {
     String name = request.getParameter("name");
@@ -216,6 +224,58 @@ public class MemberTableJJ extends JsonDataTable<Member> implements DataProcesso
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
   }
+
+  private void findMemberForResetPassword(Request request, Response response) throws Exception {
+    String name = request.getParameter("name");
+    String email = request.getParameter("email");
+    String phoneNumber = request.getParameter("phoneNumber");
+
+    Member member = null;
+    int type = 0;
+
+    for (Member m : list) {
+      if (m.getName().equals(name) && m.getEmail().equals(email)
+          && m.getPhoneNumber().equals(phoneNumber)) {
+        member = m;
+        type = 1;
+        break;
+      } else {
+        continue;
+      }
+    }
+
+    if (type == 1) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(member);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 이름과 이메일과 전화번호를 가진 회원을 찾을 수 없습니다.");
+    }
+  }
+
+  private void resetPassword(Request request, Response response) throws Exception {
+    Member member = request.getObject(Member.class);
+
+    int index = indexOf(member.getEmail());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      return;
+    }
+
+    list.set(index, member);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private int indexOf(String email) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getEmail().equals(email)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
 }
 
 
