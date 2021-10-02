@@ -19,7 +19,7 @@ public class MyInfoHandler implements Command {
 
     requestAgent.request("member.myInfo", null);
 
-    Member loginUser = AuthLogInHandler.getLoginUser();
+    //    Member loginUser = AuthLogInHandler.getLoginUser();
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("로그인 후 이용 바랍니다.");
@@ -31,7 +31,9 @@ public class MyInfoHandler implements Command {
     //      return;
     //    }
 
-    switch(loginUser.getUserAccessLevel()) {
+    Member user =  requestAgent.getObject(Member.class);
+
+    switch(user.getUserAccessLevel()) {
       case 0x02: 
         System.out.println("등급: 회원");
         break;
@@ -57,9 +59,9 @@ public class MyInfoHandler implements Command {
         break;
     }
 
-    System.out.printf("이름: %s\n", loginUser.getName());
-    System.out.printf("이메일: %s\n", loginUser.getEmail());
-    System.out.printf("휴대폰 번호: %s\n", loginUser.getPhoneNumber());
-    System.out.printf("가입일: %s\n", loginUser.getRegisteredDate());
+    System.out.printf("이름: %s\n", user.getName());
+    System.out.printf("이메일: %s\n", user.getEmail());
+    System.out.printf("휴대폰 번호: %s\n", user.getPhoneNumber());
+    System.out.printf("가입일: %s\n", user.getRegisteredDate());
   }
 }
