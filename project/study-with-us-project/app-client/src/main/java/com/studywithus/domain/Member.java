@@ -5,6 +5,7 @@ import java.util.List;
 //
 public class Member {
   private int userAccessLevel; // 권한
+  private int no; // 회원 번호
   private String name; // 회원 이름
   private String email; // 회원 이메일
   private String id; // 회원 아이디
@@ -21,6 +22,14 @@ public class Member {
 
   public void setUserAccessLevel(int userAccessLevel) {
     this.userAccessLevel = userAccessLevel;
+  }
+
+  public int getNo() {
+    return no;
+  }
+
+  public void setNo(int no) {
+    this.no = no;
   }
 
   public String getName() {
