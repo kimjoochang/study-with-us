@@ -38,7 +38,7 @@ public class SnsSignUpHandler implements Command {
 
 		} else {
 			member.setName(name);
-			member.setId(snsId);
+			member.setEmail(snsId);
 			member.setPassword(password);
 			member.setRegisteredDate((new Date(System.currentTimeMillis())));
 			member.setUserAccessLevel(Menu.ACCESS_GENERAL);

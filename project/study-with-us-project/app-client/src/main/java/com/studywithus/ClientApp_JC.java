@@ -9,6 +9,7 @@ import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -49,7 +50,7 @@ public class ClientApp_JC {
   public ClientApp_JC() throws Exception {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
-    //            commandMap.put("/auth/logIn", new AuthLogInHandler(memberList));
+    commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
     //    commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
     //    commandMap.put("/facebook/logIn", new SnsLogInHandler(memberList));
     //    commandMap.put("/kakao/logIn", new SnsLogInHandler(memberList));
@@ -610,7 +611,7 @@ public class ClientApp_JC {
     return examScheduleManagementMenu;
   }
 
-  void service() {
+  void service() throws Exception {
 
     // [삭제] HashMap 적용
     // loadObjects("chargeInterest.json", chargeInterestList, Study.class);
@@ -640,6 +641,7 @@ public class ClientApp_JC {
     System.out.println("    ノ￣ヽ　  ノ￣ヽ  Are U ready to STUDY ?");
 
     createMainMenu().execute();
+    requestAgent.request("quit", null);
     Prompt.close();
 
     // [삭제] HashMap 적용

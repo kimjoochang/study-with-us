@@ -7,9 +7,9 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
-public class SignUpHandler2 extends AbstractLoginHandler {
+public class SignUpHandlerFast extends AbstractLoginHandler {
 
-  public SignUpHandler2(List<Member> memberList) {
+  public SignUpHandlerFast(List<Member> memberList) {
     super(memberList);
   }
 

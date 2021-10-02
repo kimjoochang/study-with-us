@@ -37,39 +37,30 @@ public class AuthLogInHandler implements Command {
 
     //    Member member = findByEmailPassword(email, password);
 
+    if (email.equals("root@test.com") && password.equals("0000")) {
+      Member root = new Member();
+      root.setName("관리자");
+      root.setEmail("root@test.com");
+      loginUser = root;
+      userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL;
+      return;
+    } 
+
     HashMap<String,String> params = new HashMap<>();
     params.put("email", email);
     params.put("password", password);
 
     requestAgent.request("member.selectOneByEmailPassword", params);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("아이디와 비밀번호가 일치하는 회원을 찾을 수 없습니다.\n");
-      return;
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      Member member = requestAgent.getObject(Member.class);
+      System.out.printf("%s님 환영합니다!\n", member.getName());
+      loginUser = member;
+      userAccessLevel = Menu.ACCESS_GENERAL;
+
+    } else {
+      System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
     }
-
-    if (email.equals("root") && password.equals("0000")) {
-      Member root = new Member();
-
-      root.setName("관리자");
-
-      loginUser = root;
-      userAccessLevel = Menu.ACCESS_ADMIN;
-
-      System.out.println();
-      System.out.printf("%s님 환영합니다.\n", root.getName());
-
-      return;
-    } 
-
-    System.out.println();
-    Member member = requestAgent.getObject(Member.class);
-    System.out.printf("%s님 환영합니다.\n", member.getName());
-
-    loginUser = member;
-    userAccessLevel = member.getUserAccessLevel();
-
-    return;
   }
 }
 
