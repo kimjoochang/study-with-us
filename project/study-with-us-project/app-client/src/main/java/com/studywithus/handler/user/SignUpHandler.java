@@ -11,6 +11,7 @@ import com.studywithus.util.Prompt;
 public class SignUpHandler implements Command {
 
   RequestAgent requestAgent;
+  int no = 1;
 
   public SignUpHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
@@ -52,6 +53,7 @@ public class SignUpHandler implements Command {
         System.out.println("올바른 형식의 휴대폰 번호를 입력하세요.\n");
 
       } else {
+        member.setNo(no++);
         member.setName(name);
         member.setEmail(email);
         member.setPassword(password);
