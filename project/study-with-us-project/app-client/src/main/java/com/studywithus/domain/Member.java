@@ -15,6 +15,8 @@ public class Member {
   private List<Study> chargeInterest; // 유료 스터디 관심목록
   private List<Payment> payment; // 유료 스터디 결제목록
 
+  private boolean mentor; // 멘토 여부
+
   public int getUserAccessLevel() {
     return userAccessLevel;
   }
@@ -93,5 +95,13 @@ public class Member {
 
   public void setPayment(List<Payment> payment) {
     this.payment = payment;
+  }
+
+  public boolean isMentor() {
+    return mentor;
+  }
+
+  public void setMentor(boolean mentor) {
+    this.mentor = mentor;
   }
 }
