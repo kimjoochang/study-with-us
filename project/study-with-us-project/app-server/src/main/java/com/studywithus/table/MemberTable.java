@@ -24,6 +24,7 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
       //      case "member.selectOneByName": selectOneByName(request, response); break;
       //      case "member.update": update(request, response); break;
       //      case "member.delete": delete(request, response); break;
+      case "member.duplicateCheck": emailDuplicateCheck(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -51,6 +52,25 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
     } else {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+    }
+  }
+
+  private void emailDuplicateCheck(Request request, Response response) throws Exception {
+    String email = request.getObject(String.class);
+    int type = 0;
+    for (Member m : list) {
+      if (email.equalsIgnoreCase(m.getEmail())) {
+        type = 1;
+        break;
+      } else {
+        continue;
+      }
+    }
+
+    if (type == 0) {
+      response.setStatus(Response.SUCCESS);
+    } else {
+      response.setStatus(Response.FAIL);
     }
   }
 
