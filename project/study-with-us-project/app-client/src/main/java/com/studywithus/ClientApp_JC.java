@@ -9,7 +9,9 @@ import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.study.ChargeStudyAddHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.handler.user.MembershipWithdrawalHandler;
 import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.menu.Menu;
@@ -68,7 +70,7 @@ public class ClientApp_JC {
     //    commandMap.put("/find/id", new FindIdHandler(memberList));
     commandMap.put("/reset/password", new ResetPasswordHandler(requestAgent));
     //
-    //    commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
+    commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(requestAgent));
     //
     //    commandMap.put("/myInfo/list", new MyInfoHandler());
     //
@@ -100,8 +102,7 @@ public class ClientApp_JC {
     //        new ParticipateFreeStudyListHandler(participateFreeStudyMap));
     //
     //    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
-    //    commandMap.put("/chargeStudy/add",
-    //        new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
+    commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(requestAgent));
     //    commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
     //    commandMap.put("/chargeStudy/detail",
     //        new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
@@ -372,13 +373,13 @@ public class ClientApp_JC {
 
   // 마이 페이지 메인
   private Menu createMyPageMenu() {
-    MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
+    MenuGroup myPageMenu = new MenuGroup("마이 페이지");
 
     myPageMenu.add(createActivityDetailMenu());
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createPaymentListMenu());
     myPageMenu.add(new MenuItem("나의 정보", "/myInfo/list"));
-    myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
+    myPageMenu.add(new MenuItem("회원 탈퇴", "/auth/membershipWithdrawal"));
     // [예정] 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가
     // myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment"));
 

@@ -23,7 +23,7 @@ public class MemberTable2 extends JsonDataTable<Member> implements DataProcessor
       case "member.selectOneByEmailPassword": selectOneByEmailPassword(request, response); break;
       //      case "member.selectOneByName": selectOneByName(request, response); break;
       //      case "member.update": update(request, response); break;
-      //      case "member.delete": delete(request, response); break;
+      case "member.delete": delete(request, response); break;
       case "member.duplicateCheck": duplicateCheck(request, response); break;
       case "member.findMemberForResetPassword" : findMemberForResetPassword(request, response); break;
       case "member.resetPassword" : resetPassword(request, response); break;
@@ -175,8 +175,8 @@ public class MemberTable2 extends JsonDataTable<Member> implements DataProcessor
   }
 
   private void delete(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("no"));
-    int index = indexOf(no);
+    String email = request.getObject(String.class);
+    int index = indexOf(email);
 
     if (index == -1) {
       response.setStatus(Response.FAIL);

@@ -1,22 +1,20 @@
 package com.studywithus.handler.study;
 
 import java.sql.Date;
-import java.util.List;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class MentorApplicationAddHandler implements Command {
 
-  List<MentorApplicationForm> mentorApplicationFormList;
-  List<Member> memberList;
+  RequestAgent requestAgent;
 
-  public MentorApplicationAddHandler(List<MentorApplicationForm> mentorApplicationFormList, List<Member> memberList) {
-    this.mentorApplicationFormList = mentorApplicationFormList;
-    this.memberList = memberList;
+  public MentorApplicationAddHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -26,8 +24,9 @@ public class MentorApplicationAddHandler implements Command {
     MentorApplicationForm applyMentor = new MentorApplicationForm();
     Member member = AuthLogInHandler.loginUser;
 
-    if (!mentorApplicationFormList.isEmpty()) {
+    if (member.isMentor() == false) {
       System.out.println("이미 멘토 신청이 완료되었습니다.");
+      return;
     }
 
     else {

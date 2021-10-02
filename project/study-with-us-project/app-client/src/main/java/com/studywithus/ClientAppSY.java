@@ -663,7 +663,7 @@ public class ClientAppSY {
 	}
 
 	public static void main(String[] args) throws Exception {
-		ClientApp_JC app = new ClientApp_JC(); 
+		ClientAppSY app = new ClientAppSY(); 
 		app.service();
 		Prompt.close();
 	}
