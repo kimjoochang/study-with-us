@@ -126,17 +126,14 @@ public class MemberTableJJ extends JsonDataTable<Member> implements DataProcesso
     String name = request.getParameter("name");
     String phoneNumber = request.getParameter("phoneNumber");
     Member member = null;
-    // int type = 0;
 
     for (Member m : list) {
       if (m.getName().equals(name) && m.getPhoneNumber().equals(phoneNumber)) {
         member = m;
-        //    type = 1;
-        break;
-        //      } else {
-        //        continue;
+        break;      
       }
     }
+
     if (member != null) {
       response.setStatus(Response.SUCCESS);
       response.setValue(member);
@@ -145,14 +142,6 @@ public class MemberTableJJ extends JsonDataTable<Member> implements DataProcesso
       response.setValue("해당 이름의 회원을 찾을 수 없습니다.");
     }
   }
-  //    if (type == 1) {
-  //      response.setStatus(Response.SUCCESS);
-  //      response.setValue(member);
-  //    } else {
-  //      response.setStatus(Response.FAIL);
-  //      response.setValue("해당 정보와 일치하는 회원을 찾을 수 없습니다.");
-  //    }
-  //  }
 
   private void selectOneByName(Request request, Response response) throws Exception {
     String name = request.getParameter("name");
