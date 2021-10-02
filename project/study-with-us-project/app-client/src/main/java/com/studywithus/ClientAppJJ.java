@@ -10,6 +10,8 @@ import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.handler.user.FindEmailHandler;
+import com.studywithus.handler.user.MembershipWithdrawalHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
 import com.studywithus.handler.user.SnsSignUpHandler;
@@ -65,11 +67,11 @@ public class ClientAppJJ {
     commandMap.put("/facebook/signUp", new SnsSignUpHandler(requestAgent));
     commandMap.put("/kakao/signUp", new SnsSignUpHandler(requestAgent));
     commandMap.put("/naver/signUp", new SnsSignUpHandler(requestAgent));
-    //
-    //    commandMap.put("/find/id", new FindIdHandler(memberList));
+
+    commandMap.put("/find/email", new FindEmailHandler(requestAgent));
     //    commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
     //
-    //    commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
+    commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(requestAgent));
     //
     //    commandMap.put("/myInfo/list", new MyInfoHandler());
     //
@@ -218,7 +220,7 @@ public class ClientAppJJ {
 
     logInMenu.add(new MenuItem("이메일 로그인", "/auth/logIn"));
     logInMenu.add(createSnsLogInMenu());
-    logInMenu.add(new MenuItem("아이디 찾기", "/find/id"));
+    logInMenu.add(new MenuItem("아이디 찾기", "/find/email"));
     logInMenu.add(new MenuItem("비밀번호 변경", "/reset/password"));
 
     return logInMenu;
