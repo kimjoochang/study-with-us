@@ -6,10 +6,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.RequestProcessor;
+import com.studywithus.table.JsonDataTable;
 
 public class ServerApp {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     System.out.println("서버 실행중");
     ServerSocket serverSocket = new ServerSocket(8888);
 
