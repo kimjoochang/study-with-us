@@ -5,11 +5,17 @@ import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
-import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.study.ChargeStudyAddHandler;
+import com.studywithus.handler.study.ChargeStudyDetailHandler;
+import com.studywithus.handler.study.MentorApplicantApproveHandler;
+import com.studywithus.handler.study.MentorApplicationAddHandler;
+import com.studywithus.handler.study.MentorApplicationDetailHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.handler.user.AuthLogOutHandler;
+import com.studywithus.handler.user.MembershipWithdrawalHandler;
 import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.menu.Menu;
@@ -57,7 +63,7 @@ public class ClientApp_JC {
     //    commandMap.put("/kakao/logIn", new SnsLogInHandler(memberList));
     //    commandMap.put("/naver/logIn", new SnsLogInHandler(memberList));
     //
-    //    commandMap.put("/auth/logOut", new AuthLogOutHandler(memberList));
+    commandMap.put("/auth/logOut", new AuthLogOutHandler());
     //
     commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
     //    commandMap.put("/google/signUp", new SnsSignUpHandler(memberList));
@@ -66,9 +72,9 @@ public class ClientApp_JC {
     //    commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
     //
     //    commandMap.put("/find/id", new FindIdHandler(memberList));
-    commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
+    commandMap.put("/reset/password", new ResetPasswordHandler(requestAgent));
     //
-    //    commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
+    commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(requestAgent));
     //
     //    commandMap.put("/myInfo/list", new MyInfoHandler());
     //
@@ -76,11 +82,8 @@ public class ClientApp_JC {
     //    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
     //    commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeStudyList));
     //
-    //    commandMap.put("/mentorApplicant/add",
-    //        new MentorApplicationAddHandler(mentorApplicationFormList, memberList));
-    //    commandMap.put("/mentorApplicant/list",
-    //        new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
-    //
+    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(requestAgent));
+    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(requestAgent));
     //    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     //    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
     //    commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
@@ -100,11 +103,9 @@ public class ClientApp_JC {
     //        new ParticipateFreeStudyListHandler(participateFreeStudyMap));
     //
     //    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
-    //    commandMap.put("/chargeStudy/add",
-    //        new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
+    commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(requestAgent));
     //    commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-    //    commandMap.put("/chargeStudy/detail",
-    //        new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
+    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(requestAgent));
     //    commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
     //    commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList));
     //    commandMap.put("/chargeStudy/deleteRequestList", new ChargeStudyDeleteRequestListHandler(chargeStudyList));
@@ -167,6 +168,9 @@ public class ClientApp_JC {
     //    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(examScheduleList));
     //    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(examScheduleList));
     //    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(examScheduleList));                          
+    commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(requestAgent));                          
+
+
   }
 
   // ------------------------------ STUDY WITH US -----------------------------------------
@@ -259,7 +263,7 @@ public class ClientApp_JC {
     MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
 
     chargeStudyMenu.add(new MenuItem("검색", "/chargeStudy/search"));
-    chargeStudyMenu.add(new MenuItem("생성", ACCESS_MENTOR, "/chargeStudy/add"));
+    chargeStudyMenu.add(new MenuItem("생성", "/chargeStudy/add"));
     chargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/list"));
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
     chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
@@ -372,13 +376,13 @@ public class ClientApp_JC {
 
   // 마이 페이지 메인
   private Menu createMyPageMenu() {
-    MenuGroup myPageMenu = new MenuGroup("마이 페이지", ACCESS_GENERAL);
+    MenuGroup myPageMenu = new MenuGroup("마이 페이지");
 
     myPageMenu.add(createActivityDetailMenu());
     myPageMenu.add(createInterestMenu());
     myPageMenu.add(createPaymentListMenu());
     myPageMenu.add(new MenuItem("나의 정보", "/myInfo/list"));
-    myPageMenu.add(new MenuItem("회원 탈퇴", ACCESS_GENERAL, "/auth/membershipWithdrawal"));
+    myPageMenu.add(new MenuItem("회원 탈퇴", "/auth/membershipWithdrawal"));
     // [예정] 결제내역 돌아가는지 확인 후 ACCESS_MENTEE 권한 추가
     // myPageMenu.add(new MenuItem("나의 결제내역", "/chargeStudy/payment"));
 
