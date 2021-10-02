@@ -10,6 +10,7 @@ import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -65,7 +66,7 @@ public class ClientApp_JC {
     //    commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
     //
     //    commandMap.put("/find/id", new FindIdHandler(memberList));
-    //    commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
+    commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
     //
     //    commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
     //

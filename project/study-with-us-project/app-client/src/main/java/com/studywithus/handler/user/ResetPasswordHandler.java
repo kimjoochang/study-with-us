@@ -1,21 +1,22 @@
 package com.studywithus.handler.user;
-import java.util.List;
+import java.util.HashMap;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ResetPasswordHandler implements Command {
 
-  List<Member> memberList;
+  RequestAgent requestAgent;
 
   static Member loginUser;
   public static Member getLoginUser() {
     return loginUser;
   }
 
-  public ResetPasswordHandler(List<Member> memberList) {
-    this.memberList = memberList;
+  public ResetPasswordHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -24,12 +25,16 @@ public class ResetPasswordHandler implements Command {
     System.out.println("[비밀번호 변경]\n");
     String name = Prompt.inputString("회원 이름을 입력해주세요. > ");
     String phoneNumber = Prompt.inputString("휴대폰 번호를 입력해주세요. ('-'를 제외한 숫자 11자) > ");
-    String id = Prompt.inputString("아이디를 입력해주세요.(이메일 형식의 아이디) > ");
+    String email = Prompt.inputString("이메일을 입력해주세요. > ");
     System.out.println(" ");
 
-    Member member = resetPwdById(name, id, phoneNumber);
+    HashMap<String,String> params = new HashMap<>();
+    params.put("name",name);
+    params.put("email", email);
+    params.put("phoneNumber", phoneNumber);
+    requestAgent.request("member.resetPassword", params);
 
-    if (member == null) {
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(" ");
       System.out.println("해당 정보와 일치하는 회원이 없습니다.\n");
       return;

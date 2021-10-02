@@ -24,7 +24,8 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
       //      case "member.selectOneByName": selectOneByName(request, response); break;
       //      case "member.update": update(request, response); break;
       //      case "member.delete": delete(request, response); break;
-      case "member.duplicateCheck": emailDuplicateCheck(request, response); break;
+      case "member.duplicateCheck": duplicateCheck(request, response); break;
+      case "member.resetPassword" : matchMember(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -55,7 +56,7 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
     }
   }
 
-  private void emailDuplicateCheck(Request request, Response response) throws Exception {
+  private void duplicateCheck(Request request, Response response) throws Exception {
     String email = request.getObject(String.class);
     int type = 0;
     for (Member m : list) {
@@ -68,6 +69,29 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
     }
 
     if (type == 0) {
+      response.setStatus(Response.SUCCESS);
+    } else {
+      response.setStatus(Response.FAIL);
+    }
+  }
+
+  private void matchMember(Request request, Response response) throws Exception {
+    String name = request.getParameter("name");
+    String email = request.getParameter("email");
+    String phoneNumber = request.getParameter("phoneNumber");
+
+    int type = 0;
+    for (Member m : list) {
+      if (m.getName().equals(name) && m.getEmail().equals(email)
+          && m.getPhoneNumber().equals(phoneNumber)) {
+        type = 1;
+        break;
+      } else {
+        continue;
+      }
+    }
+
+    if (type == 1) {
       response.setStatus(Response.SUCCESS);
     } else {
       response.setStatus(Response.FAIL);
