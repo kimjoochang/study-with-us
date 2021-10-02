@@ -1,20 +1,23 @@
 package com.studywithus.handler.user;
 
 import java.sql.Date;
-import java.util.List;
 import com.studywithus.domain.Member;
+import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.menu.Menu;
+import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class SignUpHandler extends AbstractLoginHandler {
+public class SignUpHandler implements Command {
 
-  public SignUpHandler(List<Member> memberList) {
-    super(memberList);
+  RequestAgent requestAgent;
+
+  public SignUpHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
 
     Member member = new Member();
 
@@ -25,7 +28,7 @@ public class SignUpHandler extends AbstractLoginHandler {
       String id = Prompt.inputString("사용할 아이디를 입력하세요.(이메일 형식의 아이디) > ");
       String password = Prompt.inputString("사용할 비밀번호를 입력하세요.(특수문자 !,@,$,^ 포함 8자 이상 16자 이하) > ");
 
-      id = findById(id);
+      //      id = findById(id);
 
       if (id == null) {
         System.out.println("중복된 아이디가 있습니다.\n");
@@ -57,7 +60,7 @@ public class SignUpHandler extends AbstractLoginHandler {
         member.setUserAccessLevel(Menu.ACCESS_GENERAL);
         member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-        memberList.add(member);
+        requestAgent.request("member.insert", member);
 
         System.out.println("회원가입이 완료되었습니다.\n");
         return;
@@ -65,12 +68,12 @@ public class SignUpHandler extends AbstractLoginHandler {
     }
   }
 
-  private String findById(String id) {
-    for (Member member : memberList) {
-      if (id.equalsIgnoreCase(member.getId())) {
-        return null;
-      }
-    }
-    return id;
-  }
+  //  private String findById(String id) {
+  //    for (Member member : memberList) {
+  //      if (id.equalsIgnoreCase(member.getId())) {
+  //        return null;
+  //      }
+  //    }
+  //    return id;
+  //  }
 }
