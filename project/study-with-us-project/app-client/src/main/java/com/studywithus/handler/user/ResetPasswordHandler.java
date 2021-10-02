@@ -20,7 +20,7 @@ public class ResetPasswordHandler implements Command {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
 
     System.out.println("[비밀번호 변경]\n");
     String name = Prompt.inputString("회원 이름을 입력해주세요. > ");
@@ -32,13 +32,15 @@ public class ResetPasswordHandler implements Command {
     params.put("name",name);
     params.put("email", email);
     params.put("phoneNumber", phoneNumber);
-    requestAgent.request("member.resetPassword", params);
+    requestAgent.request("member.findMemberForResetPassword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(" ");
       System.out.println("해당 정보와 일치하는 회원이 없습니다.\n");
       return;
     }
+
+    Member member = requestAgent.getObject(Member.class);
 
     while (true) {
       String newPassword1 = Prompt.inputString("새 비밀번호를 입력하세요.(특수문자 !,@,$,^ 포함 8자 이상 16자 이하) > ");
@@ -58,7 +60,7 @@ public class ResetPasswordHandler implements Command {
         System.out.println("비밀번호는 다음의 특수문자를 하나 이상 포함해야 합니다.(!,@,$,^) \n");
         continue;
 
-      }  else if (newPassword1.contains(id) == true) {
+      }  else if (newPassword1.contains(member.getEmail()) == true) {
         System.out.println("아이디를 포함한 비밀번호는 사용하실 수 없습니다. \n");
         continue;
 
@@ -85,8 +87,9 @@ public class ResetPasswordHandler implements Command {
         } else if (input.equalsIgnoreCase("y")) {
 
           member.setPassword(newPassword1);
+          requestAgent.request("member.resetPassword", member);
 
-          System.out.println(" ");
+          System.out.println();
           System.out.println("비밀번호 변경이 완료되었습니다.\n");
           return;
           //y, n, 공백 제외 문자 입력 시 아래 문구 출력
@@ -96,16 +99,5 @@ public class ResetPasswordHandler implements Command {
         }
       }
     }
-  }
-
-  // 비밀번호 변경용
-  private Member resetPwdById(String name, String id, String phoneNumber) {
-    for (Member member : memberList) {
-      if (member.getName().equals(name) && member.getId().equals(id)
-          && member.getPhoneNumber().equals(phoneNumber)) {
-        return member;
-      }
-    }
-    return null;
   }
 }

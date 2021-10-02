@@ -66,7 +66,7 @@ public class ClientApp_JC {
     //    commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
     //
     //    commandMap.put("/find/id", new FindIdHandler(memberList));
-    commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
+    commandMap.put("/reset/password", new ResetPasswordHandler(requestAgent));
     //
     //    commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
     //
