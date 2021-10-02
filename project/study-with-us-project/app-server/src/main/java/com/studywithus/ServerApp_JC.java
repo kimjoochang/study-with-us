@@ -9,6 +9,7 @@ import com.studywithus.server.RequestProcessor;
 import com.studywithus.table.ChargeStudyTable;
 import com.studywithus.table.JsonDataTable;
 import com.studywithus.table.MemberTable2;
+import com.studywithus.table.MentorApplicationTable;
 
 public class ServerApp_JC {
 
@@ -26,6 +27,7 @@ public class ServerApp_JC {
     //    dataProcessorMap.put("board.", new BoardTable());
     dataProcessorMap.put("member.", new MemberTable2());
     dataProcessorMap.put("chargeStudy.", new ChargeStudyTable());
+    dataProcessorMap.put("mentorApplication.", new MentorApplicationTable());
     //    dataProcessorMap.put("project.", new ProjectTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);

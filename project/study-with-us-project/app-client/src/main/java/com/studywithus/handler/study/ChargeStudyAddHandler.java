@@ -5,7 +5,6 @@ import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.menu.Menu;
 import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
@@ -38,7 +37,15 @@ public class ChargeStudyAddHandler implements Command {
         System.out.println("다시 입력하세요.\n");
         continue;
       }
-      break;
+
+      // 현재 날짜 > 시작일인 경우
+      if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == 1) {
+        System.out.println("다시 입력하세요.\n");
+        continue;
+
+      } else {
+        break;
+      }
     }
 
     while (true) {
@@ -65,8 +72,6 @@ public class ChargeStudyAddHandler implements Command {
     }
 
     chargeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-    AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MENTOR;
 
     requestAgent.request("chargeStudy.insert", chargeStudy);
 

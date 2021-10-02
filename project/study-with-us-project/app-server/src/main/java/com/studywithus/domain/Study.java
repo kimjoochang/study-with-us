@@ -22,8 +22,9 @@ public class Study extends Content {
   private Date startDate; // 스터디 시작일
   private Date endDate; // 스터디 종료일
 
-  //  [삭제]
-  //  private int like; // 좋아요  -> 좋아요 수를 likeMembers의 인덱스 수로 변경
+  private boolean deleteRequest; // 스터디 삭제요청 확인하기 위한 필드
+  private String studyStatus;
+  private List<Review> reviewList = new ArrayList<>();
 
   public String getONLINE() {
     return ONLINE;
@@ -135,5 +136,29 @@ public class Study extends Content {
 
   public void setEndDate(Date endDate) {
     this.endDate = endDate;
+  }
+
+  public boolean isDeleteRequest() {
+    return deleteRequest;
+  }
+
+  public void setDeleteRequest(boolean deleteRequest) {
+    this.deleteRequest = deleteRequest;
+  }
+
+  public String getStudyStatus() {
+    return studyStatus;
+  }
+
+  public void setStudyStatus(String studyStatus) {
+    this.studyStatus = studyStatus;
+  }
+
+  public List<Review> getReviewList() {
+    return reviewList;
+  }
+
+  public void setReviewList(List<Review> reviewList) {
+    this.reviewList = reviewList;
   }
 }
