@@ -12,6 +12,7 @@ import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.handler.user.FindEmailHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
 import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
@@ -70,7 +71,7 @@ public class ClientAppSY {
 		commandMap.put("/kakao/signUp", new SnsSignUpHandler(requestAgent));
 		commandMap.put("/naver/signUp", new SnsSignUpHandler(requestAgent));
 		//
-		//    commandMap.put("/find/id", new FindIdHandler(memberList));
+		commandMap.put("/find/email", new FindEmailHandler(requestAgent));
 		commandMap.put("/reset/password", new ResetPasswordHandler(requestAgent));
 		//
 		commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(requestAgent));
