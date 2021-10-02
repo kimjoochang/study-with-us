@@ -21,7 +21,7 @@ public class MemberTableJJ extends JsonDataTable<Member> implements DataProcesso
       //      case "member.selectList": selectList(request, response); break;
       //      case "member.selectOne": selectOne(request, response); break;
       case "member.selectOneByEmailPassword": selectOneByEmailPassword(request, response); break;
-      case "member.selectOneByNamePhoneNumber": selectOneByName(request, response); break;
+      case "member.selectOneByNamePhoneNumber": selectOneByNamePhoneNumber(request, response); break;
       //      case "member.selectOneByName": selectOneByName(request, response); break;
       //      case "member.update": update(request, response); break;
       //      case "member.delete": delete(request, response); break;

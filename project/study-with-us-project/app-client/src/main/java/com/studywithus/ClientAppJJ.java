@@ -615,7 +615,7 @@ public class ClientAppJJ {
     return examScheduleManagementMenu;
   }
 
-  void service() {
+  void service() throws Exception {
 
     // [삭제] HashMap 적용
     // loadObjects("chargeInterest.json", chargeInterestList, Study.class);
@@ -645,6 +645,7 @@ public class ClientAppJJ {
     System.out.println("    ノ￣ヽ　  ノ￣ヽ  Are U ready to STUDY ?");
 
     createMainMenu().execute();
+    requestAgent.request("quit", null);
     Prompt.close();
 
     // [삭제] HashMap 적용
