@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.handler.user.SnsSignUpHandler;
 import com.studywithus.menu.Menu;
@@ -52,7 +53,7 @@ public class ClientAppSY {
 	public ClientAppSY() throws Exception {
 		requestAgent = new RequestAgent("127.0.0.1", 8888);
 
-		// commandMap.put("/auth/logIn", new AuthLogInHandler(memberList));
+		commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
 		// commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
 		// commandMap.put("/facebook/logIn", new SnsLogInHandler(memberList));
 		// commandMap.put("/kakao/logIn", new SnsLogInHandler(memberList));

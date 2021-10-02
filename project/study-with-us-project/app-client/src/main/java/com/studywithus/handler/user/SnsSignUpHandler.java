@@ -23,22 +23,22 @@ public class SnsSignUpHandler implements Command {
 		Member member = new Member();
 
 		String name = Prompt.inputString("이름을 입력하세요. > ");
-		String snsId = Prompt.inputString("연동할 SNS 계정을 입력하세요. > ");
+		String snsEmail = Prompt.inputString("연동할 SNS 계정을 입력하세요. > ");
 		String password = Prompt.inputString("SNS 계정의 비밀번호를 입력하세요. > ");
 
 		System.out.println();
 
 		// snsId = findBySnsId(snsId);
 
-		if (snsId == null) {
+		if (snsEmail == null) {
 			System.out.println("이미 연동된 SNS 계정입니다.\n");
 
-		} else if (!snsId.contains("@") || !snsId.contains(".com")) {
+		} else if (!snsEmail.contains("@") || !snsEmail.contains(".com")) {
 			System.out.println("이메일 형식의 SNS 계정을 입력하세요.\n");
 
 		} else {
 			member.setName(name);
-			member.setId(snsId);
+			member.setEmail(snsEmail);
 			member.setPassword(password);
 			member.setRegisteredDate((new Date(System.currentTimeMillis())));
 			member.setUserAccessLevel(Menu.ACCESS_GENERAL);
