@@ -9,7 +9,10 @@ import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.SignUpHandler;
+import com.studywithus.handler.user.SnsLogInHandler;
+import com.studywithus.handler.user.SnsSignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.request.RequestAgent;
@@ -49,19 +52,19 @@ public class ClientAppJJ {
   public ClientAppJJ() throws Exception {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
-    //            commandMap.put("/auth/logIn", new AuthLogInHandler(memberList));
-    //    commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
-    //    commandMap.put("/facebook/logIn", new SnsLogInHandler(memberList));
-    //    commandMap.put("/kakao/logIn", new SnsLogInHandler(memberList));
-    //    commandMap.put("/naver/logIn", new SnsLogInHandler(memberList));
-    //
-    //    commandMap.put("/auth/logOut", new AuthLogOutHandler(memberList));
-    //
+    commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
+    commandMap.put("/google/logIn", new SnsLogInHandler(requestAgent));
+    commandMap.put("/facebook/logIn", new SnsLogInHandler(requestAgent));
+    commandMap.put("/kakao/logIn", new SnsLogInHandler(requestAgent));
+    commandMap.put("/naver/logIn", new SnsLogInHandler(requestAgent));
+
+    //commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
+
     commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
-    //    commandMap.put("/google/signUp", new SnsSignUpHandler(memberList));
-    //    commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberList));
-    //    commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberList));
-    //    commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
+    commandMap.put("/google/signUp", new SnsSignUpHandler(requestAgent));
+    commandMap.put("/facebook/signUp", new SnsSignUpHandler(requestAgent));
+    commandMap.put("/kakao/signUp", new SnsSignUpHandler(requestAgent));
+    commandMap.put("/naver/signUp", new SnsSignUpHandler(requestAgent));
     //
     //    commandMap.put("/find/id", new FindIdHandler(memberList));
     //    commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
