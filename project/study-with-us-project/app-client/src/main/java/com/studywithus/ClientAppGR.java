@@ -11,6 +11,8 @@ import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
+import com.studywithus.handler.user.SignUpHandler;
+import com.studywithus.handler.user.SnsSignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.request.RequestAgent;
@@ -58,11 +60,11 @@ public class ClientAppGR {
 
     commandMap.put("/auth/logOut", new AuthLogOutHandler());
     //
-    //    commandMap.put("/auth/signUp", new SignUpHandler(memberList));
-    //    commandMap.put("/google/signUp", new SnsSignUpHandler(memberList));
-    //    commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberList));
-    //    commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberList));
-    //    commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
+    commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
+    commandMap.put("/google/signUp", new SnsSignUpHandler(requestAgent));
+    commandMap.put("/facebook/signUp", new SnsSignUpHandler(requestAgent));
+    commandMap.put("/kakao/signUp", new SnsSignUpHandler(requestAgent));
+    commandMap.put("/naver/signUp", new SnsSignUpHandler(requestAgent));
     //
     //    commandMap.put("/find/id", new FindIdHandler(memberList));
     //    commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
@@ -611,7 +613,7 @@ public class ClientAppGR {
     return examScheduleManagementMenu;
   }
 
-  void service() {
+  void service() throws Exception {
 
     // [삭제] HashMap 적용
     // loadObjects("chargeInterest.json", chargeInterestList, Study.class);
@@ -641,6 +643,7 @@ public class ClientAppGR {
     System.out.println("    ノ￣ヽ　  ノ￣ヽ  Are U ready to STUDY ?");
 
     createMainMenu().execute();
+    requestAgent.request("quit", null);
     Prompt.close();
 
     // [삭제] HashMap 적용
@@ -656,6 +659,8 @@ public class ClientAppGR {
   }
 
   public static void main(String[] args) throws Exception {
+    System.out.println("[PMS 클라이언트]");
+
     ClientAppGR app = new ClientAppGR(); 
     app.service();
     Prompt.close();

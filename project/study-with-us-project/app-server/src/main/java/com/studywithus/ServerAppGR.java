@@ -12,6 +12,8 @@ import com.studywithus.table.MemberTable;
 public class ServerAppGR {
 
   public static void main(String[] args) throws Exception {
+    System.out.println("[PMS 서버]");
+
     System.out.println("서버 실행중");
     ServerSocket serverSocket = new ServerSocket(8888);
 
