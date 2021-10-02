@@ -14,7 +14,7 @@ import com.studywithus.menu.MenuGroup;
 import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class ClientApp {
+public class ClientAppSY {
 
   RequestAgent requestAgent;
 
@@ -45,7 +45,7 @@ public class ClientApp {
     }
   }
 
-  public ClientApp() throws Exception {
+  public ClientAppSY() throws Exception {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     //            commandMap.put("/auth/logIn", new AuthLogInHandler(memberList));
@@ -654,7 +654,7 @@ public class ClientApp {
   }
 
   public static void main(String[] args) throws Exception {
-    ClientApp app = new ClientApp(); 
+    ClientAppSY app = new ClientAppSY(); 
     app.service();
     Prompt.close();
   }
