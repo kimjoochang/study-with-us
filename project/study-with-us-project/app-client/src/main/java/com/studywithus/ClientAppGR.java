@@ -12,6 +12,7 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.community.CommunityAddHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
+import com.studywithus.handler.study.FreeStudyDetailHandler;
 import com.studywithus.handler.study.FreeStudyListHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
@@ -90,7 +91,7 @@ public class ClientAppGR {
     // commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(requestAgent));
-    // commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(requestAgent));
     // commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
     // commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
     //
