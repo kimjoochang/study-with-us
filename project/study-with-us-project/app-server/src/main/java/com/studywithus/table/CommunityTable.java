@@ -12,7 +12,7 @@ import com.studywithus.server.Response;
 public class CommunityTable extends JsonDataTable<Community> implements DataProcessor {
 
   public CommunityTable() {
-    super("community.json", Community.class);
+    super("communityInfo.json", "communityQa.json", "communityTalk.json", Community.class);
   }
 
   @Override
@@ -21,21 +21,21 @@ public class CommunityTable extends JsonDataTable<Community> implements DataProc
       case "community.insert":
         insert(request, response);
         break;
-      case "community.selectList":
-        selectList(request, response);
-        break;
-      case "community.selectListByKeyword":
-        selectListByKeyword(request, response);
-        break;
-      case "community.selectOne":
-        selectOne(request, response);
-        break;
-      case "community.update":
-        update(request, response);
-        break;
-      case "community.delete":
-        delete(request, response);
-        break;
+        //      case "community.selectList":
+        //        selectList(request, response);
+        //        break;
+        //      case "community.selectListByKeyword":
+        //        selectListByKeyword(request, response);
+        //        break;
+        //      case "community.selectOne":
+        //        selectOne(request, response);
+        //        break;
+        //      case "community.update":
+        //        update(request, response);
+        //        break;
+        //      case "community.delete":
+        //        delete(request, response);
+        //        break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
