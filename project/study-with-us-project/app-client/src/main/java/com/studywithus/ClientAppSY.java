@@ -15,11 +15,13 @@ import com.studywithus.handler.community.CommunityAddHandler;
 import com.studywithus.handler.community.CommunityDeleteHandler;
 import com.studywithus.handler.community.CommunityDetailHandler;
 import com.studywithus.handler.community.CommunityListHandler;
+import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
 import com.studywithus.handler.study.FreeStudyDeleteHandler;
 import com.studywithus.handler.study.FreeStudyDetailHandler;
 import com.studywithus.handler.study.FreeStudyListHandler;
+import com.studywithus.handler.study.FreeStudySearchHandler;
 import com.studywithus.handler.study.FreeStudyUpdateHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
@@ -98,7 +100,7 @@ public class ClientAppSY {
 		//    commandMap.put("/mentorApplicant/list",
 		//        new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
 		//
-		//    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
+		commandMap.put("/freeStudy/search", new FreeStudySearchHandler(requestAgent));
 		commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
 		commandMap.put("/freeStudy/list", new FreeStudyListHandler(requestAgent));
 		commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(requestAgent));
@@ -149,22 +151,22 @@ public class ClientAppSY {
 		commandMap.put("/communityQa/detail",new CommunityDetailHandler(requestAgent, "/communityQa/update", "/communityQa/delete"));
 		commandMap.put("/communityQa/update", new CommunityUpdateHandler(requestAgent));
 		commandMap.put("/communityQa/delete", new CommunityDeleteHandler(requestAgent));
-		//    commandMap.put("/communityQa/search", new CommunitySearchHandler(communityQaList));
-		//
+		commandMap.put("/communityQa/search", new CommunitySearchHandler(requestAgent));
+
 		commandMap.put("/communityInfo/add", new CommunityAddHandler(requestAgent));
 		commandMap.put("/communityInfo/list", new CommunityListHandler(requestAgent));
 		commandMap.put("/communityInfo/detail", new CommunityDetailHandler(requestAgent, "/communityInfo/update", "/communityInfo/delete"));
 		commandMap.put("/communityInfo/update", new CommunityUpdateHandler(requestAgent));
 		commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(requestAgent));
-		//    commandMap.put("/communityInfo/search", new CommunitySearchHandler(communityInfoList));
-		//
+		commandMap.put("/communityInfo/search", new CommunitySearchHandler(requestAgent));
+
 		commandMap.put("/communityTalk/add", new CommunityAddHandler(requestAgent));
 		commandMap.put("/communityTalk/list", new CommunityListHandler(requestAgent));
 		commandMap.put("/communityTalk/detail", new CommunityDetailHandler(requestAgent, "/communityTalk/update", "/communityTalk/delete"));
 		commandMap.put("/communityTalk/update", new CommunityUpdateHandler(requestAgent));
 		commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(requestAgent));
-		//    commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
-		//
+		commandMap.put("/communityTalk/search", new CommunitySearchHandler(requestAgent));
+
 		//    commandMap.put("/myPost/list",
 		//        new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));
 		//    commandMap.put("/myPost/detail",
