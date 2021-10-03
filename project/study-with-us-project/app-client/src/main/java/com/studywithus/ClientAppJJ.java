@@ -8,8 +8,14 @@ import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.schedule.ExamScheduleAddHandler;
+import com.studywithus.handler.schedule.ExamScheduleDeleteHandler;
+import com.studywithus.handler.schedule.ExamScheduleDetailHandler;
+import com.studywithus.handler.schedule.ExamScheduleListHandler;
+import com.studywithus.handler.schedule.ExamScheduleUpdateHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
 import com.studywithus.handler.study.ChargeStudyListHandler;
+import com.studywithus.handler.study.ChargeStudyPaymentHandler;
 import com.studywithus.handler.study.ChargeStudySearchHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
@@ -114,8 +120,7 @@ public class ClientAppJJ {
     //    commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList));
     //    commandMap.put("/chargeStudy/deleteRequestList", new ChargeStudyDeleteRequestListHandler(chargeStudyList));
     //    commandMap.put("/chargeStudy/deleteRequestDetail", new ChargeStudyDeleteRequestDetailHandler(chargeStudyList));
-    //    commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList,
-    //        chargePaymentList, chargeApplicantList, participateChargeStudyMap));
+    commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(requestAgent));
     //    commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(
     //        chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     //    commandMap.put("/chargeStudy/paymentList",
@@ -167,11 +172,11 @@ public class ClientAppJJ {
     //    commandMap.put("/jobsSchedule/update", new JobsScheduleUpdateHandler(jobsScheduleList));
     //    commandMap.put("/jobsSchedule/delete", new JobsScheduleDeleteHandler(jobsScheduleList));
     //
-    //    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(examScheduleList));
-    //    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(examScheduleList));
-    //    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(examScheduleList));
-    //    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(examScheduleList));
-    //    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(examScheduleList));                          
+    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(requestAgent));
+    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(requestAgent));
+    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(requestAgent));
+    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(requestAgent));
+    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(requestAgent));                          
   }
 
   // ------------------------------ STUDY WITH US -----------------------------------------

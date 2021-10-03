@@ -9,6 +9,15 @@ public class MentorApplicationForm {
   private String chargeStudySubject; //  유료 스터디 주제
   private String chargeStudyExplanation; // 유료 스터디 설명
   private Date registeredDate; // 신청일
+  private boolean visible;
+
+  public boolean isVisible() {
+    return visible;
+  }
+
+  public void setVisible(boolean visible) {
+    this.visible = visible;
+  }
 
   public String getName() {
     return name;

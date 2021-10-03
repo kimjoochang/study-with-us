@@ -22,8 +22,8 @@ public class MentorApplicationTable extends JsonDataTable<MentorApplicationForm>
       //      case "member.selectOne": selectOne(request, response); break;
       case "mentorApplication.selectOneByName": selectOneByName(request, response); break;
       case "mentorApplication.selectOneByEmail": selectOneByEmail(request, response); break;
-      //      case "member.update": update(request, response); break;
-      //      case "member.delete": delete(request, response); break;
+      case "mentorApplication.update": update(request, response); break;
+      case "mentorApplication.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -80,7 +80,32 @@ public class MentorApplicationTable extends JsonDataTable<MentorApplicationForm>
     }
   }
 
-  //
+  private void delete(Request request, Response response) throws Exception {
+    String email = request.getObject(String.class);
+    int index = indexOf(email);
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 이메일의 회원을 찾을 수 없습니다.");
+      return;
+    }
+    list.remove(index);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void update(Request request, Response response) throws Exception {
+    MentorApplicationForm mentorApplication = request.getObject(MentorApplicationForm.class);
+
+    int index = indexOf(mentorApplication.getMentorApplicantEmail());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      return;
+    }
+
+    list.set(index, mentorApplication);
+    response.setStatus(Response.SUCCESS);
+  }
   //  private void selectOne(Request request, Response response) throws Exception {
   //    int no = Integer.parseInt(request.getParameter("no"));
   //    Study chargeStudy = findByNo(no);
@@ -94,29 +119,7 @@ public class MentorApplicationTable extends JsonDataTable<MentorApplicationForm>
   //    }
   //  }
   //
-  //  private void update(Request request, Response response) throws Exception {
-  //    Study chargeStudy = request.getObject(Study.class);
   //
-  //    int index = indexOf(chargeStudy.getNo());
-  //    if (index == -1) {
-  //      response.setStatus(Response.FAIL);
-  //      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
-  //      return;
-  //    }
-  //
-  //    list.set(index, chargeStudy);
-  //    response.setStatus(Response.SUCCESS);
-  //  }
-  //
-  //  private void delete(Request request, Response response) throws Exception {
-  //    int no = Integer.parseInt(request.getParameter("no"));
-  //    int index = indexOf(no);
-  //
-  //    if (index == -1) {
-  //      response.setStatus(Response.FAIL);
-  //      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
-  //      return;
-  //    }
   //
   //    list.remove(index);
   //    response.setStatus(Response.SUCCESS);
@@ -131,14 +134,14 @@ public class MentorApplicationTable extends JsonDataTable<MentorApplicationForm>
   //    return null;
   //  }
   //
-  //  private int indexOf(int memberNo) {
-  //    for (int i = 0; i < list.size(); i++) {
-  //      if (list.get(i).getNo() == memberNo) {
-  //        return i;
-  //      }
-  //    }
-  //    return -1;
-  //  }
+  private int indexOf(String email) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getMentorApplicantEmail().equals(email)) {
+        return i;
+      }
+    }
+    return -1;
+  }
 
 }
 
