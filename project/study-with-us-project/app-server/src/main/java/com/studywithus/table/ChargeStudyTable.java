@@ -18,11 +18,12 @@ public class ChargeStudyTable extends JsonDataTable<Study> implements DataProces
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "chargeStudy.insert": insert(request, response); break;
-      //      case "member.selectList": selectList(request, response); break;
+      case "chargeStudy.selectList": selectList(request, response); break;
       case "chargeStudy.selectOne": selectOne(request, response); break;
+      case "chargeStudy.selectOneByNo": selectOneByNo(request, response); break;
       //      case "member.selectOneByName": selectOneByName(request, response); break;
-      //      case "member.update": update(request, response); break;
-      //      case "member.delete": delete(request, response); break;
+      case "chargeStudy.update": update(request, response); break;
+      case "chargeStudy.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -49,7 +50,8 @@ public class ChargeStudyTable extends JsonDataTable<Study> implements DataProces
   }
 
   private void selectOne(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("no"));
+    //    int no = Integer.parseInt(request.getParameter("no"));
+    int no = request.getObject(Integer.class);
     Study chargeStudy = findByNo(no);
 
     if (chargeStudy != null) {
@@ -81,12 +83,33 @@ public class ChargeStudyTable extends JsonDataTable<Study> implements DataProces
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
       return;
     }
 
     list.remove(index);
     response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectOneByNo(Request request, Response response) {
+    Study chargeStudy = null;
+    int no = request.getObject(Integer.class);
+    for (Study study : list) {
+      if (study.getNo() == no) {
+        chargeStudy = study;
+        break;
+
+      } else {
+        continue;
+      }
+    }
+    if (chargeStudy != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(chargeStudy);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 스터디를 찾을 수 없습니다.");
+    }
   }
 
   private Study findByNo(int no) {
