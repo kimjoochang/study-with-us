@@ -1,5 +1,6 @@
 package com.studywithus.handler.user;
 
+import java.util.HashMap;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -17,24 +18,26 @@ public class MyInfoHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[나의 정보]\n");
 
-    requestAgent.request("member.myInfo", null);
+    int no = AuthLogInHandler.getLoginUser().getNo();
 
-    //    Member loginUser = AuthLogInHandler.getLoginUser();
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
 
+    requestAgent.request("member.selectOne", params);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("로그인 후 이용 바랍니다.");
       return;
     }
 
-    //    if (loginUser == null) {
-    //      System.out.println("로그인 후 이용 바랍니다.");
-    //      return;
-    //    }
+    Member user = requestAgent.getObject(Member.class);
+    // if (loginUser == null) {
+    // System.out.println("로그인 후 이용 바랍니다.");
+    // return;
+    // }
 
-    Member user =  requestAgent.getObject(Member.class);
 
-    switch(user.getUserAccessLevel()) {
-      case 0x02: 
+    switch (user.getUserAccessLevel()) {
+      case 0x02:
         System.out.println("등급: 회원");
         break;
 
@@ -42,7 +45,7 @@ public class MyInfoHandler implements Command {
         System.out.println("등급: 회원");
         break;
 
-      case 0x08: 
+      case 0x08:
         System.out.println("등급: 회원");
         break;
 
@@ -50,11 +53,11 @@ public class MyInfoHandler implements Command {
         System.out.println("등급: 회원");
         break;
 
-      case 0x10: 
+      case 0x10:
         System.out.println("등급: 멘토");
         break;
 
-      case 0x20: 
+      case 0x20:
         System.out.println("등급: 관리자");
         break;
     }
