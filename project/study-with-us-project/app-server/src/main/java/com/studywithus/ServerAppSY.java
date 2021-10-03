@@ -28,7 +28,7 @@ public class ServerAppSY {
 		//    dataProcessorMap.put("board.", new BoardTable());
 		dataProcessorMap.put("member.", new MemberTableSY());
 		dataProcessorMap.put("freeStudy.", new FreeStudyTable());
-		dataProcessorMap.put("communityStudy.", new CommunityTable());
+		dataProcessorMap.put("community.", new CommunityTable());
 		//    dataProcessorMap.put("project.", new ProjectTable());
 
 		RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);

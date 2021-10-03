@@ -13,6 +13,7 @@ import com.studywithus.util.Prompt;
 public class FreeStudyAddHandler implements Command {
 
 	RequestAgent requestAgent;
+	int no = 1;
 
 	public FreeStudyAddHandler(RequestAgent requestAgent) {
 		this.requestAgent = requestAgent;
@@ -24,7 +25,7 @@ public class FreeStudyAddHandler implements Command {
 
 		Study freeStudy = new Study();
 
-		freeStudy.setNo(Prompt.inputInt("번호를 입력하세요. > "));
+		freeStudy.setNo(no++);
 		System.out.println("온/오프라인을 선택하세요.");
 		System.out.println("1. 온라인");
 		System.out.println("2. 오프라인");
@@ -42,14 +43,26 @@ public class FreeStudyAddHandler implements Command {
 		freeStudy.setContent(Prompt.inputString("설명을 입력하세요. > "));
 		freeStudy.setRule(Prompt.inputString("규칙을 입력하세요. > "));
 		freeStudy.setMaxMembers(Prompt.inputInt("모집 인원을 입력하세요. > "));
-		freeStudy.setStartDate(Prompt.inputDate("시작일을 입력하세요. ex) YYYY-MM-DD > "));
+
+		while (true) {
+			freeStudy.setStartDate(Prompt.inputDate("시작일을 입력하세요. ex) YYYY-MM-DD > "));
+
+			// 현재 날짜 > 시작일인 경우
+			if (new Date(System.currentTimeMillis()).compareTo(freeStudy.getStartDate()) == 1) {
+				System.out.println("다시 입력하세요.\n");
+				continue;
+
+			} else {
+				break;
+			}
+		}
 
 		while (true) {
 			freeStudy.setEndDate(Prompt.inputDate("종료일을 입력하세요. ex) YYYY-MM-DD > "));
 
 			// 시작일 < 종료일이 아닌 경우
 			if (freeStudy.getEndDate().compareTo(freeStudy.getStartDate()) != 1) {
-				System.out.println("종료일은 시작일 이후로 설정하시오.\n");
+				System.out.println("종료일은 시작일 이후로 설정하세요.\n");
 				continue;
 
 			} else {
