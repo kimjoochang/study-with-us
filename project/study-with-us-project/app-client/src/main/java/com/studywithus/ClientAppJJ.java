@@ -5,10 +5,11 @@ import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
-import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.study.ChargeStudyAddHandler;
+import com.studywithus.handler.study.ChargeStudyListHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindEmailHandler;
@@ -104,9 +105,8 @@ public class ClientAppJJ {
     //        new ParticipateFreeStudyListHandler(participateFreeStudyMap));
     //
     //    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
-    //    commandMap.put("/chargeStudy/add",
-    //        new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
-    //    commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(requestAgent));
+    commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(requestAgent));
     //    commandMap.put("/chargeStudy/detail",
     //        new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
     //    commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
@@ -263,7 +263,7 @@ public class ClientAppJJ {
     MenuGroup chargeStudyMenu = new MenuGroup("유료 스터디");
 
     chargeStudyMenu.add(new MenuItem("검색", "/chargeStudy/search"));
-    chargeStudyMenu.add(new MenuItem("생성", ACCESS_MENTOR, "/chargeStudy/add"));
+    chargeStudyMenu.add(new MenuItem("생성", "/chargeStudy/add"));
     chargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/list"));
     chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
     chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
