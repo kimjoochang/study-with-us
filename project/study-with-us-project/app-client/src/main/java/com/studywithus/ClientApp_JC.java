@@ -9,11 +9,15 @@ import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
+import com.studywithus.handler.study.ChargeStudyDeleteRequestDetailHandler;
+import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
+import com.studywithus.handler.study.ChargeStudyDeleteRequestListHandler;
 import com.studywithus.handler.study.ChargeStudyDetailHandler;
 import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
 import com.studywithus.handler.study.ChargeStudyInterestDeleteHandler;
 import com.studywithus.handler.study.ChargeStudyInterestListHandler;
 import com.studywithus.handler.study.ChargeStudyListHandler;
+import com.studywithus.handler.study.ChargeStudyUpdateHandler;
 import com.studywithus.handler.study.MentorApplicantApproveHandler;
 import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
@@ -110,10 +114,10 @@ public class ClientApp_JC {
     commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(requestAgent));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(requestAgent));
     commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(requestAgent));
-    //    commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
-    //    commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList));
-    //    commandMap.put("/chargeStudy/deleteRequestList", new ChargeStudyDeleteRequestListHandler(chargeStudyList));
-    //    commandMap.put("/chargeStudy/deleteRequestDetail", new ChargeStudyDeleteRequestDetailHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(requestAgent));
+    commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(requestAgent));
+    commandMap.put("/chargeStudy/deleteRequestList", new ChargeStudyDeleteRequestListHandler(requestAgent));
+    commandMap.put("/chargeStudy/deleteRequestDetail", new ChargeStudyDeleteRequestDetailHandler(requestAgent));
     //    commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList,
     //        chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     //    commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(
