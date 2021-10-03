@@ -8,7 +8,7 @@ import com.studywithus.server.Response;
 
 // 역할
 // - 커뮤니티 데이터를 처리하는 일을 한다.
-///
+//
 public class CommunityTable extends JsonDataTable<Community> implements DataProcessor {
 
   public CommunityTable() {

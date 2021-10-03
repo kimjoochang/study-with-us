@@ -68,9 +68,10 @@ public class FreeStudyAddHandler implements Command {
 				if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
 
 					requestAgent.request("registerFreeStudy.insert", freeStudy);
+					//					Collection<Study> studyList = requestAgent.getObjects(Study.class);
 
 					// 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
-				} else {
+				} else { 
 					//					registerFreeStudyList = new ArrayList<>();
 
 					//					requestAgent.request("registerFreeStudy.insert", freeStudy);
