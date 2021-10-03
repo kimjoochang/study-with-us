@@ -15,7 +15,7 @@ import com.google.gson.reflect.TypeToken;
 
 // 역할
 // - 데이터를 처리하는 클래스가 공통으로 가져야할 필드나 메서드를 정의한다.
-//
+///
 public abstract class JsonDataTable<T> {
 
   protected List<T> list = new ArrayList<>();
