@@ -22,7 +22,7 @@ public class FreeStudyApplyListHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[무료 스터디 신청 내역 / 조회] \n");
 
-    requestAgent.request("board.selectList", null);
+    requestAgent.request("freeStudy.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("무료 스터디 조회 실패!");

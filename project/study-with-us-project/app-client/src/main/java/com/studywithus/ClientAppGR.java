@@ -7,18 +7,18 @@ import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.util.HashMap;
+import java.util.List;
+import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.community.CommunityAddHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
+import com.studywithus.handler.study.FreeStudyApplyAddHandler;
 import com.studywithus.handler.study.FreeStudyApplyCancelHandler;
-import com.studywithus.handler.study.FreeStudyApplyHandler;
 import com.studywithus.handler.study.FreeStudyApplyListHandler;
 import com.studywithus.handler.study.FreeStudyDeleteHandler;
 import com.studywithus.handler.study.FreeStudyDetailHandler;
-import com.studywithus.handler.study.FreeStudyInterestAddHandler;
-import com.studywithus.handler.study.FreeStudyInterestDeleteHandler;
 import com.studywithus.handler.study.FreeStudyInterestListHandler;
 import com.studywithus.handler.study.FreeStudyListHandler;
 import com.studywithus.handler.study.FreeStudySearchHandler;
@@ -38,6 +38,7 @@ public class ClientAppGR {
   RequestAgent requestAgent;
 
   HashMap<String, Command> commandMap = new HashMap<>();
+  HashMap<String, List<Study>> applyFreeStudyMap = new HashMap<>();
 
   class MenuItem extends Menu {
     String menuId;
@@ -105,13 +106,13 @@ public class ClientAppGR {
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(requestAgent));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(requestAgent));
 
-    commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(requestAgent));
+    commandMap.put("/freeStudy/apply", new FreeStudyApplyAddHandler(requestAgent, applyFreeStudyMap));
     commandMap.put("/freeStudy/applyCancel",
-        new FreeStudyApplyCancelHandler(requestAgent));
+        new FreeStudyApplyCancelHandler(requestAgent, applyFreeStudyMap));
     commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(requestAgent));
-    commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(requestAgent));
-    commandMap.put("/freeStudy/deleteInterest", new
-        FreeStudyInterestDeleteHandler(requestAgent));
+    //    commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(requestAgent));
+    //    commandMap.put("/freeStudy/deleteInterest", new
+    //        FreeStudyInterestDeleteHandler(requestAgent, applyFreeStudyMap));
     // commandMap.put("/freeStudy/registerStudyList",
     // new RegisterFreeStudyDetailHandler(registerFreeStudyMap, participateFreeStudyMap));
     // commandMap.put("/freeStudy/participateStudyList",

@@ -48,6 +48,12 @@ public class FreeStudyTable extends JsonDataTable<Study> implements DataProcesso
       case "freeStudy.interest.delete":
         delete(request, response);
         break;
+      case "freeStudy.apply.insert":
+        insert(request, response);
+        break;
+      case "freeStudy.apply.delete":
+        delete(request, response);
+        break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
