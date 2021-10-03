@@ -1,7 +1,6 @@
 package com.studywithus.handler.study;
 
 import java.sql.Date;
-import java.util.HashMap;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -23,10 +22,12 @@ public class ChargeStudyDetailHandler implements Command {
     System.out.println("[유료 스터디 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("no", String.valueOf(no));
+    //
+    //    requestAgent.request("chargeStudy.selectOne", params);
 
-    requestAgent.request("chargeStudy.selectOne", params);
+    requestAgent.request("chargeStudy.selectOne", no);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
@@ -50,7 +51,7 @@ public class ChargeStudyDetailHandler implements Command {
 
     System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers().size(), chargeStudy.getMaxMembers());
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
-    System.out.printf("좋아요수: %d\n", chargeStudy.getLikeMembers().size());
+    System.out.printf("좋아요수: %d\n", chargeStudy.getLikeMembersEmail().size());
     System.out.println();
 
     // ChargeStudyUpdateHandler나 ChargeStudyDeleteHandler를 실행할 때 
@@ -111,8 +112,8 @@ public class ChargeStudyDetailHandler implements Command {
           }
         }
 
-        for (Member member : chargeStudy.getLikeMembers()) {
-          if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
+        for (String email : chargeStudy.getLikeMembersEmail()) {
+          if (email.equals(AuthLogInHandler.getLoginUser().getEmail())) {
             interestType = 1;
             break;
           }
