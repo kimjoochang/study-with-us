@@ -83,20 +83,19 @@ public class MemberTable2 extends JsonDataTable<Member> implements DataProcessor
     String phoneNumber = request.getParameter("phoneNumber");
 
     Member member = null;
-    int type = 0;
 
     for (Member m : list) {
       if (m.getName().equals(name) && m.getEmail().equals(email)
           && m.getPhoneNumber().equals(phoneNumber)) {
         member = m;
-        type = 1;
         break;
+
       } else {
         continue;
       }
     }
 
-    if (type == 1) {
+    if (member != null) {
       response.setStatus(Response.SUCCESS);
       response.setValue(member);
     } else {
