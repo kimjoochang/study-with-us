@@ -22,8 +22,8 @@ public class CommunityDetailHandler implements Command{
 	@Override
 	public void execute(CommandRequest request) throws Exception {
 		System.out.println("[커뮤니티 / 상세보기] \n");
-
 		int no = Prompt.inputInt("번호를 입력하세요. > ");
+
 		HashMap<String,String> params = new HashMap<>();
 		params.put("no", String.valueOf(no));
 
@@ -45,7 +45,6 @@ public class CommunityDetailHandler implements Command{
 
 		community.setViewCount(community.getViewCount() + 1);
 		System.out.printf("조회수: %d\n", community.getViewCount());
-
 		System.out.println();
 
 		request.setAttribute("communityNo", no);
@@ -58,20 +57,21 @@ public class CommunityDetailHandler implements Command{
 				System.out.println("0. 이전");
 				System.out.println();
 
-				int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
+				int num = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
+				System.out.println();
 
-				switch (input) {
-				case 1:
+				if (num == 1) {
 					request.getRequestDispatcher("/community/update").forward(request);
-					return;
-				case 2:
+
+				} else if (num == 2) {
 					request.getRequestDispatcher("/community/delete").forward(request);
+
+				} else if (num == 0) {
 					return;
-				case 0:
-					return;
-				default:
-					System.out.println("");
+
+				} else {
 					System.out.println("다시 입력하세요.\n");
+					continue;
 				}
 				return;
 			}
