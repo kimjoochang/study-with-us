@@ -1,39 +1,39 @@
 package com.studywithus.table;
 
 import java.util.ArrayList;
-import com.studywithus.domain.Study;
+import com.studywithus.domain.Community;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.Request;
 import com.studywithus.server.Response;
 
 // 역할
-// - 무료 스터디 데이터를 처리하는 일을 한다.
+// - 커뮤니티 데이터를 처리하는 일을 한다.
 //
-public class FreeStudyTable extends JsonDataTable<Study> implements DataProcessor {
+public class CommunityTable extends JsonDataTable<Community> implements DataProcessor {
 
-  public FreeStudyTable() {
-    super("freeStudy.json", Study.class);
+  public CommunityTable() {
+    super("community.json", Community.class);
   }
 
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
-      case "freeStudy.insert":
+      case "community.insert":
         insert(request, response);
         break;
-      case "freeStudy.selectList":
+      case "community.selectList":
         selectList(request, response);
         break;
-      case "freeStudy.selectListByKeyword":
+      case "community.selectListByKeyword":
         selectListByKeyword(request, response);
         break;
-      case "freeStudy.selectOne":
+      case "community.selectOne":
         selectOne(request, response);
         break;
-      case "freeStudy.update":
+      case "community.update":
         update(request, response);
         break;
-      case "freeStudy.delete":
+      case "community.delete":
         delete(request, response);
         break;
       default:
@@ -43,8 +43,8 @@ public class FreeStudyTable extends JsonDataTable<Study> implements DataProcesso
   }
 
   private void insert(Request request, Response response) throws Exception {
-    Study freeStudy = request.getObject(Study.class);
-    list.add(freeStudy);
+    Community community = request.getObject(Community.class);
+    list.add(community);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -56,13 +56,13 @@ public class FreeStudyTable extends JsonDataTable<Study> implements DataProcesso
   private void selectListByKeyword(Request request, Response response) throws Exception {
     String keyword = request.getParameter("keyword");
 
-    ArrayList<Study> searchResult = new ArrayList<>();
-    for (Study freeStudy : list) {
-      if (!freeStudy.getTitle().contains(keyword) && !freeStudy.getContent().contains(keyword)
-          && !freeStudy.getWriter().getName().contains(keyword)) {
+    ArrayList<Community> searchResult = new ArrayList<>();
+    for (Community community : list) {
+      if (!community.getTitle().contains(keyword) && !community.getContent().contains(keyword)
+          && !community.getWriter().getName().contains(keyword)) {
         continue;
       }
-      searchResult.add(freeStudy);
+      searchResult.add(community);
     }
 
     response.setStatus(Response.SUCCESS);
@@ -71,28 +71,28 @@ public class FreeStudyTable extends JsonDataTable<Study> implements DataProcesso
 
   private void selectOne(Request request, Response response) throws Exception {
     int no = Integer.parseInt(request.getParameter("no"));
-    Study freeStudy = findByNo(no);
+    Community community = findByNo(no);
 
-    if (freeStudy != null) {
+    if (community != null) {
       response.setStatus(Response.SUCCESS);
-      response.setValue(freeStudy);
+      response.setValue(community);
     } else {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 무료 스터디를 찾을 수 없습니다.");
+      response.setValue("해당 번호의 커뮤니티를 찾을 수 없습니다.");
     }
   }
 
   private void update(Request request, Response response) throws Exception {
-    Study freeStudy = request.getObject(Study.class);
+    Community community = request.getObject(Community.class);
 
-    int index = indexOf(freeStudy.getNo());
+    int index = indexOf(community.getNo());
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 무료 스터디를 찾을 수 없습니다.");
+      response.setValue("해당 번호의 커뮤니티를 찾을 수 없습니다.");
       return;
     }
 
-    list.set(index, freeStudy);
+    list.set(index, community);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -102,7 +102,7 @@ public class FreeStudyTable extends JsonDataTable<Study> implements DataProcesso
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 무료 스터디를 찾을 수 없습니다.");
+      response.setValue("해당 번호의 커뮤니티를 찾을 수 없습니다.");
       return;
     }
 
@@ -110,18 +110,18 @@ public class FreeStudyTable extends JsonDataTable<Study> implements DataProcesso
     response.setStatus(Response.SUCCESS);
   }
 
-  private Study findByNo(int no) {
-    for (Study freeStudy : list) {
-      if (freeStudy.getNo() == no) {
-        return freeStudy;
+  private Community findByNo(int no) {
+    for (Community community : list) {
+      if (community.getNo() == no) {
+        return community;
       }
     }
     return null;
   }
 
-  private int indexOf(int freeStudyNo) {
+  private int indexOf(int communityNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getNo() == freeStudyNo) {
+      if (list.get(i).getNo() == communityNo) {
         return i;
       }
     }
