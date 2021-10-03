@@ -7,7 +7,7 @@ import com.studywithus.server.Response;
 
 // 역할
 // - 회원 데이터를 처리하는 일을 한다.
-// 
+//
 public class MemberTableGR extends JsonDataTable<Member> implements DataProcessor {
 
   public MemberTableGR() {
@@ -17,16 +17,29 @@ public class MemberTableGR extends JsonDataTable<Member> implements DataProcesso
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
-      case "member.insert": insert(request, response); break;
-      //      case "member.selectList": selectList(request, response); break;
-      case "member.selectOne": selectOne(request, response); break;
-      case "member.selectOneByEmailPassword": selectOneByEmailPassword(request, response); break;
-      //      case "member.selectOneByName": selectOneByName(request, response); break;
-      //      case "member.update": update(request, response); break;
-      //      case "member.delete": delete(request, response); break;
-      case "member.duplicateCheck": duplicateCheck(request, response); break;
-      case "member.resetPassword" : matchMember(request, response); break;
-      //      case "member.myInfo" : myInfo(request, response); break;
+      case "member.insert":
+        insert(request, response);
+        break;
+        // case "member.selectList": selectList(request, response); break;
+      case "member.selectOne":
+        selectOne(request, response);
+        break;
+      case "member.selectOneByEmailPassword":
+        selectOneByEmailPassword(request, response);
+        break;
+        // case "member.selectOneByName": selectOneByName(request, response); break;
+        // case "member.update": update(request, response); break;
+        // case "member.delete": delete(request, response); break;
+      case "member.duplicateCheck":
+        duplicateCheck(request, response);
+        break;
+      case "member.resetPassword":
+        matchMember(request, response);
+        break;
+        //      case "member.interest.insert":
+        //        memberInterestInsert(request, response);
+        //        break;
+        // case "member.myInfo" : myInfo(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -54,48 +67,6 @@ public class MemberTableGR extends JsonDataTable<Member> implements DataProcesso
     } else {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
-    }
-  }
-
-  private void duplicateCheck(Request request, Response response) throws Exception {
-    String email = request.getObject(String.class);
-    int type = 0;
-    for (Member m : list) {
-      if (email.equalsIgnoreCase(m.getEmail())) {
-        type = 1;
-        break;
-      } else {
-        continue;
-      }
-    }
-
-    if (type == 0) {
-      response.setStatus(Response.SUCCESS);
-    } else {
-      response.setStatus(Response.FAIL);
-    }
-  }
-
-  private void matchMember(Request request, Response response) throws Exception {
-    String name = request.getParameter("name");
-    String email = request.getParameter("email");
-    String phoneNumber = request.getParameter("phoneNumber");
-
-    int type = 0;
-    for (Member m : list) {
-      if (m.getName().equals(name) && m.getEmail().equals(email)
-          && m.getPhoneNumber().equals(phoneNumber)) {
-        type = 1;
-        break;
-      } else {
-        continue;
-      }
-    }
-
-    if (type == 1) {
-      response.setStatus(Response.SUCCESS);
-    } else {
-      response.setStatus(Response.FAIL);
     }
   }
 
@@ -186,22 +157,75 @@ public class MemberTableGR extends JsonDataTable<Member> implements DataProcesso
     return -1;
   }
 
-  //  private void myInfo(Request request, Response response) throws Exception {
-  //    response.setStatus(Response.SUCCESS);
-  //    Member loginUser = AuthLogInHandler.getLoginUser();
-  //    response.setValue(request.getObject(Member.class));
+  private void duplicateCheck(Request request, Response response) throws Exception {
+    String email = request.getObject(String.class);
+    int type = 0;
+    for (Member m : list) {
+      if (email.equalsIgnoreCase(m.getEmail())) {
+        type = 1;
+        break;
+      } else {
+        continue;
+      }
+    }
+
+    if (type == 0) {
+      response.setStatus(Response.SUCCESS);
+    } else {
+      response.setStatus(Response.FAIL);
+    }
+  }
+
+  private void matchMember(Request request, Response response) throws Exception {
+    String name = request.getParameter("name");
+    String email = request.getParameter("email");
+    String phoneNumber = request.getParameter("phoneNumber");
+
+    int type = 0;
+    for (Member m : list) {
+      if (m.getName().equals(name) && m.getEmail().equals(email)
+          && m.getPhoneNumber().equals(phoneNumber)) {
+        type = 1;
+        break;
+      } else {
+        continue;
+      }
+    }
+
+    if (type == 1) {
+      response.setStatus(Response.SUCCESS);
+    } else {
+      response.setStatus(Response.FAIL);
+    }
+  }
+
+  // [수정]
+  //  private void memberInterestInsert(Request request, Response response) throws Exception {
+  //    String keyword = request.getParameter("keyword");
+  //
+  //    HashMap<String, List<Study>> likeUser = new HashMap<>();
+  //    likeUser.put("freeStudy.", null);
+  //
+  //    //    ArrayList<Member> likeUser = new ArrayList<>();
+  //
+  //    for (Study freeStudy : list) {
+  //      if () {
+  //        continue;
+  //      }
+  //      likeUser.add(freeStudy);
+
+  // List<Member> likeMember = freeInterest.getLikeMembers();
+  // likeMember.add(AuthLogInHandler.getLoginUser());
+  // freeStudyInterest.setLikeMembers(AuthLogInHandler.getLoginUser());
+  //    }
   //  }
+
+  // [삭제] member.selectOne로 사용
+  // private void myInfo(Request request, Response response) throws Exception {
+  // response.setStatus(Response.SUCCESS);
+  // Member loginUser = AuthLogInHandler.getLoginUser();
+  // response.setValue(request.getObject(Member.class));
+  // }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 

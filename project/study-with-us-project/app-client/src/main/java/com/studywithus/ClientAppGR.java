@@ -12,8 +12,14 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.community.CommunityAddHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
+import com.studywithus.handler.study.FreeStudyApplyCancelHandler;
+import com.studywithus.handler.study.FreeStudyApplyHandler;
+import com.studywithus.handler.study.FreeStudyApplyListHandler;
 import com.studywithus.handler.study.FreeStudyDeleteHandler;
 import com.studywithus.handler.study.FreeStudyDetailHandler;
+import com.studywithus.handler.study.FreeStudyInterestAddHandler;
+import com.studywithus.handler.study.FreeStudyInterestDeleteHandler;
+import com.studywithus.handler.study.FreeStudyInterestListHandler;
 import com.studywithus.handler.study.FreeStudyListHandler;
 import com.studywithus.handler.study.FreeStudySearchHandler;
 import com.studywithus.handler.study.FreeStudyUpdateHandler;
@@ -81,11 +87,12 @@ public class ClientAppGR {
     // commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberList));
     //
     commandMap.put("/myInfo/list", new MyInfoHandler(requestAgent));
-    //
-    // commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
-    // commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
+
+    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(requestAgent));
+    // [질문] /freeStudy/deleteInterest과의 차이
+    // commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(requestAgent));
     // commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeStudyList));
-    //
+
     // commandMap.put("/mentorApplicant/add",
     // new MentorApplicationAddHandler(mentorApplicationFormList, memberList));
     // commandMap.put("/mentorApplicant/list",
@@ -97,15 +104,14 @@ public class ClientAppGR {
     commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(requestAgent));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(requestAgent));
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(requestAgent));
-    //
-    // commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyList,
-    // applyFreeStudyMap));
-    // commandMap.put("/freeStudy/applyCancel",
-    // new FreeStudyApplyCancelHandler(freeStudyList, applyFreeStudyMap));
-    // commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(freeStudyList));
-    // commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(freeStudyList));
-    // commandMap.put("/freeStudy/deleteInterest", new
-    // FreeStudyInterestDeleteHandler(freeStudyList));
+
+    commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(requestAgent));
+    commandMap.put("/freeStudy/applyCancel",
+        new FreeStudyApplyCancelHandler(requestAgent));
+    commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(requestAgent));
+    commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(requestAgent));
+    commandMap.put("/freeStudy/deleteInterest", new
+        FreeStudyInterestDeleteHandler(requestAgent));
     // commandMap.put("/freeStudy/registerStudyList",
     // new RegisterFreeStudyDetailHandler(registerFreeStudyMap, participateFreeStudyMap));
     // commandMap.put("/freeStudy/participateStudyList",
