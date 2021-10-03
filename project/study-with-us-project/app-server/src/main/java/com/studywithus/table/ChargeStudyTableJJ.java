@@ -1,5 +1,6 @@
 package com.studywithus.table;
 
+import java.util.ArrayList;
 import com.studywithus.domain.Study;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.Request;
@@ -20,6 +21,7 @@ public class ChargeStudyTableJJ extends JsonDataTable<Study> implements DataProc
       case "chargeStudy.insert": insert(request, response); break;
       case "chargeStudy.selectList": selectList(request, response); break;
       case "chargeStudy.selectOne": selectOne(request, response); break;
+      case "chargeStudy.selectListByKeyword" : selectListByKeyword(request, response); break;
       //      case "member.selectOneByName": selectOneByName(request, response); break;
       //      case "member.update": update(request, response); break;
       //      case "member.delete": delete(request, response); break;
@@ -46,6 +48,23 @@ public class ChargeStudyTableJJ extends JsonDataTable<Study> implements DataProc
   private void selectList(Request request, Response response) throws Exception {
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
+  }
+
+  private void selectListByKeyword(Request request, Response response) throws Exception {
+    String keyword = request.getParameter("keyword");
+
+    ArrayList<Study> searchResult = new ArrayList<>();
+    for (Study chargeStudy : list) {
+      if (!chargeStudy.getTitle().contains(keyword) &&
+          !chargeStudy.getContent().contains(keyword) &&
+          !chargeStudy.getWriter().getName().contains(keyword)) {
+        continue;
+      }
+      searchResult.add(chargeStudy);
+    }
+
+    response.setStatus(Response.SUCCESS);
+    response.setValue(searchResult);
   }
 
   private void selectOne(Request request, Response response) throws Exception {

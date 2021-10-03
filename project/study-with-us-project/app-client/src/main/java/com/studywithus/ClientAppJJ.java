@@ -10,6 +10,7 @@ import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
 import com.studywithus.handler.study.ChargeStudyListHandler;
+import com.studywithus.handler.study.ChargeStudySearchHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindEmailHandler;
@@ -104,7 +105,7 @@ public class ClientAppJJ {
     //    commandMap.put("/freeStudy/participateStudyList",
     //        new ParticipateFreeStudyListHandler(participateFreeStudyMap));
     //
-    //    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(requestAgent));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(requestAgent));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(requestAgent));
     //    commandMap.put("/chargeStudy/detail",
