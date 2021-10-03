@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.study.FreeStudyAddHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.FindEmailHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
@@ -88,7 +89,7 @@ public class ClientAppSY {
 		//        new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
 		//
 		//    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-		//    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
+		commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
 		//    commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
 		//    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList));
 		//    commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
