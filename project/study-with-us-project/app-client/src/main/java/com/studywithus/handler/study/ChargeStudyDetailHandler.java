@@ -1,6 +1,7 @@
 package com.studywithus.handler.study;
 
 import java.sql.Date;
+import java.util.HashMap;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -22,12 +23,10 @@ public class ChargeStudyDetailHandler implements Command {
     System.out.println("[유료 스터디 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("no", String.valueOf(no));
-    //
-    //    requestAgent.request("chargeStudy.selectOne", params);
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
 
-    requestAgent.request("chargeStudy.selectOne", no);
+    requestAgent.request("chargeStudy.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
@@ -77,7 +76,13 @@ public class ChargeStudyDetailHandler implements Command {
           request.getRequestDispatcher("/chargeStudy/update").forward(request);
 
         } else if (input == 2) {
-          request.getRequestDispatcher("/chargeStudy/deleteRequest").forward(request);
+
+          if (chargeStudy.isDeleteRequest()) {
+            request.getRequestDispatcher("/chargeStudy/deleteRequestCancel").forward(request);
+
+          } else {
+            request.getRequestDispatcher("/chargeStudy/deleteRequest").forward(request);
+          }
 
         } else if (input == 0) {
           return;

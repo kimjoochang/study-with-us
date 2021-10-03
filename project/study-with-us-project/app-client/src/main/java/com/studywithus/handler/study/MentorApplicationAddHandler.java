@@ -47,6 +47,7 @@ public class MentorApplicationAddHandler implements Command {
         continue;
 
       } else {
+        mentorApplication.setVisible(true);
         mentorApplication.setName(member.getName());
         mentorApplication.setMentorApplicantEmail(member.getEmail());
         mentorApplication.setSelfIntroduction(selfIntro);

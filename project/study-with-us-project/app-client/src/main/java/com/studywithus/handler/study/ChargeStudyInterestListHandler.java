@@ -34,8 +34,13 @@ public class ChargeStudyInterestListHandler implements Command {
     // 기존 스터디 리스트 가져와서 하나씩 검색
     for (Study chargeStudy : chargeStudyList) {
       if (chargeStudy.getLikeMembersEmail().isEmpty()) {
-        type = 1; // 일치하는 값 없음 
-        continue;
+
+        if (type == 2) {
+          continue;
+        } else {
+          type = 1;
+          continue;
+        }
       }
 
       // 스터디 리스트에서 꺼낸 스터디의 좋아요 누른 회원 리스트를 가져와서 하나씩 검색
