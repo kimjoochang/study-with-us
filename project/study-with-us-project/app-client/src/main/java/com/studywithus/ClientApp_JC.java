@@ -10,6 +10,10 @@ import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
 import com.studywithus.handler.study.ChargeStudyDetailHandler;
+import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
+import com.studywithus.handler.study.ChargeStudyInterestDeleteHandler;
+import com.studywithus.handler.study.ChargeStudyInterestListHandler;
+import com.studywithus.handler.study.ChargeStudyListHandler;
 import com.studywithus.handler.study.MentorApplicantApproveHandler;
 import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
@@ -80,7 +84,7 @@ public class ClientApp_JC {
     //
     //    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
     //    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
-    //    commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeStudyList));
+    commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(requestAgent));
     //
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(requestAgent));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(requestAgent));
@@ -104,7 +108,7 @@ public class ClientApp_JC {
     //
     //    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(requestAgent));
-    //    commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(requestAgent));
     commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(requestAgent));
     //    commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
     //    commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList));
@@ -116,9 +120,8 @@ public class ClientApp_JC {
     //        chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
     //    commandMap.put("/chargeStudy/paymentList",
     //        new ChargeStudyPaymentListHandler(chargeStudyList, participateChargeStudyMap));
-    //    commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList));
-    //    commandMap.put("/chargeStudy/interestDelete",
-    //        new ChargeStudyInterestDeleteHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(requestAgent));
+    commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(requestAgent));
     //
     //    commandMap.put("/chargeStudy/registerChargeStudy",
     //        new RegisterChargeStudyDetailHandler(registerChargeStudyMap));

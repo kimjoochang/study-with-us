@@ -18,12 +18,12 @@ public class CommunityUpdateHandler implements Command {
 	}
 
 	@Override
-	public void execute(CommandRequest request) throws Exception{
+	public void execute(CommandRequest request) throws Exception {
 		System.out.println("[커뮤니티 / 수정] \n");
 
 		int no = (int) request.getAttribute("communityNo");
 
-		HashMap<String,String> params = new HashMap<>();
+		HashMap<String, String> params = new HashMap<>();
 		params.put("no", String.valueOf(no));
 
 		requestAgent.request("community.selectOne", params);
@@ -36,7 +36,7 @@ public class CommunityUpdateHandler implements Command {
 
 		Community community = requestAgent.getObject(Community.class);
 
-		if (community.getWriter().getEmail() != AuthLogInHandler.getLoginUser().getEmail()) {
+		if (community.getWriter().getNo() != AuthLogInHandler.getLoginUser().getNo()) {
 			System.out.println("변경 권한이 없습니다.\n");
 			return;
 		}
@@ -52,21 +52,32 @@ public class CommunityUpdateHandler implements Command {
 				System.out.println("게시글 수정을 취소하였습니다.\n");
 				return;
 
-			} else if (input.equalsIgnoreCase("y")) {
-
-				community.setTitle(title);
-				community.setContent(content);
-
-				requestAgent.request("community.update",community);
-
-				System.out.println("");
-				System.out.println("게시글을 수정하였습니다.\n");
-				return;
-
-			} else {
+			} else if (!input.equalsIgnoreCase("y")) {
 				System.out.println("다시 입력하세요.\n");
 				continue;
+			} else {
+				break;
 			}
+			//			} else if (input.equalsIgnoreCase("y")) {
+			//
+			//				community.setTitle(title);
+			//				community.setContent(content);
+			//
+			//				requestAgent.request("community.update", community);
+			//
+			//				System.out.println("");
+			//				System.out.println("게시글을 수정하였습니다.\n");
+			//				return;
+			//
+			//			} else {
+			//				System.out.println("다시 입력하세요.\n");
+			//				continue;
+			//			}
 		}
+		community.setTitle(title);
+		community.setContent(content);
+
+		requestAgent.request("community.update", community);
+		System.out.println("게시글을 수정하였습니다.\n");
 	}
 }

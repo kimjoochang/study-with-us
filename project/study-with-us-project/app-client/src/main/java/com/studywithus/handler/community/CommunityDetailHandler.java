@@ -14,9 +14,13 @@ import com.studywithus.util.Prompt;
 public class CommunityDetailHandler implements Command{
 
 	RequestAgent requestAgent;
+	String updateKey;
+	String deleteKey;
 
-	public CommunityDetailHandler(RequestAgent requestAgent) {
+	public CommunityDetailHandler(RequestAgent requestAgent, String updateKey, String deleteKey) {
 		this.requestAgent = requestAgent;
+		this.updateKey = updateKey;
+		this.deleteKey = deleteKey;
 	}
 
 	@Override
@@ -61,10 +65,10 @@ public class CommunityDetailHandler implements Command{
 				System.out.println();
 
 				if (num == 1) {
-					request.getRequestDispatcher("/community/update").forward(request);
+					request.getRequestDispatcher(updateKey).forward(request);
 
 				} else if (num == 2) {
-					request.getRequestDispatcher("/community/delete").forward(request);
+					request.getRequestDispatcher(deleteKey).forward(request);
 
 				} else if (num == 0) {
 					return;

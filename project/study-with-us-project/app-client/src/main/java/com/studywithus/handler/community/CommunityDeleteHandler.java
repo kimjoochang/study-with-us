@@ -39,7 +39,7 @@ public class CommunityDeleteHandler implements Command {
 				System.out.println("게시글 삭제를 취소하였습니다.\n");
 				return;
 
-			} else if (input.equalsIgnoreCase("y")) {
+			} else if (!input.equalsIgnoreCase("y")) {
 				System.out.println("다시 입력하세요.\\n");
 				continue;
 
@@ -47,6 +47,8 @@ public class CommunityDeleteHandler implements Command {
 				break;
 			}
 		}
+
 		requestAgent.request("community.delete", params);
+		System.out.println("게시글을 삭제하였습니다.");
 	}
 }
