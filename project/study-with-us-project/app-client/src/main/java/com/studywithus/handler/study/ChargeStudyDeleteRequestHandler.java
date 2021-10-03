@@ -1,5 +1,6 @@
 package com.studywithus.handler.study;
 
+import java.util.HashMap;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -19,7 +20,10 @@ public class ChargeStudyDeleteRequestHandler implements Command {
     System.out.println("[유료 스터디 / 삭제 요청]\n");
     int no = (int) request.getAttribute("chargeNo");
 
-    requestAgent.request("chargeStudy.selectOneByNo", no);
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
+
+    requestAgent.request("chargeStudy.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(requestAgent.getObject(String.class));

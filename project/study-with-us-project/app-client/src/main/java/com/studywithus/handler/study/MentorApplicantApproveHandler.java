@@ -27,6 +27,7 @@ public class MentorApplicantApproveHandler implements Command{
 
     AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MENTOR;
 
+
     System.out.println("멘토 승인이 완료되었습니다.");
 
   }

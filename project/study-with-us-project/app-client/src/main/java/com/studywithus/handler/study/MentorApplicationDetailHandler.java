@@ -21,19 +21,33 @@ public class MentorApplicationDetailHandler implements Command {
 
     requestAgent.request("mentorApplication.selectList", null);
 
-    if (requestAgent.getStatus().isEmpty()) {
+    Collection<MentorApplicationForm> mentorApplicationList = requestAgent.getObjects(MentorApplicationForm.class);
+
+    if (requestAgent.getStatus() == RequestAgent.FAIL) {
       System.out.println("신청한 멘토가 존재하지 않습니다.");
       return;
     }
 
-    Collection<MentorApplicationForm> mentorApplicationList = requestAgent.getObjects(MentorApplicationForm.class);
+    if (mentorApplicationList.isEmpty()) {
+      System.out.println("신청한 멘토가 존재하지 않습니다.");
+      return;
+    }
 
+    int type = 0;
     // 멘토 신청자 조회
     for (MentorApplicationForm mentorApplication : mentorApplicationList) {
-      System.out.printf("[멘토 신청자 이메일 = %s, 유료 스터디 주제 = %s, 등록일 = %s]\n",
-          mentorApplication.getMentorApplicantEmail(),
-          mentorApplication.getChargeStudySubject(),
-          mentorApplication.getRegisteredDate());
+      if (mentorApplication.isVisible()) {
+        type = 1;
+        System.out.printf("[멘토 신청자 이메일 = %s, 유료 스터디 주제 = %s, 등록일 = %s]\n",
+            mentorApplication.getMentorApplicantEmail(),
+            mentorApplication.getChargeStudySubject(),
+            mentorApplication.getRegisteredDate());
+      }
+    }
+
+    if (type == 0) {
+      System.out.println("신청한 멘토가 존재하지 않습니다.");
+      return;
     }
 
     System.out.println();
@@ -45,8 +59,8 @@ public class MentorApplicationDetailHandler implements Command {
 
     MentorApplicationForm mentorApplication = requestAgent.getObject(MentorApplicationForm.class);
 
-    if (mentorApplication == null) {
-      System.out.println("입력하신 이름과 일치하는 신청 내역이 없습니다.");
+    if (mentorApplication == null || mentorApplication.isVisible() == false) {
+      System.out.println("입력하신 이메일과 일치하는 신청 내역이 없습니다.");
       return;
     }
 
@@ -69,10 +83,13 @@ public class MentorApplicationDetailHandler implements Command {
       System.out.println();
 
       if (input == 1) {
+        mentorApplication.setVisible(false);
+        requestAgent.request("mentorApplication.update", mentorApplication);
         request.getRequestDispatcher("/mentorApplication/approve").forward(request);
         break;
 
       } else if (input == 2) {
+        requestAgent.request("mentorApplication.delete", email);
         System.out.println("멘토 신청을 거절하였습니다.");
         break;
 

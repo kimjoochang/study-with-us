@@ -50,8 +50,7 @@ public class ChargeStudyTable extends JsonDataTable<Study> implements DataProces
   }
 
   private void selectOne(Request request, Response response) throws Exception {
-    //    int no = Integer.parseInt(request.getParameter("no"));
-    int no = request.getObject(Integer.class);
+    int no = Integer.parseInt(request.getParameter("no"));
     Study chargeStudy = findByNo(no);
 
     if (chargeStudy != null) {
