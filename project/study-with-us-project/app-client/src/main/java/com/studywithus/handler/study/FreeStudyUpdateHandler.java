@@ -53,13 +53,16 @@ public class FreeStudyUpdateHandler implements Command {
 
     while (true) {
       String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
+      System.out.println();
+
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println();
         System.out.println("무료 스터디 수정을 취소하였습니다.");
         return;
+
       } else if (!input.equalsIgnoreCase("y")) {
         System.out.println("다시 입력하세요.\n");
         continue;
+
       } else {
         break;
       }
