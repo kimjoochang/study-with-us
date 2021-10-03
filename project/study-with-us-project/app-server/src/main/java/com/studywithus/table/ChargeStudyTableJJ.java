@@ -18,7 +18,7 @@ public class ChargeStudyTableJJ extends JsonDataTable<Study> implements DataProc
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "chargeStudy.insert": insert(request, response); break;
-      //      case "member.selectList": selectList(request, response); break;
+      case "chargeStudy.selectList": selectList(request, response); break;
       case "chargeStudy.selectOne": selectOne(request, response); break;
       //      case "member.selectOneByName": selectOneByName(request, response); break;
       //      case "member.update": update(request, response); break;
