@@ -130,6 +130,7 @@ public class MemberTableSY extends JsonDataTable<Member> implements DataProcesso
 		response.setStatus(Response.SUCCESS);
 	}
 
+	// MembershipWithdrawalHandler 에서 사용
 	private void selectOneByEmailPassword(Request request, Response response) throws Exception {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
