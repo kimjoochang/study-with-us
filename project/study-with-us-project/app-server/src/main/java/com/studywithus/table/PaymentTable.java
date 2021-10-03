@@ -7,9 +7,9 @@ import com.studywithus.server.Request;
 import com.studywithus.server.Response;
 
 // 역할
-// - 회원 데이터를 처리하는 일을 한다.
+// - 결제 기능에 관련된 데이터를 처리하는 역할을 한다.
 // 
-public class PaymentTable extends JsonDataTable<Study> implements DataProcessor {
+public class PaymentTable extends JsonDataTable<Payment> implements DataProcessor {
 
   public PaymentTable() {
     super("payment.json", Payment.class);
@@ -33,17 +33,7 @@ public class PaymentTable extends JsonDataTable<Study> implements DataProcessor 
   private void insert(Request request, Response response) throws Exception {
 
     Payment payment = request.getObject(Payment.class);
-    //    Payment title = request.getObject(Payment.class);
-    //    Payment mentorName = request.getObject(Payment.class);
-    //    Payment paidStudyNo = request.getObject(Payment.class);
-    //    Payment registeredDate = request.getObject(Payment.class);
-
     list.add(payment);
-    //    list.add(title);
-    //    list.add(mentorName);
-    //    list.add(paidStudyNo);
-    //    list.add(registeredDate);
-
     response.setStatus(Response.SUCCESS);
   }
 

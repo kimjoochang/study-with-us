@@ -7,9 +7,11 @@ import java.util.HashMap;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.RequestProcessor;
 import com.studywithus.table.ChargeStudyTableJJ;
+import com.studywithus.table.ExamScheduleTable;
+import com.studywithus.table.JobsScheduleTable;
 import com.studywithus.table.JsonDataTable;
 import com.studywithus.table.MemberTableJJ;
-import com.studywithus.table.MentorApplicationTable;
+import com.studywithus.table.PaymentTable;
 
 public class ServerAppJJ {
 
@@ -24,10 +26,15 @@ public class ServerAppJJ {
     HashMap<String,DataProcessor> dataProcessorMap = new HashMap<String,DataProcessor>();
 
     // => 데이터 처리 담당자를 등록한다.
-    //    dataProcessorMap.put("board.", new BoardTable());
+
     dataProcessorMap.put("member.", new MemberTableJJ());
     dataProcessorMap.put("chargeStudy.", new ChargeStudyTableJJ());
-    dataProcessorMap.put("mentorApplication.", new MentorApplicationTable());
+    // [10.03, 04 추가]
+    dataProcessorMap.put("payment.", new PaymentTable());
+    dataProcessorMap.put("examScheduleTable.", new ExamScheduleTable());
+    dataProcessorMap.put("jobsScheduleTable.", new JobsScheduleTable());
+
+    //    dataProcessorMap.put("mentorApplication.", new MentorApplicationTable());
     //    dataProcessorMap.put("project.", new ProjectTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
