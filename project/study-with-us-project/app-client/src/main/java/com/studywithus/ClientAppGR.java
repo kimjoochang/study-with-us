@@ -9,6 +9,7 @@ import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.community.CommunityAddHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.MyInfoHandler;
@@ -137,7 +138,7 @@ public class ClientAppGR {
     // commandMap.put("/review/add", new ReviewAddHandler(chargeStudyList));
     // commandMap.put("/review/list", new ReviewListHandler(chargeStudyList));
     //
-    // commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
+    commandMap.put("/communityQa/add", new CommunityAddHandler(requestAgent));
     // commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
     // commandMap.put("/communityQa/detail",
     // new CommunityDetailHandler(communityQaList, "/communityQa/update", "/communityQa/delete"));
@@ -145,7 +146,7 @@ public class ClientAppGR {
     // commandMap.put("/communityQa/delete", new CommunityDeleteHandler(communityQaList));
     // commandMap.put("/communityQa/search", new CommunitySearchHandler(communityQaList));
     //
-    // commandMap.put("/communityInfo/add", new CommunityAddHandler(communityInfoList));
+    commandMap.put("/communityInfo/add", new CommunityAddHandler(requestAgent));
     // commandMap.put("/communityInfo/list", new CommunityListHandler(communityInfoList));
     // commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList,
     // "/communityInfo/update", "/communityInfo/delete"));
@@ -153,7 +154,7 @@ public class ClientAppGR {
     // commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(communityInfoList));
     // commandMap.put("/communityInfo/search", new CommunitySearchHandler(communityInfoList));
     //
-    // commandMap.put("/communityTalk/add", new CommunityAddHandler(communityTalkList));
+    commandMap.put("/communityTalk/add", new CommunityAddHandler(requestAgent));
     // commandMap.put("/communityTalk/list", new CommunityListHandler(communityTalkList));
     // commandMap.put("/communityTalk/detail", new CommunityDetailHandler(communityTalkList,
     // "/communityTalk/update", "/communityTalk/delete"));
