@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.RequestProcessor;
+import com.studywithus.table.CommunityTable;
+import com.studywithus.table.FreeStudyTable;
 import com.studywithus.table.JsonDataTable;
 import com.studywithus.table.MemberTableGR;
 
@@ -26,6 +28,8 @@ public class ServerAppGR {
     // => 데이터 처리 담당자를 등록한다.
     //    dataProcessorMap.put("board.", new BoardTable());
     dataProcessorMap.put("member.", new MemberTableGR());
+    dataProcessorMap.put("community.", new CommunityTable());
+    dataProcessorMap.put("freeStudy.", new FreeStudyTable());
     //    dataProcessorMap.put("project.", new ProjectTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
