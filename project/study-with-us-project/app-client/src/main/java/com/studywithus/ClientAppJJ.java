@@ -10,6 +10,7 @@ import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindEmailHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
 import com.studywithus.handler.user.SignUpHandler;
@@ -60,7 +61,7 @@ public class ClientAppJJ {
     commandMap.put("/kakao/logIn", new SnsLogInHandler(requestAgent));
     commandMap.put("/naver/logIn", new SnsLogInHandler(requestAgent));
 
-    //commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
+    commandMap.put("/auth/logOut", new AuthLogOutHandler());
 
     commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
     commandMap.put("/google/signUp", new SnsSignUpHandler(requestAgent));
