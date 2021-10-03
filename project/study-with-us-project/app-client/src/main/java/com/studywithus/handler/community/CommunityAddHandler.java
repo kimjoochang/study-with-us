@@ -11,8 +11,13 @@ import com.studywithus.util.Prompt;
 
 public class CommunityAddHandler implements Command {
 
+<<<<<<< HEAD
 	RequestAgent requestAgent;
 	int no = 1;
+=======
+  RequestAgent requestAgent;
+  int no = 1;
+>>>>>>> b240d08a9a773171851be36bc18e87bec1b4adb5
 
 	public CommunityAddHandler(RequestAgent requestAgent) {
 		this.requestAgent = requestAgent;
@@ -24,11 +29,19 @@ public class CommunityAddHandler implements Command {
 
 		Community community = new Community();
 
+<<<<<<< HEAD
 		community.setNo(no++);
 		community.setTitle(Prompt.inputString("제목을 입력하세요. > "));
 		community.setContent(Prompt.inputString("내용을 입력하세요. > "));
 		community.setWriter(AuthLogInHandler.getLoginUser());
 		community.setRegisteredDate(new Date(System.currentTimeMillis()));
+=======
+    community.setNo(no++);
+    community.setTitle(Prompt.inputString("제목을 입력하세요. > "));
+    community.setContent(Prompt.inputString("내용을 입력하세요. > "));
+    community.setWriter(AuthLogInHandler.getLoginUser());
+    community.setRegisteredDate(new Date(System.currentTimeMillis()));
+>>>>>>> b240d08a9a773171851be36bc18e87bec1b4adb5
 
 		//    communityList.add(community);
 
