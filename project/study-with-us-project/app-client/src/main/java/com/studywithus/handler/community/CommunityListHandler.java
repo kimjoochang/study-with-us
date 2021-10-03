@@ -28,9 +28,9 @@ public class CommunityListHandler implements Command {
     Collection<Community> communityList = requestAgent.getObjects(Community.class);
 
     for (Community community : communityList) {
-      System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n", community.getNo(),
-          community.getTitle(), community.getWriter().getEmail(), community.getRegisteredDate(),
-          community.getViewCount(), community.getLike());
+      System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+          community.getNo(), community.getTitle(), community.getWriter().getEmail(),
+          community.getRegisteredDate(), community.getViewCount(), community.getLike());
     }
     System.out.println();
   }

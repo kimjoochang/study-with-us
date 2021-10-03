@@ -1,52 +1,61 @@
 package com.studywithus.handler.study;
 
-import java.util.List;
-import com.studywithus.domain.Study;
+import java.util.HashMap;
+
+import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyDeleteHandler extends AbstractStudyHandler {
+public class FreeStudyDeleteHandler implements Command {
 
-  public FreeStudyDeleteHandler(List<Study> freeStudyList) {
-    super(freeStudyList);
-  }
+	RequestAgent requestAgent;
 
-  @Override
-  public void execute(CommandRequest request) {
-    System.out.println("[무료 스터디 / 삭제]");
-    int no = (int) request.getAttribute("freeNo");
+	public FreeStudyDeleteHandler(RequestAgent requestAgent) {
+		this.requestAgent = requestAgent;
+	}
 
-    Study freeStudy = findByNo(no);
+	@Override
+	public void execute(CommandRequest request) throws Exception{
+		System.out.println("[무료 스터디 / 삭제]");
+		int no = (int) request.getAttribute("freeNo");
 
-    if (freeStudy == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
-      return;
-    }
+		HashMap<String,String> params = new HashMap<>();
+		params.put("no", String.valueOf(no));
 
-    if (freeStudy.getWriter().getId() != AuthLogInHandler.getLoginUser().getId()) {
-      System.out.println("삭제 권한이 없습니다.");
-      return;
-    }
+		requestAgent.request("freeStudy.selectOne", params);
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
-    System.out.println();
-    while(true) {
-      if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println("게시글 삭제를 취소하였습니다.");
-        return;
 
-      }else if (!input.equalsIgnoreCase("y")) {
-        System.out.println("다시 입력하시오.\n");
-        continue;
+		if (requestAgent.getStatus().equals(requestAgent.FAIL)) {
+			System.out.println("해당 번호의 게시글이 없습니다.");
+			return;
+		}
 
-      } else {
-        break;
-      }
-    }
+		// 조건문에 관리자도 해당
+		if (freeStudy.getWriter().getEmail() != AuthLogInHandler.getLoginUser().getEmail()) {
+			System.out.println("삭제 권한이 없습니다.");
+			return;
+		}
 
-    studyList.remove(freeStudy);
+		String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
+		System.out.println();
+		while (true) {
+			if (input.equalsIgnoreCase("n") || input.length() == 0) {
+				System.out.println("게시글 삭제를 취소하였습니다.");
+				return;
 
-    System.out.println("게시글을 삭제하였습니다.");
-  }
+			} else if (!input.equalsIgnoreCase("y")) {
+				System.out.println("다시 입력하세요.\n");
+				continue;
+
+			} else {
+				break;
+			}
+		}
+
+		requestAgent.request("freeStudy.delete", params);
+
+		System.out.println("게시글을 삭제하였습니다.");
+	}
 }

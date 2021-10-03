@@ -29,7 +29,7 @@ public class CommunityAddHandler implements Command {
     community.setWriter(AuthLogInHandler.getLoginUser());
     community.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    //    communityList.add(community);
+    // communityList.add(community);
 
     requestAgent.request("community.insert", community);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {

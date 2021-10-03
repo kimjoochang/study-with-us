@@ -1,16 +1,20 @@
 package com.studywithus.handler.study;
 
-import java.util.List;
+import java.util.HashMap;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
+import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyDetailHandler extends AbstractStudyHandler {
+public class FreeStudyDetailHandler implements Command {
 
-  public FreeStudyDetailHandler(List<Study> freeStudyList) {
-    super(freeStudyList);
+  RequestAgent requestAgent;
+
+  public FreeStudyDetailHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -18,13 +22,25 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     System.out.println("[무료 스터디 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    Study freeStudy = findByNo(no);
+    // Study freeStudy = findByNo(no);
 
-    if (freeStudy == null) {
-      System.out.println();
-      System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
+    HashMap<String, String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
+
+    requestAgent.request("freeStudy.selectOne", params);
+
+    // if (freeStudy == null) {
+    // System.out.println();
+    // System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
+    // return;
+    // }
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("해당 번호의 무료 스터디가 없습니다.");
       return;
     }
+
+    Study freeStudy = requestAgent.getObject(Study.class);
 
     System.out.printf("제목: %s\n", freeStudy.getTitle());
     System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
@@ -49,12 +65,12 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
     System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
     System.out.println();
 
-    // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때 
+    // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때
     // 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
     request.setAttribute("freeNo", no);
 
     // 내가 쓴 글일 경우
-    if (freeStudy.getWriter().getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+    if (freeStudy.getWriter().getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
       while (true) {
         System.out.println("1. 수정");
         System.out.println("2. 삭제");
@@ -74,11 +90,11 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
           return;
 
         } else {
-          System.out.println("잘못된 메뉴 번호입니다.\n");
+          System.out.println("무효한 메뉴 번호입니다.\n");
           continue;
         }
         return;
-      } 
+      }
 
       // 내가 쓴 글이 아닐경우
     } else {
@@ -87,7 +103,7 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
       while (true) {
         for (Member member : freeStudy.getApplicants()) {
-          if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+          if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
             applyType = 1;
             break;
           }
@@ -101,10 +117,10 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
         }
 
         for (Member member : freeStudy.getLikeMembers()) {
-          if(member.getId().equals(AuthLogInHandler.getLoginUser().getId())) {
+          if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
             interestType = 1;
             break;
-          } 
+          }
         }
 
         // 관심목록 존재 여부에 따라 출력문 출력
@@ -136,18 +152,18 @@ public class FreeStudyDetailHandler extends AbstractStudyHandler {
 
           } else {
             // 관심목록에 이미 있는 경우
-            request.getRequestDispatcher("/freeStudy/deleteInterest").forward(request); 
+            request.getRequestDispatcher("/freeStudy/deleteInterest").forward(request);
           }
 
         } else if (num == 0) {
           return;
 
         } else {
-          System.out.println("잘못된 메뉴 번호입니다.\n");
+          System.out.println("무효한 메뉴 번호입니다.\n");
           continue;
         }
         return;
-      } 
+      }
     }
   }
 }
