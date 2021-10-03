@@ -40,7 +40,7 @@ public class ServerAppGR {
     Collection<DataProcessor> dataProcessors = dataProcessorMap.values();
     for (DataProcessor dataProcessor : dataProcessors) {
       if (dataProcessor instanceof JsonDataTable) {
-        // 만약 데이터 처리 담당자가 JsonDataTable 의 자손이라면,
+        // 만약 데이터 처리 담당자가 JsonDataTable의 자손이라면,
         ((JsonDataTable<?>) dataProcessor).save();
       }
     }
@@ -49,4 +49,3 @@ public class ServerAppGR {
     serverSocket.close();
   }
 }
-

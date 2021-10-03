@@ -1,4 +1,4 @@
-// * [ 09.24 수정 소스]
+// [ 09.24 수정 소스]
 package com.studywithus.handler.study;
 
 import java.util.Collection;
