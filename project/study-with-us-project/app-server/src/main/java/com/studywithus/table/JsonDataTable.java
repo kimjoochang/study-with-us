@@ -15,15 +15,26 @@ import com.google.gson.reflect.TypeToken;
 
 // 역할
 // - 데이터를 처리하는 클래스가 공통으로 가져야할 필드나 메서드를 정의한다.
-// 
+//
 public abstract class JsonDataTable<T> {
 
   protected List<T> list = new ArrayList<>();
   private Class<T> elementType;
   private String filename;
+  private String filenameF;
+  private String filenameS;
+  private String filenameT;
 
   public JsonDataTable(String filename, Class<T> elementType) {
     this.filename = filename;
+    this.elementType = elementType;
+    loadObjects();
+  }
+
+  public JsonDataTable(String filenameF, String filenameS, String filenameT, Class<T> elementType) {
+    this.filenameF = filenameF;
+    this.filenameS = filenameF;
+    this.filenameT = filenameF;
     this.elementType = elementType;
     loadObjects();
   }
@@ -34,8 +45,8 @@ public abstract class JsonDataTable<T> {
 
   private void loadObjects() {
 
-    try (BufferedReader in = new BufferedReader(
-        new FileReader(filename, Charset.forName("UTF-8")))) {
+    try (BufferedReader in =
+        new BufferedReader(new FileReader(filename, Charset.forName("UTF-8")))) {
 
       StringBuilder strBuilder = new StringBuilder();
       String str;
@@ -43,7 +54,7 @@ public abstract class JsonDataTable<T> {
         strBuilder.append(str);
       }
 
-      Type type = TypeToken.getParameterized(Collection.class, elementType).getType(); 
+      Type type = TypeToken.getParameterized(Collection.class, elementType).getType();
       Collection<T> collection = new Gson().fromJson(strBuilder.toString(), type);
       list.addAll(collection);
 
@@ -55,9 +66,8 @@ public abstract class JsonDataTable<T> {
   }
 
   private void saveObjects() {
-    try (PrintWriter out = new PrintWriter(
-        new BufferedWriter(
-            new FileWriter(filename, Charset.forName("UTF-8"))))) {
+    try (PrintWriter out =
+        new PrintWriter(new BufferedWriter(new FileWriter(filename, Charset.forName("UTF-8"))))) {
 
       out.print(new Gson().toJson(list));
 
@@ -68,19 +78,6 @@ public abstract class JsonDataTable<T> {
       e.printStackTrace();
     }
   }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
