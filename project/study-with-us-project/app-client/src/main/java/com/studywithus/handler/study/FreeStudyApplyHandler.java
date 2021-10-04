@@ -11,13 +11,13 @@ import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyApplyAddHandler implements Command {
+public class FreeStudyApplyHandler implements Command {
 
   // List<Member> freeApplicantList;
   HashMap<String, List<Study>> applyFreeStudyMap;
   RequestAgent requestAgent;
 
-  public FreeStudyApplyAddHandler(RequestAgent requestAgent, HashMap<String, List<Study>> applyFreeStudyMap) {
+  public FreeStudyApplyHandler(RequestAgent requestAgent, HashMap<String, List<Study>> applyFreeStudyMap) {
     // super(freeStudyList);
     this.applyFreeStudyMap = applyFreeStudyMap;
     this.requestAgent = requestAgent;
@@ -31,7 +31,7 @@ public class FreeStudyApplyAddHandler implements Command {
     // Study freeStudy = findByNo(no);
 
     HashMap<String, String> params = new HashMap<>();
-    params.put("freeNo", String.valueOf(no));
+    params.put("no", String.valueOf(no));
 
     requestAgent.request("freeStudy.selectOne", params);
 
