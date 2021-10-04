@@ -41,6 +41,7 @@ public class FreeStudyDetailHandler implements Command {
     }
 
     Study freeStudy = requestAgent.getObject(Study.class);
+    freeStudy.setViewCount(freeStudy.getViewCount() + 1);
 
     System.out.printf("제목: %s\n", freeStudy.getTitle());
     System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
@@ -112,7 +113,7 @@ public class FreeStudyDetailHandler implements Command {
         if (applyType == 0) {
           System.out.println("1. 신청하기");
 
-        } else {
+        } else if (applyType == 1) {
           System.out.println("1. 신청 취소하기");
         }
 
@@ -127,7 +128,7 @@ public class FreeStudyDetailHandler implements Command {
         if (interestType == 0) {
           System.out.println("2. 관심목록 추가");
 
-        } else {
+        } else if (interestType == 1) {
           System.out.println("2. 관심목록 삭제");
         }
         System.out.println("0. 이전");
@@ -141,7 +142,7 @@ public class FreeStudyDetailHandler implements Command {
             request.getRequestDispatcher("/freeStudy/apply").forward(request);
 
             // 신청하기를 이미 한 경우
-          } else {
+          } else if (applyType == 1) {
             request.getRequestDispatcher("/freeStudy/applyCancel").forward(request);
           }
 
@@ -151,7 +152,7 @@ public class FreeStudyDetailHandler implements Command {
             request.getRequestDispatcher("/freeStudy/addInterest").forward(request);
 
             // 관심목록에 이미 있는 경우
-          } else {
+          } else if (interestType == 1) {
             request.getRequestDispatcher("/freeStudy/deleteInterest").forward(request);
           }
 

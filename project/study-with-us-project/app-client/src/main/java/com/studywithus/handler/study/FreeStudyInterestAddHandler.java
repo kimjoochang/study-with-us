@@ -1,8 +1,6 @@
 package com.studywithus.handler.study;
 
 import java.util.HashMap;
-import java.util.List;
-import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -29,11 +27,11 @@ public class FreeStudyInterestAddHandler implements Command {
     requestAgent.request("freeStudy.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("해당 번호의 무료 스터디가 없습니다.");
       return;
     }
 
-    Study freeStudyInterest = new Study();
+    Study freeStudy = requestAgent.getObject(Study.class);
 
     while (true) {
       String input = Prompt.inputString("무료 스터디 관심 목록에 추가하시겠습니까? (y/N) ");
@@ -51,18 +49,16 @@ public class FreeStudyInterestAddHandler implements Command {
       }
     }
 
-    List<Member> likeUser = freeStudyInterest.getLikeMembers();
-    likeUser.add(AuthLogInHandler.getLoginUser());
-    freeStudyInterest.setLikeMembers(likeUser);
+    freeStudy.getLikeMembers().add(AuthLogInHandler.getLoginUser());
 
-    requestAgent.request("freeStudy.interest.insert", freeStudyInterest);
+    requestAgent.request("freeStudy.interest.insert", freeStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      requestAgent.request("member.interest.insert", params);
-      System.out.println("무료 스터디 관심 목록에 추가되었습니다.");
+      // requestAgent.request("member.interest.insert", params);
+      System.out.println("무료 스터디 관심 목록 추가 성공!");
 
     } else {
-      System.out.println("무료 스터디 관심 목록에 추가되지 않았습니다.");
+      System.out.println("무료 스터디 관심 목록 추가 실패!");
     }
 
     // System.out.println();
