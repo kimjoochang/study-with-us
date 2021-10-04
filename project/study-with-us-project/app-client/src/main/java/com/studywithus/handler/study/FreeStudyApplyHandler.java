@@ -41,7 +41,7 @@ public class FreeStudyApplyHandler implements Command {
     // }
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("무료 스터디 상세보기 실패!");
       return;
     }
 
@@ -102,7 +102,7 @@ public class FreeStudyApplyHandler implements Command {
     requestAgent.request("freeStudy.apply.add", freeStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("무료 스터디 신청 실패!");
       return;
     } else if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("무료 스터디 신청이 완료되었습니다.");

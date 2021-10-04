@@ -25,7 +25,7 @@ public class FreeStudyApplyListHandler implements Command {
     requestAgent.request("freeStudy.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("무료 스터디 조회 실패!");
+      System.out.println("무료 스터디 신청 내역 조회 실패!");
       return;
     }
 

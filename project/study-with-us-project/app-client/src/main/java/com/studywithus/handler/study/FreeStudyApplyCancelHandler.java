@@ -17,7 +17,8 @@ public class FreeStudyApplyCancelHandler implements Command {
   HashMap<String, List<Study>> applyFreeStudyMap;
   RequestAgent requestAgent;
 
-  public FreeStudyApplyCancelHandler(RequestAgent requestAgent, HashMap<String, List<Study>> applyFreeStudyMap) {
+  public FreeStudyApplyCancelHandler(RequestAgent requestAgent,
+      HashMap<String, List<Study>> applyFreeStudyMap) {
     // super(freeStudyList);
     this.applyFreeStudyMap = applyFreeStudyMap;
     this.requestAgent = requestAgent;
@@ -31,7 +32,7 @@ public class FreeStudyApplyCancelHandler implements Command {
     // Study freeStudy = findByNo(no);
 
     HashMap<String, String> params = new HashMap<>();
-    params.put("freeNo", String.valueOf(no));
+    params.put("no", String.valueOf(no));
 
     requestAgent.request("freeStudy.selectOne", params);
 
@@ -41,7 +42,7 @@ public class FreeStudyApplyCancelHandler implements Command {
     // }
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("무료 스터디 상세보기 실패!");
       return;
     }
 
@@ -96,7 +97,7 @@ public class FreeStudyApplyCancelHandler implements Command {
       return;
     }
 
-    //    System.out.println();
-    //    System.out.println("무료 스터디 신청 취소가 완료되었습니다.");
+    // System.out.println();
+    // System.out.println("무료 스터디 신청 취소가 완료되었습니다.");
   }
 }
