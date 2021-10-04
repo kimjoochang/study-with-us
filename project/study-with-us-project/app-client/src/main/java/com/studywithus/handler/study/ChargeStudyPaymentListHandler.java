@@ -1,45 +1,45 @@
 package com.studywithus.handler.study;
 
-import java.util.HashMap;
-import java.util.List;
-
+import java.util.Collection;
 import com.studywithus.domain.Payment;
-import com.studywithus.domain.Study;
+import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.request.RequestAgent;
 
-public class ChargeStudyPaymentListHandler extends AbstractStudyHandler {
+public class ChargeStudyPaymentListHandler implements Command {
 
-	// 유료 스터디 결제내역 리스트 (회원 관점)
-	List<Payment> chargePaymentList;
+  RequestAgent requestAgent;
 
-	// 각 회원의 참여 유료 스터디 리스트
-	HashMap<String, List<Study>> participateChargeStudyMap;
+  public ChargeStudyPaymentListHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
+  }
 
-	//	//	유료 스터디 결제자 내역 (멘토 관점)
-	//	List<Member> chargeApplicantList;
+  @Override
+  public void execute(CommandRequest request) throws Exception {
+    System.out.println("[유료 스터디 결제 내역 / 조회]\n");
 
-	public ChargeStudyPaymentListHandler(List<Study> chargeStudyList, HashMap<String, List<Study>> participateChargeStudyMap) {
-		super(chargeStudyList);
-		this.participateChargeStudyMap = participateChargeStudyMap;
-	}
+    requestAgent.request("payment.selectList", null);
 
-	@Override
-	public void execute(CommandRequest request) {
-		System.out.println("[유료 스터디 결제 내역 / 조회]\n");
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("결제 내역이 존재하지 않습니다.");
+      return;
+    }
 
-		// 일치하는 값이 없을경우, 유료 스터디 결제 내역이 없다는 출력만 한 번만 출력되게 하기 위한 변수
-		List<Study> participateStudies = participateChargeStudyMap.get(AuthLogInHandler.getLoginUser().getId()); 
+    Collection<Payment> paymentList = requestAgent.getObjects(Payment.class);
 
-		if (participateStudies ==  null) {
-			System.out.println("유료 스터디 결제 내역이 없습니다.");
-			return;
-		} 
-		for (Study participateStudy : participateStudies) {
-			System.out.printf("제목: %s\n", participateStudy.getTitle());
-			System.out.printf("멘토: %s\n", participateStudy.getWriter().getName());
-			System.out.printf("가격: %s\n", participateStudy.getPrice());
-		}
-	}
+    if (paymentList ==  null) {
+      System.out.println("유료 스터디 결제 내역이 없습니다.");
+      return;
+    } 
+    for (Payment payment : paymentList) {
+      if (payment.isVisible()) {
+        System.out.printf("결제한 스터디 번호: %s\n", payment.getPaidStudyNo());
+        System.out.printf("결제한 스터디 제목: %s\n", payment.getTitle());
+        System.out.printf("결제한 스터디 멘토: %s\n", payment.getMentorName());
+        System.out.printf("결제한 스터디 가격: %s\n", payment.getPrice());
+        System.out.printf("결제일: %s\n", payment.getPaymentDate());
+      }
+    }
+  }
 }
 
