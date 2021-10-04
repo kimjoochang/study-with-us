@@ -48,8 +48,8 @@ public class FreeStudyInterestAddHandler implements Command {
       }
     }
 
-    // List<Member> likeMember = freeInterest.getLikeMembers();
-    // likeMember.add(AuthLogInHandler.getLoginUser());
+    // List<Member> likeUser = freeInterest.getLikeMembers();
+    // likeUser.add(AuthLogInHandler.getLoginUser());
     // freeStudyInterest.setLikeMembers(AuthLogInHandler.getLoginUser());
 
     requestAgent.request("freeStudy.interest.insert", freeStudyInterest);
