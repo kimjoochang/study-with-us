@@ -37,23 +37,23 @@ public class FreeStudyTable extends JsonDataTable<Study> implements DataProcesso
         delete(request, response);
         break;
       case "freeStudy.interest.insert":
-        insert(request, response);
+        insertInterest(request, response);
         break;
       case "freeStudy.interest.selectList":
-        selectList(request, response);
+        selectListInterest(request, response);
         break;
-      case "freeStudy.interest.selectOne":
-        selectOne(request, response);
-        break;
+        // case "freeStudy.interest.selectOne":
+        // selectOneInterest(request, response);
+        // break;
       case "freeStudy.interest.delete":
-        delete(request, response);
+        deleteInterest(request, response);
         break;
-      case "freeStudy.apply.insert":
-        insert(request, response);
-        break;
-      case "freeStudy.apply.delete":
-        delete(request, response);
-        break;
+        // case "freeStudy.apply.insert":
+        // insertApply(request, response);
+        // break;
+        // case "freeStudy.apply.delete":
+        // deleteApply(request, response);
+        // break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -135,6 +135,83 @@ public class FreeStudyTable extends JsonDataTable<Study> implements DataProcesso
     list.remove(index);
     response.setStatus(Response.SUCCESS);
   }
+
+  private void insertInterest(Request request, Response response) throws Exception {
+    Study freeStudyInterest = request.getObject(Study.class);
+
+    // if (list.isEmpty()) {
+    // freeStudy.setNo(1);
+    // } else {
+    // Study lastIndex = list.get(list.size() - 1);
+    // freeStudy.setNo(lastIndex.getNo() + 1);
+    // }
+
+    freeStudyInterestList.add(freeStudyInterest);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectListInterest(Request request, Response response) throws Exception {
+    response.setStatus(Response.SUCCESS);
+    response.setValue(freeStudyInterestList);
+  }
+
+  // [삭제] 코드 중복
+  // private void selectOneInterest(Request request, Response response) throws Exception {
+  // int no = Integer.parseInt(request.getParameter("no"));
+  // Study freeStudyInterest = findByNo(no);
+  //
+  // if (freeStudyInterest != null) {
+  // response.setStatus(Response.SUCCESS);
+  // response.setValue(freeStudyInterest);
+  // } else {
+  // response.setStatus(Response.FAIL);
+  // response.setValue("해당 번호의 무료 스터디 관심 목록을 찾을 수 없습니다.");
+  // }
+  // }
+
+  private void deleteInterest(Request request, Response response) throws Exception {
+    int no = Integer.parseInt(request.getParameter("no"));
+    int index = indexOf(no);
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 무료 스터디 관심 목록을 찾을 수 없습니다.");
+      return;
+    }
+
+    freeStudyInterestList.remove(index);
+    response.setStatus(Response.SUCCESS);
+  }
+
+  // [질문] 필요성
+  // private void insertApply(Request request, Response response) throws Exception {
+  // Study freeStudy = request.getObject(Study.class);
+  //
+  // if (list.isEmpty()) {
+  // freeStudy.setNo(1);
+  // } else {
+  // Study lastIndex = list.get(list.size() - 1);
+  // freeStudy.setNo(lastIndex.getNo() + 1);
+  // }
+  //
+  // list.add(freeStudy);
+  // response.setStatus(Response.SUCCESS);
+  // }
+
+  // [질문] 필요성
+  // private void deleteApply(Request request, Response response) throws Exception {
+  // int no = Integer.parseInt(request.getParameter("no"));
+  // int index = indexOf(no);
+  //
+  // if (index == -1) {
+  // response.setStatus(Response.FAIL);
+  // response.setValue("해당 번호의 무료 스터디를 찾을 수 없습니다.");
+  // return;
+  // }
+  //
+  // list.remove(index);
+  // response.setStatus(Response.SUCCESS);
+  // }
 
   private Study findByNo(int no) {
     for (Study freeStudy : list) {

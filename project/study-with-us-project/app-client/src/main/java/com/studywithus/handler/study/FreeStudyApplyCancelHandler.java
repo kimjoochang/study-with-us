@@ -87,7 +87,9 @@ public class FreeStudyApplyCancelHandler implements Command {
       applyFreeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), freeApplicationList);
     }
 
-    requestAgent.request("freeStudy.apply.delete", freeStudy);
+    // [질문]
+    // requestAgent.request("freeStudy.apply.delete", freeStudy);
+    requestAgent.request("freeStudy.delete", freeStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 게시글이 없습니다.");

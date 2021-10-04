@@ -26,7 +26,7 @@ public class FreeStudyInterestAddHandler implements Command {
     HashMap<String, String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
-    requestAgent.request("freeStudy.interest.selectOne", params);
+    requestAgent.request("freeStudy.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -60,6 +60,7 @@ public class FreeStudyInterestAddHandler implements Command {
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       requestAgent.request("member.interest.insert", params);
       System.out.println("무료 스터디 관심 목록에 추가되었습니다.");
+
     } else {
       System.out.println("무료 스터디 관심 목록에 추가되지 않았습니다.");
     }

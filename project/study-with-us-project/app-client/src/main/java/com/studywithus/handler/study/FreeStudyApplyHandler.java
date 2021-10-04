@@ -17,7 +17,8 @@ public class FreeStudyApplyHandler implements Command {
   HashMap<String, List<Study>> applyFreeStudyMap;
   RequestAgent requestAgent;
 
-  public FreeStudyApplyHandler(RequestAgent requestAgent, HashMap<String, List<Study>> applyFreeStudyMap) {
+  public FreeStudyApplyHandler(RequestAgent requestAgent,
+      HashMap<String, List<Study>> applyFreeStudyMap) {
     // super(freeStudyList);
     this.applyFreeStudyMap = applyFreeStudyMap;
     this.requestAgent = requestAgent;
@@ -99,6 +100,8 @@ public class FreeStudyApplyHandler implements Command {
       applyFreeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), freeApplicationList);
     }
 
+    // [질문]
+    // requestAgent.request("freeStudy.add", freeStudy);
     requestAgent.request("freeStudy.apply.add", freeStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -109,7 +112,7 @@ public class FreeStudyApplyHandler implements Command {
       return;
     }
 
-    //    System.out.println();
-    //    System.out.println("무료 스터디 신청이 완료되었습니다.");
+    // System.out.println();
+    // System.out.println("무료 스터디 신청이 완료되었습니다.");
   }
 }

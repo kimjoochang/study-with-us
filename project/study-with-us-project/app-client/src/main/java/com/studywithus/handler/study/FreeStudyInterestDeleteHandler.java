@@ -19,6 +19,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
     this.requestAgent = requestAgent;
   }
 
+  // [질문]
   // HashMap<String, List<Study>> freeStudyInterest = new HashMap<>();
 
   @Override
@@ -29,7 +30,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
     HashMap<String, String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
-    requestAgent.request("freeStudy.interest.selectOne", params);
+    requestAgent.request("freeStudy.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 무료 스터디 관심 목록이 없습니다.");
@@ -82,7 +83,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
       System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");
 
     } else {
-      //      int no = (int) request.getAttribute("freeNo");
+      // int no = (int) request.getAttribute("freeNo");
 
       // Study freeInterest = findByNo(no);
 
