@@ -24,7 +24,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[마이페이지 / 무료 스터디 / 관심 목록 / 삭제]\n");
+    System.out.println("[무료 스터디 / 상세보기 / 관심 목록 / 삭제]\n");
     int no = (int) request.getAttribute("freeNo");
 
     HashMap<String, String> params = new HashMap<>();

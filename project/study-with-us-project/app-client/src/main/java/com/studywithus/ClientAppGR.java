@@ -91,9 +91,10 @@ public class ClientAppGR {
     //
     commandMap.put("/myInfo/list", new MyInfoHandler(requestAgent));
 
-    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(requestAgent));
+    // commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(requestAgent));
     // [질문] /freeStudy/deleteInterest과의 차이
     // commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(requestAgent));
+    // [질문] /freeStudy/listInterest과의 차이
     // commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeStudyList));
 
     // commandMap.put("/mentorApplicant/add",
@@ -113,6 +114,7 @@ public class ClientAppGR {
         new FreeStudyApplyCancelHandler(requestAgent, applyFreeStudyMap));
     commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(requestAgent));
     commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(requestAgent));
+    commandMap.put("/freeStudy/listInterest", new FreeStudyInterestListHandler(requestAgent));
     commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(requestAgent));
     // commandMap.put("/freeStudy/registerStudyList",
     // new RegisterFreeStudyDetailHandler(registerFreeStudyMap, participateFreeStudyMap));
@@ -524,8 +526,8 @@ public class ClientAppGR {
   private Menu createFreeInterestMenu() {
 
     MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
-    freeInterestMenu.add(new MenuItem("조회", "/freeInterest/list"));
-    freeInterestMenu.add(new MenuItem("삭제", "/freeInterest/delete"));
+    freeInterestMenu.add(new MenuItem("조회", "/freeStudy/listInterest"));
+    freeInterestMenu.add(new MenuItem("삭제", "/freeStudy/deleteInterest"));
 
     return freeInterestMenu;
   }
