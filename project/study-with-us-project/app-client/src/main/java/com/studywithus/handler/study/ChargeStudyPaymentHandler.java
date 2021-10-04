@@ -1,10 +1,8 @@
 package com.studywithus.handler.study;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import com.studywithus.domain.Member;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -22,24 +20,23 @@ public class ChargeStudyPaymentHandler implements Command {
     this.requestAgent = requestAgent;
   }
 
-  // 유료 스터디 결제내역 리스트 (회원 관점)
-  List<Payment> chargePaymentList;
-
-  // 유료 스터디 결제자(멘티) 리스트
-  List<Member> members;
-
-  // 내가 참여한 유료 스터디 리스트
-  HashMap<String, List<Study>> participateChargeStudyMap;
-  List<Study> participateChargeStudyList;
-
-  public ChargeStudyPaymentHandler(List<Payment> chargePaymentList,  List<Member> members, HashMap<String, List<Study>> participateChargeStudyMap) {
-    this.chargePaymentList = chargePaymentList;
-    this.participateChargeStudyMap = participateChargeStudyMap;
-  }
-
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[유료 스터디 / 상세보기 / 결제]\n");
+
+    int no = (int) request.getAttribute("chargeNo");
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
+
+    requestAgent.request("chargeStudy.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(requestAgent.getObject(String.class));
+      return;
+    }
+
+    Study chargeStudy = requestAgent.getObject(Study.class);
 
 
     String input = Prompt.inputString("유료 스터디를 결제 하시겠습니까? (y/N) ");
@@ -72,60 +69,24 @@ public class ChargeStudyPaymentHandler implements Command {
       System.out.println();
       System.out.println("유료 스터디 결제가 완료 되었습니다.\n");
 
+      // 결제내역 생성해서 서버에 저장 요청
       Payment payment = new Payment();
-
-      requestAgent.request("chargeStudy.selectOne", request.getAttribute("chargeNo"));
-
-      Study chargeStudy = requestAgent.getObject(Study.class);
-
+      payment.setPayeerEmail(AuthLogInHandler.getLoginUser().getEmail());
       payment.setPaidStudyNo(chargeStudy.getNo());
       payment.setTitle(chargeStudy.getTitle());
       payment.setMentorName(chargeStudy.getWriter().getName());
       payment.setPrice(chargeStudy.getPrice());
       payment.setPaymentDate(new Date(System.currentTimeMillis()));
-
-      // 결제 수단 미구현
-      // payment.setPaymentMethod(payment.getPaymentMethod());
+      payment.setVisible(true);
 
       requestAgent.request("payment.insert", payment);
 
+      // 유료스터디 멘티 리스트에 결제한 사람 이름 추가하기
+      List<String> menteeEmailList = chargeStudy.getMenteeEmailList();
+      menteeEmailList.add(AuthLogInHandler.getLoginUser().getEmail());
+      chargeStudy.setMenteeEmailList(menteeEmailList);
+
       AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MENTEE;
-      //      SendPaymentSms.execute(chargeStudy);
-
-      // 멘티 리스트 //**타입?
-      List<Member> memberList = chargeStudy.getMembers();
-      memberList.add(AuthLogInHandler.getLoginUser().getEmail());
-      chargeStudy.setMembers(memberList);
-
-      // 유료 스터디 결제내역 리스트 (회원 관점)
-      Payment payment = new Payment();
-      chargePaymentList.add(payment);
-      AuthLogInHandler.loginUser.setPayment(chargePaymentList);
-
-      // 참여 유료 스터디에 해당 아이디 존재 O
-      if (participateChargeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getEmail())) {
-        // 참여 유료 스터디에 아이디 호출 -> 참여 유료 스터디 리스트에 대입
-        participateChargeStudyList = participateChargeStudyMap.get(AuthLogInHandler.getLoginUser().getEmail());
-
-        // 참여 유료 스터디 리스트에 유료 스터디 추가
-        participateChargeStudyList.add(chargeStudy);
-        // 참여 유료 스터디에 아이디 추가
-        participateChargeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), participateChargeStudyList);
-
-        // 참여 유료 스터디에 해당 아이디 존재 X
-      } else {
-        // 새로운 참여 유료 스터디 리스트 생성
-        participateChargeStudyList = new ArrayList<>();
-
-        // 참여 유료 스터디 리스트에 유료 스터디 추가
-        participateChargeStudyList.add(chargeStudy);
-        // 참여 유료 스터디에 아이디 추가
-        participateChargeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), participateChargeStudyList);
-      }
-
-      // 유료 스터디 결제한 사람 내역 (멘토 관점)
-      members.add(AuthLogInHandler.loginUser);
     }
-    return;
   }
 }

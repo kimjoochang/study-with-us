@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Payment {
 
+  private String payeerEmail;
   private int paidStudyNo; // 결제한 유료 스터디 게시글 번호
   private String paymentMethod; // 결제 수단
   private Date paymentDate; // 결제일
@@ -11,6 +12,23 @@ public class Payment {
   private String title; // 결제한 유료 스터디 제목
   private String mentorName; // 결제한 유료 스터디 멘토
   private int price; // 결제한 가격
+  private boolean visible;
+
+  public String getPayeerEmail() {
+    return payeerEmail;
+  }
+
+  public void setPayeerEmail(String payeerEmail) {
+    this.payeerEmail = payeerEmail;
+  }
+
+  public boolean isVisible() {
+    return visible;
+  }
+
+  public void setVisible(boolean visible) {
+    this.visible = visible;
+  }
 
   public String getTitle() {
     return title;

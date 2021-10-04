@@ -1,7 +1,6 @@
 package com.studywithus.table;
 
 import com.studywithus.domain.Payment;
-import com.studywithus.domain.Study;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.Request;
 import com.studywithus.server.Response;
@@ -19,7 +18,7 @@ public class PaymentTable extends JsonDataTable<Payment> implements DataProcesso
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "payment.insert": insert(request, response); break;
-      //      case "member.selectList": selectList(request, response); break;
+      case "payment.selectList": selectList(request, response); break;
       case "payment.selectOne": selectOne(request, response); break;
       //      case "payment.selectOneByName": selectOneByName(request, response); break;
       //      case "member.update": update(request, response); break;
@@ -44,8 +43,9 @@ public class PaymentTable extends JsonDataTable<Payment> implements DataProcesso
   }
 
   private void selectOne(Request request, Response response) throws Exception {
-    int paidStudyNo = Integer.parseInt(request.getParameter("paidStudyNo"));
-    Payment payment = findByPaidStudyNo(paidStudyNo);
+    int paidStudyNo = Integer.parseInt(request.getParameter("no"));
+    String email = request.getParameter("email");
+    Payment payment = findByPaidStudyNo(paidStudyNo, email);
 
     if (payment != null) {
       response.setStatus(Response.SUCCESS);
@@ -57,20 +57,20 @@ public class PaymentTable extends JsonDataTable<Payment> implements DataProcesso
   }
 
   private void update(Request request, Response response) throws Exception {
-    Study chargeStudy = request.getObject(Study.class);
+    Payment payment = request.getObject(Payment.class);
 
-    int index = indexOf(chargeStudy.getNo());
+    int index = indexOf(payment.getPaidStudyNo(), payment.getPayeerEmail());
     if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
       return;
     }
 
-    list.set(index, chargeStudy);
+    list.set(index, payment);
     response.setStatus(Response.SUCCESS);
   }
 
-  private void delete(Request request, Response response) throws Exception {
+  /*private void delete(Request request, Response response) throws Exception {
     int no = Integer.parseInt(request.getParameter("no"));
     int index = indexOf(no);
 
@@ -82,20 +82,20 @@ public class PaymentTable extends JsonDataTable<Payment> implements DataProcesso
 
     list.remove(index);
     response.setStatus(Response.SUCCESS);
-  }
+  }*/
 
-  private Payment findByPaidStudyNo(int paidStudyNo) {
+  private Payment findByPaidStudyNo(int paidStudyNo, String email) {
     for (Payment payment : list) {
-      if (payment.getPaidStudyNo() == paidStudyNo) {
+      if (payment.getPaidStudyNo() == paidStudyNo && payment.getPayeerEmail().equals(email)) {
         return payment;
       }
     }
     return null;
   }
 
-  private int indexOf(int memberNo) {
+  private int indexOf(int memberNo, String email) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getNo() == memberNo) {
+      if (list.get(i).getPaidStudyNo() == memberNo && list.get(i).getPayeerEmail().equals(email)) {
         return i;
       }
     }
