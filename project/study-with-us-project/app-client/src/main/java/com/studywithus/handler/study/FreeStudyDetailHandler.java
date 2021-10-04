@@ -25,7 +25,7 @@ public class FreeStudyDetailHandler implements Command {
     // Study freeStudy = findByNo(no);
 
     HashMap<String, String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    params.put("freeNo", String.valueOf(no));
 
     requestAgent.request("freeStudy.selectOne", params);
 

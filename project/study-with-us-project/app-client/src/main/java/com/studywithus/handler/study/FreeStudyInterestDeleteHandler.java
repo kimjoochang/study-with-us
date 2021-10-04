@@ -19,7 +19,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
     this.requestAgent = requestAgent;
   }
 
-  //  HashMap<String, List<Study>> hm = new HashMap<>();
+  // HashMap<String, List<Study>> freeStudyInterest = new HashMap<>();
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -41,7 +41,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
 
     if (request.getAttribute("freeNo") == null) {
       // [질문] FreeStudyDetailHandler와의 차이
-      //      int num = Prompt.inputInt("메뉴 번호를 입력하세요. > ");
+      // int num = Prompt.inputInt("메뉴 번호를 입력하세요. > ");
 
       // Study freeInterest = findByNo(no);
 
