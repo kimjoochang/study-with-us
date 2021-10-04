@@ -62,6 +62,14 @@ public class FreeStudyTable extends JsonDataTable<Study> implements DataProcesso
 
   private void insert(Request request, Response response) throws Exception {
     Study freeStudy = request.getObject(Study.class);
+
+    if (list.isEmpty()) {
+      freeStudy.setNo(1);
+    } else {
+      Study lastIndex = list.get(list.size() - 1);
+      freeStudy.setNo(lastIndex.getNo() + 1);
+    }
+
     list.add(freeStudy);
     response.setStatus(Response.SUCCESS);
   }

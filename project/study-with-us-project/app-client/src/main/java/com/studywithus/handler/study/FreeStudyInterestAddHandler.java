@@ -1,9 +1,12 @@
 package com.studywithus.handler.study;
 
 import java.util.HashMap;
+import java.util.List;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
@@ -48,9 +51,9 @@ public class FreeStudyInterestAddHandler implements Command {
       }
     }
 
-    // List<Member> likeUser = freeInterest.getLikeMembers();
-    // likeUser.add(AuthLogInHandler.getLoginUser());
-    // freeStudyInterest.setLikeMembers(AuthLogInHandler.getLoginUser());
+    List<Member> likeUser = freeStudyInterest.getLikeMembers();
+    likeUser.add(AuthLogInHandler.getLoginUser());
+    freeStudyInterest.setLikeMembers(AuthLogInHandler.getLoginUser());
 
     requestAgent.request("freeStudy.interest.insert", freeStudyInterest);
 

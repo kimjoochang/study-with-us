@@ -140,18 +140,18 @@ public class FreeStudyDetailHandler implements Command {
           if (applyType == 0) {
             request.getRequestDispatcher("/freeStudy/apply").forward(request);
 
-          } else {
             // 신청하기를 이미 한 경우
+          } else {
             request.getRequestDispatcher("/freeStudy/applyCancel").forward(request);
           }
 
         } else if (num == 2) {
+          // 관심목록에 없는 경우
           if (interestType == 0) {
-            // 관심목록에 없는 경우
             request.getRequestDispatcher("/freeStudy/addInterest").forward(request);
 
-          } else {
             // 관심목록에 이미 있는 경우
+          } else {
             request.getRequestDispatcher("/freeStudy/deleteInterest").forward(request);
           }
 
