@@ -26,6 +26,15 @@ public class Study extends Content {
   private String studyStatus;
   private List<Review> reviewList = new ArrayList<>();
   private List<String> likeMembersEmail = new ArrayList<>(); // 관심목록 추가한 자
+  private List<String> menteeEmailList = new ArrayList<>();
+
+  public List<String> getMenteeEmailList() {
+    return menteeEmailList;
+  }
+
+  public void setMenteeEmailList(List<String> menteeEmailList) {
+    this.menteeEmailList = menteeEmailList;
+  }
 
   public String getONLINE() {
     return ONLINE;

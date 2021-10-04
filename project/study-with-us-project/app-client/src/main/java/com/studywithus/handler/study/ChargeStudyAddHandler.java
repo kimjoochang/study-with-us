@@ -39,13 +39,14 @@ public class ChargeStudyAddHandler implements Command {
       }
 
       // 현재 날짜 > 시작일인 경우
-      if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == 1) {
+      /* if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == 1) {
         System.out.println("다시 입력하세요.\n");
         continue;
 
       } else {
         break;
-      }
+      }*/
+      break;
     }
 
     while (true) {
@@ -57,7 +58,7 @@ public class ChargeStudyAddHandler implements Command {
         continue;
       }
 
-      if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getEndDate()) == 1) {
+      /*if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getEndDate()) == 1) {
         System.out.println("다시 입력하세요.\n");
         continue;
 
@@ -68,7 +69,8 @@ public class ChargeStudyAddHandler implements Command {
 
       } else {
         break;
-      }
+      }*/
+      break;
     }
 
     chargeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));

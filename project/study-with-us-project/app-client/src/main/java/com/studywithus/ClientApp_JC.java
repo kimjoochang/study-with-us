@@ -13,7 +13,8 @@ import com.studywithus.handler.study.ChargeStudyDeleteRequestCancelHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestDetailHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestListHandler;
-import com.studywithus.handler.study.ChargeStudyDetailHandler;
+import com.studywithus.handler.study.ChargeStudyDetailHandler_JC;
+import com.studywithus.handler.study.ChargeStudyDetailMenuPrompt;
 import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
 import com.studywithus.handler.study.ChargeStudyInterestDeleteHandler;
 import com.studywithus.handler.study.ChargeStudyInterestListHandler;
@@ -27,6 +28,8 @@ import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
 import com.studywithus.handler.study.RegisterChargeStudyDetailHandler;
 import com.studywithus.handler.study.RegisterChargeStudyListHandler;
+import com.studywithus.handler.study.ReviewAddHandler;
+import com.studywithus.handler.study.ReviewListHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
@@ -42,6 +45,8 @@ public class ClientApp_JC {
   RequestAgent requestAgent;
 
   HashMap<String,Command> commandMap = new HashMap<>();
+
+  /*[수정]*/CommandRequest request = new CommandRequest(commandMap);
 
   class MenuItem extends Menu {
     String menuId;
@@ -60,7 +65,7 @@ public class ClientApp_JC {
     public void execute() {
       Command command = commandMap.get(menuId);
       try {
-        command.execute(new CommandRequest(commandMap));
+        /*[수정]*/ command.execute(request);
       } catch (Exception e) {
         System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
         e.printStackTrace();
@@ -78,7 +83,6 @@ public class ClientApp_JC {
     //    commandMap.put("/naver/logIn", new SnsLogInHandler(memberList));
     //
     commandMap.put("/auth/logOut", new AuthLogOutHandler());
-    //
     commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
     //    commandMap.put("/google/signUp", new SnsSignUpHandler(memberList));
     //    commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberList));
@@ -87,7 +91,6 @@ public class ClientApp_JC {
     //
     //    commandMap.put("/find/id", new FindIdHandler(memberList));
     commandMap.put("/reset/password", new ResetPasswordHandler(requestAgent));
-    //
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(requestAgent));
     //
     //    commandMap.put("/myInfo/list", new MyInfoHandler());
@@ -95,7 +98,6 @@ public class ClientApp_JC {
     //    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
     //    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(requestAgent));
-    //
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(requestAgent));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(requestAgent));
     //    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
@@ -119,7 +121,8 @@ public class ClientApp_JC {
     //    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(requestAgent));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(requestAgent));
-    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(requestAgent));
+    /*[수정]*/commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler_JC(requestAgent, 
+        new ChargeStudyDetailMenuPrompt(requestAgent, request)));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(requestAgent));
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(requestAgent));
     commandMap.put("/chargeStudy/deleteRequestCancel", new ChargeStudyDeleteRequestCancelHandler(requestAgent));
@@ -135,8 +138,8 @@ public class ClientApp_JC {
     //    commandMap.put("/chargeStudy/participateChargeStudyList",
     //        new ParticipateChargeStudyListHandler(participateChargeStudyMap));
     //    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(participateChargeStudyMap)); 
-    //    commandMap.put("/review/add", new ReviewAddHandler(chargeStudyList));
-    //    commandMap.put("/review/list", new ReviewListHandler(chargeStudyList));
+    commandMap.put("/review/add", new ReviewAddHandler(requestAgent));
+    commandMap.put("/review/list", new ReviewListHandler(requestAgent));
     //
     //    commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
     //    commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
