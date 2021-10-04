@@ -24,7 +24,7 @@ public class FreeStudyInterestAddHandler implements Command {
     int no = (int) request.getAttribute("freeNo");
 
     HashMap<String, String> params = new HashMap<>();
-    params.put("freeNo", String.valueOf(no));
+    params.put("no", String.valueOf(no));
 
     requestAgent.request("freeStudy.interest.selectOne", params);
 
@@ -53,7 +53,7 @@ public class FreeStudyInterestAddHandler implements Command {
 
     List<Member> likeUser = freeStudyInterest.getLikeMembers();
     likeUser.add(AuthLogInHandler.getLoginUser());
-    freeStudyInterest.setLikeMembers(AuthLogInHandler.getLoginUser());
+    freeStudyInterest.setLikeMembers(likeUser);
 
     requestAgent.request("freeStudy.interest.insert", freeStudyInterest);
 

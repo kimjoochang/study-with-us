@@ -77,37 +77,38 @@ public class FreeStudyAddHandler implements Command {
     System.out.println();
     System.out.println("무료 스터디 등록이 완료되었습니다.");
 
-    //		while (true) {
-    //			for (Member member : freeStudy.getMembers()) {
+    // while (true) {
+    // for (Member member : freeStudy.getMembers()) {
     //
-    //				// 프리스터디리스트.생성자.아이디 = 내 아이디 
-    //				if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
+    // // 프리스터디리스트.생성자.아이디 = 내 아이디
+    // if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
     //
-    //					requestAgent.request("registerFreeStudy.insert", freeStudy);
-    //					//					Collection<Study> studyList = requestAgent.getObjects(Study.class);
+    // requestAgent.request("registerFreeStudy.insert", freeStudy);
+    // // Collection<Study> studyList = requestAgent.getObjects(Study.class);
     //
-    //					break;
-    //					// 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
-    //				} else { 
-    //					//					registerFreeStudyList = new ArrayList<>();
-    //					requestAgent.request("registerFreeStudy.insert", freeStudy);
-    //				}
-    //				break;
-    //			}
+    // break;
+    // // 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
+    // } else {
+    // // registerFreeStudyList = new ArrayList<>();
+    // requestAgent.request("registerFreeStudy.insert", freeStudy);
+    // }
+    // break;
+    // }
 
-    //		if (registerFreeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getEmail())) { // 스터디에 참여한 팀원들 
-    //			registerFreeStudyList = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getEmail());
+    // if (registerFreeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getEmail())) { // 스터디에
+    // 참여한 팀원들
+    // registerFreeStudyList = registerFreeStudyMap.get(AuthLogInHandler.getLoginUser().getEmail());
     //
-    //			registerFreeStudyList.add(freeStudy);
-    //			registerFreeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), registerFreeStudyList);
+    // registerFreeStudyList.add(freeStudy);
+    // registerFreeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), registerFreeStudyList);
     //
-    //			// 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
-    //		} else {
-    //			registerFreeStudyList = new ArrayList<>();
+    // // 생성리스트가 없는 회원이라면 새로운 생성리스트에 스터디 추가
+    // } else {
+    // registerFreeStudyList = new ArrayList<>();
     //
-    //			registerFreeStudyList.add(freeStudy);
-    //			registerFreeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), registerFreeStudyList);
-    //		}
+    // registerFreeStudyList.add(freeStudy);
+    // registerFreeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), registerFreeStudyList);
+    // }
 
   }
 }

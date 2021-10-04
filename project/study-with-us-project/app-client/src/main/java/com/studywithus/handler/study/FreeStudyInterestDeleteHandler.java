@@ -27,7 +27,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
     int no = (int) request.getAttribute("freeNo");
 
     HashMap<String, String> params = new HashMap<>();
-    params.put("freeNo", String.valueOf(no));
+    params.put("no", String.valueOf(no));
 
     requestAgent.request("freeStudy.interest.selectOne", params);
 
@@ -82,7 +82,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
       System.out.println("무료 스터디 관심 목록을 삭제하였습니다.\n");
 
     } else {
-      int num = (int) request.getAttribute("freeNo");
+      //      int no = (int) request.getAttribute("freeNo");
 
       // Study freeInterest = findByNo(no);
 
