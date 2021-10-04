@@ -29,8 +29,8 @@ public class FreeStudyApplyListHandler implements Command {
       return;
     }
 
-    Collection<Study> studyList = requestAgent.getObjects(Study.class);
     int type = 0;
+    Collection<Study> studyList = requestAgent.getObjects(Study.class);
 
     for (Study freeStudy : studyList) {
       for (Member member : freeStudy.getApplicants()) {
