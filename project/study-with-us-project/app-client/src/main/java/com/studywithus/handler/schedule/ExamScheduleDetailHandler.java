@@ -4,7 +4,6 @@ import java.util.HashMap;
 import com.studywithus.domain.Schedule;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
@@ -23,12 +22,12 @@ public class ExamScheduleDetailHandler implements Command {
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("scheduleNo", String.valueOf(no));
+    params.put("no", String.valueOf(no));
 
     requestAgent.request("examSchedule.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("해당 번호의 일정이 없습니다.");
       return;
     }
 
@@ -42,13 +41,9 @@ public class ExamScheduleDetailHandler implements Command {
 
     request.setAttribute("scheduleNo", no);
 
-    // 관리자인 경우
-    // if (examSchedule.getWriter() == AuthLogInHandler.getLoginUser()) {
-    if (examSchedule.getWriter().getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
-      System.out.println("1. 변경");
-      System.out.println("2. 삭제");
-      System.out.println("0. 이전\n");
-    }
+    System.out.println("1. 수정");
+    System.out.println("2. 삭제");
+    System.out.println("0. 이전\n");
 
     while (true) {
       int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");

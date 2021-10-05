@@ -1,5 +1,6 @@
 package com.studywithus.handler.study;
 
+import java.text.DecimalFormat;
 import java.util.Collection;
 import com.studywithus.domain.Review;
 import com.studywithus.handler.Command;
@@ -17,7 +18,7 @@ public class ReviewListHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    int sum= 0;
+    double sum= 0;
     int count = 0;
 
     System.out.println("[유료 스터디 / 후기 조회]\n");
@@ -44,16 +45,18 @@ public class ReviewListHandler implements Command {
         System.out.printf("[아이디 = %s, 후기 = %s, 평점 = %d, 등록일 = %s]\n",
             review.getWriterEmail(),
             review.getReview(),
-            review.getScore(),
+            (int)review.getScore(),
             review.getRegisteredDate());
       }
     }
+    DecimalFormat form = new DecimalFormat("#.#");
 
-    float average = ((sum / count) *100);
+    double average = sum / count;
+    System.out.println(average);
     // float average = Math.round((sum / reviewList.size()) * 100 / 100.0);
 
     System.out.println();
-    System.out.println("평점: " + Math.round(average / 100.0) + "/" + 5);
+    System.out.println("평점: " + form.format(sum) + "/" + 5);
     System.out.println(getStar(average));
   }
 
