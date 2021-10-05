@@ -107,7 +107,7 @@ public class ChargeStudyDetailHandler implements Command {
     } else {
 
       int interestType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
-      int paymentType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
+      int paymentType = 0; // 메서드를 호출할 때, 결제 내역 존재 여부 구분을 위한 변수
 
       while (true) {
         for (Member member : chargeStudy.getMembers()) {
