@@ -13,15 +13,15 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyApplyHandler implements Command {
 
-  // List<Member> freeApplicantList;
-  HashMap<String, List<Study>> applyFreeStudyMap;
   RequestAgent requestAgent;
+  HashMap<String, List<Study>> applyFreeStudyMap;
+  // List<Member> freeApplicantList;
 
   public FreeStudyApplyHandler(RequestAgent requestAgent,
       HashMap<String, List<Study>> applyFreeStudyMap) {
-    // super(freeStudyList);
-    this.applyFreeStudyMap = applyFreeStudyMap;
     this.requestAgent = requestAgent;
+    this.applyFreeStudyMap = applyFreeStudyMap;
+    // super(freeStudyList);
   }
 
   @Override
@@ -61,6 +61,7 @@ public class FreeStudyApplyHandler implements Command {
       System.out.println("모집 인원이 다 찼습니다.");
       return;
     }
+
     while (true) {
       String input = Prompt.inputString("무료 스터디를 신청 하시겠습니까? (y/N) ");
 
@@ -101,8 +102,8 @@ public class FreeStudyApplyHandler implements Command {
     }
 
     // [질문]
-    // requestAgent.request("freeStudy.add", freeStudy);
-    requestAgent.request("freeStudy.apply.add", freeStudy);
+    // requestAgent.request("freeStudy.apply.insert", freeStudy);
+    requestAgent.request("freeStudy.insert", freeStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("무료 스터디 신청 실패!");

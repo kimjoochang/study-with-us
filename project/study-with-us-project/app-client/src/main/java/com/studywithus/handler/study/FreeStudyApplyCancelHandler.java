@@ -13,15 +13,15 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyApplyCancelHandler implements Command {
 
-  // List<Member> freeApplicantList;
-  HashMap<String, List<Study>> applyFreeStudyMap;
   RequestAgent requestAgent;
+  HashMap<String, List<Study>> applyFreeStudyMap;
+  // List<Member> freeApplicantList;
 
   public FreeStudyApplyCancelHandler(RequestAgent requestAgent,
       HashMap<String, List<Study>> applyFreeStudyMap) {
-    // super(freeStudyList);
     this.applyFreeStudyMap = applyFreeStudyMap;
     this.requestAgent = requestAgent;
+    // super(freeStudyList);
   }
 
   @Override

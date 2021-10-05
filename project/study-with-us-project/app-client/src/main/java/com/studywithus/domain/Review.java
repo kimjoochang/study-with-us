@@ -1,33 +1,53 @@
 package com.studywithus.domain;
 
-import java.util.List;
+import java.sql.Date;
 
 public class Review extends Content {
-  private List<Review> chargeStudyReviewList; // 각각의 유료 스터디별 리뷰
-  private List<Review> myReviewList; // 내가 쓴 유료 스터디 리뷰 (회원 관점)
-  private List<Review> mentorReviewList; // 내가 생성한 스터디 리뷰 (멘토 관점)
 
-  public List<Review> getChargeStudyReviewList() {
-    return chargeStudyReviewList;
+  private String writerEmail;
+  private String review;
+  private int score;
+  private Date registeredDate;
+  private int studyNo;
+
+  public String getWriterEmail() {
+    return writerEmail;
   }
 
-  public void setChargeStudyReviewList(List<Review> chargeStudyReviewList) {
-    this.chargeStudyReviewList = chargeStudyReviewList;
+  public void setWriterEmail(String writerEmail) {
+    this.writerEmail = writerEmail;
   }
 
-  public List<Review> getMyReviewList() {
-    return myReviewList;
+  public String getReview() {
+    return review;
   }
 
-  public void setMyReviewList(List<Review> myReviewList) {
-    this.myReviewList = myReviewList;
+  public void setReview(String review) {
+    this.review = review;
   }
 
-  public List<Review> getMentorReviewList() {
-    return mentorReviewList;
+  public int getScore() {
+    return score;
   }
 
-  public void setMentorReviewList(List<Review> mentorReviewList) {
-    this.mentorReviewList = mentorReviewList;
+  public void setScore(int score) {
+    this.score = score;
   }
+
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
+  }
+
+  public int getStudyNo() {
+    return studyNo;
+  }
+
+  public void setStudyNo(int studyNo) {
+    this.studyNo = studyNo;
+  }
+
 }

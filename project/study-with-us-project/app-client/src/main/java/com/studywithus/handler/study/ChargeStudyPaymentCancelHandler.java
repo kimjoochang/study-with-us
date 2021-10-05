@@ -1,7 +1,9 @@
 package com.studywithus.handler.study;
 
 import java.util.HashMap;
+import java.util.List;
 import com.studywithus.domain.Payment;
+import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
@@ -24,7 +26,18 @@ public class ChargeStudyPaymentCancelHandler implements Command {
 
     HashMap<String,String> params = new HashMap<>();
 
+    // 스터디 객체 가져오기
     params.put("no", String.valueOf(no));
+    requestAgent.request("chargeStudy.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(requestAgent.getObject(String.class));
+      return;
+    }
+
+    Study chargeStudy = requestAgent.getObject(Study.class);
+
+    // payment 객체 가져오기
     params.put("email", AuthLogInHandler.getLoginUser().getEmail());
 
     requestAgent.request("payment.selectOne", params);
@@ -53,6 +66,12 @@ public class ChargeStudyPaymentCancelHandler implements Command {
         payment.setVisible(false);
 
         requestAgent.request("payment.update", payment);
+
+        List<String> menteeEmailList = chargeStudy.getMenteeEmailList();
+        menteeEmailList.remove(AuthLogInHandler.getLoginUser().getEmail());
+        chargeStudy.setMenteeEmailList(menteeEmailList);
+
+        requestAgent.request("chargeStudy.update", chargeStudy);
         break;
       }
     }

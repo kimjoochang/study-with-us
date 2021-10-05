@@ -2,7 +2,6 @@ package com.studywithus.handler.study;
 
 import java.sql.Date;
 import java.util.HashMap;
-import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -48,7 +47,7 @@ public class ChargeStudyDetailHandler implements Command {
     System.out.printf("스터디 진행상태: %s\n", StudyStatus(chargeStudy));
     System.out.printf("등록일: %s\n", chargeStudy.getRegisteredDate());
 
-    System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers().size(), chargeStudy.getMaxMembers());
+    System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMenteeEmailList().size(), chargeStudy.getMaxMembers());
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
     System.out.printf("좋아요수: %d\n", chargeStudy.getLikeMembersEmail().size());
     System.out.println();
@@ -110,8 +109,8 @@ public class ChargeStudyDetailHandler implements Command {
       int paymentType = 0; // 메서드를 호출할 때, 결제 내역 존재 여부 구분을 위한 변수
 
       while (true) {
-        for (Member member : chargeStudy.getMembers()) {
-          if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
+        for (String member : chargeStudy.getMenteeEmailList()) {
+          if (member.equals(AuthLogInHandler.getLoginUser().getEmail())) {
             paymentType = 1;
             break;
           }
