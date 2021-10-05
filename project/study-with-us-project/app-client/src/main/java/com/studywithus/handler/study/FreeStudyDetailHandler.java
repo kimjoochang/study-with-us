@@ -104,7 +104,7 @@ public class FreeStudyDetailHandler implements Command {
 
       while (true) {
         // [테스트]
-        System.out.println("테스트: " + freeStudy.getApplicants().toString());
+        // System.out.println("테스트: " + freeStudy.getApplicants().toString());
         for (Member member : freeStudy.getApplicants()) {
           if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
             applyType = 1;

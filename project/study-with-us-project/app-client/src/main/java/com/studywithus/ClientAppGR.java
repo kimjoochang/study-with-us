@@ -108,8 +108,8 @@ public class ClientAppGR {
     commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(requestAgent));
 
     commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(requestAgent));
-    commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(requestAgent));
     commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(requestAgent));
+    commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(requestAgent));
     commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(requestAgent));
     commandMap.put("/freeStudy/listInterest", new FreeStudyInterestListHandler(requestAgent));
     commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(requestAgent));
