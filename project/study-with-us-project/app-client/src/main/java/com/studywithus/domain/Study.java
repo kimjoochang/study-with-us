@@ -28,6 +28,11 @@ public class Study extends Content {
   private List<String> likeMembersEmail = new ArrayList<>(); // 관심목록 추가한 회원의 이메일
   private List<String> menteeEmailList = new ArrayList<>(); // 스터디에 참여한 회원의 이메일
 
+  @Override
+  public String toString() {
+    return "Study [applicants=" + applicants + ", likeMembers=" + likeMembers + "]";
+  }
+
   public List<String> getMenteeEmailList() {
     return menteeEmailList;
   }
