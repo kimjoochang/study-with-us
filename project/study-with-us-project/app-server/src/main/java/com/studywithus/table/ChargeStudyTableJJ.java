@@ -76,7 +76,7 @@ public class ChargeStudyTableJJ extends JsonDataTable<Study> implements DataProc
       response.setValue(chargeStudy);
     } else {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
     }
   }
 
@@ -86,7 +86,7 @@ public class ChargeStudyTableJJ extends JsonDataTable<Study> implements DataProc
     int index = indexOf(chargeStudy.getNo());
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
       return;
     }
 
@@ -100,7 +100,7 @@ public class ChargeStudyTableJJ extends JsonDataTable<Study> implements DataProc
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
       return;
     }
 
