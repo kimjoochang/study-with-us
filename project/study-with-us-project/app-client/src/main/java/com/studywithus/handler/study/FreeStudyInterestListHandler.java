@@ -13,13 +13,13 @@ public class FreeStudyInterestListHandler implements Command {
   RequestAgent requestAgent;
 
   public FreeStudyInterestListHandler(RequestAgent requestAgent) {
-    // super(freeStudyList);
     this.requestAgent = requestAgent;
+    // super(freeStudyList);
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[마이페이지 / 무료 스터디 / 관심 목록 / 조회]\n");
+    System.out.println("[마이페이지 / 나의 관심 목록 / 무료 스터디 관심목록 / 조회]\n");
 
     requestAgent.request("freeStudy.selectList", null);
 
@@ -32,15 +32,26 @@ public class FreeStudyInterestListHandler implements Command {
     int type = 0; // 일치하는 값 X -> 게시글 없다는 출력문 한 번만 출력
 
     for (Study freeStudy : freeStudyList) {
+      // 스터디 좋아요 X
       if (freeStudy.getLikeMembers().isEmpty()) {
-        type = 0; // 관심목록 X
-        continue;
+        // [삭제] 관심목록 조회 + "무료 스터디 관심목록이 존재하지 않습니다." 출력
+        // type = 0;
+        // continue;
+
+        if (type == 1) {
+          continue;
+
+        } else {
+          type = 0;
+          continue;
+        }
       }
 
+      // 스터디 좋아요 O
       for (Member likeMember : freeStudy.getLikeMembers()) {
         // 관심목록 추가한 회원 == 로그인한 회원
         if (likeMember.getEmail().equals(AuthLogInHandler.loginUser.getEmail())) {
-          type = 1; // 관심목록 O
+          type = 1;
 
           // 온라인 스터디
           if (freeStudy.getOnOffLine() == 1) {
@@ -61,23 +72,22 @@ public class FreeStudyInterestListHandler implements Command {
                 freeStudy.getLikeMembers().size());
           }
 
+          // 관심목록 추가한 회원 != 로그인한 회원
         } else {
-          // 관심목록 O
           if (type == 1) {
             continue;
 
-            // 관심목록 X
           } else {
             type = 0;
+            continue;
           }
         }
       }
     }
 
-    // 관심목록 X
+    // 나의 관심목록 X
     if (type == 0) {
-      System.out.println("무료 스터디 관심목록이 존재하지 않습니다.\n");
+      System.out.println("무료 스터디 관심목록이 존재하지 않습니다.");
     }
-    System.out.println();
   }
 }

@@ -39,6 +39,7 @@ public class FreeStudyApplyCancelHandler implements Command {
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("무료 스터디 상세보기 실패!");
+      System.out.println(requestAgent.getObject(Study.class));
       return;
     }
 
@@ -57,9 +58,11 @@ public class FreeStudyApplyCancelHandler implements Command {
 
         if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
           System.out.println("무료 스터디 신청 취소 성공!");
+          return;
 
         } else {
           System.out.println("무료 스터디 신청 취소 실패!");
+          return;
         }
 
       } else {
