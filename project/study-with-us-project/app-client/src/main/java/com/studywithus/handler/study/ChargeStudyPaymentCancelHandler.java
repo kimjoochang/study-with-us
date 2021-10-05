@@ -57,24 +57,24 @@ public class ChargeStudyPaymentCancelHandler implements Command {
         return;
 
       } else if (!input.equalsIgnoreCase("y")) {
-        System.out.println("다시 입력하시오.\n");
+        System.out.println("유효한 값을 입력하세요.\n");
         continue;
 
       } else {
-        System.out.println();
-        System.out.println("결제 취소가 완료되었습니다.");
-        payment.setVisible(false);
-
-        requestAgent.request("payment.update", payment);
-
-        List<String> menteeEmailList = chargeStudy.getMenteeEmailList();
-        menteeEmailList.remove(AuthLogInHandler.getLoginUser().getEmail());
-        chargeStudy.setMenteeEmailList(menteeEmailList);
-
-        requestAgent.request("chargeStudy.update", chargeStudy);
         break;
       }
     }
 
+    requestAgent.request("payment.update", payment);
+
+    List<String> menteeEmailList = chargeStudy.getMenteeEmailList();
+    menteeEmailList.remove(AuthLogInHandler.getLoginUser().getEmail());
+    chargeStudy.setMenteeEmailList(menteeEmailList);
+
+    requestAgent.request("chargeStudy.update", chargeStudy);
+
+    System.out.println();
+    System.out.println("결제 취소가 완료되었습니다.");
+    payment.setVisible(false);
   }
 }

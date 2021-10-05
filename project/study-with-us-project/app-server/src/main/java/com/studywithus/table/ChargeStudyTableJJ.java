@@ -23,8 +23,8 @@ public class ChargeStudyTableJJ extends JsonDataTable<Study> implements DataProc
       case "chargeStudy.selectOne": selectOne(request, response); break;
       case "chargeStudy.selectListByKeyword" : selectListByKeyword(request, response); break;
       //      case "member.selectOneByName": selectOneByName(request, response); break;
-      //      case "member.update": update(request, response); break;
-      //      case "member.delete": delete(request, response); break;
+      case "chargeStudy.update": update(request, response); break;
+      case "chargeStudy.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
