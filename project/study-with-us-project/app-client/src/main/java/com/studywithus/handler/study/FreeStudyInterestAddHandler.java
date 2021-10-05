@@ -28,6 +28,7 @@ public class FreeStudyInterestAddHandler implements Command {
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 무료 스터디가 없습니다.");
+      System.out.println(requestAgent.getObject(Study.class));
       return;
     }
 
@@ -40,25 +41,23 @@ public class FreeStudyInterestAddHandler implements Command {
         System.out.println("무료 스터디 관심 목록 추가를 취소하였습니다.\n");
         return;
 
-      } else if (!input.equalsIgnoreCase("y")) {
-        System.out.println("다시 입력하세요.\n");
-        continue;
+      } else if (input.equalsIgnoreCase("y")) {
+        freeStudy.getLikeMembers().add(AuthLogInHandler.getLoginUser());
+        requestAgent.request("freeStudy.update", freeStudy);
+
+        if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+          System.out.println("무료 스터디 관심 목록 추가 성공!");
+          return;
+
+        } else {
+          System.out.println("무료 스터디 관심 목록 추가 실패!");
+          return;
+        }
 
       } else {
-        break;
+        System.out.println("다시 입력하세요.\n");
+        continue;
       }
-    }
-
-    freeStudy.getLikeMembers().add(AuthLogInHandler.getLoginUser());
-
-    requestAgent.request("freeStudy.interest.insert", freeStudy);
-
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      // requestAgent.request("member.interest.insert", params);
-      System.out.println("무료 스터디 관심 목록 추가 성공!");
-
-    } else {
-      System.out.println("무료 스터디 관심 목록 추가 실패!");
     }
 
     // System.out.println();

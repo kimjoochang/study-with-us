@@ -21,29 +21,28 @@ public class FreeStudyInterestListHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[마이페이지 / 무료 스터디 / 관심 목록 / 조회]\n");
 
-    int type = 0; // 일치하는 값이 없을 경우, 게시글 없다는 출력문이 한 번만 출력되게 하기 위한 변수
-
-    requestAgent.request("freeStudy.interest.selectList", null);
+    requestAgent.request("freeStudy.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("무료 스터디 관심목록 조회 실패!");
       return;
     }
 
-    Collection<Study> studyList = requestAgent.getObjects(Study.class);
+    Collection<Study> freeStudyList = requestAgent.getObjects(Study.class);
+    int type = 0; // 일치하는 값 X -> 게시글 없다는 출력문 한 번만 출력
 
-    // 기존 스터디 리스트 가져와서 하나씩 검색
-    for (Study freeStudy : studyList) {
-      if (freeStudy.getLikeMembers() == null) {
-        type = 1; // 일치하는 값 없음
+    for (Study freeStudy : freeStudyList) {
+      if (freeStudy.getLikeMembers().isEmpty()) {
+        type = 0; // 관심목록 X
         continue;
       }
-      // 스터디 리스트에서 꺼낸 스터디의 좋아요 누른 회원 리스트를 가져와서 하나씩 검색
+
       for (Member likeMember : freeStudy.getLikeMembers()) {
-        // 좋아요 누른 회원 리스트에서 꺼낸 회원의 아이디와 로그인한 회원의 아이디가 같다면
-        // 좋아요 누른 회원 리스트를 가지고 있는 스터디의 정보 출력
+        // 관심목록 추가한 회원 == 로그인한 회원
         if (likeMember.getEmail().equals(AuthLogInHandler.loginUser.getEmail())) {
-          type = 2; // 일치하는 값 있음
+          type = 1; // 관심목록 O
+
+          // 온라인 스터디
           if (freeStudy.getOnOffLine() == 1) {
             System.out.printf(
                 "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
@@ -51,6 +50,8 @@ public class FreeStudyInterestListHandler implements Command {
                 freeStudy.getONLINE(), freeStudy.getMembers().size(), freeStudy.getMaxMembers(),
                 freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
                 freeStudy.getLikeMembers().size());
+
+            // 오프라인 스터디
           } else {
             System.out.printf(
                 "[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
@@ -59,16 +60,22 @@ public class FreeStudyInterestListHandler implements Command {
                 freeStudy.getMaxMembers(), freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
                 freeStudy.getLikeMembers().size());
           }
+
         } else {
-          if (type == 2) {
+          // 관심목록 O
+          if (type == 1) {
             continue;
+
+            // 관심목록 X
           } else {
-            type = 1;
+            type = 0;
           }
         }
       }
     }
-    if (type == 1) { // 일치하는 값 없을 경우, 출력
+
+    // 관심목록 X
+    if (type == 0) {
       System.out.println("무료 스터디 관심목록이 존재하지 않습니다.\n");
     }
     System.out.println();

@@ -10,17 +10,17 @@ import com.studywithus.request.RequestAgent;
 
 public class FreeStudyApplyListHandler implements Command {
 
-  // List<Study> freeStudyApplyList;
   RequestAgent requestAgent;
+  // List<Study> freeStudyApplyList;
 
   public FreeStudyApplyListHandler(RequestAgent requestAgent) {
-    // super(freeStudyList);
     this.requestAgent = requestAgent;
+    // super(freeStudyList);
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[무료 스터디 신청 내역 / 조회] \n");
+    System.out.println("[무료 스터디 신청 내역 / 조회]\n");
 
     requestAgent.request("freeStudy.selectList", null);
 
@@ -29,22 +29,32 @@ public class FreeStudyApplyListHandler implements Command {
       return;
     }
 
-    int type = 0;
-    Collection<Study> studyList = requestAgent.getObjects(Study.class);
+    Collection<Study> freeStudyList = requestAgent.getObjects(Study.class);
+    int type = 0; // 일치하는 값 X -> 게시글 없다는 출력문 한 번만 출력
 
-    for (Study freeStudy : studyList) {
-      for (Member member : freeStudy.getApplicants()) {
-        if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
-          type = 1;
+    for (Study freeStudy : freeStudyList) {
+      if (freeStudy.getApplicants().isEmpty()) {
+        type = 0; // 신청내역 X
+        continue;
+      }
+
+      for (Member applicant : freeStudy.getApplicants()) {
+        // 스터디 신청한 회원 == 로그인한 회원
+        if (applicant.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
+          type = 1; // 신청내역 O
+          freeStudy.setViewCount(freeStudy.getViewCount() + 1);
+
           System.out.printf("제목: %s\n", freeStudy.getTitle());
           System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
 
           if (freeStudy.getArea() != null) {
             System.out.printf("온/오프라인: %s\n", freeStudy.getOFFLINE());
             System.out.printf("지역: %s\n", freeStudy.getArea());
+
           } else {
             System.out.printf("온/오프라인: %s\n", freeStudy.getONLINE());
           }
+
           System.out.printf("설명: %s\n", freeStudy.getContent());
           System.out.printf("규칙: %s\n", freeStudy.getRule());
           System.out.printf("모집인원 = %d / %d\n", freeStudy.getMembers().size(),
@@ -52,21 +62,25 @@ public class FreeStudyApplyListHandler implements Command {
           System.out.printf("시작일: %s\n", freeStudy.getStartDate());
           System.out.printf("종료일: %s\n", freeStudy.getEndDate());
           System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
-
-          freeStudy.setViewCount(freeStudy.getViewCount() + 1);
           System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-          System.out.printf("좋아요수: %d\n", freeStudy.getLikeMembers().size());
+          System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
+
         } else {
+          // 신청내역 O
           if (type == 1) {
             continue;
+
+            // 신청내역 X
           } else {
             type = 0;
           }
         }
       }
     }
+
+    // 신청내역 X
     if (type == 0) {
-      System.out.println("무료 스터디 신청 내역이 없습니다.");
+      System.out.println("무료 스터디 신청 내역이 존재하지 않습니다.");
     }
   }
 }
