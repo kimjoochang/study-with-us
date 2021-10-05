@@ -15,7 +15,7 @@ public class ExamScheduleListHandler implements Command {
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception{
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[이달의 시험일정 / 조회]\n");
 
     requestAgent.request("examSchedule.selectList", null);
@@ -25,9 +25,13 @@ public class ExamScheduleListHandler implements Command {
       return;
     }
 
-    Collection<Schedule> examScheduleList = requestAgent.getObjects(Schedule.class);
+    Collection<Schedule> scheduleList = requestAgent.getObjects(Schedule.class);
 
-    for (Schedule examSchedule : examScheduleList) {
+    if (scheduleList.isEmpty()) {
+      System.out.println("이달의 시험일정이 없습니다.");
+    }
+
+    for (Schedule examSchedule : scheduleList) {
       System.out.printf("[번호 = %d, 제목 = %s, 시험일 = %s]\n", 
           examSchedule.getNo(),
           examSchedule.getTitle(), 

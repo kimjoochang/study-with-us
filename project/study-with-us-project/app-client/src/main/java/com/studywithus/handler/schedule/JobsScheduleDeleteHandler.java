@@ -1,48 +1,51 @@
 package com.studywithus.handler.schedule;
 
-import java.util.List;
-import com.studywithus.domain.Schedule;
+import java.util.HashMap;
+import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class JobsScheduleDeleteHandler extends AbstractScheduleHandler {
+public class JobsScheduleDeleteHandler implements Command {
 
-  public JobsScheduleDeleteHandler(List<Schedule> jobsCalendarList) {
-    super(jobsCalendarList);
+  RequestAgent requestAgent;
+
+  public JobsScheduleDeleteHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[이달의 채용공고 / 삭제]\n");
 
     int no = (int) request.getAttribute("scheduleNo");
-    Schedule jobsCalendar = findByNo(no);
 
-    System.out.println();
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
 
-    if (jobsCalendar == null) {
-      System.out.println();
+    requestAgent.request("jobsSchedule.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 채용공고가 없습니다.");
       return;
     }
 
-    while (true) {
-      String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
-      if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println("채용공고 삭제를 취소하였습니다.");
-        return;
-
-      } else if (input.equalsIgnoreCase("y")) {
-        scheduleList.remove(jobsCalendar);
-        System.out.println("이달의 채용공고를 삭제하였습니다.");
-        return;
-      }
-
-      else {
-        System.out.println("다시 입력하시오.\n");
-        continue;
-      }
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("채용공고 삭제를 취소하였습니다.");
+      return;
     }
+
+    requestAgent.request("jobsSchedule.delete", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("채용공고 삭제를 실패하였습니다.");
+      System.out.println(requestAgent.getObject(String.class));
+      return;
+    }
+
+    System.out.println();
+    System.out.println("채용공고를 삭제하였습니다.");
   }
 }

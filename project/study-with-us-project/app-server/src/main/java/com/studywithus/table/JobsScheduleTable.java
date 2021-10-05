@@ -29,8 +29,16 @@ public class JobsScheduleTable extends JsonDataTable<Schedule> implements DataPr
   }
 
   private void insert(Request request, Response response) throws Exception {
-    Schedule examSchedule = request.getObject(Schedule.class);
-    list.add(examSchedule);
+    Schedule jobsSchedule = request.getObject(Schedule.class);
+
+    if (!list.isEmpty()) {
+      Schedule lastElement = list.get(list.size() - 1);
+      jobsSchedule.setNo(lastElement.getNo() + 1);
+    } else {
+      jobsSchedule.setNo(1);
+    }
+
+    list.add(jobsSchedule);
     response.setStatus(Response.SUCCESS);
   }
 
@@ -53,16 +61,16 @@ public class JobsScheduleTable extends JsonDataTable<Schedule> implements DataPr
   }
 
   private void update(Request request, Response response) throws Exception {
-    Schedule examSchedule = request.getObject(Schedule.class);
+    Schedule jobsSchedule = request.getObject(Schedule.class);
 
-    int index = indexOf(examSchedule.getNo());
+    int index = indexOf(jobsSchedule.getNo());
     if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
       return;
     }
 
-    list.set(index, examSchedule); 
+    list.set(index, jobsSchedule); 
     response.setStatus(Response.SUCCESS);
   }
 
@@ -75,8 +83,7 @@ public class JobsScheduleTable extends JsonDataTable<Schedule> implements DataPr
       response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
       return;
     }
-    Schedule examSchedule = request.getObject(Schedule.class);
-    list.remove(examSchedule);
+    list.remove(index);
     response.setStatus(Response.SUCCESS);
   }
 

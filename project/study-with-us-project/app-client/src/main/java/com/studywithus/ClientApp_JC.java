@@ -8,6 +8,16 @@ import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.schedule.ExamScheduleAddHandler;
+import com.studywithus.handler.schedule.ExamScheduleDeleteHandler;
+import com.studywithus.handler.schedule.ExamScheduleDetailHandler;
+import com.studywithus.handler.schedule.ExamScheduleListHandler;
+import com.studywithus.handler.schedule.ExamScheduleUpdateHandler;
+import com.studywithus.handler.schedule.JobsScheduleAddHandler;
+import com.studywithus.handler.schedule.JobsScheduleDeleteHandler;
+import com.studywithus.handler.schedule.JobsScheduleDetailHandler;
+import com.studywithus.handler.schedule.JobsScheduleListHandler;
+import com.studywithus.handler.schedule.JobsScheduleUpdateHandler;
 import com.studywithus.handler.study.ChargeStudyAddHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestCancelHandler;
 import com.studywithus.handler.study.ChargeStudyDeleteRequestDetailHandler;
@@ -170,18 +180,19 @@ public class ClientApp_JC {
     //    commandMap.put("/myPost/detail",
     //        new MyPostDetailHandler(communityQaList, communityInfoList, communityTalkList));
     //
-    //    commandMap.put("/jobsSchedule/add", new JobsScheduleAddHandler(jobsScheduleList));
-    //    commandMap.put("/jobsSchedule/list", new JobsScheduleListHandler(jobsScheduleList));
-    //    commandMap.put("/jobsSchedule/detail", new JobsScheduleDetailHandler(jobsScheduleList));
-    //    commandMap.put("/jobsSchedule/update", new JobsScheduleUpdateHandler(jobsScheduleList));
-    //    commandMap.put("/jobsSchedule/delete", new JobsScheduleDeleteHandler(jobsScheduleList));
-    //
-    //    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(examScheduleList));
-    //    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(examScheduleList));
-    //    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(examScheduleList));
-    //    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(examScheduleList));
-    //    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(examScheduleList));                          
-    commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(requestAgent));                          
+    commandMap.put("/jobsSchedule/add", new JobsScheduleAddHandler(requestAgent));
+    commandMap.put("/jobsSchedule/list", new JobsScheduleListHandler(requestAgent));
+    commandMap.put("/jobsSchedule/detail", new JobsScheduleDetailHandler(requestAgent));
+    commandMap.put("/jobsSchedule/update", new JobsScheduleUpdateHandler(requestAgent));
+    commandMap.put("/jobsSchedule/delete", new JobsScheduleDeleteHandler(requestAgent));
+
+    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(requestAgent));
+    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(requestAgent));
+    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(requestAgent));
+    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(requestAgent));
+    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(requestAgent)); 
+
+    /*[수정]*/commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(requestAgent));                          
 
 
   }

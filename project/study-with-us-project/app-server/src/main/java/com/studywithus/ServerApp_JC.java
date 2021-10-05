@@ -7,6 +7,8 @@ import java.util.HashMap;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.RequestProcessor;
 import com.studywithus.table.ChargeStudyTable;
+import com.studywithus.table.ExamScheduleTable;
+import com.studywithus.table.JobsScheduleTable;
 import com.studywithus.table.JsonDataTable;
 import com.studywithus.table.MemberTable2;
 import com.studywithus.table.MentorApplicationTable;
@@ -32,6 +34,8 @@ public class ServerApp_JC {
     dataProcessorMap.put("mentorApplication.", new MentorApplicationTable());
     dataProcessorMap.put("payment.", new PaymentTable());
     dataProcessorMap.put("review.", new ReviewTable());
+    dataProcessorMap.put("examSchedule.", new ExamScheduleTable());
+    dataProcessorMap.put("jobsSchedule.", new JobsScheduleTable());
     //    dataProcessorMap.put("project.", new ProjectTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
