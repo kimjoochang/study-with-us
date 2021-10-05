@@ -28,11 +28,10 @@ public class ChargeStudyPaymentListHandler implements Command {
 
     Collection<Payment> paymentList = requestAgent.getObjects(Payment.class);
 
-    if (paymentList ==  null) {
-      System.out.println("유료 스터디 결제 내역이 없습니다.");
-      return;
-    } 
-
+    //    if (paymentList ==  null) {
+    //      System.out.println("유료 스터디 결제 내역이 없습니다.");
+    //      return;
+    //    } 
 
     for (Payment payment : paymentList) {
       if (payment.getMenteeEmail().equals(AuthLogInHandler.getLoginUser().getEmail())
