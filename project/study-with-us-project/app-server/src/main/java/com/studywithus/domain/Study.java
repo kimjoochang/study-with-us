@@ -17,7 +17,7 @@ public class Study extends Content {
   private String area; // 지역
   private Date registeredDate; // 스터디 등록일
   private int viewCount; // 조회수
-  // [추가] 
+  // [추가]
   private int maxMembers; // 스터디 최대 모집인원 수
   private Date startDate; // 스터디 시작일
   private Date endDate; // 스터디 종료일
@@ -25,8 +25,8 @@ public class Study extends Content {
   private boolean deleteRequest; // 스터디 삭제요청 확인하기 위한 필드
   private String studyStatus;
   private List<Review> reviewList = new ArrayList<>();
-  private List<String> likeMembersEmail = new ArrayList<>(); // 관심목록 추가한 자
-  private List<String> menteeEmailList = new ArrayList<>();
+  private List<String> likeMembersEmail = new ArrayList<>(); // 관심목록 추가한 회원의 이메일
+  private List<String> menteeEmailList = new ArrayList<>(); // 스터디에 참여한 회원의 이메일
 
   public List<String> getMenteeEmailList() {
     return menteeEmailList;

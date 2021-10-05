@@ -100,9 +100,11 @@ public class FreeStudyDetailHandler implements Command {
       // 내가 쓴 글이 아닐경우
     } else {
       int interestType = 0; // 메서드 호출할 때, 관심목록 존재 여부 구분을 위한 변수
-      int applyType = 0; // 메서드 호출할 때, 관심목록 존재 여부 구분을 위한 변수
+      int applyType = 0; // 메서드 호출할 때, 신청내역 존재 여부 구분을 위한 변수
 
       while (true) {
+        // [테스트]
+        System.out.println("테스트: " + freeStudy.getApplicants().toString());
         for (Member member : freeStudy.getApplicants()) {
           if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
             applyType = 1;
