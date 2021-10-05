@@ -68,7 +68,7 @@ public class ChargeStudyTable extends JsonDataTable<Study> implements DataProces
     int index = indexOf(chargeStudy.getNo());
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      response.setValue("해당 번호의 유료 스터디를 찾을 수 없습니다.");
       return;
     }
 

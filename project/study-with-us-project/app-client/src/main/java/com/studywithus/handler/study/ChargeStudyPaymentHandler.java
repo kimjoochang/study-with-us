@@ -81,10 +81,12 @@ public class ChargeStudyPaymentHandler implements Command {
 
       requestAgent.request("payment.insert", payment);
 
-      // 유료스터디 멘티 리스트에 결제한 사람 이름 추가하기
+      // 유료스터디 멘티 리스트에 결제한 회원 아이디 추가해서 서버에 저장 요청
       List<String> menteeEmailList = chargeStudy.getMenteeEmailList();
       menteeEmailList.add(AuthLogInHandler.getLoginUser().getEmail());
       chargeStudy.setMenteeEmailList(menteeEmailList);
+
+      requestAgent.request("chargeStudy.update", chargeStudy);
 
       AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MENTEE;
     }

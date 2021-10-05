@@ -11,6 +11,7 @@ import com.studywithus.table.JsonDataTable;
 import com.studywithus.table.MemberTable2;
 import com.studywithus.table.MentorApplicationTable;
 import com.studywithus.table.PaymentTable;
+import com.studywithus.table.ReviewTable;
 
 public class ServerApp_JC {
 
@@ -29,7 +30,8 @@ public class ServerApp_JC {
     dataProcessorMap.put("member.", new MemberTable2());
     dataProcessorMap.put("chargeStudy.", new ChargeStudyTable());
     dataProcessorMap.put("mentorApplication.", new MentorApplicationTable());
-    dataProcessorMap.put("mentorApplication.", new PaymentTable());
+    dataProcessorMap.put("payment.", new PaymentTable());
+    dataProcessorMap.put("review.", new ReviewTable());
     //    dataProcessorMap.put("project.", new ProjectTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
