@@ -106,7 +106,7 @@ public class ChargeStudyDetailHandler implements Command {
     } else {
 
       int interestType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
-      int paymentType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
+      int paymentType = 0; // 메서드를 호출할 때, 결제 내역 존재 여부 구분을 위한 변수
 
       while (true) {
         for (String member : chargeStudy.getMenteeEmailList()) {
@@ -116,17 +116,20 @@ public class ChargeStudyDetailHandler implements Command {
           }
         }
 
+        // 아직 결제하지 않은 회원이라면 출력될 1번 메뉴 옵션
+        if (paymentType == 0) {
+          System.out.println("1. 결제");
+
+          // 이미 결제한 회원이라면 출력될 1번 메뉴 옵션
+        } else {
+          System.out.println("1. 결제 취소하기");
+        }
+
         for (String email : chargeStudy.getLikeMembersEmail()) {
           if (email.equals(AuthLogInHandler.getLoginUser().getEmail())) {
             interestType = 1;
             break;
           }
-        }
-
-        if (paymentType == 0) {
-          System.out.println("1. 결제");
-        } else {
-          System.out.println("1. 결제 취소하기");
         }
 
         // 관심 목록이 없는 경우
@@ -151,26 +154,32 @@ public class ChargeStudyDetailHandler implements Command {
         int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
         System.out.println();
 
-        // 1. 결제 or 결제 취소
+        /* 1. 결제 or 결제 취소
+        -> 현재 상세보기 중인 스터디가 회원의 결제내역에 존재하는지 아닌지에 따라
+           1번 메뉴 출력을 다르게 함
+         */
         if (input == 1) {
 
-          // 1. 결제를 아직 안 한 경우
+          // 결제를 아직 안 한 경우, 결제하기로 이동함
           if (paymentType == 0) {
             request.getRequestDispatcher("/chargeStudy/payment").forward(request);
 
+            // 결제한 경우 결제 취소하기로 이동함
           } else {
             request.getRequestDispatcher("/chargeStudy/paymentCancel").forward(request);
           }
 
-          // 2. 관심목록 추가 or 삭제
-          // 현재 스터디가 회원의 관심목록에 존재하는지 아닌지에 따라 2번 메뉴 출력을 다르게 함
+          /* 2. 관심목록 추가 or 삭제
+             -> 현재 상세보기 중인 스터디가 회원의 관심목록에 존재하는지 아닌지에 따라
+                2번 메뉴 출력을 다르게 함
+           */  
         } else if (input == 2) {
 
-          // 2. 관심목록 추가 (관심 목록에 추가하지 않은 경우에 보이는 2번 메뉴)
+          // 관심목록에 추가되어있지 않은 경우, 추가하기로 이동함
           if (interestType == 0) {
             request.getRequestDispatcher("/chargeStudy/interestAdd").forward(request);
 
-            // 2. 관심목록 삭제 (관심 목록에 추가하지 않은 경우에 보이는 2번 메뉴)
+            // 관심목록에 추가되어 있는 경우, 관심목록 삭제로 이동함
           } else {
             request.getRequestDispatcher("/chargeStudy/interestDelete").forward(request);
           }
@@ -194,7 +203,9 @@ public class ChargeStudyDetailHandler implements Command {
             continue;
           }
 
-        } */else if (input == 0) {
+        } */
+
+        else if (input == 0) {
           return;
 
         } else {

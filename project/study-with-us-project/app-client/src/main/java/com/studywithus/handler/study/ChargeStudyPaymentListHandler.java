@@ -4,6 +4,7 @@ import java.util.Collection;
 import com.studywithus.domain.Payment;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.request.RequestAgent;
 
 public class ChargeStudyPaymentListHandler implements Command {
@@ -31,8 +32,11 @@ public class ChargeStudyPaymentListHandler implements Command {
       System.out.println("유료 스터디 결제 내역이 없습니다.");
       return;
     } 
+
+
     for (Payment payment : paymentList) {
-      if (payment.isVisible()) {
+      if (payment.getMenteeEmail().equals(AuthLogInHandler.getLoginUser().getEmail())
+          && payment.isVisible()) {
         System.out.printf("결제한 스터디 번호: %s\n", payment.getPaidStudyNo());
         System.out.printf("결제한 스터디 제목: %s\n", payment.getTitle());
         System.out.printf("결제한 스터디 멘토: %s\n", payment.getMentorName());

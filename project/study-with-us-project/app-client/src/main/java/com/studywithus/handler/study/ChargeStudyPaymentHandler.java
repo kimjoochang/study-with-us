@@ -71,7 +71,7 @@ public class ChargeStudyPaymentHandler implements Command {
 
       // 결제내역 생성해서 서버에 저장 요청
       Payment payment = new Payment();
-      payment.setPayeerEmail(AuthLogInHandler.getLoginUser().getEmail());
+      payment.setMenteeEmail(AuthLogInHandler.getLoginUser().getEmail());
       payment.setPaidStudyNo(chargeStudy.getNo());
       payment.setTitle(chargeStudy.getTitle());
       payment.setMentorName(chargeStudy.getWriter().getName());

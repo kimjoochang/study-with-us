@@ -11,6 +11,7 @@ import com.studywithus.table.ExamScheduleTable;
 import com.studywithus.table.JobsScheduleTable;
 import com.studywithus.table.JsonDataTable;
 import com.studywithus.table.MemberTableJJ;
+import com.studywithus.table.MentorApplicationTable;
 import com.studywithus.table.PaymentTable;
 
 public class ServerAppJJ {
@@ -34,6 +35,7 @@ public class ServerAppJJ {
     dataProcessorMap.put("examScheduleTable.", new ExamScheduleTable());
     dataProcessorMap.put("jobsScheduleTable.", new JobsScheduleTable());
 
+    dataProcessorMap.put("mentorApplication.", new MentorApplicationTable());
     //    dataProcessorMap.put("mentorApplication.", new MentorApplicationTable());
     //    dataProcessorMap.put("project.", new ProjectTable());
 

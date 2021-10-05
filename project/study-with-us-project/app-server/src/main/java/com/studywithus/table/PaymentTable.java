@@ -59,7 +59,7 @@ public class PaymentTable extends JsonDataTable<Payment> implements DataProcesso
   private void update(Request request, Response response) throws Exception {
     Payment payment = request.getObject(Payment.class);
 
-    int index = indexOf(payment.getPaidStudyNo(), payment.getPayeerEmail());
+    int index = indexOf(payment.getPaidStudyNo(), payment.getMenteeEmail());
     if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
@@ -86,7 +86,7 @@ public class PaymentTable extends JsonDataTable<Payment> implements DataProcesso
 
   private Payment findByPaidStudyNo(int paidStudyNo, String email) {
     for (Payment payment : list) {
-      if (payment.getPaidStudyNo() == paidStudyNo && payment.getPayeerEmail().equals(email)) {
+      if (payment.getPaidStudyNo() == paidStudyNo && payment.getMenteeEmail().equals(email)) {
         return payment;
       }
     }
@@ -95,7 +95,7 @@ public class PaymentTable extends JsonDataTable<Payment> implements DataProcesso
 
   private int indexOf(int memberNo, String email) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getPaidStudyNo() == memberNo && list.get(i).getPayeerEmail().equals(email)) {
+      if (list.get(i).getPaidStudyNo() == memberNo && list.get(i).getMenteeEmail().equals(email)) {
         return i;
       }
     }

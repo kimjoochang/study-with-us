@@ -9,7 +9,6 @@ import com.studywithus.request.RequestAgent;
 
 public class RegisterChargeStudyListHandler implements Command {
 
-  // 각 회원의 참여 유료 스터디 리스트
   RequestAgent requestAgent;
 
   public RegisterChargeStudyListHandler(RequestAgent requestAgent) {
@@ -19,8 +18,6 @@ public class RegisterChargeStudyListHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[마이 페이지 / 내가 생성한 유료 스터디]\n");
-
-    System.out.println("[유료 스터디 관심목록 / 조회]\n");
 
     requestAgent.request("chargeStudy.selectList", null);
 
@@ -44,7 +41,6 @@ public class RegisterChargeStudyListHandler implements Command {
             chargeStudy.getViewCount(),
             chargeStudy.getLikeMembers().size());
       }
-
     }
     System.out.println();
   }

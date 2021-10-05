@@ -11,7 +11,7 @@ import com.studywithus.util.Prompt;
 public class ChargeStudyAddHandler implements Command {
 
   RequestAgent requestAgent;
-  // 각 멘토의 생성 유료 스터디 리스트
+
   public ChargeStudyAddHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }

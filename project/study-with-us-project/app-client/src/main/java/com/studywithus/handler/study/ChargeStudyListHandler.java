@@ -37,6 +37,7 @@ public class ChargeStudyListHandler implements Command {
           chargeStudy.getMaxMembers(),
           chargeStudy.getViewCount(),
           chargeStudy.getLikeMembersEmail().size());
+      System.out.println();
     }
     System.out.println();
   }
