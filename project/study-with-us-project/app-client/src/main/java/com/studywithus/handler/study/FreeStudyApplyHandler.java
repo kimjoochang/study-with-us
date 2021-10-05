@@ -106,7 +106,7 @@ public class FreeStudyApplyHandler implements Command {
     requestAgent.request("freeStudy.insert", freeStudy);
 
     // [테스트]
-    System.out.println("테스트 1: " + freeStudy.getApplicants().isEmpty());
+    System.out.println("테스트: " + freeStudy.getApplicants().isEmpty());
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("무료 스터디 신청 실패!");
