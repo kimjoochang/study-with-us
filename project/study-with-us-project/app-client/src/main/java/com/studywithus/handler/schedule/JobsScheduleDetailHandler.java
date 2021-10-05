@@ -1,15 +1,18 @@
 package com.studywithus.handler.schedule;
 
-import java.util.List;
+import java.util.HashMap;
 import com.studywithus.domain.Schedule;
+import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class JobsScheduleDetailHandler extends AbstractScheduleHandler {
+public class JobsScheduleDetailHandler implements Command {
 
-  public JobsScheduleDetailHandler(List<Schedule> jobsCalendarList) {
-    super(jobsCalendarList);
+  RequestAgent requestAgent;
+
+  public JobsScheduleDetailHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -17,40 +20,42 @@ public class JobsScheduleDetailHandler extends AbstractScheduleHandler {
     System.out.println("[이달의 채용공고 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
-    Schedule jobsCalendar = findByNo(no);
 
-    System.out.println();
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
 
-    if (jobsCalendar == null) {
-      System.out.println("해당 번호의 채용공고가 없습니다.");
+    requestAgent.request("jobsSchedule.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("해당 번호의 일정이 없습니다.");
       return;
     }
 
-    System.out.printf("제목: %s\n", jobsCalendar.getTitle());
-    System.out.printf("작성자: %s\n", jobsCalendar.getWriter().getName());
-    System.out.printf("내용: %s\n", jobsCalendar.getContent());
-    System.out.printf("시작일: %s\n", jobsCalendar.getStartDate());
-    System.out.printf("종료일: %s\n", jobsCalendar.getEndDate());
+    Schedule jobsSchedule = requestAgent.getObject(Schedule.class);
+
+
+    System.out.printf("제목: %s\n", jobsSchedule.getTitle());
+    System.out.printf("작성자: %s\n", jobsSchedule.getWriter().getName());
+    System.out.printf("내용: %s\n", jobsSchedule.getContent());
+    System.out.printf("시작일: %s\n", jobsSchedule.getStartDate());
+    System.out.printf("종료일: %s\n", jobsSchedule.getEndDate());
     System.out.println();
 
-    request.setAttribute("sheduleNo", no);
+    request.setAttribute("scheduleNo", no);
 
-    // 관리자인 경우
-    if (jobsCalendar.getWriter() == AuthLogInHandler.getLoginUser()) {
-      System.out.println("1. 수정");
-      System.out.println("2. 삭제");
-      System.out.println("0. 이전\n");
-    }
+    System.out.println("1. 수정");
+    System.out.println("2. 삭제");
+    System.out.println("0. 이전\n");
 
     while (true) {
       int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
 
       if (input == 1) {
-        request.getRequestDispatcher("/jobsCalendar/update").forward(request);
+        request.getRequestDispatcher("/jobsSchedule/update").forward(request);
         return;
 
       } else if (input == 2) {
-        request.getRequestDispatcher("/jobsCalendar/delete").forward(request);
+        request.getRequestDispatcher("/jobsSchedule/delete").forward(request);
         return;
 
       } else if (input == 0) {

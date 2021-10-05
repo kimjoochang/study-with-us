@@ -39,7 +39,7 @@ public class ExamScheduleAddHandler implements Command {
       }
     }
 
-    requestAgent.request("ExamSchedule.insert", examSchedule);
+    requestAgent.request("examSchedule.insert", examSchedule);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("게시글 저장에 실패하였습니다.");
@@ -50,34 +50,3 @@ public class ExamScheduleAddHandler implements Command {
     System.out.println("이달의 시험일정 등록이 완료되었습니다.");
   }
 }
-
-// ExamScheduleAddHandler Ver.1
-// final int a = 3;
-//
-// Schedule lastElement = null;
-// Schedule examSchedule = new Schedule();
-// LocalDate now = LocalDate.now();
-// Calendar calendar = Calendar.getInstance();
-// // calendar 인스턴스의 월 정보를 지금 현재 월로 세팅
-// calendar.set(Calendar.MONTH, now.getMonthValue() - 1);
-//
-// if (!scheduleList.isEmpty()) {
-// lastElement = scheduleList.get(scheduleList.size() - 1);
-// examSchedule.setNo(lastElement.getNo() + 1);
-// } else {
-// examSchedule.setNo(1);
-// }
-//
-// while (true) {
-// String date = Prompt.inputString("시험일을 입력하세요. > " + Integer.toString(now.getYear()) + "-"
-// + Integer.toString(now.getMonthValue()) + "-");
-//
-// // 만약 calendar 인스턴스에 세팅된 월의 최대 일보다 입력값이 크다면 잘못된 날짜 출력
-// if (Integer.parseInt(date) > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
-// System.out.println("잘못된 날짜입니다.");
-// continue;
-// }
-// examSchedule.setStartDate(Integer.toString(now.getYear()) + "-"
-// + Integer.toString(now.getMonthValue()) + "-" + date);
-// break;
-// }

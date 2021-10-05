@@ -30,6 +30,14 @@ public class ExamScheduleTable extends JsonDataTable<Schedule> implements DataPr
 
   private void insert(Request request, Response response) throws Exception {
     Schedule examSchedule = request.getObject(Schedule.class);
+
+    if (!list.isEmpty()) {
+      Schedule lastElement = list.get(list.size() - 1);
+      examSchedule.setNo(lastElement.getNo() + 1);
+    } else {
+      examSchedule.setNo(1);
+    }
+
     list.add(examSchedule);
     response.setStatus(Response.SUCCESS);
   }
@@ -75,8 +83,7 @@ public class ExamScheduleTable extends JsonDataTable<Schedule> implements DataPr
       response.setValue("해당 번호의 게시글을 찾을 수 없습니다.");
       return;
     }
-    Schedule examSchedule = request.getObject(Schedule.class);
-    list.remove(examSchedule);
+    list.remove(index);
     response.setStatus(Response.SUCCESS);
   }
 

@@ -1,22 +1,34 @@
 package com.studywithus.handler.schedule;
 
-import java.util.List;
+import java.util.Collection;
 import com.studywithus.domain.Schedule;
+import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.request.RequestAgent;
 
-public class JobsScheduleListHandler extends AbstractScheduleHandler {
+public class JobsScheduleListHandler implements Command {
 
-  public JobsScheduleListHandler(List<Schedule> jobsCalendarList) {
-    super(jobsCalendarList);
+  RequestAgent requestAgent;
+
+  public JobsScheduleListHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("[이달의 채용공고 / 조회]\n");
 
-    if (scheduleList.isEmpty() == true) {
-      System.out.println("이달의 채용공고가 존재하지 않습니다.");
+    requestAgent.request("jobsSchedule.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("이달의 시험일정 조회를 실패하였습니다.");
       return;
+    }
+
+    Collection<Schedule> scheduleList = requestAgent.getObjects(Schedule.class);
+
+    if (scheduleList.isEmpty()) {
+      System.out.println("이달의 채용공고가 없습니다.");
     }
 
     for (Schedule jobsCalendar : scheduleList) {

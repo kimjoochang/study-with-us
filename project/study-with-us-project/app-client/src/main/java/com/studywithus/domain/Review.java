@@ -6,7 +6,7 @@ public class Review extends Content {
 
   private String writerEmail;
   private String review;
-  private int score;
+  private double score;
   private Date registeredDate;
   private int studyNo;
 
@@ -26,11 +26,11 @@ public class Review extends Content {
     this.review = review;
   }
 
-  public int getScore() {
+  public double getScore() {
     return score;
   }
 
-  public void setScore(int score) {
+  public void setScore(double score) {
     this.score = score;
   }
 
