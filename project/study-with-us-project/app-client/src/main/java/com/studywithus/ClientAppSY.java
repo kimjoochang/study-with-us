@@ -8,7 +8,9 @@ import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 
 import java.util.HashMap;
+import java.util.List;
 
+import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.community.CommunityAddHandler;
@@ -19,11 +21,14 @@ import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
 import com.studywithus.handler.study.ChargeStudyInterestListHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
+import com.studywithus.handler.study.FreeStudyApplyCancelHandler;
+import com.studywithus.handler.study.FreeStudyApplyHandler;
 import com.studywithus.handler.study.FreeStudyApplyListHandler;
 import com.studywithus.handler.study.FreeStudyDeleteHandler;
 import com.studywithus.handler.study.FreeStudyDetailHandler;
 import com.studywithus.handler.study.FreeStudyInterestAddHandler;
 import com.studywithus.handler.study.FreeStudyInterestDeleteHandler;
+import com.studywithus.handler.study.FreeStudyInterestListHandler;
 import com.studywithus.handler.study.FreeStudyListHandler;
 import com.studywithus.handler.study.FreeStudySearchHandler;
 import com.studywithus.handler.study.FreeStudyUpdateHandler;
@@ -44,7 +49,8 @@ public class ClientAppSY {
 
 	RequestAgent requestAgent;
 
-	HashMap<String,Command> commandMap = new HashMap<>();
+	HashMap<String, Command> commandMap = new HashMap<>();
+	HashMap<String, List<Study>> applyFreeStudyMap = new HashMap<>();
 
 	class MenuItem extends Menu {
 		String menuId;
@@ -93,15 +99,15 @@ public class ClientAppSY {
 		//
 		commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(requestAgent));
 		//
-		//    commandMap.put("/myInfo/list", new MyInfoHandler());
+		// commandMap.put("/myInfo/list", new MyInfoHandler());
 		//
-		//    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
-		//    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
+		commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(requestAgent));
+		commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(requestAgent));
 		commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(requestAgent));
-		//    commandMap.put("/mentorApplicant/add",
-		//        new MentorApplicationAddHandler(mentorApplicationFormList, memberList));
-		//    commandMap.put("/mentorApplicant/list",
-		//        new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
+		// commandMap.put("/mentorApplicant/add",
+		// new MentorApplicationAddHandler(mentorApplicationFormList, memberList));
+		// commandMap.put("/mentorApplicant/list",
+		// new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
 		//
 		commandMap.put("/freeStudy/search", new FreeStudySearchHandler(requestAgent));
 		commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
@@ -110,84 +116,110 @@ public class ClientAppSY {
 		commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(requestAgent));
 		commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(requestAgent));
 		//
-		//		commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(requestAgent, applyFreeStudyMap));
-		//		commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(requestAgent, applyFreeStudyMap));
+		commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(requestAgent));
+		commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(requestAgent));
 		commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(requestAgent));
 		commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(requestAgent));
 		commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(requestAgent));
-		//    commandMap.put("/freeStudy/registerStudyList",
-		//        new RegisterFreeStudyDetailHandler(registerFreeStudyMap, participateFreeStudyMap));
-		//    commandMap.put("/freeStudy/participateStudyList",
-		//        new ParticipateFreeStudyListHandler(participateFreeStudyMap));
+		//		commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(requestAgent));
+		//		commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(requestAgent));
 		//
-		//    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
-		//    commandMap.put("/chargeStudy/add",
-		//        new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
-		//    commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyList));
-		//    commandMap.put("/chargeStudy/detail",
-		//        new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
-		//    commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyList));
-		//    commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyList));
-		//    commandMap.put("/chargeStudy/deleteRequestList", new ChargeStudyDeleteRequestListHandler(chargeStudyList));
-		//    commandMap.put("/chargeStudy/deleteRequestDetail", new ChargeStudyDeleteRequestDetailHandler(chargeStudyList));
-		//    commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(chargeStudyList,
-		//        chargePaymentList, chargeApplicantList, participateChargeStudyMap));
-		//    commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(
-		//        chargeStudyList, chargePaymentList, chargeApplicantList, participateChargeStudyMap));
-		//    commandMap.put("/chargeStudy/paymentList",
-		//        new ChargeStudyPaymentListHandler(chargeStudyList, participateChargeStudyMap));
-		//    commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyList));
-		//    commandMap.put("/chargeStudy/interestDelete",
-		//        new ChargeStudyInterestDeleteHandler(chargeStudyList));
+		// commandMap.put("/chargeStudy/search", new
+		// ChargeStudySearchHandler(chargeStudyList));
+		// commandMap.put("/chargeStudy/add",
+		// new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
+		// commandMap.put("/chargeStudy/list", new
+		// ChargeStudyListHandler(chargeStudyList));
+		// commandMap.put("/chargeStudy/detail",
+		// new ChargeStudyDetailHandler(chargeStudyList, chargeApplicantList));
+		// commandMap.put("/chargeStudy/update", new
+		// ChargeStudyUpdateHandler(chargeStudyList));
+		// commandMap.put("/chargeStudy/deleteRequest", new
+		// ChargeStudyDeleteRequestHandler(chargeStudyList));
+		// commandMap.put("/chargeStudy/deleteRequestList", new
+		// ChargeStudyDeleteRequestListHandler(chargeStudyList));
+		// commandMap.put("/chargeStudy/deleteRequestDetail", new
+		// ChargeStudyDeleteRequestDetailHandler(chargeStudyList));
+		// commandMap.put("/chargeStudy/payment", new
+		// ChargeStudyPaymentHandler(chargeStudyList,
+		// chargePaymentList, chargeApplicantList, participateChargeStudyMap));
+		// commandMap.put("/chargeStudy/paymentCancel", new
+		// ChargeStudyPaymentCancelHandler(
+		// chargeStudyList, chargePaymentList, chargeApplicantList,
+		// participateChargeStudyMap));
+		// commandMap.put("/chargeStudy/paymentList",
+		// new ChargeStudyPaymentListHandler(chargeStudyList,
+		// participateChargeStudyMap));
+		// commandMap.put("/chargeStudy/interestAdd", new
+		// ChargeStudyInterestAddHandler(chargeStudyList));
+		// commandMap.put("/chargeStudy/interestDelete",
+		// new ChargeStudyInterestDeleteHandler(chargeStudyList));
 		//
-		//    commandMap.put("/chargeStudy/registerChargeStudy",
-		//        new RegisterChargeStudyDetailHandler(registerChargeStudyMap));
-		//    commandMap.put("/chargeStudy/participateChargeStudyList",
-		//        new ParticipateChargeStudyListHandler(participateChargeStudyMap));
-		//    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(participateChargeStudyMap)); 
-		//    commandMap.put("/review/add", new ReviewAddHandler(chargeStudyList));
-		//    commandMap.put("/review/list", new ReviewListHandler(chargeStudyList));
+		// commandMap.put("/chargeStudy/registerChargeStudy",
+		// new RegisterChargeStudyDetailHandler(registerChargeStudyMap));
+		// commandMap.put("/chargeStudy/participateChargeStudyList",
+		// new ParticipateChargeStudyListHandler(participateChargeStudyMap));
+		// commandMap.put("/chargeStudy/participateChargeStudyDetail", new
+		// ParticipateChargeStudyDetailHandler(participateChargeStudyMap));
+		// commandMap.put("/review/add", new ReviewAddHandler(chargeStudyList));
+		// commandMap.put("/review/list", new ReviewListHandler(chargeStudyList));
 		//
 		commandMap.put("/communityQa/add", new CommunityAddHandler(requestAgent));
 		commandMap.put("/communityQa/list", new CommunityListHandler(requestAgent));
-		commandMap.put("/communityQa/detail",new CommunityDetailHandler(requestAgent, "/communityQa/update", "/communityQa/delete"));
+		commandMap.put("/communityQa/detail",
+				new CommunityDetailHandler(requestAgent, "/communityQa/update", "/communityQa/delete"));
 		commandMap.put("/communityQa/update", new CommunityUpdateHandler(requestAgent));
 		commandMap.put("/communityQa/delete", new CommunityDeleteHandler(requestAgent));
 		commandMap.put("/communityQa/search", new CommunitySearchHandler(requestAgent));
 
 		commandMap.put("/communityInfo/add", new CommunityAddHandler(requestAgent));
 		commandMap.put("/communityInfo/list", new CommunityListHandler(requestAgent));
-		commandMap.put("/communityInfo/detail", new CommunityDetailHandler(requestAgent, "/communityInfo/update", "/communityInfo/delete"));
+		commandMap.put("/communityInfo/detail",
+				new CommunityDetailHandler(requestAgent, "/communityInfo/update", "/communityInfo/delete"));
 		commandMap.put("/communityInfo/update", new CommunityUpdateHandler(requestAgent));
 		commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(requestAgent));
 		commandMap.put("/communityInfo/search", new CommunitySearchHandler(requestAgent));
 
 		commandMap.put("/communityTalk/add", new CommunityAddHandler(requestAgent));
 		commandMap.put("/communityTalk/list", new CommunityListHandler(requestAgent));
-		commandMap.put("/communityTalk/detail", new CommunityDetailHandler(requestAgent, "/communityTalk/update", "/communityTalk/delete"));
+		commandMap.put("/communityTalk/detail",
+				new CommunityDetailHandler(requestAgent, "/communityTalk/update", "/communityTalk/delete"));
 		commandMap.put("/communityTalk/update", new CommunityUpdateHandler(requestAgent));
 		commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(requestAgent));
 		commandMap.put("/communityTalk/search", new CommunitySearchHandler(requestAgent));
 
-		//    commandMap.put("/myPost/list",
-		//        new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));
-		//    commandMap.put("/myPost/detail",
-		//        new MyPostDetailHandler(communityQaList, communityInfoList, communityTalkList));
+		// commandMap.put("/myPost/list",
+		// new MyPostListHandler(communityQaList, communityInfoList,
+		// communityTalkList));
+		// commandMap.put("/myPost/detail",
+		// new MyPostDetailHandler(communityQaList, communityInfoList,
+		// communityTalkList));
 		//
-		//    commandMap.put("/jobsSchedule/add", new JobsScheduleAddHandler(jobsScheduleList));
-		//    commandMap.put("/jobsSchedule/list", new JobsScheduleListHandler(jobsScheduleList));
-		//    commandMap.put("/jobsSchedule/detail", new JobsScheduleDetailHandler(jobsScheduleList));
-		//    commandMap.put("/jobsSchedule/update", new JobsScheduleUpdateHandler(jobsScheduleList));
-		//    commandMap.put("/jobsSchedule/delete", new JobsScheduleDeleteHandler(jobsScheduleList));
+		// commandMap.put("/jobsSchedule/add", new
+		// JobsScheduleAddHandler(jobsScheduleList));
+		// commandMap.put("/jobsSchedule/list", new
+		// JobsScheduleListHandler(jobsScheduleList));
+		// commandMap.put("/jobsSchedule/detail", new
+		// JobsScheduleDetailHandler(jobsScheduleList));
+		// commandMap.put("/jobsSchedule/update", new
+		// JobsScheduleUpdateHandler(jobsScheduleList));
+		// commandMap.put("/jobsSchedule/delete", new
+		// JobsScheduleDeleteHandler(jobsScheduleList));
 		//
-		//    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(examScheduleList));
-		//    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(examScheduleList));
-		//    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(examScheduleList));
-		//    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(examScheduleList));
-		//    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(examScheduleList));                          
+		// commandMap.put("/examSchedule/add", new
+		// ExamScheduleAddHandler(examScheduleList));
+		// commandMap.put("/examSchedule/list", new
+		// ExamScheduleListHandler(examScheduleList));
+		// commandMap.put("/examSchedule/detail", new
+		// ExamScheduleDetailHandler(examScheduleList));
+		// commandMap.put("/examSchedule/update", new
+		// ExamScheduleUpdateHandler(examScheduleList));
+		// commandMap.put("/examSchedule/delete", new
+		// ExamScheduleDeleteHandler(examScheduleList));
 	}
 
-	// ------------------------------ STUDY WITH US -----------------------------------------
+	// ------------------------------ STUDY WITH US
+	// -----------------------------------------
 
 	// 메인 메뉴
 	Menu createMainMenu() {
@@ -253,7 +285,8 @@ public class ClientAppSY {
 		return createSnsLogInMenu;
 	}
 
-	// ------------------------------ 무료 스터디 -----------------------------------------
+	// ------------------------------ 무료 스터디
+	// -----------------------------------------
 
 	// 무료 스터디 메인 메뉴
 	private Menu createFreeStudyMenu() {
@@ -265,12 +298,14 @@ public class ClientAppSY {
 		freeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/detail"));
 		// [삭제] 상세보기 안으로 위치 변경
 		// freeStudyMenu.add(new MenuItem("수정", ACCESS_LEADER, "/freeStudy/update"));
-		// freeStudyMenu.add(new MenuItem("삭제", ACCESS_LEADER | ACCESS_ADMIN, "/freeStudy/delete"));
+		// freeStudyMenu.add(new MenuItem("삭제", ACCESS_LEADER | ACCESS_ADMIN,
+		// "/freeStudy/delete"));
 
 		return freeStudyMenu;
 	}
 
-	// ------------------------------ 유료 스터디 -----------------------------------------
+	// ------------------------------ 유료 스터디
+	// -----------------------------------------
 
 	// 유료 스터디 메인 메뉴
 	private Menu createChargeStudyMenu() {
@@ -282,8 +317,10 @@ public class ClientAppSY {
 		chargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
 		chargeStudyMenu.add(new MenuItem("멘토 신청", ACCESS_GENERAL, "/mentorApplicant/add"));
 		// [삭제] 상세보기 안으로 위치 변경
-		// chargeStudyMenu.add(new MenuItem("수정", ACCESS_MENTOR, "/chargeStudy/update"));
-		// chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_MENTOR, "/chargeStudy/deleteRequest"));
+		// chargeStudyMenu.add(new MenuItem("수정", ACCESS_MENTOR,
+		// "/chargeStudy/update"));
+		// chargeStudyMenu.add(new MenuItem("삭제 요청", ACCESS_MENTOR,
+		// "/chargeStudy/deleteRequest"));
 
 		return chargeStudyMenu;
 	}
@@ -310,7 +347,8 @@ public class ClientAppSY {
 		communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
 		communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
 		// [삭제] 상세보기 안으로 위치 변경
-		// communityQaMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityQa/update"));
+		// communityQaMenu.add(new MenuItem("수정", ACCESS_GENERAL,
+		// "/communityQa/update"));
 		// communityQaMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
 		// "/communityQa/delete"));
 
@@ -326,7 +364,8 @@ public class ClientAppSY {
 		communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
 		communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
 		// [삭제] 상세보기 안으로 위치 변경
-		// communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityInfo/update"));
+		// communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL,
+		// "/communityInfo/update"));
 		// communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
 		// "/communityInfo/delete"));
 
@@ -342,7 +381,8 @@ public class ClientAppSY {
 		communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
 		communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
 		// [삭제] 상세보기 안으로 위치 변경
-		// communityTalkMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityTalk/update"));
+		// communityTalkMenu.add(new MenuItem("수정", ACCESS_GENERAL,
+		// "/communityTalk/update"));
 		// communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
 		// "/communityTalk/delete"));
 
@@ -367,8 +407,10 @@ public class ClientAppSY {
 		jobsScheduleMenu.add(new MenuItem("조회", "/jobsSchedule/list"));
 		jobsScheduleMenu.add(new MenuItem("상세보기", "/jobsSchedule/detail"));
 		// [삭제] 상세보기 안으로 위치 변경
-		// jobsScheduleMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/jobsSchedule/update"));
-		// jobsScheduleMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsSchedule/delete"));
+		// jobsScheduleMenu.add(new MenuItem("수정", ACCESS_ADMIN,
+		// "/jobsSchedule/update"));
+		// jobsScheduleMenu.add(new MenuItem("삭제", ACCESS_ADMIN,
+		// "/jobsSchedule/delete"));
 
 		return jobsScheduleMenu;
 	}
@@ -380,13 +422,16 @@ public class ClientAppSY {
 		examScheduleMenu.add(new MenuItem("조회", "/examSchedule/list"));
 		examScheduleMenu.add(new MenuItem("상세보기", "/examSchedule/detail"));
 		// [삭제] 상세보기 안으로 위치 변경
-		// examScheduleMenu.add(new MenuItem("수정", ACCESS_ADMIN, "/examSchedule/update"));
-		// examScheduleMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examSchedule/delete"));
+		// examScheduleMenu.add(new MenuItem("수정", ACCESS_ADMIN,
+		// "/examSchedule/update"));
+		// examScheduleMenu.add(new MenuItem("삭제", ACCESS_ADMIN,
+		// "/examSchedule/delete"));
 
 		return examScheduleMenu;
 	}
 
-	// ------------------------------ 마이 페이지 -----------------------------------------
+	// ------------------------------ 마이 페이지
+	// -----------------------------------------
 
 	// 마이 페이지 메인
 	private Menu createMyPageMenu() {
@@ -445,7 +490,7 @@ public class ClientAppSY {
 		MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
 		freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudy/applyList"));
 		// [삭제] 상세보기 안으로 위치 변경
-		// freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
+		freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudy/registerFreeStudyDetail"));
 		// freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
 
 		return freeStudyApplyMenu;
@@ -458,7 +503,8 @@ public class ClientAppSY {
 		MenuGroup registerFreeStudyMenu = new MenuGroup("내가 생성한 무료 스터디", ACCESS_LEADER);
 		registerFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/registerStudyList"));
 		// [삭제] 상세보기와 통합
-		// registerFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/registerStudyList"));
+		// registerFreeStudyMenu.add(new MenuItem("조회",
+		// "/freeStudy/registerStudyList"));
 		// [삭제] 회의 후 안하기로 결정
 		// registerFreeStudyMenu.add(new MenuItem("삭제", "/registerFreeStudy/delete"));
 
@@ -471,7 +517,8 @@ public class ClientAppSY {
 		MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", Menu.ACCESS_MEMBER);
 		participateFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/participateStudyList"));
 		// [삭제] 회의 후 안하기로 결정
-		// participateFreeStudyMenu.add(new MenuItem("상세보기", "/participateFreeStudy/detail"));
+		// participateFreeStudyMenu.add(new MenuItem("상세보기",
+		// "/participateFreeStudy/detail"));
 
 		return participateFreeStudyMenu;
 	}
@@ -496,8 +543,7 @@ public class ClientAppSY {
 
 		// [추가] 상세보기에 '후기' 메뉴, 결제 취소 추가 및 관련 핸들러 생성
 		// 모집중, 진행중 -> 결제 취소 && 진행 완료 -> 후기 작성
-		participateChargeStudyMenu
-		.add(new MenuItem("상세보기", "/chargeStudy/participateChargeStudyDetail"));
+		participateChargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/participateChargeStudyDetail"));
 		participateChargeStudyMenu.add(new MenuItem("삭제", "/chargeStudy/participateChargeStudyDetail"));
 
 		return participateChargeStudyMenu;
@@ -518,7 +564,8 @@ public class ClientAppSY {
 
 		MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
 		freeInterestMenu.add(new MenuItem("조회", "/freeInterest/list"));
-		freeInterestMenu.add(new MenuItem("삭제", "/freeInterest/delete"));
+		freeInterestMenu.add(new MenuItem("상세보기", "/freeStudy/interestDelete"));
+		//		freeInterestMenu.add(new MenuItem("삭제", "/freeInterest/delete"));
 
 		return freeInterestMenu;
 	}
@@ -544,7 +591,8 @@ public class ClientAppSY {
 		return paymentListMenu;
 	}
 
-	// ------------------------------ 관리자 페이지 -----------------------------------------
+	// ------------------------------ 관리자 페이지
+	// -----------------------------------------
 
 	// 관리자 페이지 메인
 	private Menu createAdminPageMenu() {
@@ -611,8 +659,10 @@ public class ClientAppSY {
 		jobsScheduleManagementMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsSchedule/add"));
 		jobsScheduleManagementMenu.add(new MenuItem("상세보기", "/jobsSchedule/detail"));
 		// [삭제] 상세보기 안으로 위치 변경
-		// jobsScheduleManagementMenu.add(new MenuItem("변경", ACCESS_ADMIN, "/jobsSchedule/update"));
-		// jobsScheduleManagementMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsSchedule/delete"));
+		// jobsScheduleManagementMenu.add(new MenuItem("변경", ACCESS_ADMIN,
+		// "/jobsSchedule/update"));
+		// jobsScheduleManagementMenu.add(new MenuItem("삭제", ACCESS_ADMIN,
+		// "/jobsSchedule/delete"));
 
 		return jobsScheduleManagementMenu;
 	}
@@ -624,8 +674,10 @@ public class ClientAppSY {
 		examScheduleManagementMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examSchedule/add"));
 		examScheduleManagementMenu.add(new MenuItem("상세보기", "/examSchedule/detail"));
 		// [삭제] 상세보기 안으로 위치 변경
-		// examScheduleManagementMenu.add(new MenuItem("변경", ACCESS_ADMIN, "/examSchedule/update"));
-		// examScheduleManagementMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examSchedule/delete"));
+		// examScheduleManagementMenu.add(new MenuItem("변경", ACCESS_ADMIN,
+		// "/examSchedule/update"));
+		// examScheduleManagementMenu.add(new MenuItem("삭제", ACCESS_ADMIN,
+		// "/examSchedule/delete"));
 
 		return examScheduleManagementMenu;
 	}
@@ -634,14 +686,14 @@ public class ClientAppSY {
 
 		// [삭제] HashMap 적용
 		// loadObjects("chargeInterest.json", chargeInterestList, Study.class);
-		//    loadObjects("member.json", memberList, Member.class);
-		//    loadObjects("freeStudy.json", freeStudyList, Study.class);
-		//    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
-		//    loadObjects("communityQa.json", communityQaList, Community.class);
-		//    loadObjects("communityInfo.json", communityInfoList, Community.class);
-		//    loadObjects("communityTalk.json", communityTalkList, Community.class);
-		//    loadObjects("jobsSchedule.json", jobsScheduleList, Schedule.class);
-		//    loadObjects("examSchedule.json", examScheduleList, Schedule.class);
+		// loadObjects("member.json", memberList, Member.class);
+		// loadObjects("freeStudy.json", freeStudyList, Study.class);
+		// loadObjects("chargeStudy.json", chargeStudyList, Study.class);
+		// loadObjects("communityQa.json", communityQaList, Community.class);
+		// loadObjects("communityInfo.json", communityInfoList, Community.class);
+		// loadObjects("communityTalk.json", communityTalkList, Community.class);
+		// loadObjects("jobsSchedule.json", jobsScheduleList, Schedule.class);
+		// loadObjects("examSchedule.json", examScheduleList, Schedule.class);
 
 		System.out.println();
 		System.out.println("|         스터디위더스         |");
@@ -665,18 +717,18 @@ public class ClientAppSY {
 
 		// [삭제] HashMap 적용
 		// saveObjects("chargeInterest.json", chargeInterestList);
-		//    saveObjects("member.json", memberList);
-		//    saveObjects("freeStudy.json", freeStudyList);
-		//    saveObjects("chargeStudy.json", chargeStudyList);
-		//    saveObjects("communityQa.json", communityQaList);
-		//    saveObjects("communityInfo.json", communityInfoList);
-		//    saveObjects("communityTalk.json", communityTalkList);
-		//    saveObjects("jobsSchedule.json", jobsScheduleList);
-		//    saveObjects("examSchedule.json", examScheduleList);
+		// saveObjects("member.json", memberList);
+		// saveObjects("freeStudy.json", freeStudyList);
+		// saveObjects("chargeStudy.json", chargeStudyList);
+		// saveObjects("communityQa.json", communityQaList);
+		// saveObjects("communityInfo.json", communityInfoList);
+		// saveObjects("communityTalk.json", communityTalkList);
+		// saveObjects("jobsSchedule.json", jobsScheduleList);
+		// saveObjects("examSchedule.json", examScheduleList);
 	}
 
 	public static void main(String[] args) throws Exception {
-		ClientAppSY app = new ClientAppSY(); 
+		ClientAppSY app = new ClientAppSY();
 		app.service();
 		Prompt.close();
 	}
