@@ -21,7 +21,7 @@ public class PaymentTable extends JsonDataTable<Payment> implements DataProcesso
       case "payment.selectList": selectList(request, response); break;
       case "payment.selectOne": selectOne(request, response); break;
       //      case "payment.selectOneByName": selectOneByName(request, response); break;
-      //      case "member.update": update(request, response); break;
+      case "payment.update": update(request, response); break;
       //      case "member.delete": delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);

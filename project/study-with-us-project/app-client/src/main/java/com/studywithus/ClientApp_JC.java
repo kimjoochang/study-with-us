@@ -4,7 +4,6 @@ import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
-import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -92,7 +91,7 @@ public class ClientApp_JC {
     //    commandMap.put("/kakao/logIn", new SnsLogInHandler(memberList));
     //    commandMap.put("/naver/logIn", new SnsLogInHandler(memberList));
     //
-    commandMap.put("/auth/logOut", new AuthLogOutHandler());
+    commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
     commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
     //    commandMap.put("/google/signUp", new SnsSignUpHandler(memberList));
     //    commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberList));
@@ -547,8 +546,8 @@ public class ClientApp_JC {
   private Menu createPaymentListMenu() {
 
     MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
-    paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "/chargeStudy/paymentList"));
-    paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "/chargeStudy/paymentCancel"));
+    paymentListMenu.add(new MenuItem("조회", "/chargeStudy/paymentList"));
+    paymentListMenu.add(new MenuItem("상세보기", "/chargeStudy/paymentCancel"));
     // [추가] 상세보기 / 결제 취소
 
     return paymentListMenu;

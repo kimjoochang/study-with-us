@@ -41,6 +41,7 @@ public class ChargeStudyPaymentListHandler implements Command {
         System.out.printf("결제한 스터디 멘토: %s\n", payment.getMentorName());
         System.out.printf("결제한 스터디 가격: %s\n", payment.getPrice());
         System.out.printf("결제일: %s\n", payment.getPaymentDate());
+        System.out.println();
       }
     }
   }
