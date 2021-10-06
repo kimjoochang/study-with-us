@@ -19,23 +19,11 @@ import com.google.gson.reflect.TypeToken;
 public abstract class JsonDataTable<T> {
 
   protected List<T> list = new ArrayList<>();
-  protected List<T> freeStudyInterestList = new ArrayList<>();
   private Class<T> elementType;
   private String filename;
-  private String filenameF;
-  private String filenameS;
-  private String filenameT;
 
   public JsonDataTable(String filename, Class<T> elementType) {
     this.filename = filename;
-    this.elementType = elementType;
-    loadObjects();
-  }
-
-  public JsonDataTable(String filenameF, String filenameS, String filenameT, Class<T> elementType) {
-    this.filenameF = filenameF;
-    this.filenameS = filenameF;
-    this.filenameT = filenameF;
     this.elementType = elementType;
     loadObjects();
   }

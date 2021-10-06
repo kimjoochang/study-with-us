@@ -6,6 +6,12 @@ public class Content {
   private String title; // 게시글 제목
   private String content; // 게시글 내용
 
+  @Override
+  public String toString() {
+    return "Content [no=" + no + ", writer=" + writer + ", title=" + title + ", content=" + content
+        + "]";
+  }
+
   public int getNo() {
     return no;
   }

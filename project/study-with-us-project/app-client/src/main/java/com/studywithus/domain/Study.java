@@ -30,7 +30,14 @@ public class Study extends Content {
 
   @Override
   public String toString() {
-    return "Study [applicants=" + applicants + ", likeMembers=" + likeMembers + "]";
+    return "Study [members=" + members + ", applicants=" + applicants + ", likeMembers="
+        + likeMembers + ", mentorExplanation=" + mentorExplanation + ", rule=" + rule + ", price="
+        + price + ", onOffLine=" + onOffLine + ", ONLINE=" + ONLINE + ", OFFLINE=" + OFFLINE
+        + ", area=" + area + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
+        + ", maxMembers=" + maxMembers + ", startDate=" + startDate + ", endDate=" + endDate
+        + ", deleteRequest=" + deleteRequest + ", studyStatus=" + studyStatus + ", reviewList="
+        + reviewList + ", likeMembersEmail=" + likeMembersEmail + ", menteeEmailList="
+        + menteeEmailList + ", toString()=" + super.toString() + "]";
   }
 
   public List<String> getMenteeEmailList() {
