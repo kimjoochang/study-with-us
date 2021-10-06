@@ -7,9 +7,9 @@ import java.util.HashMap;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.RequestProcessor;
 import com.studywithus.table.CommunityTable;
-import com.studywithus.table.FreeStudyTable;
 import com.studywithus.table.JsonDataTable;
 import com.studywithus.table.MemberTableGR;
+import com.studywithus.table.StudyTable;
 
 public class ServerAppGR {
 
@@ -26,11 +26,16 @@ public class ServerAppGR {
     HashMap<String, DataProcessor> dataProcessorMap = new HashMap<String, DataProcessor>();
 
     // => 데이터 처리 담당자를 등록한다.
-    // dataProcessorMap.put("board.", new BoardTable());
     dataProcessorMap.put("member.", new MemberTableGR());
-    dataProcessorMap.put("freeStudy.", new FreeStudyTable());
-    dataProcessorMap.put("community.", new CommunityTable());
-    // dataProcessorMap.put("project.", new ProjectTable());
+    // [삭제]
+    // dataProcessorMap.put("freeStudy.", new FreeStudyTable());
+    dataProcessorMap.put("freeStudy.", new StudyTable("freestudy.json", "freeStudy."));
+    dataProcessorMap.put("chargeStudy.", new StudyTable("charge.json", "charge."));
+    dataProcessorMap.put("communityInfo.",
+        new CommunityTable("communityInfo.json", "communityInfo"));
+    dataProcessorMap.put("communityQa.", new CommunityTable("communityQa.json", "communityQa"));
+    dataProcessorMap.put("communityTalk.",
+        new CommunityTable("communityTalk.json", "communityTalk"));
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
     requestProcessor.service();

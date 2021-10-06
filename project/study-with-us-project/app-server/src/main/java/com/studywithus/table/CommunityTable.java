@@ -11,35 +11,55 @@ import com.studywithus.server.Response;
 //
 public class CommunityTable extends JsonDataTable<Community> implements DataProcessor {
 
-  public CommunityTable() {
-    super("communityInfo.json", "communityQa.json", "communityTalk.json", Community.class);
+  String commandPrefix;
+
+  public CommunityTable(String filename, String commandPrefix) {
+    super(filename, Community.class);
+    this.commandPrefix = commandPrefix;
   }
 
   @Override
   public void execute(Request request, Response response) throws Exception {
-    switch (request.getCommand()) {
-      case "community.insert":
-        insert(request, response);
-        break;
-      case "community.selectList":
-        selectList(request, response);
-        break;
-      case "community.selectListByKeyword":
-        selectListByKeyword(request, response);
-        break;
-      case "community.selectOne":
-        selectOne(request, response);
-        break;
-      case "community.update":
-        update(request, response);
-        break;
-      case "community.delete":
-        delete(request, response);
-        break;
-      default:
-        response.setStatus(Response.FAIL);
-        response.setValue("해당 명령을 지원하지 않습니다.");
+    if (request.getCommand().equals(commandPrefix + ".insert")) {
+      insert(request, response);
+    } else if (request.getCommand().equals(commandPrefix + ".selectList")) {
+      selectList(request, response);
+    } else if (request.getCommand().equals(commandPrefix + ".selectListByKeyword")) {
+      selectListByKeyword(request, response);
+    } else if (request.getCommand().equals(commandPrefix + ".selectOne")) {
+      selectOne(request, response);
+    } else if (request.getCommand().equals(commandPrefix + ".update")) {
+      update(request, response);
+    } else if (request.getCommand().equals(commandPrefix + ".delete")) {
+      delete(request, response);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 명령을 지원하지 않습니다.");
     }
+
+    // switch (request.getCommand()) {
+    // case "community.insert":
+    // insert(request, response);
+    // break;
+    // case "community.selectList":
+    // selectList(request, response);
+    // break;
+    // case "community.selectListByKeyword":
+    // selectListByKeyword(request, response);
+    // break;
+    // case "community.selectOne":
+    // selectOne(request, response);
+    // break;
+    // case "community.update":
+    // update(request, response);
+    // break;
+    // case "community.delete":
+    // delete(request, response);
+    // break;
+    // default:
+    // response.setStatus(Response.FAIL);
+    // response.setValue("해당 명령을 지원하지 않습니다.");
+    // }
   }
 
   private void insert(Request request, Response response) throws Exception {
