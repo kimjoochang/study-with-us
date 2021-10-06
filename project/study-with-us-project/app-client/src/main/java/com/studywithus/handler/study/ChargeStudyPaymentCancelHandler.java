@@ -76,5 +76,7 @@ public class ChargeStudyPaymentCancelHandler implements Command {
     System.out.println();
     System.out.println("결제 취소가 완료되었습니다.");
     payment.setVisible(false);
+    requestAgent.request("payment.update", payment);
+
   }
 }

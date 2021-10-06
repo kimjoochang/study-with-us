@@ -28,11 +28,10 @@ public class ChargeStudyPaymentListHandler implements Command {
 
     Collection<Payment> paymentList = requestAgent.getObjects(Payment.class);
 
-    if (paymentList ==  null) {
-      System.out.println("유료 스터디 결제 내역이 없습니다.");
-      return;
-    } 
-
+    //    if (paymentList ==  null) {
+    //      System.out.println("유료 스터디 결제 내역이 없습니다.");
+    //      return;
+    //    } 
 
     for (Payment payment : paymentList) {
       if (payment.getMenteeEmail().equals(AuthLogInHandler.getLoginUser().getEmail())
@@ -42,6 +41,7 @@ public class ChargeStudyPaymentListHandler implements Command {
         System.out.printf("결제한 스터디 멘토: %s\n", payment.getMentorName());
         System.out.printf("결제한 스터디 가격: %s\n", payment.getPrice());
         System.out.printf("결제일: %s\n", payment.getPaymentDate());
+        System.out.println();
       }
     }
   }
