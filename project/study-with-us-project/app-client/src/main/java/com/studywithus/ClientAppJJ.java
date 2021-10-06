@@ -90,7 +90,7 @@ public class ClientAppJJ {
     commandMap.put("/kakao/logIn", new SnsLogInHandler(requestAgent));
     commandMap.put("/naver/logIn", new SnsLogInHandler(requestAgent));
 
-    commandMap.put("/auth/logOut", new AuthLogOutHandler());
+    commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
 
     commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
     commandMap.put("/google/signUp", new SnsSignUpHandler(requestAgent));
@@ -504,8 +504,7 @@ public class ClientAppJJ {
 
     // [추가] 상세보기에 '후기' 메뉴, 결제 취소 추가 및 관련 핸들러 생성
     // 모집중, 진행중 -> 결제 취소 && 진행 완료 -> 후기 작성
-    participateChargeStudyMenu
-    .add(new MenuItem("상세보기", "/chargeStudy/participateChargeStudyDetail"));
+    participateChargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/participateChargeStudyDetail"));
     participateChargeStudyMenu.add(new MenuItem("삭제", "/chargeStudy/participateChargeStudyDetail"));
 
     return participateChargeStudyMenu;
@@ -536,6 +535,7 @@ public class ClientAppJJ {
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
     chargeInterestMenu.add(new MenuItem("조회", "/chargeInterest/list"));
+    chargeInterestMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
     chargeInterestMenu.add(new MenuItem("삭제", "/chargeStudy/interestDelete"));
 
     return chargeInterestMenu;
@@ -546,7 +546,8 @@ public class ClientAppJJ {
 
     MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
     paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "/chargeStudy/paymentList"));
-    paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "/chargeStudy/paymentCancel"));
+    // paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "/chargeStudy/paymentCancel"));
+    paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "/chargeStudy/detail"));
     // [추가] 상세보기 / 결제 취소
 
     return paymentListMenu;
