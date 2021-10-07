@@ -53,18 +53,23 @@ public class FreeStudyApplyCancelHandler implements Command {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
+
         for (int i = 0; i < freeStudy.getApplicants().size(); i++) {
-          if (freeStudy.getApplicants().get(i).equals(AuthLogInHandler.getLoginUser())) {
-            freeStudy.getApplicants().remove(freeStudy.getApplicants().get(i).getNo());
+          if (freeStudy.getApplicants().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+            freeStudy.getApplicants().remove(freeStudy.getApplicants().get(i));
             freeStudy.setApplicants(freeStudy.getApplicants());
+            System.out.println("실행 확인");
           }
         }
 
-        // [삭제]
         // freeStudy.getApplicants().remove(AuthLogInHandler.getLoginUser());
-        // [테스트]
-        System.out.println(freeStudy.getApplicants().toString());
         requestAgent.request("freeStudy.update", freeStudy);
+
+        // [테스트]
+        // if (freeStudy.getApplicants().contains(AuthLogInHandler.getLoginUser())) {
+        // System.out.println("테스트 성공");
+        // }
+        // System.out.println(freeStudy.getApplicants().toString());
 
         if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
           System.out.println("무료 스터디 신청 취소 성공!");
