@@ -52,7 +52,8 @@ public class FreeStudyInterestListHandler implements Command {
         // 관심목록 추가한 회원 == 로그인한 회원
         if (likeMember.getEmail().equals(AuthLogInHandler.loginUser.getEmail())) {
           type = 1;
-          System.out.println(freeStudy.toString());
+          // [테스트]
+          // System.out.println(freeStudy.toString());
 
           // 온라인 스터디
           if (freeStudy.getOnOffLine() == 1) {
