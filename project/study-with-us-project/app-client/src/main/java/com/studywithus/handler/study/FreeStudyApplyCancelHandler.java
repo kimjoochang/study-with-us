@@ -62,14 +62,12 @@ public class FreeStudyApplyCancelHandler implements Command {
           }
         }
 
-        // freeStudy.getApplicants().remove(AuthLogInHandler.getLoginUser());
         requestAgent.request("freeStudy.update", freeStudy);
 
         // [테스트]
         // if (freeStudy.getApplicants().contains(AuthLogInHandler.getLoginUser())) {
         // System.out.println("테스트 성공");
         // }
-        // System.out.println(freeStudy.getApplicants().toString());
 
         if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
           System.out.println("무료 스터디 신청 취소 성공!");
