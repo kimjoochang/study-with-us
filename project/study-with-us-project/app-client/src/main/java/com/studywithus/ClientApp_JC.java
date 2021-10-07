@@ -26,15 +26,19 @@ import com.studywithus.handler.study.ChargeStudyDetailHandler_JC;
 import com.studywithus.handler.study.ChargeStudyDetailMenuPrompt;
 import com.studywithus.handler.study.ChargeStudyInterestAddHandler;
 import com.studywithus.handler.study.ChargeStudyInterestDeleteHandler;
+import com.studywithus.handler.study.ChargeStudyInterestDetailHandler;
 import com.studywithus.handler.study.ChargeStudyInterestListHandler;
 import com.studywithus.handler.study.ChargeStudyListHandler;
 import com.studywithus.handler.study.ChargeStudyPaymentCancelHandler;
+import com.studywithus.handler.study.ChargeStudyPaymentDetailHandler;
 import com.studywithus.handler.study.ChargeStudyPaymentHandler;
 import com.studywithus.handler.study.ChargeStudyPaymentListHandler;
 import com.studywithus.handler.study.ChargeStudyUpdateHandler;
 import com.studywithus.handler.study.MentorApplicantApproveHandler;
 import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
+import com.studywithus.handler.study.ParticipateChargeStudyDetailHandler;
+import com.studywithus.handler.study.ParticipateChargeStudyListHandler;
 import com.studywithus.handler.study.RegisterChargeStudyDetailHandler;
 import com.studywithus.handler.study.RegisterChargeStudyListHandler;
 import com.studywithus.handler.study.ReviewAddHandler;
@@ -56,6 +60,7 @@ public class ClientApp_JC {
   HashMap<String,Command> commandMap = new HashMap<>();
 
   /*[수정]*/CommandRequest request = new CommandRequest(commandMap);
+  /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(requestAgent, request);
 
   class MenuItem extends Menu {
     String menuId;
@@ -130,8 +135,7 @@ public class ClientApp_JC {
     //    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(requestAgent));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(requestAgent));
-    /*[수정]*/commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler_JC(requestAgent, 
-        new ChargeStudyDetailMenuPrompt(requestAgent, request)));
+    /*[수정]*/commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler_JC(requestAgent, chargeStudyDetailMenuPrompt));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(requestAgent));
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(requestAgent));
     commandMap.put("/chargeStudy/deleteRequestCancel", new ChargeStudyDeleteRequestCancelHandler(requestAgent));
@@ -144,9 +148,8 @@ public class ClientApp_JC {
     commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(requestAgent));
     commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(requestAgent));
     commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler(requestAgent));
-    //    commandMap.put("/chargeStudy/participateChargeStudyList",
-    //        new ParticipateChargeStudyListHandler(participateChargeStudyMap));
-    //    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(participateChargeStudyMap)); 
+    commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(requestAgent));
+    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(requestAgent)); 
     commandMap.put("/review/add", new ReviewAddHandler(requestAgent));
     commandMap.put("/review/list", new ReviewListHandler(requestAgent));
     //
@@ -192,6 +195,8 @@ public class ClientApp_JC {
     commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(requestAgent)); 
 
     /*[수정]*/commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(requestAgent));                          
+    /*[수정]*/commandMap.put("/chargeStudy/paymentDetail", new ChargeStudyPaymentDetailHandler(requestAgent, request));                          
+    /*[수정]*/commandMap.put("/chargeInterest/list", new ChargeStudyInterestDetailHandler(requestAgent, chargeStudyDetailMenuPrompt));                          
 
 
   }
@@ -492,7 +497,6 @@ public class ClientApp_JC {
     MenuGroup registerChargeStudyMenu = new MenuGroup("내가 생성한 유료 스터디", ACCESS_GENERAL);
     registerChargeStudyMenu.add(new MenuItem("조회", "/chargeStudy/registerChargeStudyList"));
     registerChargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/registerChargeStudyDetail"));
-    registerChargeStudyMenu.add(new MenuItem("삭제", "/registerChargeStudy/delete"));
 
     return registerChargeStudyMenu;
   }
@@ -505,9 +509,7 @@ public class ClientApp_JC {
 
     // [추가] 상세보기에 '후기' 메뉴, 결제 취소 추가 및 관련 핸들러 생성
     // 모집중, 진행중 -> 결제 취소 && 진행 완료 -> 후기 작성
-    participateChargeStudyMenu
-    .add(new MenuItem("상세보기", "/chargeStudy/participateChargeStudyDetail"));
-    participateChargeStudyMenu.add(new MenuItem("삭제", "/chargeStudy/participateChargeStudyDetail"));
+    participateChargeStudyMenu.add(new MenuItem("상세보기", "/chargeStudy/participateChargeStudyDetail"));
 
     return participateChargeStudyMenu;
   }
@@ -537,7 +539,7 @@ public class ClientApp_JC {
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
     chargeInterestMenu.add(new MenuItem("조회", "/chargeInterest/list"));
-    chargeInterestMenu.add(new MenuItem("삭제", "/chargeStudy/interestDelete"));
+    chargeInterestMenu.add(new MenuItem("상세보기", "/chargeStudy/interestDetail"));
 
     return chargeInterestMenu;
   }
@@ -547,7 +549,7 @@ public class ClientApp_JC {
 
     MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
     paymentListMenu.add(new MenuItem("조회", "/chargeStudy/paymentList"));
-    paymentListMenu.add(new MenuItem("상세보기", "/chargeStudy/paymentCancel"));
+    paymentListMenu.add(new MenuItem("상세보기",   "/chargeStudy/paymentDetail"));
     // [추가] 상세보기 / 결제 취소
 
     return paymentListMenu;
