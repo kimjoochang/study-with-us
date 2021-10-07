@@ -1,7 +1,9 @@
 package com.studywithus.handler.study;
 
+import java.util.Collection;
 import java.util.HashMap;
 
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -20,7 +22,7 @@ public class FreeStudyInterestDetailHandler implements Command {
 	@Override
 	public void execute(CommandRequest request) throws Exception {
 
-		System.out.println("[마이페이지 / 나의 관심목록 / 무료 스터디 관심목록]\n");
+		System.out.println("[마이페이지 / 나의 관심목록 / 무료 스터디 관심목록 / 상세보기]\n");
 		int no = Prompt.inputInt("번호를 입력하세요. > ");
 
 		// Study freeStudy = findByNo(no);
@@ -66,10 +68,10 @@ public class FreeStudyInterestDetailHandler implements Command {
 
 
 		System.out.println("[마이페이지 / 나의 관심목록 / 무료 스터디 관심목록 / 상세보기 / 삭제]\n");
-		//		    int type = 0; // 일치하는 값 X -> 게시글 없다는 출력문 한 번만 출력
+		int type = 0; // 일치하는 값 X -> 게시글 없다는 출력문 한 번만 출력
 		//		    int no = Prompt.inputInt("무료 스터디 번호를 입력하세요. > ");
 
-		// Study freeInterest = findByNo(no);
+		//		Study freeInterest = findByNo(no);
 
 		//		    HashMap<String, String> params = new HashMap<>();
 		params.put("no", String.valueOf(no));
@@ -82,7 +84,7 @@ public class FreeStudyInterestDetailHandler implements Command {
 			return;
 		}
 
-		Study freeStudy = requestAgent.getObject(Study.class);
+		Collection<Study> chargeStudyList = requestAgent.getObjects(Study.class);
 
 		if (request.getAttribute("freeNo") == null) {
 
@@ -114,9 +116,9 @@ public class FreeStudyInterestDetailHandler implements Command {
 				}
 			}
 		} else {
-			// int no = (int) request.getAttribute("freeNo");
+			//			int no = (int) request.getAttribute("freeNo");
 
-			// Study freeInterest = findByNo(no);
+			//			Study freeInterest = findByNo(no);
 
 			if (freeStudy == null) {
 				System.out.println("해당 번호의 게시글이 없습니다.");
