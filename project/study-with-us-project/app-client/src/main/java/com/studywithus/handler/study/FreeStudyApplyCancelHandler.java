@@ -53,7 +53,17 @@ public class FreeStudyApplyCancelHandler implements Command {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        freeStudy.getApplicants().remove(AuthLogInHandler.getLoginUser());
+        for (int i = 0; i < freeStudy.getApplicants().size(); i++) {
+          if (freeStudy.getApplicants().get(i).equals(AuthLogInHandler.getLoginUser())) {
+            freeStudy.getApplicants().remove(freeStudy.getApplicants().get(i).getNo());
+            freeStudy.setApplicants(freeStudy.getApplicants());
+          }
+        }
+
+        // [삭제]
+        // freeStudy.getApplicants().remove(AuthLogInHandler.getLoginUser());
+        // [테스트]
+        System.out.println(freeStudy.getApplicants().toString());
         requestAgent.request("freeStudy.update", freeStudy);
 
         if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
