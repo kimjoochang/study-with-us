@@ -74,7 +74,7 @@ public class ClientAppGR {
     // commandMap.put("/kakao/logIn", new SnsLogInHandler(requestAgent));
     // commandMap.put("/naver/logIn", new SnsLogInHandler(requestAgent));
 
-    commandMap.put("/auth/logOut", new AuthLogOutHandler());
+    commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
 
     commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
     commandMap.put("/google/signUp", new SnsSignUpHandler(requestAgent));
