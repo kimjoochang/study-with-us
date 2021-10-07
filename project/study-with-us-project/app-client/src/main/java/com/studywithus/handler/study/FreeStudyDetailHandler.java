@@ -136,9 +136,9 @@ public class FreeStudyDetailHandler implements Command {
         System.out.println("0. 이전");
         System.out.println();
 
-        int num = Prompt.inputInt("메뉴 번호를 선택하세요. > "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
+        int menuNo = Prompt.inputInt("메뉴 번호를 선택하세요. > "); // 위에 있는 변수 no와 변수명 겹쳐서 num으로 변경
 
-        if (num == 1) {
+        if (menuNo == 1) {
           // 신청하기를 아직 안 한 경우
           if (applyType == 0) {
             request.getRequestDispatcher("/freeStudy/apply").forward(request);
@@ -148,7 +148,7 @@ public class FreeStudyDetailHandler implements Command {
             request.getRequestDispatcher("/freeStudy/applyCancel").forward(request);
           }
 
-        } else if (num == 2) {
+        } else if (menuNo == 2) {
           // 관심목록에 없는 경우
           if (interestType == 0) {
             request.getRequestDispatcher("/freeStudy/addInterest").forward(request);
@@ -158,7 +158,7 @@ public class FreeStudyDetailHandler implements Command {
             request.getRequestDispatcher("/freeStudy/deleteInterest").forward(request);
           }
 
-        } else if (num == 0) {
+        } else if (menuNo == 0) {
           return;
 
         } else {
