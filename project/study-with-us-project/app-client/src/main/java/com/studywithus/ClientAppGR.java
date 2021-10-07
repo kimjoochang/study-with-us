@@ -13,12 +13,14 @@ import com.studywithus.handler.community.CommunityAddHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.study.FreeStudyAddHandler;
 import com.studywithus.handler.study.FreeStudyApplyCancelHandler;
+import com.studywithus.handler.study.FreeStudyApplyDetailHandler;
 import com.studywithus.handler.study.FreeStudyApplyHandler;
 import com.studywithus.handler.study.FreeStudyApplyListHandler;
 import com.studywithus.handler.study.FreeStudyDeleteHandler;
 import com.studywithus.handler.study.FreeStudyDetailHandler;
 import com.studywithus.handler.study.FreeStudyInterestAddHandler;
 import com.studywithus.handler.study.FreeStudyInterestDeleteHandler;
+import com.studywithus.handler.study.FreeStudyInterestDetailHandler;
 import com.studywithus.handler.study.FreeStudyInterestListHandler;
 import com.studywithus.handler.study.FreeStudyListHandler;
 import com.studywithus.handler.study.FreeStudySearchHandler;
@@ -109,10 +111,17 @@ public class ClientAppGR {
 
     commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(requestAgent));
     commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(requestAgent));
+    // [추가]
+    commandMap.put("/freeStudy/applyDetail", new FreeStudyApplyDetailHandler(requestAgent));
     commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(requestAgent));
-    commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(requestAgent));
-    commandMap.put("/freeStudy/listInterest", new FreeStudyInterestListHandler(requestAgent));
-    commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(requestAgent));
+
+    // [수정] Interest Key 값 변경
+    commandMap.put("/freeStudy/interestAdd", new FreeStudyInterestAddHandler(requestAgent));
+    commandMap.put("/freeStudy/interestList", new FreeStudyInterestListHandler(requestAgent));
+    // [추가]
+    commandMap.put("/freeStudy/interestDetail", new FreeStudyInterestDetailHandler(requestAgent));
+    commandMap.put("/freeStudy/interestDelete", new FreeStudyInterestDeleteHandler(requestAgent));
+
     // commandMap.put("/freeStudy/registerStudyList",
     // new RegisterFreeStudyDetailHandler(registerFreeStudyMap, participateFreeStudyMap));
     // commandMap.put("/freeStudy/participateStudyList",
@@ -450,8 +459,9 @@ public class ClientAppGR {
 
     MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
     freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudy/applyList"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
+    // [추가]
+    freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudy/applyDetail"));
+    // [삭제] 상세보기 안으로 이동
     // freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
 
     return freeStudyApplyMenu;
@@ -523,8 +533,11 @@ public class ClientAppGR {
   private Menu createFreeInterestMenu() {
 
     MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
-    freeInterestMenu.add(new MenuItem("조회", "/freeStudy/listInterest"));
-    freeInterestMenu.add(new MenuItem("삭제", "/freeStudy/deleteInterest"));
+    freeInterestMenu.add(new MenuItem("조회", "/freeStudy/interestList"));
+    // [추가]
+    freeInterestMenu.add(new MenuItem("상세보기", "/freeStudy/interestDetail"));
+    // [삭제] 상세보기 안으로 이동
+    // freeInterestMenu.add(new MenuItem("삭제", "/freeStudy/deleteInterest"));
 
     return freeInterestMenu;
   }
