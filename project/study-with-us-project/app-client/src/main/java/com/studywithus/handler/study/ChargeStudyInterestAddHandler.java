@@ -46,9 +46,11 @@ public class ChargeStudyInterestAddHandler implements Command {
 
       } else {
         // 유료 스터디 관심목록 리스트 (회원 관점)
-        List<String> likeMemberEmail = chargeStudy.getLikeMembersEmail();
-        likeMemberEmail.add(AuthLogInHandler.getLoginUser().getEmail());
-        chargeStudy.setLikeMembersEmail(likeMemberEmail);
+//        List<String> likeMemberEmail = chargeStudy.getLikeMembersEmail();
+//        likeMemberEmail.add(AuthLogInHandler.getLoginUser().getEmail());
+//        chargeStudy.setLikeMembersEmail(likeMemberEmail);
+
+            chargeStudy.getLikeMembersEmail().add(AuthLogInHandler.getLoginUser().getEmail());
 
         requestAgent.request("chargeStudy.update", chargeStudy);
 
