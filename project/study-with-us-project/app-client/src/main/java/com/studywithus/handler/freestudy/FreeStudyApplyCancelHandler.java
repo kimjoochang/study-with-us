@@ -53,11 +53,11 @@ public class FreeStudyApplyCancelHandler implements Command {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-
         for (int i = 0; i < freeStudy.getApplicants().size(); i++) {
           if (freeStudy.getApplicants().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
             freeStudy.getApplicants().remove(i);
-            System.out.println("-----테스트-----");
+            // [테스트]
+            // System.out.println("-----테스트-----");
             break;
           }
         }
