@@ -21,3 +21,7 @@
 - [x] 2021-09-09 [gyeryeongban](https://github.com/gyeryeongban)
 - [x] 2021-09-10 [Jei-Kim](https://github.com/Jei-Kim)
 - [x] 2021-09-11 [gyeryeongban](https://github.com/gyeryeongban)
+- [x] 2021-09-12 [gyeryeongban](https://github.com/gyeryeongban)
+- [x] 2021-09-18 [gyeryeongban](https://github.com/gyeryeongban)
+- [x] 2021-09-27 [gyeryeongban](https://github.com/gyeryeongban)
+- [x] 2021-10-08 [gyeryeongban](https://github.com/gyeryeongban)
