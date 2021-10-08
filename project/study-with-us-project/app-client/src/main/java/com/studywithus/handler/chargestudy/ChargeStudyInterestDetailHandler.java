@@ -1,4 +1,4 @@
-package com.studywithus.handler.study;
+package com.studywithus.handler.chargestudy;
 
 import java.util.HashMap;
 import com.studywithus.domain.Study;
@@ -8,19 +8,19 @@ import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class ChargeStudyDetailHandler_JC implements Command {
+public class ChargeStudyInterestDetailHandler implements Command {
 
   RequestAgent requestAgent;
   ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt;
 
-  public ChargeStudyDetailHandler_JC(RequestAgent requestAgent, ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt) {
+  public ChargeStudyInterestDetailHandler(RequestAgent requestAgent, ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt) {
     this.requestAgent = requestAgent;
     this.chargeStudyDetailMenuPrompt = chargeStudyDetailMenuPrompt;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[유료 스터디 / 상세보기]\n");
+    System.out.println("[마이페이지 / 유료 스터디 관심목록 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
     HashMap<String,String> params = new HashMap<>();
@@ -29,11 +29,15 @@ public class ChargeStudyDetailHandler_JC implements Command {
     requestAgent.request("chargeStudy.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 유료 스터디가 없습니다.\n");
+      System.out.println("해당 번호의 관심목록 추가된 스터디가 없습니다.\n");
       return;
     }
 
     Study chargeStudy = requestAgent.getObject(Study.class);
+
+    if (!chargeStudy.getLikeMembersEmail().contains(AuthLogInHandler.getLoginUser().getEmail())) {
+      System.out.println("해당 번호의 관심목록 추가된 스터디가 없습니다.\n");
+    }
 
     chargeStudy.setViewCount(chargeStudy.getViewCount() + 1);
 

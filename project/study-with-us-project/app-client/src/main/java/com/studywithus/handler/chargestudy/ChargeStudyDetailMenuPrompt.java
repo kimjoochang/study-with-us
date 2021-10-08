@@ -1,4 +1,4 @@
-package com.studywithus.handler.study;
+package com.studywithus.handler.chargestudy;
 
 import java.sql.Date;
 import com.studywithus.domain.Study;

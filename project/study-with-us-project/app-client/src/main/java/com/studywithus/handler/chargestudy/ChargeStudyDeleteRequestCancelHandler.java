@@ -1,4 +1,4 @@
-package com.studywithus.handler.study;
+package com.studywithus.handler.chargestudy;
 
 import java.util.HashMap;
 import com.studywithus.domain.Study;
@@ -7,17 +7,17 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class ChargeStudyDeleteRequestHandler implements Command {
+public class ChargeStudyDeleteRequestCancelHandler implements Command {
 
   RequestAgent requestAgent;
 
-  public ChargeStudyDeleteRequestHandler( RequestAgent requestAgent)  {
+  public ChargeStudyDeleteRequestCancelHandler( RequestAgent requestAgent)  {
     this.requestAgent = requestAgent;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[유료 스터디 / 삭제 요청]\n");
+    System.out.println("[유료 스터디 / 삭제 요청 취소]\n");
     int no = (int) request.getAttribute("chargeNo");
 
     HashMap<String,String> params = new HashMap<>();
@@ -32,11 +32,11 @@ public class ChargeStudyDeleteRequestHandler implements Command {
 
     Study chargeStudy = requestAgent.getObject(Study.class);
 
-    String input = Prompt.inputString("정말 삭제 요청 하시겠습니까? (y/N) ");
+    String input = Prompt.inputString("정말 삭제 요청을 취소 하시겠습니까? (y/N) ");
     System.out.println();
     while (true) {
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println("유료 스터디 삭제 요청을 취소하였습니다.\n");
+        System.out.println("유료 스터디 삭제 요청 취소를 취소하였습니다.\n");
         return;
       } else if (!input.equalsIgnoreCase("y")) {
         System.out.println("다시 입력하세요.\n");
@@ -45,10 +45,10 @@ public class ChargeStudyDeleteRequestHandler implements Command {
         break;
       }
     }
-    chargeStudy.setDeleteRequest(true);
+    chargeStudy.setDeleteRequest(false);
 
     requestAgent.request("chargeStudy.update", chargeStudy);
 
-    System.out.println("삭제 요청이 완료되었습니다.\n");
+    System.out.println("삭제 요청 취소가 완료되었습니다.\n");
   }
 }
