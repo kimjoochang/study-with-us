@@ -52,6 +52,7 @@ public class FreeStudyApplyListHandler implements Command {
       for (Member applicant : freeStudy.getApplicants()) {
         // [테스트]
         // System.out.println(freeStudy.getApplicants());
+
         // 스터디 신청한 회원 == 로그인한 회원
         if (applicant.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
           type = 1;
