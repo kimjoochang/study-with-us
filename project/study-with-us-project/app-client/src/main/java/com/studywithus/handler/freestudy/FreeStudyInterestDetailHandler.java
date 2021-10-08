@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
@@ -20,12 +21,10 @@ public class FreeStudyInterestDetailHandler implements Command {
 	public void execute(CommandRequest request) throws Exception {
 
 		System.out.println("[STUDY WITH US / 마이페이지 / 나의 관심목록 / 무료 스터디 관심목록 / 상세보기]\n");
-
-
 		int no = Prompt.inputInt("번호를 입력하세요. > ");
 		System.out.println();
 
-		//		 Study freeStudy = findByNo(no);
+		//	Study freeStudy = findByNo(no);
 
 		HashMap<String, String> params = new HashMap<>();
 		params.put("no", String.valueOf(no));
@@ -38,6 +37,19 @@ public class FreeStudyInterestDetailHandler implements Command {
 		}
 
 		Study freeStudy = requestAgent.getObject(Study.class);
+
+		Boolean myIntStd = false;
+		for (int i = 0; i < freeStudy.getLikeMembers().size(); i++) {
+			if (freeStudy.getLikeMembers().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+				myIntStd = true;
+				break;
+			} 
+		} 
+		if (!myIntStd) {
+			System.out.println("관심목록 추가한 무료 스터디가 아닙니다.");
+			return;
+		}
+
 		freeStudy.setViewCount(freeStudy.getViewCount() + 1);
 
 		System.out.printf("제목: %s\n", freeStudy.getTitle());
@@ -58,7 +70,6 @@ public class FreeStudyInterestDetailHandler implements Command {
 		System.out.printf("규칙: %s\n", freeStudy.getRule());
 		System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
-		freeStudy.setViewCount(freeStudy.getViewCount() + 1);
 		System.out.printf("조회수: %d\n", freeStudy.getViewCount());
 		System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
 		System.out.println();
@@ -86,6 +97,5 @@ public class FreeStudyInterestDetailHandler implements Command {
 			}
 			return;
 		}
-
 	}
 }

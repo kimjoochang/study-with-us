@@ -18,7 +18,7 @@ public class FreeStudyApplyDetailHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[마이페이지 / 나의 활동 / 무료 스터디 신청 내역 / 상세보기]\n");
+    System.out.println("[STUDY WITH US / 마이페이지 / 나의 활동 / 무료 스터디 신청 내역 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
     // Study freeStudy = findByNo(no);
@@ -49,7 +49,8 @@ public class FreeStudyApplyDetailHandler implements Command {
       }
     }
 
-    System.out.println("-----테스트-----");
+    // [테스트]
+    // System.out.println("-----테스트-----");
     if (!myApplStudy) {
       System.out.println("신청하신 스터디가 아닙니다.");
       return;

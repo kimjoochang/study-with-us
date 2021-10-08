@@ -51,7 +51,7 @@ public class FreeStudyApplyDetailHandlerGR implements Command {
 
     System.out.println("-----테스트-----");
     if (!myAppStudy) {
-      System.out.println("신청한 스터디가 없습니다.");
+      System.out.println("신청하신 스터디가 아닙니다.");
       return;
     }
 
