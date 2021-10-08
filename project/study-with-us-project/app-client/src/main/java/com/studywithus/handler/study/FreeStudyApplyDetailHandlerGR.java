@@ -8,11 +8,11 @@ import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyApplyDetailHandler implements Command {
+public class FreeStudyApplyDetailHandlerGR implements Command {
 
   RequestAgent requestAgent;
 
-  public FreeStudyApplyDetailHandler(RequestAgent requestAgent) {
+  public FreeStudyApplyDetailHandlerGR(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
@@ -41,17 +41,17 @@ public class FreeStudyApplyDetailHandler implements Command {
 
     Study freeStudy = requestAgent.getObject(Study.class);
 
-    Boolean myApplStudy = false;
+    Boolean myAppStudy = false;
     for (int i = 0; i < freeStudy.getApplicants().size(); i++) {
       if (freeStudy.getApplicants().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-        myApplStudy = true;
+        myAppStudy = true;
         break;
       }
     }
 
     System.out.println("-----테스트-----");
-    if (!myApplStudy) {
-      System.out.println("신청하신 스터디가 아닙니다.");
+    if (!myAppStudy) {
+      System.out.println("신청한 스터디가 없습니다.");
       return;
     }
 
