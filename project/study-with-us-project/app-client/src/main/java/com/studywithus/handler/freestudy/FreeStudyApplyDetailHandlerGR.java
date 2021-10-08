@@ -1,17 +1,18 @@
-package com.studywithus.handler.study;
+package com.studywithus.handler.freestudy;
 
 import java.util.HashMap;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyApplyDetailHandler implements Command {
+public class FreeStudyApplyDetailHandlerGR implements Command {
 
   RequestAgent requestAgent;
 
-  public FreeStudyApplyDetailHandler(RequestAgent requestAgent) {
+  public FreeStudyApplyDetailHandlerGR(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
@@ -39,6 +40,21 @@ public class FreeStudyApplyDetailHandler implements Command {
     }
 
     Study freeStudy = requestAgent.getObject(Study.class);
+
+    Boolean myAppStudy = false;
+    for (int i = 0; i < freeStudy.getApplicants().size(); i++) {
+      if (freeStudy.getApplicants().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+        myAppStudy = true;
+        break;
+      }
+    }
+
+    System.out.println("-----테스트-----");
+    if (!myAppStudy) {
+      System.out.println("신청한 스터디가 없습니다.");
+      return;
+    }
+
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
 
     System.out.printf("제목: %s\n", freeStudy.getTitle());
