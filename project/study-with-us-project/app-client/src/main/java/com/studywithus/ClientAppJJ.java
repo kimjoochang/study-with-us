@@ -535,7 +535,7 @@ public class ClientAppJJ {
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
     chargeInterestMenu.add(new MenuItem("조회", "/chargeInterest/list"));
-    chargeInterestMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
+    //    chargeInterestMenu.add(new MenuItem("상세보기", "/chargeStudy/detail"));
     chargeInterestMenu.add(new MenuItem("삭제", "/chargeStudy/interestDelete"));
 
     return chargeInterestMenu;
@@ -546,9 +546,8 @@ public class ClientAppJJ {
 
     MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
     paymentListMenu.add(new MenuItem("조회", ACCESS_MENTEE, "/chargeStudy/paymentList"));
-    // paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "/chargeStudy/paymentCancel"));
-    paymentListMenu.add(new MenuItem("상세보기", ACCESS_MENTEE, "/chargeStudy/detail"));
-    // [추가] 상세보기 / 결제 취소
+    // paymentListMenu.add(new MenuItem("", ACCESS_MENTEE, "/chargeStudy/paymentCancel"));
+
 
     return paymentListMenu;
   }
