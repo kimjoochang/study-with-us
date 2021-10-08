@@ -1,4 +1,4 @@
-package com.studywithus.handler.study;
+package com.studywithus.handler.chargestudy;
 
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
