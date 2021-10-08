@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
@@ -38,6 +39,18 @@ public class FreeStudyInterestDetailHandler implements Command {
 		}
 
 		Study freeStudy = requestAgent.getObject(Study.class);
+		Boolean myIntStd = false;
+		for (int i = 0; i < freeStudy.getLikeMembersEmail().size(); i++) {
+			if (freeStudy.getLikeMembers().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+				myIntStd = true;
+				break;
+			} 
+		} 
+		if (!myIntStd) {
+			System.out.println("관심목록 추가한 무료 스터디가 아닙니다.");
+			return;
+		}
+
 		freeStudy.setViewCount(freeStudy.getViewCount() + 1);
 
 		System.out.printf("제목: %s\n", freeStudy.getTitle());
@@ -86,6 +99,5 @@ public class FreeStudyInterestDetailHandler implements Command {
 			}
 			return;
 		}
-
 	}
 }
