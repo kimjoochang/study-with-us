@@ -34,6 +34,12 @@ import com.studywithus.handler.study.ChargeStudyPaymentDetailHandler;
 import com.studywithus.handler.study.ChargeStudyPaymentHandler;
 import com.studywithus.handler.study.ChargeStudyPaymentListHandler;
 import com.studywithus.handler.study.ChargeStudyUpdateHandler;
+import com.studywithus.handler.study.FreeStudyAddHandler;
+import com.studywithus.handler.study.FreeStudyDeleteHandler;
+import com.studywithus.handler.study.FreeStudyDetailHandler;
+import com.studywithus.handler.study.FreeStudyListHandler;
+import com.studywithus.handler.study.FreeStudySearchHandler;
+import com.studywithus.handler.study.FreeStudyUpdateHandler;
 import com.studywithus.handler.study.MentorApplicantApproveHandler;
 import com.studywithus.handler.study.MentorApplicationAddHandler;
 import com.studywithus.handler.study.MentorApplicationDetailHandler;
@@ -114,12 +120,12 @@ public class ClientApp_JC {
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(requestAgent));
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(requestAgent));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(requestAgent));
-    //    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyList));
-    //    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyList, registerFreeStudyMap));
-    //    commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyList));
-    //    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyList));
-    //    commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyList));
-    //    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyList));
+    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(requestAgent));
+    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
+    commandMap.put("/freeStudy/list", new FreeStudyListHandler(requestAgent));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(requestAgent));
+    commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(requestAgent));
+    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(requestAgent));
     //
     //    commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyList, applyFreeStudyMap));
     //    commandMap.put("/freeStudy/applyCancel",
@@ -195,8 +201,8 @@ public class ClientApp_JC {
     commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(requestAgent)); 
 
     /*[수정]*/commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(requestAgent));                          
-    /*[수정]*/commandMap.put("/chargeStudy/paymentDetail", new ChargeStudyPaymentDetailHandler(requestAgent, request));                          
-    /*[수정]*/commandMap.put("/chargeInterest/list", new ChargeStudyInterestDetailHandler(requestAgent, chargeStudyDetailMenuPrompt));                          
+    /*[수정]*/commandMap.put("/chargeStudy/paymentDetail", new ChargeStudyPaymentDetailHandler(requestAgent));                          
+    /*[수정]*/commandMap.put("/chargeInterest/detail", new ChargeStudyInterestDetailHandler(requestAgent, chargeStudyDetailMenuPrompt));                          
 
 
   }
@@ -539,7 +545,7 @@ public class ClientApp_JC {
 
     MenuGroup chargeInterestMenu = new MenuGroup("유료 스터디 관심목록");
     chargeInterestMenu.add(new MenuItem("조회", "/chargeInterest/list"));
-    chargeInterestMenu.add(new MenuItem("상세보기", "/chargeStudy/interestDetail"));
+    chargeInterestMenu.add(new MenuItem("상세보기", "/chargeInterest/detail"));
 
     return chargeInterestMenu;
   }
@@ -549,7 +555,7 @@ public class ClientApp_JC {
 
     MenuGroup paymentListMenu = new MenuGroup("나의 결제 내역");
     paymentListMenu.add(new MenuItem("조회", "/chargeStudy/paymentList"));
-    paymentListMenu.add(new MenuItem("상세보기",   "/chargeStudy/paymentDetail"));
+    paymentListMenu.add(new MenuItem("상세보기","/chargeStudy/paymentDetail"));
     // [추가] 상세보기 / 결제 취소
 
     return paymentListMenu;
