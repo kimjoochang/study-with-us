@@ -40,6 +40,7 @@ public class FreeStudyApplyHandler implements Command {
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("무료 스터디 상세보기 실패!");
+      System.out.println(requestAgent.getObject(Study.class));
       return;
     }
 
