@@ -75,7 +75,7 @@ public class FreeStudyInterestDetailHandler implements Command {
 			System.out.println();
 
 			if (menuNo == 1) {
-				request.getRequestDispatcher("/freeStudy/deleteInterest").forward(request);
+				request.getRequestDispatcher("/freeStudy/interestDelete").forward(request);
 
 			} else if (menuNo == 0) {
 				return;
