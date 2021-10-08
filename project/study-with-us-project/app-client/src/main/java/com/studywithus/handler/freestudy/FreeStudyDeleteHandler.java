@@ -1,4 +1,4 @@
-package com.studywithus.handler.study;
+package com.studywithus.handler.freestudy;
 
 import java.util.HashMap;
 import com.studywithus.handler.Command;
@@ -29,14 +29,14 @@ public class FreeStudyDeleteHandler implements Command {
       return;
     }
 
-    //    Study freeStudy = requestAgent.getObject(Study.class);
+    // Study freeStudy = requestAgent.getObject(Study.class);
 
     // [수정] 조건문에 관리자도 해당
-    //    if (freeStudy.getWriter().getEmail() != AuthLogInHandler.getLoginUser().getEmail()
-    //        || AuthLogInHandler.getLoginUser().getEmail().equals("root@test.com")) {
-    //      System.out.println("삭제 권한이 없습니다.");
-    //      return;
-    //    }
+    // if (freeStudy.getWriter().getEmail() != AuthLogInHandler.getLoginUser().getEmail()
+    // || AuthLogInHandler.getLoginUser().getEmail().equals("root@test.com")) {
+    // System.out.println("삭제 권한이 없습니다.");
+    // return;
+    // }
 
     while (true) {
       String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");

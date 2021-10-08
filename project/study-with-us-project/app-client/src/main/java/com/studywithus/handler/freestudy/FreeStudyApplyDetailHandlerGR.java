@@ -1,4 +1,4 @@
-package com.studywithus.handler.study;
+package com.studywithus.handler.freestudy;
 
 import java.util.HashMap;
 import com.studywithus.domain.Study;
