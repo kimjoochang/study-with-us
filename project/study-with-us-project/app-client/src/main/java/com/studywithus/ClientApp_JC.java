@@ -5,6 +5,7 @@ import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import java.util.HashMap;
+import com.studywithus.dao.impl.NetScheduleDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.chargestudy.ChargeStudyAddHandler;
@@ -95,6 +96,8 @@ public class ClientApp_JC {
 
   public ClientApp_JC() throws Exception {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
+
+    NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent, "examSchedule");
 
     commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
     //    commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
@@ -194,11 +197,11 @@ public class ClientApp_JC {
     commandMap.put("/jobsSchedule/update", new JobsScheduleUpdateHandler(requestAgent));
     commandMap.put("/jobsSchedule/delete", new JobsScheduleDeleteHandler(requestAgent));
 
-    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(requestAgent));
-    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(requestAgent));
-    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(requestAgent));
-    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(requestAgent));
-    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(requestAgent)); 
+    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(examScheduleDao));
+    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(examScheduleDao));
+    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(examScheduleDao));
+    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(examScheduleDao));
+    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(examScheduleDao)); 
 
     /*[수정]*/commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(requestAgent));                          
     /*[수정]*/commandMap.put("/chargeStudy/paymentDetail", new ChargeStudyPaymentDetailHandler(requestAgent));                          

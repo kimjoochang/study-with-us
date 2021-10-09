@@ -1,6 +1,7 @@
 package com.studywithus.handler.schedule;
 
 import java.util.HashMap;
+import com.studywithus.dao.ScheduleDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.request.RequestAgent;
@@ -8,10 +9,10 @@ import com.studywithus.util.Prompt;
 
 public class ExamScheduleDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
+  ScheduleDao scheduleDao;
 
-  public ExamScheduleDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ExamScheduleDeleteHandler(ScheduleDao scheduleDao) {
+    this.scheduleDao = scheduleDao;
   }
 
   @Override

@@ -12,3 +12,4 @@ public interface ScheduleDao {
   void update(Schedule schedule) throws Exception;
   void delete(int no) throws Exception;
 }
+
