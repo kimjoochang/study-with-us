@@ -1,20 +1,18 @@
 package com.studywithus.handler.freestudy;
 
-import java.util.HashMap;
-
+import com.studywithus.dao.FreeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyUpdateHandler implements Command {
 
-	RequestAgent requestAgent;
+	FreeStudyDao freeStudyDao;
 
-	public FreeStudyUpdateHandler(RequestAgent requestAgent) {
-		this.requestAgent = requestAgent;
+	public FreeStudyUpdateHandler(FreeStudyDao freeStudyDao) {
+		this.freeStudyDao = freeStudyDao;
 	}
 
 	@Override
@@ -22,25 +20,24 @@ public class FreeStudyUpdateHandler implements Command {
 		System.out.println("[무료 스터디 / 수정]\n");
 		int no = (int) request.getAttribute("freeNo");
 
+
 		// Study freeStudy = findByNo(no);
 
-		HashMap<String, String> params = new HashMap<>();
-		params.put("no", String.valueOf(no));
+		Study freeStudy = freeStudyDao.findByNo(no);
 
-		requestAgent.request("freeStudy.selectOne", params);
-
-		// if (freeStudy == null) {
-		// System.out.println();
-		// System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
-		// return;
-		// }
-
-		if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-			System.out.println("해당 번호의 무료 스터디가 없습니다.");
+		if (freeStudy == null) {
+			System.out.println();
+			System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
 			return;
 		}
 
-		Study freeStudy = requestAgent.getObject(Study.class);
+		//		if (freeStudyDao.getStatus().equals(RequestAgent.FAIL)) {
+		//			System.out.println("해당 번호의 무료 스터디가 없습니다.");
+		//			return;
+		//		}
+
+		//		Study freeStudy = freeStudyDao.getObject(Study.class);
+
 
 		if (freeStudy.getWriter().getNo() != AuthLogInHandler.getLoginUser().getNo()) {
 			System.out.println("변경 권한이 없습니다.");
@@ -73,13 +70,13 @@ public class FreeStudyUpdateHandler implements Command {
 		freeStudy.setContent(content);
 		freeStudy.setRule(rule);
 
-		requestAgent.request("freeStudy.update", freeStudy);
+		freeStudyDao.update(freeStudy);
 
-		if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-			System.out.println("무료 스터디 변경 실패!");
-			System.out.println(requestAgent.getObject(String.class));
-			return;
-		}
+		//		if (freeStudyDao.getStatus().equals(RequestAgent.FAIL)) {
+		//			System.out.println("무료 스터디 변경 실패!");
+		//			System.out.println(freeStudyDao.getObject(String.class));
+		//			return;
+		//		}
 
 		System.out.println();
 		System.out.println("무료 스터디를 수정하였습니다.");

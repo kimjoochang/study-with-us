@@ -1,7 +1,7 @@
 package com.studywithus.handler.schedule;
 
 import java.sql.Date;
-import com.studywithus.dao.impl.NetScheduleDao;
+import com.studywithus.dao.ScheduleDao;
 import com.studywithus.domain.Schedule;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,10 +10,10 @@ import com.studywithus.util.Prompt;
 
 public class ExamScheduleAddHandler implements Command {
 
-  NetScheduleDao netScheduleDao;
+  ScheduleDao scheduleDao;
 
-  public ExamScheduleAddHandler(NetScheduleDao netScheduleDao) {
-    this.netScheduleDao = netScheduleDao;
+  public ExamScheduleAddHandler(ScheduleDao scheduleDao) {
+    this.scheduleDao = scheduleDao;
   }
 
   @Override
@@ -39,6 +39,6 @@ public class ExamScheduleAddHandler implements Command {
       }
     }
 
-    netScheduleDao.insert(examSchedule);
+    scheduleDao.insert(examSchedule);
   }
 }

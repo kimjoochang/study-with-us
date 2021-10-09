@@ -7,6 +7,8 @@ import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.util.HashMap;
+import com.studywithus.dao.impl.NetCommunityDao;
+import com.studywithus.dao.impl.NetFreeStudyDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.community.CommunityAddHandler;
@@ -74,6 +76,9 @@ public class ClientAppGR {
   public ClientAppGR() throws Exception {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
+    NetFreeStudyDao freeStudyDao = new NetFreeStudyDao(requestAgent);
+    NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
+
     commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
     // commandMap.put("/google/logIn", new SnsLogInHandler(requestAgent));
     // commandMap.put("/facebook/logIn", new SnsLogInHandler(requestAgent));
@@ -106,12 +111,12 @@ public class ClientAppGR {
     // commandMap.put("/mentorApplicant/list",
     // new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
     //
-    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(requestAgent));
-    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
-    commandMap.put("/freeStudy/list", new FreeStudyListHandler(requestAgent));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(requestAgent));
-    commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(requestAgent));
-    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(requestAgent));
+    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyDao));
+    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyDao));
+    commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyDao));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyDao));
+    commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyDao));
+    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyDao));
 
     commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(requestAgent));
     commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(requestAgent));
@@ -164,29 +169,29 @@ public class ClientAppGR {
     // commandMap.put("/review/add", new ReviewAddHandler(chargeStudyList));
     // commandMap.put("/review/list", new ReviewListHandler(chargeStudyList));
     //
-    commandMap.put("/communityQa/add", new CommunityAddHandler(requestAgent));
-    commandMap.put("/communityQa/list", new CommunityListHandler(requestAgent));
+    commandMap.put("/communityQa/add", new CommunityAddHandler(communityDao));
+    commandMap.put("/communityQa/list", new CommunityListHandler(communityDao));
     commandMap.put("/communityQa/detail",
-        new CommunityDetailHandler(requestAgent, "/communityQa/update", "/communityQa/delete"));
-    commandMap.put("/communityQa/update", new CommunityUpdateHandler(requestAgent));
-    commandMap.put("/communityQa/delete", new CommunityDeleteHandler(requestAgent));
-    commandMap.put("/communityQa/search", new CommunitySearchHandler(requestAgent));
+        new CommunityDetailHandler(communityDao, "/communityQa/update", "/communityQa/delete"));
+    commandMap.put("/communityQa/update", new CommunityUpdateHandler(communityDao));
+    commandMap.put("/communityQa/delete", new CommunityDeleteHandler(communityDao));
+    commandMap.put("/communityQa/search", new CommunitySearchHandler(communityDao));
 
-    commandMap.put("/communityInfo/add", new CommunityAddHandler(requestAgent));
-    commandMap.put("/communityInfo/list", new CommunityListHandler(requestAgent));
+    commandMap.put("/communityInfo/add", new CommunityAddHandler(communityDao));
+    commandMap.put("/communityInfo/list", new CommunityListHandler(communityDao));
     commandMap.put("/communityInfo/detail",
-        new CommunityDetailHandler(requestAgent, "/communityInfo/update", "/communityInfo/delete"));
-    commandMap.put("/communityInfo/update", new CommunityUpdateHandler(requestAgent));
-    commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(requestAgent));
-    commandMap.put("/communityInfo/search", new CommunitySearchHandler(requestAgent));
+        new CommunityDetailHandler(communityDao, "/communityInfo/update", "/communityInfo/delete"));
+    commandMap.put("/communityInfo/update", new CommunityUpdateHandler(communityDao));
+    commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(communityDao));
+    commandMap.put("/communityInfo/search", new CommunitySearchHandler(communityDao));
 
-    commandMap.put("/communityTalk/add", new CommunityAddHandler(requestAgent));
-    commandMap.put("/communityTalk/list", new CommunityListHandler(requestAgent));
+    commandMap.put("/communityTalk/add", new CommunityAddHandler(communityDao));
+    commandMap.put("/communityTalk/list", new CommunityListHandler(communityDao));
     commandMap.put("/communityTalk/detail",
-        new CommunityDetailHandler(requestAgent, "/communityTalk/update", "/communityTalk/delete"));
-    commandMap.put("/communityTalk/update", new CommunityUpdateHandler(requestAgent));
-    commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(requestAgent));
-    commandMap.put("/communityTalk/search", new CommunitySearchHandler(requestAgent));
+        new CommunityDetailHandler(communityDao, "/communityTalk/update", "/communityTalk/delete"));
+    commandMap.put("/communityTalk/update", new CommunityUpdateHandler(communityDao));
+    commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityDao));
+    commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityDao));
 
     // commandMap.put("/myPost/list",
     // new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));

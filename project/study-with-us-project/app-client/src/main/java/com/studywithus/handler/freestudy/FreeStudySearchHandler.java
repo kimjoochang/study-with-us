@@ -2,20 +2,19 @@
 package com.studywithus.handler.freestudy;
 
 import java.util.Collection;
-import java.util.HashMap;
 
+import com.studywithus.dao.FreeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class FreeStudySearchHandler implements Command {
 
-	RequestAgent requestAgent;
+	FreeStudyDao freeStudyDao;
 
-	public FreeStudySearchHandler(RequestAgent requestAgent) {
-		this.requestAgent = requestAgent;
+	public FreeStudySearchHandler(FreeStudyDao freeStudyDao) {
+		this.freeStudyDao = freeStudyDao;
 	}
 
 	@Override
@@ -25,24 +24,22 @@ public class FreeStudySearchHandler implements Command {
 		String input = Prompt.inputString("검색할 키워드를 입력하세요. > ");
 		System.out.println();
 
-		HashMap<String, String> params = new HashMap<>();
-		params.put("keyword", String.valueOf(input));
+		Collection<Study> studyList = freeStudyDao.findByKeyword(input);
 
-		requestAgent.request("freeStudy.selectListByKeyword", params);
+		//		freeStudyDao.request("freeStudy.selectListByKeyword");
 
 		// if (studyList.isEmpty() == true) {
 		// System.out.println("무료 스터디 게시글이 존재하지 않습니다.\n");
 		// return;
 		// }
 
-		if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-			System.out.println("무료 스터디 조회 실패!");
-			return;
-		}
+		//		if (freeStudyDao.getStatus().equals(RequestAgent.FAIL)) {
+		//			System.out.println("무료 스터디 조회 실패!");
+		//			return;
+		//		}
 
 		int type = 0; // 일치하는 값이 없을 경우, 게시글 없다는 출력문이 한 번만 출력되게 하기 위한 변수
 
-		Collection<Study> studyList = requestAgent.getObjects(Study.class);
 
 		for (Study freeStudy : studyList) {
 			if (!freeStudy.getTitle().contains(input) && !freeStudy.getContent().contains(input)

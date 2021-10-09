@@ -1,6 +1,7 @@
 package com.studywithus.handler.schedule;
 
 import java.util.HashMap;
+import com.studywithus.dao.ScheduleDao;
 import com.studywithus.domain.Schedule;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -9,9 +10,9 @@ import com.studywithus.util.Prompt;
 
 public class ExamScheduleUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  ScheduleDao scheduleDao;
 
-  public ExamScheduleUpdateHandler(RequestAgent requestAgent) {
+  public ExamScheduleUpdateHandler(ScheduleDao scheduleDao) {
     this.requestAgent = requestAgent;
   }
 
