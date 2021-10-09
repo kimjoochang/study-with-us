@@ -28,9 +28,8 @@ public class ServerAppSY {
 		//    dataProcessorMap.put("board.", new BoardTable());
 		dataProcessorMap.put("member.", new MemberTableSY());
 		dataProcessorMap.put("freeStudy.", new FreeStudyTable());
-		dataProcessorMap.put("communityInfo.", new CommunityTable("communityInfo.json", "communityInfo"));
-		dataProcessorMap.put("communityQa.", new CommunityTable("communityQa.json", "communityQa"));
-		dataProcessorMap.put("communityTalk.", new CommunityTable("communityTalk.json", "communityTalk"));
+		dataProcessorMap.put("community.", new CommunityTable());
+		//    dataProcessorMap.put("project.", new ProjectTable());
 
 		RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
 		requestProcessor.service();
@@ -50,4 +49,3 @@ public class ServerAppSY {
 		serverSocket.close();
 	}
 }
-
