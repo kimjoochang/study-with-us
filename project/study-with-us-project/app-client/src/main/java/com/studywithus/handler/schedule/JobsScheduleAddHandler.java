@@ -1,24 +1,24 @@
 package com.studywithus.handler.schedule;
 
 import java.sql.Date;
+import com.studywithus.dao.ScheduleDao;
 import com.studywithus.domain.Schedule;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class JobsScheduleAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  ScheduleDao scheduleDao;
 
-  public JobsScheduleAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public JobsScheduleAddHandler(ScheduleDao scheduleDao) {
+    this.scheduleDao = scheduleDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[이달의 채용공고 / 등록]\n");
+    System.out.println("[이달의 채용공고 / 생성]\n");
 
     Schedule jobsSchedule = new Schedule();
 
@@ -57,13 +57,7 @@ public class JobsScheduleAddHandler implements Command {
       }
     }
 
-    requestAgent.request("jobsSchedule.insert", jobsSchedule);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글 저장에 실패하였습니다.");
-      return;
-    }
-
+    scheduleDao.insert(jobsSchedule);
 
     System.out.println();
     System.out.println("이달의 채용공고 등록이 완료되었습니다.");

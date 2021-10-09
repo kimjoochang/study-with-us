@@ -1,18 +1,18 @@
 package com.studywithus.handler.schedule;
 
-import java.util.HashMap;
+import com.studywithus.dao.ScheduleDao;
 import com.studywithus.domain.Schedule;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class JobsScheduleUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  ScheduleDao scheduleDao;
 
-  public JobsScheduleUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public JobsScheduleUpdateHandler(ScheduleDao scheduleDao) {
+    this.scheduleDao = scheduleDao;
   }
 
   @Override
@@ -21,17 +21,17 @@ public class JobsScheduleUpdateHandler implements Command {
 
     int no = (int) request.getAttribute("scheduleNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no)); //?
+    Schedule jobsSchedule = scheduleDao.findByNo(no);
 
-    requestAgent.request("jobsSchedule.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (jobsSchedule == null) {
       System.out.println("해당 번호의 채용공고가 없습니다.");
       return;
     }
 
-    Schedule jobsSchedule = requestAgent.getObject(Schedule.class);
+    if (jobsSchedule.getWriter().getEmail() != AuthLogInHandler.getLoginUser().getEmail()) {
+      System.out.println("변경 권한이 없습니다.");
+      return;
+    }
 
     String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", jobsSchedule.getTitle()));
     String content = Prompt.inputString(String.format("[%s] 수정할 내용: ", jobsSchedule.getContent()));
@@ -48,14 +48,7 @@ public class JobsScheduleUpdateHandler implements Command {
         jobsSchedule.setTitle(title);
         jobsSchedule.setContent(content);
 
-        requestAgent.request("jobsSchedule.update", jobsSchedule);
-
         System.out.println("채용 공고를 수정하였습니다.");
-        return;
-
-      } else if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("시험일정 변경을 실패하였습니다.");
-        System.out.println(requestAgent.getObject(String.class));
         return;
 
       } else {

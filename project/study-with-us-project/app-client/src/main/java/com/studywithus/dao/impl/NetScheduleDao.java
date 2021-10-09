@@ -21,7 +21,7 @@ public class NetScheduleDao implements ScheduleDao{
   public void insert(Schedule schedule) throws Exception {
     requestAgent.request(type + ".insert", schedule);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("시험 일정 데이터 저장 실패!");
+      throw new Exception("스케줄 데이터 저장을 실패하였습니다.");
     }
   }
 
@@ -29,7 +29,7 @@ public class NetScheduleDao implements ScheduleDao{
   public List<Schedule> findAll() throws Exception {
     requestAgent.request(type + ".selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("시험 일정 목록 조회 실패!");
+      throw new Exception("스케줄 목록 조회를 실패하였습니다.");
     }
 
     return new ArrayList<>(requestAgent.getObjects(Schedule.class));
@@ -42,7 +42,7 @@ public class NetScheduleDao implements ScheduleDao{
     requestAgent.request(type +  ".selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("시험 일정 검색 실패!");
+      throw new Exception("스케줄 검색을 실패하였습니다.");
     }
 
     return new ArrayList<>(requestAgent.getObjects(Schedule.class));
@@ -67,7 +67,7 @@ public class NetScheduleDao implements ScheduleDao{
     requestAgent.request(type + ".update", schedule);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("시험 일정 변경 실패!");
+      throw new Exception("스케줄 변경을 실패하였습니다.");
     }
   }
 
@@ -79,7 +79,7 @@ public class NetScheduleDao implements ScheduleDao{
     requestAgent.request(type + ".delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("시험 일정 삭제 실패!");
+      throw new Exception("스케줄 삭제를 실패하였습니다.");
     }
   }
 

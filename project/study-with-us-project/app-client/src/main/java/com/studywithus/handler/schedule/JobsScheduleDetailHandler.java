@@ -1,18 +1,17 @@
 package com.studywithus.handler.schedule;
 
-import java.util.HashMap;
+import com.studywithus.dao.ScheduleDao;
 import com.studywithus.domain.Schedule;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class JobsScheduleDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  ScheduleDao scheduleDao;
 
-  public JobsScheduleDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public JobsScheduleDetailHandler(ScheduleDao scheduleDao) {
+    this.scheduleDao = scheduleDao;
   }
 
   @Override
@@ -21,18 +20,12 @@ public class JobsScheduleDetailHandler implements Command {
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    Schedule jobsSchedule = scheduleDao.findByNo(no);
 
-    requestAgent.request("jobsSchedule.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 일정이 없습니다.");
+    if (jobsSchedule == null) {
+      System.out.println("해당 번호의 채용공고가 없습니다.");
       return;
     }
-
-    Schedule jobsSchedule = requestAgent.getObject(Schedule.class);
-
 
     System.out.printf("제목: %s\n", jobsSchedule.getTitle());
     System.out.printf("작성자: %s\n", jobsSchedule.getWriter().getName());
