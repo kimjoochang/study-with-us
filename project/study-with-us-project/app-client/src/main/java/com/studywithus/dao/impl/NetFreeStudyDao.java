@@ -3,14 +3,14 @@ package com.studywithus.dao.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import com.studywithus.dao.freeStudyDao;
+import com.studywithus.dao.FreeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.request.RequestAgent;
 
 // 역할
 // - 무료 스터디 데이터를 서버를 통해 관리한다.
 //
-public class NetFreeStudyDao implements freeStudyDao {
+public class NetFreeStudyDao implements FreeStudyDao {
 
   RequestAgent requestAgent;
 

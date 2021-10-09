@@ -6,7 +6,7 @@ import com.studywithus.domain.Study;
 // 역할
 // - 무료 스터디 데이터를 처리하는 객체 사용법을 정의한다.
 //
-public interface freeStudyDao {
+public interface FreeStudyDao {
   void insert(Study freeStudy) throws Exception;
 
   List<Study> findAll() throws Exception;

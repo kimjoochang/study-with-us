@@ -1,21 +1,20 @@
 package com.studywithus.handler.freestudy;
 
 import java.sql.Date;
+import com.studywithus.dao.FreeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.menu.Menu;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyAddHandler implements Command {
 
-  RequestAgent requestAgent;
-  int no = 1;
+  FreeStudyDao freeStudyDao;
 
-  public FreeStudyAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public FreeStudyAddHandler(FreeStudyDao freeStudyDao) {
+    this.freeStudyDao = freeStudyDao;
   }
 
   @Override
@@ -70,7 +69,7 @@ public class FreeStudyAddHandler implements Command {
 
     freeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    requestAgent.request("freeStudy.insert", freeStudy);
+    freeStudyDao.insert(freeStudy);
 
     AuthLogInHandler.userAccessLevel |= Menu.ACCESS_LEADER;
 

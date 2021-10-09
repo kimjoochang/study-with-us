@@ -1,20 +1,19 @@
 package com.studywithus.handler.freestudy;
 
-import java.util.HashMap;
+import com.studywithus.dao.FreeStudyDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  FreeStudyDao freeStudyDao;
 
-  public FreeStudyDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public FreeStudyDetailHandler(FreeStudyDao freeStudyDao) {
+    this.freeStudyDao = freeStudyDao;
   }
 
   @Override
@@ -24,23 +23,20 @@ public class FreeStudyDetailHandler implements Command {
 
     // Study freeStudy = findByNo(no);
 
-    HashMap<String, String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    Study freeStudy = freeStudyDao.findByNo(no);
 
-    requestAgent.request("freeStudy.selectOne", params);
-
-    // if (freeStudy == null) {
-    // System.out.println();
-    // System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
-    // return;
-    // }
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 무료 스터디가 없습니다.");
+    if (freeStudy == null) {
+      System.out.println();
+      System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
       return;
     }
 
-    Study freeStudy = requestAgent.getObject(Study.class);
+    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    // System.out.println("해당 번호의 무료 스터디가 없습니다.");
+    // return;
+    // }
+
+    // Study freeStudy = requestAgent.getObject(Study.class);
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
 
     System.out.printf("제목: %s\n", freeStudy.getTitle());
@@ -105,6 +101,7 @@ public class FreeStudyDetailHandler implements Command {
       while (true) {
         // [테스트]
         // System.out.println("테스트: " + freeStudy.getApplicants().toString());
+
         for (Member member : freeStudy.getApplicants()) {
           if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
             applyType = 1;

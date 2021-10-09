@@ -1,17 +1,18 @@
 package com.studywithus.handler.freestudy;
 
-import java.util.HashMap;
+import com.studywithus.dao.FreeStudyDao;
+import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
+  FreeStudyDao freeStudyDao;
 
-  public FreeStudyDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public FreeStudyDeleteHandler(FreeStudyDao freeStudyDao) {
+    this.freeStudyDao = freeStudyDao;
   }
 
   @Override
@@ -19,12 +20,9 @@ public class FreeStudyDeleteHandler implements Command {
     System.out.println("[무료 스터디 / 삭제]");
     int no = (int) request.getAttribute("freeNo");
 
-    HashMap<String, String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    Study freeStudy = freeStudyDao.findByNo(no);
 
-    requestAgent.request("freeStudy.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (freeStudy == null) {
       System.out.println("해당 번호의 무료 스터디가 없습니다.");
       return;
     }
@@ -37,6 +35,11 @@ public class FreeStudyDeleteHandler implements Command {
     // System.out.println("삭제 권한이 없습니다.");
     // return;
     // }
+
+    if (freeStudy.getWriter().getNo() != AuthLogInHandler.getLoginUser().getNo() || AuthLogInHandler.getLoginUser().getEmail().equals("root@test.com")) {
+      System.out.println("삭제 권한이 없습니다.");
+      return;
+    }
 
     while (true) {
       String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
@@ -55,12 +58,7 @@ public class FreeStudyDeleteHandler implements Command {
       }
     }
 
-    requestAgent.request("freeStudy.delete", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("무료 스터디 삭제 실패!");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    freeStudyDao.delete(no);
 
     System.out.println("무료 스터디를 삭제하였습니다.");
   }
