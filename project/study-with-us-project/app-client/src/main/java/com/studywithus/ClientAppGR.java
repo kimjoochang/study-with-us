@@ -7,6 +7,7 @@ import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 import java.util.HashMap;
+import com.studywithus.dao.impl.NetFreeStudyDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.community.CommunityAddHandler;
@@ -74,6 +75,8 @@ public class ClientAppGR {
   public ClientAppGR() throws Exception {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
+    NetFreeStudyDao freeStudyDao = new NetFreeStudyDao(requestAgent);
+
     commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
     // commandMap.put("/google/logIn", new SnsLogInHandler(requestAgent));
     // commandMap.put("/facebook/logIn", new SnsLogInHandler(requestAgent));
@@ -106,12 +109,12 @@ public class ClientAppGR {
     // commandMap.put("/mentorApplicant/list",
     // new MentorApplicationDetailHandler(mentorApplicationFormList, mentorList));
     //
-    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(requestAgent));
-    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
-    commandMap.put("/freeStudy/list", new FreeStudyListHandler(requestAgent));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(requestAgent));
-    commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(requestAgent));
-    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(requestAgent));
+    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(freeStudyDao));
+    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(freeStudyDao));
+    commandMap.put("/freeStudy/list", new FreeStudyListHandler(freeStudyDao));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(freeStudyDao));
+    commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyDao));
+    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyDao));
 
     commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(requestAgent));
     commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(requestAgent));
