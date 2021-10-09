@@ -1,7 +1,6 @@
 package com.studywithus.table;
 
 import java.util.ArrayList;
-
 import com.studywithus.domain.Community;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.Request;
@@ -12,129 +11,133 @@ import com.studywithus.server.Response;
 //
 public class CommunityTable extends JsonDataTable<Community> implements DataProcessor {
 
-	public CommunityTable() {
-		super("communityInfo.json", "communityQa.json", "communityTalk.json", Community.class);
-	}
+  String commandPrefix;
 
-	@Override
-	public void execute(Request request, Response response) throws Exception {
-		switch (request.getCommand()) {
-		case "community.insert":
-			insert(request, response);
-			break;
-		case "community.selectList":
-			selectList(request, response);
-			break;
-		case "community.selectListByKeyword":
-			selectListByKeyword(request, response);
-			break;
-		case "community.selectOne":
-			selectOne(request, response);
-			break;
-		case "community.update":
-			update(request, response);
-			break;
-		case "community.delete":
-			delete(request, response);
-			break;
-		default:
-			response.setStatus(Response.FAIL);
-			response.setValue("해당 명령을 지원하지 않습니다.");
-		}
-	}
+  public CommunityTable(String filename, String commandPrefix) {
+    super(filename, Community.class);
+    this.commandPrefix = commandPrefix;
+  }
 
-	private void insert(Request request, Response response) throws Exception {
-		Community community = request.getObject(Community.class);
+  @Override
+  public void execute(Request request, Response response) throws Exception {
+    String action = request.getCommand().substring(commandPrefix.length());
+    switch (action) {
+      case "insert":
+        insert(request, response);
+        break;
+      case "selectList":
+        selectList(request, response);
+        break;
+      case "selectListByKeyword":
+        selectListByKeyword(request, response);
+        break;
+      case "selectOne":
+        selectOne(request, response);
+        break;
+      case "update":
+        update(request, response);
+        break;
+      case "delete":
+        delete(request, response);
+        break;
+      default:
+        response.setStatus(Response.FAIL);
+        response.setValue("해당 명령을 지원하지 않습니다.");
+    }
+  }
 
-		if (list.isEmpty()) {
-			community.setNo(1);
-		} else {
-			Community lastIndex = list.get(list.size() - 1);
-			community.setNo(lastIndex.getNo() + 1);
-		}
+  private void insert(Request request, Response response) throws Exception {
+    Community community = request.getObject(Community.class);
 
-		list.add(community);
-		response.setStatus(Response.SUCCESS);
-	}
+    if (list.isEmpty()) {
+      community.setNo(1);
+    } else {
+      Community lastIndex = list.get(list.size() - 1);
+      community.setNo(lastIndex.getNo() + 1);
+    }
 
-	private void selectList(Request request, Response response) throws Exception {
-		response.setStatus(Response.SUCCESS);
-		response.setValue(list);
-	}
+    list.add(community);
+    response.setStatus(Response.SUCCESS);
+  }
 
-	private void selectListByKeyword(Request request, Response response) throws Exception {
-		String keyword = request.getParameter("keyword");
+  private void selectList(Request request, Response response) throws Exception {
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
+  }
 
-		ArrayList<Community> searchResult = new ArrayList<>();
-		for (Community community : list) {
-			if (!community.getTitle().contains(keyword) && !community.getContent().contains(keyword)
-					&& !community.getWriter().getName().contains(keyword)) {
-				continue;
-			}
-			searchResult.add(community);
-		}
+  private void selectListByKeyword(Request request, Response response) throws Exception {
+    String keyword = request.getParameter("keyword");
 
-		response.setStatus(Response.SUCCESS);
-		response.setValue(searchResult);
-	}
+    ArrayList<Community> searchResult = new ArrayList<>();
+    for (Community community : list) {
+      if (!community.getTitle().contains(keyword) && !community.getContent().contains(keyword)
+          && !community.getWriter().getName().contains(keyword)) {
+        continue;
+      }
+      searchResult.add(community);
+    }
 
-	private void selectOne(Request request, Response response) throws Exception {
-		int no = Integer.parseInt(request.getParameter("no"));
-		Community community = findByNo(no);
+    response.setStatus(Response.SUCCESS);
+    response.setValue(searchResult);
+  }
 
-		if (community != null) {
-			response.setStatus(Response.SUCCESS);
-			response.setValue(community);
-		} else {
-			response.setStatus(Response.FAIL);
-			response.setValue("해당 번호의 커뮤니티를 찾을 수 없습니다.");
-		}
-	}
+  private void selectOne(Request request, Response response) throws Exception {
+    int no = Integer.parseInt(request.getParameter("no"));
+    Community community = findByNo(no);
 
-	private void update(Request request, Response response) throws Exception {
-		Community community = request.getObject(Community.class);
+    if (community != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(community);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 커뮤니티를 찾을 수 없습니다.");
+    }
+  }
 
-		int index = indexOf(community.getNo());
-		if (index == -1) {
-			response.setStatus(Response.FAIL);
-			response.setValue("해당 번호의 커뮤니티를 찾을 수 없습니다.");
-			return;
-		}
+  private void update(Request request, Response response) throws Exception {
+    Community community = request.getObject(Community.class);
 
-		list.set(index, community);
-		response.setStatus(Response.SUCCESS);
-	}
+    int index = indexOf(community.getNo());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 커뮤니티를 찾을 수 없습니다.");
+      return;
+    }
 
-	private void delete(Request request, Response response) throws Exception {
-		int no = Integer.parseInt(request.getParameter("no"));
-		int index = indexOf(no);
+    list.set(index, community);
+    response.setStatus(Response.SUCCESS);
+  }
 
-		if (index == -1) {
-			response.setStatus(Response.FAIL);
-			response.setValue("해당 번호의 커뮤니티를 찾을 수 없습니다.");
-			return;
-		}
+  private void delete(Request request, Response response) throws Exception {
+    int no = Integer.parseInt(request.getParameter("no"));
+    int index = indexOf(no);
 
-		list.remove(index);
-		response.setStatus(Response.SUCCESS);
-	}
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 커뮤니티를 찾을 수 없습니다.");
+      return;
+    }
 
-	private Community findByNo(int no) {
-		for (Community community : list) {
-			if (community.getNo() == no) {
-				return community;
-			}
-		}
-		return null;
-	}
+    list.remove(index);
+    response.setStatus(Response.SUCCESS);
+  }
 
-	private int indexOf(int communityNo) {
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getNo() == communityNo) {
-				return i;
-			}
-		}
-		return -1;
-	}
+  private Community findByNo(int no) {
+    for (Community community : list) {
+      if (community.getNo() == no) {
+        return community;
+      }
+    }
+    return null;
+  }
+
+  private int indexOf(int communityNo) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getNo() == communityNo) {
+        return i;
+      }
+    }
+    return -1;
+  }
 }
 
