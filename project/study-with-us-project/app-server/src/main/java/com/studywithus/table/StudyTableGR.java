@@ -9,11 +9,11 @@ import com.studywithus.server.Response;
 // 역할
 // - 무료 스터디 데이터를 처리하는 일을 한다.
 //
-public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
+public class StudyTableGR extends JsonDataTable<Study> implements DataProcessor {
 
   String commandPrefix;
 
-  public StudyTable(String filename, String commandPrefix) {
+  public StudyTableGR(String filename, String commandPrefix) {
     super(filename, Study.class);
     this.commandPrefix = commandPrefix;
   }

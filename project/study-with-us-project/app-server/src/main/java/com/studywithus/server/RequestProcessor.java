@@ -4,37 +4,30 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import com.google.gson.Gson;
+import com.studywithus.table.JsonDataTable;
 
-public class RequestProcessor implements AutoCloseable {
+public class RequestProcessor extends Thread {
   Socket socket;
-  PrintWriter out;
-  BufferedReader in; 
-
   Map<String,DataProcessor> dataProcessorMap;
 
   public RequestProcessor(Socket socket, Map<String,DataProcessor> dataProcessorMap) throws Exception {
     this.socket = socket;
-    out = new PrintWriter(socket.getOutputStream());
-    in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     this.dataProcessorMap = dataProcessorMap; 
   }
 
   @Override
-  public void close() {
-    try {out.close();} catch (Exception e) {}
-    try {in.close();} catch (Exception e) {}
-    try {socket.close();} catch (Exception e) {}
-  }
+  public void run() {
+    try (Socket socket = this.socket;
+        PrintWriter out = new PrintWriter(socket.getOutputStream());
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) {
 
-  public void service() throws Exception {
+      // 데이터 처리 담당자의 이름 목록 가져오기
+      Set<String> dataProcessorNames = dataProcessorMap.keySet();
 
-    // 데이터 처리 담당자의 이름 목록 가져오기
-    Set<String> dataProcessorNames = dataProcessorMap.keySet();
-
-    while (true) {
       String command = in.readLine();
       Request request = new Request(command, in.readLine());
       Response response = new Response();
@@ -42,8 +35,8 @@ public class RequestProcessor implements AutoCloseable {
       if (command.equalsIgnoreCase("quit")) {
         response.setStatus(Response.SUCCESS);
         response.setValue("goodbye");
-        sendResult(response);
-        break;
+        sendResult(response, out);
+        return;
       } 
 
       // 명령어에 해당하는 데이터 처리 담당자를 찾는다.
@@ -63,11 +56,27 @@ public class RequestProcessor implements AutoCloseable {
         response.setValue("해당 명령어를 처리할 수 없습니다.");
       }
 
-      sendResult(response); // 클라이언트에게 실행 결과를 보낸다.
+      sendResult(response, out); // 클라이언트에게 실행 결과를 보낸다.
+
+      saveData();
+
+      System.out.println("클라이언트 접속 종료!");
+
+    } catch (Exception e) {
+      System.out.println("클라이언트 요청 처리 중 오류 발생!");
     }
   }
 
-  private void sendResult(Response response) throws Exception {
+  private void saveData() throws Exception {
+    Collection<DataProcessor> dataProcessors = dataProcessorMap.values();
+    for (DataProcessor dataProcessor : dataProcessors) {
+      if (dataProcessor instanceof JsonDataTable) {
+        ((JsonDataTable<?>)dataProcessor).save();
+      }
+    }
+  }
+
+  private void sendResult(Response response, PrintWriter out) throws Exception {
     // Response 객체에 보관된 실행 결과를 클라이언트에게 보낸다.
     out.println(response.status);
     if (response.getValue() != null) {
