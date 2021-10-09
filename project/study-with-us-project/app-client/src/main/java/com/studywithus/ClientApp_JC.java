@@ -5,6 +5,7 @@ import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import java.util.HashMap;
+import com.studywithus.dao.impl.NetScheduleDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.chargestudy.ChargeStudyAddHandler;
@@ -33,12 +34,6 @@ import com.studywithus.handler.chargestudy.RegisterChargeStudyDetailHandler;
 import com.studywithus.handler.chargestudy.RegisterChargeStudyListHandler;
 import com.studywithus.handler.chargestudy.ReviewAddHandler;
 import com.studywithus.handler.chargestudy.ReviewListHandler;
-import com.studywithus.handler.freestudy.FreeStudyAddHandler;
-import com.studywithus.handler.freestudy.FreeStudyDeleteHandler;
-import com.studywithus.handler.freestudy.FreeStudyDetailHandler;
-import com.studywithus.handler.freestudy.FreeStudyListHandler;
-import com.studywithus.handler.freestudy.FreeStudySearchHandler;
-import com.studywithus.handler.freestudy.FreeStudyUpdateHandler;
 import com.studywithus.handler.schedule.ExamScheduleAddHandler;
 import com.studywithus.handler.schedule.ExamScheduleDeleteHandler;
 import com.studywithus.handler.schedule.ExamScheduleDetailHandler;
@@ -96,6 +91,8 @@ public class ClientApp_JC {
   public ClientApp_JC() throws Exception {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
+    NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent, "examSchedule");
+
     commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
     //    commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
     //    commandMap.put("/facebook/logIn", new SnsLogInHandler(memberList));
@@ -120,12 +117,12 @@ public class ClientApp_JC {
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(requestAgent));
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(requestAgent));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(requestAgent));
-    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(requestAgent));
-    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
-    commandMap.put("/freeStudy/list", new FreeStudyListHandler(requestAgent));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(requestAgent));
-    commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(requestAgent));
-    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(requestAgent));
+    //commandMap.put("/freeStudy/search", new FreeStudySearchHandler(requestAgent));
+    //commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
+    //commandMap.put("/freeStudy/list", new FreeStudyListHandler(requestAgent));
+    //commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(requestAgent));
+    //commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(requestAgent));
+    //commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(requestAgent));
     //
     //    commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyList, applyFreeStudyMap));
     //    commandMap.put("/freeStudy/applyCancel",
@@ -194,11 +191,11 @@ public class ClientApp_JC {
     commandMap.put("/jobsSchedule/update", new JobsScheduleUpdateHandler(requestAgent));
     commandMap.put("/jobsSchedule/delete", new JobsScheduleDeleteHandler(requestAgent));
 
-    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(requestAgent));
-    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(requestAgent));
-    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(requestAgent));
-    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(requestAgent));
-    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(requestAgent)); 
+    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(examScheduleDao));
+    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(examScheduleDao));
+    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(examScheduleDao));
+    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(examScheduleDao));
+    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(examScheduleDao)); 
 
     /*[수정]*/commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(requestAgent));                          
     /*[수정]*/commandMap.put("/chargeStudy/paymentDetail", new ChargeStudyPaymentDetailHandler(requestAgent));                          

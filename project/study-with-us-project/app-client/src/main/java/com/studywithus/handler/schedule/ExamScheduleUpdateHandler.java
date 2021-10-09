@@ -1,18 +1,17 @@
 package com.studywithus.handler.schedule;
 
-import java.util.HashMap;
+import com.studywithus.dao.ScheduleDao;
 import com.studywithus.domain.Schedule;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ExamScheduleUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  ScheduleDao scheduleDao;
 
-  public ExamScheduleUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ExamScheduleUpdateHandler(ScheduleDao scheduleDao) {
+    this.scheduleDao = scheduleDao;
   }
 
   @Override
@@ -21,17 +20,12 @@ public class ExamScheduleUpdateHandler implements Command {
 
     int no = (int) request.getAttribute("scheduleNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no)); //?
+    Schedule examSchedule = scheduleDao.findByNo(no);
 
-    requestAgent.request("examSchedule.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (examSchedule == null) {
       System.out.println("해당 번호의 시험일정이 없습니다.");
       return;
     }
-
-    Schedule examSchedule = requestAgent.getObject(Schedule.class);
 
     String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", examSchedule.getTitle()));
     String content = Prompt.inputString(String.format("[%s] 수정할 내용: ", examSchedule.getContent()));
@@ -49,18 +43,9 @@ public class ExamScheduleUpdateHandler implements Command {
         examSchedule.setTitle(title);
         examSchedule.setContent(content);
 
-        requestAgent.request("examSchedule.update", examSchedule);
+        scheduleDao.update(examSchedule);
 
-        System.out.println("시험 일정을 수정하였습니다.");
-        return;
-
-      } else if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("시험일정 수정을 실패하였습니다.");
-        System.out.println(requestAgent.getObject(String.class));
-        return;
-      }
-
-      else {
+      } else {
         System.out.println("유효한 값을 입력하세요.\n");
         continue;
       }
