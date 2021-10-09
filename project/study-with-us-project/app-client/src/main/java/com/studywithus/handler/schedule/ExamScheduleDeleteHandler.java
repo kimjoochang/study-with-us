@@ -1,10 +1,9 @@
 package com.studywithus.handler.schedule;
 
-import java.util.HashMap;
 import com.studywithus.dao.ScheduleDao;
+import com.studywithus.domain.Schedule;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ExamScheduleDeleteHandler implements Command {
@@ -21,12 +20,9 @@ public class ExamScheduleDeleteHandler implements Command {
 
     int no = (int) request.getAttribute("scheduleNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    Schedule examSchedule = scheduleDao.findByNo(no);
 
-    requestAgent.request("examSchedule.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (examSchedule == null) {
       System.out.println("해당 번호의 시험일정이 없습니다.");
       return;
     }
@@ -37,13 +33,7 @@ public class ExamScheduleDeleteHandler implements Command {
       return;
     }
 
-    requestAgent.request("examSchedule.delete", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("시험일정 삭제를 실패하였습니다.");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    scheduleDao.delete(no);
 
     System.out.println();
     System.out.println("시험일정을 삭제하였습니다.");

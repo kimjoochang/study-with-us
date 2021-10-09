@@ -34,12 +34,6 @@ import com.studywithus.handler.chargestudy.RegisterChargeStudyDetailHandler;
 import com.studywithus.handler.chargestudy.RegisterChargeStudyListHandler;
 import com.studywithus.handler.chargestudy.ReviewAddHandler;
 import com.studywithus.handler.chargestudy.ReviewListHandler;
-import com.studywithus.handler.freestudy.FreeStudyAddHandler;
-import com.studywithus.handler.freestudy.FreeStudyDeleteHandler;
-import com.studywithus.handler.freestudy.FreeStudyDetailHandler;
-import com.studywithus.handler.freestudy.FreeStudyListHandler;
-import com.studywithus.handler.freestudy.FreeStudySearchHandler;
-import com.studywithus.handler.freestudy.FreeStudyUpdateHandler;
 import com.studywithus.handler.schedule.ExamScheduleAddHandler;
 import com.studywithus.handler.schedule.ExamScheduleDeleteHandler;
 import com.studywithus.handler.schedule.ExamScheduleDetailHandler;
@@ -123,12 +117,12 @@ public class ClientApp_JC {
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(requestAgent));
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(requestAgent));
     commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(requestAgent));
-    commandMap.put("/freeStudy/search", new FreeStudySearchHandler(requestAgent));
-    commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
-    commandMap.put("/freeStudy/list", new FreeStudyListHandler(requestAgent));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(requestAgent));
-    commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(requestAgent));
-    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(requestAgent));
+    //commandMap.put("/freeStudy/search", new FreeStudySearchHandler(requestAgent));
+    //commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
+    //commandMap.put("/freeStudy/list", new FreeStudyListHandler(requestAgent));
+    //commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(requestAgent));
+    //commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(requestAgent));
+    //commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(requestAgent));
     //
     //    commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyList, applyFreeStudyMap));
     //    commandMap.put("/freeStudy/applyCancel",
