@@ -9,7 +9,7 @@ import com.studywithus.server.RequestProcessor;
 import com.studywithus.table.CommunityTable;
 import com.studywithus.table.JsonDataTable;
 import com.studywithus.table.MemberTableGR;
-import com.studywithus.table.StudyTable;
+import com.studywithus.table.StudyTableGR;
 
 public class ServerAppGR {
 
@@ -29,13 +29,13 @@ public class ServerAppGR {
     dataProcessorMap.put("member.", new MemberTableGR());
     // [삭제]
     // dataProcessorMap.put("freeStudy.", new FreeStudyTable());
-    dataProcessorMap.put("freeStudy.", new StudyTable("freestudy.json", "freeStudy."));
-    dataProcessorMap.put("chargeStudy.", new StudyTable("charge.json", "charge."));
+    dataProcessorMap.put("freeStudy.", new StudyTableGR("freestudy.json", "freeStudy."));
+    dataProcessorMap.put("chargeStudy.", new StudyTableGR("chargeStudy.json", "chargeStudy."));
     dataProcessorMap.put("communityInfo.",
-        new CommunityTable("communityInfo.json", "communityInfo"));
-    dataProcessorMap.put("communityQa.", new CommunityTable("communityQa.json", "communityQa"));
+        new CommunityTable("communityInfo.json", "communityInfo."));
+    dataProcessorMap.put("communityQa.", new CommunityTable("communityQa.json", "communityQa."));
     dataProcessorMap.put("communityTalk.",
-        new CommunityTable("communityTalk.json", "communityTalk"));
+        new CommunityTable("communityTalk.json", "communityTalk."));
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
     requestProcessor.service();

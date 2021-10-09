@@ -29,7 +29,7 @@ public class CommunityAddHandler implements Command {
 
     // communityList.add(community);
 
-    requestAgent.request("community.insert", community);
+    requestAgent.request("community", community);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("커뮤니티 저장 실패!");
       return;

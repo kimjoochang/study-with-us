@@ -10,7 +10,11 @@ import java.util.HashMap;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.community.CommunityAddHandler;
+import com.studywithus.handler.community.CommunityDeleteHandler;
+import com.studywithus.handler.community.CommunityDetailHandler;
 import com.studywithus.handler.community.CommunityListHandler;
+import com.studywithus.handler.community.CommunitySearchHandler;
+import com.studywithus.handler.community.CommunityUpdateHandler;
 import com.studywithus.handler.freestudy.FreeStudyAddHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyCancelHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyDetailHandler;
@@ -162,28 +166,28 @@ public class ClientAppGR {
     //
     commandMap.put("/communityQa/add", new CommunityAddHandler(requestAgent));
     commandMap.put("/communityQa/list", new CommunityListHandler(requestAgent));
-    // commandMap.put("/communityQa/detail",
-    // new CommunityDetailHandler(communityQaList, "/communityQa/update", "/communityQa/delete"));
-    // commandMap.put("/communityQa/update", new CommunityUpdateHandler(communityQaList));
-    // commandMap.put("/communityQa/delete", new CommunityDeleteHandler(communityQaList));
-    // commandMap.put("/communityQa/search", new CommunitySearchHandler(communityQaList));
-    //
+    commandMap.put("/communityQa/detail",
+        new CommunityDetailHandler(requestAgent, "/communityQa/update", "/communityQa/delete"));
+    commandMap.put("/communityQa/update", new CommunityUpdateHandler(requestAgent));
+    commandMap.put("/communityQa/delete", new CommunityDeleteHandler(requestAgent));
+    commandMap.put("/communityQa/search", new CommunitySearchHandler(requestAgent));
+
     commandMap.put("/communityInfo/add", new CommunityAddHandler(requestAgent));
     commandMap.put("/communityInfo/list", new CommunityListHandler(requestAgent));
-    // commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList,
-    // "/communityInfo/update", "/communityInfo/delete"));
-    // commandMap.put("/communityInfo/update", new CommunityUpdateHandler(communityInfoList));
-    // commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(communityInfoList));
-    // commandMap.put("/communityInfo/search", new CommunitySearchHandler(communityInfoList));
-    //
+    commandMap.put("/communityInfo/detail",
+        new CommunityDetailHandler(requestAgent, "/communityInfo/update", "/communityInfo/delete"));
+    commandMap.put("/communityInfo/update", new CommunityUpdateHandler(requestAgent));
+    commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(requestAgent));
+    commandMap.put("/communityInfo/search", new CommunitySearchHandler(requestAgent));
+
     commandMap.put("/communityTalk/add", new CommunityAddHandler(requestAgent));
     commandMap.put("/communityTalk/list", new CommunityListHandler(requestAgent));
-    // commandMap.put("/communityTalk/detail", new CommunityDetailHandler(communityTalkList,
-    // "/communityTalk/update", "/communityTalk/delete"));
-    // commandMap.put("/communityTalk/update", new CommunityUpdateHandler(communityTalkList));
-    // commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityTalkList));
-    // commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityTalkList));
-    //
+    commandMap.put("/communityTalk/detail",
+        new CommunityDetailHandler(requestAgent, "/communityTalk/update", "/communityTalk/delete"));
+    commandMap.put("/communityTalk/update", new CommunityUpdateHandler(requestAgent));
+    commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(requestAgent));
+    commandMap.put("/communityTalk/search", new CommunitySearchHandler(requestAgent));
+
     // commandMap.put("/myPost/list",
     // new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));
     // commandMap.put("/myPost/detail",
