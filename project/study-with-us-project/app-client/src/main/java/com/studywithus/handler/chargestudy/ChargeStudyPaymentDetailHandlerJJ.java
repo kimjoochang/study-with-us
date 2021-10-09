@@ -24,6 +24,7 @@ public class ChargeStudyPaymentDetailHandlerJJ implements Command {
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
     HashMap<String, String> params = new HashMap<>();
+    params.put("no", String.valueOf(no));
 
     requestAgent.request("payment.selectOne", params);
 
@@ -41,39 +42,34 @@ public class ChargeStudyPaymentDetailHandlerJJ implements Command {
     System.out.printf("결제일: %s\n", payment.getPaymentDate());
     System.out.println();
 
-    params.put("no", String.valueOf(no));
     request.setAttribute("no", no);
-    //    
-    //
-    //    params.put("no", String.valueOf(payment.getPaidStudyNo()));
-    //
-    //    requestAgent.request("chargeStudy.selectOne", no);
 
-    if (requestAgent.getObject(Study.class).getStudyStatus().equals("모집중")
-        || requestAgent.getObject(Study.class).getStudyStatus().equals("진행중")) {
+    while (true) {
+      if (requestAgent.getObject(Study.class).getStudyStatus().equals("모집중")
+          || requestAgent.getObject(Study.class).getStudyStatus().equals("진행중")) {
 
-      while (true) {
+        while (true) {
 
-        System.out.println("1. 결제 취소하기");
-        System.out.println("0. 이전");
-        int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
+          System.out.println("1. 결제 취소하기");
+          System.out.println("0. 이전");
 
-        if (input == 1) {
-          request.setAttribute("no", no);
-          request.getRequestDispatcher("/chargeStudy/paymentCancel").forward(request);
+          int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
 
-        } else if (input == 0) {
+          if (input == 1) {
+            request.setAttribute("no", no);
+            request.getRequestDispatcher("/chargeStudy/paymentCancel").forward(request);
+
+          } else if (input == 0) {
+            return;
+
+          } else {
+            System.out.println("존재하지 않는 메뉴 번호입니다.");
+            continue;
+          }
           return;
-
-        } else {
-          System.out.println("존재하지 않는 메뉴 번호입니다.");
-          continue;
         }
-        return;
       }
     }
-
   }
-
 }
 
