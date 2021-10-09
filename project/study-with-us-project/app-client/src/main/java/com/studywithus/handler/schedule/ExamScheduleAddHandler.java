@@ -1,19 +1,19 @@
 package com.studywithus.handler.schedule;
 
 import java.sql.Date;
+import com.studywithus.dao.impl.NetScheduleDao;
 import com.studywithus.domain.Schedule;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ExamScheduleAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  NetScheduleDao netScheduleDao;
 
-  public ExamScheduleAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ExamScheduleAddHandler(NetScheduleDao netScheduleDao) {
+    this.netScheduleDao = netScheduleDao;
   }
 
   @Override
@@ -39,14 +39,6 @@ public class ExamScheduleAddHandler implements Command {
       }
     }
 
-    requestAgent.request("examSchedule.insert", examSchedule);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글 저장에 실패하였습니다.");
-      return;
-    }
-
-    System.out.println();
-    System.out.println("이달의 시험일정 등록이 완료되었습니다.");
+    netScheduleDao.insert(examSchedule);
   }
 }
