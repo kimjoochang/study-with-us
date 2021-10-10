@@ -1,19 +1,18 @@
 package com.studywithus.handler.chargestudy;
 
-import java.util.HashMap;
+import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class RegisterChargeStudyDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  ChargeStudyDao chargeStudyDao;
 
-  public RegisterChargeStudyDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public RegisterChargeStudyDetailHandler(ChargeStudyDao chargeStudyDao) {
+    this.chargeStudyDao = chargeStudyDao;
   }
 
   @Override
@@ -23,17 +22,7 @@ public class RegisterChargeStudyDetailHandler implements Command {
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
-
-    requestAgent.request("chargeStudy.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
-
-    Study chargeStudy = requestAgent.getObject(Study.class);
+    Study chargeStudy = chargeStudyDao.findByNo(no);
 
     if (!chargeStudy.getWriter().getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
       System.out.println("번호에 해당하는 내가 생성한 유료 스터디가 없습니다.");

@@ -1,18 +1,17 @@
 package com.studywithus.handler.chargestudy;
 
-import java.util.HashMap;
+import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDeleteRequestDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  ChargeStudyDao chargeStudyDao;
 
-  public ChargeStudyDeleteRequestDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ChargeStudyDeleteRequestDetailHandler(ChargeStudyDao chargeStudyDao) {
+    this.chargeStudyDao = chargeStudyDao;
   }
 
   // 관리자 관점
@@ -22,17 +21,7 @@ public class ChargeStudyDeleteRequestDetailHandler implements Command {
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
-
-    requestAgent.request("chargeStudy.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
-
-    Study chargeStudy = requestAgent.getObject(Study.class);
+    Study chargeStudy = chargeStudyDao.findByNo(no);
 
     if ( chargeStudy.isDeleteRequest() == false) {
       System.out.println();
@@ -64,14 +53,7 @@ public class ChargeStudyDeleteRequestDetailHandler implements Command {
 
       // 1. 삭제
       if (input == 1) {
-        requestAgent.request("chargeStudy.delete", params);
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("스터디 삭제를 실패하였습니다.");
-          System.out.println(requestAgent.getObject(String.class));
-        }
-
-        System.out.println("삭제가 완료되었습니다.");
-        return;
+        chargeStudyDao.delete(no);
 
         // 0. 이전
       } else if (input == 0) {

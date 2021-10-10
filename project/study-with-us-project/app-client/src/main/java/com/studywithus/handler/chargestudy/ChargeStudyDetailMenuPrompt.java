@@ -1,25 +1,25 @@
 package com.studywithus.handler.chargestudy;
 
 import java.sql.Date;
+import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailMenuPrompt {
 
   CommandRequest request;
-  RequestAgent requestAgent;
+  ChargeStudyDao chargeStudyDao;
   Study chargeStudy;
 
   int interestType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
   int paymentType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
 
 
-  public ChargeStudyDetailMenuPrompt(RequestAgent requestAgent, CommandRequest request) {
+  public ChargeStudyDetailMenuPrompt(ChargeStudyDao chargeStudyDao, CommandRequest request) {
     this.request = request;
-    this.requestAgent = requestAgent;
+    this.chargeStudyDao = chargeStudyDao;
   }
 
   protected String studyStatus(Study chargeStudy) {
@@ -187,9 +187,8 @@ public class ChargeStudyDetailMenuPrompt {
   }
 
   private boolean findByName() throws Exception {
-    requestAgent.request("chargeStudy.selectList", null);
 
-    for (Study chargeStudy : requestAgent.getObjects(Study.class)) {
+    for (Study chargeStudy : chargeStudyDao.findAll()) {
 
       for (String email : chargeStudy.getMenteeEmailList()) {
         if (email.equals(AuthLogInHandler.getLoginUser().getEmail())) {
