@@ -1,23 +1,25 @@
 package com.studywithus.handler.chargestudy;
 
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
+import com.studywithus.dao.ChargeStudyDao;
+import com.studywithus.dao.PaymentDao;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.menu.Menu;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyPaymentHandler implements Command {
 
-  RequestAgent requestAgent;
+  PaymentDao paymentDao;
+  ChargeStudyDao chargeStudyDao;
 
-  public ChargeStudyPaymentHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ChargeStudyPaymentHandler(PaymentDao paymentDao, ChargeStudyDao chargeStudyDao) {
+    this.paymentDao = paymentDao;
+    this.chargeStudyDao = chargeStudyDao;
   }
 
   @Override
@@ -26,18 +28,7 @@ public class ChargeStudyPaymentHandler implements Command {
 
     int no = (int) request.getAttribute("chargeNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
-
-    requestAgent.request("chargeStudy.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
-
-    Study chargeStudy = requestAgent.getObject(Study.class);
-
+    Study chargeStudy = chargeStudyDao.findByNo(no);
 
     String input = Prompt.inputString("유료 스터디를 결제 하시겠습니까? (y/N) ");
 
@@ -79,14 +70,14 @@ public class ChargeStudyPaymentHandler implements Command {
       payment.setPaymentDate(new Date(System.currentTimeMillis()));
       payment.setVisible(true);
 
-      requestAgent.request("payment.insert", payment);
+      paymentDao.insert(payment);
 
       // 유료스터디 멘티 리스트에 결제한 회원 아이디 추가해서 서버에 저장 요청
       List<String> menteeEmailList = chargeStudy.getMenteeEmailList();
       menteeEmailList.add(AuthLogInHandler.getLoginUser().getEmail());
       chargeStudy.setMenteeEmailList(menteeEmailList);
 
-      requestAgent.request("chargeStudy.update", chargeStudy);
+      chargeStudyDao.update(chargeStudy);
 
       AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MENTEE;
     }

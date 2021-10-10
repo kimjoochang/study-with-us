@@ -1,37 +1,25 @@
 package com.studywithus.handler.chargestudy;
 
 import java.util.Collection;
+import com.studywithus.dao.PaymentDao;
 import com.studywithus.domain.Payment;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.request.RequestAgent;
 
 public class ChargeStudyPaymentListHandler implements Command {
 
-  RequestAgent requestAgent;
+  PaymentDao paymentDao;
 
-  public ChargeStudyPaymentListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ChargeStudyPaymentListHandler(PaymentDao paymentDao) {
+    this.paymentDao = paymentDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[유료 스터디 결제 내역 / 조회]\n");
 
-    requestAgent.request("payment.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("결제 내역이 존재하지 않습니다.");
-      return;
-    }
-
-    Collection<Payment> paymentList = requestAgent.getObjects(Payment.class);
-
-    //    if (paymentList ==  null) {
-    //      System.out.println("유료 스터디 결제 내역이 없습니다.");
-    //      return;
-    //    } 
+    Collection<Payment> paymentList = paymentDao.findAll();
 
     for (Payment payment : paymentList) {
       if (payment.getMenteeEmail().equals(AuthLogInHandler.getLoginUser().getEmail())
