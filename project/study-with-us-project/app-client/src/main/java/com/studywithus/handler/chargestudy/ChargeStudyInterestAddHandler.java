@@ -10,15 +10,18 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyInterestAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  ChargeStudyDao chargeStudyDao;
 
-  public ChargeStudyInterestAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ChargeStudyInterestAddHandler(ChargeStudyDao chargeStudyDao) {
+    this.chargeStudyDao = chargeStudyDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[마이페이지 / 유료 스터디 / 관심 목록 / 추가]\n");
+
+    ChargeStudy chargeStudy = new ChargeStudy();
+
     int no = (int) request.getAttribute("chargeNo");
 
     HashMap<String,String> params = new HashMap<>();
