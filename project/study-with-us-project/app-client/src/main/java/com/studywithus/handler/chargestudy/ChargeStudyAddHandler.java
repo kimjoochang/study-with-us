@@ -1,19 +1,19 @@
 package com.studywithus.handler.chargestudy;
 
 import java.sql.Date;
+import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  ChargeStudyDao chargeStudyDao;
 
-  public ChargeStudyAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ChargeStudyAddHandler(ChargeStudyDao chargeStudyDao) {
+    this.chargeStudyDao = chargeStudyDao;
   }
 
   @Override
@@ -75,7 +75,7 @@ public class ChargeStudyAddHandler implements Command {
 
     chargeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    requestAgent.request("chargeStudy.insert", chargeStudy);
+    chargeStudyDao.insert(chargeStudy);
 
     System.out.println();
     System.out.println("유료스터디 등록이 완료되었습니다.\n");
@@ -83,28 +83,3 @@ public class ChargeStudyAddHandler implements Command {
 
 }
 
-/*studyList.add(chargeStudy);
-
-    List<Study> registerChargeStudyList; // 해쉬맵에 객체 담기 위한 임시 변수
-
-
-    // 생성 유료 스터디에 해당 아이디 존재 O
-    if (registerChargeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getId())) {
-      // 생성 유료 스터디에 아이디 호출 -> 생성 유료 스터디 리스트에 대입
-      registerChargeStudyList = registerChargeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
-
-      // 생성 유료 스터디 리스트에 유료 스터디 추가
-      registerChargeStudyList.add(chargeStudy);
-      // 생성 유료 스터디에 아이디 추가
-      registerChargeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), registerChargeStudyList);
-
-      // 생성 유료 스터디에 해당 아이디 존재 X
-    } else {
-      // 새로운 생성 유료 스터디 리스트 생성
-      registerChargeStudyList = new ArrayList<>();
-
-      // 생성 유료 스터디 리스트에 유료 스터디 추가
-      registerChargeStudyList.add(chargeStudy);
-      // 생성 유료 스터디에 아이디 추가
-      registerChargeStudyMap.put(AuthLogInHandler.getLoginUser().getId(), registerChargeStudyList);
-    }*/
