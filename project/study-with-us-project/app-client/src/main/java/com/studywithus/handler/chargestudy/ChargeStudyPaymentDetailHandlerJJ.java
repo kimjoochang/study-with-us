@@ -1,19 +1,21 @@
 package com.studywithus.handler.chargestudy;
 
-import java.util.HashMap;
+import com.studywithus.dao.ChargeStudyDao;
+import com.studywithus.dao.PaymentDao;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyPaymentDetailHandlerJJ implements Command {
 
-  RequestAgent requestAgent;
+  PaymentDao paymentDao;
+  ChargeStudyDao chargeStudyDao;
 
-  public ChargeStudyPaymentDetailHandlerJJ(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ChargeStudyPaymentDetailHandlerJJ(PaymentDao paymentDao, ChargeStudyDao chargeStudyDao) {
+    this.paymentDao = paymentDao;
+    this.chargeStudyDao = chargeStudyDao;
   }
 
   @Override
@@ -23,17 +25,9 @@ public class ChargeStudyPaymentDetailHandlerJJ implements Command {
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    HashMap<String, String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    Payment payment = paymentDao.findByNo(no);
 
-    requestAgent.request("payment.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 결제내역이 없습니다.\n");
-      return;
-    }
-
-    Payment payment = requestAgent.getObject(Payment.class);
+    Study chargeStudy = chargeStudyDao.findByNo(payment.getPaidStudyNo());
 
     System.out.printf("결제한 스터디 번호: %s\n", payment.getPaidStudyNo());
     System.out.printf("결제한 스터디 제목: %s\n", payment.getTitle());
@@ -45,8 +39,8 @@ public class ChargeStudyPaymentDetailHandlerJJ implements Command {
     request.setAttribute("no", no);
 
     while (true) {
-      if (requestAgent.getObject(Study.class).getStudyStatus().equals("모집중")
-          || requestAgent.getObject(Study.class).getStudyStatus().equals("진행중")) {
+      if (chargeStudy.getStudyStatus().equals("모집중")
+          || chargeStudy.getStudyStatus().equals("진행중")) {
 
         while (true) {
 

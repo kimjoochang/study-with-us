@@ -5,6 +5,8 @@ import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import java.util.HashMap;
+import com.studywithus.dao.impl.NetChargeStudyDao;
+import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetScheduleDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -61,7 +63,6 @@ public class ClientApp_JC {
   HashMap<String,Command> commandMap = new HashMap<>();
 
   /*[수정]*/CommandRequest request = new CommandRequest(commandMap);
-  /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(requestAgent, request);
 
   class MenuItem extends Menu {
     String menuId;
@@ -92,6 +93,9 @@ public class ClientApp_JC {
     requestAgent = new RequestAgent("127.0.0.1", 8888);
 
     NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent, "examSchedule");
+    NetPaymentDao paymentDao = new NetPaymentDao(requestAgent);
+    NetChargeStudyDao chargeStudyDao = new NetChargeStudyDao(requestAgent);
+    /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(chargeStudyDao, request);
 
     commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
     //    commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
@@ -136,23 +140,23 @@ public class ClientApp_JC {
     //        new ParticipateFreeStudyListHandler(participateFreeStudyMap));
     //
     //    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
-    commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(requestAgent));
-    commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(requestAgent));
-    /*[수정]*/commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler_JC(requestAgent, chargeStudyDetailMenuPrompt));
-    commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(requestAgent));
-    commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(requestAgent));
-    commandMap.put("/chargeStudy/deleteRequestCancel", new ChargeStudyDeleteRequestCancelHandler(requestAgent));
-    commandMap.put("/chargeStudy/deleteRequestList", new ChargeStudyDeleteRequestListHandler(requestAgent));
-    commandMap.put("/chargeStudy/deleteRequestDetail", new ChargeStudyDeleteRequestDetailHandler(requestAgent));
+    commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(chargeStudyDao));
+    commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyDao));
+    /*[수정]*/commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler_JC(chargeStudyDao, chargeStudyDetailMenuPrompt));
+    commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyDao));
+    commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyDao));
+    commandMap.put("/chargeStudy/deleteRequestCancel", new ChargeStudyDeleteRequestCancelHandler(chargeStudyDao));
+    commandMap.put("/chargeStudy/deleteRequestList", new ChargeStudyDeleteRequestListHandler(chargeStudyDao));
+    commandMap.put("/chargeStudy/deleteRequestDetail", new ChargeStudyDeleteRequestDetailHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(requestAgent));
     commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(requestAgent));
     commandMap.put("/chargeStudy/paymentList", new ChargeStudyPaymentListHandler(requestAgent));
     commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(requestAgent));
     commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(requestAgent));
-    commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(requestAgent));
-    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler(requestAgent));
-    commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(requestAgent));
-    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(requestAgent)); 
+    commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(chargeStudyDao));
+    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler(chargeStudyDao));
+    commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(chargeStudyDao));
+    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(chargeStudyDao)); 
     commandMap.put("/review/add", new ReviewAddHandler(requestAgent));
     commandMap.put("/review/list", new ReviewListHandler(requestAgent));
     //

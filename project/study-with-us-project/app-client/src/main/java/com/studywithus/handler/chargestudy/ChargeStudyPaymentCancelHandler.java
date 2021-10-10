@@ -2,20 +2,23 @@ package com.studywithus.handler.chargestudy;
 
 import java.util.HashMap;
 import java.util.List;
+import com.studywithus.dao.ChargeStudyDao;
+import com.studywithus.dao.PaymentDao;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyPaymentCancelHandler implements Command {
 
-  RequestAgent requestAgent;
+  PaymentDao paymentDao;
+  ChargeStudyDao chargeStudyDao;
 
-  public ChargeStudyPaymentCancelHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ChargeStudyPaymentCancelHandler(PaymentDao paymentDao, ChargeStudyDao chargeStudyDao) {
+    this.paymentDao = paymentDao;
+    this.chargeStudyDao = chargeStudyDao;
   }
 
   @Override
@@ -28,26 +31,10 @@ public class ChargeStudyPaymentCancelHandler implements Command {
 
     // 스터디 객체 가져오기
     params.put("no", String.valueOf(no));
-    requestAgent.request("chargeStudy.selectOne", params);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    Study chargeStudy = chargeStudyDao.findByNo(no);
 
-    Study chargeStudy = requestAgent.getObject(Study.class);
-
-    // payment 객체 가져오기
-    params.put("email", AuthLogInHandler.getLoginUser().getEmail());
-
-    requestAgent.request("payment.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
-
-    Payment payment = requestAgent.getObject(Payment.class);
+    Payment payment = paymentDao.findByNo(no);
 
     while (true) {
       String input = Prompt.inputString("유료 스터디를 결제를 취소 하시겠습니까? (y/N) ");
@@ -65,18 +52,15 @@ public class ChargeStudyPaymentCancelHandler implements Command {
       }
     }
 
-    requestAgent.request("payment.update", payment);
-
     List<String> menteeEmailList = chargeStudy.getMenteeEmailList();
     menteeEmailList.remove(AuthLogInHandler.getLoginUser().getEmail());
     chargeStudy.setMenteeEmailList(menteeEmailList);
 
-    requestAgent.request("chargeStudy.update", chargeStudy);
+    chargeStudyDao.update(chargeStudy);
 
     System.out.println();
     System.out.println("결제 취소가 완료되었습니다.");
     payment.setVisible(false);
-    requestAgent.request("payment.update", payment);
-
+    paymentDao.update(payment);
   }
 }
