@@ -104,8 +104,8 @@ public class ClientAppSY {
 		//
 		// commandMap.put("/myInfo/list", new MyInfoHandler());
 		//
-		commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(requestAgent));
-		commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(requestAgent));
+		commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyDao));
+		commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyDao));
 		commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(requestAgent));
 		// commandMap.put("/mentorApplicant/add",
 		// new MentorApplicationAddHandler(mentorApplicationFormList, memberList));
@@ -119,15 +119,15 @@ public class ClientAppSY {
 		commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(freeStudyDao));
 		commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyDao));
 		//
-		commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(requestAgent));
-		commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(requestAgent));
-		commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(requestAgent));
+		commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyDao));
+		commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(freeStudyDao));
+		commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(freeStudyDao));
 
-		commandMap.put("/freeStudy/interestAdd", new FreeStudyInterestAddHandler(requestAgent));
-		commandMap.put("/freeStudy/interestDelete", new FreeStudyInterestDeleteHandler(requestAgent));
+		commandMap.put("/freeStudy/interestAdd", new FreeStudyInterestAddHandler(freeStudyDao));
+		commandMap.put("/freeStudy/interestDelete", new FreeStudyInterestDeleteHandler(freeStudyDao));
 
-		commandMap.put("/freeStudy/interestDetail", new FreeStudyInterestDetailHandler(requestAgent));
-		commandMap.put("/freeStudy/interestList", new FreeStudyInterestListHandler(requestAgent));
+		commandMap.put("/freeStudy/interestDetail", new FreeStudyInterestDetailHandler(freeStudyDao));
+		commandMap.put("/freeStudy/interestList", new FreeStudyInterestListHandler(freeStudyDao));
 
 
 		//		commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(requestAgent));

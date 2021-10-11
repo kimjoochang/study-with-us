@@ -2,6 +2,7 @@ package com.studywithus.handler.community;
 
 import java.util.Collection;
 
+import com.studywithus.dao.CommunityDao;
 import com.studywithus.domain.Community;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
