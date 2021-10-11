@@ -1,20 +1,21 @@
 package com.studywithus.handler.user;
 
 import java.sql.Date;
+import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.menu.Menu;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class SignUpHandler implements Command {
 
-  RequestAgent requestAgent;
+  MemberDao memberDao;
+
   int no = 1;
 
-  public SignUpHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public SignUpHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -28,10 +29,10 @@ public class SignUpHandler implements Command {
       String phoneNumber = Prompt.inputString("휴대폰 번호를 입력하세요.('-'를 제외한 숫자 11자) > ");
       String email = Prompt.inputString("사용할 이메일을 입력하세요. > ");
       String password = Prompt.inputString("사용할 비밀번호를 입력하세요.(특수문자 !,@,$,^ 포함 8자 이상 16자 이하) > ");
+      // ?
+      memberDao.findByEmail(email);
 
-      requestAgent.request("member.duplicateCheck", email);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      if (email == null) {
         System.out.println("중복된 아이디가 있습니다.\n");
 
       } else if (!email.contains("@") || !email.contains(".com")){
@@ -62,10 +63,9 @@ public class SignUpHandler implements Command {
         member.setUserAccessLevel(Menu.ACCESS_GENERAL);
         member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-        requestAgent.request("member.insert", member);
+        memberDao.insert(member);
 
         System.out.println("회원가입이 완료되었습니다.\n");
-
       }
       return;
     }
