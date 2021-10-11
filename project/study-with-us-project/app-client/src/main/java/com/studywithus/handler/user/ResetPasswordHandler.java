@@ -1,28 +1,29 @@
 package com.studywithus.handler.user;
 import java.util.HashMap;
+import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ResetPasswordHandler implements Command {
 
-  RequestAgent requestAgent;
+  MemberDao memberDao;
 
   static Member loginUser;
   public static Member getLoginUser() {
     return loginUser;
   }
 
-  public ResetPasswordHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ResetPasswordHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println("[비밀번호 변경]\n");
+
     String name = Prompt.inputString("회원 이름을 입력해주세요. > ");
     String phoneNumber = Prompt.inputString("휴대폰 번호를 입력해주세요. ('-'를 제외한 숫자 11자) > ");
     String email = Prompt.inputString("이메일을 입력해주세요. > ");
@@ -32,15 +33,15 @@ public class ResetPasswordHandler implements Command {
     params.put("name",name);
     params.put("email", email);
     params.put("phoneNumber", phoneNumber);
-    requestAgent.request("member.findMemberForResetPassword", params);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" ");
-      System.out.println("해당 정보와 일치하는 회원이 없습니다.\n");
+    Member member = memberDao.findMember(name, email, phoneNumber);
+
+    if (member == null) {
+      System.out.println("해당 정보와 일치하는 회원이 없습니다.");
       return;
     }
 
-    Member member = requestAgent.getObject(Member.class);
+    //    Member member = memberDao.findMember(name, email, phoneNumber);
 
     while (true) {
       String newPassword1 = Prompt.inputString("새 비밀번호를 입력하세요.(특수문자 !,@,$,^ 포함 8자 이상 16자 이하) > ");
@@ -87,7 +88,7 @@ public class ResetPasswordHandler implements Command {
         } else if (input.equalsIgnoreCase("y")) {
 
           member.setPassword(newPassword1);
-          requestAgent.request("member.resetPassword", member);
+          memberDao.update(member);
 
           System.out.println();
           System.out.println("비밀번호 변경이 완료되었습니다.\n");

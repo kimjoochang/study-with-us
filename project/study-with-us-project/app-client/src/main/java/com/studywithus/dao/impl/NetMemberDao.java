@@ -33,19 +33,19 @@ public class NetMemberDao implements MemberDao {
     return new ArrayList<>(requestAgent.getObjects(Member.class));
   }
 
-  @Override
-  public Member findByNo(int no) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
-
-    requestAgent.request("member.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return null;
-    }
-
-    return requestAgent.getObject(Member.class);
-  }
+  //  @Override
+  //  public Member findByNo(int no) throws Exception {
+  //    HashMap<String,String> params = new HashMap<>();
+  //    params.put("no", String.valueOf(no));
+  //
+  //    requestAgent.request("member.selectOne", params);
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      return null;
+  //    }
+  //
+  //    return requestAgent.getObject(Member.class);
+  //  }
 
   @Override
   public Member findByName(String name) throws Exception {
@@ -67,6 +67,22 @@ public class NetMemberDao implements MemberDao {
     params.put("email", email);
 
     requestAgent.request("member.duplicateCheck", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+
+    return requestAgent.getObject(Member.class);
+  }
+
+  @Override
+  public Member findMember(String name, String email, String phoneNumber) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("name", name);
+    params.put("email", email);
+    params.put("phoneNumber", phoneNumber);
+
+    requestAgent.request("member.findMemberForResetPassword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;

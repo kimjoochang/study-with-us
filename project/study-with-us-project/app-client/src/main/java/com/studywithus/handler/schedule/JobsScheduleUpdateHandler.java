@@ -45,8 +45,11 @@ public class JobsScheduleUpdateHandler implements Command {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
+
         jobsSchedule.setTitle(title);
         jobsSchedule.setContent(content);
+
+        scheduleDao.update(jobsSchedule);
 
         System.out.println("채용 공고를 수정하였습니다.");
         return;
