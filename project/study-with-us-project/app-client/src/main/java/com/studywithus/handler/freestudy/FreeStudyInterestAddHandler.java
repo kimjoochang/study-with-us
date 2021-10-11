@@ -48,6 +48,7 @@ public class FreeStudyInterestAddHandler implements Command {
       } else if (input.equalsIgnoreCase("y")) {
         freeStudy.getLikeMembers().add(AuthLogInHandler.getLoginUser());
         freeStudyDao.update(freeStudy);
+        return;
 
         // if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
         // System.out.println("무료 스터디 관심 목록 추가 성공!");

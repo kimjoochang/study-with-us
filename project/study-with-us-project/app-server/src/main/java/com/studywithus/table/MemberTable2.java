@@ -59,7 +59,7 @@ public class MemberTable2 extends JsonDataTable<Member> implements DataProcessor
   }
 
   private void duplicateCheck(Request request, Response response) throws Exception {
-    String email = request.getObject(String.class);
+    String email = request.getParameter("email");
     int type = 0;
     for (Member m : list) {
       if (email.equalsIgnoreCase(m.getEmail())) {

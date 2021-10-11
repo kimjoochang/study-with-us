@@ -5,8 +5,8 @@ import java.net.Socket;
 import java.util.HashMap;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.RequestProcessor;
+import com.studywithus.table.FreeStudyTable;
 import com.studywithus.table.MemberTableGR;
-import com.studywithus.table.StudyTableGR;
 
 public class ServerAppGR {
 
@@ -22,9 +22,9 @@ public class ServerAppGR {
     // => 데이터 처리 담당자를 등록한다.
     dataProcessorMap.put("member.", new MemberTableGR());
     // [삭제]
-    // dataProcessorMap.put("freeStudy.", new FreeStudyTable());
-    dataProcessorMap.put("freeStudy.", new StudyTableGR("freestudy.json", "freeStudy."));
-    dataProcessorMap.put("chargeStudy.", new StudyTableGR("chargeStudy.json", "chargeStudy."));
+    dataProcessorMap.put("freeStudy.", new FreeStudyTable());
+    // dataProcessorMap.put("freeStudy.", new StudyTableGR("freestudy.json", "freeStudy."));
+    // dataProcessorMap.put("chargeStudy.", new StudyTableGR("chargeStudy.json", "chargeStudy."));
     // dataProcessorMap.put("communityInfo.",
     // new CommunityTable("communityInfo.json", "communityInfo."));
     // dataProcessorMap.put("communityQa.", new CommunityTable("communityQa.json", "communityQa."));
