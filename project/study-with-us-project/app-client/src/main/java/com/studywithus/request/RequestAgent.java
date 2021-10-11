@@ -59,5 +59,4 @@ public class RequestAgent {
     Type type = TypeToken.getParameterized(Collection.class, elementType).getType(); 
     return new Gson().fromJson(jsonData, type);
   }
-
 }
