@@ -42,8 +42,9 @@ public class FreeStudyInterestDeleteHandler implements Command {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        freeStudy.getLikeMembers().remove(AuthLogInHandler.getLoginUser().getNo());
+        freeStudy.getLikeMembers().remove(AuthLogInHandler.getLoginUser());
         freeStudyDao.update(freeStudy);
+        return;
 
         // if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
         // System.out.println("무료 스터디 관심 목록 삭제 성공!");
