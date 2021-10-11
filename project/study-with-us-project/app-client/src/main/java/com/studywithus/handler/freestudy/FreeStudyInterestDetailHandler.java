@@ -22,19 +22,19 @@ public class FreeStudyInterestDetailHandler implements Command {
     int no = Prompt.inputInt("번호를 입력하세요. > ");
     System.out.println();
 
-    //	Study freeStudy = findByNo(no);
+    //  Study freeStudy = findByNo(no);
 
-    //		HashMap<String, String> params = new HashMap<>();
-    //		params.put("no", String.valueOf(no));
+    //      HashMap<String, String> params = new HashMap<>();
+    //      params.put("no", String.valueOf(no));
 
     Study freeStudy = freeStudyDao.findByNo(no);
 
-    //		if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //			System.out.println("해당 번호의 무료 스터디가 없습니다.");
-    //			return;
-    //		}
+    //      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //          System.out.println("해당 번호의 무료 스터디가 없습니다.");
+    //          return;
+    //      }
 
-    //		Study freeStudy = requestAgent.getObject(Study.class);
+    //      Study freeStudy = requestAgent.getObject(Study.class);
 
     Boolean myIntStd = false;
     for (int i = 0; i < freeStudy.getLikeMembers().size(); i++) {
