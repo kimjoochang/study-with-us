@@ -32,8 +32,9 @@ public class ServerAppSY {
 		//    dataProcessorMap.put("project.", new ProjectTable());
 
 		RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
-		requestProcessor.service();
-		requestProcessor.close();
+		requestProcessor.start();
+		//		requestProcessor.service();
+		//		requestProcessor.close();
 
 
 		// => 데이터를 파일에 저장한다.

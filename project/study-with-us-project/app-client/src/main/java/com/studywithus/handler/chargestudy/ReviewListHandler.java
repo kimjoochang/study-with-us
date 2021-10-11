@@ -2,17 +2,17 @@ package com.studywithus.handler.chargestudy;
 
 import java.text.DecimalFormat;
 import java.util.Collection;
+import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.domain.Review;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
 
 public class ReviewListHandler implements Command {
 
-  RequestAgent requestAgent;
+  ChargeStudyDao chargeStudyDao;
 
-  public ReviewListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ReviewListHandler(ChargeStudyDao chargeStudyDao) {
+    this.chargeStudyDao = chargeStudyDao;
   }
   String star;
 
@@ -24,14 +24,7 @@ public class ReviewListHandler implements Command {
     System.out.println("[유료 스터디 / 후기 조회]\n");
     int no = (int) request.getAttribute("chargeNo");
 
-    requestAgent.request("review.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 유료 스터디 후기가 존재하지 않습니다.");
-      return;
-    }
-
-    Collection<Review> reviewList = requestAgent.getObjects(Review.class);
+    Collection<Study> reviewList = chargeStudyDao.findAll();
 
     if (reviewList.isEmpty()) {
       System.out.println("아직 등록된 후기가 없습니다.");

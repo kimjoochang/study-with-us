@@ -1,17 +1,17 @@
 package com.studywithus.handler.chargestudy;
 
 import java.util.Collection;
+import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
 
 public class ChargeStudyDeleteRequestListHandler implements Command {
 
-  RequestAgent requestAgent;
+  ChargeStudyDao chargeStudyDao;
 
-  public ChargeStudyDeleteRequestListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ChargeStudyDeleteRequestListHandler(ChargeStudyDao chargeStudyDao) {
+    this.chargeStudyDao = chargeStudyDao;
   }
 
   // 관리자 관점
@@ -19,14 +19,7 @@ public class ChargeStudyDeleteRequestListHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[스터디 삭제 요청 내역 / 조회]\n");
 
-    requestAgent.request("chargeStudy.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("유료 스터디 게시글이 존재하지 않습니다.");
-      return;
-    }
-
-    Collection<Study> studyList = requestAgent.getObjects(Study.class);
+    Collection<Study> studyList = chargeStudyDao.findAll();
 
     for(Study chargeStudy : studyList) {
       if (chargeStudy.isDeleteRequest()) {

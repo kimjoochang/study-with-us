@@ -1,22 +1,20 @@
 package com.studywithus.handler.chargestudy;
 
-import java.util.HashMap;
 import java.util.List;
+import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-// [09.24 merge by 제이] App에서 재확인 필요
 
 public class ChargeStudyInterestDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
+  ChargeStudyDao chargeStudyDao;
 
-  public ChargeStudyInterestDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ChargeStudyInterestDeleteHandler(ChargeStudyDao chargeStudyDao) {
+    this.chargeStudyDao = chargeStudyDao;
   }
 
   @Override
@@ -29,17 +27,7 @@ public class ChargeStudyInterestDeleteHandler implements Command {
 
       int no = Prompt.inputInt("삭제할 관심목록 번호를 입력하세요. > ");
 
-      HashMap<String,String> params = new HashMap<>();
-      params.put("no", String.valueOf(no));
-
-      requestAgent.request("chargeStudy.selectOne", params);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println(requestAgent.getObject(String.class));
-        return;
-      }
-
-      Study chargeStudy = requestAgent.getObject(Study.class);
+      Study chargeStudy = chargeStudyDao.findByNo(no);
 
       for (String likeMemberEmail : chargeStudy.getLikeMembersEmail()) {
 
@@ -72,27 +60,19 @@ public class ChargeStudyInterestDeleteHandler implements Command {
 
       List<String> likeMemberEmail = chargeStudy.getLikeMembersEmail();
       likeMemberEmail.remove(AuthLogInHandler.getLoginUser().getEmail());
+
       chargeStudy.setLikeMembersEmail(likeMemberEmail);
 
-      requestAgent.request("chargeStudy.update", chargeStudy);
+      chargeStudyDao.update(chargeStudy);
 
       System.out.println();
       System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");
 
     } else {
+
       int no = (int) request.getAttribute("chargeNo");
 
-      HashMap<String,String> params = new HashMap<>();
-      params.put("no", String.valueOf(no));
-
-      requestAgent.request("chargeStudy.selectOne", params);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println(requestAgent.getObject(String.class));
-        return;
-      }
-
-      Study chargeStudy = requestAgent.getObject(Study.class);
+      Study chargeStudy = chargeStudyDao.findByNo(no);
 
       if (chargeStudy.getLikeMembersEmail().isEmpty()) {
         System.out.println("유료 스터디 관심목록이 존재하지 않습니다.\n");
@@ -119,7 +99,7 @@ public class ChargeStudyInterestDeleteHandler implements Command {
       likeMemberEmail.remove(AuthLogInHandler.getLoginUser().getEmail());
       chargeStudy.setLikeMembersEmail(likeMemberEmail);
 
-      requestAgent.request("chargeStudy.update", chargeStudy);
+      chargeStudyDao.update(chargeStudy);
 
       System.out.println();
       System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");

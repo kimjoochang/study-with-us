@@ -1,17 +1,18 @@
 package com.studywithus.handler.schedule;
 
-import java.util.HashMap;
+import com.studywithus.dao.ScheduleDao;
+import com.studywithus.domain.Schedule;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class JobsScheduleDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
+  ScheduleDao scheduleDao;
 
-  public JobsScheduleDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public JobsScheduleDeleteHandler(ScheduleDao scheduleDao) {
+    this.scheduleDao = scheduleDao;
   }
 
   @Override
@@ -20,13 +21,15 @@ public class JobsScheduleDeleteHandler implements Command {
 
     int no = (int) request.getAttribute("scheduleNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    Schedule jobsSchedule = scheduleDao.findByNo(no);
 
-    requestAgent.request("jobsSchedule.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (jobsSchedule == null) {
       System.out.println("해당 번호의 채용공고가 없습니다.");
+      return;
+    }
+
+    if (jobsSchedule.getWriter().getEmail() != AuthLogInHandler.getLoginUser().getEmail()) {
+      System.out.println("삭제 권한이 없습니다.");
       return;
     }
 
@@ -37,13 +40,7 @@ public class JobsScheduleDeleteHandler implements Command {
       return;
     }
 
-    requestAgent.request("jobsSchedule.delete", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("채용공고 삭제를 실패하였습니다.");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    scheduleDao.delete(no);
 
     System.out.println();
     System.out.println("채용공고를 삭제하였습니다.");

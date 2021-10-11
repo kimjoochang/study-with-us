@@ -1,18 +1,18 @@
 package com.studywithus.handler.chargestudy;
 
 import java.util.Collection;
+import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.request.RequestAgent;
 
 public class ParticipateChargeStudyListHandler implements Command {
 
-  RequestAgent requestAgent;
+  ChargeStudyDao chargeStudyDao;
 
-  public ParticipateChargeStudyListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ParticipateChargeStudyListHandler(ChargeStudyDao chargeStudyDao) {
+    this.chargeStudyDao = chargeStudyDao;
   }
 
   @Override
@@ -20,14 +20,7 @@ public class ParticipateChargeStudyListHandler implements Command {
 
     System.out.println("[마이 페이지 / 내가 참여한 유료 스터디]\n");
 
-    requestAgent.request("chargeStudy.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("유료 스터디 게시글이 존재하지 않습니다.");
-      return;
-    }
-
-    Collection<Study> chargeStudyList = requestAgent.getObjects(Study.class);
+    Collection<Study> chargeStudyList = chargeStudyDao.findAll();
 
     int count = 0; 
 

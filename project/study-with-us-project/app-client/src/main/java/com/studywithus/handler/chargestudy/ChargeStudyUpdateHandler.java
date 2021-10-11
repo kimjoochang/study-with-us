@@ -1,18 +1,18 @@
 package com.studywithus.handler.chargestudy;
 
 import java.util.HashMap;
+import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  ChargeStudyDao chargeStudyDao;
 
-  public ChargeStudyUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;	
+  public ChargeStudyUpdateHandler(ChargeStudyDao chargeStudyDao) {
+    this.chargeStudyDao = chargeStudyDao;	
   }
 
   @Override
@@ -23,14 +23,7 @@ public class ChargeStudyUpdateHandler implements Command {
     HashMap<String,String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
-    requestAgent.request("chargeStudy.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
-      return;
-    }
-
-    Study chargeStudy = requestAgent.getObject(Study.class);
+    Study chargeStudy = chargeStudyDao.findByNo(no);
 
     String title = Prompt.inputString(String.format("[%s] 수정된 스터디 제목: ", chargeStudy.getTitle()));
     String content = Prompt.inputString(String.format("[%s] 수정된 내용: ", chargeStudy.getContent()));
@@ -49,13 +42,7 @@ public class ChargeStudyUpdateHandler implements Command {
         chargeStudy.setTitle(title);
         chargeStudy.setContent(content);
 
-        requestAgent.request("chargeStudy.update", chargeStudy);
-
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println("유료 스터디 수정을 실패했습니다.");
-          System.out.println(requestAgent.getObject(String.class));
-          return;
-        }
+        chargeStudyDao.update(chargeStudy);
 
         System.out.println("유료 스터디를 수정하였습니다.\n");
         return;
