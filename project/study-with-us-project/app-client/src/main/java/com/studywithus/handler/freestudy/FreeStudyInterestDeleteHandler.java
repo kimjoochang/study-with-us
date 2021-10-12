@@ -38,12 +38,22 @@ public class FreeStudyInterestDeleteHandler implements Command {
       String input = Prompt.inputString("무료 스터디 관심 목록을 삭제하시겠습니까? (y/N) ");
 
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println();
         System.out.println("무료 스터디 관심 목록 삭제를 취소하였습니다.\n");
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        freeStudy.getLikeMembers().remove(AuthLogInHandler.getLoginUser());
+        // freeStudy.getLikeMembers().remove(AuthLogInHandler.getLoginUser().getNo());
+        for (int i = 0; i < freeStudy.getLikeMembers().size(); i++) {
+          if (freeStudy.getLikeMembers().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+            freeStudy.getLikeMembers().remove(i);
+            break;
+          }
+        }
+
         freeStudyDao.update(freeStudy);
+        System.out.println();
+        System.out.println("무료 스터디 관심 목록을 삭제하였습니다.");
         return;
 
         // if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
@@ -56,6 +66,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
         // }
 
       } else {
+        System.out.println();
         System.out.println("다시 입력하세요.\n");
         continue;
       }
