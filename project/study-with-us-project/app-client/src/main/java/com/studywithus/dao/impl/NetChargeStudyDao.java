@@ -19,7 +19,7 @@ public class NetChargeStudyDao implements ChargeStudyDao {
   public void insert(Study chargeStudy) throws Exception {
     requestAgent.request("chargeStudy.insert", chargeStudy);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("시험 일정 데이터 저장 실패!");
+      throw new Exception("유료 스터디 데이터 저장을 실패하였습니다.");
     }
   }
 
@@ -27,7 +27,7 @@ public class NetChargeStudyDao implements ChargeStudyDao {
   public List<Study> findAll() throws Exception {
     requestAgent.request("chargeStudy.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("시험 일정 목록 조회 실패!");
+      throw new Exception("유료 스터디 목록 조회를 실패하였습니다.");
     }
 
     return new ArrayList<>(requestAgent.getObjects(Study.class));
@@ -40,7 +40,7 @@ public class NetChargeStudyDao implements ChargeStudyDao {
     requestAgent.request("chargeStudy.selectListByKeyword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("시험 일정 검색 실패!");
+      throw new Exception("유료 스터디 검색을 실패하였습니다.");
     }
 
     return new ArrayList<>(requestAgent.getObjects(Study.class));
@@ -65,7 +65,7 @@ public class NetChargeStudyDao implements ChargeStudyDao {
     requestAgent.request("chargeStudy.update", chargeStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("시험 일정 변경 실패!");
+      throw new Exception("유료 스터디 변경을 실패하였습니다.");
     }
   }
 
@@ -77,7 +77,7 @@ public class NetChargeStudyDao implements ChargeStudyDao {
     requestAgent.request("chargeStudy.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("시험 일정 삭제 실패!");
+      throw new Exception("유료 스터디 삭제를 실패하였습니다.");
     }
   }
 
