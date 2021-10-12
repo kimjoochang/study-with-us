@@ -46,8 +46,6 @@ public class FreeStudyInterestDeleteHandler implements Command {
         for (int i = 0; i < freeStudy.getLikeMembers().size(); i++) {
           if (freeStudy.getLikeMembers().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
             freeStudy.getLikeMembers().remove(i);
-            // [테스트]
-            System.out.println("-----테스트-----");
             break;
           }
         }
