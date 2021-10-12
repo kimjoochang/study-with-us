@@ -18,7 +18,7 @@ public class RegisterChargeStudyDetailHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception  {
 
-    System.out.println("[마이 페이지 / 내가 생성한 유료 스터디 / 상세보기]\n");
+    System.out.println("[마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디 / 상세보기]\n");
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
@@ -47,7 +47,16 @@ public class RegisterChargeStudyDetailHandler implements Command {
     request.setAttribute("chargeNo", no);
 
     System.out.println("1. 수정"); 
-    System.out.println("2. 삭제");
+
+    int changableMenu = 0; // 메뉴 출력 다르게 하기 위한 변수
+    if(chargeStudy.isDeleteRequest() == false) {
+      System.out.println("2. 삭제 요청");
+      changableMenu = 1;
+    } else {
+      System.out.println("2. 삭제 요청 취소");
+      changableMenu = 2;
+    }
+
     System.out.println("0. 이전\n");
 
     int input = Prompt.inputInt("메뉴 번호를 선택하세요. > "); 
@@ -55,10 +64,13 @@ public class RegisterChargeStudyDetailHandler implements Command {
 
     if (input == 1) {
       request.getRequestDispatcher("/chargeStudy/update").forward(request);
-    } else if (input == 2) {
+    } else if (input == 2 && changableMenu == 1) {
       request.getRequestDispatcher("/chargeStudy/deleteRequest").forward(request);
+    }  else if (input == 2 && changableMenu == 2) {
+      request.getRequestDispatcher("/chargeStudy/deleteRequestCancel").forward(request);
     } else if (input == 0) {
       return;
     }
   }
+
 }

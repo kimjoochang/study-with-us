@@ -17,7 +17,7 @@ public class RegisterChargeStudyListHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[마이 페이지 / 내가 생성한 유료 스터디]\n");
+    System.out.println("[마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디]\n");
 
 
     Collection<Study> chargeStudyList = chargeStudyDao.findAll();
