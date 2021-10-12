@@ -38,6 +38,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
       String input = Prompt.inputString("무료 스터디 관심 목록을 삭제하시겠습니까? (y/N) ");
 
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println();
         System.out.println("무료 스터디 관심 목록 삭제를 취소하였습니다.\n");
         return;
 
@@ -65,6 +66,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
         // }
 
       } else {
+        System.out.println();
         System.out.println("다시 입력하세요.\n");
         continue;
       }

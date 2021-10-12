@@ -46,7 +46,7 @@ public class FreeStudyApplyHandler implements Command {
 
     // 중복신청 확인
     for (Member member : freeStudy.getApplicants()) {
-      if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
+      if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
         System.out.println("이미 신청하신 스터디입니다.");
         return;
       }
@@ -62,12 +62,15 @@ public class FreeStudyApplyHandler implements Command {
       String input = Prompt.inputString("무료 스터디를 신청 하시겠습니까? (y/N) ");
 
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println();
         System.out.println("무료 스터디 신청이 취소되었습니다.");
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
         freeStudy.getApplicants().add(AuthLogInHandler.getLoginUser());
         freeStudyDao.update(freeStudy);
+        System.out.println();
+        System.out.println("무료 스터디 신청이 완료되었습니다.");
         return;
 
         // [테스트]
@@ -83,6 +86,7 @@ public class FreeStudyApplyHandler implements Command {
         //              }
 
       } else {
+        System.out.println();
         System.out.println("다시 입력하세요.\n");
         continue;
       }
