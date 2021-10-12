@@ -1,14 +1,13 @@
 package com.studywithus.domain;
 
 import java.sql.Date;
-import java.util.List;
 
 public class Community extends Content {
   private Date registeredDate; // 게시글 등록일
   private int viewCount; // 조회수
   private int like; // 좋아요
-  private List<Member> members;// 회원별 게시글 조회용 리스트
-  // 게시글 분류 변수 추가
+  private int category; // 정보, 질문, 스몰톡
+  // private List<Member> members; // 회원별 게시글 조회용 리스트
 
   public Date getRegisteredDate() {
     return registeredDate;
@@ -34,11 +33,19 @@ public class Community extends Content {
     this.like = like;
   }
 
-  public List<Member> getMembers() {
-    return members;
+  public int getCategory() {
+    return category;
   }
 
-  public void setMembers(List<Member> members) {
-    this.members = members;
+  public void setCategory(int category) {
+    this.category = category;
   }
+
+  // public List<Member> getMembers() {
+  // return members;
+  // }
+
+  // public void setMembers(List<Member> members) {
+  // this.members = members;
+  // }
 }
