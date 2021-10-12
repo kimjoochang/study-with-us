@@ -3,14 +3,14 @@ package com.studywithus.handler.community;
 import java.util.HashMap;
 import com.studywithus.domain.Community;
 import com.studywithus.handler.Command;
-//import com.studywithus.domain.Member;
+// import com.studywithus.domain.Member;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.request.RequestAgent;
-//import com.studywithus.handler.user.AuthLogInHandler;
+// import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class CommunityDetailHandler implements Command{
+public class CommunityDetailHandler implements Command {
 
   RequestAgent requestAgent;
   String updateKey;
@@ -27,7 +27,7 @@ public class CommunityDetailHandler implements Command{
     System.out.println("[커뮤니티 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    HashMap<String,String> params = new HashMap<>();
+    HashMap<String, String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
 
     requestAgent.request("community.selectOne", params);

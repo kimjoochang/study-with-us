@@ -1,6 +1,7 @@
 package com.studywithus.handler.community;
 
 import java.sql.Date;
+import com.studywithus.dao.CommunityDao;
 import com.studywithus.domain.Community;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,10 +11,10 @@ import com.studywithus.util.Prompt;
 
 public class CommunityAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  CommunityDao communityDao;
 
-  public CommunityAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public CommunityAddHandler(CommunityDao communityDao) {
+    this.communityDao = communityDao;
   }
 
   @Override
