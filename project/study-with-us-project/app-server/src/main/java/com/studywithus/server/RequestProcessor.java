@@ -78,7 +78,7 @@ public class RequestProcessor extends Thread {
 
   private void sendResult(Response response, PrintWriter out) throws Exception {
     // Response 객체에 보관된 실행 결과를 클라이언트에게 보낸다.
-    out.println(response.status);
+    out.println(response.getStatus());
     if (response.getValue() != null) {
       out.println(new Gson().toJson(response.getValue()));
     } else {

@@ -18,9 +18,9 @@ public class NetMemberDao implements MemberDao {
   @Override
   public void insert(Member member) throws Exception {
     requestAgent.request("member.insert", member);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
-    }
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      throw new Exception(requestAgent.getObject(String.class));
+    //    }
   }
 
   @Override
@@ -62,7 +62,7 @@ public class NetMemberDao implements MemberDao {
   }
 
   @Override
-  public Member findByEmail(String email) throws Exception {
+  public String findByEmail(String email) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("email", email);
 
@@ -71,8 +71,7 @@ public class NetMemberDao implements MemberDao {
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
-
-    return requestAgent.getObject(Member.class);
+    return email;
   }
 
   @Override
