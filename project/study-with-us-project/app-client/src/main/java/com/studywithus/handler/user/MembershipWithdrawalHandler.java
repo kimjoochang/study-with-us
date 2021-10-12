@@ -1,18 +1,18 @@
 package com.studywithus.handler.user;
 
+import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.menu.Menu;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class MembershipWithdrawalHandler implements Command {
 
-  RequestAgent requestAgent;
+  MemberDao memberDao;
 
-  public MembershipWithdrawalHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MembershipWithdrawalHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -24,9 +24,10 @@ public class MembershipWithdrawalHandler implements Command {
     String email = Prompt.inputString("이메일: ");
     String password = Prompt.inputString("비밀번호: ");
 
-    // Member member = findByEmailPassword(email, password);
+    Member member = memberDao.findMemberByEmailPassword(email, password);
     Member loginUser = AuthLogInHandler.getLoginUser();
 
+    // Member member = findByEmailPassword(email, password);
     //		HashMap<String, String> params = new HashMap<>();
     //		params.put("email", email);
     //		params.put("password", password);
@@ -37,10 +38,12 @@ public class MembershipWithdrawalHandler implements Command {
       System.out.println();
       System.out.println("현재 로그인한 회원 정보와 일치하지 않습니다.\n");
       return;
-    } else if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+
+    } else if (member == null) {
       System.out.println();
       System.out.println("아이디와 비밀번호가 일치하는 회원을 찾을 수 없습니다.\n");
       return;
+
     } else {
       System.out.println();
       String input = Prompt.inputString("정말 회원 탈퇴하시겠습니까? (y/N) ");
@@ -50,7 +53,8 @@ public class MembershipWithdrawalHandler implements Command {
         System.out.println(" 회원 탈퇴가 취소되었습니다.\n");
       } else {
 
-        requestAgent.request("member.delete", AuthLogInHandler.getLoginUser().getEmail());
+        memberDao.delete(email);
+        // requestAgent.request("member.delete", AuthLogInHandler.getLoginUser().getEmail());
 
         AuthLogInHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
         System.out.println();

@@ -62,7 +62,7 @@ public class NetMemberDao implements MemberDao {
   }
 
   @Override
-  public String findByEmail(String email) throws Exception {
+  public Member findByEmail(String email) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("email", email);
 
@@ -71,7 +71,20 @@ public class NetMemberDao implements MemberDao {
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
-    return email;
+    return requestAgent.getObject(Member.class);
+  }
+
+  @Override
+  public Member findMemberByEmailPassword(String email, String password) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("email", email);
+
+    requestAgent.request("member.selectOneByEmailPassword", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+    return requestAgent.getObject(Member.class);
   }
 
   @Override
@@ -100,9 +113,9 @@ public class NetMemberDao implements MemberDao {
   }
 
   @Override
-  public void delete(int no) throws Exception {
+  public void delete(String email) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
+    params.put("email", String.valueOf(email));
 
     requestAgent.request("member.delete", params);
 
