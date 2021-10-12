@@ -42,9 +42,17 @@ public class FreeStudyInterestDeleteHandler implements Command {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        freeStudy.getLikeMembers().remove(AuthLogInHandler.getLoginUser());
+        // freeStudy.getLikeMembers().remove(AuthLogInHandler.getLoginUser().getNo());
+        for (int i = 0; i < freeStudy.getApplicants().size(); i++) {
+          if (freeStudy.getApplicants().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+            freeStudy.getApplicants().remove(i);
+            // [테스트]
+            System.out.println("-----테스트-----");
+            break;
+          }
+        }
         freeStudyDao.update(freeStudy);
-        return;
+        // return;
 
         // if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
         // System.out.println("무료 스터디 관심 목록 삭제 성공!");
