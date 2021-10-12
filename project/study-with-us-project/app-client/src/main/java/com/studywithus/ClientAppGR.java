@@ -23,8 +23,6 @@ import com.studywithus.handler.freestudy.FreeStudyUpdateHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.MyInfoHandler;
-import com.studywithus.handler.user.SignUpHandler;
-import com.studywithus.handler.user.SnsSignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.request.RequestAgent;
@@ -76,11 +74,11 @@ public class ClientAppGR {
 
     commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
 
-    commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
-    commandMap.put("/google/signUp", new SnsSignUpHandler(requestAgent));
-    commandMap.put("/facebook/signUp", new SnsSignUpHandler(requestAgent));
-    commandMap.put("/kakao/signUp", new SnsSignUpHandler(requestAgent));
-    commandMap.put("/naver/signUp", new SnsSignUpHandler(requestAgent));
+    //    commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
+    //    commandMap.put("/google/signUp", new SnsSignUpHandler(requestAgent));
+    //    commandMap.put("/facebook/signUp", new SnsSignUpHandler(requestAgent));
+    //    commandMap.put("/kakao/signUp", new SnsSignUpHandler(requestAgent));
+    //    commandMap.put("/naver/signUp", new SnsSignUpHandler(requestAgent));
     //
     // commandMap.put("/find/id", new FindIdHandler(memberList));
     // commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
