@@ -29,6 +29,7 @@ import com.studywithus.handler.chargestudy.RegisterChargeStudyListHandler;
 import com.studywithus.handler.chargestudy.ReviewAddHandler;
 import com.studywithus.handler.chargestudy.ReviewListHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
@@ -87,7 +88,7 @@ public class ClientAppJJ {
     commandMap.put("/kakao/logIn", new SnsLogInHandler(requestAgent));
     commandMap.put("/naver/logIn", new SnsLogInHandler(requestAgent));
 
-    //commandMap.put("/auth/logOut", new AuthLogOutHandler());
+    commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
 
     commandMap.put("/auth/signUp", new SignUpHandler(memberDao));
     commandMap.put("/google/signUp", new SnsSignUpHandler(memberDao));
@@ -135,8 +136,8 @@ public class ClientAppJJ {
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyDao));
-    // commandMap.put("/chargeStudy/detail",
-    //     new ChargeStudyDetailHandler_JC(chargeStudyDao, chargeStudyDetailMenuPrompt));
+    //     commandMap.put("/chargeStudy/detail",
+    //         new ChargeStudyDetailHandler_JC(chargeStudyDao, chargeStudyDetailMenuPrompt));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/deleteRequestCancel",

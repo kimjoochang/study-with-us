@@ -43,6 +43,7 @@ public class AuthLogInHandler implements Command {
       root.setEmail("root@test.com");
       loginUser = root;
       userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL;
+      System.out.println("관리자 계정으로 로그인하였습니다.\n");
       return;
     } 
 
