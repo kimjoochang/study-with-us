@@ -41,7 +41,6 @@ public class ServerApp_JC {
 
       requestProcessor.start();
     }
-
   }
 }
 

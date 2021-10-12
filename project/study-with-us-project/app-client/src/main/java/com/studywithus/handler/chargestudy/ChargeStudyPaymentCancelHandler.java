@@ -1,6 +1,5 @@
 package com.studywithus.handler.chargestudy;
 
-import java.util.HashMap;
 import java.util.List;
 import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.dao.PaymentDao;
@@ -27,14 +26,9 @@ public class ChargeStudyPaymentCancelHandler implements Command {
 
     int no = (int) request.getAttribute("chargeNo");
 
-    HashMap<String,String> params = new HashMap<>();
-
-    // 스터디 객체 가져오기
-    params.put("no", String.valueOf(no));
-
     Study chargeStudy = chargeStudyDao.findByNo(no);
 
-    Payment payment = paymentDao.findByNo(no);
+    Payment payment = paymentDao.findByNo(no, AuthLogInHandler.getLoginUser().getEmail());
 
     while (true) {
       String input = Prompt.inputString("유료 스터디를 결제를 취소 하시겠습니까? (y/N) ");
@@ -58,9 +52,10 @@ public class ChargeStudyPaymentCancelHandler implements Command {
 
     chargeStudyDao.update(chargeStudy);
 
-    System.out.println();
-    System.out.println("결제 취소가 완료되었습니다.");
     payment.setVisible(false);
     paymentDao.update(payment);
+
+    System.out.println();
+    System.out.println("결제 취소가 완료되었습니다.");
   }
 }

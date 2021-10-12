@@ -1,6 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
-import java.util.HashMap;
+import java.sql.Date;
 import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.dao.PaymentDao;
 import com.studywithus.domain.Payment;
@@ -24,13 +24,13 @@ public class ChargeStudyPaymentDetailHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[마이페이지 / 유료 스터디 결제내역 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
+    Payment payment = paymentDao.findByNo(no, AuthLogInHandler.getLoginUser().getEmail());
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
-
-    Payment payment = paymentDao.findByNo(no);
-
-    params.put("no", String.valueOf(payment.getPaidStudyNo()));
+    if (payment == null || payment.isVisible()== false) {
+      System.out.println();
+      System.out.println("해당 번호의 결제내역이 없습니다.\n");
+      return;
+    }
 
     Study chargeStudy = chargeStudyDao.findByNo(payment.getPaidStudyNo());
 
@@ -45,15 +45,15 @@ public class ChargeStudyPaymentDetailHandler implements Command {
     System.out.printf("결제일: %s\n", payment.getPaymentDate());
     System.out.println();
 
-    if (chargeStudy.getStudyStatus().equals("모집중") ||
-        chargeStudy.getStudyStatus().equals("진행중")) {
+    if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == -1 ||
+        new Date(System.currentTimeMillis()).compareTo(chargeStudy.getEndDate()) == -1) {
 
       System.out.println("1. 결제 취소하기");
       System.out.println("0. 이전");
       int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
 
       if(input == 1) {
-        request.setAttribute("chargeNo", no);
+        request.setAttribute("chargeNo", payment.getPaidStudyNo());
         request.getRequestDispatcher("/chargeStudy/paymentCancel").forward(request);
 
       } else if (input == 0) {
@@ -62,6 +62,8 @@ public class ChargeStudyPaymentDetailHandler implements Command {
       } else {
         System.out.println("존재하지 않는 메뉴 번호입니다.");
       }
+    } else {
+      return;
     }
 
   }

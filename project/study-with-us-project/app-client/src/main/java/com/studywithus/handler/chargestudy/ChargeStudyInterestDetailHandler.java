@@ -26,6 +26,7 @@ public class ChargeStudyInterestDetailHandler implements Command {
 
     if (!chargeStudy.getLikeMembersEmail().contains(AuthLogInHandler.getLoginUser().getEmail())) {
       System.out.println("해당 번호의 관심목록 추가된 스터디가 없습니다.\n");
+      return;
     }
 
     chargeStudy.setViewCount(chargeStudy.getViewCount() + 1);
