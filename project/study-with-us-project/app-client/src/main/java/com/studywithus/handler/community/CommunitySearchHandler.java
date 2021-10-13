@@ -29,10 +29,10 @@ public class CommunitySearchHandler implements Command {
 
 		//    requestAgent.request("community.selectListByKeyword", params);
 
-		//		if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-		//			System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");
-		//			return;
-		//		}
+		if (communityList == null) {
+			System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");
+			return;
+		}
 
 		// [기존] 키워드 포함 게시글이 없을 경우, line 43 출력문이 무한 반복됨
 		// [수정] 임의의 변수로 조건문 설정하여 한 번만 출력되도록 수정
