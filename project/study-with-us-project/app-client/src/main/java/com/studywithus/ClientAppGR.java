@@ -17,6 +17,8 @@ import com.studywithus.handler.community.CommunityDetailHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
+import com.studywithus.handler.community.MyPostDetailHandler;
+import com.studywithus.handler.community.MyPostListHandler;
 import com.studywithus.handler.freestudy.FreeStudyAddHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyCancelHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyDetailHandler;
@@ -205,11 +207,9 @@ public class ClientAppGR {
     // commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(communityDao));
     // commandMap.put("/communityTalk/search", new CommunitySearchHandler(communityDao));
 
-    // commandMap.put("/myPost/list",
-    // new MyPostListHandler(communityQaList, communityInfoList, communityTalkList));
-    // commandMap.put("/myPost/detail",
-    // new MyPostDetailHandler(communityQaList, communityInfoList, communityTalkList));
-    //
+    commandMap.put("/myPost/list", new MyPostListHandler(communityDao));
+    commandMap.put("/myPost/detail", new MyPostDetailHandler(communityDao));
+
     // commandMap.put("/jobsSchedule/add", new JobsScheduleAddHandler(jobsScheduleList));
     // commandMap.put("/jobsSchedule/list", new JobsScheduleListHandler(jobsScheduleList));
     // commandMap.put("/jobsSchedule/detail", new JobsScheduleDetailHandler(jobsScheduleList));
