@@ -51,7 +51,7 @@ public class AuthLogInHandler implements Command {
     params.put("email", email);
     params.put("password", password);
 
-    requestAgent.request("member.selectOneByEmailPassword", params);
+    requestAgent.request("member.selectOneForLogin", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       Member member = requestAgent.getObject(Member.class);

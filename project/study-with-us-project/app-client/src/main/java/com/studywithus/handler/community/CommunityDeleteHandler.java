@@ -50,7 +50,7 @@ public class CommunityDeleteHandler implements Command {
         System.out.println("게시글 삭제를 취소하였습니다.");
         return;
 
-      } else if (!input.equalsIgnoreCase("y")) {
+      } else if (input.equalsIgnoreCase("y")) {
         // requestAgent.request("community.delete", params);
         communityDao.delete(no);
         System.out.println("게시글을 삭제하였습니다.");

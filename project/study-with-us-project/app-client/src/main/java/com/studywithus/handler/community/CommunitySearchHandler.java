@@ -29,10 +29,10 @@ public class CommunitySearchHandler implements Command {
 
 		//    requestAgent.request("community.selectListByKeyword", params);
 
-		//		if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-		//			System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");
-		//			return;
-		//		}
+		if (communityList == null) {
+			System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");
+			return;
+		}
 
 		// [기존] 키워드 포함 게시글이 없을 경우, line 43 출력문이 무한 반복됨
 		// [수정] 임의의 변수로 조건문 설정하여 한 번만 출력되도록 수정
@@ -47,10 +47,24 @@ public class CommunitySearchHandler implements Command {
 				continue;
 			}
 
-			System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
-					community.getNo(), community.getTitle(), community.getWriter().getName(),
-					community.getRegisteredDate(), community.getViewCount(), community.getLike());
-			return;
+			if (community.getCategory() == 1) {
+				System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+						community.getNo(), community.getTitle(), community.getWriter().getEmail(),
+						community.getRegisteredDate(), community.getViewCount(), community.getLike());
+
+			} else if (community.getCategory() == 2) {
+				System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+						community.getNo(), community.getTitle(), community.getWriter().getEmail(),
+						community.getRegisteredDate(), community.getViewCount(), community.getLike());
+
+			} else if (community.getCategory() == 3) {
+				System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+						community.getNo(), community.getTitle(), community.getWriter().getEmail(),
+						community.getRegisteredDate(), community.getViewCount(), community.getLike());
+
+			} else {
+				return;
+			}
 		}
 
 		if (type == 1) {

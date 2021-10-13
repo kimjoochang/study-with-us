@@ -28,11 +28,11 @@ public class CommunityUpdateHandler implements Command {
 
 		Community community = communityDao.findByNo(no);
 
-		//    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-		//      System.out.println();
-		//      System.out.println("해당 번호의 게시글이 없습니다.\n");
-		//      return;
-		//    }
+		//		    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+		//		      System.out.println();
+		//		      System.out.println("해당 번호의 게시글이 없습니다.\n");
+		//		      return;
+		//		    }
 
 		//    Community community = requestAgent.getObject(Community.class);
 

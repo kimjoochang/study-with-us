@@ -14,6 +14,9 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.community.CommunityAddHandler;
 import com.studywithus.handler.community.CommunityDeleteHandler;
 import com.studywithus.handler.community.CommunityDetailHandler;
+import com.studywithus.handler.community.CommunityListHandler;
+import com.studywithus.handler.community.CommunitySearchHandler;
+import com.studywithus.handler.community.CommunityUpdateHandler;
 import com.studywithus.handler.freestudy.FreeStudyAddHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyCancelHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyDetailHandler;
@@ -165,11 +168,11 @@ public class ClientAppGR {
     // commandMap.put("/review/list", new ReviewListHandler(chargeStudyList));
 
     commandMap.put("/community/add", new CommunityAddHandler(communityDao));
-    // commandMap.put("/community/list", new CommunityListHandler(communityDao));
+    commandMap.put("/community/list", new CommunityListHandler(communityDao));
     commandMap.put("/community/detail", new CommunityDetailHandler(communityDao));
-    // commandMap.put("/community/update", new CommunityUpdateHandler(communityDao));
+    commandMap.put("/community/update", new CommunityUpdateHandler(communityDao));
     commandMap.put("/community/delete", new CommunityDeleteHandler(communityDao));
-    // commandMap.put("/community/search", new CommunitySearchHandler(communityDao));
+    commandMap.put("/community/search", new CommunitySearchHandler(communityDao));
 
     // commandMap.put("/communityQa/add", new CommunityAddHandler(communityDao));
     // commandMap.put("/communityQa/list", new CommunityListHandler(communityDao));

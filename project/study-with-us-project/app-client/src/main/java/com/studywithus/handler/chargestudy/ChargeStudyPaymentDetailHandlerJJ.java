@@ -6,6 +6,7 @@ import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyPaymentDetailHandlerJJ implements Command {
@@ -25,7 +26,7 @@ public class ChargeStudyPaymentDetailHandlerJJ implements Command {
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    Payment payment = paymentDao.findByNo(no);
+    Payment payment = paymentDao.findByNo(no,AuthLogInHandler.getLoginUser().getEmail());
 
     Study chargeStudy = chargeStudyDao.findByNo(payment.getPaidStudyNo());
 

@@ -34,9 +34,10 @@ public class NetPaymentDao implements PaymentDao {
   }
 
   @Override
-  public Payment findByNo(int no) throws Exception {
+  public Payment findByNo(int no, String email) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("no", String.valueOf(no));
+    params.put("email", String.valueOf(email));
 
     requestAgent.request("payment.selectOne", params);
 
