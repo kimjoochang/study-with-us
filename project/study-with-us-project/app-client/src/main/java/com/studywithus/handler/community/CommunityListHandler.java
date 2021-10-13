@@ -26,7 +26,6 @@ public class CommunityListHandler implements Command {
       return;
     }
 
-
     for (Community community : communityList) {
       if (community.getCategory() == 1) {
         System.out.println("*** 정보 ***");
