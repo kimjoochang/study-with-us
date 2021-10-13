@@ -27,18 +27,16 @@ public class MyPostListHandler implements Command {
       return;
     }
 
-    // line66 무한출력 방지용으로 임의의 변수 선언
-    int count = 0;
+    int count = 0; // 게시글 존재 X -> 1번만 출력
+    // *** 카테고리 *** -> 1번만 출력
     int categoryInfo = 0;
     int categoryQa = 0;
     int categoryTalk = 0;
 
     for (Community myPost : communityList) {
-      // 로그인한 회원의 정보와 커뮤니티 게시글의 작성자가 일치한다면,
       if (myPost.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()) {
         count++;
 
-        // 내가 작성한 커뮤니티 게시글을 아래의 형식으로 출력함
         if (myPost.getCategory() == 1) {
           if (categoryInfo == 0) {
             System.out.println("*** 정보 ***");
@@ -47,21 +45,34 @@ public class MyPostListHandler implements Command {
           System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
               myPost.getNo(), myPost.getTitle(), myPost.getWriter().getEmail(),
               myPost.getRegisteredDate(), myPost.getViewCount(), myPost.getLike());
-
           categoryInfo++;
+        }
+      }
+    }
 
-        } else if (myPost.getCategory() == 2) {
+    for (Community myPost : communityList) {
+      if (myPost.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+        count++;
+
+        if (myPost.getCategory() == 2) {
           if (categoryQa == 0) {
             System.out.println();
             System.out.println("*** 질문 ***");
           }
+
           System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
               myPost.getNo(), myPost.getTitle(), myPost.getWriter().getEmail(),
               myPost.getRegisteredDate(), myPost.getViewCount(), myPost.getLike());
-
           categoryQa++;
+        }
+      }
+    }
 
-        } else if (myPost.getCategory() == 3) {
+    for (Community myPost : communityList) {
+      if (myPost.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+        count++;
+
+        if (myPost.getCategory() == 3) {
           if (categoryTalk == 0) {
             System.out.println();
             System.out.println("*** 스몰톡 ***");
@@ -70,11 +81,7 @@ public class MyPostListHandler implements Command {
           System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
               myPost.getNo(), myPost.getTitle(), myPost.getWriter().getEmail(),
               myPost.getRegisteredDate(), myPost.getViewCount(), myPost.getLike());
-
           categoryTalk++;
-
-        } else {
-          return;
         }
       }
     }
