@@ -23,7 +23,7 @@ public class MyPostDetailHandler implements Command {
     Community community = communityDao.findByNo(no);
 
     if (community == null) {
-      System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");
+      System.out.println("커뮤니티 게시글이 존재하지 않습니다.");
       return;
     }
 
@@ -47,6 +47,7 @@ public class MyPostDetailHandler implements Command {
 
     if (count == 0) {
       System.out.println("나의 게시글이 존재하지 않습니다.\n");
+      return;
     }
   }
 

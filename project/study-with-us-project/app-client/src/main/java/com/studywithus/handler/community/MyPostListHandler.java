@@ -23,7 +23,7 @@ public class MyPostListHandler implements Command {
 
     // [추가] 커뮤니티 게시판 자체가 비어있을 시, 아무것도 출력되지 않아서 아래의 조건문 추가함
     if (communityList == null) {
-      System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");
+      System.out.println("커뮤니티 게시글이 존재하지 않습니다.");
       return;
     }
 
@@ -36,17 +36,15 @@ public class MyPostListHandler implements Command {
         count++;
 
         // 내가 작성한 커뮤니티 게시글을 아래의 형식으로 출력함
-        System.out.printf(
-            "[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+        System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
             myPost.getNo(), myPost.getTitle(), myPost.getWriter().getName(),
             myPost.getRegisteredDate(), myPost.getViewCount(), myPost.getLike());
-
-        count++;
       }
     }
 
     if (count == 0) {
-      System.out.println("나의 게시글이 존재하지 않습니다.\n");
+      System.out.println("나의 게시글이 존재하지 않습니다.");
+      return;
     }
   }
 }
