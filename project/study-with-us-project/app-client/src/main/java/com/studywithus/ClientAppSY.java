@@ -21,6 +21,8 @@ import com.studywithus.handler.community.CommunityDetailHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
+import com.studywithus.handler.community.MyPostDetailHandler;
+import com.studywithus.handler.community.MyPostListHandler;
 import com.studywithus.handler.freestudy.FreeStudyAddHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyCancelHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyHandler;
@@ -199,12 +201,8 @@ public class ClientAppSY {
 		//		commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(requestAgent));
 		//		commandMap.put("/communityTalk/search", new CommunitySearchHandler(requestAgent));
 
-		// commandMap.put("/myPost/list",
-		// new MyPostListHandler(communityQaList, communityInfoList,
-		// communityTalkList));
-		// commandMap.put("/myPost/detail",
-		// new MyPostDetailHandler(communityQaList, communityInfoList,
-		// communityTalkList));
+		commandMap.put("/myPost/list", new MyPostListHandler(communityDao));
+		commandMap.put("/myPost/detail", new MyPostDetailHandler(communityDao));
 		//
 		// commandMap.put("/jobsSchedule/add", new
 		// JobsScheduleAddHandler(jobsScheduleList));

@@ -8,7 +8,7 @@ import com.studywithus.server.DataProcessor;
 import com.studywithus.server.RequestProcessor;
 import com.studywithus.table.CommunityTable;
 import com.studywithus.table.FreeStudyTable;
-import com.studywithus.table.MemberTableGR;
+import com.studywithus.table.MemberTable;
 
 public class ServerAppSY {
 
@@ -22,7 +22,7 @@ public class ServerAppSY {
 		HashMap<String, DataProcessor> dataProcessorMap = new HashMap<String, DataProcessor>();
 
 		// => 데이터 처리 담당자를 등록한다.
-		dataProcessorMap.put("member.", new MemberTableGR());
+		dataProcessorMap.put("member.", new MemberTable());
 		dataProcessorMap.put("freeStudy.", new FreeStudyTable());
 		dataProcessorMap.put("community.", new CommunityTable());
 		// dataProcessorMap.put("freeStudy.", new StudyTableGR("freestudy.json", "freeStudy."));
