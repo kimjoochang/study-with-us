@@ -33,8 +33,8 @@ public class CommunityListHandler implements Command {
 
 		for (Community community : communityList) {
 			if (community.getCategory() == 1) {
-				System.out.println();
 				if (categoryInfo == 0) {
+					System.out.println();
 					System.out.println("*** 정보 ***");
 				}
 				System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
