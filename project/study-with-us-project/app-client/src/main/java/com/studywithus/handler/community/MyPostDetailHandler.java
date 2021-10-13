@@ -2,6 +2,7 @@ package com.studywithus.handler.community;
 
 import com.studywithus.dao.CommunityDao;
 import com.studywithus.domain.Community;
+import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
@@ -49,31 +50,67 @@ public class MyPostDetailHandler implements Command {
       System.out.println("나의 게시글이 존재하지 않습니다.\n");
       return;
     }
+
+    Member loginUser = AuthLogInHandler.getLoginUser();
+    if (loginUser == null || (community.getWriter().getNo() != loginUser.getNo()
+        && !loginUser.getEmail().equals("root@test.com"))) {
+      return;
+    }
+
+    request.setAttribute("communityNo", no);
+
+    // 내가 쓴 글인 경우
+    if (community.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+      while (true) {
+        System.out.println("1. 수정");
+        System.out.println("2. 삭제");
+        System.out.println("0. 이전");
+        System.out.println();
+
+        int num = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
+        System.out.println();
+
+        if (num == 1) {
+          request.getRequestDispatcher("/community/update").forward(request);
+
+        } else if (num == 2) {
+          request.getRequestDispatcher("/community/delete").forward(request);
+
+        } else if (num == 0) {
+          return;
+
+        } else {
+          System.out.println("다시 입력하세요.\n");
+          continue;
+        }
+        return;
+      }
+    }
   }
-
-  /*
-   * 상세보기에서 수정/삭제로 이동 Member loginUser = AuthLogInHandler.getLoginUser(); if (loginUser == null ||
-   * myPost.getWriter().getId() != loginUser.getId()) { return; }
-   * 
-   * request.setAttribute("communityNo", no);
-   * 
-   * while (true) {
-   * 
-   * System.out.println("1. 수정"); System.out.println("2. 삭제"); System.out.println("0. 이전");
-   * System.out.println(); int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
-   * 
-   * switch (input) { case 1: request.getRequestDispatcher(updateKey).forward(request); return; case
-   * 2: request.getRequestDispatcher(deleteKey).forward(request); return; case 0: return; default:
-   * System.out.println(""); System.out.println("무효한 메뉴 번호입니다.\n"); } }
-   */
-
-  // 나의 게시글 번호로 커뮤니티 게시글 조회하는 메서드
-  // private Community findByMyPostNo(int myPostNo) {
-  // for (Community myPost : myPostList) {
-  // if (myPost.getMyPostNo() == no) {
-  // return myPost;
-  // }
-  // }
-  // return null;
-  // }
 }
+
+/*
+ * 상세보기에서 수정/삭제로 이동 Member loginUser = AuthLogInHandler.getLoginUser(); if (loginUser == null ||
+ * myPost.getWriter().getId() != loginUser.getId()) { return; }
+ * 
+ * request.setAttribute("communityNo", no);
+ * 
+ * while (true) {
+ * 
+ * System.out.println("1. 수정"); System.out.println("2. 삭제"); System.out.println("0. 이전");
+ * System.out.println(); int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
+ * 
+ * switch (input) { case 1: request.getRequestDispatcher(updateKey).forward(request); return; case
+ * 2: request.getRequestDispatcher(deleteKey).forward(request); return; case 0: return; default:
+ * System.out.println(""); System.out.println("무효한 메뉴 번호입니다.\n"); } }
+ */
+
+// 나의 게시글 번호로 커뮤니티 게시글 조회하는 메서드
+// private Community findByMyPostNo(int myPostNo) {
+// for (Community myPost : myPostList) {
+// if (myPost.getMyPostNo() == no) {
+// return myPost;
+// }
+// }
+// return null;
+// }
