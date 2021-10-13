@@ -1,6 +1,5 @@
 package com.studywithus.handler.user;
 
-import java.util.HashMap;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -18,25 +17,26 @@ public class MyInfoHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[나의 정보]\n");
 
-    int no = AuthLogInHandler.getLoginUser().getNo();
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("no", String.valueOf(no));
+    //
+    //    requestAgent.request("member.selectOne", params);
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("로그인 후 이용 바랍니다.");
+    //      return;
+    //    }
+    // Member user = requestAgent.getObject(Member.class);
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(no));
 
-    requestAgent.request("member.selectOne", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    Member user = AuthLogInHandler.getLoginUser();
+
+    if (user == null) {
       System.out.println("로그인 후 이용 바랍니다.");
       return;
     }
 
-    Member user = requestAgent.getObject(Member.class);
-    // if (loginUser == null) {
-    // System.out.println("로그인 후 이용 바랍니다.");
-    // return;
-    // }
-
-
     switch (user.getUserAccessLevel()) {
+
       case 0x02:
         System.out.println("등급: 회원");
         break;
