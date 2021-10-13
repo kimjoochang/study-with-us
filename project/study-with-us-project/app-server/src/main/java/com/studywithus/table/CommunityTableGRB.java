@@ -9,31 +9,35 @@ import com.studywithus.server.Response;
 // 역할
 // - 커뮤니티 데이터를 처리하는 일을 한다.
 //
-public class CommunityTable extends JsonDataTable<Community> implements DataProcessor {
+public class CommunityTableGRB extends JsonDataTable<Community> implements DataProcessor {
 
-  public CommunityTable() {
-    super("community.json", Community.class);
+  String commandPrefix;
+
+  public CommunityTableGRB(String filename, String commandPrefix) {
+    super(filename, Community.class);
+    this.commandPrefix = commandPrefix;
   }
 
   @Override
   public void execute(Request request, Response response) throws Exception {
-    switch (request.getCommand()) {
-      case "community.insert":
+    String action = request.getCommand().substring(commandPrefix.length());
+    switch (action) {
+      case "insert":
         insert(request, response);
         break;
-      case "community.selectList":
+      case "selectList":
         selectList(request, response);
         break;
-      case "community.selectListByKeyword":
+      case "selectListByKeyword":
         selectListByKeyword(request, response);
         break;
-      case "community.selectOne":
+      case "selectOne":
         selectOne(request, response);
         break;
-      case "community.update":
+      case "update":
         update(request, response);
         break;
-      case "community.delete":
+      case "delete":
         delete(request, response);
         break;
       default:
