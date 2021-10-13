@@ -8,11 +8,9 @@ import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 
 import java.util.HashMap;
-import java.util.List;
 
 import com.studywithus.dao.impl.NetCommunityDao;
 import com.studywithus.dao.impl.NetFreeStudyDao;
-import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.community.CommunityAddHandler;
@@ -25,6 +23,7 @@ import com.studywithus.handler.community.MyPostDetailHandler;
 import com.studywithus.handler.community.MyPostListHandler;
 import com.studywithus.handler.freestudy.FreeStudyAddHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyCancelHandler;
+import com.studywithus.handler.freestudy.FreeStudyApplyDetailHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyListHandler;
 import com.studywithus.handler.freestudy.FreeStudyDeleteHandler;
@@ -39,6 +38,7 @@ import com.studywithus.handler.freestudy.FreeStudyUpdateHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindEmailHandler;
+import com.studywithus.handler.user.MyInfoHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
@@ -50,7 +50,7 @@ public class ClientAppSY {
 	RequestAgent requestAgent;
 
 	HashMap<String, Command> commandMap = new HashMap<>();
-	HashMap<String, List<Study>> applyFreeStudyMap = new HashMap<>();
+	//	HashMap<String, List<Study>> applyFreeStudyMap = new HashMap<>();
 
 	class MenuItem extends Menu {
 		String menuId;
@@ -102,7 +102,7 @@ public class ClientAppSY {
 		//
 		//		commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(requestAgent));
 		//
-		// commandMap.put("/myInfo/list", new MyInfoHandler());
+		commandMap.put("/myInfo/list", new MyInfoHandler(requestAgent));
 		//
 		commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyDao));
 		commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyDao));
@@ -120,8 +120,9 @@ public class ClientAppSY {
 		commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(freeStudyDao));
 		//
 		commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(freeStudyDao));
-		commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(freeStudyDao));
 		commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(freeStudyDao));
+		commandMap.put("/freeStudy/applyDetail", new FreeStudyApplyDetailHandler(freeStudyDao));
+		commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(freeStudyDao));
 
 		commandMap.put("/freeStudy/interestAdd", new FreeStudyInterestAddHandler(freeStudyDao));
 		commandMap.put("/freeStudy/interestDelete", new FreeStudyInterestDeleteHandler(freeStudyDao));
