@@ -10,7 +10,7 @@ import com.studywithus.table.CommunityTableGRB;
 import com.studywithus.table.FreeStudyTable;
 import com.studywithus.table.JsonDataTable;
 import com.studywithus.table.MemberTableSY;
-//
+////
 public class ServerAppSY {
 
   public static void main(String[] args) throws Exception {
