@@ -41,7 +41,6 @@ public class MyPostListHandler implements Command {
         // 내가 작성한 커뮤니티 게시글을 아래의 형식으로 출력함
         if (myPost.getCategory() == 1) {
           if (categoryInfo == 0) {
-            System.out.println();
             System.out.println("*** 정보 ***");
           }
 

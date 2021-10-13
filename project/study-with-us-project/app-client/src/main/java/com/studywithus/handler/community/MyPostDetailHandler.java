@@ -47,7 +47,7 @@ public class MyPostDetailHandler implements Command {
     }
 
     if (count == 0) {
-      System.out.println("나의 게시글이 존재하지 않습니다.\n");
+      System.out.println("내가 작성한 게시글이 존재하지 않습니다.");
       return;
     }
 
