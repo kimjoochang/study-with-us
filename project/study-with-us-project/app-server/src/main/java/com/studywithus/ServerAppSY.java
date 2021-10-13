@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.RequestProcessor;
-import com.studywithus.table.CommunityTable;
+import com.studywithus.table.CommunityTableGRB;
 import com.studywithus.table.FreeStudyTable;
 import com.studywithus.table.JsonDataTable;
 import com.studywithus.table.MemberTableSY;
@@ -28,7 +28,7 @@ public class ServerAppSY {
 		//    dataProcessorMap.put("board.", new BoardTable());
 		dataProcessorMap.put("member.", new MemberTableSY());
 		dataProcessorMap.put("freeStudy.", new FreeStudyTable());
-		dataProcessorMap.put("community.", new CommunityTable());
+		dataProcessorMap.put("community.", new CommunityTableGRB());
 		//    dataProcessorMap.put("project.", new ProjectTable());
 
 		RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);

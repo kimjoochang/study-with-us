@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.RequestProcessor;
+import com.studywithus.table.CommunityTable;
 import com.studywithus.table.FreeStudyTable;
 import com.studywithus.table.MemberTableGR;
 
@@ -23,6 +24,7 @@ public class ServerAppGR {
     dataProcessorMap.put("member.", new MemberTableGR());
     // [삭제]
     dataProcessorMap.put("freeStudy.", new FreeStudyTable());
+    dataProcessorMap.put("community.", new CommunityTable());
     // dataProcessorMap.put("freeStudy.", new StudyTableGR("freestudy.json", "freeStudy."));
     // dataProcessorMap.put("chargeStudy.", new StudyTableGR("chargeStudy.json", "chargeStudy."));
     // dataProcessorMap.put("communityInfo.",
