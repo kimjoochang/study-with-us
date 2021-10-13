@@ -1,5 +1,4 @@
 package com.studywithus.handler.user;
-import java.util.HashMap;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
@@ -28,11 +27,6 @@ public class ResetPasswordHandler implements Command {
     String phoneNumber = Prompt.inputString("휴대폰 번호를 입력해주세요. ('-'를 제외한 숫자 11자) > ");
     String email = Prompt.inputString("이메일을 입력해주세요. > ");
     System.out.println(" ");
-
-    HashMap<String,String> params = new HashMap<>();
-    params.put("name",name);
-    params.put("email", email);
-    params.put("phoneNumber", phoneNumber);
 
     Member member = memberDao.findMember(name, email, phoneNumber);
 

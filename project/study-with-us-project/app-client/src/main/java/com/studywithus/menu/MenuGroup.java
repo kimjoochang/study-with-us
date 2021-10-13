@@ -3,7 +3,6 @@ package com.studywithus.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class MenuGroup extends Menu {
@@ -13,6 +12,8 @@ public class MenuGroup extends Menu {
 
   boolean disablePrevMenu;
   String prevMenuTitle = "이전 메뉴";
+
+  MenuFilter menuFilter;
 
   private static class PrevMenu extends Menu {
     public PrevMenu() {
@@ -46,6 +47,10 @@ public class MenuGroup extends Menu {
 
   public void setPrevMenuTitle(String prevMenuTitle) {
     this.prevMenuTitle = prevMenuTitle;
+  }
+
+  public void setMenuFilter(MenuFilter menuFilter) {
+    this.menuFilter = menuFilter;
   }
 
   public void add(Menu child) {
@@ -117,9 +122,12 @@ public class MenuGroup extends Menu {
     ArrayList<Menu> menuList = new ArrayList<>();
 
     for (Menu menu : childs) {
-      if ((menu.accessScope & AuthLogInHandler.getUserAccessLevel()) > 0 ) {
-        menuList.add(menu);
+      if (menuFilter != null && !menuFilter.accept(menu)) {
+        // 메뉴 필터가 있을 때, 그 메뉴 필터에서 승인하지 않는다면
+        // 출력할 메뉴에 포함시키지 않는다.
+        continue;
       }
+      menuList.add(menu);
     }
     return menuList;
   }

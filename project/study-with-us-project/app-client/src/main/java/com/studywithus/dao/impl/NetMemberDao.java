@@ -88,13 +88,27 @@ public class NetMemberDao implements MemberDao {
   }
 
   @Override
+  public Member findMemberByNamePhoneNumber(String name, String phoneNumber) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("name", name);
+    params.put("phoneNumber", phoneNumber);
+
+    requestAgent.request("member.selectOneForFindEmail", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      return null;
+    }
+    return requestAgent.getObject(Member.class);
+  }
+
+  @Override
   public Member findMember(String name, String email, String phoneNumber) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("name", name);
     params.put("email", email);
     params.put("phoneNumber", phoneNumber);
 
-    requestAgent.request("member.findMemberForResetPassword", params);
+    requestAgent.request("member.selectOneForResetPassword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
@@ -108,14 +122,14 @@ public class NetMemberDao implements MemberDao {
     requestAgent.request("member.update", member);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      throw new Exception("변경 실패");
     }
   }
 
   @Override
   public void delete(String email) throws Exception {
     HashMap<String,String> params = new HashMap<>();
-    params.put("email", String.valueOf(email));
+    params.put("email",email);
 
     requestAgent.request("member.delete", params);
 
