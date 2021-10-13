@@ -340,63 +340,68 @@ public class ClientAppSY {
 	private Menu createCommunityMenu() {
 		MenuGroup communityMenu = new MenuGroup("커뮤니티");
 
-		communityMenu.add(createCommunityInfoMenu());
-		communityMenu.add(createCommunityQaMenu());
-		communityMenu.add(createCommunityTalkMenu());
+		//		communityMenu.add(createCommunityInfoMenu());
+		//		communityMenu.add(createCommunityQaMenu());
+		//		communityMenu.add(createCommunityTalkMenu());
+
+		communityMenu.add(new MenuItem("검색", "/communityQa/search"));
+		communityMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityQa/add"));
+		communityMenu.add(new MenuItem("조회", "/communityQa/list"));
+		communityMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
 
 		return communityMenu;
 	}
 
 	// 커뮤니티 / 질문
-	private Menu createCommunityQaMenu() {
-		MenuGroup communityQaMenu = new MenuGroup("질문");
+	//	private Menu createCommunityQaMenu() {
+	//		MenuGroup communityQaMenu = new MenuGroup("질문");
 
-		communityQaMenu.add(new MenuItem("검색", "/communityQa/search"));
-		communityQaMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityQa/add"));
-		communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
-		communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
-		// [삭제] 상세보기 안으로 위치 변경
-		// communityQaMenu.add(new MenuItem("수정", ACCESS_GENERAL,
-		// "/communityQa/update"));
-		// communityQaMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
-		// "/communityQa/delete"));
+	//		communityQaMenu.add(new MenuItem("검색", "/communityQa/search"));
+	//		communityQaMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityQa/add"));
+	//		communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
+	//		communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
+	// [삭제] 상세보기 안으로 위치 변경
+	// communityQaMenu.add(new MenuItem("수정", ACCESS_GENERAL,
+	// "/communityQa/update"));
+	// communityQaMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
+	// "/communityQa/delete"));
 
-		return communityQaMenu;
-	}
+	//		return communityQaMenu;
+	//	}
 
 	// 커뮤니티 / 정보
-	private Menu createCommunityInfoMenu() {
-		MenuGroup communityInfoMenu = new MenuGroup("정보");
+	//	private Menu createCommunityInfoMenu() {
+	//		MenuGroup communityInfoMenu = new MenuGroup("정보");
+	//
+	//		communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
+	//		communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
+	//		communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
+	//		communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
+	// [삭제] 상세보기 안으로 위치 변경
+	// communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL,
+	// "/communityInfo/update"));
+	// communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
+	// "/communityInfo/delete"));
 
-		communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
-		communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
-		communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
-		communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
-		// [삭제] 상세보기 안으로 위치 변경
-		// communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL,
-		// "/communityInfo/update"));
-		// communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
-		// "/communityInfo/delete"));
-
-		return communityInfoMenu;
-	}
+	//		return communityInfoMenu;
+	//	}
 
 	// 커뮤니티 / 스몰톡
-	private Menu createCommunityTalkMenu() {
-		MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
+	//	private Menu createCommunityTalkMenu() {
+	//		MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
+	//
+	//		communityTalkMenu.add(new MenuItem("검색", "/communityTalk/search"));
+	//		communityTalkMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityTalk/add"));
+	//		communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
+	//		communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
+	// [삭제] 상세보기 안으로 위치 변경
+	// communityTalkMenu.add(new MenuItem("수정", ACCESS_GENERAL,
+	// "/communityTalk/update"));
+	// communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
+	// "/communityTalk/delete"));
 
-		communityTalkMenu.add(new MenuItem("검색", "/communityTalk/search"));
-		communityTalkMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityTalk/add"));
-		communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
-		communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
-		// [삭제] 상세보기 안으로 위치 변경
-		// communityTalkMenu.add(new MenuItem("수정", ACCESS_GENERAL,
-		// "/communityTalk/update"));
-		// communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
-		// "/communityTalk/delete"));
-
-		return communityTalkMenu;
-	}
+	//		return communityTalkMenu;
+	//	}
 
 	// ------------------------------ 일정 -----------------------------------------
 
