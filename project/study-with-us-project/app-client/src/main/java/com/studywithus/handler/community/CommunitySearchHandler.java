@@ -47,10 +47,24 @@ public class CommunitySearchHandler implements Command {
 				continue;
 			}
 
-			System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
-					community.getNo(), community.getTitle(), community.getWriter().getName(),
-					community.getRegisteredDate(), community.getViewCount(), community.getLike());
-			return;
+			if (community.getCategory() == 1) {
+				System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+						community.getNo(), community.getTitle(), community.getWriter().getEmail(),
+						community.getRegisteredDate(), community.getViewCount(), community.getLike());
+
+			} else if (community.getCategory() == 2) {
+				System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+						community.getNo(), community.getTitle(), community.getWriter().getEmail(),
+						community.getRegisteredDate(), community.getViewCount(), community.getLike());
+
+			} else if (community.getCategory() == 3) {
+				System.out.printf("[번호 = %d, 제목 = %s, 작성자 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
+						community.getNo(), community.getTitle(), community.getWriter().getEmail(),
+						community.getRegisteredDate(), community.getViewCount(), community.getLike());
+
+			} else {
+				return;
+			}
 		}
 
 		if (type == 1) {
