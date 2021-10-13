@@ -32,7 +32,7 @@ public class FindEmailHandler implements Command {
     params.put("name",name);
     params.put("phoneNumber", phoneNumber);
 
-    requestAgent.request("member.selectOneByNamePhoneNumber", params);
+    requestAgent.request("member.selectOneForFindEmail", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println();
