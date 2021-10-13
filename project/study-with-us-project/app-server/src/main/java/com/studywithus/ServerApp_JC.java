@@ -8,7 +8,7 @@ import com.studywithus.server.RequestProcessor;
 import com.studywithus.table.ChargeStudyTable;
 import com.studywithus.table.ExamScheduleTable;
 import com.studywithus.table.JobsScheduleTable;
-import com.studywithus.table.MemberTable2;
+import com.studywithus.table.MemberTable;
 import com.studywithus.table.MentorApplicationTable;
 import com.studywithus.table.PaymentTable;
 import com.studywithus.table.ReviewTable;
@@ -24,7 +24,7 @@ public class ServerApp_JC {
 
     // => 데이터 처리 담당자를 등록한다.
     //    dataProcessorMap.put("board.", new BoardTable());
-    dataProcessorMap.put("member.", new MemberTable2());
+    dataProcessorMap.put("member.", new MemberTable());
     dataProcessorMap.put("chargeStudy.", new ChargeStudyTable());
     dataProcessorMap.put("mentorApplication.", new MentorApplicationTable());
     dataProcessorMap.put("payment.", new PaymentTable());
