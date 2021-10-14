@@ -6,9 +6,14 @@ import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import com.studywithus.context.ApplicationContextListener;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.SignUpHandler;
+import com.studywithus.listener.AppInitListener;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.request.RequestAgent;
@@ -56,7 +61,7 @@ public class ClientApp {
     //
     //    commandMap.put("/auth/logOut", new AuthLogOutHandler(memberList));
     //
-        commandMap.put("/auth/signUp", new SignUpHandler(memberList));
+    commandMap.put("/auth/signUp", new SignUpHandler(memberList));
     //    commandMap.put("/google/signUp", new SnsSignUpHandler(memberList));
     //    commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberList));
     //    commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberList));
@@ -609,52 +614,34 @@ public class ClientApp {
     return examScheduleManagementMenu;
   }
 
+  List<ApplicationContextListener> listeners = new ArrayList<>();
+
+  // => 옵저버(리스너)를 등록하는 메서드
+  public void addApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.add(listener);
+  }
+
+  // => 옵저버(리스너)를 제거하는 메서드
+  public void removeApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.remove(listener);
+  }
+
+  private void notifyOnApplicationStarted() {
+    HashMap<String,Object> params = new HashMap<>();
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextInitialized(params);
+    }
+  }
+
   void service() {
-
-    // [삭제] HashMap 적용
-    // loadObjects("chargeInterest.json", chargeInterestList, Study.class);
-    //    loadObjects("member.json", memberList, Member.class);
-    //    loadObjects("freeStudy.json", freeStudyList, Study.class);
-    //    loadObjects("chargeStudy.json", chargeStudyList, Study.class);
-    //    loadObjects("communityQa.json", communityQaList, Community.class);
-    //    loadObjects("communityInfo.json", communityInfoList, Community.class);
-    //    loadObjects("communityTalk.json", communityTalkList, Community.class);
-    //    loadObjects("jobsSchedule.json", jobsScheduleList, Schedule.class);
-    //    loadObjects("examSchedule.json", examScheduleList, Schedule.class);
-
-    System.out.println();
-    System.out.println("|         스터디위더스         |");
-    System.out.println("|          STUDYWITHUS         |");
-    System.out.println("     ￣￣￣￣∨￣￣￣￣￣￣￣   ");
-    System.out.println("　　　      ∧_,,∧");
-    System.out.println("　　　     (`･ω･´)");
-    System.out.println("　　　     Ｕ θ Ｕ");
-    System.out.println("　     ／￣￣｜￣￣＼");
-    System.out.println("　     |二二二二二二二|");
-    System.out.println("      ｜　　　　　　 ｜");
-    System.out.println("    찰칵       찰칵   찰");
-    System.out.println("        ∧∧└ 　   ∧∧   칵");
-    System.out.println("    　(　　)】 (　　)】");
-    System.out.println("    　/　/┘　  /　/┘");
-    System.out.println("    ノ￣ヽ　  ノ￣ヽ  Are U ready to STUDY ?");
-
+    notifyOnApplicationStarted();
     createMainMenu().execute();
     Prompt.close();
-
-    // [삭제] HashMap 적용
-    // saveObjects("chargeInterest.json", chargeInterestList);
-    //    saveObjects("member.json", memberList);
-    //    saveObjects("freeStudy.json", freeStudyList);
-    //    saveObjects("chargeStudy.json", chargeStudyList);
-    //    saveObjects("communityQa.json", communityQaList);
-    //    saveObjects("communityInfo.json", communityInfoList);
-    //    saveObjects("communityTalk.json", communityTalkList);
-    //    saveObjects("jobsSchedule.json", jobsScheduleList);
-    //    saveObjects("examSchedule.json", examScheduleList);
   }
 
   public static void main(String[] args) throws Exception {
     ClientApp app = new ClientApp(); 
+    app.addApplicationContextListener(new AppInitListener());
     app.service();
     Prompt.close();
   }

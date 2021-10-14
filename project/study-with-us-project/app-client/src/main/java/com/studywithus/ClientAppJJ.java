@@ -48,6 +48,7 @@ import com.studywithus.handler.schedule.JobsScheduleListHandler;
 import com.studywithus.handler.schedule.JobsScheduleUpdateHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
+import com.studywithus.handler.user.FindEmailHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
 import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
@@ -120,7 +121,7 @@ public class ClientAppJJ {
     commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberDao));
     commandMap.put("/naver/signUp", new SnsSignUpHandler(memberDao));
 
-    //commandMap.put("/find/email", new FindEmailHandler(memberDao));
+    commandMap.put("/find/email", new FindEmailHandler(memberDao));
     commandMap.put("/reset/password", new ResetPasswordHandler(memberDao));
 
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberDao));

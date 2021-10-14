@@ -21,6 +21,7 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
       case "member.selectOneForLogin": selectOneForLogin(request, response); break;
       //case "member.selectOneByEmail": selectOneByEmail(request, response); break;
       case "member.delete": delete(request, response); break;
+      case "member.update": update(request, response); break;
       case "member.duplicateCheck": duplicateCheck(request, response); break;
       case "member.selectOneForFindEmail": selectOneForFindEmail(request, response); break;
       case "member.selectOneForResetPassword" : findMemberForResetPassword(request, response); break;
@@ -157,6 +158,22 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
       response.setStatus(Response.FAIL);
       response.setValue("해당 이메일의 회원을 찾을 수 없습니다.");
     }
+  }
+
+  private void update(Request request, Response response) throws Exception {
+    Member member = request.getObject(Member.class);
+
+    int index = indexOf(member.getEmail());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 유료 스터디를 찾을 수 없습니다.");
+      return;
+    }
+    System.out.println("인덱스 값 찾아옴");
+
+    list.set(index, member);
+    response.setStatus(Response.SUCCESS);
+    System.out.println("리스트에 값 업데이트 성공");
   }
 
   private void delete(Request request, Response response) throws Exception {

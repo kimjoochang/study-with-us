@@ -47,6 +47,8 @@ import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
+import com.studywithus.handler.user.SnsLogInHandler;
+import com.studywithus.handler.user.SnsSignUpHandler;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.request.RequestAgent;
@@ -96,17 +98,17 @@ public class ClientApp_JC {
     /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(chargeStudyDao, request);
 
     commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
-    //    commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
-    //    commandMap.put("/facebook/logIn", new SnsLogInHandler(memberList));
-    //    commandMap.put("/kakao/logIn", new SnsLogInHandler(memberList));
-    //    commandMap.put("/naver/logIn", new SnsLogInHandler(memberList));
+    commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
+    commandMap.put("/facebook/logIn", new SnsLogInHandler(memberList));
+    commandMap.put("/kakao/logIn", new SnsLogInHandler(memberList));
+    commandMap.put("/naver/logIn", new SnsLogInHandler(memberList));
     //
     commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
     commandMap.put("/auth/signUp", new SignUpHandler(memberDao));
-    //    commandMap.put("/google/signUp", new SnsSignUpHandler(memberList));
-    //    commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberList));
-    //    commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberList));
-    //    commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
+    commandMap.put("/google/signUp", new SnsSignUpHandler(memberList));
+    commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberList));
+    commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberList));
+    commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
     //
     //    commandMap.put("/find/id", new FindIdHandler(memberList));
     commandMap.put("/reset/password", new ResetPasswordHandler(memberDao));
@@ -159,7 +161,7 @@ public class ClientApp_JC {
     commandMap.put("/review/add", new ReviewAddHandler(reviewDao));
     commandMap.put("/review/list", new ReviewListHandler(reviewDao));
     //
-    //    commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList));
+    //    commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList);
     //    commandMap.put("/communityQa/list", new CommunityListHandler(communityQaList));
     //    commandMap.put("/communityQa/detail",
     //        new CommunityDetailHandler(communityQaList, "/communityQa/update", "/communityQa/delete"));
@@ -167,7 +169,7 @@ public class ClientApp_JC {
     //    commandMap.put("/communityQa/delete", new CommunityDeleteHandler(communityQaList));
     //    commandMap.put("/communityQa/search", new CommunitySearchHandler(communityQaList));
     //
-    //    commandMap.put("/communityInfo/add", new CommunityAddHandler(communityInfoList));
+    //    commandMap.put("/communityInfo/add", new CommunityAddHandler(communityInfoList);
     //    commandMap.put("/communityInfo/list", new CommunityListHandler(communityInfoList));
     //    commandMap.put("/communityInfo/detail", new CommunityDetailHandler(communityInfoList,
     //        "/communityInfo/update", "/communityInfo/delete"));

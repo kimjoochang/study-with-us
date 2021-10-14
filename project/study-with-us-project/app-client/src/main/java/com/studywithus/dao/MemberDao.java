@@ -10,6 +10,7 @@ public interface MemberDao {
   Member findByName(String name) throws Exception;
   Member findByEmail(String email) throws Exception;
   Member findMemberByEmailPassword(String email, String password) throws Exception;
+  Member findMemberByNamePhoneNumber(String name, String phoneNumber) throws Exception;
   Member findMember(String name, String email, String phoneNumber) throws Exception;
   void update(Member member) throws Exception;
   void delete(String email) throws Exception;
