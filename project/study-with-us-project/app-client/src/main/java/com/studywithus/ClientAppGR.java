@@ -137,12 +137,12 @@ public class ClientAppGR {
     commandMap.put("/freeStudy/interestDetail", new FreeStudyInterestDetailHandler(freeStudyDao));
     commandMap.put("/freeStudy/interestDelete", new FreeStudyInterestDeleteHandler(freeStudyDao));
 
-    commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyListHandler(freeStudyDao));
-    commandMap.put("/freeStudy/registerStudyDetail",
+    commandMap.put("/freeStudy/registerFreeStudyList", new RegisterFreeStudyListHandler(freeStudyDao));
+    commandMap.put("/freeStudy/registerFreeStudyDetail",
         new RegisterFreeStudyDetailHandler(freeStudyDao));
     // [수정] Key 값 변경
-    commandMap.put("/freeStudy/participateList", new ParticipateFreeStudyListHandler(freeStudyDao));
-    commandMap.put("/freeStudy/participateDetail",
+    commandMap.put("/freeStudy/participateFreeStudyList", new ParticipateFreeStudyListHandler(freeStudyDao));
+    commandMap.put("/freeStudy/participateFreeStudyDetail",
         new ParticipateFreeStudyDetailHandler(freeStudyDao));
     commandMap.put("/freeStudy/memberApprove", new FreeStudyMemberApproveHandler(freeStudyDao));
     commandMap.put("/freeStudy/memberRefusal", new FreeStudyMemberRefusalHandler(freeStudyDao));
@@ -509,9 +509,9 @@ public class ClientAppGR {
   private Menu createRegisterFreeStudyMenu() {
 
     MenuGroup registerFreeStudyMenu = new MenuGroup("내가 생성한 무료 스터디", ACCESS_LEADER);
-    registerFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/registerStudyList"));
     // [삭제] 상세보기와 통합
-    // registerFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/registerStudyList"));
+    registerFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/registerFreeStudyList"));
+    registerFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/registerFreeStudyDatail"));
     // [삭제] 회의 후 안하기로 결정
     // registerFreeStudyMenu.add(new MenuItem("삭제", "/registerFreeStudy/delete"));
 
@@ -522,9 +522,9 @@ public class ClientAppGR {
   private Menu createParticipateFreeStudyMenu() {
 
     MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", Menu.ACCESS_MEMBER);
-    participateFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/participateList"));
+    participateFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/participateFreeStudyList"));
     // [삭제] 회의 후 안하기로 결정
-    participateFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/participateDetail"));
+    participateFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/participateFreeStudyDetail"));
 
     return participateFreeStudyMenu;
   }
