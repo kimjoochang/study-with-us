@@ -91,7 +91,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
 			String name = Prompt.inputString("이름을 입력하세요. > ");
 
 			// 파라미터 값 freeStudy는 해당 스터디의 지원자 명단 확인을 위해 파라미터로 넘김
-			Member freeApplicant = findByNo();
+			Member freeApplicant;
 
 			if (freeApplicant == null) {
 				System.out.println();
@@ -128,7 +128,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
 					break;
 
 				} else if (input == 4) {
-					freeStudy.getApplicants().remove(freeApplicant);
+					request.getRequestDispatcher("/freeStudy/remove").foward(request);
 					System.out.println("팀원 신청을 거절하였습니다.");
 					break;
 
