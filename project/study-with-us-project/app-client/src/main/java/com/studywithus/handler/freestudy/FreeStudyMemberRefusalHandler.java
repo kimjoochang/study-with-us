@@ -5,14 +5,13 @@ import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyMemberApproveHandler implements Command {
+public class FreeStudyMemberRefusalHandler implements Command {
 
   FreeStudyDao freeStudyDao;
 
-  public FreeStudyMemberApproveHandler(FreeStudyDao freeStudyDao) {
+  public FreeStudyMemberRefusalHandler(FreeStudyDao freeStudyDao) {
     this.freeStudyDao = freeStudyDao;
   }
 
@@ -31,21 +30,21 @@ public class FreeStudyMemberApproveHandler implements Command {
       return;
     }
 
-    AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MEMBER;
+    // AuthLogInHandler.userAccessLevel |= Menu.ACCESS_ACCESS_MEMBER;
 
     while (true) {
-      String input = Prompt.inputString("해당 회원을 멤버로 승인하시겠습니까? (y/N) ");
+      String input = Prompt.inputString("해당 회원을 승인 거절하시겠습니까? (y/N) ");
 
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
         System.out.println();
-        System.out.println("멤버 승인이 취소되었습니다.");
+        System.out.println("멤버 승인 거절이 취소되었습니다.");
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        freeStudy.getParticipants().add(AuthLogInHandler.getLoginUser());
+        freeStudy.getParticipants().remove(AuthLogInHandler.getLoginUser());
         freeStudyDao.update(freeStudy);
         System.out.println();
-        System.out.println("멤버 승인이 완료되었습니다.");
+        System.out.println("멤버 승인 거절이 완료되었습니다.");
         return;
 
       } else {
@@ -54,6 +53,6 @@ public class FreeStudyMemberApproveHandler implements Command {
         continue;
       }
     }
-    // System.out.println("무료스터디 멤버 승인이 완료되었습니다.");
+    // System.out.println("무료스터디 멤버 승인 거절이 완료되었습니다.");
   }
 }
