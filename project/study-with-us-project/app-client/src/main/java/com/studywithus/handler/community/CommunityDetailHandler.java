@@ -61,6 +61,11 @@ public class CommunityDetailHandler implements Command {
       return;
     }
 
+    System.out.println("-----------------------------------------------------------");
+
+    System.out.println("-----------------------------------------------------------");
+
+
     request.setAttribute("communityNo", no);
 
     // 내가 쓴 글인 경우
