@@ -6,6 +6,8 @@ import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import java.util.HashMap;
 import com.studywithus.dao.impl.NetChargeStudyDao;
+import com.studywithus.dao.impl.NetCommentDao;
+import com.studywithus.dao.impl.NetCommunityDao;
 import com.studywithus.dao.impl.NetMemberDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
@@ -38,6 +40,14 @@ import com.studywithus.handler.chargestudy.RegisterChargeStudyDetailHandler;
 import com.studywithus.handler.chargestudy.RegisterChargeStudyListHandler;
 import com.studywithus.handler.chargestudy.ReviewAddHandler;
 import com.studywithus.handler.chargestudy.ReviewListHandler;
+import com.studywithus.handler.comment.CommentAddHandler;
+import com.studywithus.handler.comment.CommentDeleteHandler;
+import com.studywithus.handler.community.CommunityAddHandler;
+import com.studywithus.handler.community.CommunityDeleteHandler;
+import com.studywithus.handler.community.CommunityDetailHandler;
+import com.studywithus.handler.community.CommunityListHandler;
+import com.studywithus.handler.community.CommunitySearchHandler;
+import com.studywithus.handler.community.CommunityUpdateHandler;
 import com.studywithus.handler.schedule.ExamScheduleAddHandler;
 import com.studywithus.handler.schedule.ExamScheduleDeleteHandler;
 import com.studywithus.handler.schedule.ExamScheduleDetailHandler;
@@ -45,6 +55,9 @@ import com.studywithus.handler.schedule.ExamScheduleListHandler;
 import com.studywithus.handler.schedule.ExamScheduleUpdateHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
+import com.studywithus.handler.user.FindEmailHandler;
+import com.studywithus.handler.user.MembershipWithdrawalHandler;
+import com.studywithus.handler.user.MyInfoHandler;
 import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
@@ -95,26 +108,27 @@ public class ClientApp_JC {
     NetReviewDao reviewDao = new NetReviewDao(requestAgent);
     NetChargeStudyDao chargeStudyDao = new NetChargeStudyDao(requestAgent);
     NetMemberDao memberDao = new NetMemberDao(requestAgent);
+    NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
     /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(chargeStudyDao, request);
+    NetCommentDao commentDao = new NetCommentDao(requestAgent);
 
     commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
-    commandMap.put("/google/logIn", new SnsLogInHandler(memberList));
-    commandMap.put("/facebook/logIn", new SnsLogInHandler(memberList));
-    commandMap.put("/kakao/logIn", new SnsLogInHandler(memberList));
-    commandMap.put("/naver/logIn", new SnsLogInHandler(memberList));
+    commandMap.put("/google/logIn", new SnsLogInHandler(requestAgent));
+    commandMap.put("/facebook/logIn", new SnsLogInHandler(requestAgent));
+    commandMap.put("/kakao/logIn", new SnsLogInHandler(requestAgent));
+    commandMap.put("/naver/logIn", new SnsLogInHandler(requestAgent));
     //
     commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
     commandMap.put("/auth/signUp", new SignUpHandler(memberDao));
-    commandMap.put("/google/signUp", new SnsSignUpHandler(memberList));
-    commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberList));
-    commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberList));
-    commandMap.put("/naver/signUp", new SnsSignUpHandler(memberList));
+    commandMap.put("/google/signUp", new SnsSignUpHandler(memberDao));
+    commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberDao));
+    commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberDao));
+    commandMap.put("/naver/signUp", new SnsSignUpHandler(memberDao));
     //
-    //    commandMap.put("/find/id", new FindIdHandler(memberList));
+    commandMap.put("/find/id", new FindEmailHandler(memberDao));
     commandMap.put("/reset/password", new ResetPasswordHandler(memberDao));
-    //    commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(requestAgent));
-    //
-    //    commandMap.put("/myInfo/list", new MyInfoHandler());
+    commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberDao));
+    commandMap.put("/myInfo/list", new MyInfoHandler(requestAgent));
     //
     //    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
     //    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
@@ -200,10 +214,20 @@ public class ClientApp_JC {
     commandMap.put("/examSchedule/list", new ExamScheduleListHandler(examScheduleDao));
     commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(examScheduleDao));
     commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(examScheduleDao));
-    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(examScheduleDao)); 
+    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(examScheduleDao));
+
+    commandMap.put("/community/add", new CommunityAddHandler(communityDao));
+    commandMap.put("/community/list", new CommunityListHandler(communityDao));
+    commandMap.put("/community/detail", new CommunityDetailHandler(communityDao, commentDao));
+    commandMap.put("/community/update", new CommunityUpdateHandler(communityDao));
+    commandMap.put("/community/delete", new CommunityDeleteHandler(communityDao));
+    commandMap.put("/community/search", new CommunitySearchHandler(communityDao));
+
 
     /*[수정]*/commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(requestAgent));                          
     /*[수정]*/commandMap.put("/chargeInterest/detail", new ChargeStudyInterestDetailHandler(chargeStudyDao, chargeStudyDetailMenuPrompt));                          
+    /*[추가]*/commandMap.put("/comment/add", new CommentAddHandler(commentDao));                          
+    /*[추가]*/commandMap.put("/comment/delete", new CommentDeleteHandler(commentDao));                          
 
 
   }
@@ -311,64 +335,79 @@ public class ClientApp_JC {
 
   // ------------------------------ 커뮤니티 -----------------------------------------
 
-  // 커뮤니티 메인 메뉴
   private Menu createCommunityMenu() {
     MenuGroup communityMenu = new MenuGroup("커뮤니티");
 
-    communityMenu.add(createCommunityInfoMenu());
-    communityMenu.add(createCommunityQaMenu());
-    communityMenu.add(createCommunityTalkMenu());
+    // communityMenu.add(createCommunityInfoMenu());
+    // communityMenu.add(createCommunityQaMenu());
+    // communityMenu.add(createCommunityTalkMenu());
+
+    communityMenu.add(new MenuItem("검색", "/community/search"));
+    communityMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/community/add"));
+    communityMenu.add(new MenuItem("조회", "/community/list"));
+    communityMenu.add(new MenuItem("상세보기", "/community/detail"));
 
     return communityMenu;
   }
 
-  // 커뮤니티 / 질문
-  private Menu createCommunityQaMenu() {
-    MenuGroup communityQaMenu = new MenuGroup("질문");
+  //  // 커뮤니티 메인 메뉴
+  //  private Menu createCommunityMenu() {
+  //    MenuGroup communityMenu = new MenuGroup("커뮤니티");
+  //
+  //    communityMenu.add(createCommunityInfoMenu());
+  //    communityMenu.add(createCommunityQaMenu());
+  //    communityMenu.add(createCommunityTalkMenu());
+  //
+  //    return communityMenu;
+  //  }
+  //
+  //  // 커뮤니티 / 질문
+  //  private Menu createCommunityQaMenu() {
+  //    MenuGroup communityQaMenu = new MenuGroup("질문");
+  //
+  //    communityQaMenu.add(new MenuItem("검색", "/communityQa/search"));
+  //    communityQaMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityQa/add"));
+  //    communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
+  //    communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
+  //    // [삭제] 상세보기 안으로 위치 변경
+  //    // communityQaMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityQa/update"));
+  //    // communityQaMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
+  //    // "/communityQa/delete"));
+  //
+  //    return communityQaMenu;
+  //  }
+  //
+  //  // 커뮤니티 / 정보
+  //  private Menu createCommunityInfoMenu() {
+  //    MenuGroup communityInfoMenu = new MenuGroup("정보");
+  //
+  //    communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
+  //    communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
+  //    communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
+  //    communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
+  //    // [삭제] 상세보기 안으로 위치 변경
+  //    // communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityInfo/update"));
+  //    // communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
+  //    // "/communityInfo/delete"));
+  //
+  //    return communityInfoMenu;
+  //  }
+  //
+  //  // 커뮤니티 / 스몰톡
+  //  private Menu createCommunityTalkMenu() {
+  //    MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
+  //
+  //    communityTalkMenu.add(new MenuItem("검색", "/communityTalk/search"));
+  //    communityTalkMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityTalk/add"));
+  //    communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
+  //    communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
+  //    // [삭제] 상세보기 안으로 위치 변경
+  //    // communityTalkMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityTalk/update"));
+  //    // communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
+  //    // "/communityTalk/delete"));
 
-    communityQaMenu.add(new MenuItem("검색", "/communityQa/search"));
-    communityQaMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityQa/add"));
-    communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
-    communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // communityQaMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityQa/update"));
-    // communityQaMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
-    // "/communityQa/delete"));
-
-    return communityQaMenu;
-  }
-
-  // 커뮤니티 / 정보
-  private Menu createCommunityInfoMenu() {
-    MenuGroup communityInfoMenu = new MenuGroup("정보");
-
-    communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
-    communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
-    communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
-    communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityInfo/update"));
-    // communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
-    // "/communityInfo/delete"));
-
-    return communityInfoMenu;
-  }
-
-  // 커뮤니티 / 스몰톡
-  private Menu createCommunityTalkMenu() {
-    MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
-
-    communityTalkMenu.add(new MenuItem("검색", "/communityTalk/search"));
-    communityTalkMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityTalk/add"));
-    communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
-    communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // communityTalkMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityTalk/update"));
-    // communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
-    // "/communityTalk/delete"));
-
-    return communityTalkMenu;
-  }
+  //  return communityTalkMenu;
+  //}
 
   // ------------------------------ 일정 -----------------------------------------
 

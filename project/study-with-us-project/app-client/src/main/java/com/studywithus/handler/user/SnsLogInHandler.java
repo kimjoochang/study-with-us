@@ -12,16 +12,16 @@ public class SnsLogInHandler implements Command {
 
   RequestAgent requestAgent;
 
-  static Member loginUser;
-  static int userAccessLevel = Menu.ACCESS_LOGOUT;
-
-  public static Member getLoginUser() {
-    return loginUser;
-  }
-
-  public static int getUserAccessLevel() {
-    return userAccessLevel;
-  }
+  //  static Member loginUser;
+  //  static int userAccessLevel = Menu.ACCESS_LOGOUT;
+  //
+  //  public static Member getLoginUser() {
+  //    return loginUser;
+  //  }
+  //
+  //  public static int getUserAccessLevel() {
+  //    return userAccessLevel;
+  //  }
 
   public SnsLogInHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
@@ -43,8 +43,16 @@ public class SnsLogInHandler implements Command {
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       Member member = requestAgent.getObject(Member.class);
       System.out.printf("%s님 환영합니다!\n", member.getName());
-      member = AuthLogInHandler.getLoginUser();
-      userAccessLevel = Menu.ACCESS_GENERAL;
+
+      /* 프로젝트에서 로그인한 회원의 정보는 
+       * 모두 다 AuthLogInHandler.userAccessLevel를 확인하니까
+       * snsLogin도 성공하면 AuthLoginHandler에 로그인한 회원 정보를 저장해야함
+       * 기존코드 (15 ~24번째 줄은 주석처리)
+       * member = AuthLogInHandler.getLoginUser();
+       */
+      AuthLogInHandler.loginUser = member;
+      AuthLogInHandler.userAccessLevel = Menu.ACCESS_GENERAL;
+
 
     } else {
       System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
