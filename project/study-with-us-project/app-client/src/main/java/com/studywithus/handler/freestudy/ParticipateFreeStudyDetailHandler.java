@@ -1,9 +1,11 @@
 package com.studywithus.handler.freestudy;
 
 import com.studywithus.dao.FreeStudyDao;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class ParticipateFreeStudyDetailHandler implements Command {
@@ -22,7 +24,7 @@ public class ParticipateFreeStudyDetailHandler implements Command {
     Study freeStudy = freeStudyDao.findByNo(no);
 
     if (freeStudy == null) {
-      System.out.println("참여한 무료 스터디가 존재하지 않습니다.");
+      System.out.println("해당 번호의 무료 스터디가 없습니다.");
       return;
     }
 
@@ -32,6 +34,13 @@ public class ParticipateFreeStudyDetailHandler implements Command {
     // if (freeStudy.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()
     // && no == freeStudy.getNo()) {
     // count++;
+
+    for (Member participant : freeStudy.getParticipants()) {
+      if (participant.getNo() != AuthLogInHandler.getLoginUser().getNo()) {
+        System.out.println("참여한 무료 스터디가 존재하지 않습니다.");
+        return;
+      }
+    }
 
     System.out.println();
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
