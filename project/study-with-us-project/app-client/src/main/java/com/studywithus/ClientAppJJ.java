@@ -50,6 +50,7 @@ import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindEmailHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
+import com.studywithus.handler.user.MyInfoHandler;
 import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
@@ -126,7 +127,7 @@ public class ClientAppJJ {
 
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberDao));
 
-    //commandMap.put("/myInfo/list", new MyInfoHandler());
+    commandMap.put("/myInfo/list", new MyInfoHandler(requestAgent));
 
     // commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
     // commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
@@ -243,14 +244,14 @@ public class ClientAppJJ {
   // ------------------------------ STUDY WITH US -----------------------------------------
 
   /* 10.15 DB Modeling Feedback 이후 추가할 메뉴
-  
+
   - 블랙리스트 메뉴
   - 쪽지 or 채팅 메뉴
   - 투두리스트 (web?)
   - 댓글 메뉴
-   
+
     c.f. 위 메뉴 추가하고, 마이페이지에 반영할 부분 반영하기 
-  */
+   */
 
   // 메인 메뉴
   Menu createMainMenu() {
