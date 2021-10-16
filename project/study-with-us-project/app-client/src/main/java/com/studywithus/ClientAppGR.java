@@ -33,6 +33,8 @@ import com.studywithus.handler.freestudy.FreeStudyInterestListHandler;
 import com.studywithus.handler.freestudy.FreeStudyListHandler;
 import com.studywithus.handler.freestudy.FreeStudySearchHandler;
 import com.studywithus.handler.freestudy.FreeStudyUpdateHandler;
+import com.studywithus.handler.freestudy.ParticipateFreeStudyDetailHandler;
+import com.studywithus.handler.freestudy.ParticipateFreeStudyListHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.MyInfoHandler;
@@ -132,10 +134,12 @@ public class ClientAppGR {
     commandMap.put("/freeStudy/interestDelete", new FreeStudyInterestDeleteHandler(freeStudyDao));
 
     // commandMap.put("/freeStudy/registerStudyList",
-    // new RegisterFreeStudyDetailHandler(registerFreeStudyMap, participateFreeStudyMap));
-    // commandMap.put("/freeStudy/participateStudyList",
-    // new ParticipateFreeStudyListHandler(participateFreeStudyMap));
-    //
+    // new RegisterFreeStudyDetailHandler(freeStudyDao));
+    // [수정] Key 값 변경
+    commandMap.put("/freeStudy/participateList", new ParticipateFreeStudyListHandler(freeStudyDao));
+    commandMap.put("/freeStudy/participateDetail",
+        new ParticipateFreeStudyDetailHandler(freeStudyDao));
+
     // commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
     // commandMap.put("/chargeStudy/add",
     // new ChargeStudyAddHandler(chargeStudyList, registerChargeStudyMap));
@@ -511,9 +515,9 @@ public class ClientAppGR {
   private Menu createParticipateFreeStudyMenu() {
 
     MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", Menu.ACCESS_MEMBER);
-    participateFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/participateStudyList"));
+    participateFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/participateList"));
     // [삭제] 회의 후 안하기로 결정
-    // participateFreeStudyMenu.add(new MenuItem("상세보기", "/participateFreeStudy/detail"));
+    participateFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/participateDetail"));
 
     return participateFreeStudyMenu;
   }
