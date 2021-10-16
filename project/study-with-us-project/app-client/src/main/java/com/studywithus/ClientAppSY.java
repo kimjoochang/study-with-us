@@ -37,7 +37,6 @@ import com.studywithus.handler.freestudy.FreeStudySearchHandler;
 import com.studywithus.handler.freestudy.FreeStudyUpdateHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
-import com.studywithus.handler.user.FindEmailHandler;
 import com.studywithus.handler.user.MyInfoHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
 import com.studywithus.menu.Menu;
@@ -97,7 +96,7 @@ public class ClientAppSY {
 		//		commandMap.put("/kakao/signUp", new SnsSignUpHandler(requestAgent));
 		//		commandMap.put("/naver/signUp", new SnsSignUpHandler(requestAgent));
 		//
-		commandMap.put("/find/email", new FindEmailHandler(requestAgent));
+		//		commandMap.put("/find/email", new FindEmailHandler(requestAgent));
 		//		commandMap.put("/reset/password", new ResetPasswordHandler(requestAgent));
 		//
 		//		commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(requestAgent));
