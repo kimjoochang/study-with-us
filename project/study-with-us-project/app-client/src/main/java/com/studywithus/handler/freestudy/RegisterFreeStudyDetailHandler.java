@@ -114,28 +114,30 @@ public class RegisterFreeStudyDetailHandler implements Command {
 
         if (input == 1) {
           request.getRequestDispatcher("/freeStudy/update").forward(request);
+          return;
 
         } else if (input == 2) {
           request.getRequestDispatcher("/freeStudy/delete").forward(request);
+          return;
 
         } else if (input == 3) {
           // freeStudy는 해당 스터디의 지원자 명단 확인, freeApplicant는 해당 스터디 정보에 멤버로 추가하기 위해 파라미터로 넘김
-          studyMemberApproveHandler(freeApplicant, freeStudy);
+          // studyMemberApproveHandler(freeApplicant, freeStudy);
           // freeApplicant.setUserAccessLevel(Menu.ACCESS_MEMBER | Menu.ACCESS_GENERAL);
           request.getRequestDispatcher("/freeStudy/registerStudyDetail").forward(request);
-          System.out.println("팀원 승인이 완료되었습니다.");
-          break;
+          // System.out.println("팀원 승인이 완료되었습니다.");
+          return;
 
         } else if (input == 4) {
           request.getRequestDispatcher("/freeStudy/registerStudyDetail").forward(request);
-          System.out.println("팀원 신청을 거절하였습니다.");
-          break;
+          // System.out.println("팀원 신청을 거절하였습니다.");
+          return;
 
         } else if (input == 0) {
           return;
 
         } else {
-          System.out.println("무효한 메뉴 번호입니다.\n");
+          System.out.println("다시 입력하세요.\n");
           continue;
         }
       }
