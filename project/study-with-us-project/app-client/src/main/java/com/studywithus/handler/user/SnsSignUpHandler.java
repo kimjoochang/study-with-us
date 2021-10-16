@@ -21,32 +21,36 @@ public class SnsSignUpHandler implements Command {
 
     Member member = new Member();
 
-    String name = Prompt.inputString("이름을 입력하세요. > ");
-    String snsEmail = Prompt.inputString("연동할 SNS 계정을 입력하세요. > ");
-    String password = Prompt.inputString("SNS 계정의 비밀번호를 입력하세요. > ");
+    while (true) {
 
-    System.out.println();
+      String name = Prompt.inputString("이름을 입력하세요. > ");
+      String snsEmail = Prompt.inputString("연동할 SNS 계정을 입력하세요. > ");
+      String password = Prompt.inputString("SNS 계정의 비밀번호를 입력하세요. > ");
 
-    // snsId = findBySnsId(snsId);
+      // System.out.println();
 
-    if (snsEmail == null) {
-      System.out.println("이미 연동된 SNS 계정입니다.\n");
+      memberDao.findByEmail(snsEmail);
 
-    } else if (!snsEmail.contains("@") || !snsEmail.contains(".com")) {
-      System.out.println("이메일 형식의 SNS 계정을 입력하세요.\n");
+      if (snsEmail == null) {
+        System.out.println("이미 연동된 SNS 계정입니다.\n");
 
-    } else {
-      member.setName(name);
-      member.setEmail(snsEmail);
-      member.setPassword(password);
-      member.setRegisteredDate((new Date(System.currentTimeMillis())));
-      member.setUserAccessLevel(Menu.ACCESS_GENERAL);
-      member.setRegisteredDate(new Date(System.currentTimeMillis()));
+      } else if (!snsEmail.contains("@") || !snsEmail.contains(".com")) {
+        System.out.println("이메일 형식의 SNS 계정을 입력하세요.\n");
 
-      memberDao.insert(member);
+      } else {
+        member.setName(name);
+        member.setEmail(snsEmail);
+        member.setPassword(password);
+        member.setRegisteredDate((new Date(System.currentTimeMillis())));
+        member.setUserAccessLevel(Menu.ACCESS_GENERAL);
+        member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-      System.out.println();
-      System.out.println("SNS 계정 연동이 완료되었습니다.\n");
+        memberDao.insert(member);
+
+        System.out.println();
+        System.out.println("SNS 계정 연동이 완료되었습니다.\n");
+      }
+      return;
     }
   }
 }

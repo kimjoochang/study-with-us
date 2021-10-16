@@ -78,8 +78,10 @@ public class NetMemberDao implements MemberDao {
   public Member findMemberByEmailPassword(String email, String password) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("email", email);
+    params.put("password", password);
 
-    requestAgent.request("member.selectOneByEmailPassword", params);
+    //requestAgent.request("member.selectOneByEmailPassword", params);
+    requestAgent.request("member.selectOneForLogin", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;

@@ -38,12 +38,12 @@ public class SnsLogInHandler implements Command {
     params.put("email", snsEmail);
     params.put("password", password);
 
-    requestAgent.request("member.selectOneByEmailPassword", params);
+    requestAgent.request("member.selectOneForLogin", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       Member member = requestAgent.getObject(Member.class);
       System.out.printf("%s님 환영합니다!\n", member.getName());
-      loginUser = member;
+      member = AuthLogInHandler.getLoginUser();
       userAccessLevel = Menu.ACCESS_GENERAL;
 
     } else {

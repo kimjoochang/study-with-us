@@ -17,6 +17,7 @@ public class MyInfoHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[나의 정보]\n");
 
+    // - 이전 소스
     //    HashMap<String,String> params = new HashMap<>();
     //    params.put("no", String.valueOf(no));
     //
@@ -28,14 +29,14 @@ public class MyInfoHandler implements Command {
     // Member user = requestAgent.getObject(Member.class);
 
 
-    Member user = AuthLogInHandler.getLoginUser();
+    Member member = AuthLogInHandler.getLoginUser();
 
-    if (user == null) {
+    if (member == null) {
       System.out.println("로그인 후 이용 바랍니다.");
       return;
     }
 
-    switch (user.getUserAccessLevel()) {
+    switch (member.getUserAccessLevel()) {
 
       case 0x02:
         System.out.println("등급: 회원");
@@ -62,9 +63,9 @@ public class MyInfoHandler implements Command {
         break;
     }
 
-    System.out.printf("이름: %s\n", user.getName());
-    System.out.printf("이메일: %s\n", user.getEmail());
-    System.out.printf("휴대폰 번호: %s\n", user.getPhoneNumber());
-    System.out.printf("가입일: %s\n", user.getRegisteredDate());
+    System.out.printf("이름: %s\n", member.getName());
+    System.out.printf("이메일: %s\n", member.getEmail());
+    System.out.printf("휴대폰 번호: %s\n", member.getPhoneNumber());
+    System.out.printf("가입일: %s\n", member.getRegisteredDate());
   }
 }

@@ -11,6 +11,11 @@ public class MembershipWithdrawalHandler implements Command {
 
   MemberDao memberDao;
 
+  static Member loginUser;
+  public static Member getLoginUser() {
+    return loginUser;
+  }
+
   public MembershipWithdrawalHandler(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
@@ -24,15 +29,39 @@ public class MembershipWithdrawalHandler implements Command {
     String email = Prompt.inputString("이메일: ");
     String password = Prompt.inputString("비밀번호: ");
 
-    Member member = memberDao.findMemberByEmailPassword(email, password);
-    Member loginUser = AuthLogInHandler.getLoginUser();
+    // Member loginUser = AuthLogInHandler.getLoginUser();
 
-    // Member member = findByEmailPassword(email, password);
-    //		HashMap<String, String> params = new HashMap<>();
-    //		params.put("email", email);
-    //		params.put("password", password);
-    //
-    //		requestAgent.request("member.selectOneByEmailPassword", params);
+    Member member = memberDao.findMemberByEmailPassword(email, password);
+
+    //    if (!loginUser.getEmail().equals(email) || !loginUser.getPassword().equals(password)) {
+    //      System.out.println("현재 로그인한 정보와 일치하지 않습니다.\n");
+    //      return;
+    //    } 
+
+    if (member == null) {
+      System.out.println("현재 로그인한 정보와 일치하지 않습니다.\n");
+      return;
+    } 
+
+    System.out.println();
+    String input = Prompt.inputString("정말 회원 탈퇴하시겠습니까? (y/N) ");
+
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println();
+      System.out.println(" 회원 탈퇴가 취소되었습니다.\n");
+    } else {
+
+      memberDao.delete(email);
+
+      AuthLogInHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
+      System.out.println();
+      System.out.println("회원 탈퇴가 완료되었습니다.\n");
+      return;
+
+    }
+  }
+
+  /* 10.16 수정 전 코드
 
     if (!loginUser.getEmail().equals(email)) {
       System.out.println();
@@ -64,6 +93,7 @@ public class MembershipWithdrawalHandler implements Command {
     }
 
   }
+   */
 
   // 기존 코드
   // private Member findById() {

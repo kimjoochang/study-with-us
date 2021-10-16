@@ -90,7 +90,7 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
     int index = indexOf(member.getEmail());
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      response.setValue("해당 정보의 회원을 찾을 수 없습니다.");
       return;
     }
 
@@ -166,14 +166,13 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
     int index = indexOf(member.getEmail());
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 유료 스터디를 찾을 수 없습니다.");
+      response.setValue("해당 정보의 회원을 찾을 수 없습니다.");
       return;
     }
-    System.out.println("인덱스 값 찾아옴");
 
     list.set(index, member);
     response.setStatus(Response.SUCCESS);
-    System.out.println("리스트에 값 업데이트 성공");
+
   }
 
   private void delete(Request request, Response response) throws Exception {
@@ -182,7 +181,7 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
 
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      response.setValue("해당 정보의 회원을 찾을 수 없습니다.");
       return;
     }
 
