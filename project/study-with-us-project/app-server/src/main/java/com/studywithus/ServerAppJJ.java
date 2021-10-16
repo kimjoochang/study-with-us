@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.RequestProcessor;
 import com.studywithus.table.ChargeStudyTableJJ;
+import com.studywithus.table.CommentTable;
 import com.studywithus.table.ExamScheduleTable;
 import com.studywithus.table.JobsScheduleTable;
 import com.studywithus.table.MemberTableJJ;
@@ -30,6 +31,7 @@ public class ServerAppJJ {
     dataProcessorMap.put("examScheduleTable.", new ExamScheduleTable());
     dataProcessorMap.put("jobsScheduleTable.", new JobsScheduleTable());
     dataProcessorMap.put("mentorApplication.", new MentorApplicationTable());
+    dataProcessorMap.put("comment.", new CommentTable());
     //    dataProcessorMap.put("mentorApplication.", new MentorApplicationTable());
     //    dataProcessorMap.put("project.", new ProjectTable());
 
