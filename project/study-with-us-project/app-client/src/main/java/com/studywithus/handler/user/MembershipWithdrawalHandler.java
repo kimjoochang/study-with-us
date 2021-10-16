@@ -53,6 +53,7 @@ public class MembershipWithdrawalHandler implements Command {
 
       memberDao.delete(email);
 
+      AuthLogInHandler.loginUser = null;
       AuthLogInHandler.userAccessLevel = Menu.ACCESS_LOGOUT;
       System.out.println();
       System.out.println("회원 탈퇴가 완료되었습니다.\n");

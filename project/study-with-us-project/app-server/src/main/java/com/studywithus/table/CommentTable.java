@@ -20,18 +20,14 @@ public class CommentTable extends JsonDataTable<Comment> implements DataProcesso
       case "comment.insert":
         insert(request, response);
         break;
-        //      case "community.selectList":
-        //        selectList(request, response);
-        //        break;
-        //      case "community.selectListByKeyword":
-        //        selectListByKeyword(request, response);
-        //        break;
-        //      case "community.selectOne":
-        //        selectOne(request, response);
-        //        break;
-        //      case "community.update":
-        //        update(request, response);
-        //        break;
+      case "comment.selectList": selectList(request, response); break;
+      //      case "community.selectListByKeyword":
+      //        selectListByKeyword(request, response);
+      //        break;
+      case "comment.selectOne": selectOne(request, response); break;
+      //      case "community.update":
+      //        update(request, response);
+      //        break;
       case "comment.delete":
         delete(request, response);
         break;
@@ -55,10 +51,10 @@ public class CommentTable extends JsonDataTable<Comment> implements DataProcesso
     response.setStatus(Response.SUCCESS);
   }
   //
-  //  private void selectList(Request request, Response response) throws Exception {
-  //    response.setStatus(Response.SUCCESS);
-  //    response.setValue(list);
-  //  }
+  private void selectList(Request request, Response response) throws Exception {
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
+  }
   //
   //  private void selectListByKeyword(Request request, Response response) throws Exception {
   //    String keyword = request.getParameter("keyword");
@@ -76,18 +72,18 @@ public class CommentTable extends JsonDataTable<Comment> implements DataProcesso
   //    response.setValue(searchResult);
   //  }
   //
-  //  private void selectOne(Request request, Response response) throws Exception {
-  //    int no = Integer.parseInt(request.getParameter("no"));
-  //    Community community = findByNo(no);
-  //
-  //    if (community != null) {
-  //      response.setStatus(Response.SUCCESS);
-  //      response.setValue(community);
-  //    } else {
-  //      response.setStatus(Response.FAIL);
-  //      response.setValue("해당 번호의 커뮤니티를 찾을 수 없습니다.");
-  //    }
-  //  }
+  private void selectOne(Request request, Response response) throws Exception {
+    int no = Integer.parseInt(request.getParameter("no"));
+    Comment comment = findByNo(no);
+
+    if (comment != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(comment);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 커뮤니티를 찾을 수 없습니다.");
+    }
+  }
   //
   //  private void update(Request request, Response response) throws Exception {
   //    Community community = request.getObject(Community.class);
@@ -117,14 +113,14 @@ public class CommentTable extends JsonDataTable<Comment> implements DataProcesso
     response.setStatus(Response.SUCCESS);
   }
 
-  //  private Community findByNo(int no) {
-  //    for (Community community : list) {
-  //      if (community.getNo() == no) {
-  //        return community;
-  //      }
-  //    }
-  //    return null;
-  //  }
+  private Comment findByNo(int no) {
+    for (Comment comment : list) {
+      if (comment.getNo() == no) {
+        return comment;
+      }
+    }
+    return null;
+  }
 
   private int indexOf(int commentNo) {
     for (int i = 0; i < list.size(); i++) {

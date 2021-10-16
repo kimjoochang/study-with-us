@@ -176,7 +176,15 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
   }
 
   private void delete(Request request, Response response) throws Exception {
-    String email = request.getObject(String.class);
+
+    /* 기존코드는 Object 값 하나 확인하는 코드인데
+     * NetMemberDao 134번째 줄에서 해쉬맵에 email 담아서 보내주니까
+     * 여기서도 Object 값 하나가 아니라 해쉬맵 값 확인해야 함!
+     * 
+     * 기존코드
+     * String email = request.getObject(String.class);
+     */
+    String email = request.getParameter("email");
     int index = indexOf(email);
 
     if (index == -1) {

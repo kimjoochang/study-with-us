@@ -17,7 +17,7 @@ public class CommentDeleteHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[커뮤니티 / 댓글 삭제]\n");
+    //    System.out.println("[커뮤니티 / 댓글 삭제]\n");
 
     int no = (int) request.getAttribute("commentNo");
 
@@ -28,12 +28,13 @@ public class CommentDeleteHandler implements Command {
       return;
     }
 
-    if (comment.getWriter().getEmail() != AuthLogInHandler.getLoginUser().getEmail()) {
+    if (!comment.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
       System.out.println("삭제 권한이 없습니다.");
       return;
-    }
-    else if (comment.getWriter().getEmail() == AuthLogInHandler.getLoginUser().getEmail()
-        || AuthLogInHandler.getLoginUser().getEmail().equals("root@test.com"))
+
+    } else if (comment.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail()) 
+        || AuthLogInHandler.getLoginUser().getEmail().equals("root@test.com")) {
+
       while (true) {
         String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
@@ -51,6 +52,7 @@ public class CommentDeleteHandler implements Command {
           continue;
         }
       }
+    }
   }
 
 

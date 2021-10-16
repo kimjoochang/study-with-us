@@ -1,6 +1,8 @@
 package com.studywithus.dao.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import com.studywithus.dao.CommentDao;
 import com.studywithus.domain.Comment;
 import com.studywithus.request.RequestAgent;
@@ -24,15 +26,15 @@ public class NetCommentDao implements CommentDao {
     }
   }
 
-  //  @Override
-  //  public List<Community> findAll() throws Exception {
-  //    requestAgent.request("community.selectList", null);
-  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-  //      throw new Exception("게시글 목록 조회 실패!");
-  //    }
-  //
-  //    return new ArrayList<>(requestAgent.getObjects(Community.class));
-  //  }
+  @Override
+  public List<Comment> findAll() throws Exception {
+    requestAgent.request("comment.selectList", null);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("게시글 목록 조회 실패!");
+    }
+
+    return new ArrayList<>(requestAgent.getObjects(Comment.class));
+  }
   //
   //  @Override
   //  public List<Community> findByKeyword(String keyword) throws Exception {
