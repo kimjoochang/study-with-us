@@ -2,7 +2,6 @@ package com.studywithus.handler.comment;
 
 import com.studywithus.dao.CommentDao;
 import com.studywithus.domain.Comment;
-import com.studywithus.domain.Community;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
@@ -33,26 +32,27 @@ public class CommentDeleteHandler implements Command {
       System.out.println("삭제 권한이 없습니다.");
       return;
     }
+    else if (comment.getWriter().getEmail() == AuthLogInHandler.getLoginUser().getEmail()
+        || AuthLogInHandler.getLoginUser().getEmail().equals("root@test.com"))
+      while (true) {
+        String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
 
-    while (true) {
-      String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
+        if (input.equalsIgnoreCase("n") || input.length() == 0) {
+          System.out.println("게시글 삭제를 취소하였습니다.");
+          return;
 
-      if (input.equalsIgnoreCase("n") || input.length() == 0) {
-        System.out.println("게시글 삭제를 취소하였습니다.");
-        return;
+        } else if (input.equalsIgnoreCase("y")) {
+          commentDao.delete(no);
+          System.out.println("게시글을 삭제하였습니다.");
+          return;
 
-      } else if (input.equalsIgnoreCase("y")) {
-        comment.delete(no);
-        System.out.println("게시글을 삭제하였습니다.");
-        return;
-
-      } else {
-        System.out.println("다시 입력하세요.\n");
-        continue;
+        } else {
+          System.out.println("다시 입력하세요.\n");
+          continue;
+        }
       }
-    }
   }
-}
+
 
 
 
