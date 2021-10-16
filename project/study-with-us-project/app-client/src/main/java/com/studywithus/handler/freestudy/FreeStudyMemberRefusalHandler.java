@@ -17,6 +17,7 @@ public class FreeStudyMemberRefusalHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
+    System.out.println("[마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 무료 스터디/ 상세보기 / 승인 거절]\n");
     int no = (int) request.getAttribute("freeNo");
 
     // requestAgent.request("member.selectOneByEmail", email);
