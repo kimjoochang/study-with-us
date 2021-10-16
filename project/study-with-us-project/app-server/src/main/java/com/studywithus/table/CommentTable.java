@@ -1,6 +1,6 @@
 package com.studywithus.table;
 
-import com.studywithus.domain.Community;
+import com.studywithus.domain.Comment;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.Request;
 import com.studywithus.server.Response;
@@ -8,7 +8,7 @@ import com.studywithus.server.Response;
 // 역할
 // - 댓글 데이터를 처리하는 일을 한다.
 //
-public class CommentTable extends JsonDataTable<Community> implements DataProcessor {
+public class CommentTable extends JsonDataTable<Comment> implements DataProcessor {
 
   public CommentTable() {
     super("comment.json", Comment.class);
