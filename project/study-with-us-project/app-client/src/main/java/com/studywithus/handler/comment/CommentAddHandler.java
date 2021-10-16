@@ -7,7 +7,7 @@ import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class CommentDeleteHandler implements Command {
+public class CommentAddHandler implements Command {
 
   CommentDao commentDao;
 
