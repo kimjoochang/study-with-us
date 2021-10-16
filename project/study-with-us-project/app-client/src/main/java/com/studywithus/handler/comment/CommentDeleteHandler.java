@@ -1,6 +1,7 @@
 package com.studywithus.handler.comment;
 
 import com.studywithus.dao.CommentDao;
+import com.studywithus.domain.Comment;
 import com.studywithus.domain.Community;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
