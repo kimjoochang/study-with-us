@@ -6,7 +6,6 @@ import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class RegisterFreeStudyDetailHandler implements Command {
@@ -123,12 +122,13 @@ public class RegisterFreeStudyDetailHandler implements Command {
 				} else if (input == 3) {
 					// freeStudy는 해당 스터디의 지원자 명단 확인, freeApplicant는 해당 스터디 정보에 멤버로 추가하기 위해 파라미터로 넘김
 					studyMemberApproveHandler(freeApplicant, freeStudy);
-					freeApplicant.setUserAccessLevel(Menu.ACCESS_MEMBER | Menu.ACCESS_GENERAL);
+					//					freeApplicant.setUserAccessLevel(Menu.ACCESS_MEMBER | Menu.ACCESS_GENERAL);
+					request.getRequestDispatcher("/freeStudy/registerStudyDetail").forward(request);
 					System.out.println("팀원 승인이 완료되었습니다.");
 					break;
 
 				} else if (input == 4) {
-					request.getRequestDispatcher("/freeStudy/remove").foward(request);
+					request.getRequestDispatcher("/freeStudy/registerStudyDetail").forward(request);
 					System.out.println("팀원 신청을 거절하였습니다.");
 					break;
 

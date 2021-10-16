@@ -61,6 +61,8 @@ import com.studywithus.handler.freestudy.FreeStudyInterestListHandler;
 import com.studywithus.handler.freestudy.FreeStudyListHandler;
 import com.studywithus.handler.freestudy.FreeStudySearchHandler;
 import com.studywithus.handler.freestudy.FreeStudyUpdateHandler;
+import com.studywithus.handler.freestudy.ParticipateFreeStudyDetailHandler;
+import com.studywithus.handler.freestudy.ParticipateFreeStudyListHandler;
 import com.studywithus.handler.freestudy.RegisterFreeStudyDetailHandler;
 import com.studywithus.handler.freestudy.RegisterFreeStudyListHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
@@ -178,7 +180,8 @@ public class ClientAppSY {
 
 		commandMap.put("/freeStudy/registerStudyDetail", new RegisterFreeStudyDetailHandler(freeStudyDao));
 		commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyListHandler(freeStudyDao));
-		//		commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(requestAgent));
+		commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(freeStudyDao));
+		commandMap.put("/freeStudy/participateStudyDetail", new ParticipateFreeStudyDetailHandler(freeStudyDao));
 		//
 		commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyDao));
 		commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyDao));
@@ -560,10 +563,9 @@ public class ClientAppSY {
 	private Menu createRegisterFreeStudyMenu() {
 
 		MenuGroup registerFreeStudyMenu = new MenuGroup("내가 생성한 무료 스터디", ACCESS_LEADER);
-		registerFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/registerStudyList"));
+		registerFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/registerStudyDetail"));
 		// [삭제] 상세보기와 통합
-		// registerFreeStudyMenu.add(new MenuItem("조회",
-		// "/freeStudy/registerStudyList"));
+		registerFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/registerStudyList"));
 		// [삭제] 회의 후 안하기로 결정
 		// registerFreeStudyMenu.add(new MenuItem("삭제", "/registerFreeStudy/delete"));
 
@@ -576,8 +578,7 @@ public class ClientAppSY {
 		MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", Menu.ACCESS_MEMBER);
 		participateFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/participateStudyList"));
 		// [삭제] 회의 후 안하기로 결정
-		// participateFreeStudyMenu.add(new MenuItem("상세보기",
-		// "/participateFreeStudy/detail"));
+		participateFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/participateStudyDetail"));
 
 		return participateFreeStudyMenu;
 	}
