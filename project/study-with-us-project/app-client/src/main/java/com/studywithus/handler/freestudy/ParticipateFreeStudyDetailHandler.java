@@ -1,11 +1,9 @@
 package com.studywithus.handler.freestudy;
 
 import com.studywithus.dao.FreeStudyDao;
-import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class ParticipateFreeStudyDetailHandler implements Command {
@@ -51,11 +49,11 @@ public class ParticipateFreeStudyDetailHandler implements Command {
     // return;
     // }
 
-    Member loginUser = AuthLogInHandler.getLoginUser();
-    if (loginUser == null || (freeStudy.getWriter().getNo() != loginUser.getNo()
-        && !loginUser.getEmail().equals("root@test.com"))) {
-      return;
-    }
+    // Member loginUser = AuthLogInHandler.getLoginUser();
+    // if (loginUser == null || (freeStudy.getWriter().getNo() != loginUser.getNo()
+    // && !loginUser.getEmail().equals("root@test.com"))) {
+    // return;
+    // }
 
     request.setAttribute("freeStudyNo", no);
 
