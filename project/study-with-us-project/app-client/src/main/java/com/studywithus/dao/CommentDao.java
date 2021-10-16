@@ -1,5 +1,6 @@
 package com.studywithus.dao;
 
+import com.studywithus.domain.Comment;
 import com.studywithus.domain.Study;
 
 public interface CommentDao {
