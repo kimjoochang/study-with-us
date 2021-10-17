@@ -32,6 +32,7 @@ import com.studywithus.handler.freestudy.FreeStudyInterestListHandler;
 import com.studywithus.handler.freestudy.FreeStudyListHandler;
 import com.studywithus.handler.freestudy.FreeStudyMemberApproveHandler;
 import com.studywithus.handler.freestudy.FreeStudyMemberRefusalHandler;
+import com.studywithus.handler.freestudy.FreeStudyParticipationCancelHandler;
 import com.studywithus.handler.freestudy.FreeStudySearchHandler;
 import com.studywithus.handler.freestudy.FreeStudyUpdateHandler;
 import com.studywithus.handler.freestudy.ParticipateFreeStudyDetailHandler;
@@ -135,6 +136,10 @@ public class ClientAppGR {
     // [추가]
     commandMap.put("/freeStudy/interestDetail", new FreeStudyInterestDetailHandler(freeStudyDao));
     commandMap.put("/freeStudy/interestDelete", new FreeStudyInterestDeleteHandler(freeStudyDao));
+
+    // [추가]
+    commandMap.put("/freeStudy/participationCancel",
+        new FreeStudyParticipationCancelHandler(freeStudyDao));
 
     commandMap.put("/freeStudy/registerFreeStudyList",
         new RegisterFreeStudyListHandler(freeStudyDao));

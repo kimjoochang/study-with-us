@@ -5,25 +5,20 @@ import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
-public class FreeStudyMemberApproveHandler implements Command {
+public class FreeStudyParticipationCancelHandler implements Command {
 
   FreeStudyDao freeStudyDao;
 
-  public FreeStudyMemberApproveHandler(FreeStudyDao freeStudyDao) {
+  public FreeStudyParticipationCancelHandler(FreeStudyDao freeStudyDao) {
     this.freeStudyDao = freeStudyDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 무료 스터디/ 상세보기 / 승인]\n");
+    System.out.println("[무료 스터디 / 상세보기 / 참여 취소]\n");
     int no = (int) request.getAttribute("freeNo");
-
-    // requestAgent.request("member.selectOneByEmail", email);
-    // Member Applicant = requestAgent.getObject(Member.class);
-    // Applicant.setMentor(true);
 
     Study freeStudy = freeStudyDao.findByNo(no);
 
@@ -32,21 +27,26 @@ public class FreeStudyMemberApproveHandler implements Command {
       return;
     }
 
-    AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MEMBER;
-
     while (true) {
-      String input = Prompt.inputString("해당 회원을 멤버로 승인하시겠습니까? (y/N) ");
+      String input = Prompt.inputString("무료 스터디 참여를 취소하시겠습니까? (y/N) ");
 
       if (input.equalsIgnoreCase("n") || input.length() == 0) {
         System.out.println();
-        System.out.println("멤버 승인이 취소되었습니다.");
+        System.out.println("무료 스터디 참여 취소가 취소되었습니다.");
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        freeStudy.getApplicants().add(AuthLogInHandler.getLoginUser());
+        for (int i = 0; i < freeStudy.getParticipants().size(); i++) {
+          if (freeStudy.getParticipants().get(i).getNo() == AuthLogInHandler.getLoginUser()
+              .getNo()) {
+            freeStudy.getParticipants().remove(i);
+            break;
+          }
+        }
+
         freeStudyDao.update(freeStudy);
         System.out.println();
-        System.out.println("멤버 승인이 완료되었습니다.");
+        System.out.println("무료 스터디 참여를 취소하였습니다.");
         return;
 
       } else {
@@ -55,6 +55,5 @@ public class FreeStudyMemberApproveHandler implements Command {
         continue;
       }
     }
-    // System.out.println("무료스터디 멤버 승인이 완료되었습니다.");
   }
 }

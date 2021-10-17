@@ -42,7 +42,7 @@ public class FreeStudyMemberRefusalHandler implements Command {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        freeStudy.getParticipants().remove(AuthLogInHandler.getLoginUser());
+        freeStudy.getApplicants().remove(AuthLogInHandler.getLoginUser());
         freeStudyDao.update(freeStudy);
         System.out.println();
         System.out.println("멤버 승인 거절이 완료되었습니다.");
