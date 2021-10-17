@@ -8,8 +8,8 @@ public interface MentorApplicationDao {
 
   void insert(MentorApplicationForm mentorApplication) throws Exception;
   List<Member> findAll() throws Exception;
-  List<Member> findByName(String name) throws Exception;
-  List<Member> findByEmail(String email) throws Exception;
-  void update(MentorApplicationForm mentorApplication) throws Exception;
+  //List<Member> findByName(String name) throws Exception;
+  MentorApplicationForm findByEmail(String email) throws Exception;
+  //void update(MentorApplicationForm mentorApplication) throws Exception;
   void delete(String mentorApplicantEmail) throws Exception;
 }

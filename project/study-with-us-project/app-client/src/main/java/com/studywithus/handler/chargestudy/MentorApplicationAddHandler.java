@@ -1,6 +1,7 @@
 package com.studywithus.handler.chargestudy;
 
 import java.sql.Date;
+import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,10 +11,11 @@ import com.studywithus.util.Prompt;
 
 public class MentorApplicationAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  MentorApplicationDao mentorApplicationDao;
 
-  public MentorApplicationAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+
+  public MentorApplicationAddHandler(MentorApplicationDao mentorApplicationDao) {
+    this.mentorApplicationDao = mentorApplicationDao;
   }
 
   @Override
@@ -27,7 +29,10 @@ public class MentorApplicationAddHandler implements Command {
       return;
     }
 
-    requestAgent.request("mentorApplication.selectOneByEmail", AuthLogInHandler.loginUser.getEmail());
+    String email = AuthLogInHandler.loginUser.getEmail();
+    MentorApplicationForm mentorApplicantEmail = mentorApplicationDao.findByEmail(email);
+
+    // requestAgent.request("mentorApplication.selectOneByEmail", AuthLogInHandler.loginUser.getEmail());
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("이미 멘토 신청이 완료되었습니다.");
