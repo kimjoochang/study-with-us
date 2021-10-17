@@ -9,76 +9,76 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyUpdateHandler implements Command {
 
-    FreeStudyDao freeStudyDao;
+	FreeStudyDao freeStudyDao;
 
-    public FreeStudyUpdateHandler(FreeStudyDao freeStudyDao) {
-        this.freeStudyDao = freeStudyDao;
-    }
+	public FreeStudyUpdateHandler(FreeStudyDao freeStudyDao) {
+		this.freeStudyDao = freeStudyDao;
+	}
 
-    @Override
-    public void execute(CommandRequest request) throws Exception {
-        System.out.println("[무료 스터디 / 수정]\n");
-        int no = (int) request.getAttribute("freeNo");
-
-
-        // Study freeStudy = findByNo(no);
-
-        Study freeStudy = freeStudyDao.findByNo(no);
-
-        if (freeStudy == null) {
-            System.out.println();
-            System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
-            return;
-        }
-
-        //      if (freeStudyDao.getStatus().equals(RequestAgent.FAIL)) {
-        //          System.out.println("해당 번호의 무료 스터디가 없습니다.");
-        //          return;
-        //      }
-
-        //      Study freeStudy = freeStudyDao.getObject(Study.class);
+	@Override
+	public void execute(CommandRequest request) throws Exception {
+		System.out.println("[무료 스터디 / 수정]\n");
+		int no = (int) request.getAttribute("freeNo"); // 에러
 
 
-        if (freeStudy.getWriter().getNo() != AuthLogInHandler.getLoginUser().getNo()) {
-            System.out.println("변경 권한이 없습니다.");
-            return;
-        }
+		// Study freeStudy = findByNo(no);
 
-        String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", freeStudy.getTitle()));
-        String content = Prompt.inputString(String.format("[%s] 수정할 설명: ", freeStudy.getContent()));
-        String rule = Prompt.inputString(String.format("[%s] 수정할 규칙: ", freeStudy.getRule()));
-        System.out.println();
+		Study freeStudy = freeStudyDao.findByNo(no);
 
-        while (true) {
-            String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
-            System.out.println();
+		if (freeStudy == null) {
+			System.out.println();
+			System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
+			return;
+		}
 
-            if (input.equalsIgnoreCase("n") || input.length() == 0) {
-                System.out.println("무료 스터디 수정을 취소하였습니다.");
-                return;
+		//      if (freeStudyDao.getStatus().equals(RequestAgent.FAIL)) {
+		//          System.out.println("해당 번호의 무료 스터디가 없습니다.");
+		//          return;
+		//      }
 
-            } else if (!input.equalsIgnoreCase("y")) {
-                System.out.println("다시 입력하세요.\n");
-                continue;
+		//      Study freeStudy = freeStudyDao.getObject(Study.class);
 
-            } else {
-                break;
-            }
-        }
 
-        freeStudy.setTitle(title);
-        freeStudy.setContent(content);
-        freeStudy.setRule(rule);
+		if (freeStudy.getWriter().getNo() != AuthLogInHandler.getLoginUser().getNo()) {
+			System.out.println("변경 권한이 없습니다.");
+			return;
+		}
 
-        freeStudyDao.update(freeStudy);
+		String title = Prompt.inputString(String.format("[%s] 수정할 제목: ", freeStudy.getTitle()));
+		String content = Prompt.inputString(String.format("[%s] 수정할 설명: ", freeStudy.getContent()));
+		String rule = Prompt.inputString(String.format("[%s] 수정할 규칙: ", freeStudy.getRule()));
+		System.out.println();
 
-        //      if (freeStudyDao.getStatus().equals(RequestAgent.FAIL)) {
-        //          System.out.println("무료 스터디 변경 실패!");
-        //          System.out.println(freeStudyDao.getObject(String.class));
-        //          return;
-        //      }
+		while (true) {
+			String input = Prompt.inputString("정말 수정하시겠습니까? (y/N) ");
+			System.out.println();
 
-        System.out.println();
-        System.out.println("무료 스터디를 수정하였습니다.");
-    }
+			if (input.equalsIgnoreCase("n") || input.length() == 0) {
+				System.out.println("무료 스터디 수정을 취소하였습니다.");
+				return;
+
+			} else if (!input.equalsIgnoreCase("y")) {
+				System.out.println("다시 입력하세요.\n");
+				continue;
+
+			} else {
+				break;
+			}
+		}
+
+		freeStudy.setTitle(title);
+		freeStudy.setContent(content);
+		freeStudy.setRule(rule);
+
+		freeStudyDao.update(freeStudy);
+
+		//      if (freeStudyDao.getStatus().equals(RequestAgent.FAIL)) {
+		//          System.out.println("무료 스터디 변경 실패!");
+		//          System.out.println(freeStudyDao.getObject(String.class));
+		//          return;
+		//      }
+
+		System.out.println();
+		System.out.println("무료 스터디를 수정하였습니다.");
+	}
 }
