@@ -5,13 +5,14 @@ import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class MentorApplicationDetailHandler implements Command {
+public class MentorApplicationDetailHandler_JJ implements Command {
 
   MentorApplicationDao mentorApplicationDao;
 
-  public MentorApplicationDetailHandler (MentorApplicationDao mentorApplicationDao) {
+  public MentorApplicationDetailHandler_JJ (MentorApplicationDao mentorApplicationDao) {
     this.mentorApplicationDao = mentorApplicationDao;
   }
 
@@ -19,7 +20,14 @@ public class MentorApplicationDetailHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[멘토 승인 내역 / 상세보기]\n");
 
-    Collection<MentorApplicationForm> mentorApplicationList = mentorApplicationDao.findAll();
+    requestAgent.request("mentorApplication.selectList", null);
+
+    Collection<MentorApplicationForm> mentorApplicationList = requestAgent.getObjects(MentorApplicationForm.class);
+
+    if (requestAgent.getStatus() == RequestAgent.FAIL) {
+      System.out.println("신청한 멘토가 존재하지 않습니다.");
+      return;
+    }
 
     if (mentorApplicationList.isEmpty()) {
       System.out.println("신청한 멘토가 존재하지 않습니다.");
@@ -46,9 +54,11 @@ public class MentorApplicationDetailHandler implements Command {
     System.out.println();
     String email = Prompt.inputString("멘토 신청자 이메일을 입력하세요. > ");
 
+    requestAgent.request("mentorApplication.selectOneByEmail", email);
+
     System.out.println();
 
-    MentorApplicationForm mentorApplication = mentorApplicationDao.findByEmail(email);
+    MentorApplicationForm mentorApplication = requestAgent.getObject(MentorApplicationForm.class);
 
     if (mentorApplication == null || mentorApplication.isVisible() == false) {
       System.out.println("입력하신 이메일과 일치하는 신청 내역이 없습니다.");
@@ -62,7 +72,7 @@ public class MentorApplicationDetailHandler implements Command {
     System.out.printf("스터디 설명: %s\n", mentorApplication.getChargeStudyExplanation());
     System.out.printf("등록일: %s\n", mentorApplication.getRegisteredDate());
 
-    request.setAttribute("applicantEmail", email);
+    request.setAttribute("applicantName", email);
 
     System.out.println();
     System.out.println("1. 승인");
@@ -75,13 +85,12 @@ public class MentorApplicationDetailHandler implements Command {
 
       if (input == 1) {
         mentorApplication.setVisible(false);
-        mentorApplicationDao.update(mentorApplication);
+        requestAgent.request("mentorApplication.update", mentorApplication);
         request.getRequestDispatcher("/mentorApplication/approve").forward(request);
         break;
 
       } else if (input == 2) {
-        mentorApplication.setVisible(false);
-        mentorApplicationDao.update(mentorApplication);
+        requestAgent.request("mentorApplication.delete", email);
         System.out.println("멘토 신청을 거절하였습니다.");
         break;
 

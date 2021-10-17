@@ -9,6 +9,7 @@ import com.studywithus.dao.impl.NetChargeStudyDao;
 import com.studywithus.dao.impl.NetCommentDao;
 import com.studywithus.dao.impl.NetCommunityDao;
 import com.studywithus.dao.impl.NetMemberDao;
+import com.studywithus.dao.impl.NetMentorApplicationDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
 import com.studywithus.dao.impl.NetScheduleDao;
@@ -36,7 +37,7 @@ import com.studywithus.handler.chargestudy.MentorApplicationAddHandler;
 import com.studywithus.handler.chargestudy.MentorApplicationDetailHandler;
 import com.studywithus.handler.chargestudy.ParticipateChargeStudyDetailHandler;
 import com.studywithus.handler.chargestudy.ParticipateChargeStudyListHandler;
-import com.studywithus.handler.chargestudy.RegisterChargeStudyDetailHandler;
+import com.studywithus.handler.chargestudy.RegisterChargeStudyDetailHandler_Save;
 import com.studywithus.handler.chargestudy.RegisterChargeStudyListHandler;
 import com.studywithus.handler.chargestudy.ReviewAddHandler;
 import com.studywithus.handler.chargestudy.ReviewListHandler;
@@ -111,6 +112,7 @@ public class ClientApp_JC {
     NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
     /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(chargeStudyDao, request);
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
+    NetMentorApplicationDao netMentorApplicationDao = new NetMentorApplicationDao(requestAgent);
 
     commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
     commandMap.put("/google/logIn", new SnsLogInHandler(requestAgent));
@@ -133,8 +135,8 @@ public class ClientApp_JC {
     //    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
     //    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeStudyDao));
-    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(requestAgent));
-    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(chargeStudyDao));
+    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(netMentorApplicationDao));
+    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(netMentorApplicationDao));
     //commandMap.put("/freeStudy/search", new FreeStudySearchHandler(requestAgent));
     //commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
     //commandMap.put("/freeStudy/list", new FreeStudyListHandler(requestAgent));
@@ -169,7 +171,7 @@ public class ClientApp_JC {
     commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(chargeStudyDao));
-    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler(chargeStudyDao));
+    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler_Save(chargeStudyDao));
     commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(chargeStudyDao)); 
     commandMap.put("/review/add", new ReviewAddHandler(reviewDao));
@@ -224,7 +226,7 @@ public class ClientApp_JC {
     commandMap.put("/community/search", new CommunitySearchHandler(communityDao));
 
 
-    /*[수정]*/commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(requestAgent));                          
+    /*[수정]*/commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(memberDao));                          
     /*[수정]*/commandMap.put("/chargeInterest/detail", new ChargeStudyInterestDetailHandler(chargeStudyDao, chargeStudyDetailMenuPrompt));                          
     /*[추가]*/commandMap.put("/comment/add", new CommentAddHandler(commentDao));                          
     /*[추가]*/commandMap.put("/comment/delete", new CommentDeleteHandler(commentDao));                          

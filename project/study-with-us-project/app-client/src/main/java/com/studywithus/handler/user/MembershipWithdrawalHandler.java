@@ -11,11 +11,6 @@ public class MembershipWithdrawalHandler implements Command {
 
   MemberDao memberDao;
 
-  static Member loginUser;
-  public static Member getLoginUser() {
-    return loginUser;
-  }
-
   public MembershipWithdrawalHandler(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
@@ -29,20 +24,9 @@ public class MembershipWithdrawalHandler implements Command {
     String email = Prompt.inputString("이메일: ");
     String password = Prompt.inputString("비밀번호: ");
 
-    // Member loginUser = AuthLogInHandler.getLoginUser();
+    Member loginUser = AuthLogInHandler.getLoginUser();
 
-    Member member = memberDao.findMemberByEmailPassword(email, password);
-
-    // *** 질문 ***
-    // 현재 로그인한 정보와 재입력한 정보를 비교해야 되는데 이렇게 DAO에서 찾는 게 맞는건가....? 
-    // DAO에서 찾으면 그냥 로그인 개념 아닌가?
-
-    //    if (!loginUser.getEmail().equals(email) || !loginUser.getPassword().equals(password)) {
-    //      System.out.println("현재 로그인한 정보와 일치하지 않습니다.\n");
-    //      return;
-    //    } 
-
-    if (member == null) {
+    if (!loginUser.getEmail().equals(email) || !loginUser.getPassword().equals(password)) {
       System.out.println("현재 로그인한 정보와 일치하지 않습니다.\n");
       return;
     } 

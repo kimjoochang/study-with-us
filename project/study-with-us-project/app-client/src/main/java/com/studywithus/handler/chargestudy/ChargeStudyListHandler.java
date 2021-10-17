@@ -20,7 +20,7 @@ public class ChargeStudyListHandler implements Command {
 
     Collection<Study> studyList = chargeStudyDao.findAll();
 
-    if (studyList == null) {
+    if (studyList.isEmpty()) {
       System.out.println("유료 스터디 게시글이 존재하지 않습니다.");
       return;
     }

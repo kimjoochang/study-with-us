@@ -6,14 +6,15 @@ import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
-public class MentorApplicationAddHandler implements Command {
+public class MentorApplicationAddHandler_JJ implements Command {
 
   MentorApplicationDao mentorApplicationDao;
 
 
-  public MentorApplicationAddHandler(MentorApplicationDao mentorApplicationDao) {
+  public MentorApplicationAddHandler_JJ(MentorApplicationDao mentorApplicationDao) {
     this.mentorApplicationDao = mentorApplicationDao;
   }
 
@@ -21,15 +22,19 @@ public class MentorApplicationAddHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[유료 스터디 / 멘토 신청]\n");
 
+    MentorApplicationForm mentorApplication = new MentorApplicationForm();
+
     if (AuthLogInHandler.loginUser.isMentor()) {
       System.out.println("이미 멘토입니다.");
       return;
     }
 
-    MentorApplicationForm mentorApplicantEmail = mentorApplicationDao.findByEmail(AuthLogInHandler.loginUser.getEmail());
+    String email = AuthLogInHandler.loginUser.getEmail();
+    MentorApplicationForm mentorApplicantEmail = mentorApplicationDao.findByEmail(email);
 
-    // 신청서가 이미 있으면서 아직 승인/거절 결정이 안났다면 (visible이 true라면)
-    if (mentorApplicantEmail != null && mentorApplicantEmail.isVisible()) {
+    // requestAgent.request("mentorApplication.selectOneByEmail", AuthLogInHandler.loginUser.getEmail());
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       System.out.println("이미 멘토 신청이 완료되었습니다.");
       return;
     }
@@ -45,8 +50,6 @@ public class MentorApplicationAddHandler implements Command {
         continue;
 
       } else {
-        MentorApplicationForm mentorApplication = new MentorApplicationForm();
-
         mentorApplication.setVisible(true);
         mentorApplication.setName(AuthLogInHandler.loginUser.getName());
         mentorApplication.setMentorApplicantEmail(AuthLogInHandler.loginUser.getEmail());
@@ -55,9 +58,8 @@ public class MentorApplicationAddHandler implements Command {
         mentorApplication.setChargeStudyExplanation(explanation);
         mentorApplication.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-        mentorApplicationDao.insert(mentorApplication);
+        requestAgent.request("mentorApplication.insert", mentorApplication);
 
-        System.out.println();
         System.out.println("멘토 신청이 완료되었습니다.");
       }
       break;
