@@ -35,7 +35,7 @@ public class ParticipateFreeStudyDetailHandler implements Command {
     // && no == freeStudy.getNo()) {
     // count++;
 
-    for (Member participant : freeStudy.getApplicants()) {
+    for (Member participant : freeStudy.getParticipants()) {
       if (participant.getNo() != AuthLogInHandler.getLoginUser().getNo()) {
         System.out.println("참여한 무료 스터디가 존재하지 않습니다.");
         return;
