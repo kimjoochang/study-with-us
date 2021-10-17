@@ -41,15 +41,15 @@ public class ParticipateFreeStudyDetailHandler implements Command {
     // }
     // }
 
-    Boolean myPartiStudy = false;
+    Boolean myPartStudy = false;
     for (int i = 0; i < freeStudy.getParticipants().size(); i++) {
       if (freeStudy.getParticipants().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-        myPartiStudy = true;
+        myPartStudy = true;
         break;
       }
     }
 
-    if (!myPartiStudy) {
+    if (!myPartStudy) {
       System.out.println("참여하신 무료 스터디가 아닙니다.");
       return;
     }

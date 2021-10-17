@@ -67,7 +67,7 @@ public class FreeStudyDetailHandler implements Command {
     request.setAttribute("freeNo", no);
 
     // 내가 쓴 글일 경우
-    if (freeStudy.getWriter().getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
+    if (freeStudy.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()) {
       while (true) {
         System.out.println("1. 수정");
         System.out.println("2. 삭제");
@@ -97,13 +97,14 @@ public class FreeStudyDetailHandler implements Command {
     } else {
       int interestType = 0; // 메서드 호출할 때, 관심목록 존재 여부 구분을 위한 변수
       int applyType = 0; // 메서드 호출할 때, 신청내역 존재 여부 구분을 위한 변수
+      int partType = 0;
 
       while (true) {
         // [테스트]
         // System.out.println("테스트: " + freeStudy.getApplicants().toString());
 
         for (Member member : freeStudy.getApplicants()) {
-          if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
+          if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
             applyType = 1;
             break;
           }
@@ -116,8 +117,19 @@ public class FreeStudyDetailHandler implements Command {
           System.out.println("1. 신청 취소하기");
         }
 
+        for (Member member : freeStudy.getParticipants()) {
+          if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+            partType = 1;
+            break;
+          }
+        }
+
+        if (partType == 1) {
+          System.out.println("1. 참여 취소하기");
+        }
+
         for (Member member : freeStudy.getLikeMembers()) {
-          if (member.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
+          if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
             interestType = 1;
             break;
           }
@@ -143,6 +155,9 @@ public class FreeStudyDetailHandler implements Command {
             // 신청하기를 이미 한 경우
           } else if (applyType == 1) {
             request.getRequestDispatcher("/freeStudy/applyCancel").forward(request);
+
+          } else if (partType == 1) {
+            request.getRequestDispatcher("/freeStudy/participationCancel").forward(request);
           }
 
         } else if (menuNo == 2) {
