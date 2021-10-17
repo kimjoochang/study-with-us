@@ -36,7 +36,6 @@ import com.studywithus.handler.chargestudy.ChargeStudySearchHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyUpdateHandler;
 import com.studywithus.handler.chargestudy.ParticipateChargeStudyDetailHandler;
 import com.studywithus.handler.chargestudy.ParticipateChargeStudyListHandler;
-import com.studywithus.handler.chargestudy.RegisterChargeStudyDetailHandler;
 import com.studywithus.handler.chargestudy.RegisterChargeStudyListHandler;
 import com.studywithus.handler.chargestudy.ReviewAddHandler;
 import com.studywithus.handler.chargestudy.ReviewListHandler;
@@ -213,8 +212,7 @@ public class ClientAppSY {
 
 		commandMap.put("/chargeStudy/registerChargeStudyList",
 				new RegisterChargeStudyListHandler(chargeStudyDao));
-		commandMap.put("/chargeStudy/registerChargeStudyDetail",
-				new RegisterChargeStudyDetailHandler(chargeStudyDao));
+		//		commandMap.put("/chargeStudy/registerChargeStudyDetail", new RegisterChargeStudyDetailHandler(chargeStudyDao));
 
 		commandMap.put("/chargeStudy/participateChargeStudyList",
 				new ParticipateChargeStudyListHandler(chargeStudyDao));

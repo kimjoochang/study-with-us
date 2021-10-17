@@ -29,17 +29,17 @@ public class RegisterFreeStudyDetailHandler implements Command {
 		}
 
 		// 1017 선영 추가
-		Boolean myRegisterStd = false;
-		for (int i = 0; i < freeStudy.getLikeMembers().size(); i++) {
-			if (freeStudy.getLikeMembers().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-				myRegisterStd = true;
-				break;
-			} 
-		} 
-		if (!myRegisterStd) {
-			System.out.println("내가 생성한 무료 스터디가 아닙니다.");
-			return;
-		}
+		//		for (freeStudy.getNo() == null ) {
+		//			if (freeStudy.getLikeMembers().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+		//				myRegisterStd = true;
+		//				break;
+		//			} 
+		//		} 
+
+		//		if (!myRegisterStd) {
+		//			System.out.println("내가 생성한 무료 스터디가 아닙니다.");
+		//			return;
+		//		}
 
 		freeStudy.setViewCount(freeStudy.getViewCount() + 1);
 		System.out.printf("제목: %s\n", freeStudy.getTitle());
