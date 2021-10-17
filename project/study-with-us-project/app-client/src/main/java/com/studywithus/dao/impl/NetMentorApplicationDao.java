@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.studywithus.dao.MentorApplicationDao;
-import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.request.RequestAgent;
 
@@ -25,13 +24,13 @@ public class NetMentorApplicationDao implements MentorApplicationDao {
   }
 
   @Override
-  public List<Member> findAll() throws Exception {
+  public List<MentorApplicationForm> findAll() throws Exception {
     requestAgent.request("mentorApplication.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("멘토 신청 목록 조회를 실패하였습니다.");
     }
 
-    return new ArrayList<>(requestAgent.getObjects(Member.class));
+    return new ArrayList<>(requestAgent.getObjects(MentorApplicationForm.class));
   }
   //
   //  @Override
@@ -48,7 +47,7 @@ public class NetMentorApplicationDao implements MentorApplicationDao {
   //  }
 
   @Override
-  public List<Member> findByEmail(String email) throws Exception {
+  public MentorApplicationForm findByEmail(String email) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("email", email);
 
@@ -58,17 +57,17 @@ public class NetMentorApplicationDao implements MentorApplicationDao {
       return null;
     }
 
-    return new ArrayList<>(requestAgent.getObjects(Member.class));
+    return requestAgent.getObject(MentorApplicationForm.class);
   }
   //
-  //  @Override
-  //  public void update(MentorApplicationForm mentorApplication) throws Exception {
-  //    requestAgent.request("mentorApplication.update", mentorApplication);
-  //
-  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-  //      throw new Exception("멘토 신청 변경을 실패하였습니다.");
-  //    }
-  //  }
+  @Override
+  public void update(MentorApplicationForm mentorApplication) throws Exception {
+    requestAgent.request("mentorApplication.update", mentorApplication);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      throw new Exception("멘토 신청 변경을 실패하였습니다.");
+    }
+  }
 
   @Override
   public void delete(String mentorApplicantEmail) throws Exception {
