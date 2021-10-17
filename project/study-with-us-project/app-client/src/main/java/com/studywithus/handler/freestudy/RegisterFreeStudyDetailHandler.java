@@ -89,7 +89,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
 					return;
 
 				} else {
-					System.out.println("무효한 메뉴 번호입니다.\n");
+					System.out.println("무효한 메뉴 번호입니다.\n");
 					continue;
 				}
 			}
