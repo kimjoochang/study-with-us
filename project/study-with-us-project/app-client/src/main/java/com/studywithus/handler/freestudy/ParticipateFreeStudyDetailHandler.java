@@ -1,7 +1,6 @@
 package com.studywithus.handler.freestudy;
 
 import com.studywithus.dao.FreeStudyDao;
-import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -35,11 +34,24 @@ public class ParticipateFreeStudyDetailHandler implements Command {
     // && no == freeStudy.getNo()) {
     // count++;
 
-    for (Member participant : freeStudy.getParticipants()) {
-      if (participant.getNo() != AuthLogInHandler.getLoginUser().getNo()) {
-        System.out.println("참여한 무료 스터디가 존재하지 않습니다.");
-        return;
+    // for (Member participant : freeStudy.getParticipants()) {
+    // if (participant.getNo() != AuthLogInHandler.getLoginUser().getNo()) {
+    // System.out.println("참여한 무료 스터디가 존재하지 않습니다.");
+    // return;
+    // }
+    // }
+
+    Boolean myPartiStudy = false;
+    for (int i = 0; i < freeStudy.getParticipants().size(); i++) {
+      if (freeStudy.getParticipants().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+        myPartiStudy = true;
+        break;
       }
+    }
+
+    if (!myPartiStudy) {
+      System.out.println("참여하신 무료 스터디가 아닙니다.");
+      return;
     }
 
     System.out.println();
