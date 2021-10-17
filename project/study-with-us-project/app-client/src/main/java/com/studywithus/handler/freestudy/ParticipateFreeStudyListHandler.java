@@ -16,7 +16,7 @@ public class ParticipateFreeStudyListHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[마이 페이지 / 내가 참여한 무료 스터디 / 조회]");
+    System.out.println("[마이 페이지 / 내가 참여한 무료 스터디 / 조회]\n");
     // List<Study> LoginIdList =
     // participateFreeStudyMap.get(AuthLogInHandler.getLoginUser().getId());
     Collection<Study> freeStudyList = freeStudyDao.findAll();
@@ -43,6 +43,7 @@ public class ParticipateFreeStudyListHandler implements Command {
     }
 
     if (count == 0) {
+      System.out.println();
       System.out.println("참여 무료 스터디가 존재하지 않습니다.");
       return;
     }

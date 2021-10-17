@@ -13,7 +13,6 @@ import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.community.CommunityAddHandler;
 import com.studywithus.handler.community.CommunityDeleteHandler;
-import com.studywithus.handler.community.CommunityDetailHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
@@ -137,11 +136,13 @@ public class ClientAppGR {
     commandMap.put("/freeStudy/interestDetail", new FreeStudyInterestDetailHandler(freeStudyDao));
     commandMap.put("/freeStudy/interestDelete", new FreeStudyInterestDeleteHandler(freeStudyDao));
 
-    commandMap.put("/freeStudy/registerFreeStudyList", new RegisterFreeStudyListHandler(freeStudyDao));
+    commandMap.put("/freeStudy/registerFreeStudyList",
+        new RegisterFreeStudyListHandler(freeStudyDao));
     commandMap.put("/freeStudy/registerFreeStudyDetail",
         new RegisterFreeStudyDetailHandler(freeStudyDao));
     // [수정] Key 값 변경
-    commandMap.put("/freeStudy/participateFreeStudyList", new ParticipateFreeStudyListHandler(freeStudyDao));
+    commandMap.put("/freeStudy/participateFreeStudyList",
+        new ParticipateFreeStudyListHandler(freeStudyDao));
     commandMap.put("/freeStudy/participateFreeStudyDetail",
         new ParticipateFreeStudyDetailHandler(freeStudyDao));
     commandMap.put("/freeStudy/memberApprove", new FreeStudyMemberApproveHandler(freeStudyDao));
@@ -182,7 +183,7 @@ public class ClientAppGR {
 
     commandMap.put("/community/add", new CommunityAddHandler(communityDao));
     commandMap.put("/community/list", new CommunityListHandler(communityDao));
-    commandMap.put("/community/detail", new CommunityDetailHandler(communityDao));
+    // commandMap.put("/community/detail", new CommunityDetailHandler(communityDao));
     commandMap.put("/community/update", new CommunityUpdateHandler(communityDao));
     commandMap.put("/community/delete", new CommunityDeleteHandler(communityDao));
     commandMap.put("/community/search", new CommunitySearchHandler(communityDao));
@@ -511,7 +512,7 @@ public class ClientAppGR {
     MenuGroup registerFreeStudyMenu = new MenuGroup("내가 생성한 무료 스터디", ACCESS_LEADER);
     // [삭제] 상세보기와 통합
     registerFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/registerFreeStudyList"));
-    registerFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/registerFreeStudyDatail"));
+    registerFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/registerFreeStudyDetail"));
     // [삭제] 회의 후 안하기로 결정
     // registerFreeStudyMenu.add(new MenuItem("삭제", "/registerFreeStudy/delete"));
 

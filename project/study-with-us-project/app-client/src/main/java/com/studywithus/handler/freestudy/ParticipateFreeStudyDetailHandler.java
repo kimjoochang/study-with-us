@@ -18,7 +18,7 @@ public class ParticipateFreeStudyDetailHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[마이 페이지 / 내가 참여한 무료 스터디 / 상세보기]");
+    System.out.println("[마이 페이지 / 내가 참여한 무료 스터디 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
     Study freeStudy = freeStudyDao.findByNo(no);
@@ -64,7 +64,7 @@ public class ParticipateFreeStudyDetailHandler implements Command {
     // return;
     // }
 
-    request.setAttribute("freeStudyNo", no);
+    request.setAttribute("freeNo", no);
 
     // 내가 쓴 글인 경우
     // if (freeStudy.getWriter().getNo()==AuthLogInHandler.getLoginUser().getNo()) {

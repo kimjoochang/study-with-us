@@ -51,6 +51,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
     System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
     System.out.println();
 
+    request.setAttribute("freeNo", no);
 
     // 무료 스터디 신청 회원 X
     if (freeStudy.getApplicants().isEmpty()) {
@@ -65,9 +66,11 @@ public class RegisterFreeStudyDetailHandler implements Command {
 
         if (input == 1) {
           request.getRequestDispatcher("/freeStudy/update").forward(request);
+          return;
 
         } else if (input == 2) {
           request.getRequestDispatcher("/freeStudy/delete").forward(request);
+          return;
 
         } else if (input == 0) {
           return;
