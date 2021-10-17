@@ -33,6 +33,10 @@ public class MembershipWithdrawalHandler implements Command {
 
     Member member = memberDao.findMemberByEmailPassword(email, password);
 
+    // *** 질문 ***
+    // 현재 로그인한 정보와 재입력한 정보를 비교해야 되는데 이렇게 DAO에서 찾는 게 맞는건가....? 
+    // DAO에서 찾으면 그냥 로그인 개념 아닌가?
+
     //    if (!loginUser.getEmail().equals(email) || !loginUser.getPassword().equals(password)) {
     //      System.out.println("현재 로그인한 정보와 일치하지 않습니다.\n");
     //      return;

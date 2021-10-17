@@ -1,7 +1,7 @@
 package com.studywithus.handler.chargestudy;
 
 import java.util.Collection;
-import com.studywithus.dao.ChargeStudyDao;
+import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,10 +10,10 @@ import com.studywithus.util.Prompt;
 
 public class MentorApplicationDetailHandler implements Command {
 
-  ChargeStudyDao chargeStudyDao;
+  MentorApplicationDao mentorApplicationDao;
 
-  public MentorApplicationDetailHandler (ChargeStudyDao chargeStudyDao) {
-    this.chargeStudyDao = chargeStudyDao;
+  public MentorApplicationDetailHandler (MentorApplicationDao mentorApplicationDao) {
+    this.mentorApplicationDao = mentorApplicationDao;
   }
 
   @Override

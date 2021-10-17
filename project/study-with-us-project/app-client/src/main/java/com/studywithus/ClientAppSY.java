@@ -4,6 +4,7 @@ import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
+import static com.studywithus.menu.Menu.ACCESS_MEMBER;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 
@@ -554,7 +555,7 @@ public class ClientAppSY {
 		MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
 		freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudy/applyList"));
 		// [삭제] 상세보기 안으로 위치 변경
-		freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudy/registerFreeStudyDetail"));
+		freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudy/applyDetail"));
 		// freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
 
 		return freeStudyApplyMenu;
@@ -574,7 +575,7 @@ public class ClientAppSY {
 	// 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 무료 스터디(팀원 관점)
 	private Menu createParticipateFreeStudyMenu() {
 
-		MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", Menu.ACCESS_MEMBER);
+		MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", ACCESS_MEMBER);
 		participateFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/participateFreeStudyList"));
 		// [삭제] 회의 후 안하기로 결정
 		participateFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/participateFreeStudyDetail"));

@@ -149,6 +149,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
     }
   }
 }
+
 // 내가 참여한 무료 스터디 리스트 출력
 // private void list(List<Study> LoginIdList) {
 // for (Study freeStudy : LoginIdList) {

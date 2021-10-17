@@ -8,6 +8,7 @@ import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import java.util.HashMap;
 import com.studywithus.dao.impl.NetChargeStudyDao;
 import com.studywithus.dao.impl.NetMemberDao;
+import com.studywithus.dao.impl.NetMentorApplicationDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
 import com.studywithus.dao.impl.NetScheduleDao;
@@ -30,6 +31,9 @@ import com.studywithus.handler.chargestudy.ChargeStudyPaymentHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyPaymentListHandler;
 import com.studywithus.handler.chargestudy.ChargeStudySearchHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyUpdateHandler;
+import com.studywithus.handler.chargestudy.MentorApplicantApproveHandler;
+import com.studywithus.handler.chargestudy.MentorApplicationAddHandler;
+import com.studywithus.handler.chargestudy.MentorApplicationDetailHandler;
 import com.studywithus.handler.chargestudy.ParticipateChargeStudyDetailHandler;
 import com.studywithus.handler.chargestudy.ParticipateChargeStudyListHandler;
 import com.studywithus.handler.chargestudy.RegisterChargeStudyDetailHandler;
@@ -108,6 +112,8 @@ public class ClientAppJJ {
     NetScheduleDao jobsScheduleDao = new NetScheduleDao(requestAgent, "jobsSchedule");
     NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent, "examSchedule");
 
+    NetMentorApplicationDao mentorApplicationDao = new NetMentorApplicationDao(requestAgent);
+
     commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
     commandMap.put("/google/logIn", new SnsLogInHandler(requestAgent));
     commandMap.put("/facebook/logIn", new SnsLogInHandler(requestAgent));
@@ -155,9 +161,9 @@ public class ClientAppJJ {
     // new ParticipateFreeStudyListHandler(participateFreeStudyMap));
     //
 
-    //    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(requestAgent));
-    //    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(requestAgent));
-    //    commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(requestAgent));
+    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationDao));
+    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationDao));
+    commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(mentorApplicationDao));
 
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyDao));
@@ -609,11 +615,11 @@ public class ClientAppJJ {
 
     MenuGroup memberManagementMenu = new MenuGroup("회원 관리");
     memberManagementMenu.add(new MenuItem("멘토 승인 관리", "/mentorApplicant/list"));
-    memberManagementMenu.add(createBlackListMenu());
+    // memberManagementMenu.add(createBlackListMenu());
 
     return memberManagementMenu;
   }
-
+  /*
   // 관리자 페이지 / 회원 관리 / 블랙리스트 관리
   private Menu createBlackListMenu() {
 
@@ -622,7 +628,7 @@ public class ClientAppJJ {
 
     return mentorManagementMenu;
   }
-
+   */
   // 관리자 페이지 / 스터디 관리
   private Menu createStudyManagementMenu() {
 
