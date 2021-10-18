@@ -1,12 +1,12 @@
 package com.studywithus.dao.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
-import com.studywithus.request.RequestAgent;
 
 public class MariadbMemberDaoGR implements MemberDao {
 
@@ -18,6 +18,18 @@ public class MariadbMemberDaoGR implements MemberDao {
 
   @Override
   public void insert(Member member) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "insert into member(name,email,password,phone_number) values(?,?,password(?),?)")) {
+
+      stmt.setString(1, member.getName());
+      stmt.setString(2, member.getEmail());
+      stmt.setString(3, member.getPassword());
+      stmt.setString(4, member.getPhoneNumber());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 데이터 저장을 실패하였습니다.");
+      }
+    }
     // requestAgent.request("member.insert", member);
     // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
     // throw new Exception(requestAgent.getObject(String.class));
@@ -26,118 +38,233 @@ public class MariadbMemberDaoGR implements MemberDao {
 
   @Override
   public List<Member> findAll() throws Exception {
-    requestAgent.request("member.selectList", null);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
-    }
+    try (
+        PreparedStatement stmt = con.prepareStatement(
+            "select member_no,name,email,phone_number,join_date from member order by name asc");
+        ResultSet rs = stmt.executeQuery()) {
 
-    return new ArrayList<>(requestAgent.getObjects(Member.class));
+      ArrayList<Member> list = new ArrayList<>();
+
+      while (rs.next()) {
+        Member member = new Member();
+        member.setNo(rs.getInt("member_no"));
+        member.setName(rs.getString("name"));
+        member.setEmail(rs.getString("email"));
+        member.setPhoneNumber(rs.getString("phone_number"));
+        member.setRegisteredDate(rs.getDate("join_date"));
+
+        list.add(member);
+      }
+
+      return list;
+    }
+    // requestAgent.request("member.selectList", null);
+    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    // throw new Exception(requestAgent.getObject(String.class));
+    // }
+    //
+    // return new ArrayList<>(requestAgent.getObjects(Member.class));
   }
 
-  // @Override
-  // public Member findByNo(int no) throws Exception {
-  // HashMap<String,String> params = new HashMap<>();
-  // params.put("no", String.valueOf(no));
-  //
-  // requestAgent.request("member.selectOne", params);
-  //
-  // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-  // return null;
-  // }
-  //
-  // return requestAgent.getObject(Member.class);
-  // }
+  @Override
+  public Member findByNo(int no) throws Exception {
+    try (
+        PreparedStatement stmt = con.prepareStatement(
+            "select member_no,name,email,phone_number,join_date from member where member_no=" + no);
+        ResultSet rs = stmt.executeQuery()) {
+
+      if (!rs.next()) {
+        return null;
+      }
+
+      Member member = new Member();
+      member.setNo(rs.getInt("member_no"));
+      member.setName(rs.getString("name"));
+      member.setEmail(rs.getString("email"));
+      member.setPhoneNumber(rs.getString("phone_number"));
+      member.setRegisteredDate(rs.getDate("join_date"));
+
+      return member;
+    }
+    // HashMap<String,String> params = new HashMap<>();
+    // params.put("no", String.valueOf(no));
+    //
+    // requestAgent.request("member.selectOne", params);
+    //
+    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    // return null;
+    // }
+    //
+    // return requestAgent.getObject(Member.class);
+  }
 
   @Override
   public Member findByName(String name) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("name", name);
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select member_no,name,email,phone_number,join_date from member" + " where name=?")) {
 
-    requestAgent.request("member.selectOneByName", params);
+      stmt.setString(1, name);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return null;
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next()) {
+          return null;
+        }
+        Member member = new Member();
+        member.setNo(rs.getInt("member_no"));
+        member.setName(rs.getString("name"));
+        member.setEmail(rs.getString("email"));
+        member.setPhoneNumber(rs.getString("phone_number"));
+        member.setRegisteredDate(rs.getDate("join_date"));
+        return member;
+      }
     }
-
-    return requestAgent.getObject(Member.class);
+    // HashMap<String, String> params = new HashMap<>();
+    // params.put("name", name);
+    //
+    // requestAgent.request("member.selectOneByName", params);
+    //
+    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    // return null;
+    // }
+    //
+    // return requestAgent.getObject(Member.class);
   }
 
   @Override
   public Member findByEmail(String email) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("email", email);
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select member_no,name,email,phone_number,join_date from member" + " where email=?")) {
 
-    requestAgent.request("member.duplicateCheck", params);
+      stmt.setString(1, email);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return null;
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next()) {
+          return null;
+        }
+        Member member = new Member();
+        member.setNo(rs.getInt("member_no"));
+        member.setName(rs.getString("name"));
+        member.setEmail(rs.getString("email"));
+        member.setPhoneNumber(rs.getString("phone_number"));
+        member.setRegisteredDate(rs.getDate("join_date"));
+        return member;
+      }
     }
-    return requestAgent.getObject(Member.class);
+    // HashMap<String, String> params = new HashMap<>();
+    // params.put("email", email);
+    //
+    // requestAgent.request("member.duplicateCheck", params);
+    //
+    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    // return null;
+    // }
+    // return requestAgent.getObject(Member.class);
   }
 
   @Override
   public Member findMemberByEmailPassword(String email, String password) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("email", email);
-    params.put("password", password);
+    try (PreparedStatement stmt =
+        con.prepareStatement("select member_no,name,email,phone_number,join_date from member"
+            + " where email=? and password=password(?)")) {
 
-    // requestAgent.request("member.selectOneByEmailPassword", params);
-    requestAgent.request("member.selectOneForLogin", params);
+      stmt.setString(1, email);
+      stmt.setString(2, password);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return null;
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next()) {
+          return null;
+        }
+        Member member = new Member();
+        member.setNo(rs.getInt("member_no"));
+        member.setName(rs.getString("name"));
+        member.setEmail(rs.getString("email"));
+        member.setPhoneNumber(rs.getString("phone_number"));
+        member.setRegisteredDate(rs.getDate("join_date"));
+        return member;
+      }
     }
-    return requestAgent.getObject(Member.class);
+    // HashMap<String, String> params = new HashMap<>();
+    // params.put("email", email);
+    // params.put("password", password);
+    //
+    // // requestAgent.request("member.selectOneByEmailPassword", params);
+    // requestAgent.request("member.selectOneForLogin", params);
+    //
+    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    // return null;
+    // }
+    // return requestAgent.getObject(Member.class);
   }
 
   @Override
   public Member findMemberByNamePhoneNumber(String name, String phoneNumber) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("name", name);
-    params.put("phoneNumber", phoneNumber);
-
-    requestAgent.request("member.selectOneForFindEmail", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return null;
-    }
-    return requestAgent.getObject(Member.class);
+    // HashMap<String, String> params = new HashMap<>();
+    // params.put("name", name);
+    // params.put("phoneNumber", phoneNumber);
+    //
+    // requestAgent.request("member.selectOneForFindEmail", params);
+    //
+    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    // return null;
+    // }
+    // return requestAgent.getObject(Member.class);
   }
 
   @Override
   public Member findMember(String name, String email, String phoneNumber) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("name", name);
-    params.put("email", email);
-    params.put("phoneNumber", phoneNumber);
-
-    requestAgent.request("member.selectOneForResetPassword", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      return null;
-    }
-
-    return requestAgent.getObject(Member.class);
+    // HashMap<String, String> params = new HashMap<>();
+    // params.put("name", name);
+    // params.put("email", email);
+    // params.put("phoneNumber", phoneNumber);
+    //
+    // requestAgent.request("member.selectOneForResetPassword", params);
+    //
+    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    // return null;
+    // }
+    //
+    // return requestAgent.getObject(Member.class);
   }
 
   @Override
   public void update(Member member) throws Exception {
-    requestAgent.request("member.update", member);
+    try (PreparedStatement stmt = con.prepareStatement("update member set"
+        + " name=?,email=?,password=password(?),phone_number=?" + " where member_no=?")) {
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("변경 실패");
+      stmt.setString(1, member.getName());
+      stmt.setString(2, member.getEmail());
+      stmt.setString(3, member.getPassword());
+      stmt.setString(4, member.getPhoneNumber());
+      stmt.setInt(5, member.getNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 데이터 변경 실패!");
+      }
     }
+    // requestAgent.request("member.update", member);
+    //
+    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    // throw new Exception("변경 실패");
+    // }
   }
 
   @Override
-  public void delete(String email) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("email", email);
+  public void delete(int no) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement("delete from member where member_no=?")) {
 
-    requestAgent.request("member.delete", params);
+      stmt.setInt(1, no);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception(requestAgent.getObject(String.class));
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 데이터 삭제를 실패하였습니다.");
+      }
     }
+    // HashMap<String, String> params = new HashMap<>();
+    // params.put("email", email);
+    //
+    // requestAgent.request("member.delete", params);
+    //
+    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    // throw new Exception(requestAgent.getObject(String.class));
+    // }
   }
 }
