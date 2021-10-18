@@ -2,19 +2,19 @@ package com.studywithus.domain;
 
 import java.sql.Date;
 import java.util.List;
-//
+
 public class Member {
   private int userAccessLevel; // 권한
   private int no; // 회원 번호
   private String name; // 회원 이름
   private String email; // 회원 이메일
   private String password; // 회원 비밀번호
+  private String photo; // 회원 첨부파일
   private String phoneNumber; // 회원 휴대폰 번호
   private Date registeredDate; // 회원 가입일
   private List<Study> freeInterest; // 무료 스터디 관심목록
   private List<Study> chargeInterest; // 유료 스터디 관심목록
   private List<Payment> payment; // 유료 스터디 결제목록
-
   private boolean mentor; // 멘토 여부
 
   @Override
@@ -64,6 +64,14 @@ public class Member {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public String getPhoto() {
+    return photo;
+  }
+
+  public void setPhoto(String photo) {
+    this.photo = photo;
   }
 
   public String getPhoneNumber() {

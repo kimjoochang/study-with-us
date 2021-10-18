@@ -1,5 +1,6 @@
 package com.studywithus.dao.impl;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,18 +10,18 @@ import com.studywithus.request.RequestAgent;
 
 public class MariadbMemberDaoGR implements MemberDao {
 
-  RequestAgent requestAgent;
+  Connection con;
 
-  public MariadbMemberDaoGR(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MariadbMemberDaoGR(Connection con) {
+    this.con = con;
   }
 
   @Override
   public void insert(Member member) throws Exception {
-    requestAgent.request("member.insert", member);
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      throw new Exception(requestAgent.getObject(String.class));
-    //    }
+    // requestAgent.request("member.insert", member);
+    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    // throw new Exception(requestAgent.getObject(String.class));
+    // }
   }
 
   @Override
@@ -33,23 +34,23 @@ public class MariadbMemberDaoGR implements MemberDao {
     return new ArrayList<>(requestAgent.getObjects(Member.class));
   }
 
-  //  @Override
-  //  public Member findByNo(int no) throws Exception {
-  //    HashMap<String,String> params = new HashMap<>();
-  //    params.put("no", String.valueOf(no));
+  // @Override
+  // public Member findByNo(int no) throws Exception {
+  // HashMap<String,String> params = new HashMap<>();
+  // params.put("no", String.valueOf(no));
   //
-  //    requestAgent.request("member.selectOne", params);
+  // requestAgent.request("member.selectOne", params);
   //
-  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-  //      return null;
-  //    }
+  // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  // return null;
+  // }
   //
-  //    return requestAgent.getObject(Member.class);
-  //  }
+  // return requestAgent.getObject(Member.class);
+  // }
 
   @Override
   public Member findByName(String name) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
+    HashMap<String, String> params = new HashMap<>();
     params.put("name", name);
 
     requestAgent.request("member.selectOneByName", params);
@@ -63,7 +64,7 @@ public class MariadbMemberDaoGR implements MemberDao {
 
   @Override
   public Member findByEmail(String email) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
+    HashMap<String, String> params = new HashMap<>();
     params.put("email", email);
 
     requestAgent.request("member.duplicateCheck", params);
@@ -76,11 +77,11 @@ public class MariadbMemberDaoGR implements MemberDao {
 
   @Override
   public Member findMemberByEmailPassword(String email, String password) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
+    HashMap<String, String> params = new HashMap<>();
     params.put("email", email);
     params.put("password", password);
 
-    //requestAgent.request("member.selectOneByEmailPassword", params);
+    // requestAgent.request("member.selectOneByEmailPassword", params);
     requestAgent.request("member.selectOneForLogin", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -91,7 +92,7 @@ public class MariadbMemberDaoGR implements MemberDao {
 
   @Override
   public Member findMemberByNamePhoneNumber(String name, String phoneNumber) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
+    HashMap<String, String> params = new HashMap<>();
     params.put("name", name);
     params.put("phoneNumber", phoneNumber);
 
@@ -105,7 +106,7 @@ public class MariadbMemberDaoGR implements MemberDao {
 
   @Override
   public Member findMember(String name, String email, String phoneNumber) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
+    HashMap<String, String> params = new HashMap<>();
     params.put("name", name);
     params.put("email", email);
     params.put("phoneNumber", phoneNumber);
@@ -130,8 +131,8 @@ public class MariadbMemberDaoGR implements MemberDao {
 
   @Override
   public void delete(String email) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("email",email);
+    HashMap<String, String> params = new HashMap<>();
+    params.put("email", email);
 
     requestAgent.request("member.delete", params);
 
