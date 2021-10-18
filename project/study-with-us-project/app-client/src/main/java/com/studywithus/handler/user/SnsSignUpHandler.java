@@ -24,6 +24,7 @@ public class SnsSignUpHandler implements Command {
     while (true) {
 
       String name = Prompt.inputString("이름을 입력하세요. > ");
+      String phoneNumber = Prompt.inputString("휴대폰 번호를 입력하세요.('-'를 제외한 숫자 11자) > ");
       String snsEmail = Prompt.inputString("연동할 SNS 계정을 입력하세요. > ");
       String password = Prompt.inputString("SNS 계정의 비밀번호를 입력하세요. > ");
 
@@ -39,6 +40,7 @@ public class SnsSignUpHandler implements Command {
 
       } else {
         member.setName(name);
+        member.setPhoneNumber(phoneNumber);
         member.setEmail(snsEmail);
         member.setPassword(password);
         member.setRegisteredDate((new Date(System.currentTimeMillis())));
@@ -54,47 +56,37 @@ public class SnsSignUpHandler implements Command {
     }
   }
 }
-/* 10.11 Merge by J 
-  RequestAgent requestAgent;
-
-  public SnsSignUpHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
-  }
-
-  @Override
-  public void execute(CommandRequest request) throws Exception {
-
-    Member member = new Member();
-
-    String name = Prompt.inputString("이름을 입력하세요. > ");
-    String snsEmail = Prompt.inputString("연동할 SNS 계정을 입력하세요. > ");
-    String password = Prompt.inputString("SNS 계정의 비밀번호를 입력하세요. > ");
-
-    System.out.println();
-
-    // snsId = findBySnsId(snsId);
-
-    if (snsEmail == null) {
-      System.out.println("이미 연동된 SNS 계정입니다.\n");
-
-    } else if (!snsEmail.contains("@") || !snsEmail.contains(".com")) {
-      System.out.println("이메일 형식의 SNS 계정을 입력하세요.\n");
-
-    } else {
-      member.setName(name);
-      member.setEmail(snsEmail);
-      member.setPassword(password);
-      member.setRegisteredDate((new Date(System.currentTimeMillis())));
-      member.setUserAccessLevel(Menu.ACCESS_GENERAL);
-      member.setRegisteredDate(new Date(System.currentTimeMillis()));
-
-      requestAgent.request("member.insert", member);
-
-      System.out.println();
-      System.out.println("SNS 계정 연동이 완료되었습니다.\n");
-    }
-  }
-
-}
+/*
+ * 10.11 Merge by J RequestAgent requestAgent;
+ * 
+ * public SnsSignUpHandler(RequestAgent requestAgent) { this.requestAgent = requestAgent; }
+ * 
+ * @Override public void execute(CommandRequest request) throws Exception {
+ * 
+ * Member member = new Member();
+ * 
+ * String name = Prompt.inputString("이름을 입력하세요. > "); String snsEmail =
+ * Prompt.inputString("연동할 SNS 계정을 입력하세요. > "); String password =
+ * Prompt.inputString("SNS 계정의 비밀번호를 입력하세요. > ");
+ * 
+ * System.out.println();
+ * 
+ * // snsId = findBySnsId(snsId);
+ * 
+ * if (snsEmail == null) { System.out.println("이미 연동된 SNS 계정입니다.\n");
+ * 
+ * } else if (!snsEmail.contains("@") || !snsEmail.contains(".com")) {
+ * System.out.println("이메일 형식의 SNS 계정을 입력하세요.\n");
+ * 
+ * } else { member.setName(name); member.setEmail(snsEmail); member.setPassword(password);
+ * member.setRegisteredDate((new Date(System.currentTimeMillis())));
+ * member.setUserAccessLevel(Menu.ACCESS_GENERAL); member.setRegisteredDate(new
+ * Date(System.currentTimeMillis()));
+ * 
+ * requestAgent.request("member.insert", member);
+ * 
+ * System.out.println(); System.out.println("SNS 계정 연동이 완료되었습니다.\n"); } }
+ * 
+ * }
  */
 

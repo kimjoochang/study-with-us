@@ -109,11 +109,11 @@ public class ClientAppGR {
 
     commandMap.put("/auth/logOut", new AuthLogOutHandler());
 
-    commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
-    commandMap.put("/google/signUp", new SnsSignUpHandler(requestAgent));
-    commandMap.put("/facebook/signUp", new SnsSignUpHandler(requestAgent));
-    commandMap.put("/kakao/signUp", new SnsSignUpHandler(requestAgent));
-    commandMap.put("/naver/signUp", new SnsSignUpHandler(requestAgent));
+    commandMap.put("/auth/signUp", new SignUpHandler(memberDao));
+    commandMap.put("/google/signUp", new SnsSignUpHandler(memberDao));
+    commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberDao));
+    commandMap.put("/kakao/signUp", new SnsSignUpHandler(memberDao));
+    commandMap.put("/naver/signUp", new SnsSignUpHandler(memberDao));
 
     // commandMap.put("/find/id", new FindIdHandler(memberList));
     // commandMap.put("/reset/password", new ResetPasswordHandler(memberList));
