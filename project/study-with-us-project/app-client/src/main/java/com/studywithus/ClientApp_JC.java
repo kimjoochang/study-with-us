@@ -4,11 +4,14 @@ import static com.studywithus.menu.Menu.ACCESS_ADMIN;
 import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.HashMap;
+import com.studywithus.dao.MemberDao;
+import com.studywithus.dao.impl.MariadbMemberDaoJC;
 import com.studywithus.dao.impl.NetChargeStudyDao;
 import com.studywithus.dao.impl.NetCommentDao;
 import com.studywithus.dao.impl.NetCommunityDao;
-import com.studywithus.dao.impl.NetMemberDao;
 import com.studywithus.dao.impl.NetMentorApplicationDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
@@ -70,6 +73,8 @@ import com.studywithus.util.Prompt;
 
 public class ClientApp_JC {
 
+  Connection con;
+
   RequestAgent requestAgent;
 
   HashMap<String,Command> commandMap = new HashMap<>();
@@ -102,19 +107,25 @@ public class ClientApp_JC {
   }
 
   public ClientApp_JC() throws Exception {
-    requestAgent = new RequestAgent("127.0.0.1", 8888);
+    requestAgent = null;
+
+    con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/team3db?user=team3&password=1111");
+
+    MemberDao memberDao = new MariadbMemberDaoJC(con);
+
 
     NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent, "examSchedule");
     NetPaymentDao paymentDao = new NetPaymentDao(requestAgent);
     NetReviewDao reviewDao = new NetReviewDao(requestAgent);
     NetChargeStudyDao chargeStudyDao = new NetChargeStudyDao(requestAgent);
-    NetMemberDao memberDao = new NetMemberDao(requestAgent);
+    // NetMemberDao memberDao = new NetMemberDao(requestAgent);
     NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
     /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(chargeStudyDao, request);
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
     NetMentorApplicationDao netMentorApplicationDao = new NetMentorApplicationDao(requestAgent);
 
-    commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
+    commandMap.put("/auth/logIn", new AuthLogInHandler(memberDao));
     commandMap.put("/google/logIn", new SnsLogInHandler(requestAgent));
     commandMap.put("/facebook/logIn", new SnsLogInHandler(requestAgent));
     commandMap.put("/kakao/logIn", new SnsLogInHandler(requestAgent));
