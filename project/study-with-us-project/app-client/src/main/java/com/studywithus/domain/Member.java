@@ -17,6 +17,15 @@ public class Member {
 
   private boolean mentor; // 멘토 여부
 
+  @Override
+  public String toString() {
+    return "Member [userAccessLevel=" + userAccessLevel + ", no=" + no + ", name=" + name
+        + ", email=" + email + ", password=" + password + ", phoneNumber=" + phoneNumber
+        + ", registeredDate=" + registeredDate + ", freeInterest=" + freeInterest
+        + ", chargeInterest=" + chargeInterest + ", payment=" + payment + ", mentor=" + mentor
+        + "]";
+  }
+
   public int getUserAccessLevel() {
     return userAccessLevel;
   }
