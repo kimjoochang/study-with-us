@@ -6,7 +6,11 @@ import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.HashMap;
+import com.studywithus.dao.MemberDao;
+import com.studywithus.dao.impl.MariadbMemberDaoGR;
 import com.studywithus.dao.impl.NetCommunityDao;
 import com.studywithus.dao.impl.NetFreeStudyDao;
 import com.studywithus.handler.Command;
@@ -49,6 +53,8 @@ import com.studywithus.util.Prompt;
 
 public class ClientAppGR {
 
+  Connection con;
+
   RequestAgent requestAgent;
 
   HashMap<String, Command> commandMap = new HashMap<>();
@@ -80,12 +86,19 @@ public class ClientAppGR {
   }
 
   public ClientAppGR() throws Exception {
-    requestAgent = new RequestAgent("127.0.0.1", 8888);
+    // requestAgent = new RequestAgent("127.0.0.1", 8888);
+    // 서버와 통신을 담당할 객체 준비
+    requestAgent = null;
 
+    // DBMS와 연결한다.
+    con =
+        DriverManager.getConnection("jdbc:mysql://localhost:3306/team3db?user=team3&password=1111");
+
+    MemberDao memberDao = new MariadbMemberDaoGR(con);
     NetFreeStudyDao freeStudyDao = new NetFreeStudyDao(requestAgent);
     NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
 
-    commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
+    commandMap.put("/auth/logIn", new AuthLogInHandler(memberDao));
     // commandMap.put("/google/logIn", new SnsLogInHandler(requestAgent));
     // commandMap.put("/facebook/logIn", new SnsLogInHandler(requestAgent));
     // commandMap.put("/kakao/logIn", new SnsLogInHandler(requestAgent));
