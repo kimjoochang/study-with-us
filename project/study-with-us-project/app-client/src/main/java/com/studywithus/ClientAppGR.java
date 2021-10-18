@@ -87,6 +87,7 @@ public class ClientAppGR {
 
   public ClientAppGR() throws Exception {
     // requestAgent = new RequestAgent("127.0.0.1", 8888);
+
     // 서버와 통신을 담당할 객체 준비
     requestAgent = null;
 
@@ -104,7 +105,7 @@ public class ClientAppGR {
     // commandMap.put("/kakao/logIn", new SnsLogInHandler(requestAgent));
     // commandMap.put("/naver/logIn", new SnsLogInHandler(requestAgent));
 
-    commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
+    commandMap.put("/auth/logOut", new AuthLogOutHandler());
 
     // commandMap.put("/auth/signUp", new SignUpHandler(requestAgent));
     // commandMap.put("/google/signUp", new SnsSignUpHandler(requestAgent));
@@ -735,8 +736,13 @@ public class ClientAppGR {
     System.out.println("    ノ￣ヽ　  ノ￣ヽ  Are U ready to STUDY ?");
 
     createMainMenu().execute();
+
     requestAgent.request("quit", null);
+
     Prompt.close();
+
+    // DBMS와 연결을 끊는다.
+    con.close();
 
     // [삭제] HashMap 적용
     // saveObjects("chargeInterest.json", chargeInterestList);
@@ -755,6 +761,7 @@ public class ClientAppGR {
 
     ClientAppGR app = new ClientAppGR();
     app.service();
+
     Prompt.close();
   }
 }
