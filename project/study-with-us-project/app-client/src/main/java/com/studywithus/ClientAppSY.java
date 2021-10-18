@@ -8,12 +8,15 @@ import static com.studywithus.menu.Menu.ACCESS_MEMBER;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.HashMap;
 
+import com.studywithus.dao.MemberDao;
+import com.studywithus.dao.impl.MariadbMemberDaoSY;
 import com.studywithus.dao.impl.NetChargeStudyDao;
 import com.studywithus.dao.impl.NetCommunityDao;
 import com.studywithus.dao.impl.NetFreeStudyDao;
-import com.studywithus.dao.impl.NetMemberDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
 import com.studywithus.dao.impl.NetScheduleDao;
@@ -82,6 +85,8 @@ import com.studywithus.util.Prompt;
 
 public class ClientAppSY {
 
+	Connection con;
+
 	RequestAgent requestAgent;
 
 	HashMap<String, Command> commandMap = new HashMap<>();
@@ -113,17 +118,20 @@ public class ClientAppSY {
 	}
 
 	public ClientAppSY() throws Exception {
-		requestAgent = new RequestAgent("127.0.0.1", 8888);
 
-		NetMemberDao memberDao = new NetMemberDao(requestAgent);
+		// 서버와 통신을 담당할 객체 준비
+		requestAgent = null;
 
+		// DBMS와 연결한다.
+		con = DriverManager.getConnection(
+				"jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
+
+		// 데이터 관리를 담당할 DAO 객체를 준비한다.
+		MemberDao memberDao = new MariadbMemberDaoSY(con);
 		NetFreeStudyDao freeStudyDao = new NetFreeStudyDao(requestAgent);
-
 		NetChargeStudyDao chargeStudyDao = new NetChargeStudyDao(requestAgent);
-		//		ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(chargeStudyDao, request);
 
 		NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
-
 		NetPaymentDao paymentDao = new NetPaymentDao(requestAgent);
 		NetReviewDao reviewDao = new NetReviewDao(requestAgent);
 
@@ -131,13 +139,13 @@ public class ClientAppSY {
 		NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent, "examSchedule");
 
 
-		commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
-		commandMap.put("/google/logIn", new SnsLogInHandler(requestAgent));
-		commandMap.put("/facebook/logIn", new SnsLogInHandler(requestAgent));
-		commandMap.put("/kakao/logIn", new SnsLogInHandler(requestAgent));
-		commandMap.put("/naver/logIn", new SnsLogInHandler(requestAgent));
+		commandMap.put("/auth/logIn", new AuthLogInHandler(memberDao));
+		commandMap.put("/google/logIn", new SnsLogInHandler(memberDao));
+		commandMap.put("/facebook/logIn", new SnsLogInHandler(memberDao));
+		commandMap.put("/kakao/logIn", new SnsLogInHandler(memberDao));
+		commandMap.put("/naver/logIn", new SnsLogInHandler(memberDao));
 
-		commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
+		commandMap.put("/auth/logOut", new AuthLogOutHandler());
 
 		commandMap.put("/auth/signUp", new SignUpHandler(memberDao));
 		commandMap.put("/google/signUp", new SnsSignUpHandler(memberDao));
@@ -147,6 +155,7 @@ public class ClientAppSY {
 
 		commandMap.put("/find/email", new FindEmailHandler(memberDao));
 		commandMap.put("/reset/password", new ResetPasswordHandler(memberDao));
+
 
 		commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberDao));
 
@@ -770,19 +779,15 @@ public class ClientAppSY {
 		System.out.println("    ノ￣ヽ　  ノ￣ヽ  Are U ready to STUDY ?");
 
 		createMainMenu().execute();
+
 		requestAgent.request("quit", null);
+
 		Prompt.close();
 
-		// [삭제] HashMap 적용
-		// saveObjects("chargeInterest.json", chargeInterestList);
-		// saveObjects("member.json", memberList);
-		// saveObjects("freeStudy.json", freeStudyList);
-		// saveObjects("chargeStudy.json", chargeStudyList);
-		// saveObjects("communityQa.json", communityQaList);
-		// saveObjects("communityInfo.json", communityInfoList);
-		// saveObjects("communityTalk.json", communityTalkList);
-		// saveObjects("jobsSchedule.json", jobsScheduleList);
-		// saveObjects("examSchedule.json", examScheduleList);
+
+		// DBMS와 연결을 끊는다.
+		con.close();
+
 	}
 
 	public static void main(String[] args) throws Exception {
