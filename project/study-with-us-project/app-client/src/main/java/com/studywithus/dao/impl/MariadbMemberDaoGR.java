@@ -198,6 +198,26 @@ public class MariadbMemberDaoGR implements MemberDao {
 
   @Override
   public Member findMemberByNamePhoneNumber(String name, String phoneNumber) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("select member_no,name,email,phone_number,join_date from member"
+            + " where name=? and phoneNumber=?")) {
+
+      stmt.setString(1, name);
+      stmt.setString(2, phoneNumber);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next()) {
+          return null;
+        }
+        Member member = new Member();
+        member.setNo(rs.getInt("member_no"));
+        member.setName(rs.getString("name"));
+        member.setEmail(rs.getString("email"));
+        member.setPhoneNumber(rs.getString("phone_number"));
+        member.setRegisteredDate(rs.getDate("join_date"));
+        return member;
+      }
+    }
     // HashMap<String, String> params = new HashMap<>();
     // params.put("name", name);
     // params.put("phoneNumber", phoneNumber);
@@ -212,6 +232,27 @@ public class MariadbMemberDaoGR implements MemberDao {
 
   @Override
   public Member findMember(String name, String email, String phoneNumber) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("select member_no,name,email,phone_number,join_date from member"
+            + " where name=? and email=? and phoneNumber=?")) {
+
+      stmt.setString(1, name);
+      stmt.setString(2, email);
+      stmt.setString(3, phoneNumber);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next()) {
+          return null;
+        }
+        Member member = new Member();
+        member.setNo(rs.getInt("member_no"));
+        member.setName(rs.getString("name"));
+        member.setEmail(rs.getString("email"));
+        member.setPhoneNumber(rs.getString("phone_number"));
+        member.setRegisteredDate(rs.getDate("join_date"));
+        return member;
+      }
+    }
     // HashMap<String, String> params = new HashMap<>();
     // params.put("name", name);
     // params.put("email", email);
