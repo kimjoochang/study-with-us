@@ -1,17 +1,15 @@
 package com.studywithus.handler.user;
 
-import java.util.HashMap;
+import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.menu.Menu;
-import com.studywithus.request.RequestAgent;
 import com.studywithus.util.Prompt;
 
 public class AuthLogInHandler implements Command {
 
-  RequestAgent requestAgent;
-  //  List<Member> memberList;
+  MemberDao memberDao;
 
   public static Member loginUser;
   public static int userAccessLevel = Menu.ACCESS_LOGOUT;
@@ -24,8 +22,8 @@ public class AuthLogInHandler implements Command {
     return userAccessLevel;
   }
 
-  public AuthLogInHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AuthLogInHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -34,8 +32,6 @@ public class AuthLogInHandler implements Command {
 
     String email = Prompt.inputString("이메일: ");
     String password = Prompt.inputString("비밀번호: ");
-
-    //    Member member = findByEmailPassword(email, password);
 
     if (email.equals("root@test.com") && password.equals("0000")) {
       Member root = new Member();
@@ -47,14 +43,9 @@ public class AuthLogInHandler implements Command {
       return;
     } 
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("email", email);
-    params.put("password", password);
+    Member member = memberDao.findMemberByEmailPassword(email, password);
 
-    requestAgent.request("member.selectOneForLogin", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      Member member = requestAgent.getObject(Member.class);
+    if (member != null) {
       System.out.printf("%s님 환영합니다!\n", member.getName());
       loginUser = member;
       userAccessLevel = Menu.ACCESS_GENERAL;
@@ -64,14 +55,3 @@ public class AuthLogInHandler implements Command {
     }
   }
 }
-
-//  private Member findByEmailPassword(String id, String password) {
-//    Collection<Member> memberList = requestAgent.getObjects(Member.class);
-//
-//    for (Member member : memberList) {
-//      if (member.getId().equalsIgnoreCase(id) && member.getPassword().equals(password)) {
-//        return member;
-//      }
-//    }
-//    return null;
-//  }
