@@ -1,18 +1,14 @@
 package com.studywithus.handler.user;
 
-import java.sql.Date;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class SignUpHandler implements Command {
 
   MemberDao memberDao;
-
-  int no = 1;
 
   public SignUpHandler(MemberDao memberDao) {
     this.memberDao = memberDao;
@@ -54,14 +50,10 @@ public class SignUpHandler implements Command {
         System.out.println("올바른 형식의 휴대폰 번호를 입력하세요.\n");
 
       } else {
-        member.setNo(no++);
         member.setName(name);
         member.setEmail(email);
         member.setPassword(password);
         member.setPhoneNumber(phoneNumber);
-        member.setRegisteredDate((new Date(System.currentTimeMillis())));
-        member.setUserAccessLevel(Menu.ACCESS_GENERAL);
-        member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
         memberDao.insert(member);
 
