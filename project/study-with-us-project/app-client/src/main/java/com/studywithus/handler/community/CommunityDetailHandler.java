@@ -42,11 +42,9 @@ public class CommunityDetailHandler implements Command {
 
     for (Comment comment : community.getComments()) {
 
-      if (comment.getCommunityNo() == no) {
-        System.out.printf("번호 : %d | 작성자 이메일 : %s | 내용 : %s\n",
-            comment.getNo(), comment.getWriter().getEmail(), comment.getContent());
-        System.out.println("-----------------------------------------------------------");
-      }
+      System.out.printf("번호 : %d | 작성자 이메일 : %s | 내용 : %s\n",
+          comment.getNo(), comment.getWriter().getEmail(), comment.getContent());
+      System.out.println("-----------------------------------------------------------");
     }
 
     request.setAttribute("communityNo", no);

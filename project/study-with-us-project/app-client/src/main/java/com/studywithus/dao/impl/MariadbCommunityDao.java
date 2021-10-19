@@ -353,6 +353,7 @@ public class MariadbCommunityDao implements CommunityDao {
           while(c.next()) {
 
             Comment comment = new Comment();
+            comment.setNo(c.getInt("comment_no"));
             comment.setContent(c.getString("content"));
 
             Member member = new Member();

@@ -25,7 +25,7 @@ public class CommentAddHandler implements Command {
 
     comment.setCommunityNo(no);
     comment.setContent(Prompt.inputString("내용을 입력하세요. > "));
-    comment.setEmail(AuthLogInHandler.getLoginUser().getEmail());
+    comment.setWriter(AuthLogInHandler.getLoginUser());
 
     commentDao.insert(comment);
 

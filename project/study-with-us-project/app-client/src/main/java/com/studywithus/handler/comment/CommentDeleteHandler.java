@@ -28,11 +28,11 @@ public class CommentDeleteHandler implements Command {
       return;
     }
 
-    if (!comment.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
+    if (comment.getWriter().getNo() != AuthLogInHandler.getLoginUser().getNo()) {
       System.out.println("삭제 권한이 없습니다.");
       return;
 
-    } else if (comment.getEmail().equals(AuthLogInHandler.getLoginUser().getEmail()) 
+    } else if (comment.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()
         || AuthLogInHandler.getLoginUser().getEmail().equals("root@test.com")) {
 
       while (true) {
