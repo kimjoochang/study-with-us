@@ -31,6 +31,8 @@ public class MembershipWithdrawalHandler implements Command {
       return;
     } 
 
+    int no = (int) request.getAttribute("no");
+
     System.out.println();
     String input = Prompt.inputString("정말 회원 탈퇴하시겠습니까? (y/N) ");
 
@@ -39,7 +41,7 @@ public class MembershipWithdrawalHandler implements Command {
       System.out.println(" 회원 탈퇴가 취소되었습니다.\n");
     } else {
 
-      memberDao.delete(email);
+      memberDao.delete(no);
 
       AuthLogInHandler.loginUser = null;
       AuthLogInHandler.userAccessLevel = Menu.ACCESS_LOGOUT;

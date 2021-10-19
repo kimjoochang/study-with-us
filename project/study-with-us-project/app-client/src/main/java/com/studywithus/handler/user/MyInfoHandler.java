@@ -3,31 +3,13 @@ package com.studywithus.handler.user;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
-import com.studywithus.request.RequestAgent;
 
 public class MyInfoHandler implements Command {
 
-  RequestAgent requestAgent;
-
-  public MyInfoHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
-  }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[나의 정보]\n");
-
-    // - 이전 소스
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("no", String.valueOf(no));
-    //
-    //    requestAgent.request("member.selectOne", params);
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("로그인 후 이용 바랍니다.");
-    //      return;
-    //    }
-    // Member user = requestAgent.getObject(Member.class);
-
 
     Member member = AuthLogInHandler.getLoginUser();
 
