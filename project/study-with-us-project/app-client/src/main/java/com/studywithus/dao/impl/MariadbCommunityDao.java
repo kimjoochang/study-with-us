@@ -166,12 +166,12 @@ public class MariadbCommunityDao implements CommunityDao {
             + " m.email"
             + " from"
             + " cmnt cm"
-            + " inner join member m on member_no=m.member_no"
+            + " inner join member m on cm.member_no=m.member_no"
             + " left outer join cmnt_file cf on cm.cmnt_no=cf.cmnt_no"
             + " where cm.title like (concat('%',?,'%'))"
             + " or cm.content like (concat('%',?,'%'))"
             + " or m.email like (concat('%',?,'%'))"
-            + " order by b.board_no desc")) {
+            + " order by member_no desc")) {
 
       stmt.setString(1, keyword);
       stmt.setString(2, keyword);
@@ -401,11 +401,11 @@ public class MariadbCommunityDao implements CommunityDao {
   @Override
   public void delete(int no) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "delete from cmnt where project_no=?");
+        "delete from cmnt where cmnt_no=?");
         PreparedStatement stmt2 = con.prepareStatement(
-            "delete from comment where project_no=?");
+            "delete from comment where cmnt_no=?");
         PreparedStatement stmt3 = con.prepareStatement(
-            "delete from cmnt_file where project_no=?")) {
+            "delete from cmnt_file where cmnt_no=?")) {
 
       stmt3.setInt(1, no);
       stmt3.executeUpdate();

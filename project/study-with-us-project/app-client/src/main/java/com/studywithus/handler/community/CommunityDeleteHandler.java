@@ -22,17 +22,6 @@ public class CommunityDeleteHandler implements Command {
 
     Community community = communityDao.findByNo(no);
 
-    // HashMap<String, String> params = new HashMap<>();
-    // params.put("no", String.valueOf(no));
-    //
-    // requestAgent.request("community.selectOne", params);
-    //
-    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    // System.out.println();
-    // System.out.println("해당 번호의 게시글이 없습니다.\n");
-    // return;
-    // }
-
     if (community == null) {
       System.out.println("해당 번호의 커뮤니티가 없습니다.");
       return;
