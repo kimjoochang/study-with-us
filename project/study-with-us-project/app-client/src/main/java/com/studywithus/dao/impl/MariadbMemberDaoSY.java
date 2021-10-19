@@ -20,7 +20,7 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public void insert(Member member) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"insert into pms_member(name,email,password,phoneNumber) values(?,?,password(?),?)")) {
+				"insert into member(name,email,password,phone_number) values(?,?,password(?),?)")) {
 
 			stmt.setString(1, member.getName());
 			stmt.setString(2, member.getEmail());
@@ -36,7 +36,7 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public List<Member> findAll() throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"select member_no,name,email,phone_nember,join_dt from pms_member order by name asc");
+				"select member_no,name,email,password,phone_number,join_date,status,last_date,access_level from member order by name asc");
 				ResultSet rs = stmt.executeQuery()) {
 
 			ArrayList<Member> list = new ArrayList<>();
@@ -46,8 +46,12 @@ public class MariadbMemberDaoSY implements MemberDao {
 				member.setNo(rs.getInt("member_no"));
 				member.setName(rs.getString("name"));
 				member.setEmail(rs.getString("email"));
-				member.setPhoneNumber(rs.getString("phone_nember"));
-				member.setRegisteredDate(rs.getDate("join_dt"));
+				member.setPassword(rs.getString("password"));
+				member.setPhoneNumber(rs.getString("phone_number"));
+				member.setRegisteredDate(rs.getDate("join_date"));
+				member.setStatus(rs.getInt("status"));
+				member.setLastDate(rs.getDate("last_date"));
+				member.setUserAccessLevel(rs.getInt("access_level"));
 
 				list.add(member);
 			}
@@ -59,7 +63,7 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public Member findByName(String name) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"select member_no,name,email,phone_number,join_dt from pms_member"
+				"select member_no,name,email,password,phone_number,join_date,status,last_date,access_level from member"
 						+ " where name=?")) {
 
 			stmt.setString(1, name);
@@ -72,12 +76,16 @@ public class MariadbMemberDaoSY implements MemberDao {
 				member.setNo(rs.getInt("member_no"));
 				member.setName(rs.getString("name"));
 				member.setEmail(rs.getString("email"));
-				//				member.setPhoto(rs.getString("photo"));
+				member.setPassword(rs.getString("password"));
 				member.setPhoneNumber(rs.getString("phone_number"));
-				member.setRegisteredDate(rs.getDate("join_dt"));
+				member.setRegisteredDate(rs.getDate("join_date"));
+				member.setStatus(rs.getInt("status"));
+				member.setLastDate(rs.getDate("last_date"));
+				member.setUserAccessLevel(rs.getInt("access_level"));
 				return member;
 			}
-		}	}
+		}	
+	}
 
 	// 차지 스터디
 	// 회원가입 / 아이디 중복 검사
@@ -85,7 +93,7 @@ public class MariadbMemberDaoSY implements MemberDao {
 	public Member findByEmail(String email) throws Exception {
 
 		try (PreparedStatement stmt = con.prepareStatement(
-				"select member_no,userAccessLevel,name,email,password,photo,phoneNumber,registeredDate from pms_member"
+				"select member_no,name,email,password,phone_number,join_date,status,last_date,access_level from member"
 						+ " where email=?")) {
 
 			stmt.setString(1, email);
@@ -99,9 +107,11 @@ public class MariadbMemberDaoSY implements MemberDao {
 				member.setName(rs.getString("name"));
 				member.setEmail(rs.getString("email"));
 				member.setPassword(rs.getString("password"));
-				member.setPhoto(rs.getString("photo"));
 				member.setPhoneNumber(rs.getString("phone_number"));
-				member.setRegisteredDate(rs.getDate("join_dt"));
+				member.setRegisteredDate(rs.getDate("join_date"));
+				member.setStatus(rs.getInt("status"));
+				member.setLastDate(rs.getDate("last_date"));
+				member.setUserAccessLevel(rs.getInt("access_level"));
 				return member;
 			}
 		}
@@ -110,7 +120,7 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public Member findMemberByEmailPassword(String email, String password) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"select member_no,name,email,phone_number,created_dt from pms_member"
+				"select member_no,name,email,password,phone_number,join_date,status,last_date,access_level from member"
 						+ " where email=? and password=password(?)")) {
 
 			stmt.setString(1, email);
@@ -124,8 +134,12 @@ public class MariadbMemberDaoSY implements MemberDao {
 				member.setNo(rs.getInt("member_no"));
 				member.setName(rs.getString("name"));
 				member.setEmail(rs.getString("email"));
+				member.setPassword(rs.getString("password"));
 				member.setPhoneNumber(rs.getString("phone_number"));
-				member.setRegisteredDate(rs.getDate("join_dt"));
+				member.setRegisteredDate(rs.getDate("join_date"));
+				member.setStatus(rs.getInt("status"));
+				member.setLastDate(rs.getDate("last_date"));
+				member.setUserAccessLevel(rs.getInt("access_level"));
 				return member;
 			}
 		}
@@ -135,8 +149,8 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public Member findMemberByNamePhoneNumber(String name, String phoneNumber) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"select member_no,name,email,phone_number,created_dt from pms_member"
-						+ " where name=? and phoneNumber=?")) {
+				"select member_no,name,email,password,phone_number,join_date,status,last_date,access_level from member"
+						+ " where name=? and phone_number=?")) {
 
 			stmt.setString(1, name);
 			stmt.setString(2, phoneNumber);
@@ -149,8 +163,12 @@ public class MariadbMemberDaoSY implements MemberDao {
 				member.setNo(rs.getInt("member_no"));
 				member.setName(rs.getString("name"));
 				member.setEmail(rs.getString("email"));
+				member.setPassword(rs.getString("password"));
 				member.setPhoneNumber(rs.getString("phone_number"));
-				member.setRegisteredDate(rs.getDate("join_dt"));
+				member.setRegisteredDate(rs.getDate("join_date"));
+				member.setStatus(rs.getInt("status"));
+				member.setLastDate(rs.getDate("last_date"));
+				member.setUserAccessLevel(rs.getInt("access_level"));
 				return member;
 			}
 		}
@@ -160,8 +178,8 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public Member findMember(String name, String email, String phoneNumber) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"select member_no,name,email,phone_number,created_dt from pms_member"
-						+ " where name=? and email=? and phoneNumber=?")) {
+				"select member_no,name,email,password,phone_number,join_date,status,last_date,access_level from member"
+						+ " where name=? and email=? and phone_number=?")) {
 
 			stmt.setString(1, name);
 			stmt.setString(2, email);
@@ -175,8 +193,12 @@ public class MariadbMemberDaoSY implements MemberDao {
 				member.setNo(rs.getInt("member_no"));
 				member.setName(rs.getString("name"));
 				member.setEmail(rs.getString("email"));
+				member.setPassword(rs.getString("password"));
 				member.setPhoneNumber(rs.getString("phone_number"));
-				member.setRegisteredDate(rs.getDate("join_dt"));
+				member.setRegisteredDate(rs.getDate("join_date"));
+				member.setStatus(rs.getInt("status"));
+				member.setLastDate(rs.getDate("last_date"));
+				member.setUserAccessLevel(rs.getInt("access_level"));
 				return member;
 			}
 		}
@@ -186,7 +208,7 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public void update(Member member) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"update pms_member set"
+				"update member set"
 						+ " name=?,email=?,password=password(?),phone_number=?"
 						+ " where member_no=?")) {
 
@@ -205,7 +227,7 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public void delete(int no) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"delete from pms_member where member_no=?")) {
+				"delete from member where member_no=?")) {
 
 			stmt.setInt(1, no);
 
@@ -218,7 +240,8 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public Member findByNo(int no) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"select member_no,name,email,photo,tel,created_dt from pms_member where member_no=" + no);
+				"select member_no,name,email,password,phone_number,join_date,status,last_date,access_level from member"
+						+ " where member_no=" + no);
 				ResultSet rs = stmt.executeQuery()) {
 
 			if (!rs.next()) {
@@ -229,9 +252,12 @@ public class MariadbMemberDaoSY implements MemberDao {
 			member.setNo(rs.getInt("member_no"));
 			member.setName(rs.getString("name"));
 			member.setEmail(rs.getString("email"));
-			member.setPhoto(rs.getString("photo"));
-			member.setTel(rs.getString("tel"));
-			member.setRegisteredDate(rs.getDate("created_dt"));
+			member.setPassword(rs.getString("password"));
+			member.setPhoneNumber(rs.getString("phone_number"));
+			member.setRegisteredDate(rs.getDate("join_date"));
+			member.setStatus(rs.getInt("status"));
+			member.setLastDate(rs.getDate("last_date"));
+			member.setUserAccessLevel(rs.getInt("access_level"));
 
 			return member;
 		}

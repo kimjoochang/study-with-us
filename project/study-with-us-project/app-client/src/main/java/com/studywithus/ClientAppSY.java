@@ -123,7 +123,7 @@ public class ClientAppSY {
 		requestAgent = null;
 
 		// DBMS와 연결한다.
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/team3db?user=team3&password=1111");
 
 		// 데이터 관리를 담당할 DAO 객체를 준비한다.
 		MemberDao memberDao = new MariadbMemberDaoSY(con);
@@ -134,8 +134,8 @@ public class ClientAppSY {
 		NetPaymentDao paymentDao = new NetPaymentDao(requestAgent);
 		NetReviewDao reviewDao = new NetReviewDao(requestAgent);
 
-		NetScheduleDao jobsScheduleDao = new NetScheduleDao(requestAgent, "jobsSchedule");
-		NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent, "examSchedule");
+		NetScheduleDao jobsScheduleDao = new NetScheduleDao(con);
+		NetScheduleDao examScheduleDao = new NetScheduleDao(con);
 
 
 		commandMap.put("/auth/logIn", new AuthLogInHandler(memberDao));
