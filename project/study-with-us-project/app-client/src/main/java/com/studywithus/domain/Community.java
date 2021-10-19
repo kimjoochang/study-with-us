@@ -7,7 +7,6 @@ public class Community extends Content {
   private int viewCount; // 조회수
   private int like; // 좋아요
   private int category; // 정보, 질문, 스몰톡
-  // private List<Member> members; // 회원별 게시글 조회용 리스트
 
   public Date getRegisteredDate() {
     return registeredDate;
