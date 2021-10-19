@@ -7,11 +7,12 @@ import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.HashMap;
+import com.studywithus.dao.CommunityDao;
 import com.studywithus.dao.MemberDao;
+import com.studywithus.dao.impl.MariadbCommunityDao;
 import com.studywithus.dao.impl.MariadbMemberDaoJC;
 import com.studywithus.dao.impl.NetChargeStudyDao;
 import com.studywithus.dao.impl.NetCommentDao;
-import com.studywithus.dao.impl.NetCommunityDao;
 import com.studywithus.dao.impl.NetMentorApplicationDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
@@ -113,6 +114,7 @@ public class ClientApp_JC {
         "jdbc:mysql://localhost:3306/team3db?user=team3&password=1111");
 
     MemberDao memberDao = new MariadbMemberDaoJC(con);
+    CommunityDao communityDao = new MariadbCommunityDao(con);
 
 
     NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent, "examSchedule");
@@ -120,18 +122,18 @@ public class ClientApp_JC {
     NetReviewDao reviewDao = new NetReviewDao(requestAgent);
     NetChargeStudyDao chargeStudyDao = new NetChargeStudyDao(requestAgent);
     // NetMemberDao memberDao = new NetMemberDao(requestAgent);
-    NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
+    // NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
     /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(chargeStudyDao, request);
     NetCommentDao commentDao = new NetCommentDao(requestAgent);
     NetMentorApplicationDao netMentorApplicationDao = new NetMentorApplicationDao(requestAgent);
 
     commandMap.put("/auth/logIn", new AuthLogInHandler(memberDao));
-    commandMap.put("/google/logIn", new SnsLogInHandler(requestAgent));
-    commandMap.put("/facebook/logIn", new SnsLogInHandler(requestAgent));
-    commandMap.put("/kakao/logIn", new SnsLogInHandler(requestAgent));
-    commandMap.put("/naver/logIn", new SnsLogInHandler(requestAgent));
+    commandMap.put("/google/logIn", new SnsLogInHandler(memberDao));
+    commandMap.put("/facebook/logIn", new SnsLogInHandler(memberDao));
+    commandMap.put("/kakao/logIn", new SnsLogInHandler(memberDao));
+    commandMap.put("/naver/logIn", new SnsLogInHandler(memberDao));
     //
-    commandMap.put("/auth/logOut", new AuthLogOutHandler(requestAgent));
+    commandMap.put("/auth/logOut", new AuthLogOutHandler());
     commandMap.put("/auth/signUp", new SignUpHandler(memberDao));
     commandMap.put("/google/signUp", new SnsSignUpHandler(memberDao));
     commandMap.put("/facebook/signUp", new SnsSignUpHandler(memberDao));
@@ -231,7 +233,7 @@ public class ClientApp_JC {
 
     commandMap.put("/community/add", new CommunityAddHandler(communityDao));
     commandMap.put("/community/list", new CommunityListHandler(communityDao));
-    commandMap.put("/community/detail", new CommunityDetailHandler(communityDao, commentDao));
+    commandMap.put("/community/detail", new CommunityDetailHandler(communityDao));
     commandMap.put("/community/update", new CommunityUpdateHandler(communityDao));
     commandMap.put("/community/delete", new CommunityDeleteHandler(communityDao));
     commandMap.put("/community/search", new CommunitySearchHandler(communityDao));

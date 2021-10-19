@@ -16,7 +16,7 @@ public class CommunityListHandler implements Command {
 
   @Override
   public void execute(CommandRequest request) throws Exception {
-    System.out.println("[커뮤니티 / 조회\n]");
+    System.out.println("[커뮤니티 / 조회]\n");
 
     Collection<Community> communityList = communityDao.findAll();
 

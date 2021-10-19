@@ -1,6 +1,5 @@
 package com.studywithus.handler.community;
 
-import java.sql.Date;
 import com.studywithus.dao.CommunityDao;
 import com.studywithus.domain.Community;
 import com.studywithus.handler.Command;
@@ -29,7 +28,6 @@ public class CommunityAddHandler implements Command {
     community.setTitle(Prompt.inputString("제목을 입력하세요. > "));
     community.setContent(Prompt.inputString("내용을 입력하세요. > "));
     community.setWriter(AuthLogInHandler.getLoginUser());
-    community.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     communityDao.insert(community);
 

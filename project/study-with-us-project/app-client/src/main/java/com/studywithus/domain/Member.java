@@ -18,6 +18,8 @@ public class Member {
   private List<Study> chargeInterest; // 유료 스터디 관심목록
   private List<Payment> payment; // 유료 스터디 결제목록
   private boolean mentor; // 멘토 여부
+  private MemberFile memberFile;
+
 
   @Override
   public String toString() {
@@ -26,6 +28,14 @@ public class Member {
         + ", registeredDate=" + registeredDate + ", freeInterest=" + freeInterest
         + ", chargeInterest=" + chargeInterest + ", payment=" + payment + ", mentor=" + mentor
         + "]";
+  }
+
+  public MemberFile getMemberFile() {
+    return memberFile;
+  }
+
+  public void setMemberFile(MemberFile memberFile) {
+    this.memberFile = memberFile;
   }
 
   public int getStatus() {

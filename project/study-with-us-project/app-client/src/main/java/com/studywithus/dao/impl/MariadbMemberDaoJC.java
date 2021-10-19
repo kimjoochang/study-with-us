@@ -111,6 +111,14 @@ public class MariadbMemberDaoJC implements MemberDao {
   }
 
   @Override
-  public void delete(String email) throws Exception {
+  public Member findByNo(int no) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void delete(int no) throws Exception {
+    // TODO Auto-generated method stub
+
   }
 }
