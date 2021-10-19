@@ -16,7 +16,6 @@ import com.studywithus.dao.impl.NetCommentDao;
 import com.studywithus.dao.impl.NetMentorApplicationDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
-import com.studywithus.dao.impl.NetScheduleDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.chargestudy.ChargeStudyAddHandler;
@@ -53,11 +52,6 @@ import com.studywithus.handler.community.CommunityDetailHandler;
 import com.studywithus.handler.community.CommunityListHandler;
 import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
-import com.studywithus.handler.schedule.ExamScheduleAddHandler;
-import com.studywithus.handler.schedule.ExamScheduleDeleteHandler;
-import com.studywithus.handler.schedule.ExamScheduleDetailHandler;
-import com.studywithus.handler.schedule.ExamScheduleListHandler;
-import com.studywithus.handler.schedule.ExamScheduleUpdateHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindEmailHandler;
@@ -117,7 +111,7 @@ public class ClientApp_JC {
     CommunityDao communityDao = new MariadbCommunityDao(con);
 
 
-    NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent, "examSchedule");
+    //    NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent);
     NetPaymentDao paymentDao = new NetPaymentDao(requestAgent);
     NetReviewDao reviewDao = new NetReviewDao(requestAgent);
     NetChargeStudyDao chargeStudyDao = new NetChargeStudyDao(requestAgent);
@@ -225,11 +219,11 @@ public class ClientApp_JC {
     //    commandMap.put("/jobsSchedule/update", new JobsScheduleUpdateHandler(requestAgent));
     //    commandMap.put("/jobsSchedule/delete", new JobsScheduleDeleteHandler(requestAgent));
 
-    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(examScheduleDao));
-    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(examScheduleDao));
-    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(examScheduleDao));
-    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(examScheduleDao));
-    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(examScheduleDao));
+    //    commandMap.put("/examSchedule/add", new ExamScheduleAddHandler(examScheduleDao));
+    //    commandMap.put("/examSchedule/list", new ExamScheduleListHandler(examScheduleDao));
+    //    commandMap.put("/examSchedule/detail", new ExamScheduleDetailHandler(examScheduleDao));
+    //    commandMap.put("/examSchedule/update", new ExamScheduleUpdateHandler(examScheduleDao));
+    //    commandMap.put("/examSchedule/delete", new ExamScheduleDeleteHandler(examScheduleDao));
 
     commandMap.put("/community/add", new CommunityAddHandler(communityDao));
     commandMap.put("/community/list", new CommunityListHandler(communityDao));

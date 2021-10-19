@@ -31,12 +31,6 @@ public class CommunityAddHandler implements Command {
 
     communityDao.insert(community);
 
-    // requestAgent.request("community", community);
-    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    // System.out.println("커뮤니티 저장 실패!");
-    // return;
-    // }
-
     System.out.println();
     System.out.println("커뮤니티 등록이 완료되었습니다.");
   }

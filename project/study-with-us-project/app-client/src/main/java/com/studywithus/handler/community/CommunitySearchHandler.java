@@ -23,25 +23,17 @@ public class CommunitySearchHandler implements Command {
     System.out.println();
 
     Collection<Community> communityList = communityDao.findByKeyword(input);
-    // HashMap<String, String> params = new HashMap<>();
-    // params.put("keyword", String.valueOf(input));
-
-    // requestAgent.request("community.selectListByKeyword", params);
 
     if (communityList == null) {
       System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");
       return;
     }
 
-    // [기존] 키워드 포함 게시글이 없을 경우, line 43 출력문이 무한 반복됨
-    // [수정] 임의의 변수로 조건문 설정하여 한 번만 출력되도록 수정
     int type = 0;
-
-    // Collection<Community> communityList = requestAgent.getObjects(Community.class);
 
     for (Community community : communityList) {
       if (!community.getTitle().contains(input) && !community.getContent().contains(input)
-          && !community.getWriter().getName().contains(input)) {
+          && !community.getWriter().getEmail().contains(input)) {
         type = 1;
         continue;
       }

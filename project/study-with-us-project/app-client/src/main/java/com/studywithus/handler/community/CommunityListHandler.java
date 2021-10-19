@@ -20,7 +20,6 @@ public class CommunityListHandler implements Command {
 
     Collection<Community> communityList = communityDao.findAll();
 
-    // communityDao.request("community.selectList", null);
     if (communityList == null) {
       System.out.println("커뮤니티 게시글이 존재하지 않습니다.\n");
       return;
