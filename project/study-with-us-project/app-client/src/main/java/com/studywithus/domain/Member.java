@@ -6,14 +6,14 @@ import java.util.List;
 public class Member {
   private int userAccessLevel; // 권한
   private int no; // 회원 번호
-  private int status; // 회원 번호
+  private int status; // 회원 상태
   private String name; // 회원 이름
   private String email; // 회원 이메일
   private String password; // 회원 비밀번호
-  private String photo; // 회원 첨부파일
+  private String photo; // 회원 첨부파일(사진)
   private String phoneNumber; // 회원 휴대폰 번호
   private Date registeredDate; // 회원 가입일
-  private Date lastDate; // 회원 가입일
+  private Date lastDate; // 회원 마지막 접속일
   private List<Study> freeInterest; // 무료 스터디 관심목록
   private List<Study> chargeInterest; // 유료 스터디 관심목록
   private List<Payment> payment; // 유료 스터디 결제목록
