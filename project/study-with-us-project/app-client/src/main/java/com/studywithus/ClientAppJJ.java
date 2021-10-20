@@ -6,13 +6,20 @@ import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.studywithus.context.ApplicationContextListener;
+import com.studywithus.dao.MemberDao;
+import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.impl.MybatisMemberDaoJJ;
+import com.studywithus.dao.impl.MybatisStudyDao;
 import com.studywithus.dao.impl.NetChargeStudyDao;
-import com.studywithus.dao.impl.NetMemberDao;
-import com.studywithus.dao.impl.NetMentorApplicationDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
-import com.studywithus.dao.impl.NetScheduleDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.chargestudy.ChargeStudyAddHandler;
@@ -60,6 +67,7 @@ import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
 import com.studywithus.handler.user.SnsSignUpHandler;
+import com.studywithus.listener.AppInitListener;
 import com.studywithus.menu.Menu;
 import com.studywithus.menu.MenuGroup;
 import com.studywithus.request.RequestAgent;
@@ -102,21 +110,31 @@ public class ClientAppJJ {
 
   public ClientAppJJ() throws Exception {
 
-    requestAgent = new RequestAgent("127.0.0.1", 8888);
+    // 서버와 통신을 담당할 객체 준비
+    requestAgent = null;
 
-    NetMemberDao memberDao = new NetMemberDao(requestAgent);
+    // DBMS와 연결한다.
+    con =
+        DriverManager.getConnection("jdbc:mysql://localhost:3306/team3db?user=team3&password=1111");
+
+    // Mybatis의 SqlSession 객체 준비
+    SqlSession sqlSession = new SqlSessionFactoryBuilder()
+        .build(Resources.getResourceAsStream("com/studywithus/pms/conf/mybatis-config.xml"))
+        .openSession();
+
+    // 데이터 관리를 담당할 DAO 객체를 준비한다.
+    MemberDao memberDao = new MybatisMemberDaoJJ(sqlSession);
+    StudyDao studyDao = new MybatisStudyDao(sqlSession);
 
     NetChargeStudyDao chargeStudyDao = new NetChargeStudyDao(requestAgent);
-    ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(chargeStudyDao, request);
+    ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt =
+        new ChargeStudyDetailMenuPrompt(chargeStudyDao, request);
 
     NetPaymentDao paymentDao = new NetPaymentDao(requestAgent);
     NetReviewDao reviewDao = new NetReviewDao(requestAgent);
 
-    NetScheduleDao jobsScheduleDao = new NetScheduleDao(requestAgent, "jobsSchedule");
-    NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent, "examSchedule");
 
-    NetMentorApplicationDao mentorApplicationDao = new NetMentorApplicationDao(requestAgent);
-
+    // Command 객체 준비
     commandMap.put("/auth/logIn", new AuthLogInHandler(requestAgent));
     commandMap.put("/google/logIn", new SnsLogInHandler(requestAgent));
     commandMap.put("/facebook/logIn", new SnsLogInHandler(requestAgent));
@@ -165,8 +183,10 @@ public class ClientAppJJ {
     //
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationDao));
-    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationDao));
-    commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(mentorApplicationDao));
+    commandMap.put("/mentorApplicant/list",
+        new MentorApplicationDetailHandler(mentorApplicationDao));
+    commandMap.put("/mentorApplication/approve",
+        new MentorApplicantApproveHandler(mentorApplicationDao));
 
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyDao));
@@ -174,7 +194,8 @@ public class ClientAppJJ {
     commandMap.put("/chargeStudy/detail",
         new ChargeStudyDetailHandler_JC(chargeStudyDao, chargeStudyDetailMenuPrompt));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyDao));
-    commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyDao));
+    commandMap.put("/chargeStudy/deleteRequest",
+        new ChargeStudyDeleteRequestHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/deleteRequestCancel",
         new ChargeStudyDeleteRequestCancelHandler(chargeStudyDao));
     commandMap.put("/chargeStudy/deleteRequestList",
@@ -182,15 +203,18 @@ public class ClientAppJJ {
     commandMap.put("/chargeStudy/deleteRequestDetail",
         new ChargeStudyDeleteRequestDetailHandler(chargeStudyDao));
 
-    commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(paymentDao, chargeStudyDao));
-    commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(paymentDao, chargeStudyDao));
+    commandMap.put("/chargeStudy/payment",
+        new ChargeStudyPaymentHandler(paymentDao, chargeStudyDao));
+    commandMap.put("/chargeStudy/paymentCancel",
+        new ChargeStudyPaymentCancelHandler(paymentDao, chargeStudyDao));
     commandMap.put("/chargeStudy/paymentList", new ChargeStudyPaymentListHandler(paymentDao));
-    commandMap.put("/chargeStudy/paymentDetail", new ChargeStudyPaymentDetailHandler(paymentDao, chargeStudyDao));
+    commandMap.put("/chargeStudy/paymentDetail",
+        new ChargeStudyPaymentDetailHandler(paymentDao, chargeStudyDao));
 
     commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyDao));
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeStudyDao));
-    //  commandMap.put("/chargeInterest/detail",
-    //      new ChargeStudyInterestDetailHandler(chargeStudyDao, chargeStudyDetailMenuPrompt));
+    // commandMap.put("/chargeInterest/detail",
+    // new ChargeStudyInterestDetailHandler(chargeStudyDao, chargeStudyDetailMenuPrompt));
     commandMap.put("/chargeStudy/interestDelete",
         new ChargeStudyInterestDeleteHandler(chargeStudyDao));
 
@@ -251,16 +275,6 @@ public class ClientAppJJ {
   }
 
   // ------------------------------ STUDY WITH US -----------------------------------------
-
-  /* 10.15 DB Modeling Feedback 이후 추가할 메뉴
-
-  - 블랙리스트 메뉴
-  - 쪽지 or 채팅 메뉴
-  - 투두리스트 (web?)
-  - 댓글 메뉴
-
-    c.f. 위 메뉴 추가하고, 마이페이지에 반영할 부분 반영하기 
-   */
 
   // 메인 메뉴
   Menu createMainMenu() {
@@ -336,9 +350,6 @@ public class ClientAppJJ {
     freeStudyMenu.add(new MenuItem("생성", ACCESS_GENERAL | ACCESS_LEADER, "/freeStudy/add"));
     freeStudyMenu.add(new MenuItem("조회", "/freeStudy/list"));
     freeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/detail"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // freeStudyMenu.add(new MenuItem("수정", ACCESS_LEADER, "/freeStudy/update"));
-    // freeStudyMenu.add(new MenuItem("삭제", ACCESS_LEADER | ACCESS_ADMIN, "/freeStudy/delete"));
 
     return freeStudyMenu;
   }
@@ -379,10 +390,6 @@ public class ClientAppJJ {
     communityQaMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityQa/add"));
     communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
     communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // communityQaMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityQa/update"));
-    // communityQaMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
-    // "/communityQa/delete"));
 
     return communityQaMenu;
   }
@@ -395,10 +402,6 @@ public class ClientAppJJ {
     communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
     communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
     communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityInfo/update"));
-    // communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
-    // "/communityInfo/delete"));
 
     return communityInfoMenu;
   }
@@ -411,10 +414,6 @@ public class ClientAppJJ {
     communityTalkMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityTalk/add"));
     communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
     communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // communityTalkMenu.add(new MenuItem("수정", ACCESS_GENERAL, "/communityTalk/update"));
-    // communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
-    // "/communityTalk/delete"));
 
     return communityTalkMenu;
   }
@@ -494,9 +493,6 @@ public class ClientAppJJ {
     MenuGroup myPostMenu = new MenuGroup("나의 게시글");
     myPostMenu.add(new MenuItem("조회", "/myPost/list"));
     myPostMenu.add(new MenuItem("상세보기", "/myPost/detail"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // myPostMenu.add(new MenuItem("수정", "/myPost/update"));
-    // myPostMenu.add(new MenuItem("삭제", "/myPost/delete"));
 
     return myPostMenu;
   }
@@ -506,15 +502,12 @@ public class ClientAppJJ {
 
     MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
     freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudy/applyList"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
-    // freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
 
     return freeStudyApplyMenu;
   }
 
   // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 무료 스터디(팀장 관점)
-  // - "신청자 명단" -> 상세보기(승인/삭제) 추가해야 함
+
   private Menu createRegisterFreeStudyMenu() {
 
     MenuGroup registerFreeStudyMenu = new MenuGroup("내가 생성한 무료 스터디", ACCESS_LEADER);
@@ -532,14 +525,12 @@ public class ClientAppJJ {
 
     MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", Menu.ACCESS_MEMBER);
     participateFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/participateStudyList"));
-    // [삭제] 회의 후 안하기로 결정
     // participateFreeStudyMenu.add(new MenuItem("상세보기", "/participateFreeStudy/detail"));
 
     return participateFreeStudyMenu;
   }
 
-  // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디(멘토 관점) [X]
-  // - "신청자 명단" -> 상세보기(승인/삭제) 추가해야 함
+  // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디
   private Menu createRegisterChargeStudyMenu() {
 
     MenuGroup registerChargeStudyMenu = new MenuGroup("내가 생성한 유료 스터디", ACCESS_GENERAL);
@@ -549,7 +540,7 @@ public class ClientAppJJ {
     return registerChargeStudyMenu;
   }
 
-  // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 유료 스터디(멘티 관점) [X]
+  // 마이 페이지 / 나의 활동 / 나의 스터디 / 내가 참여한 유료 스터디
   private Menu createParticipateChargeStudyMenu() {
 
     MenuGroup participateChargeStudyMenu = new MenuGroup("내가 참여한 유료 스터디", ACCESS_GENERAL);
@@ -622,16 +613,16 @@ public class ClientAppJJ {
 
     return memberManagementMenu;
   }
+
   /*
-  // 관리자 페이지 / 회원 관리 / 블랙리스트 관리
-  private Menu createBlackListMenu() {
-
-    MenuGroup mentorManagementMenu = new MenuGroup("블랙리스트 관리");
-    mentorManagementMenu.add(new MenuItem("", "/"));
-
-    return mentorManagementMenu;
-  }
+   * // 관리자 페이지 / 회원 관리 / 블랙리스트 관리 private Menu createBlackListMenu() {
+   * 
+   * MenuGroup mentorManagementMenu = new MenuGroup("블랙리스트 관리"); mentorManagementMenu.add(new
+   * MenuItem("", "/"));
+   * 
+   * return mentorManagementMenu; }
    */
+
   // 관리자 페이지 / 스터디 관리
   private Menu createStudyManagementMenu() {
 
@@ -667,9 +658,6 @@ public class ClientAppJJ {
 
     jobsScheduleManagementMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/jobsSchedule/add"));
     jobsScheduleManagementMenu.add(new MenuItem("상세보기", "/jobsSchedule/detail"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // jobsScheduleManagementMenu.add(new MenuItem("변경", ACCESS_ADMIN, "/jobsSchedule/update"));
-    // jobsScheduleManagementMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/jobsSchedule/delete"));
 
     return jobsScheduleManagementMenu;
   }
@@ -680,38 +668,38 @@ public class ClientAppJJ {
     MenuGroup examScheduleManagementMenu = new MenuGroup("이달의 시험일정");
     examScheduleManagementMenu.add(new MenuItem("생성", ACCESS_ADMIN, "/examSchedule/add"));
     examScheduleManagementMenu.add(new MenuItem("상세보기", "/examSchedule/detail"));
-    // [삭제] 상세보기 안으로 위치 변경
-    // examScheduleManagementMenu.add(new MenuItem("변경", ACCESS_ADMIN, "/examSchedule/update"));
-    // examScheduleManagementMenu.add(new MenuItem("삭제", ACCESS_ADMIN, "/examSchedule/delete"));
 
     return examScheduleManagementMenu;
   }
 
-  void service() throws Exception {
+  List<ApplicationContextListener> listeners = new ArrayList<>();
 
-    System.out.println();
-    System.out.println("|         스터디위더스         |");
-    System.out.println("|          STUDYWITHUS         |");
-    System.out.println("     ￣￣￣￣∨￣￣￣￣￣￣￣   ");
-    System.out.println("　　　      ∧_,,∧");
-    System.out.println("　　　     (`･ω･´)");
-    System.out.println("　　　     Ｕ θ Ｕ");
-    System.out.println("　     ／￣￣｜￣￣＼");
-    System.out.println("　     |二二二二二二二|");
-    System.out.println("      ｜　　　　　　 ｜");
-    System.out.println("    찰칵       찰칵   찰");
-    System.out.println("        ∧∧└ 　   ∧∧   칵");
-    System.out.println("    　(　　)】 (　　)】");
-    System.out.println("    　/　/┘　  /　/┘");
-    System.out.println("    ノ￣ヽ　  ノ￣ヽ  Are U ready to STUDY ?");
+  // => 옵저버(리스너)를 등록하는 메서드
+  public void addApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.add(listener);
+  }
 
+  // => 옵저버(리스너)를 제거하는 메서드
+  public void removeApplicationContextListener(ApplicationContextListener listener) {
+    this.listeners.remove(listener);
+  }
+
+  private void notifyOnApplicationStarted() {
+    HashMap<String, Object> params = new HashMap<>();
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextInitialized(params);
+    }
+  }
+
+  void service() {
+    notifyOnApplicationStarted();
     createMainMenu().execute();
-    requestAgent.request("quit", null);
     Prompt.close();
   }
 
   public static void main(String[] args) throws Exception {
     ClientAppJJ app = new ClientAppJJ();
+    app.addApplicationContextListener(new AppInitListener());
     app.service();
     Prompt.close();
   }
