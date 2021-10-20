@@ -49,7 +49,7 @@ public class MariadbMentorApplicationDao implements MentorApplicationDao {
             + " from"
             + " mentor mt"
             + " inner join member m on mt.member_no=m.member_no"
-            + " order by member_no desc");
+            + " order by mt.member_no desc");
         ResultSet rs = stmt.executeQuery()) {
 
       ArrayList<MentorApplicationForm> list = new ArrayList<>();
@@ -91,27 +91,30 @@ public class MariadbMentorApplicationDao implements MentorApplicationDao {
             + " from"
             + " mentor mt"
             + " inner join member m on mt.member_no=m.member_no"
-            + " where mt.member_no=" + no
-            + " order by member_no desc");
+            + " where mt.member_no=" + no);
         ResultSet rs = stmt.executeQuery()) {
 
       MentorApplicationForm mentorApplicationForm = null;
 
-      if (mentorApplicationForm == null) {
-        mentorApplicationForm = new MentorApplicationForm();
+      while(rs.next()) {
 
-        mentorApplicationForm.setNo(rs.getInt("mt.member_no"));
-        mentorApplicationForm.setSelfIntroduction(rs.getString("introduction"));
-        mentorApplicationForm.setChargeStudySubject(rs.getString("subject"));
-        mentorApplicationForm.setRegisteredDate(rs.getDate("apply_date"));
-        mentorApplicationForm.setStatus(rs.getInt("status"));
 
-        Member applicant = new Member();
-        applicant.setNo(rs.getInt("m.member_no"));
-        applicant.setName(rs.getString("name"));
-        applicant.setEmail(rs.getString("email"));
+        if (mentorApplicationForm == null) {
+          mentorApplicationForm = new MentorApplicationForm();
 
-        mentorApplicationForm.setMember(applicant);
+          mentorApplicationForm.setNo(rs.getInt("mt.member_no"));
+          mentorApplicationForm.setSelfIntroduction(rs.getString("introduction"));
+          mentorApplicationForm.setChargeStudySubject(rs.getString("subject"));
+          mentorApplicationForm.setRegisteredDate(rs.getDate("apply_date"));
+          mentorApplicationForm.setStatus(rs.getInt("status"));
+
+          Member applicant = new Member();
+          applicant.setNo(rs.getInt("m.member_no"));
+          applicant.setName(rs.getString("name"));
+          applicant.setEmail(rs.getString("email"));
+
+          mentorApplicationForm.setMember(applicant);
+        }
       }
       return mentorApplicationForm;
     }
@@ -123,8 +126,8 @@ public class MariadbMentorApplicationDao implements MentorApplicationDao {
         "update mentor set"
             + " introduction=?,"
             + " subject=?,"
-            + " status=?"
-            + " remarks=?"
+            + " status=?,"
+            + " remarks=?,"
             + " member_no=?"
             + " where member_no=?")) {
 
