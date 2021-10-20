@@ -7,14 +7,14 @@ import com.studywithus.dao.FreeStudyDao;
 import com.studywithus.domain.Study;
 
 // 역할
-// - 무료 스터디 데이터를 서버를 통해 관리한다.
+// - 스터디 데이터를 서버를 통해 관리한다.
 //
-public class MybatisFreeStudyDao implements FreeStudyDao {
+public class MybatisStudyDao implements FreeStudyDao {
 
   Connection con;
   SqlSession sqlSession;
 
-  public MybatisFreeStudyDao(SqlSession sqlSession) {
+  public MybatisStudyDao(SqlSession sqlSession) {
     this.sqlSession = sqlSession;
   }
 
