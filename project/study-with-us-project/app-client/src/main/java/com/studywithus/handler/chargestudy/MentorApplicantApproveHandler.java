@@ -19,16 +19,19 @@ public class MentorApplicantApproveHandler implements Command{
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[멘토 승인 관리]");
 
-    String email = (String) request.getAttribute("applicantEmail");
+    int no = (int) request.getAttribute("applicantNo");
 
-    Member applicant = memberDao.findByEmail(email);
+    Member applicant = memberDao.findByNo(no);
 
     if (applicant == null) {
       System.out.println("해당 정보의 멘토 신청자가 없습니다.");
       return;
     }
 
-    applicant.setMentor(true);
+    int temp = applicant.getUserAccessLevel();
+    temp |= Menu.ACCESS_MENTOR;
+    applicant.setUserAccessLevel(temp);
+
     AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MENTOR;
 
     System.out.println("멘토 승인이 완료되었습니다.");

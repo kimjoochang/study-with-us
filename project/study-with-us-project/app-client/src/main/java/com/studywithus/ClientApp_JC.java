@@ -10,11 +10,12 @@ import java.util.HashMap;
 import com.studywithus.dao.CommentDao;
 import com.studywithus.dao.CommunityDao;
 import com.studywithus.dao.MemberDao;
+import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.dao.impl.MariadbCommentDao;
 import com.studywithus.dao.impl.MariadbCommunityDao;
 import com.studywithus.dao.impl.MariadbMemberDaoJC;
+import com.studywithus.dao.impl.MariadbMentorApplicationDao;
 import com.studywithus.dao.impl.NetChargeStudyDao;
-import com.studywithus.dao.impl.NetMentorApplicationDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
 import com.studywithus.handler.Command;
@@ -111,6 +112,7 @@ public class ClientApp_JC {
     MemberDao memberDao = new MariadbMemberDaoJC(con);
     CommunityDao communityDao = new MariadbCommunityDao(con);
     CommentDao commentDao = new MariadbCommentDao(con);
+    MentorApplicationDao mentorApplicationDao = new MariadbMentorApplicationDao(con);
 
 
     //    NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent);
@@ -121,7 +123,7 @@ public class ClientApp_JC {
     // NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
     /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(chargeStudyDao, request);
     //NetCommentDao commentDao = new NetCommentDao(requestAgent);
-    NetMentorApplicationDao netMentorApplicationDao = new NetMentorApplicationDao(requestAgent);
+    //NetMentorApplicationDao netMentorApplicationDao = new NetMentorApplicationDao(requestAgent);
 
     commandMap.put("/auth/logIn", new AuthLogInHandler(memberDao));
     commandMap.put("/google/logIn", new SnsLogInHandler(memberDao));
@@ -139,13 +141,13 @@ public class ClientApp_JC {
     commandMap.put("/find/id", new FindEmailHandler(memberDao));
     commandMap.put("/reset/password", new ResetPasswordHandler(memberDao));
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberDao));
-    commandMap.put("/myInfo/list", new MyInfoHandler(requestAgent));
+    commandMap.put("/myInfo/list", new MyInfoHandler());
     //
     //    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyList));
     //    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyList));
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeStudyDao));
-    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(netMentorApplicationDao));
-    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(netMentorApplicationDao));
+    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationDao));
+    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationDao));
     //commandMap.put("/freeStudy/search", new FreeStudySearchHandler(requestAgent));
     //commandMap.put("/freeStudy/add", new FreeStudyAddHandler(requestAgent));
     //commandMap.put("/freeStudy/list", new FreeStudyListHandler(requestAgent));

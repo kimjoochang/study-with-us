@@ -1,6 +1,5 @@
 package com.studywithus.handler.chargestudy;
 
-import java.sql.Date;
 import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.handler.Command;
@@ -26,10 +25,10 @@ public class MentorApplicationAddHandler implements Command {
       return;
     }
 
-    MentorApplicationForm mentorApplicantEmail = mentorApplicationDao.findByEmail(AuthLogInHandler.loginUser.getEmail());
+    MentorApplicationForm mentorApplicantEmail = mentorApplicationDao.findByNo(AuthLogInHandler.loginUser.getNo());
 
     // 신청서가 이미 있으면서 아직 승인/거절 결정이 안났다면 (visible이 true라면)
-    if (mentorApplicantEmail != null && mentorApplicantEmail.isVisible()) {
+    if (mentorApplicantEmail != null && mentorApplicantEmail.getStatus() == 0) {
       System.out.println("이미 멘토 신청이 완료되었습니다.");
       return;
     }
@@ -37,23 +36,18 @@ public class MentorApplicationAddHandler implements Command {
     while (true) {
       String selfIntro = Prompt.inputString("자기 소개를 입력하세요. > ");
       String subject = Prompt.inputString("개설할 스터디 주제를 입력하세요. > ");
-      String explanation = Prompt.inputString("스터디 설명을 입력하세요. > ");
       System.out.println();
 
-      if (selfIntro.equals("") || subject.equals("") || explanation.equals("")) {
+      if (selfIntro.equals("") || subject.equals("")) {
         System.out.println("모두 필수입력 항목입니다.\n");
         continue;
 
       } else {
         MentorApplicationForm mentorApplication = new MentorApplicationForm();
 
-        mentorApplication.setVisible(true);
-        mentorApplication.setName(AuthLogInHandler.loginUser.getName());
-        mentorApplication.setMentorApplicantEmail(AuthLogInHandler.loginUser.getEmail());
+        mentorApplication.setNo(AuthLogInHandler.getLoginUser().getNo());
         mentorApplication.setSelfIntroduction(selfIntro);
         mentorApplication.setChargeStudySubject(subject);
-        mentorApplication.setChargeStudyExplanation(explanation);
-        mentorApplication.setRegisteredDate(new Date(System.currentTimeMillis()));
 
         mentorApplicationDao.insert(mentorApplication);
 

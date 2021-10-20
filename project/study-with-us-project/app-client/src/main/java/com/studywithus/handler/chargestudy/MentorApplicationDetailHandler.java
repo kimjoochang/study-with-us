@@ -29,10 +29,11 @@ public class MentorApplicationDetailHandler implements Command {
     int type = 0;
     // 멘토 신청자 조회
     for (MentorApplicationForm mentorApplication : mentorApplicationList) {
-      if (mentorApplication.isVisible()) {
+      if (mentorApplication.getStatus() == 0) {
         type = 1;
-        System.out.printf("[멘토 신청자 이메일 = %s, 유료 스터디 주제 = %s, 등록일 = %s]\n",
-            mentorApplication.getMentorApplicantEmail(),
+        System.out.printf("[멘토 신청자 번호 = %d, 멘토 신청자 이메일 = %s, 유료 스터디 주제 = %s, 등록일 = %s]\n",
+            mentorApplication.getMember().getNo(),
+            mentorApplication.getMember().getEmail(),
             mentorApplication.getChargeStudySubject(),
             mentorApplication.getRegisteredDate());
       }
@@ -44,25 +45,24 @@ public class MentorApplicationDetailHandler implements Command {
     }
 
     System.out.println();
-    String email = Prompt.inputString("멘토 신청자 이메일을 입력하세요. > ");
+    int no = Prompt.inputInt("멘토 신청자의 회원번호를 입력하세요. > ");
 
     System.out.println();
 
-    MentorApplicationForm mentorApplication = mentorApplicationDao.findByEmail(email);
+    MentorApplicationForm mentorApplication = mentorApplicationDao.findByNo(no);
 
-    if (mentorApplication == null || mentorApplication.isVisible() == false) {
+    if (mentorApplication == null || mentorApplication.getStatus() != 0) {
       System.out.println("입력하신 이메일과 일치하는 신청 내역이 없습니다.");
       return;
     }
 
-    System.out.printf("신청자 이름: %s\n", mentorApplication.getName());
-    System.out.printf("신청자 아이디: %s\n", mentorApplication.getMentorApplicantEmail());
+    System.out.printf("신청자 이름: %s\n", mentorApplication.getMember().getName());
+    System.out.printf("신청자 아이디: %s\n", mentorApplication.getMember().getEmail());
     System.out.printf("자기소개: %s\n", mentorApplication.getSelfIntroduction());
     System.out.printf("스터디 주제: %s\n", mentorApplication.getChargeStudySubject());
-    System.out.printf("스터디 설명: %s\n", mentorApplication.getChargeStudyExplanation());
     System.out.printf("등록일: %s\n", mentorApplication.getRegisteredDate());
 
-    request.setAttribute("applicantEmail", email);
+    request.setAttribute("applicantNo", no);
 
     System.out.println();
     System.out.println("1. 승인");
@@ -74,13 +74,14 @@ public class MentorApplicationDetailHandler implements Command {
       System.out.println();
 
       if (input == 1) {
-        mentorApplication.setVisible(false);
+        mentorApplication.setStatus(1);
         mentorApplicationDao.update(mentorApplication);
         request.getRequestDispatcher("/mentorApplication/approve").forward(request);
         break;
 
       } else if (input == 2) {
-        mentorApplication.setVisible(false);
+        mentorApplication.setStatus(2);
+        mentorApplication.setRemarks(Prompt.inputString("거절 사유를 입력해주세요. > "));
         mentorApplicationDao.update(mentorApplication);
         System.out.println("멘토 신청을 거절하였습니다.");
         break;

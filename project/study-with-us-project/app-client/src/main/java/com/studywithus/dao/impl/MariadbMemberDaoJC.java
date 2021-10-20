@@ -108,12 +108,67 @@ public class MariadbMemberDaoJC implements MemberDao {
 
   @Override
   public void update(Member member) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "update"
+            + " member set"
+            + " name=?,"
+            + " email=?,"
+            + " password=password(?),"
+            + " phone_number=?" 
+            + " join_date=?" 
+            + " status=?" 
+            + " last_date=?" 
+            + " access_level=?" 
+            + " where member_no=?")) {
+
+      stmt.setString(1, member.getName());
+      stmt.setString(2, member.getEmail());
+      stmt.setString(3, member.getPassword());
+      stmt.setString(4, member.getPhoneNumber());
+      stmt.setDate(5, member.getRegisteredDate());
+      stmt.setInt(6, member.getStatus());
+      stmt.setDate(7, member.getLastDate());
+      stmt.setInt(8, member.getUserAccessLevel());
+      stmt.setInt(9, member.getNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 데이터 변경 실패!");
+      }
+    }
   }
 
   @Override
   public Member findByNo(int no) throws Exception {
-    // TODO Auto-generated method stub
-    return null;
+    try (
+        PreparedStatement stmt = con.prepareStatement(
+            "select"
+                + " member_no,"
+                + " name,"
+                + " email,"
+                + " phone_number,"
+                + " join_date,"
+                + " status,"
+                + " last_date,"
+                + " access_level"
+                + " from member"
+                + " where member_no=" + no);
+        ResultSet rs = stmt.executeQuery()) {
+
+      if (!rs.next()) {
+        return null;
+      }
+
+      Member member = new Member();
+      member.setNo(rs.getInt("member_no"));
+      member.setName(rs.getString("name"));
+      member.setEmail(rs.getString("email"));
+      member.setPhoneNumber(rs.getString("phone_number"));
+      member.setRegisteredDate(rs.getDate("join_date"));
+      member.setStatus(rs.getInt("status"));
+      member.setLastDate(rs.getDate("last_date"));
+      member.setUserAccessLevel(rs.getInt("access_level"));
+      return member;
+    }
   }
 
   @Override

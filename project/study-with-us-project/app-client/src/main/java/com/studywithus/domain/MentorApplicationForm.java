@@ -3,38 +3,37 @@ package com.studywithus.domain;
 import java.sql.Date;
 
 public class MentorApplicationForm {
-  private String name; // 멘토 신청자 이름
-  private String mentorApplicantEmail; // 멘토 신청자 이메일
-  private String selfIntroduction; // 멘토 신청 회원 자기소개
-  private String chargeStudySubject; //  유료 스터디 주제
-  private String chargeStudyExplanation; // 유료 스터디 설명
-  private Date registeredDate; // 신청일
-  private boolean visible;
+  private int no;
+  private Member member;
+  private String selfIntroduction; 
+  private String chargeStudySubject; 
+  private Date registeredDate; 
+  private int status; // 0 = 미정, 1 = 승인, 2 = 거절
+  private String remarks;
 
-  public boolean isVisible() {
-    return visible;
+  public Member getMember() {
+    return member;
   }
 
-  public void setVisible(boolean visible) {
-    this.visible = visible;
+  public void setMember(Member member) {
+    this.member = member;
   }
 
-  public String getName() {
-    return name;
+  public int getStatus() {
+    return status;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setStatus(int status) {
+    this.status = status;
   }
 
-  public String getMentorApplicantEmail() {
-    return mentorApplicantEmail;
+  public int getNo() {
+    return no;
   }
 
-  public void setMentorApplicantEmail(String mentorApplicantEmail) {
-    this.mentorApplicantEmail = mentorApplicantEmail;
+  public void setNo(int no) {
+    this.no = no;
   }
-
 
   public String getSelfIntroduction() {
     return selfIntroduction;
@@ -52,14 +51,6 @@ public class MentorApplicationForm {
     this.chargeStudySubject = chargeStudySubject;
   }
 
-  public String getChargeStudyExplanation() {
-    return chargeStudyExplanation;
-  }
-
-  public void setChargeStudyExplanation(String chargeStudyExplanation) {
-    this.chargeStudyExplanation = chargeStudyExplanation;
-  }
-
   public Date getRegisteredDate() {
     return registeredDate;
   }
@@ -67,4 +58,13 @@ public class MentorApplicationForm {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+
+  public String getRemarks() {
+    return remarks;
+  }
+
+  public void setRemarks(String remarks) {
+    this.remarks = remarks;
+  }
+
 }
