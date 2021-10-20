@@ -120,7 +120,15 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public Member findMemberByEmailPassword(String email, String password) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"select member_no,name,email,password,phone_number,join_date,status,last_date,access_level from member"
+				"select "
+						+ "member_no,"
+						+ "name,email,"
+						+ "password,"
+						+ "phone_number,"
+						+ "join_date,"
+						+ "status,"
+						+ "last_date,"
+						+ "access_level from member"
 						+ " where email=? and password=password(?)")) {
 
 			stmt.setString(1, email);
@@ -149,7 +157,15 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public Member findMemberByNamePhoneNumber(String name, String phoneNumber) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"select member_no,name,email,password,phone_number,join_date,status,last_date,access_level from member"
+				"select "
+						+ "member_no,"
+						+ "name,"
+						+ "email,"
+						+ "password,"
+						+ "phone_number,"
+						+ "join_date,"
+						+ "status,"
+						+ "last_date,access_level from member"
 						+ " where name=? and phone_number=?")) {
 
 			stmt.setString(1, name);
@@ -209,7 +225,10 @@ public class MariadbMemberDaoSY implements MemberDao {
 	public void update(Member member) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
 				"update member set"
-						+ " name=?,email=?,password=password(?),phone_number=?"
+						+ "name=?,"
+						+ "email=?,"
+						+ "password=password(?),"
+						+ "phone_number=?"
 						+ " where member_no=?")) {
 
 			stmt.setString(1, member.getName());
@@ -240,7 +259,16 @@ public class MariadbMemberDaoSY implements MemberDao {
 	@Override
 	public Member findByNo(int no) throws Exception {
 		try (PreparedStatement stmt = con.prepareStatement(
-				"select member_no,name,email,password,phone_number,join_date,status,last_date,access_level from member"
+				"select "
+						+ "member_no,"
+						+ "name,"
+						+ "email,"
+						+ "password,"
+						+ "phone_number,"
+						+ "join_date,"
+						+ "status,"
+						+ "last_date,"
+						+ "access_level from member"
 						+ " where member_no=" + no);
 				ResultSet rs = stmt.executeQuery()) {
 

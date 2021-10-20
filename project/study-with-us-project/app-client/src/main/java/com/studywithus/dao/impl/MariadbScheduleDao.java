@@ -6,17 +6,16 @@ import java.util.List;
 import com.studywithus.dao.ScheduleDao;
 import com.studywithus.domain.Schedule;
 
-public class NetScheduleDao implements ScheduleDao{
+public class MariadbScheduleDao implements ScheduleDao{
 
 	Connection con;
 
-	public NetScheduleDao(Connection con) {
+	public MariadbScheduleDao(Connection con) {
 		this.con = con;
 	}
 
 	@Override
 	public void insert(Schedule schedule) throws Exception {
-
 	}
 
 	@Override
@@ -42,12 +41,5 @@ public class NetScheduleDao implements ScheduleDao{
 	public void delete(int no) throws Exception {
 	}
 
-	//  private String selectType(Schedule schedule) {
-	//    if (schedule.getEndDate() == null) {
-	//      return "examSchedule";
-	//    } else {
-	//      return "jobsSchedule";
-	//    }
-	//  }
 
 }

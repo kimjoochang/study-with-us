@@ -13,13 +13,14 @@ import java.sql.DriverManager;
 import java.util.HashMap;
 
 import com.studywithus.dao.MemberDao;
+import com.studywithus.dao.ScheduleDao;
 import com.studywithus.dao.impl.MariadbMemberDaoSY;
+import com.studywithus.dao.impl.MariadbScheduleDao;
 import com.studywithus.dao.impl.NetChargeStudyDao;
 import com.studywithus.dao.impl.NetCommunityDao;
 import com.studywithus.dao.impl.NetFreeStudyDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
-import com.studywithus.dao.impl.NetScheduleDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.chargestudy.ChargeStudyAddHandler;
@@ -134,8 +135,8 @@ public class ClientAppSY {
 		NetPaymentDao paymentDao = new NetPaymentDao(requestAgent);
 		NetReviewDao reviewDao = new NetReviewDao(requestAgent);
 
-		NetScheduleDao jobsScheduleDao = new NetScheduleDao(con);
-		NetScheduleDao examScheduleDao = new NetScheduleDao(con);
+		ScheduleDao jobsScheduleDao = new MariadbScheduleDao(con);
+		ScheduleDao examScheduleDao = new MariadbScheduleDao(con);
 
 
 		commandMap.put("/auth/logIn", new AuthLogInHandler(memberDao));
