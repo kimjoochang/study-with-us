@@ -21,23 +21,23 @@ public class MybatisMemberDaoJJ implements MemberDao {
 
   @Override
   public void insert(Member member) throws Exception {
-    sqlSession.insert("MemberMapper.insert", member);
+    sqlSession.insert("MemberMapperJJ.insert", member);
     sqlSession.commit();
   }
 
   @Override
   public List<Member> findAll() throws Exception {
-    return sqlSession.selectList("MemberMapper.findAll");
+    return sqlSession.selectList("MemberMapperJJ.findAll");
   }
 
   @Override
   public Member findByNo(int no) throws Exception {
-    return sqlSession.selectOne("MemberMapper.findByNo", no);
+    return sqlSession.selectOne("MemberMapperJJ.findByNo", no);
   }
 
   @Override
   public Member findByName(String name) throws Exception {
-    List<Member> list = sqlSession.selectList("MemberMapper.findByName", name);
+    List<Member> list = sqlSession.selectList("MemberMapperJJ.findByName", name);
     if (list.size() > 0) {
       return list.get(0);
     } else {
@@ -45,10 +45,9 @@ public class MybatisMemberDaoJJ implements MemberDao {
     }
   }
 
-  // 없앨듯
   @Override
   public Member findByEmail(String email) throws Exception {
-    return null;
+    return sqlSession.selectOne("MemberMapperJJ.findByName", email);
   }
 
   @Override
@@ -57,7 +56,7 @@ public class MybatisMemberDaoJJ implements MemberDao {
     params.put("name", name);
     params.put("phoneNumber", phoneNumber);
 
-    return sqlSession.selectOne("MemberMapper.findMemberByNamePhoneNumber", params);
+    return sqlSession.selectOne("MemberMapperJJ.findMemberByNamePhoneNumber", params);
   }
 
   @Override
@@ -67,7 +66,7 @@ public class MybatisMemberDaoJJ implements MemberDao {
     params.put("email", email);
     params.put("phoneNumber", phoneNumber);
 
-    return sqlSession.selectOne("MemberMapper.findMember", params);
+    return sqlSession.selectOne("MemberMapperJJ.findMember", params);
   }
 
   @Override
@@ -76,18 +75,18 @@ public class MybatisMemberDaoJJ implements MemberDao {
     params.put("email", email);
     params.put("password", password);
 
-    return sqlSession.selectOne("MemberMapper.findMemberByEmailPassword", params);
+    return sqlSession.selectOne("MemberMapperJJ.findMemberByEmailPassword", params);
   }
 
   @Override
   public void update(Member member) throws Exception {
-    sqlSession.update("MemberMapper.update", member);
+    sqlSession.update("MemberMapperJJ.update", member);
     sqlSession.commit();
   }
 
   @Override
   public void delete(int no) throws Exception {
-    sqlSession.delete("MemberMapper.delete", no);
+    sqlSession.delete("MemberMapperJJ.delete", no);
     sqlSession.commit();
   }
 
