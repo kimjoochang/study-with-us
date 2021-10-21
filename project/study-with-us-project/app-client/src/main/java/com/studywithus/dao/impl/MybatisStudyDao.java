@@ -1,6 +1,5 @@
 package com.studywithus.dao.impl;
 
-import java.sql.Connection;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
@@ -11,7 +10,7 @@ import com.studywithus.domain.Study;
 //
 public class MybatisStudyDao implements StudyDao {
 
-  Connection con;
+
   SqlSession sqlSession;
 
   public MybatisStudyDao(SqlSession sqlSession) {
