@@ -10,7 +10,6 @@ import com.studywithus.domain.Study;
 //
 public class MybatisStudyDao implements StudyDao {
 
-
   SqlSession sqlSession;
 
   public MybatisStudyDao(SqlSession sqlSession) {

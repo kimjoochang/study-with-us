@@ -39,9 +39,9 @@
       end_date,
       del_status,
       price,
-      status
+      st.status
     from 
-      study
+      study st
     inner join member m on st.member_no=m.member_no
   </sql>
   
@@ -57,7 +57,7 @@
   
   <!-- select할 컬럼 논의 -->
    <select id="findByKeyword" resultMap="StudyMap" parameterType="string">
-  <include refid="select1"/>
+    <include refid="select1"/>
     where 
       st.title like(concat('%',#{keyword},'%'))
       or st.content like (concat('%',#{keyword},'%'))

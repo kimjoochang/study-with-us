@@ -8,6 +8,7 @@ import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.studywithus.context.ApplicationContextListener;
