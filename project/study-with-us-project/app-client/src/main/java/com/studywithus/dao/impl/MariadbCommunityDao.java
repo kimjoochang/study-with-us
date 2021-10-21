@@ -9,7 +9,7 @@ import java.util.List;
 import com.studywithus.dao.CommunityDao;
 import com.studywithus.domain.Comment;
 import com.studywithus.domain.Community;
-import com.studywithus.domain.CommunityFile;
+import com.studywithus.domain.AttachmentFile;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.MemberFile;
 
@@ -101,7 +101,7 @@ public class MariadbCommunityDao implements CommunityDao {
 
         // 커뮤니티 첨부파일이 있을때만 실행!
         if (rs.getString("name") != null) {
-          CommunityFile communityFile = new CommunityFile();
+          AttachmentFile communityFile = new AttachmentFile();
           communityFile.setNo(rs.getInt("cmnt_file.no"));
           communityFile.setFileName(rs.getString("name"));
         }
@@ -217,7 +217,7 @@ public class MariadbCommunityDao implements CommunityDao {
           community.setViewCount(rs.getInt("view_count"));
 
           if (rs.getString("name") != null) {
-            CommunityFile communityFile = new CommunityFile();
+            AttachmentFile communityFile = new AttachmentFile();
             communityFile.setNo(rs.getInt("cmnt_file.no"));
             communityFile.setFileName(rs.getString("name"));
           }
@@ -328,7 +328,7 @@ public class MariadbCommunityDao implements CommunityDao {
           community.setViewCount(rs.getInt("view_count"));
 
           if (rs.getString("name") != null) {
-            CommunityFile communityFile = new CommunityFile();
+            AttachmentFile communityFile = new AttachmentFile();
             communityFile.setNo(rs.getInt("cmnt_file.no"));
             communityFile.setFileName(rs.getString("name"));
           }

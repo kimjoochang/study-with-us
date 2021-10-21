@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommunityMapper">
+  
+  <resultMap type="Community" id="CommunityMap">
+    <id column="cmnt_no" property="no"/> 
+    <result column="category" property="category"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="register_date" property="registeredDate"/>
+    <result column="view_count" property="viewCount"/>
+  </resultMap>
+  
+  <resultMap type="Comment" id="CommentMap">
+    <id column="comment_no" property="no"/>
+    <result column="content" property="content"/>
+    <result column="register_date" property="registeredDate"/>
+  </resultMap>
+
+  <resultMap type="Member" id="MemberMap">
+    <id column="member_no" property="no"/>
+    <result column="email" property="email"/>
+  </resultMap>
+  
+  <resultMap type="CommunityFile" id="CommunityFile">
+    <id column="file_no" property="no"/>
+    <result column="name" property="fileName"/>
+  </resultMap>
+  
+  <resultMap type="MemberFile" id="MemberFileMap">
+    <id column="file_no" property="no"/>
+    <result column="name" property="fileName"/>
+  </resultMap>
+  
+  <select id="findAll" resultMap="MemberMap">
+     select
+        cm.cmnt_no,
+        cm.category,
+        cm.title,
+        cm.content,
+        cm.register_date,
+        cm.view_count,
+        cf.cmnt_file_no,
+        cf.name,
+        m.member_no,
+        m.email
+     from
+        cmnt cm
+        inner join member m on cm.member_no=m.member_no
+        left outer join cmnt_file cf on cm.cmnt_no=cf.cmnt_no
+     order by member_no desc
+  </select>
+  
+  <select id="findByNo" resultMap="MemberMap" parameterType="int">
+    select 
+      member_no,
+      name,
+      email,
+      photo,
+      tel,
+      created_dt 
+    from 
+      pms_member 
+    where 
+      member_no=#{no}
+  </select>
+
+
+	<insert id="insert" parameterType="member">
+	 insert into pms_member(name,email,password,photo,tel)
+	  values(#{name},#{email},password(#{password}),#{photo},#{tel})
+	</insert>
+	  
+	<update id="update" parameterType="member">
+	 update pms_member set
+      name=#{name},
+      email=#{email},
+      password=password(#{password}),
+      photo=#{photo},
+      tel=#{tel}
+   where member_no=#{no}  
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pms_member
+    where member_no=#{value}
+  </delete>
+  
+  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
+    select 
+      member_no,
+      name,
+      email,
+      photo,
+      tel,
+      created_dt 
+    from pms_member
+    where email=#{email} and password=password(#{password})
+  </select>
+  
+   <select id="findByName" resultMap="MemberMap" parameterType="map">
+  select 
+  member_no,
+  name,
+  email,
+  photo,
+  tel,
+  created_dt
+  from pms_member
+  where name=#{member}
+   </select>
+            
+</mapper>
+
+
+
+
+
+
+

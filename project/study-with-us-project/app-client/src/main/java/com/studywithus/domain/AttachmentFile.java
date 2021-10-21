@@ -1,6 +1,6 @@
 package com.studywithus.domain;
 
-public class CommunityFile {
+public class AttachmentFile {
   private int no;
   private String fileName;
 

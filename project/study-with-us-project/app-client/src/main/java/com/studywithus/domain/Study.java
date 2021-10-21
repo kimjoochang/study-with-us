@@ -5,56 +5,115 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Study extends Content {
-  private List<Member> members = new ArrayList<>(); // 팀원 or 멘티
-  private List<Member> applicants = new ArrayList<>(); // 무료 스터디 신청자
-  private List<Member> participants = new ArrayList<>(); // 무료 스터디 참가자
-  private List<Member> likeMembers = new ArrayList<>(); // 관심목록 추가한 자
-  private String mentorExplanation; // 멘토 설명
-  private String rule; // 스터디 규칙
-  private int price; // 유료 스터디 가격
-  private int onOffLine; // 온라인 or 오프라인
-  private String ONLINE = "온라인";
-  private String OFFLINE = "오프라인";
+  private int no;
   private String area; // 지역
+  private int onOffLine; // 오프라인 = 0 , 온라인 = 1 
   private Date registeredDate; // 스터디 등록일
   private int viewCount; // 조회수
-  // [추가] 
   private int maxMembers; // 스터디 최대 모집인원 수
   private Date startDate; // 스터디 시작일
   private Date endDate; // 스터디 종료일
+  private int studyStatus;
 
-  private boolean deleteRequest; // 스터디 삭제요청 확인하기 위한 필드
-  private String studyStatus;
-  private List<Review> reviewList = new ArrayList<>();
-  private List<String> likeMembersEmail = new ArrayList<>(); // 관심목록 추가한 회원의 이메일
-  private List<String> menteeEmailList = new ArrayList<>(); // 스터디에 참여한 회원의 이메일
+  // 기본값 = 0, 
+  //삭제(무료)/삭제요청(유료) = 1, 
+  //삭제요청 승인(가격이 0 이상) = 2,
+  //삭제요청 거절(가격 0이상) = 3; 
+  private int deleteStatus;
+  private int price; // 유료 스터디 가격
+  private List<Member> members = new ArrayList<>(); // 팀원 or 멘티
+  private List<Member> applicants = new ArrayList<>(); // 무료 스터디 신청자
+  private List<Member> likeMembers = new ArrayList<>(); // 관심목록 추가한 자
+
 
   @Override
-  public String toString() {
-    return "Study [members=" + members + ", applicants=" + applicants + ", likeMembers="
-        + likeMembers + ", mentorExplanation=" + mentorExplanation + ", rule=" + rule + ", price="
-        + price + ", onOffLine=" + onOffLine + ", ONLINE=" + ONLINE + ", OFFLINE=" + OFFLINE
-        + ", area=" + area + ", registeredDate=" + registeredDate + ", viewCount=" + viewCount
-        + ", maxMembers=" + maxMembers + ", startDate=" + startDate + ", endDate=" + endDate
-        + ", deleteRequest=" + deleteRequest + ", studyStatus=" + studyStatus + ", reviewList="
-        + reviewList + ", likeMembersEmail=" + likeMembersEmail + ", menteeEmailList="
-        + menteeEmailList + ", toString()=" + super.toString() + "]";
+  public int getNo() {
+    return no;
   }
 
-  public List<String> getMenteeEmailList() {
-    return menteeEmailList;
+  @Override
+  public void setNo(int no) {
+    this.no = no;
   }
 
-  public void setMenteeEmailList(List<String> menteeEmailList) {
-    this.menteeEmailList = menteeEmailList;
+  public String getArea() {
+    return area;
   }
 
-  public String getONLINE() {
-    return ONLINE;
+  public void setArea(String area) {
+    this.area = area;
   }
 
-  public String getOFFLINE() {
-    return OFFLINE;
+  public int getOnOffLine() {
+    return onOffLine;
+  }
+
+  public void setOnOffLine(int onOffLine) {
+    this.onOffLine = onOffLine;
+  }
+
+  public Date getRegisteredDate() {
+    return registeredDate;
+  }
+
+  public void setRegisteredDate(Date registeredDate) {
+    this.registeredDate = registeredDate;
+  }
+
+  public int getViewCount() {
+    return viewCount;
+  }
+
+  public void setViewCount(int viewCount) {
+    this.viewCount = viewCount;
+  }
+
+  public int getMaxMembers() {
+    return maxMembers;
+  }
+
+  public void setMaxMembers(int maxMembers) {
+    this.maxMembers = maxMembers;
+  }
+
+  public Date getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
+
+  public Date getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
+  }
+
+  public int getStudyStatus() {
+    return studyStatus;
+  }
+
+  public void setStudyStatus(int studyStatus) {
+    this.studyStatus = studyStatus;
+  }
+
+  public int getDeleteStatus() {
+    return deleteStatus;
+  }
+
+  public void setDeleteStatus(int deleteStatus) {
+    this.deleteStatus = deleteStatus;
+  }
+
+  public int getPrice() {
+    return price;
+  }
+
+  public void setPrice(int price) {
+    this.price = price;
   }
 
   public List<Member> getMembers() {
@@ -81,125 +140,6 @@ public class Study extends Content {
     this.likeMembers = likeMembers;
   }
 
-  public String getMentorExplanation() {
-    return mentorExplanation;
-  }
-
-  public void setMentorExplanation(String mentorExplanation) {
-    this.mentorExplanation = mentorExplanation;
-  }
-
-  public String getRule() {
-    return rule;
-  }
-
-  public void setRule(String rule) {
-    this.rule = rule;
-  }
-
-  public int getPrice() {
-    return price;
-  }
-
-  public void setPrice(int price) {
-    this.price = price;
-  }
-
-  public int getOnOffLine() {
-    return onOffLine;
-  }
-
-  public void setOnOffLine(int onOffLine) {
-    this.onOffLine = onOffLine;
-  }
-
-  public String getArea() {
-    return area;
-  }
-
-  public void setArea(String area) {
-    this.area = area;
-  }
-
-  public Date getRegisteredDate() {
-    return registeredDate;
-  }
-
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
-  }
-
-  public int getViewCount() {
-    return viewCount;
-  }
-
-  public void setViewCount(int viewCount) {
-    this.viewCount = viewCount;
-  }
-
-  public int getMaxMembers() {
-    return maxMembers;
-  }
-
-  public void setMaxMembers(int maxMember) {
-    this.maxMembers = maxMember;
-  }
-
-  public Date getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(Date startDate) {
-    this.startDate = startDate;
-  }
-
-  public Date getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(Date endDate) {
-    this.endDate = endDate;
-  }
-
-  public boolean isDeleteRequest() {
-    return deleteRequest;
-  }
-
-  public void setDeleteRequest(boolean deleteRequest) {
-    this.deleteRequest = deleteRequest;
-  }
-
-  public String getStudyStatus() {
-    return studyStatus;
-  }
-
-  public void setStudyStatus(String studyStatus) {
-    this.studyStatus = studyStatus;
-  }
-
-  public List<Review> getReviewList() {
-    return reviewList;
-  }
-
-  public void setReviewList(List<Review> reviewList) {
-    this.reviewList = reviewList;
-  }
-
-  public List<String> getLikeMembersEmail() {
-    return likeMembersEmail;
-  }
-
-  public void setLikeMembersEmail(List<String> likeMembersEmail) {
-    this.likeMembersEmail = likeMembersEmail;
-  }
-
-  public List<Member> getParticipants() {
-    return participants;
-  }
-
-  public void setParticipants(List<Member> participants) {
-    this.participants = participants;
-  }
 
 
 }

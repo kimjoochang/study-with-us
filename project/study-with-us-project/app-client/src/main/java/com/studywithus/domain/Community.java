@@ -1,30 +1,19 @@
 package com.studywithus.domain;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Community extends Content {
   private Date registeredDate; // 게시글 등록일
   private int viewCount; // 조회수
   private int like; // 좋아요
   private int category; // 정보, 질문, 스몰톡
-  private CommunityFile communityFile;
-  private List<Comment> comments = new ArrayList<>(); 
+  private AttachmentFile communityFile;
 
-  public List<Comment> getComments() {
-    return comments;
-  }
-
-  public void setComments(List<Comment> comments) {
-    this.comments = comments;
-  }
-
-  public CommunityFile getCommunityFile() {
+  public AttachmentFile getCommunityFile() {
     return communityFile;
   }
 
-  public void setCommunityFile(CommunityFile communityFile) {
+  public void setCommunityFile(AttachmentFile communityFile) {
     this.communityFile = communityFile;
   }
 
@@ -60,11 +49,4 @@ public class Community extends Content {
     this.category = category;
   }
 
-  // public List<Member> getMembers() {
-  // return members;
-  // }
-
-  // public void setMembers(List<Member> members) {
-  // this.members = members;
-  // }
 }
