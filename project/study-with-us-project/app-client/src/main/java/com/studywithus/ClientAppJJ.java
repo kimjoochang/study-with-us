@@ -5,8 +5,6 @@ import static com.studywithus.menu.Menu.ACCESS_GENERAL;
 import static com.studywithus.menu.Menu.ACCESS_LEADER;
 import static com.studywithus.menu.Menu.ACCESS_LOGOUT;
 import static com.studywithus.menu.Menu.ACCESS_MENTEE;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,7 +73,8 @@ import com.studywithus.util.Prompt;
 
 public class ClientAppJJ {
 
-  Connection con;
+  // Connection con;
+  SqlSession sqlSession;
 
   HashMap<String, Command> commandMap = new HashMap<>();
 
@@ -114,8 +113,8 @@ public class ClientAppJJ {
     requestAgent = null;
 
     // DBMS와 연결한다.
-    con =
-        DriverManager.getConnection("jdbc:mysql://localhost:3306/team3db?user=team3&password=1111");
+    //    con =
+    //        DriverManager.getConnection("jdbc:mysql://localhost:3306/team3db?user=team3&password=1111");
 
     // Mybatis의 SqlSession 객체 준비
     SqlSession sqlSession = new SqlSessionFactoryBuilder()
@@ -695,6 +694,7 @@ public class ClientAppJJ {
     notifyOnApplicationStarted();
     createMainMenu().execute();
     Prompt.close();
+    sqlSession.close();
   }
 
   public static void main(String[] args) throws Exception {
