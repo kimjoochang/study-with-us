@@ -1,6 +1,5 @@
 package com.studywithus.dao.impl;
 
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
@@ -12,7 +11,6 @@ import com.studywithus.domain.Member;
 //
 public class MybatisMemberDaoJJ implements MemberDao {
 
-  Connection con;
   SqlSession sqlSession;
 
   public MybatisMemberDaoJJ(SqlSession sqlSession) {
