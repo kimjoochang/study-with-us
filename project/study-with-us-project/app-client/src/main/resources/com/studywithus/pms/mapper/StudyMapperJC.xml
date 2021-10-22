@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StudyMapper">
+  
+  <resultMap type="Study" id="StudyMap">
+    <id column="study_no" property="no"/> 
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="area" property="area"/>
+    <result column="register_date" property="registeredDate"/>
+    <result column="view_count" property="viewCount"/>
+    <result column="max_member" property="maxMembers"/>
+    <result column="start_date" property="startDate"/>
+    <result column="end_date" property="endDate"/>
+    <result column="del_status" property="deleteStatus"/>
+    <result column="price" property="price"/>
+    <result column="status" property="studyStatus"/>   
+    
+    <association property="writer" javaType="member">
+      <id column="writer_no" property="no"/>
+      <result column="writer_name" property="name"/>
+      <result column="writer_email" property="email"/>
+    </association>
+    
+    <collection property="likeMembers" ofType="member">
+      <id column="likeMembers_no" property="no"/>
+      <result column="likeMembers_name" property="name"/>
+      <result column="likeMembers_email" property="email"/>
+    </collection>   
+  </resultMap>
+  
+  <sql id="select1">
+    select 
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.price,
+      st.status,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.email writer_email
+    from 
+      study st
+    inner join member m on st.member_no=m.member_no
+    left outer join member_file mf on m.member_no=mf.member_no
+  </sql>
+  
+  <sql id="select2">
+  select 
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.price,
+      st.status,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.email writer_email,
+      m2.member_no likeMembers_no,
+      m2.email likeMembers_email
+    from 
+      study st
+    left outer join interest i on st.study_no=i.study_no
+    inner join member m on st.member_no=m.member_no
+    left outer join member m2 on i.member_no=m2.member_no
+  </sql>
+  
+  <sql id="order1">
+    order by 
+      st.study_no desc
+  </sql>
+  
+  <select id="findAll" resultMap="StudyMap">
+    <include refid="select2"/>
+    <include refid="order1"/>
+  </select>
+  
+  <!-- select할 컬럼 논의 -->
+   <select id="findByKeyword" resultMap="StudyMap" parameterType="string">
+  <include refid="select1"/>
+    where 
+      st.title like(concat('%',#{keyword},'%'))
+      or st.content like (concat('%',#{keyword},'%'))
+      or st.name like (concat('%',#{keyword},'%'))
+    <include refid="order1"/>
+   </select>
+            
+  <select id="findByNo" resultMap="StudyMap" parameterType="int">
+   <include refid="select1"/>
+    where 
+       st.study_no=#{no}
+  </select>
+  
+<select id="findLikeMembers" resultMap="StudyMap" parameterType="int">
+ select
+    m.member_no likeMembers_no,
+    m.email likeMembers_email
+    from 
+      study st
+      left outer join interest i on st.study_no=i.study_no
+      inner join member m on i.member_no=m.member_no
+  where
+    i.study_no=#{studyNo}
+  </select> 
+
+  <insert id="insert" parameterType="study">
+   insert into 
+     study(title,content,area,max_member,start_date,end_date,price,member_no)
+    values(#{title},#{content},#{area},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) <!--  값 넣기 -->
+  </insert>
+
+  <update id="update" parameterType="study">
+   update study set
+      title=#{title},
+      content=#{content},
+      area=#{area},
+      view_count=#{viewCount},
+      max_member=#{maxMembers},
+      start_date=#{startDate},
+      end_date=#{endDate},
+      del_status=#{deleteStatus},
+      price=#{price},
+      status=#{studyStatus}     
+   where study_no=#{no}  
+  </update>
+<!-- 
+  
+  <delete id="delete" parameterType="int">
+    delete from study
+    where study_no=#{no}
+  </delete>
+  
+  <delete id="deleteInterest" parameterType="int">
+    delete from interest
+    where study_no=#{no}
+  </delete>
+  
+  <delete id="deleteMentee" parameterType="int">
+    delete from mentee
+    where study_no=#{no}
+  </delete>
+  
+  <delete id="deleteReview" parameterType="int">
+    delete from review
+    where study_no=#{no}
+  </delete>
+  
+ -->    
+</mapper>

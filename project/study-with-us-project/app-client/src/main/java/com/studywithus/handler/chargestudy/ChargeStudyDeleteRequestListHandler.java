@@ -1,16 +1,16 @@
 package com.studywithus.handler.chargestudy;
 
 import java.util.Collection;
-import com.studywithus.dao.ChargeStudyDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 
 public class ChargeStudyDeleteRequestListHandler implements Command {
 
-  ChargeStudyDao chargeStudyDao;
+  StudyDao chargeStudyDao;
 
-  public ChargeStudyDeleteRequestListHandler(ChargeStudyDao chargeStudyDao) {
+  public ChargeStudyDeleteRequestListHandler(StudyDao chargeStudyDao) {
     this.chargeStudyDao = chargeStudyDao;
   }
 
@@ -22,7 +22,7 @@ public class ChargeStudyDeleteRequestListHandler implements Command {
     Collection<Study> studyList = chargeStudyDao.findAll();
 
     for(Study chargeStudy : studyList) {
-      if (chargeStudy.isDeleteRequest()) {
+      if (chargeStudy.getDeleteStatus() == 1) {
         System.out.printf("[번호 = %d, 제목 = %s, 멘토 = %s, 등록일 = %s, 모집인원 = %d / %d]\n",
             chargeStudy.getNo(),
             chargeStudy.getTitle(),

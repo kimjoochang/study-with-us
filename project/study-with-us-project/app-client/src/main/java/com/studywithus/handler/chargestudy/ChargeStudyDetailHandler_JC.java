@@ -1,6 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
-import com.studywithus.dao.ChargeStudyDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -9,10 +9,10 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyDetailHandler_JC implements Command {
 
-  ChargeStudyDao chargeStudyDao;
+  StudyDao chargeStudyDao;
   ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt;
 
-  public ChargeStudyDetailHandler_JC(ChargeStudyDao chargeStudyDao, ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt) {
+  public ChargeStudyDetailHandler_JC(StudyDao chargeStudyDao, ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt) {
     this.chargeStudyDao = chargeStudyDao;
     this.chargeStudyDetailMenuPrompt = chargeStudyDetailMenuPrompt;
   }
@@ -23,6 +23,7 @@ public class ChargeStudyDetailHandler_JC implements Command {
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
     Study chargeStudy = chargeStudyDao.findByNo(no);
+
 
     chargeStudy.setViewCount(chargeStudy.getViewCount() + 1);
 
@@ -39,7 +40,11 @@ public class ChargeStudyDetailHandler_JC implements Command {
 
     System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers().size(), chargeStudy.getMaxMembers());
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
-    System.out.printf("좋아요수: %d\n", chargeStudy.getLikeMembersEmail().size());
+    if (chargeStudy.getLikeMembers().isEmpty()) {
+      System.out.printf("좋아요수: %d\n", 0);
+    } else {
+      System.out.printf("좋아요수: %d\n", chargeStudy.getLikeMembers().size());
+    }
     System.out.println();
 
     request.setAttribute("chargeNo", no);

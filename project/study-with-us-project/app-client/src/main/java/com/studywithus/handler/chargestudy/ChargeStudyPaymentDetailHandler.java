@@ -1,8 +1,8 @@
 package com.studywithus.handler.chargestudy;
 
 import java.sql.Date;
-import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.dao.PaymentDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -13,9 +13,9 @@ import com.studywithus.util.Prompt;
 public class ChargeStudyPaymentDetailHandler implements Command {
 
   PaymentDao paymentDao;
-  ChargeStudyDao chargeStudyDao;
+  StudyDao chargeStudyDao;
 
-  public ChargeStudyPaymentDetailHandler(PaymentDao paymentDao, ChargeStudyDao chargeStudyDao) {
+  public ChargeStudyPaymentDetailHandler(PaymentDao paymentDao, StudyDao chargeStudyDao) {
     this.paymentDao = paymentDao;
     this.chargeStudyDao = chargeStudyDao;
   }
@@ -26,19 +26,19 @@ public class ChargeStudyPaymentDetailHandler implements Command {
     int no = Prompt.inputInt("번호를 입력하세요. > ");
     Payment payment = paymentDao.findByNo(no, AuthLogInHandler.getLoginUser().getEmail());
 
-    if (payment == null || payment.isVisible()== false) {
+    if (payment == null || payment.getStatus()== 2) {
       System.out.println();
       System.out.println("해당 번호의 결제내역이 없습니다.\n");
       return;
     }
 
-    Study chargeStudy = chargeStudyDao.findByNo(payment.getPaidStudyNo());
+    Study chargeStudy = chargeStudyDao.findByNo(payment.getStudyNo());
 
-    if (!payment.getMenteeEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
+    if (payment.getMemberNo() != AuthLogInHandler.getLoginUser().getNo()) {
       System.out.println("해당 번호의 결제내역이 없습니다.\n");
     }
 
-    System.out.printf("결제한 스터디 번호: %s\n", payment.getPaidStudyNo());
+    System.out.printf("결제한 스터디 번호: %s\n", payment.getStudyNo());
     System.out.printf("결제한 스터디 제목: %s\n", payment.getTitle());
     System.out.printf("결제한 스터디 멘토: %s\n", payment.getMentorName());
     System.out.printf("결제한 스터디 가격: %s\n", payment.getPrice());

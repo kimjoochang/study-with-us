@@ -12,9 +12,11 @@ import com.studywithus.util.Prompt;
 public class ChargeStudyInterestDeleteHandler implements Command {
 
   ChargeStudyDao chargeStudyDao;
+  InterestDao interestDao;
 
-  public ChargeStudyInterestDeleteHandler(ChargeStudyDao chargeStudyDao) {
+  public ChargeStudyInterestDeleteHandler(ChargeStudyDao chargeStudyDao, InterestDao interestDao) {
     this.chargeStudyDao = chargeStudyDao;
+    this.interestDao = interestDao;
   }
 
   @Override
@@ -29,7 +31,7 @@ public class ChargeStudyInterestDeleteHandler implements Command {
 
       Study chargeStudy = chargeStudyDao.findByNo(no);
 
-      for (String likeMemberEmail : chargeStudy.getLikeMembersEmail()) {
+      for (Member likeMember : chargeStudy.getLikeMember()) {
 
         if (likeMemberEmail.equals(AuthLogInHandler.getLoginUser().getEmail())) {
           type = 1;

@@ -1,16 +1,16 @@
 package com.studywithus.handler.chargestudy;
 
 import java.util.Collection;
-import com.studywithus.dao.ChargeStudyDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 
 public class ChargeStudyListHandler implements Command {
 
-  ChargeStudyDao chargeStudyDao;
+  StudyDao chargeStudyDao;
 
-  public ChargeStudyListHandler(ChargeStudyDao chargeStudyDao) {
+  public ChargeStudyListHandler(StudyDao chargeStudyDao) {
     this.chargeStudyDao = chargeStudyDao;
   }
 
@@ -34,7 +34,7 @@ public class ChargeStudyListHandler implements Command {
           chargeStudy.getMembers().size(),
           chargeStudy.getMaxMembers(),
           chargeStudy.getViewCount(),
-          chargeStudy.getLikeMembersEmail().size());
+          chargeStudy.getViewCount());
       System.out.println();
     }
     System.out.println();

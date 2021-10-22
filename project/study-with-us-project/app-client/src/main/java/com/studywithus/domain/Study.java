@@ -13,18 +13,26 @@ public class Study extends Content {
   private int maxMembers; // 스터디 최대 모집인원 수
   private Date startDate; // 스터디 시작일
   private Date endDate; // 스터디 종료일
-  private int studyStatus;
+  private int studyStatus; // 모집중 = 0, 진행중 = 1, 진행완료 = 2
 
   // 기본값 = 0, 
-  //삭제(무료)/삭제요청(유료) = 1, 
-  //삭제요청 승인(가격이 0 이상) = 2,
-  //삭제요청 거절(가격 0이상) = 3; 
+  // 삭제요청(유료) = 1 
+  // 삭제(무료)/삭제요청 승인(가격이 0 이상) = 2
+
   private int deleteStatus;
   private int price; // 유료 스터디 가격
   private List<Member> members = new ArrayList<>(); // 팀원 or 멘티
   private List<Member> applicants = new ArrayList<>(); // 무료 스터디 신청자
-  private List<Member> likeMembers = new ArrayList<>(); // 관심목록 추가한 자
+  private List<Member> likeMembers = new ArrayList<>(); // 무료 스터디 신청자
 
+
+  public List<Member> getLikeMembers() {
+    return likeMembers;
+  }
+
+  public void setLikeMembers(List<Member> likeMembers) {
+    this.likeMembers = likeMembers;
+  }
 
   @Override
   public int getNo() {
@@ -131,15 +139,6 @@ public class Study extends Content {
   public void setApplicants(List<Member> applicants) {
     this.applicants = applicants;
   }
-
-  public List<Member> getLikeMembers() {
-    return likeMembers;
-  }
-
-  public void setLikeMembers(List<Member> likeMembers) {
-    this.likeMembers = likeMembers;
-  }
-
 
 
 }

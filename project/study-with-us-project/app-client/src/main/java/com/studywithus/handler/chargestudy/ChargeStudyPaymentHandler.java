@@ -1,9 +1,7 @@
 package com.studywithus.handler.chargestudy;
 
-import java.sql.Date;
-import java.util.List;
-import com.studywithus.dao.ChargeStudyDao;
 import com.studywithus.dao.PaymentDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -15,9 +13,9 @@ import com.studywithus.util.Prompt;
 public class ChargeStudyPaymentHandler implements Command {
 
   PaymentDao paymentDao;
-  ChargeStudyDao chargeStudyDao;
+  StudyDao chargeStudyDao;
 
-  public ChargeStudyPaymentHandler(PaymentDao paymentDao, ChargeStudyDao chargeStudyDao) {
+  public ChargeStudyPaymentHandler(PaymentDao paymentDao, StudyDao chargeStudyDao) {
     this.paymentDao = paymentDao;
     this.chargeStudyDao = chargeStudyDao;
   }
@@ -62,20 +60,10 @@ public class ChargeStudyPaymentHandler implements Command {
 
       // 결제내역 생성해서 서버에 저장 요청
       Payment payment = new Payment();
-      payment.setMenteeEmail(AuthLogInHandler.getLoginUser().getEmail());
-      payment.setPaidStudyNo(chargeStudy.getNo());
-      payment.setTitle(chargeStudy.getTitle());
-      payment.setMentorName(chargeStudy.getWriter().getName());
-      payment.setPrice(chargeStudy.getPrice());
-      payment.setPaymentDate(new Date(System.currentTimeMillis()));
-      payment.setVisible(true);
+      payment.setMemberNo(AuthLogInHandler.getLoginUser().getNo());
+      payment.setStudyNo(chargeStudy.getNo());
 
       paymentDao.insert(payment);
-
-      // 유료스터디 멘티 리스트에 결제한 회원 아이디 추가해서 서버에 저장 요청
-      List<String> menteeEmailList = chargeStudy.getMenteeEmailList();
-      menteeEmailList.add(AuthLogInHandler.getLoginUser().getEmail());
-      chargeStudy.setMenteeEmailList(menteeEmailList);
 
       chargeStudyDao.update(chargeStudy);
 
