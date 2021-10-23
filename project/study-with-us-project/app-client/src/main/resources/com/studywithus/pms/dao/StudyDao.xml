@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="StudyMapperJC">
+<mapper namespace="com.studywithus.dao.StudyDao">
   
   <resultMap type="Study" id="StudyMap">
     <id column="study_no" property="no"/> 
@@ -18,18 +18,19 @@
     <result column="del_status" property="deleteStatus"/>
     <result column="price" property="price"/>
     <result column="status" property="studyStatus"/>   
-    <!--  
+
     <association property="writer" javaType="Member">
       <id column="writer_no" property="no"/>
       <result column="writer_name" property="name"/>
       <result column="writer_email" property="email"/>
     </association>
+
     <collection property="likeMembers" ofType="Member">
       <id column="likeMembers_no" property="no"/>
       <result column="likeMembers_name" property="name"/>
       <result column="likeMembers_email" property="email"/>
     </collection>   
-    --> 
+
   </resultMap>
   
   <sql id="select1">
@@ -180,12 +181,13 @@
   <include refid="selectInterest"/>
     <include refid="where2"/>
   </select>
-<!-- 
-  
+
   <delete id="delete" parameterType="int">
     delete from study
     where study_no=#{no}
   </delete>
+<!-- 
+  
   
   <delete id="deleteInterest" parameterType="int">
     delete from interest
