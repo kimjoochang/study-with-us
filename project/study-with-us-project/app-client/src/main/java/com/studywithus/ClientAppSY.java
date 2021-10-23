@@ -9,13 +9,16 @@ import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.HashMap;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.studywithus.dao.MemberDao;
 import com.studywithus.dao.ScheduleDao;
 import com.studywithus.dao.impl.MariadbMemberDaoSY;
-import com.studywithus.dao.impl.MariadbScheduleDao;
+import com.studywithus.dao.impl.MybatisScheduleDao;
 import com.studywithus.dao.impl.NetChargeStudyDao;
 import com.studywithus.dao.impl.NetCommunityDao;
 import com.studywithus.dao.impl.NetFreeStudyDao;
@@ -74,7 +77,6 @@ import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindEmailHandler;
 import com.studywithus.handler.user.MembershipWithdrawalHandler;
-import com.studywithus.handler.user.MyInfoHandler;
 import com.studywithus.handler.user.ResetPasswordHandler;
 import com.studywithus.handler.user.SignUpHandler;
 import com.studywithus.handler.user.SnsLogInHandler;
@@ -86,6 +88,7 @@ import com.studywithus.util.Prompt;
 
 public class ClientAppSY {
 
+	SqlSession sqlSession;
 	Connection con;
 
 	RequestAgent requestAgent;
@@ -123,8 +126,10 @@ public class ClientAppSY {
 		// 서버와 통신을 담당할 객체 준비
 		requestAgent = null;
 
-		// DBMS와 연결한다.
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/team3db?user=team3&password=1111");
+		// Mybatis의 SqlSession 객체 준비
+		sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+				"com/studywithus/pms/conf/mybatis-config.xml")).openSession();
+
 
 		// 데이터 관리를 담당할 DAO 객체를 준비한다.
 		MemberDao memberDao = new MariadbMemberDaoSY(con);
@@ -135,8 +140,8 @@ public class ClientAppSY {
 		NetPaymentDao paymentDao = new NetPaymentDao(requestAgent);
 		NetReviewDao reviewDao = new NetReviewDao(requestAgent);
 
-		ScheduleDao jobsScheduleDao = new MariadbScheduleDao(con);
-		ScheduleDao examScheduleDao = new MariadbScheduleDao(con);
+		ScheduleDao jobsScheduleDao = new MybatisScheduleDao(sqlSession);
+		ScheduleDao examScheduleDao = new MybatisScheduleDao(sqlSession);
 
 
 		commandMap.put("/auth/logIn", new AuthLogInHandler(memberDao));
@@ -159,7 +164,7 @@ public class ClientAppSY {
 
 		commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberDao));
 
-		commandMap.put("/myInfo/list", new MyInfoHandler(requestAgent));
+		//		commandMap.put("/myInfo/list", new MyInfoHandler(memberDao));
 		//
 		commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyDao));
 		commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyDao));
