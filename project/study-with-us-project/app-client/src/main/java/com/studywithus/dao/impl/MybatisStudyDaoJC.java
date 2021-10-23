@@ -1,6 +1,7 @@
 package com.studywithus.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
@@ -9,7 +10,6 @@ import com.studywithus.domain.Study;
 // - 스터디 데이터를 서버를 통해 관리한다.
 //
 public class MybatisStudyDaoJC implements StudyDao {
-
 
   SqlSession sqlSession;
 
@@ -50,6 +50,32 @@ public class MybatisStudyDaoJC implements StudyDao {
     sqlSession.delete("StudyMapper.deleteMentee", no);
     sqlSession.delete("StudyMapper.deleteReview", no);
     sqlSession.delete("StudyMapper.delete", no);
+    sqlSession.commit();
+  }
+
+  @Override
+  public List<Study> findAllMyStudy(int no, String type) throws Exception {
+    return sqlSession.selectList("StudyMapper.findAll" + type + "Study", no);
+  }
+
+  @Override
+  public Study findByNoMyStudy(Map<String,Object> params, String type) throws Exception {
+    return sqlSession.selectOne("StudyMapper.findByNo" + type + "Study",params);
+  }
+
+  @Override
+  public List<Study> findAllInterest(int no) throws Exception {
+    return sqlSession.selectList("StudyMapper.findAllInterest",no);
+  }
+
+  @Override
+  public Study findByNoInterest(Map<String, Object> params) throws Exception {
+    return sqlSession.selectOne("StudyMapper.findByNoInterest",params);
+  }
+
+  @Override
+  public void insertInterest(Map<String,Object> params) throws Exception {
+    sqlSession.insert("StudyMapper.insertInterest", params);
     sqlSession.commit();
   }
 }

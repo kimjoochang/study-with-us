@@ -31,6 +31,8 @@ import com.studywithus.handler.chargestudy.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyDeleteRequestListHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyDetailHandler_JC;
 import com.studywithus.handler.chargestudy.ChargeStudyDetailMenuPrompt;
+import com.studywithus.handler.chargestudy.ChargeStudyInterestAddHandler;
+import com.studywithus.handler.chargestudy.ChargeStudyInterestDetailHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyListHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyPaymentDetailHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyPaymentHandler;
@@ -38,6 +40,10 @@ import com.studywithus.handler.chargestudy.ChargeStudyUpdateHandler;
 import com.studywithus.handler.chargestudy.MentorApplicantApproveHandler;
 import com.studywithus.handler.chargestudy.MentorApplicationAddHandler;
 import com.studywithus.handler.chargestudy.MentorApplicationDetailHandler;
+import com.studywithus.handler.chargestudy.ParticipateChargeStudyDetailHandler;
+import com.studywithus.handler.chargestudy.ParticipateChargeStudyListHandler;
+import com.studywithus.handler.chargestudy.RegisterChargeStudyDetailHandler_Save;
+import com.studywithus.handler.chargestudy.RegisterChargeStudyListHandler;
 import com.studywithus.handler.chargestudy.ReviewAddHandler;
 import com.studywithus.handler.chargestudy.ReviewListHandler;
 import com.studywithus.handler.comment.CommentAddHandler;
@@ -175,12 +181,12 @@ public class ClientApp_JC {
     commandMap.put("/chargeStudy/paymentDetail", new ChargeStudyPaymentDetailHandler(paymentDao, studyDao));
     //    commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(paymentDao, studyDao));
     //    commandMap.put("/chargeStudy/paymentList", new ChargeStudyPaymentListHandler(paymentDao));
-    //    commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(studyDao));
+    commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(studyDao));
     //    commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(studyDao));
-    //    commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(studyDao));
-    //    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler_Save(studyDao));
-    //    commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(studyDao));
-    //    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(studyDao));
+    commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(studyDao));
+    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler_Save(studyDao));
+    commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(studyDao));
+    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(studyDao));
     commandMap.put("/review/add", new ReviewAddHandler(reviewDao));
     commandMap.put("/review/list", new ReviewListHandler(reviewDao));
     //
@@ -234,7 +240,7 @@ public class ClientApp_JC {
 
 
     /*[수정]*/commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(memberDao));                          
-    //    /*[수정]*/commandMap.put("/chargeInterest/detail", new ChargeStudyInterestDetailHandler(studyDao, chargeStudyDetailMenuPrompt));                          
+    /*[수정]*/commandMap.put("/chargeInterest/detail", new ChargeStudyInterestDetailHandler(studyDao, chargeStudyDetailMenuPrompt));                          
     /*[추가]*/commandMap.put("/comment/add", new CommentAddHandler(commentDao));                          
     /*[추가]*/commandMap.put("/comment/delete", new CommentDeleteHandler(commentDao));                          
 

@@ -6,6 +6,17 @@ import java.util.List;
 
 public class Study extends Content {
   private int no;
+  private Member writer;
+  @Override
+  public Member getWriter() {
+    return writer;
+  }
+
+  @Override
+  public void setWriter(Member writer) {
+    this.writer = writer;
+  }
+
   private String area; // 지역
   private int onOffLine; // 오프라인 = 0 , 온라인 = 1 
   private Date registeredDate; // 스터디 등록일
@@ -18,8 +29,8 @@ public class Study extends Content {
   // 기본값 = 0, 
   // 삭제요청(유료) = 1 
   // 삭제(무료)/삭제요청 승인(가격이 0 이상) = 2
-
   private int deleteStatus;
+
   private int price; // 유료 스터디 가격
   private List<Member> members = new ArrayList<>(); // 팀원 or 멘티
   private List<Member> applicants = new ArrayList<>(); // 무료 스터디 신청자

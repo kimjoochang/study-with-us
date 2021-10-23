@@ -19,13 +19,13 @@
     <result column="price" property="price"/>
     <result column="status" property="studyStatus"/>   
     
-    <association property="writer" javaType="member">
+    <association property="writer" javaType="Member">
       <id column="writer_no" property="no"/>
       <result column="writer_name" property="name"/>
       <result column="writer_email" property="email"/>
     </association>
     
-    <collection property="likeMembers" ofType="member">
+    <collection property="likeMembers" ofType="Member">
       <id column="likeMembers_no" property="no"/>
       <result column="likeMembers_name" property="name"/>
       <result column="likeMembers_email" property="email"/>
@@ -33,29 +33,6 @@
   </resultMap>
   
   <sql id="select1">
-    select 
-      st.study_no,
-      st.title,
-      st.content,
-      st.area,
-      st.register_date,
-      st.view_count,
-      st.max_member,
-      st.start_date,
-      st.end_date,
-      st.del_status,
-      st.price,
-      st.status,
-      m.member_no writer_no,
-      m.name writer_name,
-      m.email writer_email
-    from 
-      study st
-    inner join member m on st.member_no=m.member_no
-    left outer join member_file mf on m.member_no=mf.member_no
-  </sql>
-  
-  <sql id="select2">
   select 
       st.study_no,
       st.title,
@@ -81,17 +58,52 @@
     left outer join member m2 on i.member_no=m2.member_no
   </sql>
   
+  <sql id="selectInterest">
+  select 
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.price,
+      st.status,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.email writer_email,
+      m2.member_no likeMembers_no,
+      m2.email likeMembers_email
+    from 
+      study st
+    inner join interest i on st.study_no=i.study_no
+    inner join member m on st.member_no=m.member_no
+    left outer join member m2 on i.member_no=m2.member_no
+  </sql>
+  
   <sql id="order1">
     order by 
-      st.study_no desc
+      st.study_no asc
+  </sql>
+  
+  <sql id="where1">
+   where 
+       m.member_no=#{writerNo}
+  </sql>
+  
+  <sql id="where2">
+  where 
+       m.member_no=#{writerNo} AND st.study_no=#{studyNo}
   </sql>
   
   <select id="findAll" resultMap="StudyMap">
-    <include refid="select2"/>
+    <include refid="select1"/>
     <include refid="order1"/>
   </select>
   
-  <!-- select할 컬럼 논의 -->
    <select id="findByKeyword" resultMap="StudyMap" parameterType="string">
   <include refid="select1"/>
     where 
@@ -107,22 +119,15 @@
        st.study_no=#{no}
   </select>
   
-<select id="findLikeMembers" resultMap="StudyMap" parameterType="int">
- select
-    m.member_no likeMembers_no,
-    m.email likeMembers_email
-    from 
-      study st
-      left outer join interest i on st.study_no=i.study_no
-      inner join member m on i.member_no=m.member_no
-  where
-    i.study_no=#{studyNo}
-  </select> 
-
   <insert id="insert" parameterType="study">
    insert into 
      study(title,content,area,max_member,start_date,end_date,price,member_no)
-    values(#{title},#{content},#{area},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) <!--  값 넣기 -->
+    values(#{title},#{content},#{area},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 
+  </insert>
+  
+  <insert id="insertInterest" parameterType="map">
+  insert into interest(member_no,study_no)
+    values(#{memberNo},#{studyNo})
   </insert>
 
   <update id="update" parameterType="study">
@@ -139,6 +144,42 @@
       status=#{studyStatus}     
    where study_no=#{no}  
   </update>
+  
+  <select id="findAllRegisterStudy" resultMap="StudyMap" parameterType="no">
+    <include refid="select1"/>
+      <include refid="where1"/>
+    <include refid="order1"/> 
+  </select>
+  
+  <select id="findAllParticipateStudy" resultMap="StudyMap" parameterType="no">
+    <include refid="select1"/>
+      where 
+       m2.member_no=#{writerNo}
+    <include refid="order1"/> 
+  </select>
+  
+  <select id="findByNoRegisterStudy" resultMap="StudyMap" parameterType="map">
+    <include refid="select1"/>
+    <include refid="where2"/>
+    <include refid="order1"/> 
+  </select>
+  
+  <select id="findByNoParticipateStudy" resultMap="StudyMap" parameterType="map">
+    <include refid="select1"/>
+      where 
+       m2.member_no=#{writerNo} AND st.study_no=#{studyNo}
+    <include refid="order1"/> 
+  </select>
+  
+  <select id="findAllInterest" resultMap="StudyMap" parameterType="no">
+    <include refid="selectInterest"/>
+    <include refid="where1"/>
+  </select>
+
+  <select id="findByNoInterest" resultMap="StudyMap" parameterType="no">
+  <include refid="selectInterest"/>
+    <include refid="where2"/>
+  </select>
 <!-- 
   
   <delete id="delete" parameterType="int">
@@ -160,6 +201,18 @@
     delete from review
     where study_no=#{no}
   </delete>
+
+<select id="findLikeMembers" resultMap="StudyMap" parameterType="int">
+ select
+    m.member_no likeMembers_no,
+    m.email likeMembers_email
+    from 
+      study st
+      left outer join interest i on st.study_no=i.study_no
+      inner join member m on i.member_no=m.member_no
+  where
+    i.study_no=#{studyNo}
+  </select> 
   
  -->    
 </mapper>
