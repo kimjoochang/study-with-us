@@ -31,7 +31,7 @@ public class MybatisPaymentDao implements PaymentDao {
     params.put("studyNo", String.valueOf(studyNo));
     params.put("memberNo", String.valueOf(memberNo));
 
-    return sqlSession.selectOne("PaymentMapper.findByEmailAndPassword", params);
+    return sqlSession.selectOne("PaymentMapper.findByNo", params);
   }
 
   @Override

@@ -23,7 +23,7 @@
     </association>
   </resultMap>
 
-<sql id="select1">
+  <sql id="select1">
     select
     p.pay_no,
     p.member_no,
@@ -60,6 +60,8 @@
     values(#{studyNo},#{memberNo},#{paymentMethod},#{status})
   </insert>
   
+  <!--오류  Cannot add or update a child row: 
+  a foreign key constraint fails  -->
   <insert id="insertStudyMember" parameterType="payment">
     insert into
     study_member(member_no,study_no)
