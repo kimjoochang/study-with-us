@@ -1,6 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
-import com.studywithus.dao.ChargeStudyDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -8,9 +8,9 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyDeleteRequestCancelHandler implements Command {
 
-  ChargeStudyDao chargeStudyDao;
+  StudyDao chargeStudyDao;
 
-  public ChargeStudyDeleteRequestCancelHandler(ChargeStudyDao chargeStudyDao)  {
+  public ChargeStudyDeleteRequestCancelHandler(StudyDao chargeStudyDao)  {
     this.chargeStudyDao = chargeStudyDao;
   }
 
@@ -34,7 +34,7 @@ public class ChargeStudyDeleteRequestCancelHandler implements Command {
         break;
       }
     }
-    chargeStudy.setDeleteRequest(false);
+    chargeStudy.setDeleteStatus(0);
 
     chargeStudyDao.update(chargeStudy);
 

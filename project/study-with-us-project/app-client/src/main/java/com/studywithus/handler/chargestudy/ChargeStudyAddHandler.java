@@ -1,7 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
-import java.sql.Date;
-import com.studywithus.dao.ChargeStudyDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,9 +9,9 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyAddHandler implements Command {
 
-  ChargeStudyDao chargeStudyDao;
+  StudyDao chargeStudyDao;
 
-  public ChargeStudyAddHandler(ChargeStudyDao chargeStudyDao) {
+  public ChargeStudyAddHandler(StudyDao chargeStudyDao) {
     this.chargeStudyDao = chargeStudyDao;
   }
 
@@ -38,14 +37,6 @@ public class ChargeStudyAddHandler implements Command {
         continue;
       }
 
-      // 현재 날짜 > 시작일인 경우
-      /* if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == 1) {
-        System.out.println("다시 입력하세요.\n");
-        continue;
-
-      } else {
-        break;
-      }*/
       break;
     }
 
@@ -58,22 +49,8 @@ public class ChargeStudyAddHandler implements Command {
         continue;
       }
 
-      /*if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getEndDate()) == 1) {
-        System.out.println("다시 입력하세요.\n");
-        continue;
-
-        // 시작일 < 종료일이 아닌 경우
-      }else if (chargeStudy.getEndDate().compareTo(chargeStudy.getStartDate()) != 1) {
-        System.out.println("종료일은 시작일 이후로 설정하세요.\n");
-        continue;
-
-      } else {
-        break;
-      }*/
       break;
     }
-
-    chargeStudy.setRegisteredDate(new Date(System.currentTimeMillis()));
 
     chargeStudyDao.insert(chargeStudy);
 

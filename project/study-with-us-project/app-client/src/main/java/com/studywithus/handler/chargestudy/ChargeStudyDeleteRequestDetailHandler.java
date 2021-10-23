@@ -1,6 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
-import com.studywithus.dao.ChargeStudyDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -8,9 +8,9 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyDeleteRequestDetailHandler implements Command {
 
-  ChargeStudyDao chargeStudyDao;
+  StudyDao chargeStudyDao;
 
-  public ChargeStudyDeleteRequestDetailHandler(ChargeStudyDao chargeStudyDao) {
+  public ChargeStudyDeleteRequestDetailHandler(StudyDao chargeStudyDao) {
     this.chargeStudyDao = chargeStudyDao;
   }
 
@@ -23,7 +23,7 @@ public class ChargeStudyDeleteRequestDetailHandler implements Command {
 
     Study chargeStudy = chargeStudyDao.findByNo(no);
 
-    if ( chargeStudy.isDeleteRequest() == false) {
+    if ( chargeStudy.getStudyStatus() != 1) {
       System.out.println();
       System.out.println("해당 번호의 삭제 요청 유료 스터디가 없습니다.\n");
       return;
@@ -41,7 +41,7 @@ public class ChargeStudyDeleteRequestDetailHandler implements Command {
 
     System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers().size(), chargeStudy.getMaxMembers());
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
-    System.out.printf("좋아요수: %d\n", chargeStudy.getLikeMembers().size());
+    System.out.printf("좋아요수: %d\n", chargeStudy.getViewCount());
     System.out.println();
 
     System.out.println("1. 삭제");

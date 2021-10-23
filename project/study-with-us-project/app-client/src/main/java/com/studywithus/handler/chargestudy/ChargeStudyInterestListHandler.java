@@ -1,7 +1,7 @@
 package com.studywithus.handler.chargestudy;
 
 import java.util.Collection;
-import com.studywithus.dao.ChargeStudyDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -9,9 +9,9 @@ import com.studywithus.handler.user.AuthLogInHandler;
 
 public class ChargeStudyInterestListHandler implements Command {
 
-  ChargeStudyDao chargeStudyDao;
+  StudyDao chargeStudyDao;
 
-  public ChargeStudyInterestListHandler(ChargeStudyDao chargeStudyDao) {
+  public ChargeStudyInterestListHandler(StudyDao chargeStudyDao) {
     this.chargeStudyDao = chargeStudyDao;
   }
 
@@ -19,53 +19,31 @@ public class ChargeStudyInterestListHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[유료 스터디 관심목록 / 조회]\n");
 
-    Collection<Study> chargeStudyList = chargeStudyDao.findAll();
+    Collection<Study> chargeStudyList = chargeStudyDao.findAllInterest(AuthLogInHandler.getLoginUser().getNo());
 
-    // 일치하는 값이 없을 경우, 출력문 한 번만 출력되도록 임의의 변수 활용
-    int type = 0;
+    if (chargeStudyList.isEmpty()) {
+      System.out.println("관심목록이 존재하지 않습니다.");
+      return;
+    }
 
-    // 기존 스터디 리스트 가져와서 하나씩 검색
     for (Study chargeStudy : chargeStudyList) {
-
-      if (chargeStudy.getLikeMembersEmail().isEmpty()) {
-
-        if (type == 2) {
-          continue;
-        } else {
-          type = 1;
-          continue;
-        }
-      }
-
-      // 스터디 리스트에서 꺼낸 스터디의 좋아요 누른 회원 리스트를 가져와서 하나씩 검색
-      for (String likeMemberEmail : chargeStudy.getLikeMembersEmail()) {
-        // 좋아요 누른 회원 리스트에서 꺼낸 회원의 아이디와 로그인한 회원의 아이디가 같다면
-        // 좋아요 누른 회원 리스트를 가지고 있는 스터디의 정보 출력
-        if (likeMemberEmail.equals(AuthLogInHandler.loginUser.getEmail())) {
-          type = 2; // 일치하는 값 있음
-          System.out.printf("[번호 = %d, 제목 = %s, 멘토 = %s, 등록일 = %s, 모집인원 = %d / %d, 조회수 = %d, 좋아요 = %d]\n",
-              chargeStudy.getNo(),
-              chargeStudy.getTitle(),
-              chargeStudy.getWriter().getName(),
-              chargeStudy.getRegisteredDate(),
-              chargeStudy.getMembers().size(),
-              chargeStudy.getMaxMembers(),
-              chargeStudy.getViewCount(),
-              chargeStudy.getLikeMembers().size());
-        } else {
-          if (type == 2) {
-            continue;
-          } else {
-            type = 1;
-          }
-        }
-      }
-
+      System.out.printf
+      ("[번호 = %d, 제목 = %s, 설명 = %s, 지역 = %s, 가격 = %d, 멘토 = %s, 시작일 = %s,종료일 = %s,"
+          + " 스터디 진행상태 = %s, 등록일 = %s, 모집인원 = %d / %d, 조회수 = %d, 좋아요 = %d]\n",
+          chargeStudy.getNo(),
+          chargeStudy.getTitle(),
+          chargeStudy.getWriter().getName(),
+          chargeStudy.getContent(),
+          chargeStudy.getArea(),
+          chargeStudy.getPrice(),
+          chargeStudy.getStartDate(),
+          chargeStudy.getEndDate(),
+          StudyStatusHelper.studyStatus(chargeStudy),
+          chargeStudy.getRegisteredDate(),
+          chargeStudy.getMembers().size(),
+          chargeStudy.getMaxMembers(),
+          chargeStudy.getViewCount(),
+          chargeStudy.getLikeMembers().size());
     }
-
-    if (type == 1) {
-      System.out.println("유료 스터디 관심목록이 존재하지 않습니다.");
-    }
-    System.out.println(" ");
   }
 }

@@ -23,10 +23,13 @@
   </environments>
   
   <mappers>
+    <mapper resource="com/studywithus/pms/mapper/StudyMapperJC.xml"/>
     <mapper resource="com/studywithus/pms/mapper/MemberMapper.xml"/>
     <mapper resource="com/studywithus/pms/mapper/MemberMapperJJ.xml"/>
     <mapper resource="com/studywithus/pms/mapper/StudyMapper.xml"/>
     <mapper resource="com/studywithus/pms/mapper/ScheduleMapper.xml"/>
+    <mapper resource="com/studywithus/pms/mapper/CommunityMapper.xml"/>
+    <mapper resource="com/studywithus/pms/mapper/CommentMapper.xml"/>
   </mappers>
 </configuration>
 

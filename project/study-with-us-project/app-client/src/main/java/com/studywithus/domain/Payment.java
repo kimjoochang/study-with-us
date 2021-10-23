@@ -8,6 +8,7 @@ public class Payment {
   private int studyNo; // 결제한 유료 스터디 게시글 번호
   private String paymentMethod; // 결제 수단
   private Date paymentDate; // 결제일
+  private Study study;
 
   // 기본 = 0
   // 무료스터디 참여상태 (유료 - 결제완료) = 1 

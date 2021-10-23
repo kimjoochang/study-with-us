@@ -1,7 +1,8 @@
 package com.studywithus.handler.chargestudy;
 
-import java.sql.Date;
-import com.studywithus.dao.ChargeStudyDao;
+import java.util.HashMap;
+import com.studywithus.dao.StudyDao;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
@@ -10,32 +11,16 @@ import com.studywithus.util.Prompt;
 public class ChargeStudyDetailMenuPrompt {
 
   CommandRequest request;
-  ChargeStudyDao chargeStudyDao;
+  StudyDao chargeStudyDao;
   Study chargeStudy;
+  Study interest;
 
-  int interestType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
   int paymentType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
 
 
-  public ChargeStudyDetailMenuPrompt(ChargeStudyDao chargeStudyDao, CommandRequest request) {
+  public ChargeStudyDetailMenuPrompt(StudyDao chargeStudyDao, CommandRequest request) {
     this.request = request;
     this.chargeStudyDao = chargeStudyDao;
-  }
-
-  protected String studyStatus(Study chargeStudy) {
-    this.chargeStudy = chargeStudy;
-    // 현재 날짜 < 시작일인 경우
-    if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == -1) {
-      chargeStudy.setStudyStatus("모집중");
-
-      // 현재 날짜 < 종료일
-    } else if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getEndDate()) == -1) {
-      chargeStudy.setStudyStatus("진행중");
-
-    } else {
-      chargeStudy.setStudyStatus("진행종료");
-    }
-    return chargeStudy.getStudyStatus();
   }
 
   protected void myStudySelectedMenu() throws Exception {
@@ -46,7 +31,7 @@ public class ChargeStudyDetailMenuPrompt {
 
     } else if (input == 2) {
 
-      if (chargeStudy.isDeleteRequest()) {
+      if (chargeStudy.getDeleteStatus() == 1 && chargeStudy.getPrice() > 0) {
         request.getRequestDispatcher("/chargeStudy/deleteRequestCancel").forward(request);
 
       } else {
@@ -54,7 +39,7 @@ public class ChargeStudyDetailMenuPrompt {
       }
 
     } else if (input == 3) {
-      if (chargeStudy.getStudyStatus().equals("진행종료")) {
+      if (chargeStudy.getStudyStatus() == 2) {
         request.getRequestDispatcher("/review/list").forward(request);
 
       } else {
@@ -88,7 +73,7 @@ public class ChargeStudyDetailMenuPrompt {
     } else if (input == 2) {
 
       // 관심목록 추가 (관심 목록에 추가하지 않은 경우에 보이는 2번 메뉴)
-      if (interestType == 0) {
+      if (interest == null) {
         request.getRequestDispatcher("/chargeStudy/interestAdd").forward(request);
 
         // 관심목록 삭제 (관심 목록에 추가하지 않은 경우에 보이는 2번 메뉴)
@@ -98,7 +83,7 @@ public class ChargeStudyDetailMenuPrompt {
 
     } else if (input == 3) { 
 
-      if (chargeStudy.getStudyStatus().equals("진행종료")) {
+      if (chargeStudy.getStudyStatus() == 2) {
         request.getRequestDispatcher("/review/list").forward(request);
 
       } else {
@@ -106,7 +91,7 @@ public class ChargeStudyDetailMenuPrompt {
       }
 
     } else if (input == 4) {
-      if (findByName()) {
+      if (findWriterByNo()) {
         request.getRequestDispatcher("/review/add").forward(request);
 
       } else {
@@ -123,18 +108,16 @@ public class ChargeStudyDetailMenuPrompt {
 
   private int anotherStudyMenu() throws Exception {
     paymentType = 0;
-    interestType= 0;
 
-    for (String member : chargeStudy.getMenteeEmailList()) {
-      if (member.equals(AuthLogInHandler.getLoginUser().getEmail())) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("memberNo", AuthLogInHandler.getLoginUser().getNo( ));
+    params.put("studyNo", chargeStudy.getNo());
+
+    interest = chargeStudyDao.findByNoInterest(params);
+
+    for (Member member : chargeStudy.getMembers()) {
+      if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
         paymentType = 1;
-        break;
-      }
-    }
-
-    for (String email : chargeStudy.getLikeMembersEmail()) {
-      if (email.equals(AuthLogInHandler.getLoginUser().getEmail())) {
-        interestType = 1;
         break;
       }
     }
@@ -146,7 +129,7 @@ public class ChargeStudyDetailMenuPrompt {
     }
 
     // 관심 목록이 없는 경우
-    if (interestType == 0) {
+    if (interest == null) {
       System.out.println("2. 관심목록 추가");
 
       // 관심 목록이 있는 경우
@@ -154,10 +137,10 @@ public class ChargeStudyDetailMenuPrompt {
       System.out.println("2. 관심목록 삭제");
     }
 
-    if (chargeStudy.getStudyStatus().equals("진행종료")) {
+    if (chargeStudy.getStudyStatus() == 2) {
       System.out.println("3. 후기 보기");
 
-      if (findByName()) {
+      if (findWriterByNo()) {
         System.out.println("4. 후기 작성");
       }
     }
@@ -170,7 +153,7 @@ public class ChargeStudyDetailMenuPrompt {
   private int myStudyMenu() {
     String selectedMenu;
 
-    if (chargeStudy.isDeleteRequest() == true) {
+    if (chargeStudy.getDeleteStatus() == 1 && chargeStudy.getPrice() > 0) {
       selectedMenu = "삭제요청 취소";
     } else {
       selectedMenu = "삭제요청";
@@ -178,7 +161,7 @@ public class ChargeStudyDetailMenuPrompt {
 
     System.out.println("1. 수정");
     System.out.println("2. "+ selectedMenu);
-    if (chargeStudy.getStudyStatus().equals("진행종료")) {
+    if (chargeStudy.getStudyStatus() == 2) {
       System.out.println("3. 후기 보기");
     }
     System.out.println("0. 이전\n");
@@ -186,14 +169,12 @@ public class ChargeStudyDetailMenuPrompt {
     return Prompt.inputInt("메뉴 번호를 선택하세요. > "); 
   }
 
-  private boolean findByName() throws Exception {
+  private boolean findWriterByNo() throws Exception {
 
     for (Study chargeStudy : chargeStudyDao.findAll()) {
 
-      for (String email : chargeStudy.getMenteeEmailList()) {
-        if (email.equals(AuthLogInHandler.getLoginUser().getEmail())) {
-          return true;
-        }
+      if (chargeStudy.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+        return true;
       }
     }
     return false;

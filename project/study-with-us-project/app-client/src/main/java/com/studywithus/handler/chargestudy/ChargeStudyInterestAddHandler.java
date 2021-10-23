@@ -1,7 +1,7 @@
 package com.studywithus.handler.chargestudy;
 
-import com.studywithus.dao.ChargeStudyDao;
-import com.studywithus.domain.Study;
+import java.util.HashMap;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
@@ -9,10 +9,10 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyInterestAddHandler implements Command {
 
-  ChargeStudyDao chargeStudyDao;
+  StudyDao studyDao;
 
-  public ChargeStudyInterestAddHandler(ChargeStudyDao chargeStudyDao) {
-    this.chargeStudyDao = chargeStudyDao;
+  public ChargeStudyInterestAddHandler(StudyDao studyDao) {
+    this.studyDao = studyDao;
   }
 
   @Override
@@ -21,10 +21,8 @@ public class ChargeStudyInterestAddHandler implements Command {
 
     int no = (int) request.getAttribute("chargeNo");
 
-    Study chargeStudy = chargeStudyDao.findByNo(no);
-
-    if (chargeStudy == null) {
-      System.out.println("해당 번호의 유료 스터디 게시글이 없습니다.");
+    if (studyDao.findByNo(no) == null) {
+      System.out.println("해당 번호의 유료 스터디가 없습니다.");
       return;
     }
 
@@ -40,14 +38,11 @@ public class ChargeStudyInterestAddHandler implements Command {
         continue;
 
       } else {
-        // 유료 스터디 관심목록 리스트 (회원 관점)
-        //        List<String> likeMemberEmail = chargeStudy.getLikeMembersEmail();
-        //        likeMemberEmail.add(AuthLogInHandler.getLoginUser().getEmail());
-        //        chargeStudy.setLikeMembersEmail(likeMemberEmail);
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("memberNo", AuthLogInHandler.getLoginUser().getNo( ));
+        params.put("studyNo", no);
 
-        chargeStudy.getLikeMembersEmail().add(AuthLogInHandler.getLoginUser().getEmail());
-
-        chargeStudyDao.update(chargeStudy);
+        studyDao.insertInterest(params);
 
         System.out.println();
         System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
