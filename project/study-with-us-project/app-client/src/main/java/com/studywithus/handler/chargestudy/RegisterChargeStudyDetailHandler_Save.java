@@ -1,6 +1,5 @@
 package com.studywithus.handler.chargestudy;
 
-import java.util.HashMap;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -23,11 +22,8 @@ public class RegisterChargeStudyDetailHandler_Save implements Command {
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("writerNo", AuthLogInHandler.getLoginUser().getNo( ));
-    params.put("studyNo", no);
-
-    Study chargeStudy = chargeStudyDao.findByNoMyStudy(params, "Register");
+    Study chargeStudy = 
+        chargeStudyDao.findByNoRegisterStudy(AuthLogInHandler.getLoginUser().getNo(), no);
 
     if (chargeStudy == null) {
       System.out.println("번호에 해당하는 내가 생성한 유료 스터디가 없습니다.");

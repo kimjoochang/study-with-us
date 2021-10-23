@@ -1,6 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
-import java.util.HashMap;
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,9 +10,11 @@ import com.studywithus.util.Prompt;
 public class ChargeStudyInterestAddHandler implements Command {
 
   StudyDao studyDao;
+  SqlSession sqlSession;
 
-  public ChargeStudyInterestAddHandler(StudyDao studyDao) {
+  public ChargeStudyInterestAddHandler(StudyDao studyDao,  SqlSession sqlSession) {
     this.studyDao = studyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -38,11 +40,9 @@ public class ChargeStudyInterestAddHandler implements Command {
         continue;
 
       } else {
-        HashMap<String,Object> params = new HashMap<>();
-        params.put("memberNo", AuthLogInHandler.getLoginUser().getNo( ));
-        params.put("studyNo", no);
 
-        studyDao.insertInterest(params);
+        studyDao.insertInterest(AuthLogInHandler.getLoginUser().getNo(), no);
+        sqlSession.commit();
 
         System.out.println();
         System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
