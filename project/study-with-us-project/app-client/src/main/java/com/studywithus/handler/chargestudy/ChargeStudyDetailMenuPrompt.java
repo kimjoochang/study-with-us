@@ -1,6 +1,5 @@
 package com.studywithus.handler.chargestudy;
 
-import java.util.HashMap;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
@@ -17,13 +16,16 @@ public class ChargeStudyDetailMenuPrompt {
 
   int paymentType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
 
+  int no;
+
 
   public ChargeStudyDetailMenuPrompt(StudyDao chargeStudyDao, CommandRequest request) {
     this.request = request;
     this.chargeStudyDao = chargeStudyDao;
   }
 
-  protected void myStudySelectedMenu() throws Exception {
+  protected void myStudySelectedMenu(Study study) throws Exception {
+    chargeStudy = study;
     int input = myStudyMenu();
 
     if (input == 1) {
@@ -55,7 +57,8 @@ public class ChargeStudyDetailMenuPrompt {
     }
   }
 
-  protected void anotherStudySelectedMenu() throws Exception {
+  protected void anotherStudySelectedMenu(Study study) throws Exception {
+    chargeStudy = study;
     int input = anotherStudyMenu();
 
     // 1. 결제 or 결제 취소
@@ -109,11 +112,7 @@ public class ChargeStudyDetailMenuPrompt {
   private int anotherStudyMenu() throws Exception {
     paymentType = 0;
 
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("memberNo", AuthLogInHandler.getLoginUser().getNo( ));
-    params.put("studyNo", chargeStudy.getNo());
-
-    interest = chargeStudyDao.findByNoInterest(params);
+    interest = chargeStudyDao.findByNoInterest(AuthLogInHandler.getLoginUser().getNo( ), chargeStudy.getNo());
 
     for (Member member : chargeStudy.getMembers()) {
       if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {

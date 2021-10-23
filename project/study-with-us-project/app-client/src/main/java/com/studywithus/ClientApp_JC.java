@@ -17,8 +17,6 @@ import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.dao.impl.MariadbCommentDao;
 import com.studywithus.dao.impl.MariadbCommunityDao;
-import com.studywithus.dao.impl.MariadbMemberDaoJC;
-import com.studywithus.dao.impl.MariadbMentorApplicationDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
 import com.studywithus.handler.Command;
@@ -32,9 +30,11 @@ import com.studywithus.handler.chargestudy.ChargeStudyDetailHandler_JC;
 import com.studywithus.handler.chargestudy.ChargeStudyDetailMenuPrompt;
 import com.studywithus.handler.chargestudy.ChargeStudyInterestAddHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyInterestDetailHandler;
+import com.studywithus.handler.chargestudy.ChargeStudyInterestListHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyListHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyPaymentDetailHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyPaymentHandler;
+import com.studywithus.handler.chargestudy.ChargeStudySearchHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyUpdateHandler;
 import com.studywithus.handler.chargestudy.MentorApplicantApproveHandler;
 import com.studywithus.handler.chargestudy.MentorApplicationAddHandler;
@@ -109,12 +109,12 @@ public class ClientApp_JC {
     SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/studywithus/conf/mybatis-config.xml")).openSession();
 
-    MemberDao memberDao = new MariadbMemberDaoJC(con);
+    MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
     CommunityDao communityDao = new MariadbCommunityDao(con);
     CommentDao commentDao = new MariadbCommentDao(con);
     //StudyDao studyDao = new MybatisStudyDao(sqlSession);
     StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
-    MentorApplicationDao mentorApplicationDao = new MariadbMentorApplicationDao(con);
+    MentorApplicationDao mentorApplicationDao = sqlSession.getMapper(MentorApplicationDao.class);
 
 
     //    NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent);
@@ -168,7 +168,7 @@ public class ClientApp_JC {
     //    commandMap.put("/freeStudy/participateStudyList",
     //        new ParticipateFreeStudyListHandler(participateFreeStudyMap));
     //
-    //    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyList));
+    commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(studyDao));
     commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(studyDao));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(studyDao));
     commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler_JC(studyDao, chargeStudyDetailMenuPrompt));
@@ -181,7 +181,7 @@ public class ClientApp_JC {
     commandMap.put("/chargeStudy/paymentDetail", new ChargeStudyPaymentDetailHandler(paymentDao, studyDao));
     //    commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(paymentDao, studyDao));
     //    commandMap.put("/chargeStudy/paymentList", new ChargeStudyPaymentListHandler(paymentDao));
-    commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(studyDao));
+    commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(studyDao, sqlSession));
     //    commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(studyDao));
     commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(studyDao));
     commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler_Save(studyDao));
@@ -241,6 +241,7 @@ public class ClientApp_JC {
 
     /*[수정]*/commandMap.put("/mentorApplication/approve", new MentorApplicantApproveHandler(memberDao));                          
     /*[수정]*/commandMap.put("/chargeInterest/detail", new ChargeStudyInterestDetailHandler(studyDao, chargeStudyDetailMenuPrompt));                          
+    /*[수정]*/commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(studyDao));                          
     /*[추가]*/commandMap.put("/comment/add", new CommentAddHandler(commentDao));                          
     /*[추가]*/commandMap.put("/comment/delete", new CommentDeleteHandler(commentDao));                          
 

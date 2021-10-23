@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.domain.Member;
-import com.studywithus.domain.MentorApplicationForm;
+import com.studywithus.domain.MentorApplication;
 
 public class MybatisMentorApplicationDao implements MentorApplicationDao {
 
@@ -19,7 +19,7 @@ public class MybatisMentorApplicationDao implements MentorApplicationDao {
   }
 
   @Override
-  public void insert(MentorApplicationForm mentorApplication) throws Exception {
+  public void insert(MentorApplication mentorApplication) throws Exception {
     try(PreparedStatement stmt = con.prepareStatement(
         "insert into mentor(member_no,introduction,subject)" 
             + "values(?,?,?)", Statement.RETURN_GENERATED_KEYS)) {
@@ -34,7 +34,7 @@ public class MybatisMentorApplicationDao implements MentorApplicationDao {
   }
 
   @Override
-  public List<MentorApplicationForm> findAll() throws Exception {
+  public List<MentorApplication> findAll() throws Exception {
     try(PreparedStatement stmt = con.prepareStatement(
         "select"
             + " mt.member_no,"
@@ -52,10 +52,10 @@ public class MybatisMentorApplicationDao implements MentorApplicationDao {
             + " order by mt.member_no desc");
         ResultSet rs = stmt.executeQuery()) {
 
-      ArrayList<MentorApplicationForm> list = new ArrayList<>();
+      ArrayList<MentorApplication> list = new ArrayList<>();
 
       while(rs.next()) {
-        MentorApplicationForm mentorApplicationForm = new MentorApplicationForm();
+        MentorApplication mentorApplicationForm = new MentorApplication();
         mentorApplicationForm.setNo(rs.getInt("mt.member_no"));
         mentorApplicationForm.setSelfIntroduction(rs.getString("introduction"));
         mentorApplicationForm.setChargeStudySubject(rs.getString("subject"));
@@ -76,7 +76,7 @@ public class MybatisMentorApplicationDao implements MentorApplicationDao {
   }
 
   @Override
-  public MentorApplicationForm findByNo(int no) throws Exception {
+  public MentorApplication findByNo(int no) throws Exception {
     try(PreparedStatement stmt = con.prepareStatement(
         "select"
             + " mt.member_no,"
@@ -94,13 +94,13 @@ public class MybatisMentorApplicationDao implements MentorApplicationDao {
             + " where mt.member_no=" + no);
         ResultSet rs = stmt.executeQuery()) {
 
-      MentorApplicationForm mentorApplicationForm = null;
+      MentorApplication mentorApplicationForm = null;
 
       while(rs.next()) {
 
 
         if (mentorApplicationForm == null) {
-          mentorApplicationForm = new MentorApplicationForm();
+          mentorApplicationForm = new MentorApplication();
 
           mentorApplicationForm.setNo(rs.getInt("mt.member_no"));
           mentorApplicationForm.setSelfIntroduction(rs.getString("introduction"));
@@ -121,7 +121,7 @@ public class MybatisMentorApplicationDao implements MentorApplicationDao {
   }
   //
   @Override
-  public void update(MentorApplicationForm mentorApplication) throws Exception {
+  public void update(MentorApplication mentorApplication) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "update mentor set"
             + " introduction=?,"

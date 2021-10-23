@@ -23,7 +23,7 @@ public class ChargeStudyDeleteRequestDetailHandler implements Command {
 
     Study chargeStudy = chargeStudyDao.findByNo(no);
 
-    if ( chargeStudy.getStudyStatus() != 1) {
+    if ( chargeStudy.getDeleteStatus() != 1) {
       System.out.println();
       System.out.println("해당 번호의 삭제 요청 유료 스터디가 없습니다.\n");
       return;

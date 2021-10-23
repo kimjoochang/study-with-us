@@ -1,6 +1,5 @@
 package com.studywithus.handler.chargestudy;
 
-import java.util.HashMap;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -23,11 +22,7 @@ public class ChargeStudyInterestDetailHandler implements Command {
     System.out.println("[마이페이지 / 유료 스터디 관심목록 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("memberNo", AuthLogInHandler.getLoginUser().getNo( ));
-    params.put("studyNo", no);
-
-    Study chargeStudy = chargeStudyDao.findByNoInterest(params);
+    Study chargeStudy = chargeStudyDao.findByNoInterest(AuthLogInHandler.getLoginUser().getNo( ), no);
 
     if (chargeStudy == null) {
       System.out.println("해당 번호의 관심목록 추가된 스터디가 없습니다.\n");
@@ -60,11 +55,11 @@ public class ChargeStudyInterestDetailHandler implements Command {
     // 본인이 작성한 글 상세보기 시 경우 보이는 메뉴
     if (chargeStudy.getWriter().getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
 
-      chargeStudyDetailMenuPrompt.myStudySelectedMenu();
+      chargeStudyDetailMenuPrompt.myStudySelectedMenu(chargeStudy);
 
       // 타인이 작성한 글 상세보기 시 보이는 메뉴
     } else {
-      chargeStudyDetailMenuPrompt.anotherStudySelectedMenu();
+      chargeStudyDetailMenuPrompt.anotherStudySelectedMenu(chargeStudy);
 
     }
   }

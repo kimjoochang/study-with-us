@@ -17,8 +17,8 @@
     <result column="end_date" property="endDate"/>
     <result column="del_status" property="deleteStatus"/>
     <result column="price" property="price"/>
-    <result column="status" property="studyStatus"/>   
-<!--  
+    <result column="status" property="studyStatus"/>
+       
     <association property="writer" javaType="Member">
       <id column="writer_no" property="no"/>
       <result column="writer_name" property="name"/>
@@ -30,7 +30,6 @@
       <result column="likeMembers_name" property="name"/>
       <result column="likeMembers_email" property="email"/>
     </collection>
-    -->   
   </resultMap>
   
   <sql id="select1">
@@ -76,13 +75,13 @@
       m.member_no writer_no,
       m.name writer_name,
       m.email writer_email,
-      m2.member_no likeMembers_no,
-      m2.email likeMembers_email
+      m2.member_no member_no,
+      m2.email member_email
     from 
       study st
-    inner join interest i on st.study_no=i.study_no
+   inner join interest i on st.study_no=i.study_no
     inner join member m on st.member_no=m.member_no
-    left outer join member m2 on i.member_no=m2.member_no
+    inner join member m2 on i.member_no=m2.member_no
   </sql>
   
   <sql id="order1">
@@ -97,7 +96,7 @@
   
   <sql id="where2">
   where 
-       m.member_no=#{writerNo} AND st.study_no=#{studyNo}
+       m2.member_no=#{writerNo} AND st.study_no=#{studyNo}
   </sql>
   
   <select id="findAll" resultMap="StudyMap">
@@ -126,8 +125,9 @@
     values(#{title},#{content},#{area},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 
   </insert>
   
-  <insert id="insertInterest" parameterType="map">
-  insert into interest(member_no,study_no)
+  <insert id="insertInterest">
+  insert into 
+    interest(member_no,study_no)
     values(#{memberNo},#{studyNo})
   </insert>
 
@@ -146,39 +146,41 @@
    where study_no=#{no}  
   </update>
   
-  <select id="findAllRegisterStudy" resultMap="StudyMap" parameterType="no">
+  <select id="findAllRegisterStudy" resultMap="StudyMap" parameterType="int">
     <include refid="select1"/>
       <include refid="where1"/>
     <include refid="order1"/> 
   </select>
   
-  <select id="findAllParticipateStudy" resultMap="StudyMap" parameterType="no">
+  <select id="findAllParticipateStudy" resultMap="StudyMap" parameterType="int">
     <include refid="select1"/>
       where 
        m2.member_no=#{writerNo}
     <include refid="order1"/> 
   </select>
   
-  <select id="findByNoRegisterStudy" resultMap="StudyMap" parameterType="map">
+  <select id="findByNoRegisterStudy" resultMap="StudyMap">
     <include refid="select1"/>
-    <include refid="where2"/>
+    where 
+       m.member_no=#{writerNo} AND st.study_no=#{studyNo}
     <include refid="order1"/> 
   </select>
   
-  <select id="findByNoParticipateStudy" resultMap="StudyMap" parameterType="map">
+  <select id="findByNoParticipateStudy" resultMap="StudyMap">
     <include refid="select1"/>
       where 
        m2.member_no=#{writerNo} AND st.study_no=#{studyNo}
     <include refid="order1"/> 
   </select>
   
-  <select id="findAllInterest" resultMap="StudyMap" parameterType="no">
-    <include refid="selectInterest"/>
-    <include refid="where1"/>
+  <select id="findAllInterest" resultMap="StudyMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+       m2.member_no=#{writerNo}
   </select>
 
-  <select id="findByNoInterest" resultMap="StudyMap" parameterType="no">
-  <include refid="selectInterest"/>
+  <select id="findByNoInterest" resultMap="StudyMap">
+  <include refid="select1"/>
     <include refid="where2"/>
   </select>
 

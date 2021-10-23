@@ -2,21 +2,21 @@ package com.studywithus.domain;
 
 import java.sql.Date;
 
-public class MentorApplicationForm {
+public class MentorApplication {
   private int no;
-  private Member member;
+  private Member applicant;
   private String selfIntroduction; 
   private String chargeStudySubject; 
   private Date registeredDate; 
   private int status; // 0 = 미정, 1 = 승인, 2 = 거절
   private String remarks;
 
-  public Member getMember() {
-    return member;
+  public Member getApplicant() {
+    return applicant;
   }
 
-  public void setMember(Member member) {
-    this.member = member;
+  public void setApplicant(Member applicant) {
+    this.applicant = applicant;
   }
 
   public int getStatus() {

@@ -49,13 +49,13 @@ public class ChargeStudyDetailHandler_JC implements Command {
     request.setAttribute("chargeNo", no);
 
     // 본인이 작성한 글 상세보기 시 경우 보이는 메뉴
-    if (chargeStudy.getWriter().getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
+    if (chargeStudy.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()) {
 
-      chargeStudyDetailMenuPrompt.myStudySelectedMenu();
+      chargeStudyDetailMenuPrompt.myStudySelectedMenu(chargeStudy);
 
       // 타인이 작성한 글 상세보기 시 보이는 메뉴
     } else {
-      chargeStudyDetailMenuPrompt.anotherStudySelectedMenu();
+      chargeStudyDetailMenuPrompt.anotherStudySelectedMenu(chargeStudy);
 
     }
   }
