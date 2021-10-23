@@ -7,7 +7,7 @@
 
 <mapper namespace="MemberMapperJJ">
   
-  <resultMap type="Member" id="MemberMap">
+  <resultMap type="Member" id="MemberMapJJ">
     <id column="member_no" property="no"/> 
     <result column="name" property="name"/>
     <result column="email" property="email"/>
@@ -20,7 +20,7 @@
     
   </resultMap>
   
-  <select id="findAll" resultMap="MemberMap">
+  <select id="findAll" resultMap="MemberMapJJ">
     select 
       member_no,
       name,
@@ -36,7 +36,7 @@
       name asc
   </select>
   
-  <select id="findByNo" resultMap="MemberMap" parameterType="int">
+  <select id="findByNo" resultMap="MemberMapJJ" parameterType="int">
     select 
       member_no,
       name,
@@ -52,7 +52,7 @@
       member_no=#{no}
   </select>
   
-  <select id="findByEmail" resultMap="MemberMap" parameterType="string">
+  <select id="findByEmail" resultMap="MemberMapJJ" parameterType="string">
     select 
       ?
     from 
@@ -61,7 +61,7 @@
       email=#{email}
   </select>
 
-	<select id="findByName" resultMap="MemberMap" parameterType="map">
+	<select id="findByName" resultMap="MemberMapJJ" parameterType="map">
 	  select 
 	    member_no,
       name,
@@ -75,7 +75,7 @@
 	  where name=#{name}
 	   </select>
 	   
-	 <select id="findMemberByNamePhoneNumber" resultMap="MemberMap" parameterType="map">
+	 <select id="findMemberByNamePhoneNumber" resultMap="MemberMapJJ" parameterType="map">
 	    select 
 	      member_no,
 	      name,

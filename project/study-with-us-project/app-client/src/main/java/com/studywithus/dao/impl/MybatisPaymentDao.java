@@ -27,7 +27,7 @@ public class MybatisPaymentDao implements PaymentDao {
 
   @Override
   public Payment findByNo(int studyNo, int memberNo) throws Exception {
-    HashMap<Object,Obeject> params = new HashMap<>();
+    HashMap<Object,Object> params = new HashMap<>();
     params.put("studyNo", String.valueOf(studyNo));
     params.put("memberNo", String.valueOf(memberNo));
 

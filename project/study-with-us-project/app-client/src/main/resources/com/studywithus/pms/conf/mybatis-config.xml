@@ -7,7 +7,7 @@
   <properties resource="com/studywithus/pms/conf/jdbc.properties"></properties>
 
   <typeAliases>
-    <package name="com.studywithus.domain"/>
+    <package name="com.studywithus.pms.domain"/>
   </typeAliases>
 
   <environments default="development">

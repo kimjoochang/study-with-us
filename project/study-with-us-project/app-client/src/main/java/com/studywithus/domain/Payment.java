@@ -14,7 +14,6 @@ public class Payment {
   // 무료스터디 참여상태 (유료 - 결제완료) = 1 
   // 무료스터디 탈퇴상태 (유료 - 결제취소)= 2
   private int status; 
-  private String remarks;
 
   public int getMemberNo() {
     return memberNo;
@@ -45,12 +44,6 @@ public class Payment {
   }
   public void setStatus(int status) {
     this.status = status;
-  }
-  public String getRemarks() {
-    return remarks;
-  }
-  public void setRemarks(String remarks) {
-    this.remarks = remarks;
   }
 
 }
