@@ -17,10 +17,10 @@
 			<id column="writer_no" property="memberNo" />
 			<result column="writer_email" property="email" />
 		</association>
-
 	</resultMap>
 
-	<select id="findAllForWriter" resultMap="CommunityMap">
+	<!-- ForWriter -->
+	<select id="findAll" resultMap="CommunityMap">
 		select
 		cm.cmnt_no,
 		cm.category,
@@ -34,25 +34,73 @@
 		m.email
 		from
 		cmnt cm
-		inner join member m on
+		inner join
+		member m on
 		cm.member_no=m.member_no
 		left outer join cmnt_file cf on
 		cm.cmnt_no=cf.cmnt_no
 		order by member_no desc
 	</select>
 
-	<select id="findAllForLikes" resultMap="CommunityMap">
+	<!-- ForLikes
+	<select id="findAll" resultMap="CommunityMap">
+		select
+		count(member_no) as
+		likes
+		from
+		cmnt_like
+		where
+		cmnt_no=#{no}
+	</select>
+-->
+
+	<!-- <select id="findAll" resultMap="CommunityMap"> select c.comment_no, 
+		c.content, c.register_date, m.member_no, m.email, mf.file_no, mf.name from 
+		comment c inner join member m on c.member_no=m.member_no left outer join 
+		member_file mf on m.member_no=mf.member_no where cmnt_no=#{no} </select> 
+		ForComment -->
+
+	<select id="findByNo" resultMap="CommunityMap"
+		parameterType="int">
+
+	</select>
+
+	<select id="findByKeyword" resultMap="CommunityMap"
+		parameterType="string">
+		select
+		cm.cmnt_no,
+		cm.category,
+		cm.title,
+		cm.content,
+		cm.register_date,
+		cm.view_count,
+		cf.cmnt_file_no,
+		cf.name,
+		m.member_no,
+		m.email
+		from
+		cmnt cm
+		inner join member m on cm.member_no=m.member_no
+		left
+		outer join
+		cmnt_file cf on cm.cmnt_no=cf.cmnt_no
+		where cm.title like
+		(concat('%',?,'%'))
+		or cm.content like (concat('%',?,'%'))
+		or m.email
+		like (concat('%',?,'%'))
+		order by member_no desc
+		<!-- -->
 		select
 		count(member_no) as likes
 		from
 		cmnt_like
 		where
 		cmnt_no=#{no}
-	</select>
-
-	<select id="findAllForComment" resultMap="CommunityMap">
+		<!-- -->
 		select
 		c.comment_no,
+		c.cmnt_no,
 		c.content,
 		c.register_date,
 		m.member_no,
@@ -61,104 +109,29 @@
 		mf.name
 		from
 		comment c
-		inner join member m on c.member_no=m.member_no
-		left outer join member_file mf on m.member_no=mf.member_no
+		inner join member m on
+		c.member_no=m.member_no
+		left outer join member_file mf on
+		m.member_no=mf.member_no
 		where
 		cmnt_no=#{no}
 	</select>
-	
-<!--  -->
-
-	<select id="findByNo" resultMap="CommunityMap"
-		parameterType="int">
-		select
-		member_no,
-		name,
-		email,
-		phone_number,
-		join_date,
-		status,
-		last_date,
-		access_level
-		from
-		member
-		where
-		member_no=#{no}
-	</select>
-
-	<select id="findByEmail" resultMap="CommunityMap"
-		parameterType="string">
-		select
-		email
-		from
-		member
-		where
-		email=#{email}
-	</select>
-
-	<select id="findMemberByNamePhoneNumber"
-		resultMap="CommunityMap">
-		select
-		email
-		from member
-		where name=#{name} and
-		phone_number=#{phoneNumber}
-	</select>
-
-	<select id="findMember" resultMap="CommunityMap">
-		select
-		member_no,
-		name,
-		email,
-		phone_number,
-		join_date,
-		status,
-		last_date,
-		access_level
-		from member
-		where
-		name=#{name} and email=#{email} and phone_number=#{phoneNumber}
-	</select>
-
-	<select id="findMemberByEmailPassword" resultMap="CommunityMap">
-		select
-		member_no,
-		name,
-		email,
-		phone_number,
-		join_date,
-		status,
-		last_date,
-		access_level
-		from member
-		where email=#{email} and
-		password=password(#{password})
-	</select>
-
 
 	<insert id="insert" parameterType="community">
-		insert into
-		cmnt(category,title,content,member_no)
-		values(#{category},#{title},#{content},#{memberNo})
+		insert into cmnt(category,title,content,member_no)
+		values(#{category},#{title},#{content},#{member_no})
 	</insert>
 
 	<update id="update" parameterType="community">
-		update member set
-		name=#{name},
-		email=#{email},
-		password=password(#{password}),
-		phone_number=#{phoneNumber},
-		join_date=#{registeredDate},
-		status=#{status},
-		last_date=#{lastDate},
-		access_level=#{userAccessLevel}
-		where member_no=#{no}
+		update cmnt set
+		category=#{category},
+		title=#{title},
+		content=#{no}
+		where cmnt_no=#{no}
 	</update>
 
 	<delete id="delete" parameterType="int">
-		delete from member
-		where
-		member_no=#{no}
+		delete from cmnt where cmnt_no=#{no}
 	</delete>
 
 </mapper>

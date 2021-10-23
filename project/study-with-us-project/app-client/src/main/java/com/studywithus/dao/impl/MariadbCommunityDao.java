@@ -7,11 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.studywithus.dao.CommunityDao;
+import com.studywithus.domain.AttachmentFile;
 import com.studywithus.domain.Comment;
 import com.studywithus.domain.Community;
-import com.studywithus.domain.AttachmentFile;
 import com.studywithus.domain.Member;
-import com.studywithus.domain.MemberFile;
+//import com.studywithus.domain.MemberFile;
 
 // 역할
 // - 커뮤니티 데이터를 서버를 통해 관리한다.
@@ -131,7 +131,7 @@ public class MariadbCommunityDao implements CommunityDao {
             member.setEmail(c.getString("email"));
 
             if (c.getString("name") != null) {
-              MemberFile memberFile = new MemberFile();
+              AttachmentFile memberFile = new AttachmentFile();
               memberFile.setNo(c.getInt("file_no"));
               memberFile.setFileName(c.getString("name"));
 
