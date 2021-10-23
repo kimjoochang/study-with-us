@@ -4,7 +4,9 @@ import java.sql.Date;
 
 public class Payment {
 
+  private int payNo;
   private int memberNo;
+  private Member mentee;
   private int studyNo; // 결제한 유료 스터디 게시글 번호
   private String paymentMethod; // 결제 수단
   private Date paymentDate; // 결제일
@@ -45,5 +47,22 @@ public class Payment {
   public void setStatus(int status) {
     this.status = status;
   }
-
+  public int getPayNo() {
+    return payNo;
+  }
+  public void setPayNo(int payNo) {
+    this.payNo = payNo;
+  }
+  public Study getStudy() {
+    return study;
+  }
+  public void setStudy(Study study) {
+    this.study = study;
+  }
+  public Member getMentee() {
+    return mentee;
+  }
+  public void setMentee(Member mentee) {
+    this.mentee = mentee;
+  }
 }

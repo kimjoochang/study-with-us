@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studywithus.dao.PaymentDao">
+
+  <resultMap type="Payment" id="PaymentMap">
+    <id column="pay_no" property="payNo" />
+    <result column="pay_method" property="paymentMethod" />
+    <result column="status" property="status" />
+    <result column="register_date" property="paymentDate" />
+  </resultMap>
+  
+   <association property="mentee" javaType="Member">
+      <id column="member_no" property="memberNo" />
+      <result column="mentee_name" property="name"/>
+    </association>
+    
+    <association property="study" javaType="Study">
+    <id column="study_no" property="studyNo"/>
+    <result column="study_title" property="title"/>
+     <result column="study_price" property="price"/>
+    </association>
+
+  <select id="findAll" resultMap="PaymentMap" parameterType="int">
+    select
+    p.pay_no
+    p.member_no,
+    p.study_no,
+    p.pay_method,
+    p.status,
+    p.register_date
+    m.member_no member_no,
+    m.name mentee_name,
+    s.study_no,
+    s.study_title,
+    s.study_price
+    from
+    payment p
+    inner join member m on p.member_no=m.member_no
+    inner join study s on p.study_no=s.study_no
+    order by
+      p.pay_no asc
+  </select>
+
+  <select id="findByNo" resultMap="PaymentMap" parameterType="int">
+   select
+    p.pay_no
+    p.member_no,
+    p.study_no,
+    p.pay_method,
+    p.status,
+    p.register_date
+    m.member_no member_no,
+    m.name mentee_name,
+    s.study_no,
+    s.study_title,
+    s.study_price
+    from
+    payment p
+    inner join member m on p.member_no=m.member_no
+    inner join study s on p.study_no=s.study_no
+    where
+      p.pay_no=#{payNo}
+    order by
+      p.pay_no asc
+  </select>
+
+ <insert id="insert" parameterType="payment" 
+          useGeneratedKeys="true" keyColumn="payment_no" keyProperty="no">
+    insert into payment(study_no,member_no,pay_method,status) 
+    values(#{studyNo},#{memberNo},#{paymentMethod},#{status})
+  </insert>
+  
+  <insert id="insertStudyMember" parameterType="payment">
+    insert into
+    study_member(member_no,study_no)
+    values(#{memberNo},#{studyNo})
+  </insert>
+
+  <update id="update" parameterType="payment">
+  update payment set
+  status=#{status}
+   where payment_no=#{no}
+  </update>
+  
+  <!-- 보류 
+    <delete id="delete" parameterType="int">
+    delete from pms_board 
+    where board_no=#{no}
+  </delete>
+-->
+
+</mapper>
