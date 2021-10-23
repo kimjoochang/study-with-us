@@ -107,7 +107,7 @@ public class ClientApp_JC {
     con = DriverManager.getConnection("jdbc:mysql://localhost:3306/team3db?user=team3&password=1111");
 
     SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
-        "com/studywithus/pms/conf/mybatis-config.xml")).openSession();
+        "com/studywithus/conf/mybatis-config.xml")).openSession();
 
     MemberDao memberDao = new MariadbMemberDaoJC(con);
     CommunityDao communityDao = new MariadbCommunityDao(con);
