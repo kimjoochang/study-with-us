@@ -24,7 +24,7 @@
   </environments>
   
   <mappers>
-<!--  <package name="com.studywithus.dao"/>-->  
+    <package name="com.studywithus.dao"/>
   </mappers>
 </configuration>
 
