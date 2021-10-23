@@ -10,7 +10,6 @@
     <result column="pay_method" property="paymentMethod" />
     <result column="status" property="status" />
     <result column="register_date" property="paymentDate" />
-  </resultMap>
   
    <association property="mentee" javaType="Member">
       <id column="member_no" property="memberNo" />
@@ -22,6 +21,8 @@
     <result column="study_title" property="title"/>
      <result column="study_price" property="price"/>
     </association>
+  
+  </resultMap>
 
   <select id="findAll" resultMap="PaymentMap" parameterType="int">
     select
