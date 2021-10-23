@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ScheduleMapper">
+  
+  <resultMap type="Schedule" id="ScheduleMap">
+    <id column="calendar_no" property="no"/> 
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="start_date" property="startDate"/>
+    <result column="end_date" property="endDate"/>
+  </resultMap>
+  
+  <select id="findAll" resultMap="MemberMap">
+    select
+      calendar_no,
+      title,
+      content,
+      start_date,
+      end_date
+    from 
+      calendar
+    order by 
+      start_date asc
+  </select>
+  
+	<insert id="insert" parameterType="schedule">
+insert into schedule(title,content,start_date,end_date)	  
+values(#{title},#{content},#{startDate},#{endDate})
+	</insert>
+	
+  <select id="findByNo" resultMap="ScheduleMap" parameterType="int">
+    select 
+      calendar_no,
+      title,
+      content,
+      start_date,
+      end_date
+    from 
+      calendar 
+    where 
+      calendar_no=#{no}
+  </select>
+  
+	<update id="update" parameterType="schedule">
+	 update schedule set
+      title=#{title},
+      content=#{content},
+      start_date=#{startDate},
+      end_date=#{endDate}
+   where schedule_no=#{no}  
+  </update>
+  
+  <!-- 
+  
+  <delete id="delete" parameterType="int">
+    delete from pms_member
+    where member_no=#{value}
+  </delete>
+  
+  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
+    select 
+      member_no,
+      name,
+      email,
+      photo,
+      tel,
+      created_dt 
+    from pms_member
+    where email=#{email} and password=password(#{password})
+  </select>
+  
+   <select id="findByName" resultMap="MemberMap" parameterType="map">
+  select 
+  member_no,
+  name,
+  email,
+  photo,
+  tel,
+  created_dt
+  from pms_member
+  where name=#{member}
+   </select>
+   -->
+            
+</mapper>
+
+
+
+
+
+
+
