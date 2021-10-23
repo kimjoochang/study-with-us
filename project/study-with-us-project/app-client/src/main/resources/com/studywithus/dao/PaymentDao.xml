@@ -21,17 +21,16 @@
     <result column="study_title" property="title"/>
      <result column="study_price" property="price"/>
     </association>
-  
   </resultMap>
 
-  <select id="findAll" resultMap="PaymentMap" parameterType="int">
+<sql id="select1">
     select
-    p.pay_no
+    p.pay_no,
     p.member_no,
     p.study_no,
     p.pay_method,
     p.status,
-    p.register_date
+    p.register_date,
     m.member_no member_no,
     m.name mentee_name,
     s.study_no,
@@ -41,31 +40,18 @@
     payment p
     inner join member m on p.member_no=m.member_no
     inner join study s on p.study_no=s.study_no
+  </sql>
+  
+  <select id="findAll" resultMap="PaymentMap" parameterType="int">
+     <include refid="select1"/>
     order by
       p.pay_no asc
   </select>
 
   <select id="findByNo" resultMap="PaymentMap" parameterType="int">
-   select
-    p.pay_no
-    p.member_no,
-    p.study_no,
-    p.pay_method,
-    p.status,
-    p.register_date
-    m.member_no member_no,
-    m.name mentee_name,
-    s.study_no,
-    s.study_title,
-    s.study_price
-    from
-    payment p
-    inner join member m on p.member_no=m.member_no
-    inner join study s on p.study_no=s.study_no
+   <include refid="select1"/>
     where
       p.pay_no=#{payNo}
-    order by
-      p.pay_no asc
   </select>
 
  <insert id="insert" parameterType="payment" 
