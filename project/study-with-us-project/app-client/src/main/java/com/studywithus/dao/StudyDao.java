@@ -17,8 +17,5 @@ public interface StudyDao {
   Study findByNoParticipateStudy(Map<String,Object> params, String type) throws Exception;
   List<Study> findAllInterest(int no) throws Exception;
   Study findByNoInterest(Map<String,Object> params) throws Exception;
-
-
-
   void delete(int no) throws Exception;
 }

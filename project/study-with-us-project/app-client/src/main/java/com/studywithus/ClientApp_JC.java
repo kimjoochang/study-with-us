@@ -19,6 +19,7 @@ import com.studywithus.dao.impl.MariadbCommentDao;
 import com.studywithus.dao.impl.MariadbCommunityDao;
 import com.studywithus.dao.impl.MariadbMemberDaoJC;
 import com.studywithus.dao.impl.MariadbMentorApplicationDao;
+import com.studywithus.dao.impl.MybatisStudyDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
 import com.studywithus.handler.Command;
@@ -112,7 +113,8 @@ public class ClientApp_JC {
     MemberDao memberDao = new MariadbMemberDaoJC(con);
     CommunityDao communityDao = new MariadbCommunityDao(con);
     CommentDao commentDao = new MariadbCommentDao(con);
-    StudyDao studyDao = sqlSession.getMapper(StudyDao.class);;
+    StudyDao studyDao = new MybatisStudyDao(sqlSession);
+    //StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
     MentorApplicationDao mentorApplicationDao = new MariadbMentorApplicationDao(con);
 
 
