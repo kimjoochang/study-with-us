@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+
   <properties resource="com/studywithus/conf/jdbc.properties"></properties>
 
   <typeAliases>
@@ -23,16 +24,7 @@
   </environments>
   
   <mappers>
-  <package name="com.studywithus.dao"/>
-  <!--  
-    <mapper resource="com/studywithus/pms/mapper/StudyMapperJC.xml"/>
-    <mapper resource="com/studywithus/pms/mapper/MemberMapper.xml"/>
-    <mapper resource="com/studywithus/pms/mapper/MemberMapperJJ.xml"/>
-    <mapper resource="com/studywithus/pms/mapper/StudyMapper.xml"/>
-    <mapper resource="com/studywithus/pms/mapper/ScheduleMapper.xml"/>
-    <mapper resource="com/studywithus/pms/mapper/CommunityMapper.xml"/>
-    <mapper resource="com/studywithus/pms/mapper/CommentMapper.xml"/>
-  -->
+<!--  <package name="com.studywithus.dao"/>-->  
   </mappers>
 </configuration>
 

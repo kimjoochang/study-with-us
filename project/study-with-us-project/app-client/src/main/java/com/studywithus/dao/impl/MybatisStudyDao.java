@@ -1,6 +1,7 @@
 package com.studywithus.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
@@ -47,5 +48,47 @@ public class MybatisStudyDao implements StudyDao {
   public void delete(int no) throws Exception {
     sqlSession.delete("StudyMapper.delete", no);
     sqlSession.commit();
+  }
+
+  @Override
+  public void insertInterest(Map<String, Object> params) throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public List<Study> findAllRegisterStudy(int no) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public List<Study> findAllParticipateStudy(int no) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Study findByNoRegisterStudy(Map<String, Object> params, String type) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Study findByNoParticipateStudy(Map<String, Object> params, String type) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public List<Study> findAllInterest(int no) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Study findByNoInterest(Map<String, Object> params) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
   }
 }
