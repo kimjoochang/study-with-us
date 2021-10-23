@@ -17,8 +17,6 @@ import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.dao.impl.MariadbCommentDao;
 import com.studywithus.dao.impl.MariadbCommunityDao;
-import com.studywithus.dao.impl.MariadbMemberDaoJC;
-import com.studywithus.dao.impl.MariadbMentorApplicationDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
 import com.studywithus.handler.Command;
@@ -111,12 +109,12 @@ public class ClientApp_JC {
     SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/studywithus/conf/mybatis-config.xml")).openSession();
 
-    MemberDao memberDao = new MariadbMemberDaoJC(con);
+    MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
     CommunityDao communityDao = new MariadbCommunityDao(con);
     CommentDao commentDao = new MariadbCommentDao(con);
     //StudyDao studyDao = new MybatisStudyDao(sqlSession);
     StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
-    MentorApplicationDao mentorApplicationDao = new MariadbMentorApplicationDao(con);
+    MentorApplicationDao mentorApplicationDao = sqlSession.getMapper(MentorApplicationDao.class);
 
 
     //    NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent);

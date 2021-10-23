@@ -1,7 +1,7 @@
 package com.studywithus.handler.chargestudy;
 
 import com.studywithus.dao.MentorApplicationDao;
-import com.studywithus.domain.MentorApplicationForm;
+import com.studywithus.domain.MentorApplication;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
@@ -26,7 +26,7 @@ public class MentorApplicationAddHandler implements Command {
       return;
     }
 
-    MentorApplicationForm mentorApplicantEmail = mentorApplicationDao.findByNo(AuthLogInHandler.loginUser.getNo());
+    MentorApplication mentorApplicantEmail = mentorApplicationDao.findByNo(AuthLogInHandler.loginUser.getNo());
 
     // 신청서가 이미 있으면서 아직 승인/거절 결정이 안났다면 (visible이 true라면)
     if (mentorApplicantEmail != null && mentorApplicantEmail.getStatus() == 0) {
@@ -44,7 +44,7 @@ public class MentorApplicationAddHandler implements Command {
         continue;
 
       } else {
-        MentorApplicationForm mentorApplication = new MentorApplicationForm();
+        MentorApplication mentorApplication = new MentorApplication();
 
         mentorApplication.setNo(AuthLogInHandler.getLoginUser().getNo());
         mentorApplication.setSelfIntroduction(selfIntro);

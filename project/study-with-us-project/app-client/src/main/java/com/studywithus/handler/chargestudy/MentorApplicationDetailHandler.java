@@ -2,7 +2,7 @@ package com.studywithus.handler.chargestudy;
 
 import java.util.Collection;
 import com.studywithus.dao.MentorApplicationDao;
-import com.studywithus.domain.MentorApplicationForm;
+import com.studywithus.domain.MentorApplication;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.util.Prompt;
@@ -19,7 +19,7 @@ public class MentorApplicationDetailHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[멘토 승인 내역 / 상세보기]\n");
 
-    Collection<MentorApplicationForm> mentorApplicationList = mentorApplicationDao.findAll();
+    Collection<MentorApplication> mentorApplicationList = mentorApplicationDao.findAll();
 
     if (mentorApplicationList.isEmpty()) {
       System.out.println("신청한 멘토가 존재하지 않습니다.");
@@ -28,12 +28,12 @@ public class MentorApplicationDetailHandler implements Command {
 
     int type = 0;
     // 멘토 신청자 조회
-    for (MentorApplicationForm mentorApplication : mentorApplicationList) {
+    for (MentorApplication mentorApplication : mentorApplicationList) {
       if (mentorApplication.getStatus() == 0) {
         type = 1;
         System.out.printf("[멘토 신청자 번호 = %d, 멘토 신청자 이메일 = %s, 유료 스터디 주제 = %s, 등록일 = %s]\n",
-            mentorApplication.getMember().getNo(),
-            mentorApplication.getMember().getEmail(),
+            mentorApplication.getApplicant().getNo(),
+            mentorApplication.getApplicant().getEmail(),
             mentorApplication.getChargeStudySubject(),
             mentorApplication.getRegisteredDate());
       }
@@ -49,15 +49,15 @@ public class MentorApplicationDetailHandler implements Command {
 
     System.out.println();
 
-    MentorApplicationForm mentorApplication = mentorApplicationDao.findByNo(no);
+    MentorApplication mentorApplication = mentorApplicationDao.findByNo(no);
 
     if (mentorApplication == null || mentorApplication.getStatus() != 0) {
       System.out.println("입력하신 이메일과 일치하는 신청 내역이 없습니다.");
       return;
     }
 
-    System.out.printf("신청자 이름: %s\n", mentorApplication.getMember().getName());
-    System.out.printf("신청자 아이디: %s\n", mentorApplication.getMember().getEmail());
+    System.out.printf("신청자 이름: %s\n", mentorApplication.getApplicant().getName());
+    System.out.printf("신청자 아이디: %s\n", mentorApplication.getApplicant().getEmail());
     System.out.printf("자기소개: %s\n", mentorApplication.getSelfIntroduction());
     System.out.printf("스터디 주제: %s\n", mentorApplication.getChargeStudySubject());
     System.out.printf("등록일: %s\n", mentorApplication.getRegisteredDate());

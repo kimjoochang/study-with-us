@@ -17,7 +17,8 @@
     <result column="end_date" property="endDate"/>
     <result column="del_status" property="deleteStatus"/>
     <result column="price" property="price"/>
-    <result column="status" property="studyStatus"/>   
+    <result column="status" property="studyStatus"/>
+       
     <association property="writer" javaType="Member">
       <id column="writer_no" property="no"/>
       <result column="writer_name" property="name"/>

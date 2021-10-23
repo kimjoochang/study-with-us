@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  select할 컬럼 정리하기 -->
+
+<mapper namespace="com.studywithus.dao.MemberDao">
+  
+  <resultMap type="Member" id="MemberMap">
+    <id column="member_no" property="no"/> 
+    <result column="name" property="name"/>
+    <result column="email" property="email"/>
+    <result column="password" property="password"/>
+    <result column="phone_number" property="phoneNumber"/>
+    <result column="join_date" property="registeredDate"/>
+    <result column="status" property="status"/>
+    <result column="last_date" property="lastDate"/>
+    <result column="access_level" property="userAccessLevel"/>
+  </resultMap>
+  
+  <select id="findAll" resultMap="MemberMap">
+    select 
+      member_no,
+      name,
+      email,
+      phone_number,
+      join_date,
+      status,
+      last_date,
+      access_level
+    from 
+      member 
+    order by 
+      name asc
+  </select>
+  
+  <select id="findByNo" resultMap="MemberMap" parameterType="int">
+    select 
+      member_no,
+      name,
+      email,
+      phone_number,
+      join_date,
+      status,
+      last_date,
+      access_level
+    from 
+      member 
+    where 
+      member_no=#{no}
+  </select>
+  
+  <select id="findByEmail" resultMap="MemberMap" parameterType="string">
+    select 
+      email
+    from 
+      member 
+    where 
+      email=#{email}
+  </select>
+	   
+	 <select id="findMemberByNamePhoneNumber" resultMap="MemberMap">
+	    select 
+	      email
+	    from member
+	    where name=#{name} and phone_number=#{phoneNumber}
+	  </select>
+	  
+	   <select id="findMember" resultMap="MemberMap">
+      select 
+        member_no,
+        name,
+        email,
+        phone_number,
+        join_date,
+        status,
+        last_date,
+        access_level
+      from member
+      where name=#{name} and email=#{email} and phone_number=#{phoneNumber}
+    </select>
+    
+     <select id="findMemberByEmailPassword" resultMap="MemberMap">
+      select 
+        member_no,
+        name,
+        email,
+        phone_number,
+        join_date,
+        status,
+        last_date,
+        access_level
+      from member
+      where email=#{email} and password=password(#{password})
+    </select>
+    
+  
+		<insert id="insert" parameterType="member">
+		 insert into member(
+	      name,
+	      email,
+	      password,
+	      phone_number,
+	      status,
+	      access_level)
+		  values(#{name},#{email},password(#{password}),#{phoneNumber},#{status},#{userAccessLevel})
+		</insert>
+		  
+		<update id="update" parameterType="member">
+		 update member set
+	      name=#{name},
+	      email=#{email},
+	      password=password(#{password}),
+	      phone_number=#{phoneNumber},
+	      join_date=#{registeredDate},
+	      status=#{status},
+	      last_date=#{lastDate},
+	      access_level=#{userAccessLevel}
+	   where member_no=#{no}  
+	  </update>
+	  
+	  <delete id="delete" parameterType="int">
+	    delete from member
+	    where member_no=#{no}
+	  </delete>
+	  
+	  <!-- 
+	  <select id="findByName" resultMap="MemberMapJJ" parameterType="map">
+    select 
+      member_no,
+      name,
+      email,
+      phone_number,
+      join_date,
+      status,
+      last_date,
+      access_level
+    from member
+    where name=#{name}
+     </select>
+	   -->
+            
+</mapper>
+
+
+
+
+
+
+

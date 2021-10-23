@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.studywithus.dao.MentorApplicationDao;
-import com.studywithus.domain.MentorApplicationForm;
+import com.studywithus.domain.MentorApplication;
 import com.studywithus.request.RequestAgent;
 
 public class NetMentorApplicationDao implements MentorApplicationDao {
@@ -16,7 +16,7 @@ public class NetMentorApplicationDao implements MentorApplicationDao {
   }
 
   @Override
-  public void insert(MentorApplicationForm mentorApplication) throws Exception {
+  public void insert(MentorApplication mentorApplication) throws Exception {
     requestAgent.request("mentorApplication.insert", mentorApplication);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("멘토 신청 데이터 저장을 실패하였습니다.");
@@ -24,13 +24,13 @@ public class NetMentorApplicationDao implements MentorApplicationDao {
   }
 
   @Override
-  public List<MentorApplicationForm> findAll() throws Exception {
+  public List<MentorApplication> findAll() throws Exception {
     requestAgent.request("mentorApplication.selectList", null);
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       throw new Exception("멘토 신청 목록 조회를 실패하였습니다.");
     }
 
-    return new ArrayList<>(requestAgent.getObjects(MentorApplicationForm.class));
+    return new ArrayList<>(requestAgent.getObjects(MentorApplication.class));
   }
   //
   //  @Override
@@ -47,7 +47,7 @@ public class NetMentorApplicationDao implements MentorApplicationDao {
   //  }
 
   @Override
-  public MentorApplicationForm findByEmail(String email) throws Exception {
+  public MentorApplication findByEmail(String email) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("email", email);
 
@@ -57,11 +57,11 @@ public class NetMentorApplicationDao implements MentorApplicationDao {
       return null;
     }
 
-    return requestAgent.getObject(MentorApplicationForm.class);
+    return requestAgent.getObject(MentorApplication.class);
   }
   //
   @Override
-  public void update(MentorApplicationForm mentorApplication) throws Exception {
+  public void update(MentorApplication mentorApplication) throws Exception {
     requestAgent.request("mentorApplication.update", mentorApplication);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
