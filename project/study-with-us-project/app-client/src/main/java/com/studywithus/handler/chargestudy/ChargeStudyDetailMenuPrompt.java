@@ -1,6 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
-import java.sql.Date;
+import java.util.HashMap;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
@@ -13,30 +13,14 @@ public class ChargeStudyDetailMenuPrompt {
   CommandRequest request;
   StudyDao chargeStudyDao;
   Study chargeStudy;
+  Study interest;
 
-  int interestType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
   int paymentType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
 
 
   public ChargeStudyDetailMenuPrompt(StudyDao chargeStudyDao, CommandRequest request) {
     this.request = request;
     this.chargeStudyDao = chargeStudyDao;
-  }
-
-  protected int studyStatus(Study chargeStudy) {
-    this.chargeStudy = chargeStudy;
-    // 현재 날짜 < 시작일인 경우
-    if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == -1) {
-      chargeStudy.setStudyStatus(0); // 모집중
-
-      // 현재 날짜 < 종료일
-    } else if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getEndDate()) == -1) {
-      chargeStudy.setStudyStatus(1); // 진행중
-
-    } else {
-      chargeStudy.setStudyStatus(2); // 진행완료
-    }
-    return chargeStudy.getStudyStatus();
   }
 
   protected void myStudySelectedMenu() throws Exception {
@@ -89,7 +73,7 @@ public class ChargeStudyDetailMenuPrompt {
     } else if (input == 2) {
 
       // 관심목록 추가 (관심 목록에 추가하지 않은 경우에 보이는 2번 메뉴)
-      if (interestType == 0) {
+      if (interest == null) {
         request.getRequestDispatcher("/chargeStudy/interestAdd").forward(request);
 
         // 관심목록 삭제 (관심 목록에 추가하지 않은 경우에 보이는 2번 메뉴)
@@ -124,18 +108,16 @@ public class ChargeStudyDetailMenuPrompt {
 
   private int anotherStudyMenu() throws Exception {
     paymentType = 0;
-    interestType= 0;
+
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("memberNo", AuthLogInHandler.getLoginUser().getNo( ));
+    params.put("studyNo", chargeStudy.getNo());
+
+    interest = chargeStudyDao.findByNoInterest(params);
 
     for (Member member : chargeStudy.getMembers()) {
       if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
         paymentType = 1;
-        break;
-      }
-    }
-
-    for (Member member : chargeStudy.getLikeMembers()) {
-      if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-        interestType = 1;
         break;
       }
     }
@@ -147,7 +129,7 @@ public class ChargeStudyDetailMenuPrompt {
     }
 
     // 관심 목록이 없는 경우
-    if (interestType == 0) {
+    if (interest == null) {
       System.out.println("2. 관심목록 추가");
 
       // 관심 목록이 있는 경우

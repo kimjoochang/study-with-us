@@ -5,6 +5,7 @@ import com.studywithus.domain.MentorApplicationForm;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class MentorApplicationAddHandler implements Command {
@@ -20,7 +21,7 @@ public class MentorApplicationAddHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[유료 스터디 / 멘토 신청]\n");
 
-    if (AuthLogInHandler.loginUser.isMentor()) {
+    if ((AuthLogInHandler.getLoginUser().getUserAccessLevel() & Menu.ACCESS_MENTOR) == 1) {
       System.out.println("이미 멘토입니다.");
       return;
     }

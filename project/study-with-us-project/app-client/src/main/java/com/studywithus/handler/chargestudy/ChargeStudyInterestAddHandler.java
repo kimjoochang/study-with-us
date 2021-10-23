@@ -1,15 +1,18 @@
 package com.studywithus.handler.chargestudy;
 
+import java.util.HashMap;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
+import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
 public class ChargeStudyInterestAddHandler implements Command {
 
-  InterestDao interestDao;
+  StudyDao studyDao;
 
-  public ChargeStudyInterestAddHandler(InterestDao interestDao) {
-    this.interestDao = interestDao;
+  public ChargeStudyInterestAddHandler(StudyDao studyDao) {
+    this.studyDao = studyDao;
   }
 
   @Override
@@ -17,6 +20,11 @@ public class ChargeStudyInterestAddHandler implements Command {
     System.out.println("[유료 스터디 / 상세보기 / 관심 목록 추가]\n");
 
     int no = (int) request.getAttribute("chargeNo");
+
+    if (studyDao.findByNo(no) == null) {
+      System.out.println("해당 번호의 유료 스터디가 없습니다.");
+      return;
+    }
 
     while(true) {
       String input = Prompt.inputString("유료 스터디 관심 목록에 추가하시겠습니까? (y/N) ");
@@ -30,8 +38,11 @@ public class ChargeStudyInterestAddHandler implements Command {
         continue;
 
       } else {
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("memberNo", AuthLogInHandler.getLoginUser().getNo( ));
+        params.put("studyNo", no);
 
-        interestDao.update(chargeStudy);
+        studyDao.insertInterest(params);
 
         System.out.println();
         System.out.println("유료 스터디 관심 목록에 추가되었습니다.\n");
