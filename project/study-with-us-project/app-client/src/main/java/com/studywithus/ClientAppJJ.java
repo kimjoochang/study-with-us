@@ -22,7 +22,6 @@ import com.studywithus.dao.impl.MariadbCommentDao;
 import com.studywithus.dao.impl.MariadbCommunityDao;
 import com.studywithus.dao.impl.MariadbMentorApplicationDao;
 import com.studywithus.dao.impl.MybatisMemberDaoJJ;
-import com.studywithus.dao.impl.MybatisStudyDao;
 import com.studywithus.dao.impl.NetChargeStudyDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
@@ -111,17 +110,19 @@ public class ClientAppJJ {
 
   public ClientAppJJ() throws Exception {
 
+    requestAgent = null;
+
     con =
         DriverManager.getConnection("jdbc:mysql://localhost:3306/team3db?user=team3&password=1111");
 
     // Mybatis의 SqlSession 객체 준비
     SqlSession sqlSession = new SqlSessionFactoryBuilder()
-        .build(Resources.getResourceAsStream("com/studywithus/pms/conf/mybatis-config.xml"))
+        .build(Resources.getResourceAsStream("com/studywithus/conf/mybatis-config.xml"))
         .openSession();
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
     MemberDao memberDao = new MybatisMemberDaoJJ(sqlSession);
-    StudyDao studyDao = new MybatisStudyDao(sqlSession);
+    StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
     CommunityDao communityDao = new MariadbCommunityDao(con);
     CommentDao commentDao = new MariadbCommentDao(con);
     MentorApplicationDao mentorApplicationDao = new MariadbMentorApplicationDao(con);

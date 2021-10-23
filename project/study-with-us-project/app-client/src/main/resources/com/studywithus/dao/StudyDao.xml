@@ -24,7 +24,7 @@
       <result column="writer_name" property="name"/>
       <result column="writer_email" property="email"/>
     </association>
-
+    
     <collection property="likeMembers" ofType="Member">
       <id column="likeMembers_no" property="no"/>
       <result column="likeMembers_name" property="name"/>
