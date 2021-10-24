@@ -1,17 +1,18 @@
 package com.studywithus.handler.freestudy;
 
-import com.studywithus.dao.FreeStudyDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
+import com.studywithus.util.StudyStatusHelper;
 
 public class ParticipateFreeStudyDetailHandler implements Command {
 
-  FreeStudyDao freeStudyDao;
+  StudyDao freeStudyDao;
 
-  public ParticipateFreeStudyDetailHandler(FreeStudyDao freeStudyDao) {
+  public ParticipateFreeStudyDetailHandler(StudyDao freeStudyDao) {
     this.freeStudyDao = freeStudyDao;
   }
 
@@ -20,66 +21,43 @@ public class ParticipateFreeStudyDetailHandler implements Command {
     System.out.println("[마이 페이지 / 내가 참여한 무료 스터디 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    Study freeStudy = freeStudyDao.findByNo(no);
+    Study freeStudy = freeStudyDao.
+        findByNoParticipateStudy( AuthLogInHandler.getLoginUser().getNo( ), no);
 
-    if (freeStudy == null) {
-      System.out.println("해당 번호의 무료 스터디가 없습니다.");
+    if (freeStudy == null || freeStudy.getPrice() > 0) {
+      System.out.println();
+      System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
       return;
     }
 
-    // int count = 0;
+    String status = StudyStatusHelper.studyStatus(freeStudy);
 
-    // 무료 스터디 작성자 == 로그인 회원
-    // if (freeStudy.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()
-    // && no == freeStudy.getNo()) {
-    // count++;
-
-    // for (Member participant : freeStudy.getParticipants()) {
-    // if (participant.getNo() != AuthLogInHandler.getLoginUser().getNo()) {
-    // System.out.println("참여한 무료 스터디가 존재하지 않습니다.");
-    // return;
-    // }
-    // }
-
-    Boolean myPartStudy = false;
-    for (int i = 0; i < freeStudy.getParticipants().size(); i++) {
-      if (freeStudy.getParticipants().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-        myPartStudy = true;
-        break;
-      }
-    }
-
-    if (!myPartStudy) {
-      System.out.println("참여하신 무료 스터디가 아닙니다.");
-      return;
-    }
-
-    System.out.println();
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
-    System.out.printf("번호: %d\n", freeStudy.getNo());
+    System.out.printf("번호: %d\n",freeStudy.getNo());
     System.out.printf("제목: %s\n", freeStudy.getTitle());
-    System.out.printf("내용: %s\n", freeStudy.getContent());
-    System.out.printf("작성자: %s\n", freeStudy.getWriter().getName());
+    System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
+    System.out.printf("스터디 진행상태 = %s\n", status);
+
+    if (freeStudy.getOnOffLine() == 1) {
+      System.out.printf("온/오프라인: 오프라인");
+      System.out.printf("지역: %s\n", freeStudy.getArea());
+
+    } else {
+      System.out.printf("온/오프라인: 온라인");
+    }
+    System.out.printf("시작일: %s\n", freeStudy.getStartDate());
+    System.out.printf("종료일: %s\n", freeStudy.getEndDate());
+    System.out.printf("모집인원: %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
+    System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
+
+    freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
+    System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
     System.out.println();
-    // }
-
-    // if (count == 0) {
-    // System.out.println("내가 작성한 게시글이 존재하지 않습니다.");
-    // return;
-    // }
-
-    // Member loginUser = AuthLogInHandler.getLoginUser();
-    // if (loginUser == null || (freeStudy.getWriter().getNo() != loginUser.getNo()
-    // && !loginUser.getEmail().equals("root@test.com"))) {
-    // return;
-    // }
 
     request.setAttribute("freeNo", no);
 
-    // 내가 쓴 글인 경우
-    // if (freeStudy.getWriter().getNo()==AuthLogInHandler.getLoginUser().getNo()) {
     while (true) {
       System.out.println("1. 참여 취소");
       System.out.println("0. 이전");

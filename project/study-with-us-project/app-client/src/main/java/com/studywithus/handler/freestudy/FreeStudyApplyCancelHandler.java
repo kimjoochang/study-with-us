@@ -1,6 +1,6 @@
 package com.studywithus.handler.freestudy;
 
-import com.studywithus.dao.FreeStudyDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -9,121 +9,44 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyApplyCancelHandler implements Command {
 
-	FreeStudyDao freeStudyDao;
-	// List<Member> freeApplicantList;
-	// HashMap<String, List<Study>> applyFreeStudyMap;
+  StudyDao freeStudyDao;
 
-	public FreeStudyApplyCancelHandler(FreeStudyDao freeStudyDao) {
-		this.freeStudyDao = freeStudyDao;
-		// super(freeStudyList);
-		// this.applyFreeStudyMap = applyFreeStudyMap;
-	}
+  public FreeStudyApplyCancelHandler(StudyDao freeStudyDao) {
+    this.freeStudyDao = freeStudyDao;
+  }
 
-	@Override
-	public void execute(CommandRequest request) throws Exception {
-		System.out.println("[무료 스터디 / 상세보기 / 신청 취소]\n");
-		int no = (int) request.getAttribute("freeNo"); // 에러
+  @Override
+  public void execute(CommandRequest request) throws Exception {
+    System.out.println("[무료 스터디 / 상세보기 / 신청 취소]\n");
+    int no = (int) request.getAttribute("freeNo");
 
-		// Study freeStudy = findByNo(no);
+    Study freeStudy = freeStudyDao.findByNoApplyStudy(AuthLogInHandler.getLoginUser().getNo(), no);
 
-		//      HashMap<String, String> params = new HashMap<>();
-		//      params.put("no", String.valueOf(no));
+    if (freeStudy == null) {
+      System.out.println("해당 번호의 게시글이 없습니다.");
+      return;
+    }
 
-		Study freeStudy = freeStudyDao.findByNo(no);
+    while (true) {
+      String input = Prompt.inputString("무료 스터디를 신청을 취소하시겠습니까? (y/N) ");
 
-		if (freeStudy == null) {
-			System.out.println("해당 번호의 게시글이 없습니다.");
-			return;
-		}
+      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+        System.out.println();
+        System.out.println("무료 스터디 신청 취소가 취소되었습니다.");
+        return;
 
-		//      if (freeStudyDao.getStatus().equals(RequestAgent.FAIL)) {
-		//          System.out.println("무료 스터디 상세보기 실패!");
-		//          System.out.println(freeStudyDao.getObject(Study.class));
-		//          return;
-		//      }
+      } else if (input.equalsIgnoreCase("y")) {
 
-		while (true) {
-			String input = Prompt.inputString("무료 스터디를 신청을 취소하시겠습니까? (y/N) ");
+        freeStudyDao.deleteStudyMember(AuthLogInHandler.getLoginUser().getNo(), no);
+        System.out.println();
+        System.out.println("무료 스터디 신청을 취소하였습니다.");
+        return;
 
-			if (input.equalsIgnoreCase("n") || input.length() == 0) {
-				System.out.println();
-				System.out.println("무료 스터디 신청 취소가 취소되었습니다.");
-				return;
-
-			} else if (input.equalsIgnoreCase("y")) {
-				for (int i = 0; i < freeStudy.getApplicants().size(); i++) {
-					if (freeStudy.getApplicants().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-						freeStudy.getApplicants().remove(i);
-						// [테스트]
-						// System.out.println("-----테스트-----");
-						break;
-					}
-				}
-
-				freeStudyDao.update(freeStudy);
-				System.out.println();
-				System.out.println("무료 스터디 신청을 취소하였습니다.");
-				return;
-
-				// [테스트]
-				// if (freeStudy.getApplicants().contains(AuthLogInHandler.getLoginUser())) {
-				// System.out.println("테스트 성공");
-				// }
-
-				//  //right ?
-				//              if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-				//                  System.out.println("무료 스터디 신청 취소 성공!");
-				//                  return;
-				//
-				//              } else {
-				//                  System.out.println("무료 스터디 신청 취소 실패!");
-				//                  return;
-				//              }
-
-			} else {
-				System.out.println();
-				System.out.println("다시 입력하세요.\n");
-				continue;
-			}
-		}
-
-		// 회원 개개인의 신청한 스터디
-		// List<Member> freeApplicantList;
-		// List<Study> freeApplicationList;
-
-		// 무료 스터디 신청자 리스트에 회원 정보 추가 (멘토 관점)
-		// freeApplicantList = freeStudy.getApplicants();
-		// freeApplicantList.remove(AuthLogInHandler.getLoginUser());
-		// freeStudy.setApplicants(freeApplicantList);
-
-		// if (applyFreeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getEmail())) {
-		// freeApplicationList = applyFreeStudyMap.get(AuthLogInHandler.getLoginUser().getEmail());
-		//
-		// freeApplicationList.remove(freeStudy);
-		// applyFreeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), freeApplicationList);
-		//
-		// 생성 리스트가 없는 회원이라면 새로운 생성 리스트에 스터디 추가
-		// } else {
-		// freeApplicationList = new ArrayList<>();
-		//
-		// freeApplicationList.remove(freeStudy);
-		// applyFreeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), freeApplicationList);
-		// }
-
-		// [질문]
-		// requestAgent.request("freeStudy.apply.delete", freeStudy);
-		// requestAgent.request("freeStudy.delete", freeStudy);
-
-		// if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-		// System.out.println("해당 번호의 게시글이 없습니다.");
-		// return;
-		//
-		// } else if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-		// System.out.println("무료 스터디 신청 취소가 완료되었습니다.");
-		// return;
-		// }
-
-		// System.out.println();
-		// System.out.println("무료 스터디 신청 취소가 완료되었습니다.");
-	}
+      } else {
+        System.out.println();
+        System.out.println("다시 입력하세요.\n");
+        continue;
+      }
+    }
+  }
 }

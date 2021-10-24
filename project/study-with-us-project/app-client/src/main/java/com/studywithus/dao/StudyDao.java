@@ -11,13 +11,22 @@ public interface StudyDao {
   Study findByNo(int no) throws Exception;
   void insert(Study study) throws Exception;
   void update(Study chargeStudy) throws Exception;
+
   List<Study> findAllRegisterStudy(int no) throws Exception;
+  Study findByNoRegisterStudy(@Param("writerNo") int writerNo, @Param("studyNo") int studyNo) throws Exception;
+
   List<Study> findAllParticipateStudy(int no) throws Exception;
-  List<Study> findAllInterest(int no) throws Exception;
-  void delete(int no) throws Exception;
+  Study findByNoParticipateStudy(@Param("memberNo") int writerNo, @Param("studyNo") int studyNo) throws Exception;
 
   void insertInterest(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
-  Study findByNoInterest(@Param("writerNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
-  Study findByNoRegisterStudy(@Param("writerNo") int writerNo, @Param("studyNo") int studyNo) throws Exception;
-  Study findByNoParticipateStudy(@Param("writerNo") int writerNo, @Param("studyNo") int studyNo) throws Exception;
+  List<Study> findAllInterest(int no) throws Exception;
+  Study findByNoInterest(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
+
+  // 0 = 무료 신청, 1 = 무료 참여자, 2 = 유료 참여자(결제한 사람)
+  void insertStudyMember(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo, @Param("status") int status) throws Exception;
+  List<Study> findAllApplyStudy(int no) throws Exception;
+  Study findByNoApplyStudy(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
+
+  void delete(int no) throws Exception;
+  void deleteStudyMember(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
 }

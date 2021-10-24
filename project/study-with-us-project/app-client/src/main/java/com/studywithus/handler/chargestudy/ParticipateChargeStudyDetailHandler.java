@@ -6,6 +6,7 @@ import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
+import com.studywithus.util.StudyStatusHelper;
 
 public class ParticipateChargeStudyDetailHandler implements Command {
 
@@ -25,7 +26,7 @@ public class ParticipateChargeStudyDetailHandler implements Command {
     Study chargeStudy = chargeStudyDao.
         findByNoParticipateStudy( AuthLogInHandler.getLoginUser().getNo( ), no);
 
-    if (chargeStudy == null) {
+    if (chargeStudy == null || chargeStudy.getPrice() == 0) {
       System.out.println("해당 번호의 내가 참여한 유료 스터디가 없습니다.");
       return;
     }

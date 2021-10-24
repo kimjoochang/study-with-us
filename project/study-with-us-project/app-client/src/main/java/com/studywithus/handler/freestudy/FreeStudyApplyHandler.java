@@ -1,7 +1,6 @@
 package com.studywithus.handler.freestudy;
 
-import com.studywithus.dao.FreeStudyDao;
-import com.studywithus.domain.Member;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,14 +9,10 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyApplyHandler implements Command {
 
-  FreeStudyDao freeStudyDao;
-  // List<Member> freeApplicantList;
-  // HashMap<String, List<Study>> applyFreeStudyMap;
+  StudyDao freeStudyDao;
 
-  public FreeStudyApplyHandler(FreeStudyDao freeStudyDao) {
+  public FreeStudyApplyHandler(StudyDao freeStudyDao) {
     this.freeStudyDao = freeStudyDao;
-    // super(freeStudyList);
-    // this.applyFreeStudyMap = applyFreeStudyMap;
   }
 
   @Override
@@ -25,31 +20,17 @@ public class FreeStudyApplyHandler implements Command {
     System.out.println("[무료 스터디 / 상세보기 / 신청]\n");
     int no = (int) request.getAttribute("freeNo");
 
-    // Study freeStudy = findByNo(no);
-
-    //      HashMap<String, String> params = new HashMap<>();
-    //      params.put("no", String.valueOf(no));
-
     Study freeStudy = freeStudyDao.findByNo(no);
 
+    // 중복신청 확인
     if (freeStudy == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
-    //      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //          System.out.println("무료 스터디 상세보기 실패!");
-    //          System.out.println(requestAgent.getObject(Study.class));
-    //          return;
-    //      }
-
-
-    // 중복신청 확인
-    for (Member member : freeStudy.getApplicants()) {
-      if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-        System.out.println("이미 신청하신 스터디입니다.");
-        return;
-      }
+    if (freeStudyDao.findByNoParticipateStudy(AuthLogInHandler.getLoginUser().getNo(), no) != null) {
+      System.out.println("이미 신청하신 스터디입니다.");
+      return;
     }
 
     // 모집인원 다 찼을 경우
@@ -67,23 +48,13 @@ public class FreeStudyApplyHandler implements Command {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        freeStudy.getApplicants().add(AuthLogInHandler.getLoginUser());
-        freeStudyDao.update(freeStudy);
+
+        // 세번째 파라미터 -> 0 = 무료스터디 신청자
+        freeStudyDao.insertStudyMember(AuthLogInHandler.getLoginUser().getNo(), no, 0);
+
         System.out.println();
         System.out.println("무료 스터디 신청이 완료되었습니다.");
         return;
-
-        // [테스트]
-        // System.out.println("테스트: " + freeStudy.getApplicants().isEmpty());
-
-        //              if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        //                  System.out.println("무료 스터디 신청 실패!");
-        //                  return;
-        //
-        //              } else if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-        //                  System.out.println("무료 스터디 신청이 완료되었습니다.");
-        //                  return;
-        //              }
 
       } else {
         System.out.println();
@@ -91,35 +62,5 @@ public class FreeStudyApplyHandler implements Command {
         continue;
       }
     }
-
-    // 회원 개개인의 신청한 스터디
-    // List<Member> freeApplicantList;
-    // List<Study> freeApplicationList;
-
-    // 무료 스터디 신청자 리스트에 회원 정보 추가 (멘토 관점)
-    // freeApplicantList = freeStudy.getApplicants();
-    // freeApplicantList.add(AuthLogInHandler.getLoginUser());
-    // freeStudy.setApplicants(freeApplicantList);
-
-    // if (applyFreeStudyMap.containsKey(AuthLogInHandler.getLoginUser().getEmail())) {
-    // freeApplicationList = applyFreeStudyMap.get(AuthLogInHandler.getLoginUser().getEmail());
-    //
-    // freeApplicationList.add(freeStudy);
-    // applyFreeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), freeApplicationList);
-    //
-    // 생성 리스트가 없는 회원이라면 새로운 생성 리스트에 스터디 추가
-    // } else {
-    // freeApplicationList = new ArrayList<>();
-    //
-    // freeApplicationList.add(freeStudy);
-    // applyFreeStudyMap.put(AuthLogInHandler.getLoginUser().getEmail(), freeApplicationList);
-    // }
-
-    // [질문]
-    // requestAgent.request("freeStudy.apply.insert", freeStudy);
-    // requestAgent.request("freeStudy.insert", freeStudy);
-
-    // System.out.println();
-    // System.out.println("무료 스터디 신청이 완료되었습니다.");
   }
 }

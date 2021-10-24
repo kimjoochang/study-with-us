@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommunityMapper">
+  
+  <resultMap type="Community" id="CommunityMap">
+    <id column="cmnt_no" property="no"/> 
+    <result column="category" property="category"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="register_date" property="registeredDate"/>
+    <result column="view_count" property="viewCount"/>
+  
+  <association property="writer" javaType="Member">
+  <id column="writer_no" property="no"/>
+      <result column="writer_name" property="name"/>
+      <result column="writer_email" property="email"/>
+      
+      <association property="MemberFile" javaType="AttachmentFile">
+      <id column="memberFile_no" property="no"/>
+    <result column="name" property="fileName"/>
+      </association>
+  </association>
+  
+  <association property="communityFile" javaType="AttachmentFile">
+  <id column="communityFile_no" property="no"/>
+    <result column="communityFileName" property="fileName"/>
+  </association>
+  </resultMap>
+  
+  <resultMap type="AttachmentFile" id="CommuniryFileMap">
+  <id column="cmnt_file_no" property="no"/>
+  <id column="name" property="no"/>
+    <result column="communityFileName" property="fileName"/>
+  </resultMap>
+
+  <!--  
+  <resultMap type="Comment" id="CommentMap">
+    <id column="comment_no" property="no"/>
+    <result column="content" property="content"/>
+    <result column="register_date" property="registeredDate"/>
+  </resultMap>
+-->
+  <sql id="select1">
+  select
+        cm.cmnt_no,
+        cm.category,
+        cm.title,
+        cm.content,
+        cm.register_date,
+        cm.view_count,
+        cf.cmnt_file_no communityFile_no,
+        cf.name communityFileName,
+        m.member_no,
+        m.email,
+        mf.file_no memberFile_no,
+        mf.name memberFileName
+     from
+        cmnt cm
+        inner join member m on cm.member_no=m.member_no
+        left outer join cmnt_file cf on cm.cmnt_no=cf.cmnt_no
+        left outer join member_file mf on m.member_no=mf.member_no
+  </sql>
+  
+  
+  <select id="findAll" resultMap="MemberMap">
+     <include refid="select1"/>
+     order by member_no asc
+  </select>
+  
+  <select id="findByNo" resultMap="MemberMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+      member_no=#{no}
+  </select>
+
+
+	<insert id="insert" parameterType="community">
+	 insert into cmnt(title,content,category,member_no)
+	  values(#{title},#{content},category#{category},#{writer.no})
+	</insert>
+	  
+	<update id="update" parameterType="member">
+	 update pms_member set
+      title=#{title},
+      content=#{content},
+      password=password(#{password}),
+      photo=#{photo},
+      tel=#{tel}
+   where member_no=#{no}  
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from pms_member
+    where member_no=#{value}
+  </delete>
+  
+  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
+    select 
+      member_no,
+      name,
+      email,
+      photo,
+      tel,
+      created_dt 
+    from pms_member
+    where email=#{email} and password=password(#{password})
+  </select>
+  
+   <select id="findByName" resultMap="MemberMap" parameterType="map">
+  select 
+  member_no,
+  name,
+  email,
+  photo,
+  tel,
+  created_dt
+  from pms_member
+  where name=#{member}
+   </select>
+            
+</mapper>
+
+
+
+
+
+
+
