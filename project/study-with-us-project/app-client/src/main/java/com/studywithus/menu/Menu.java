@@ -2,13 +2,13 @@ package com.studywithus.menu;
 
 public abstract class Menu {
 
-  public static final int ACCESS_LOGOUT = 0x01; // 비회원
-  public static final int ACCESS_GENERAL = 0x02; // 회원
-  public static final int ACCESS_MEMBER = 0x04; // 팀원
-  public static final int ACCESS_MENTEE = 0x40; // 멘티
-  public static final int ACCESS_LEADER = 0x08; // 팀장
-  public static final int ACCESS_MENTOR = 0x10; // 멘토
-  public static final int ACCESS_ADMIN = 0x20; // 관리자
+  public static final int ACCESS_LOGOUT = 1; // 비회원 (1)
+  public static final int ACCESS_GENERAL = 2; // 회원  (2)
+  public static final int ACCESS_MEMBER = 4; // 팀원   (4)
+  public static final int ACCESS_LEADER = 8; // 팀장   (8)
+  public static final int ACCESS_MENTOR = 16; // 멘토   (16)
+  public static final int ACCESS_ADMIN = 32; // 관리자  (32)
+  public static final int ACCESS_MENTEE = 64; // 멘티   (64)
 
   String title;
   int accessScope;

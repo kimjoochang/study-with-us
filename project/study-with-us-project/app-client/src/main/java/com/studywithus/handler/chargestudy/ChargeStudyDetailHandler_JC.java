@@ -6,6 +6,7 @@ import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
+import com.studywithus.util.StudyStatusHelper;
 
 public class ChargeStudyDetailHandler_JC implements Command {
 

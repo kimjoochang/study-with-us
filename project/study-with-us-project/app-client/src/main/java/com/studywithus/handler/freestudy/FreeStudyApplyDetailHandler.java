@@ -20,11 +20,6 @@ public class FreeStudyApplyDetailHandler implements Command {
     System.out.println("[STUDY WITH US / 마이페이지 / 나의 활동 / 무료 스터디 신청 내역 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    // Study freeStudy = findByNo(no);
-
-    // HashMap<String, String> params = new HashMap<>();
-    // params.put("no", String.valueOf(no));
-
     Study freeStudy = freeStudyDao.findByNo(no);
 
     if (freeStudy == null) {
@@ -32,13 +27,6 @@ public class FreeStudyApplyDetailHandler implements Command {
       System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
       return;
     }
-
-    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    // System.out.println("해당 번호의 신청 내역이 없습니다.");
-    // return;
-    // }
-    //
-    // Study freeStudy = requestAgent.getObject(Study.class);
 
     Boolean myApplStudy = false;
     for (int i = 0; i < freeStudy.getApplicants().size(); i++) {

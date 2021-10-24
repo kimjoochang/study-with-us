@@ -1,9 +1,10 @@
-package com.studywithus.handler.chargestudy;
+package com.studywithus.util;
 
 import java.sql.Date;
 import com.studywithus.domain.Study;
 
 public class StudyStatusHelper {
+
 
   public static String studyStatus(Study chargeStudy) {
     // 현재 날짜 < 시작일인 경우

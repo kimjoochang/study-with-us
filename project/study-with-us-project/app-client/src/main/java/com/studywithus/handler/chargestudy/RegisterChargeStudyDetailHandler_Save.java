@@ -6,6 +6,7 @@ import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
+import com.studywithus.util.StudyStatusHelper;
 
 public class RegisterChargeStudyDetailHandler_Save implements Command {
 
@@ -25,7 +26,7 @@ public class RegisterChargeStudyDetailHandler_Save implements Command {
     Study chargeStudy = 
         chargeStudyDao.findByNoRegisterStudy(AuthLogInHandler.getLoginUser().getNo(), no);
 
-    if (chargeStudy == null) {
+    if (chargeStudy == null || chargeStudy.getPrice() == 0) {
       System.out.println("번호에 해당하는 내가 생성한 유료 스터디가 없습니다.");
       return;
     }

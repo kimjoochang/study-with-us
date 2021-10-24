@@ -1,18 +1,19 @@
 package com.studywithus.handler.freestudy;
 
-import com.studywithus.dao.FreeStudyDao;
-import com.studywithus.domain.Member;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
+import com.studywithus.util.StudyStatusHelper;
 
 public class FreeStudyDetailHandler implements Command {
 
-  FreeStudyDao freeStudyDao;
+  StudyDao freeStudyDao;
+  Study interest;
 
-  public FreeStudyDetailHandler(FreeStudyDao freeStudyDao) {
+  public FreeStudyDetailHandler(StudyDao freeStudyDao) {
     this.freeStudyDao = freeStudyDao;
   }
 
@@ -25,36 +26,31 @@ public class FreeStudyDetailHandler implements Command {
 
     Study freeStudy = freeStudyDao.findByNo(no);
 
-    if (freeStudy == null) {
+    if (freeStudy == null || freeStudy.getPrice() > 0) {
       System.out.println();
       System.out.println("해당 번호의 무료 스터디가 없습니다.\n");
       return;
     }
 
-    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    // System.out.println("해당 번호의 무료 스터디가 없습니다.");
-    // return;
-    // }
+    String status = StudyStatusHelper.studyStatus(freeStudy);
 
-    // Study freeStudy = requestAgent.getObject(Study.class);
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
-
+    System.out.printf("번호: %d\n",freeStudy.getNo());
     System.out.printf("제목: %s\n", freeStudy.getTitle());
     System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
+    System.out.printf("스터디 진행상태 = %s\n", status);
 
-    if (freeStudy.getArea() != null) {
-      System.out.printf("온/오프라인: %s\n", freeStudy.getOFFLINE());
+    if (freeStudy.getOnOffLine() == 1) {
+      System.out.printf("온/오프라인: 오프라인");
       System.out.printf("지역: %s\n", freeStudy.getArea());
 
     } else {
-      System.out.printf("온/오프라인: %s\n", freeStudy.getONLINE());
+      System.out.printf("온/오프라인: 온라인");
     }
-
     System.out.printf("시작일: %s\n", freeStudy.getStartDate());
     System.out.printf("종료일: %s\n", freeStudy.getEndDate());
     System.out.printf("모집인원: %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
     System.out.printf("설명: %s\n", freeStudy.getContent());
-    System.out.printf("규칙: %s\n", freeStudy.getRule());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
@@ -62,8 +58,6 @@ public class FreeStudyDetailHandler implements Command {
     System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
     System.out.println();
 
-    // FreeStudyUpdateHandler나 FreeStudyDeleteHandler를 실행할 때
-    // 게시글 번호를 사용할 수 있도록 CommandRequest에 보관한다.
     request.setAttribute("freeNo", no);
 
     // 내가 쓴 글일 경우
@@ -95,51 +89,42 @@ public class FreeStudyDetailHandler implements Command {
 
       // 내가 쓴 글이 아닐경우
     } else {
-      int interestType = 0; // 메서드 호출할 때, 관심목록 존재 여부 구분을 위한 변수
       int applyType = 0; // 메서드 호출할 때, 신청내역 존재 여부 구분을 위한 변수
       int partType = 0;
 
       while (true) {
-        // [테스트]
-        // System.out.println("테스트: " + freeStudy.getApplicants().toString());
 
-        for (Member member : freeStudy.getApplicants()) {
-          if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-            applyType = 1;
-            break;
-          }
-        }
+        //        for (Member member : freeStudy.getApplicants()) {
+        //          if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+        //            applyType = 1;
+        //            break;
+        //          }
+        //        }
+        //
+        //        if (applyType == 0) {
+        //          System.out.println("1. 신청하기");
+        //
+        //        } else if (applyType == 1) {
+        //          System.out.println("1. 신청 취소하기");
+        //        }
+        //
+        //        for (Member member : freeStudy.getParticipants()) {
+        //          if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+        //            partType = 1;
+        //            break;
+        //          }
+        //        }
 
-        if (applyType == 0) {
-          System.out.println("1. 신청하기");
+        //        if (partType == 1) {
+        //          System.out.println("1. 참여 취소하기");
+        //        }
 
-        } else if (applyType == 1) {
-          System.out.println("1. 신청 취소하기");
-        }
+        interest = freeStudyDao.findByNoInterest(AuthLogInHandler.getLoginUser().getNo( ), freeStudy.getNo());
 
-        for (Member member : freeStudy.getParticipants()) {
-          if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-            partType = 1;
-            break;
-          }
-        }
-
-        if (partType == 1) {
-          System.out.println("1. 참여 취소하기");
-        }
-
-        for (Member member : freeStudy.getLikeMembers()) {
-          if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-            interestType = 1;
-            break;
-          }
-        }
-
-        // 관심목록 존재 여부에 따라 출력문 출력
-        if (interestType == 0) {
+        if (interest == null) {
           System.out.println("2. 관심목록 추가");
 
-        } else if (interestType == 1) {
+        } else {
           System.out.println("2. 관심목록 삭제");
         }
         System.out.println("0. 이전");
@@ -162,11 +147,11 @@ public class FreeStudyDetailHandler implements Command {
 
         } else if (menuNo == 2) {
           // 관심목록에 없는 경우
-          if (interestType == 0) {
+          if (interest == null) {
             request.getRequestDispatcher("/freeStudy/interestAdd").forward(request);
 
             // 관심목록에 이미 있는 경우
-          } else if (interestType == 1) {
+          } else {
             request.getRequestDispatcher("/freeStudy/interestDelete").forward(request);
           }
 
