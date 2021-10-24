@@ -54,8 +54,7 @@
       p.pay_no=#{payNo}
   </select>
 
- <insert id="insert" parameterType="payment" 
-          useGeneratedKeys="true" keyColumn="payment_no" keyProperty="no">
+ <insert id="insert" parameterType="payment">
     insert into payment(study_no,member_no,pay_method,status) 
     values(#{studyNo},#{memberNo},#{paymentMethod},#{status})
   </insert>
