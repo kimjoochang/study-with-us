@@ -62,10 +62,10 @@
   
   <!--오류  Cannot add or update a child row: 
   a foreign key constraint fails  -->
-  <insert id="insertStudyMember" parameterType="payment">
+  <insert id="insertStudyMember">
     insert into
     study_member(member_no,study_no)
-    values(#{memberNo},#{studyNo})
+    values(#{param1},#{param2})
   </insert>
 
   <update id="update" parameterType="payment">

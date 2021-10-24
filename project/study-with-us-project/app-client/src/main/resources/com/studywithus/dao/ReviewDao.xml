@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReviewDao">
+
+	<resultMap type="Review" id="ReviewMap">
+		<id column="review_no" property="no" />
+		<result column="study_no" property="studyNo" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="score" property="score" />
+		<result column="register_date" property="registeredDate" />
+
+		<association property="writer" javaType="member">
+			<id column="member_no" property="memberNo" />
+			<result column="writer_email" property="email" />
+		</association>
+
+	</resultMap>
+
+	<select id="findAll" resultMap="CommentMap" parameterType="int">
+		select
+		r.review_no,
+		r.member_no,
+		r.study_no,
+		r.title,
+		r.content,
+		r.score,
+		r.register_date
+		from
+		review r
+		inner join member m on r.member_no=m.member_no
+		inner join study s on r.study_no=s.study_no
+		order by
+		r.review_no asc
+	</select>
+
+	<insert id="insert" parameterType="comment">
+		insert into
+		review(study_no,member_no,title,content,score)
+		values(#{studyNo},#{memberNo},#{title},#{content},#{score})
+	</insert>
+
+</mapper>

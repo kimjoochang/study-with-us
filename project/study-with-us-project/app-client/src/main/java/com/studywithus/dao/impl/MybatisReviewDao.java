@@ -1,34 +1,26 @@
 package com.studywithus.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.ReviewDao;
 import com.studywithus.domain.Review;
-import com.studywithus.request.RequestAgent;
 
 public class MybatisReviewDao implements ReviewDao {
 
-  RequestAgent requestAgent;
+  SqlSession sqlSession;
 
-  public MybatisReviewDao(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MybatisReviewDao(SqlSession sqlSession) {
+    this.sqlSession = sqlSession;
   }
 
   @Override
   public void insert(Review review) throws Exception {
-    requestAgent.request("review.insert", review);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("후기 데이터 저장 실패!");
-    }
+    sqlSession.insert("ReviewMapper.insert", review);
+    sqlSession.commit();
   }
 
   @Override
   public List<Review> findAll() throws Exception {
-    requestAgent.request("review.selectList", null);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      throw new Exception("후기 조회 실패!");
-    }
-
-    return new ArrayList<>(requestAgent.getObjects(Review.class));
+    return sqlSession.selectList("ReviewMapper.findAll");
   }
 }
