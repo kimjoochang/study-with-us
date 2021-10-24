@@ -26,21 +26,21 @@
     </association>
     
     <collection property="likeMembers" ofType="Member">
-      <id column="likeMembers_no" property="no"/>
-      <result column="likeMembers_name" property="name"/>
-      <result column="likeMembers_email" property="email"/>
+      <id column="likeMember_no" property="no"/>
+      <result column="likeMember_name" property="name"/>
+      <result column="likeMember_email" property="email"/>
     </collection>
     
     <collection property="applicants" ofType="Member">
-      <id column="applicants_no" property="no"/>
-      <result column="applicants_name" property="name"/>
-      <result column="applicants_email" property="email"/>
+      <id column="applicant_no" property="no"/>
+      <result column="applicant_name" property="name"/>
+      <result column="applicant_email" property="email"/>
     </collection>
 
     <collection property="members" ofType="Member">
-      <id column="members_no" property="no"/>
-      <result column="members_name" property="name"/>
-      <result column="members_email" property="email"/>
+      <id column="member_no" property="no"/>
+      <result column="member_name" property="name"/>
+      <result column="member_email" property="email"/>
     </collection>
   </resultMap>
   
@@ -65,8 +65,8 @@
       m.member_no writer_no,
       m.name writer_name,
       m.email writer_email,
-      m2.member_no likeMembers_no,
-      m2.email likeMembers_email
+      m2.member_no likeMember_no,
+      m2.email likeMember_email
     from 
       study st
     left outer join interest i on st.study_no=i.study_no
@@ -92,11 +92,11 @@
       m.member_no writer_no,
       m.name writer_name,
       m.email writer_email,
-      m2.member_no members_no,
-      m2.name members_name,
-      m2.email members_email,
-      m3.member_no likeMembers_no,
-      m3.email likeMembers_email
+      m2.member_no member_no,
+      m2.name member_name,
+      m2.email member_email,
+      m3.member_no likeMember_no,
+      m3.email likeMember_email
     from 
       study_member sm
     inner join member m2 on sm.member_no=m2.member_no
@@ -124,11 +124,11 @@
       m.member_no writer_no,
       m.name writer_name,
       m.email writer_email,
-      m2.member_no applicants_no,
-      m2.name applicants_name,
-      m2.email applicants_email,
-      m3.member_no likeMembers_no,
-      m3.email likeMembers_email
+      m2.member_no applicant_no,
+      m2.name applicant_name,
+      m2.email applicant_email,
+      m3.member_no likeMember_no,
+      m3.email likeMember_email
     from 
       study_member sm
     inner join member m2 on sm.member_no=m2.member_no
@@ -142,16 +142,6 @@
   <sql id="order1">
     order by 
       st.study_no asc
-  </sql>
-  
-  <sql id="where1">
-   where 
-       m.member_no=#{writerNo}
-  </sql>
-  
-  <sql id="where2">
-  where 
-       m2.member_no=#{writerNo} AND st.study_no=#{studyNo}
   </sql>
   
   <select id="findAll" resultMap="StudyMap">
@@ -188,8 +178,8 @@
   
   <insert id="insertStudyMember">
     insert into
-      study_member(member_no,study_no, status)
-      values(#{memberNo},#{studyNo},#{status})
+      study_member(member_no,study_no,status)
+      values(#{memberNo},#{studyNo},#{myStatus})
   </insert>
 
   <update id="update" parameterType="study">
@@ -207,6 +197,13 @@
    where study_no=#{no}  
   </update>
   
+  <update id="updateMyStatus">
+    update study_member set
+      status=#{myStatus}
+    where
+      member_no=#{memberNo} AND study_no=#{studyNo}
+  </update>
+  
   <select id="findAllRegisterStudy" resultMap="StudyMap" parameterType="int">
     <include refid="select1"/>
       where 
@@ -220,21 +217,6 @@
        m.member_no=#{writerNo} AND st.study_no=#{studyNo}
   </select>
 
-
-  <select id="findAllParticipateStudy" resultMap="StudyMap" parameterType="int">
-    <include refid="selectfindParticipate"/>
-      where 
-       m2.member_no=#{memberNo}
-    <include refid="order1"/> 
-  </select>
-  
-  <select id="findByNoParticipateStudy" resultMap="StudyMap">
-    <include refid="selectfindParticipate"/>
-      where 
-       m2.member_no=#{memberNo} AND st.study_no=#{studyNo}
-  </select>
-
-  
   <select id="findAllInterest" resultMap="StudyMap" parameterType="int">
     <include refid="select1"/>
     where 
@@ -247,12 +229,24 @@
     where 
        m2.member_no=#{memberNo} AND st.study_no=#{studyNo}
   </select>
+
+  <select id="findAllParticipateStudy" resultMap="StudyMap">
+    <include refid="selectfindParticipate"/>
+      where 
+       m2.member_no=#{memberNo} AND sm.status=#{myStatus}
+    <include refid="order1"/> 
+  </select>
   
+  <select id="findByNoParticipateStudy" resultMap="StudyMap">
+    <include refid="selectfindParticipate"/>
+      where 
+       m2.member_no=#{memberNo} AND st.study_no=#{studyNo} AND sm.status=#{myStatus}
+  </select>
   
   <select id="findAllApplyStudy" resultMap="StudyMap" parameterType="int">
    <include refid="selectfindParticipate"/>
     where
-      sm.member_no=#{memberNo} AND sm.status=0
+      m2.member_no=#{memberNo} AND sm.status=0
     order by 
       sm.study_no asc
   </select>
@@ -260,7 +254,7 @@
   <select id="findByNOApplyStudy" resultMap="StudyMap">
    <include refid="selectfindParticipate"/>
     where
-      sm.member_no=#{memberNo} AND sm.study_no=#{studyNo} AND sm.status=0
+      m2.member_no=#{memberNo} AND sm.study_no=#{studyNo} AND sm.status=0
   </select>
 
   <delete id="delete" parameterType="int">
