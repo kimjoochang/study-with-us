@@ -43,12 +43,7 @@
       <result column="member_email" property="email"/>
     </collection>
   </resultMap>
-  
-  <resultMap type="Payment" id="paymentMap">
-  
-  </resultMap>
-  
-  <sql id="select1"> <!-- 기본 조회 & 내생스 & 관심목록 용 -->
+  <sql id="select1">
   select 
       st.study_no,
       st.title,
@@ -73,8 +68,8 @@
     inner join member m on st.member_no=m.member_no
     left outer join member m2 on i.member_no=m2.member_no
   </sql>
-
-  <sql id="selectfindParticipate"> <!-- 내참스용 -->
+ 
+  <sql id="selectfindParticipate"> 
    select 
       sm.status,
       st.study_no,
@@ -102,11 +97,11 @@
     inner join member m2 on sm.member_no=m2.member_no
     inner join study st on sm.study_no=st.study_no
     inner join member m on st.member_no=m.member_no
-    left outer join interest i on sm.study_no=i.study_no  <!-- 내참스 좋아요 수 확인하기 위해 -->
-    left outer join member m3 on i.member_no=m3.member_no  <!-- 내참스 좋아요 수 확인하기 위해 -->
+    left outer join interest i on sm.study_no=i.study_no 
+    left outer join member m3 on i.member_no=m3.member_no 
   </sql>
   
-  <sql id="selectfindApply"> <!-- 내참스 & 내가 지원한 스터디 용 -->
+  <sql id="selectfindApply">
    select 
       sm.status,
       st.study_no,
@@ -134,8 +129,8 @@
     inner join member m2 on sm.member_no=m2.member_no
     inner join study st on sm.study_no=st.study_no
     inner join member m on st.member_no=m.member_no
-    left outer join interest i on sm.study_no=i.study_no  <!-- 내가 지원한 스터디 좋아요 수 확인하기 위해 -->
-    left outer join member m3 on i.member_no=m3.member_no  <!-- 내가 지원한 스터디 좋아요 수 확인하기 위해 -->
+    left outer join interest i on sm.study_no=i.study_no 
+    left outer join member m3 on i.member_no=m3.member_no 
     
   </sql>
   
@@ -169,7 +164,7 @@
      study(title,content,area,max_member,start_date,end_date,price,member_no)
     values(#{title},#{content},#{area},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 
   </insert>
-  
+ 
   <insert id="insertInterest">
   insert into 
     interest(member_no,study_no)
@@ -197,7 +192,7 @@
    where study_no=#{no}  
   </update>
   
-  <update id="updateMyStatus">
+  <update id="updateStatus">
     update study_member set
       status=#{myStatus}
     where
@@ -205,14 +200,14 @@
   </update>
   
   <select id="findAllRegisterStudy" resultMap="StudyMap" parameterType="int">
-    <include refid="select1"/>
+    <include refid="selectfindParticipate"/>
       where 
        m.member_no=#{writerNo}
     <include refid="order1"/> 
   </select>
   
   <select id="findByNoRegisterStudy" resultMap="StudyMap">
-    <include refid="select1"/>
+    <include refid="selectfindParticipate"/>
     where 
        m.member_no=#{writerNo} AND st.study_no=#{studyNo}
   </select>
@@ -251,7 +246,7 @@
       sm.study_no asc
   </select>
 
-  <select id="findByNOApplyStudy" resultMap="StudyMap">
+  <select id="findByNoApplyStudy" resultMap="StudyMap">
    <include refid="selectfindParticipate"/>
     where
       m2.member_no=#{memberNo} AND sm.study_no=#{studyNo} AND sm.status=0
@@ -266,7 +261,8 @@
     delete from study_member
     where member_no=#{memberNo} AND study_no={studyNo}
   </delete>
-<!-- 
+
+  <!-- 
   <delete id="deleteInterest" parameterType="int">
     delete from interest
     where study_no=#{no}

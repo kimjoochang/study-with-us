@@ -82,7 +82,7 @@ public class ResetPasswordHandler implements Command {
         } else if (input.equalsIgnoreCase("y")) {
 
           member.setPassword(newPassword1);
-          memberDao.update(member);
+          memberDao.updatePassword(member);
 
           System.out.println();
           System.out.println("비밀번호 변경이 완료되었습니다.\n");

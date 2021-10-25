@@ -1,5 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -9,9 +10,11 @@ import com.studywithus.util.Prompt;
 public class ChargeStudyDeleteRequestHandler implements Command {
 
   StudyDao chargeStudyDao;
+  SqlSession sqlSession;
 
-  public ChargeStudyDeleteRequestHandler(StudyDao chargeStudyDao)  {
+  public ChargeStudyDeleteRequestHandler(StudyDao chargeStudyDao, SqlSession sqlSession)  {
     this.chargeStudyDao = chargeStudyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -37,6 +40,7 @@ public class ChargeStudyDeleteRequestHandler implements Command {
     chargeStudy.setDeleteStatus(1);
 
     chargeStudyDao.update(chargeStudy);
+    sqlSession.commit();
 
     System.out.println("삭제 요청이 완료되었습니다.\n");
   }

@@ -1,6 +1,7 @@
 package com.studywithus.handler.chargestudy;
 
 import java.util.HashMap;
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -10,9 +11,11 @@ import com.studywithus.util.Prompt;
 public class ChargeStudyUpdateHandler implements Command {
 
   StudyDao chargeStudyDao;
+  SqlSession sqlSession;
 
-  public ChargeStudyUpdateHandler(StudyDao chargeStudyDao) {
+  public ChargeStudyUpdateHandler(StudyDao chargeStudyDao, SqlSession sqlSession) {
     this.chargeStudyDao = chargeStudyDao;	
+    this.sqlSession = sqlSession;	
   }
 
   @Override
@@ -43,6 +46,7 @@ public class ChargeStudyUpdateHandler implements Command {
         chargeStudy.setContent(content);
 
         chargeStudyDao.update(chargeStudy);
+        sqlSession.commit();
 
         System.out.println("유료 스터디를 수정하였습니다.\n");
         return;

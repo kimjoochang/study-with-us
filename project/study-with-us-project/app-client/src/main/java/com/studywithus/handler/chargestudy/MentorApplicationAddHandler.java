@@ -1,5 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.domain.MentorApplication;
 import com.studywithus.handler.Command;
@@ -11,10 +12,11 @@ import com.studywithus.util.Prompt;
 public class MentorApplicationAddHandler implements Command {
 
   MentorApplicationDao mentorApplicationDao;
+  SqlSession sqlSession;
 
-
-  public MentorApplicationAddHandler(MentorApplicationDao mentorApplicationDao) {
+  public MentorApplicationAddHandler(MentorApplicationDao mentorApplicationDao, SqlSession sqlSession) {
     this.mentorApplicationDao = mentorApplicationDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -51,6 +53,7 @@ public class MentorApplicationAddHandler implements Command {
         mentorApplication.setChargeStudySubject(subject);
 
         mentorApplicationDao.insert(mentorApplication);
+        sqlSession.commit();
 
         System.out.println();
         System.out.println("멘토 신청이 완료되었습니다.");

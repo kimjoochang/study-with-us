@@ -8,11 +8,11 @@ import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 import com.studywithus.util.StudyStatusHelper;
 
-public class RegisterChargeStudyDetailHandler_Save implements Command {
+public class RegisterChargeStudyDetailHandler implements Command {
 
   StudyDao chargeStudyDao;
 
-  public RegisterChargeStudyDetailHandler_Save(StudyDao chargeStudyDao) {
+  public RegisterChargeStudyDetailHandler(StudyDao chargeStudyDao) {
     this.chargeStudyDao = chargeStudyDao;
   }
 

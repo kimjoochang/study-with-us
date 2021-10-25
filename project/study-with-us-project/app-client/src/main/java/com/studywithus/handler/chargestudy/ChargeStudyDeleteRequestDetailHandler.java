@@ -1,5 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -9,9 +10,11 @@ import com.studywithus.util.Prompt;
 public class ChargeStudyDeleteRequestDetailHandler implements Command {
 
   StudyDao chargeStudyDao;
+  SqlSession sqlSession;
 
-  public ChargeStudyDeleteRequestDetailHandler(StudyDao chargeStudyDao) {
+  public ChargeStudyDeleteRequestDetailHandler(StudyDao chargeStudyDao, SqlSession sqlSession) {
     this.chargeStudyDao = chargeStudyDao;
+    this.sqlSession = sqlSession;
   }
 
   // 관리자 관점
@@ -54,6 +57,7 @@ public class ChargeStudyDeleteRequestDetailHandler implements Command {
       // 1. 삭제
       if (input == 1) {
         chargeStudyDao.delete(no);
+        sqlSession.commit();
 
         // 0. 이전
       } else if (input == 0) {

@@ -1,106 +1,57 @@
 package com.studywithus.handler.freestudy;
 
 import java.util.Collection;
-
-import com.studywithus.dao.FreeStudyDao;
-import com.studywithus.domain.Member;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.util.StudyStatusHelper;
 
 public class FreeStudyInterestListHandler implements Command {
 
-	FreeStudyDao freeStudyDao;
+  StudyDao freeStudyDao;
 
-	public FreeStudyInterestListHandler(FreeStudyDao freeStudyDao) {
-		this.freeStudyDao = freeStudyDao;
-		// super(freeStudyList);
-	}
+  public FreeStudyInterestListHandler(StudyDao freeStudyDao) {
+    this.freeStudyDao = freeStudyDao;
+  }
 
-	@Override
-	public void execute(CommandRequest request) throws Exception {
-		System.out.println("[마이페이지 / 나의 관심 목록 / 무료 스터디 관심목록 / 조회]\n");
+  @Override
+  public void execute(CommandRequest request) throws Exception {
+    System.out.println("[마이페이지 / 나의 관심 목록 / 무료 스터디 관심목록 / 조회]\n");
 
-		Collection<Study> freeStudyList = freeStudyDao.findAll();
+    Collection<Study> freeStudyList = freeStudyDao.findAllInterest(AuthLogInHandler.getLoginUser().getNo());
 
-		// if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-		// System.out.println("무료 스터디 관심목록 조회 실패!");
-		// return;
-		// }
+    if (freeStudyList.isEmpty()) {
+      System.out.println("무료 스터디 관심목록이 존재하지 않습니다.");
+      return;
+    }
 
-		// Collection<Study> freeStudyList = requestAgent.getObjects(Study.class);
-		int type = 0; // 일치하는 값 X -> 게시글 없다는 출력문 한 번만 출력
+    for (Study freeStudy : freeStudyList) {
+      if (freeStudy.getPrice() == 0) {
+        String status = StudyStatusHelper.studyStatus(freeStudy);
 
-		for (Study freeStudy : freeStudyList) {
-			// 스터디 좋아요 X
-			if (freeStudy.getLikeMembers().isEmpty()) {
-				// [삭제] 관심목록 조회 + "무료 스터디 관심목록이 존재하지 않습니다." 출력
-				// type = 0;
-				// continue;
+        System.out.printf("번호: %d\n",freeStudy.getNo());
+        System.out.printf("제목: %s\n", freeStudy.getTitle());
+        System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
+        System.out.printf("스터디 진행상태 = %s\n", status);
 
-				if (type == 1) {
-					continue;
+        if (freeStudy.getOnOffLine() == 1) {
+          System.out.printf("온/오프라인: 오프라인");
+          System.out.printf("지역: %s\n", freeStudy.getArea());
 
-				} else {
-					type = 0;
-					continue;
-				}
-			}
+        } else {
+          System.out.printf("온/오프라인: 온라인");
+        }
+        System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
-			// 스터디 좋아요 O
-			for (Member likeMember : freeStudy.getLikeMembers()) {
-				// 관심목록 추가한 회원 == 로그인한 회원
-				if (likeMember.getEmail().equals(AuthLogInHandler.loginUser.getEmail())) {
-					type = 1;
-					// [테스트]
-					// System.out.println(freeStudy.toString());
+        freeStudy.setViewCount(freeStudy.getViewCount() + 1);
+        System.out.printf("조회수: %d\n", freeStudy.getViewCount());
+        System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
+        System.out.println();
+      }
 
-					// 온라인 스터디
-					if (freeStudy.getOnOffLine() == 1) {
-						System.out.printf(
-								"[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
-								freeStudy.getNo(), 
-								freeStudy.getTitle(), 
-								freeStudy.getWriter().getName(),
-								freeStudy.getONLINE(), 
-								freeStudy.getMembers().size(), 
-								freeStudy.getMaxMembers(),
-								freeStudy.getRegisteredDate(), 
-								freeStudy.getViewCount(),
-								freeStudy.getLikeMembers().size());
-
-						// 오프라인 스터디
-					} else {
-						System.out.printf(
-								"[번호 = %d, 제목 = %s, 팀장 = %s, 온/오프라인 = %s, 지역 = %s, 모집인원 = %d / %d, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
-								freeStudy.getNo(), 
-								freeStudy.getTitle(), 
-								freeStudy.getWriter().getName(),
-								freeStudy.getOFFLINE(), 
-								freeStudy.getArea(), 
-								freeStudy.getMembers().size(),
-								freeStudy.getMaxMembers(), 
-								freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
-								freeStudy.getLikeMembers().size());
-					}
-
-					// 관심목록 추가한 회원 != 로그인한 회원
-				} else {
-					if (type == 1) {
-						continue;
-
-					} else {
-						type = 0;
-						continue;
-					}
-				}
-			}
-		}
-
-		// 나의 관심목록 X
-		if (type == 0) {
-			System.out.println("무료 스터디 관심목록이 존재하지 않습니다.");
-		}
-	}
+    }
+  }
 }
+

@@ -1,5 +1,6 @@
 package com.studywithus.handler.user;
 
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
@@ -9,9 +10,11 @@ import com.studywithus.util.Prompt;
 public class SignUpHandler implements Command {
 
   MemberDao memberDao;
+  SqlSession sqlSession;
 
-  public SignUpHandler(MemberDao memberDao) {
+  public SignUpHandler(MemberDao memberDao, SqlSession sqlSession) {
     this.memberDao = memberDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -56,6 +59,7 @@ public class SignUpHandler implements Command {
         member.setPhoneNumber(phoneNumber);
 
         memberDao.insert(member);
+        sqlSession.commit();
 
         System.out.println("회원가입이 완료되었습니다.\n");
       }

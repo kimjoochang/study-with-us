@@ -22,11 +22,12 @@ public interface StudyDao {
   List<Study> findAllParticipateStudy(@Param("memberNo") int memberNo, @Param("myStatus") int status) throws Exception;
   Study findByNoParticipateStudy(@Param("memberNo") int writerNo, @Param("studyNo") int studyNo, @Param("myStatus") int status) throws Exception;
 
+  List<Study> findAllApplyStudy(int memberNo) throws Exception;
+  Study findByNoApplyStudy(@Param("memberNo") int writerNo, @Param("studyNo") int studyNo) throws Exception;
+
   // 0 = 무료 신청, 1 = 무료 참여자, 2 = 유료 참여자(결제한 사람)
   void insertStudyMember(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo, @Param("myStatus") int status) throws Exception;
-  List<Study> findAllApplyStudy(int no) throws Exception;
-  Study findByNoApplyStudy(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
-  void updateMyStatus(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo, @Param("myStatus") int status) throws Exception;
+  void updateStatus(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo, @Param("myStatus") int status) throws Exception;
 
 
   void delete(int no) throws Exception;

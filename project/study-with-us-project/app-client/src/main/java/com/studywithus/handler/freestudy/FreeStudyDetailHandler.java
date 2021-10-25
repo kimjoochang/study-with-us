@@ -22,8 +22,6 @@ public class FreeStudyDetailHandler implements Command {
     System.out.println("[무료 스터디 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    // Study freeStudy = findByNo(no);
-
     Study freeStudy = freeStudyDao.findByNo(no);
 
     if (freeStudy == null || freeStudy.getPrice() > 0) {
@@ -89,35 +87,19 @@ public class FreeStudyDetailHandler implements Command {
 
       // 내가 쓴 글이 아닐경우
     } else {
-      int applyType = 0; // 메서드 호출할 때, 신청내역 존재 여부 구분을 위한 변수
-      int partType = 0;
 
       while (true) {
 
-        //        for (Member member : freeStudy.getApplicants()) {
-        //          if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-        //            applyType = 1;
-        //            break;
-        //          }
-        //        }
-        //
-        //        if (applyType == 0) {
-        //          System.out.println("1. 신청하기");
-        //
-        //        } else if (applyType == 1) {
-        //          System.out.println("1. 신청 취소하기");
-        //        }
-        //
-        //        for (Member member : freeStudy.getParticipants()) {
-        //          if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-        //            partType = 1;
-        //            break;
-        //          }
-        //        }
+        Study participateStudy = freeStudyDao.findByNoParticipateStudy(AuthLogInHandler.getLoginUser().getNo(), no, 1);
+        Study applyStudy = freeStudyDao.findByNoApplyStudy(AuthLogInHandler.getLoginUser().getNo(), no);
 
-        //        if (partType == 1) {
-        //          System.out.println("1. 참여 취소하기");
-        //        }
+        if (participateStudy != null) {
+          System.out.println("1. 참여 취소하기");
+        } else if (applyStudy == null) {
+          System.out.println("1. 신청하기");
+        } else {
+          System.out.println("1. 신청 취소하기");
+        }
 
         interest = freeStudyDao.findByNoInterest(AuthLogInHandler.getLoginUser().getNo( ), freeStudy.getNo());
 
@@ -134,21 +116,21 @@ public class FreeStudyDetailHandler implements Command {
 
         if (menuNo == 1) {
           // 신청하기를 아직 안 한 경우
-          if (applyType == 0) {
-            request.getRequestDispatcher("/freeStudy/apply").forward(request);
+          if (participateStudy != null) {
+            request.getRequestDispatcher("/freeStudy/participationCancel").forward(request);
 
             // 신청하기를 이미 한 경우
-          } else if (applyType == 1) {
-            request.getRequestDispatcher("/freeStudy/applyCancel").forward(request);
+          } else if (applyStudy == null) {
+            request.getRequestDispatcher("/freeStudy/apply").forward(request);
 
-          } else if (partType == 1) {
-            request.getRequestDispatcher("/freeStudy/participationCancel").forward(request);
+          } else {
+            request.getRequestDispatcher("/freeStudy/applyCancel").forward(request);
           }
 
         } else if (menuNo == 2) {
           // 관심목록에 없는 경우
           if (interest == null) {
-            request.getRequestDispatcher("/freeStudy/interestAdd").forward(request);
+            request.getRequestDispatcher("/freeStudy/addInterest").forward(request);
 
             // 관심목록에 이미 있는 경우
           } else {
@@ -166,4 +148,5 @@ public class FreeStudyDetailHandler implements Command {
       }
     }
   }
+
 }

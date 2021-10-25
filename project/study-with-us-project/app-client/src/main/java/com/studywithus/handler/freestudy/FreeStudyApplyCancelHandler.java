@@ -1,5 +1,6 @@
 package com.studywithus.handler.freestudy;
 
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -10,8 +11,9 @@ import com.studywithus.util.Prompt;
 public class FreeStudyApplyCancelHandler implements Command {
 
   StudyDao freeStudyDao;
+  SqlSession sqlSession;
 
-  public FreeStudyApplyCancelHandler(StudyDao freeStudyDao) {
+  public FreeStudyApplyCancelHandler(StudyDao freeStudyDao, SqlSession sqlSession) {
     this.freeStudyDao = freeStudyDao;
   }
 
@@ -38,6 +40,7 @@ public class FreeStudyApplyCancelHandler implements Command {
       } else if (input.equalsIgnoreCase("y")) {
 
         freeStudyDao.deleteStudyMember(AuthLogInHandler.getLoginUser().getNo(), no);
+        sqlSession.commit();
         System.out.println();
         System.out.println("무료 스터디 신청을 취소하였습니다.");
         return;

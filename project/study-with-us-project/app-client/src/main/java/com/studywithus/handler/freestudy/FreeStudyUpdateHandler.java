@@ -1,5 +1,6 @@
 package com.studywithus.handler.freestudy;
 
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -10,9 +11,11 @@ import com.studywithus.util.Prompt;
 public class FreeStudyUpdateHandler implements Command {
 
   StudyDao freeStudyDao;
+  SqlSession sqlSession;
 
-  public FreeStudyUpdateHandler(StudyDao freeStudyDao) {
+  public FreeStudyUpdateHandler(StudyDao freeStudyDao, SqlSession sqlSession) {
     this.freeStudyDao = freeStudyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -58,6 +61,7 @@ public class FreeStudyUpdateHandler implements Command {
     freeStudy.setContent(content);
 
     freeStudyDao.update(freeStudy);
+    sqlSession.commit();
 
     System.out.println("무료 스터디를 수정하였습니다.");
   }

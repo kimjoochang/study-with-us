@@ -1,18 +1,26 @@
 package com.studywithus.handler.freestudy;
 
-import com.studywithus.dao.FreeStudyDao;
+import org.apache.ibatis.session.SqlSession;
+import com.studywithus.dao.MemberDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyParticipationCancelHandler implements Command {
 
-  FreeStudyDao freeStudyDao;
+  StudyDao freeStudyDao;
+  MemberDao memberDao;
+  SqlSession sqlSession;
 
-  public FreeStudyParticipationCancelHandler(FreeStudyDao freeStudyDao) {
+
+  public FreeStudyParticipationCancelHandler(StudyDao freeStudyDao, MemberDao memberDao, SqlSession sqlSession) {
     this.freeStudyDao = freeStudyDao;
+    this.memberDao = memberDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -20,7 +28,8 @@ public class FreeStudyParticipationCancelHandler implements Command {
     System.out.println("[무료 스터디 / 상세보기 / 참여 취소]\n");
     int no = (int) request.getAttribute("freeNo");
 
-    Study freeStudy = freeStudyDao.findByNo(no);
+    Study freeStudy = freeStudyDao.findByNoParticipateStudy
+        (AuthLogInHandler.getLoginUser().getNo(), no, 1);
 
     if (freeStudy == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -36,15 +45,11 @@ public class FreeStudyParticipationCancelHandler implements Command {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        for (int i = 0; i < freeStudy.getParticipants().size(); i++) {
-          if (freeStudy.getParticipants().get(i).getNo() == AuthLogInHandler.getLoginUser()
-              .getNo()) {
-            freeStudy.getParticipants().remove(i);
-            break;
-          }
-        }
 
-        freeStudyDao.update(freeStudy);
+        freeStudyDao.deleteStudyMember(AuthLogInHandler.getLoginUser().getNo(), no);
+
+        int temp = AuthLogInHandler.getLoginUser().getUserAccessLevel();
+        AuthLogInHandler.getLoginUser().setUserAccessLevel((~temp) & Menu.ACCESS_MEMBER);
         System.out.println();
         System.out.println("무료 스터디 참여를 취소하였습니다.");
         return;

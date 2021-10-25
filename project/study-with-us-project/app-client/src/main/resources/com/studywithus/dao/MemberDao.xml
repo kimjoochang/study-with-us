@@ -107,12 +107,16 @@
 		  values(#{name},#{email},password(#{password}),#{phoneNumber},#{status},#{userAccessLevel})
 		</insert>
 		  
+		<update id="updatePassword" parameterType="member">
+		 update member set
+	      password=password(#{password}),
+	   where member_no=#{no}  
+	  </update>
+
 		<update id="update" parameterType="member">
 		 update member set
 	      name=#{name},
 	      email=#{email},
-	      password=password(#{password}),
-	      phone_number=#{phoneNumber},
 	      join_date=#{registeredDate},
 	      status=#{status},
 	      last_date=#{lastDate},

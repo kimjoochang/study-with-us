@@ -32,7 +32,7 @@ import com.studywithus.handler.chargestudy.ChargeStudyDeleteRequestCancelHandler
 import com.studywithus.handler.chargestudy.ChargeStudyDeleteRequestDetailHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyDeleteRequestHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyDeleteRequestListHandler;
-import com.studywithus.handler.chargestudy.ChargeStudyDetailHandler_JC;
+import com.studywithus.handler.chargestudy.ChargeStudyDetailHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyDetailMenuPrompt;
 import com.studywithus.handler.chargestudy.ChargeStudyInterestAddHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyInterestDetailHandler;
@@ -45,7 +45,7 @@ import com.studywithus.handler.chargestudy.MentorApplicationAddHandler;
 import com.studywithus.handler.chargestudy.MentorApplicationDetailHandler;
 import com.studywithus.handler.chargestudy.ParticipateChargeStudyDetailHandler;
 import com.studywithus.handler.chargestudy.ParticipateChargeStudyListHandler;
-import com.studywithus.handler.chargestudy.RegisterChargeStudyDetailHandler_Save;
+import com.studywithus.handler.chargestudy.RegisterChargeStudyDetailHandler;
 import com.studywithus.handler.chargestudy.RegisterChargeStudyListHandler;
 import com.studywithus.handler.chargestudy.ReviewAddHandler;
 import com.studywithus.handler.chargestudy.ReviewListHandler;
@@ -192,7 +192,7 @@ public class ClientAppJJ {
 
     commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(studyDao));
     commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(studyDao));
-    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler_JC(studyDao, chargeStudyDetailMenuPrompt));
+    commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler(studyDao, chargeStudyDetailMenuPrompt));
     commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(studyDao));
     commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(studyDao));
     commandMap.put("/chargeStudy/deleteRequestCancel", new ChargeStudyDeleteRequestCancelHandler(studyDao));
@@ -205,7 +205,7 @@ public class ClientAppJJ {
     commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(studyDao));
     //    commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(studyDao));
     commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(studyDao));
-    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler_Save(studyDao));
+    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler(studyDao));
     commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(studyDao));
     commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(studyDao));
     commandMap.put("/review/add", new ReviewAddHandler(reviewDao));

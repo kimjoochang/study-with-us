@@ -1,5 +1,6 @@
 package com.studywithus.handler.freestudy;
 
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -10,9 +11,11 @@ import com.studywithus.util.Prompt;
 public class FreeStudyApplyHandler implements Command {
 
   StudyDao freeStudyDao;
+  SqlSession sqlSession;
 
-  public FreeStudyApplyHandler(StudyDao freeStudyDao) {
+  public FreeStudyApplyHandler(StudyDao freeStudyDao, SqlSession sqlSession) {
     this.freeStudyDao = freeStudyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -20,7 +23,7 @@ public class FreeStudyApplyHandler implements Command {
     System.out.println("[무료 스터디 / 상세보기 / 신청]\n");
     int no = (int) request.getAttribute("freeNo");
 
-    Study freeStudy = freeStudyDao.findByNo(no);
+    Study freeStudy = freeStudyDao.findByNoParticipateStudy(AuthLogInHandler.getLoginUser().getNo(), no, 1);
 
     // 중복신청 확인
     if (freeStudy == null) {
@@ -28,7 +31,7 @@ public class FreeStudyApplyHandler implements Command {
       return;
     }
 
-    if (freeStudyDao.findByNoParticipateStudy(AuthLogInHandler.getLoginUser().getNo(), no) != null) {
+    if (freeStudyDao.findByNoApplyStudy(AuthLogInHandler.getLoginUser().getNo(), no) != null) {
       System.out.println("이미 신청하신 스터디입니다.");
       return;
     }
@@ -49,8 +52,8 @@ public class FreeStudyApplyHandler implements Command {
 
       } else if (input.equalsIgnoreCase("y")) {
 
-        // 세번째 파라미터 -> 0 = 무료스터디 신청자
         freeStudyDao.insertStudyMember(AuthLogInHandler.getLoginUser().getNo(), no, 0);
+        sqlSession.commit();
 
         System.out.println();
         System.out.println("무료 스터디 신청이 완료되었습니다.");

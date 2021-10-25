@@ -1,5 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -10,9 +11,11 @@ import com.studywithus.util.Prompt;
 public class ChargeStudyAddHandler implements Command {
 
   StudyDao chargeStudyDao;
+  SqlSession sqlSession;
 
-  public ChargeStudyAddHandler(StudyDao chargeStudyDao) {
+  public ChargeStudyAddHandler(StudyDao chargeStudyDao, SqlSession sqlSession) {
     this.chargeStudyDao = chargeStudyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -53,6 +56,7 @@ public class ChargeStudyAddHandler implements Command {
     }
 
     chargeStudyDao.insert(chargeStudy);
+    sqlSession.commit();
 
     System.out.println();
     System.out.println("유료스터디 등록이 완료되었습니다.\n");
