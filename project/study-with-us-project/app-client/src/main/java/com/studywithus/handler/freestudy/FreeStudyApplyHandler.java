@@ -2,6 +2,7 @@ package com.studywithus.handler.freestudy;
 
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -11,10 +12,12 @@ import com.studywithus.util.Prompt;
 public class FreeStudyApplyHandler implements Command {
 
   StudyDao freeStudyDao;
+  StudyMemberDao studyMemberDao;
   SqlSession sqlSession;
 
-  public FreeStudyApplyHandler(StudyDao freeStudyDao, SqlSession sqlSession) {
+  public FreeStudyApplyHandler(StudyDao freeStudyDao,  StudyMemberDao studyMemberDao, SqlSession sqlSession) {
     this.freeStudyDao = freeStudyDao;
+    this.studyMemberDao = studyMemberDao;
     this.sqlSession = sqlSession;
   }
 
@@ -23,16 +26,19 @@ public class FreeStudyApplyHandler implements Command {
     System.out.println("[무료 스터디 / 상세보기 / 신청]\n");
     int no = (int) request.getAttribute("freeNo");
     Study freeStudy = freeStudyDao.findByNo(no);
-    Study paritcipateStudy = freeStudyDao.findByNoParticipateStudy(AuthLogInHandler.getLoginUser().getNo(), no, 1);
-    Study applyStudy = freeStudyDao.findByNoApplyStudy(AuthLogInHandler.getLoginUser().getNo(), no);
+    int memberStatus = (int) studyMemberDao.findByNoStatus(AuthLogInHandler.getLoginUser().getNo(), no).get("status");
 
-    if (applyStudy != null || paritcipateStudy != null) {
+    if (memberStatus == 0) {
       System.out.println("이미 신청하신 스터디입니다.");
+      return;
+
+    } else if (memberStatus == 1) {
+      System.out.println("이미 참여중인 스터디입니다.");
       return;
     }
 
     // 모집인원 다 찼을 경우
-    if (freeStudy.getMembers().size() == freeStudy.getMaxMembers()) {
+    if (freeStudy.getMembers() == freeStudy.getMaxMembers()) {
       System.out.println("모집 인원이 다 찼습니다.");
       return;
     }
@@ -47,7 +53,7 @@ public class FreeStudyApplyHandler implements Command {
 
       } else if (input.equalsIgnoreCase("y")) {
 
-        freeStudyDao.insertStudyMember(AuthLogInHandler.getLoginUser().getNo(), no, 0);
+        studyMemberDao.insert(AuthLogInHandler.getLoginUser().getNo(), no, Study.APPLICANT_STATUS);
         sqlSession.commit();
 
         System.out.println();

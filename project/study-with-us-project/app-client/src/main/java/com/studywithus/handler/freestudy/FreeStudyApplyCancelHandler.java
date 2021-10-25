@@ -1,7 +1,7 @@
 package com.studywithus.handler.freestudy;
 
 import org.apache.ibatis.session.SqlSession;
-import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,11 +10,12 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyApplyCancelHandler implements Command {
 
-  StudyDao freeStudyDao;
   SqlSession sqlSession;
+  StudyMemberDao studyMemberDao;
 
-  public FreeStudyApplyCancelHandler(StudyDao freeStudyDao, SqlSession sqlSession) {
-    this.freeStudyDao = freeStudyDao;
+  public FreeStudyApplyCancelHandler(StudyMemberDao studyMemberDao, SqlSession sqlSession) {
+    this.studyMemberDao = studyMemberDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -22,10 +23,10 @@ public class FreeStudyApplyCancelHandler implements Command {
     System.out.println("[무료 스터디 / 상세보기 / 신청 취소]\n");
     int no = (int) request.getAttribute("freeNo");
 
-    Study freeStudy = freeStudyDao.findByNoApplyStudy(AuthLogInHandler.getLoginUser().getNo(), no);
+    Study freeStudy = studyMemberDao.findByNoStudy(AuthLogInHandler.getLoginUser().getNo(), no, Study.APPLICANT_STATUS);
 
     if (freeStudy == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("해당 번호의 무료 스터디 신청내역이 없습니다.\n");
       return;
     }
 
@@ -39,7 +40,7 @@ public class FreeStudyApplyCancelHandler implements Command {
 
       } else if (input.equalsIgnoreCase("y")) {
 
-        freeStudyDao.deleteStudyMember(AuthLogInHandler.getLoginUser().getNo(), no);
+        studyMemberDao.delete(AuthLogInHandler.getLoginUser().getNo(), no);
         sqlSession.commit();
         System.out.println();
         System.out.println("무료 스터디 신청을 취소하였습니다.");

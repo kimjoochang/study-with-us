@@ -28,7 +28,7 @@
   </resultMap>
   
   <sql id="select1">
-  select 
+ select 
       st.study_no,
       st.title,
       st.content,
@@ -41,6 +41,20 @@
       st.del_status,
       st.price,
       st.status,
+      (select 
+      count(*) 
+      from 
+      interest
+      where
+      study_no=st.study_no) likes,
+      (select 
+      count(*) 
+      from 
+      study_member
+      where
+      study_no=st.study_no
+      and
+      status=1) members,
       m.member_no writer_no,
       m.name writer_name,
       m.email writer_email
@@ -114,6 +128,20 @@
       st.del_status,
       st.price,
       st.status,
+      (select 
+      count(*) 
+      from 
+      interest
+      where
+      study_no=st.study_no) likes,
+      (select 
+      count(*) 
+      from 
+      study_member
+      where
+      study_no=st.study_no
+      and
+      status=1) members,
       m.member_no writer_no,
       m.name writer_name,
       m.email writer_email
@@ -124,6 +152,15 @@
     where 
        i.member_no=#{memberNo}
     <include refid="order1"/> 
+  </select>
+  
+  <select id="findMyInterest" resultType="int">
+  select
+    count(*)
+    from
+    interest
+    where
+    member_no=#{memberNo} and study_no=#{studyNo}
   </select>
 
   <delete id="delete" parameterType="int">

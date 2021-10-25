@@ -15,6 +15,7 @@ import com.studywithus.dao.CommunityDao;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.dao.impl.MariadbCommentDao;
 import com.studywithus.dao.impl.MariadbCommunityDao;
 import com.studywithus.dao.impl.NetPaymentDao;
@@ -122,11 +123,13 @@ public class ClientApp_JC {
         "com/studywithus/conf/mybatis-config.xml")).openSession();
 
     MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
-    CommunityDao communityDao = new MariadbCommunityDao(con);
-    CommentDao commentDao = new MariadbCommentDao(con);
-    //StudyDao studyDao = new MybatisStudyDao(sqlSession);
     StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
     MentorApplicationDao mentorApplicationDao = sqlSession.getMapper(MentorApplicationDao.class);
+    StudyMemberDao studyMemberdao = sqlSession.getMapper(StudyMemberDao.class);
+
+    //StudyDao studyDao = new MybatisStudyDao(sqlSession);
+    CommentDao commentDao = new MariadbCommentDao(con);
+    CommunityDao communityDao = new MariadbCommunityDao(con);
 
 
     //    NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent);
@@ -165,17 +168,17 @@ public class ClientApp_JC {
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(studyDao));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(studyDao,memberDao,sqlSession));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(studyDao));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(studyDao));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(studyMemberdao));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(studyDao, sqlSession));
     //    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(studyDao, sqlSession));
 
-    commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(studyDao, sqlSession));
-    commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(studyDao, sqlSession));
-    commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(studyDao));
+    commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(studyDao, studyMemberdao, sqlSession));
+    commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(studyMemberdao, sqlSession));
+    commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(studyMemberdao));
     commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(studyDao, sqlSession));
     //    commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(studyDao, sqlSession));
-    commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(studyDao));
-    commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(studyDao));
+    commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(studyMemberdao));
+    commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(studyMemberdao));
 
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(studyDao));
     commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(studyDao, sqlSession));

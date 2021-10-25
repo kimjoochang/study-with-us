@@ -1,7 +1,7 @@
 package com.studywithus.handler.freestudy;
 
 import java.util.Collection;
-import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,18 +10,17 @@ import com.studywithus.util.StudyStatusHelper;
 
 public class ParticipateFreeStudyListHandler implements Command {
 
-  StudyDao freeStudyDao;
+  StudyMemberDao studyMemberDao;
 
-  public ParticipateFreeStudyListHandler(StudyDao freeStudyDao) {
-    this.freeStudyDao = freeStudyDao;
+  public ParticipateFreeStudyListHandler(StudyMemberDao studyMemberDao) {
+    this.studyMemberDao = studyMemberDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[마이 페이지 / 내가 참여한 무료 스터디 / 조회]\n");
 
-    Collection<Study> freeStudyList = 
-        freeStudyDao.findAllParticipateStudy(AuthLogInHandler.getLoginUser().getNo(), 1);
+    Collection<Study> freeStudyList = studyMemberDao.findAllStudy(AuthLogInHandler.getLoginUser().getNo(), Study.PARTICIPANT_STATUS);
 
     if (freeStudyList.isEmpty()) {
       System.out.println("무료 스터디 게시글이 존재하지 않습니다.");
@@ -48,7 +47,7 @@ public class ParticipateFreeStudyListHandler implements Command {
 
         freeStudy.setViewCount(freeStudy.getViewCount() + 1);
         System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-        System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
+        System.out.printf("좋아요: %d\n", freeStudy.getLikes());
         System.out.println();
       }
     }

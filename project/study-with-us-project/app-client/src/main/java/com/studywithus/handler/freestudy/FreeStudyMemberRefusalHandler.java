@@ -1,7 +1,8 @@
 package com.studywithus.handler.freestudy;
 
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
-import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -11,11 +12,11 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyMemberRefusalHandler implements Command {
 
-  StudyDao freeStudyDao;
+  StudyMemberDao studyMemberDao;
   SqlSession sqlSession;
 
-  public FreeStudyMemberRefusalHandler(StudyDao freeStudyDao,  SqlSession sqlSession) {
-    this.freeStudyDao = freeStudyDao;
+  public FreeStudyMemberRefusalHandler(StudyMemberDao studyMemberDao, SqlSession sqlSession) {
+    this.studyMemberDao = studyMemberDao;
     this.sqlSession = sqlSession;
   }
 
@@ -24,15 +25,17 @@ public class FreeStudyMemberRefusalHandler implements Command {
     System.out.println("[마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 무료 스터디/ 상세보기 / 승인 거절]\n");
     int no = (int) request.getAttribute("freeNo");
 
-    Study freeStudy = freeStudyDao.findByNoRegisterStudy(AuthLogInHandler.getLoginUser().getNo(), no);
+    Study freeStudy = studyMemberDao.findByNoStudy(AuthLogInHandler.getLoginUser().getNo(), no, Study.OWNER_STATUS);
 
     if (freeStudy == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
+    List<Member> applicants = studyMemberDao.findAllMember(no, Study.PARTICIPANT_STATUS);
+
     while (true) {
-      for (Member freeApplicant : freeStudy.getApplicants()) {
+      for (Member freeApplicant : applicants) {
         System.out.printf("[번호 = %d, 이름 = %s]", freeApplicant.getNo(), freeApplicant.getName());
       }
       int applicantNo = Prompt.inputInt("신청자 번호를 입력하세요. > ");
@@ -45,7 +48,7 @@ public class FreeStudyMemberRefusalHandler implements Command {
 
       } else if (input.equalsIgnoreCase("y")) {
 
-        freeStudyDao.deleteStudyMember(applicantNo, no);
+        studyMemberDao.delete(applicantNo, no);
         sqlSession.commit();
 
         System.out.println();

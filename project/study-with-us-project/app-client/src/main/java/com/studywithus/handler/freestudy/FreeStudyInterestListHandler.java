@@ -47,7 +47,7 @@ public class FreeStudyInterestListHandler implements Command {
 
         freeStudy.setViewCount(freeStudy.getViewCount() + 1);
         System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-        System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
+        System.out.printf("좋아요: %d\n", freeStudy.getLikes());
         System.out.println();
       }
 
