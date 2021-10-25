@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studywithus.dao.StudyMemeberDao">
+  
+ <resultMap type="Study" id="StudyMap">
+    <id column="study_no" property="no"/> 
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="area" property="area"/>
+    <result column="register_date" property="registeredDate"/>
+    <result column="view_count" property="viewCount"/>
+    <result column="max_member" property="maxMembers"/>
+    <result column="start_date" property="startDate"/>
+    <result column="end_date" property="endDate"/>
+    <result column="del_status" property="deleteStatus"/>
+    <result column="price" property="price"/>
+    <result column="status" property="studyStatus"/>
+    <result column="likes" property="likes"/>
+       
+    <association property="writer" javaType="Member">
+      <id column="writer_no" property="no"/>
+      <result column="writer_name" property="name"/>
+      <result column="writer_email" property="email"/>
+    </association>
+  </resultMap>
+  
+  <resultMap type="Member" id="MemberMap">
+    <id column="member_no" property="no"/> 
+    <result column="name" property="name"/>
+    <result column="email" property="email"/>
+    <result column="phone_number" property="phoneNumber"/>
+    <result column="status" property="status"/>
+    <result column="access_level" property="userAccessLevel"/>
+  </resultMap>
+  
+  <sql id="selectStudy">
+  select 
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.price,
+      st.status,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.email writer_email
+    from 
+      study_member sm
+    inner join study st on sm.study_no=st.study_no
+    inner join member m on st.member_no=m.member_no
+  </sql>
+  
+  <sql id="selectMember">
+   select
+      sm.status, 
+      m.member_no,
+      m.name,
+      m.email,
+      m.status,
+      m.phone_number,
+      m.access_level
+      from 
+      study_member sm
+      inner join member m on sm.member_no=m.member_no
+      
+  </sql>
+  
+  <select id="findAllStudy" resultMap="StudyMap">
+    <include refid="selectStudy"/>
+    where
+      sm.member_no=#{memberNo} and sm.status=#{myStatus}
+    order by 
+      st.study_no asc
+  </select>
+  
+  <select id="findAllMember" resultMap="MemberMap">
+    <include refid="selectMember"/>
+    where
+      sm.member_no=#{studyNo} and sm.status=#{myStatus}
+    order by 
+      sm.member_no asc
+  </select>
+            
+  <insert id="insert">
+   insert into 
+     study_member(member_no,study_no,status)
+    values(#{memberNo},#{studyNo},#{myStatus}) 
+  </insert>
+  
+  <update id="update">
+    update study_member set
+      status=#{myStatus}
+    where
+      member_no=#{memberNo} AND study_no=#{studyNo}
+  </update>
+
+  <delete id="delete">
+    delete from study_member
+    where member_no=#{memberNo} AND study_no={studyNo}
+  </delete>
+  
+  <!-- 
+  <select id="findByNoStudy" resultMap="StudyMap" parameterType="int">
+   <include refid="selectStudy"/>
+    where 
+       sm.study_no=#{no}
+  </select>
+   -->
+
+</mapper>

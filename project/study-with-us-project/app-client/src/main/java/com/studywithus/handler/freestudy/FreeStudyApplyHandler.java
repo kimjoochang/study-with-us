@@ -22,16 +22,11 @@ public class FreeStudyApplyHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[무료 스터디 / 상세보기 / 신청]\n");
     int no = (int) request.getAttribute("freeNo");
+    Study freeStudy = freeStudyDao.findByNo(no);
+    Study paritcipateStudy = freeStudyDao.findByNoParticipateStudy(AuthLogInHandler.getLoginUser().getNo(), no, 1);
+    Study applyStudy = freeStudyDao.findByNoApplyStudy(AuthLogInHandler.getLoginUser().getNo(), no);
 
-    Study freeStudy = freeStudyDao.findByNoParticipateStudy(AuthLogInHandler.getLoginUser().getNo(), no, 1);
-
-    // 중복신청 확인
-    if (freeStudy == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
-      return;
-    }
-
-    if (freeStudyDao.findByNoApplyStudy(AuthLogInHandler.getLoginUser().getNo(), no) != null) {
+    if (applyStudy != null || paritcipateStudy != null) {
       System.out.println("이미 신청하신 스터디입니다.");
       return;
     }
