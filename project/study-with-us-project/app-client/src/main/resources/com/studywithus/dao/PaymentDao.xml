@@ -70,7 +70,7 @@
   <update id="update" parameterType="payment">
   update payment set
   status=#{status}
-   where payment_no=#{no}
+   where payment_no=#{payNo}
   </update>
   
   <!-- 보류 
