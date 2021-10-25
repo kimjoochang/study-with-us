@@ -23,7 +23,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
     Study freeStudy = freeStudyDao.
-        findByNoParticipateStudy( AuthLogInHandler.getLoginUser().getNo( ), no);
+        findByNoRegisterStudy(AuthLogInHandler.getLoginUser().getNo( ), no);
 
     if (freeStudy == null || freeStudy.getPrice() > 0) {
       System.out.println();

@@ -8,12 +8,12 @@ import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 import com.studywithus.util.StudyStatusHelper;
 
-public class ChargeStudyDetailHandler_JC implements Command {
+public class ChargeStudyDetailHandler implements Command {
 
   StudyDao chargeStudyDao;
   ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt;
 
-  public ChargeStudyDetailHandler_JC(StudyDao chargeStudyDao, ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt) {
+  public ChargeStudyDetailHandler(StudyDao chargeStudyDao, ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt) {
     this.chargeStudyDao = chargeStudyDao;
     this.chargeStudyDetailMenuPrompt = chargeStudyDetailMenuPrompt;
   }
@@ -25,6 +25,10 @@ public class ChargeStudyDetailHandler_JC implements Command {
 
     Study chargeStudy = chargeStudyDao.findByNo(no);
 
+    if (chargeStudy == null || chargeStudy.getPrice() == 0) {
+      System.out.println("해당 번호의 유료 스터디가 없습니다.");
+      return;
+    }
 
     chargeStudy.setViewCount(chargeStudy.getViewCount() + 1);
 

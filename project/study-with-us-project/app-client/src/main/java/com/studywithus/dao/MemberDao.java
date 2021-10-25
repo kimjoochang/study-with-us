@@ -13,6 +13,7 @@ public interface MemberDao {
   Member findMemberByEmailPassword(@Param("email") String email, @Param("password") String password) throws Exception; // 로그인
   void insert(Member member) throws Exception;
   void update(Member member) throws Exception;
+  void updatePassword(Member member) throws Exception;
   void delete(int no) throws Exception;
 
 }

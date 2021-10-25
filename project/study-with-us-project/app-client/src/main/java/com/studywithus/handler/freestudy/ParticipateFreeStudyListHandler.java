@@ -21,7 +21,7 @@ public class ParticipateFreeStudyListHandler implements Command {
     System.out.println("[마이 페이지 / 내가 참여한 무료 스터디 / 조회]\n");
 
     Collection<Study> freeStudyList = 
-        freeStudyDao.findAllParticipateStudy(AuthLogInHandler.getLoginUser().getNo());
+        freeStudyDao.findAllParticipateStudy(AuthLogInHandler.getLoginUser().getNo(), 1);
 
     if (freeStudyList.isEmpty()) {
       System.out.println("무료 스터디 게시글이 존재하지 않습니다.");

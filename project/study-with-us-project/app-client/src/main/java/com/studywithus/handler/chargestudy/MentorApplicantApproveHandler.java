@@ -1,5 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.handler.Command;
@@ -10,9 +11,11 @@ import com.studywithus.menu.Menu;
 public class MentorApplicantApproveHandler implements Command{
 
   MemberDao memberDao;
+  SqlSession sqlSession;
 
-  public MentorApplicantApproveHandler(MemberDao memberDao) {
+  public MentorApplicantApproveHandler(MemberDao memberDao, SqlSession sqlSession) {
     this.memberDao = memberDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override

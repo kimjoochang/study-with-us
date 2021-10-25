@@ -21,18 +21,7 @@ public class FreeStudyInterestDeleteHandler implements Command {
     System.out.println("[무료 스터디 / 상세보기 / 관심 목록 / 삭제]\n");
     int no = (int) request.getAttribute("freeNo");
 
-    // HashMap<String, String> params = new HashMap<>();
-    // params.put("no", String.valueOf(no));
-
     Study freeStudy = freeStudyDao.findByNo(no);
-
-    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    // System.out.println("무료 스터디 상세보기 실패!");
-    // System.out.println(requestAgent.getObject(Study.class));
-    // return;
-    // }
-
-    // Study freeStudy = requestAgent.getObject(Study.class);
 
     while (true) {
       String input = Prompt.inputString("무료 스터디 관심 목록을 삭제하시겠습니까? (y/N) ");
@@ -43,7 +32,6 @@ public class FreeStudyInterestDeleteHandler implements Command {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        // freeStudy.getLikeMembers().remove(AuthLogInHandler.getLoginUser().getNo());
         for (int i = 0; i < freeStudy.getLikeMembers().size(); i++) {
           if (freeStudy.getLikeMembers().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
             freeStudy.getLikeMembers().remove(i);
@@ -56,67 +44,11 @@ public class FreeStudyInterestDeleteHandler implements Command {
         System.out.println("무료 스터디 관심 목록을 삭제하였습니다.");
         return;
 
-        // if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-        // System.out.println("무료 스터디 관심 목록 삭제 성공!");
-        // return;
-        //
-        // } else {
-        // System.out.println("무료 스터디 관심 목록 삭제 실패!");
-        // return;
-        // }
-
       } else {
         System.out.println();
         System.out.println("다시 입력하세요.\n");
         continue;
       }
     }
-
-    // List<Member> likeUser = freeStudyInterest.getLikeMembers();
-    // likeUser.remove(AuthLogInHandler.getLoginUser());
-    // freeStudyInterest.setLikeMembers(likeUser);
-    //
-    // requestAgent.request("freeStudy.interest.delete", freeStudyInterest);
-    //
-    // System.out.println();
-    // System.out.println("무료 스터디 관심 목록을 삭제하였습니다.");
-
-    // } else {
-    // int no = (int) request.getAttribute("freeNo");
-
-    // Study freeInterest = findByNo(no);
-
-    // if (freeStudy == null) {
-    // System.out.println("해당 번호의 게시글이 없습니다.");
-    // return;
-    // }
-    //
-    // if (freeStudy.getLikeMembers().isEmpty()) {
-    // System.out.println("무료 스터디 관심목록이 존재하지 않습니다.\n");
-    // return;
-    // }
-    //
-    // while (true) {
-    // String input = Prompt.inputString("정말 삭제하시겠습니까? (y/N) ");
-    //
-    // if (input.equalsIgnoreCase("n") || input.length() == 0) {
-    // System.out.println("무료 스터디 관심 목록을 취소하였습니다.\n");
-    // return;
-    //
-    // } else if (input.equalsIgnoreCase("y")) {
-
-    // } else {
-    // System.out.println("다시 입력하세요.\n");
-    // continue;
-    // }
-    // }
-    // }
-
-    // List<Member> likeMember = freeStudyInterest.getLikeMembers();
-    // likeMember.remove(AuthLogInHandler.getLoginUser());
-    // freeStudyInterest.setLikeMembers(likeMember);
-
-    // System.out.println();
-    // System.out.println("무료 스터디 관심 목록을 삭제하였습니다.");
   }
 }

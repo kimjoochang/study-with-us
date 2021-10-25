@@ -1,20 +1,26 @@
 package com.studywithus.handler.freestudy;
 
 import java.sql.Date;
+import org.apache.ibatis.session.SqlSession;
+import com.studywithus.dao.MemberDao;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
-import com.studywithus.menu.Menu;
 import com.studywithus.util.Prompt;
 
 public class FreeStudyAddHandler implements Command {
 
   StudyDao freeStudyDao;
+  MemberDao memberDao;
+  SqlSession sqlSession;
 
-  public FreeStudyAddHandler(StudyDao freeStudyDao) {
+  public FreeStudyAddHandler(StudyDao freeStudyDao, MemberDao memberDao, SqlSession sqlSession) {
     this.freeStudyDao = freeStudyDao;
+    this.memberDao = memberDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -67,8 +73,11 @@ public class FreeStudyAddHandler implements Command {
     }
 
     freeStudyDao.insert(freeStudy);
-
-    AuthLogInHandler.userAccessLevel |= Menu.ACCESS_LEADER;
+    Member member = memberDao.findByNo(AuthLogInHandler.getLoginUser().getNo());
+    int temp = member.getUserAccessLevel();
+    member.setUserAccessLevel(temp);
+    memberDao.update(member);
+    sqlSession.commit();
 
     System.out.println();
     System.out.println("무료 스터디 등록이 완료되었습니다.");

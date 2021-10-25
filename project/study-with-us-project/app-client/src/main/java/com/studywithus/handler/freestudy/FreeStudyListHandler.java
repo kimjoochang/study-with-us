@@ -44,7 +44,6 @@ public class FreeStudyListHandler implements Command {
         }
         System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
-        freeStudy.setViewCount(freeStudy.getViewCount() + 1);
         System.out.printf("조회수: %d\n", freeStudy.getViewCount());
         System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
         System.out.println();

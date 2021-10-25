@@ -1,17 +1,18 @@
 package com.studywithus.handler.freestudy;
 
-import com.studywithus.dao.FreeStudyDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
+import com.studywithus.util.StudyStatusHelper;
 
 public class FreeStudyApplyDetailHandler implements Command {
 
-  FreeStudyDao freeStudyDao;
+  StudyDao freeStudyDao;
 
-  public FreeStudyApplyDetailHandler(FreeStudyDao freeStudyDao) {
+  public FreeStudyApplyDetailHandler(StudyDao freeStudyDao) {
     this.freeStudyDao = freeStudyDao;
   }
 
@@ -20,7 +21,7 @@ public class FreeStudyApplyDetailHandler implements Command {
     System.out.println("[STUDY WITH US / 마이페이지 / 나의 활동 / 무료 스터디 신청 내역 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    Study freeStudy = freeStudyDao.findByNo(no);
+    Study freeStudy = freeStudyDao.findByNoParticipateStudy(AuthLogInHandler.getLoginUser().getNo(),no, 0);
 
     if (freeStudy == null) {
       System.out.println();
@@ -28,44 +29,32 @@ public class FreeStudyApplyDetailHandler implements Command {
       return;
     }
 
-    Boolean myApplStudy = false;
-    for (int i = 0; i < freeStudy.getApplicants().size(); i++) {
-      if (freeStudy.getApplicants().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-        myApplStudy = true;
-        break;
-      }
-    }
-
-    // [테스트]
-    // System.out.println("-----테스트-----");
-    if (!myApplStudy) {
-      System.out.println("신청하신 스터디가 아닙니다.");
-      return;
-    }
+    String status = StudyStatusHelper.studyStatus(freeStudy);
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
-
+    System.out.printf("번호: %d\n",freeStudy.getNo());
     System.out.printf("제목: %s\n", freeStudy.getTitle());
     System.out.printf("팀장: %s\n", freeStudy.getWriter().getName());
+    System.out.printf("스터디 진행상태 = %s\n", status);
 
-    if (freeStudy.getArea() != null) {
-      System.out.printf("온/오프라인: %s\n", freeStudy.getOFFLINE());
+    if (freeStudy.getOnOffLine() == 1) {
+      System.out.printf("온/오프라인: 오프라인");
       System.out.printf("지역: %s\n", freeStudy.getArea());
-    } else {
-      System.out.printf("온/오프라인: %s\n", freeStudy.getONLINE());
-    }
 
+    } else {
+      System.out.printf("온/오프라인: 온라인");
+    }
     System.out.printf("시작일: %s\n", freeStudy.getStartDate());
     System.out.printf("종료일: %s\n", freeStudy.getEndDate());
     System.out.printf("모집인원: %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
     System.out.printf("설명: %s\n", freeStudy.getContent());
-    System.out.printf("규칙: %s\n", freeStudy.getRule());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
+
+    freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
     System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
     System.out.println();
 
-    // CommandRequest에 보관 -> 게시글 번호 사용 가능
     request.setAttribute("freeNo", no);
 
     while (true) {

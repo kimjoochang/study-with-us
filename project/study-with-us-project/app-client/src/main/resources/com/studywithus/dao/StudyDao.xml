@@ -18,37 +18,16 @@
     <result column="del_status" property="deleteStatus"/>
     <result column="price" property="price"/>
     <result column="status" property="studyStatus"/>
+    <result column="likes" property="likes"/>
        
     <association property="writer" javaType="Member">
       <id column="writer_no" property="no"/>
       <result column="writer_name" property="name"/>
       <result column="writer_email" property="email"/>
     </association>
-    
-    <collection property="likeMembers" ofType="Member">
-      <id column="likeMember_no" property="no"/>
-      <result column="likeMember_name" property="name"/>
-      <result column="likeMember_email" property="email"/>
-    </collection>
-    
-    <collection property="applicants" ofType="Member">
-      <id column="applicant_no" property="no"/>
-      <result column="applicant_name" property="name"/>
-      <result column="applicant_email" property="email"/>
-    </collection>
-
-    <collection property="members" ofType="Member">
-      <id column="member_no" property="no"/>
-      <result column="member_name" property="name"/>
-      <result column="member_email" property="email"/>
-    </collection>
   </resultMap>
   
-  <resultMap type="Payment" id="paymentMap">
-  
-  </resultMap>
-  
-  <sql id="select1"> <!-- 기본 조회 & 내생스 & 관심목록 용 -->
+  <sql id="select1">
   select 
       st.study_no,
       st.title,
@@ -64,79 +43,10 @@
       st.status,
       m.member_no writer_no,
       m.name writer_name,
-      m.email writer_email,
-      m2.member_no likeMember_no,
-      m2.email likeMember_email
+      m.email writer_email
     from 
       study st
-    left outer join interest i on st.study_no=i.study_no
     inner join member m on st.member_no=m.member_no
-    left outer join member m2 on i.member_no=m2.member_no
-  </sql>
-
-  <sql id="selectfindParticipate"> <!-- 내참스용 -->
-   select 
-      sm.status,
-      st.study_no,
-      st.title,
-      st.content,
-      st.area,
-      st.register_date,
-      st.view_count,
-      st.max_member,
-      st.start_date,
-      st.end_date,
-      st.del_status,
-      st.price,
-      st.status,
-      m.member_no writer_no,
-      m.name writer_name,
-      m.email writer_email,
-      m2.member_no member_no,
-      m2.name member_name,
-      m2.email member_email,
-      m3.member_no likeMember_no,
-      m3.email likeMember_email
-    from 
-      study_member sm
-    inner join member m2 on sm.member_no=m2.member_no
-    inner join study st on sm.study_no=st.study_no
-    inner join member m on st.member_no=m.member_no
-    left outer join interest i on sm.study_no=i.study_no  <!-- 내참스 좋아요 수 확인하기 위해 -->
-    left outer join member m3 on i.member_no=m3.member_no  <!-- 내참스 좋아요 수 확인하기 위해 -->
-  </sql>
-  
-  <sql id="selectfindApply"> <!-- 내참스 & 내가 지원한 스터디 용 -->
-   select 
-      sm.status,
-      st.study_no,
-      st.title,
-      st.content,
-      st.area,
-      st.register_date,
-      st.view_count,
-      st.max_member,
-      st.start_date,
-      st.end_date,
-      st.del_status,
-      st.price,
-      st.status,
-      m.member_no writer_no,
-      m.name writer_name,
-      m.email writer_email,
-      m2.member_no applicant_no,
-      m2.name applicant_name,
-      m2.email applicant_email,
-      m3.member_no likeMember_no,
-      m3.email likeMember_email
-    from 
-      study_member sm
-    inner join member m2 on sm.member_no=m2.member_no
-    inner join study st on sm.study_no=st.study_no
-    inner join member m on st.member_no=m.member_no
-    left outer join interest i on sm.study_no=i.study_no  <!-- 내가 지원한 스터디 좋아요 수 확인하기 위해 -->
-    left outer join member m3 on i.member_no=m3.member_no  <!-- 내가 지원한 스터디 좋아요 수 확인하기 위해 -->
-    
   </sql>
   
   <sql id="order1">
@@ -152,9 +62,8 @@
    <select id="findByKeyword" resultMap="StudyMap" parameterType="string">
   <include refid="select1"/>
     where 
-      st.title like(concat('%',#{keyword},'%'))
+      st.title like (concat('%',#{keyword},'%'))
       or st.content like (concat('%',#{keyword},'%'))
-      or st.name like (concat('%',#{keyword},'%'))
     <include refid="order1"/>
    </select>
             
@@ -169,17 +78,11 @@
      study(title,content,area,max_member,start_date,end_date,price,member_no)
     values(#{title},#{content},#{area},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 
   </insert>
-  
+ 
   <insert id="insertInterest">
   insert into 
     interest(member_no,study_no)
     values(#{memberNo},#{studyNo})
-  </insert>
-  
-  <insert id="insertStudyMember">
-    insert into
-      study_member(member_no,study_no,status)
-      values(#{memberNo},#{studyNo},#{myStatus})
   </insert>
 
   <update id="update" parameterType="study">
@@ -197,76 +100,44 @@
    where study_no=#{no}  
   </update>
   
-  <update id="updateMyStatus">
-    update study_member set
-      status=#{myStatus}
-    where
-      member_no=#{memberNo} AND study_no=#{studyNo}
-  </update>
-  
-  <select id="findAllRegisterStudy" resultMap="StudyMap" parameterType="int">
-    <include refid="select1"/>
-      where 
-       m.member_no=#{writerNo}
-    <include refid="order1"/> 
-  </select>
-  
-  <select id="findByNoRegisterStudy" resultMap="StudyMap">
-    <include refid="select1"/>
+  <select id="findAllIInterest" resultMap="StudyMap" parameterType="int">
+  select 
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.price,
+      st.status,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.email writer_email
+    from 
+      study st
+     left outer join interest i on st.study_no=i.study_no
+     inner join member m on m.member_no=st.member_no
     where 
-       m.member_no=#{writerNo} AND st.study_no=#{studyNo}
-  </select>
-
-  <select id="findAllInterest" resultMap="StudyMap" parameterType="int">
-    <include refid="select1"/>
-    where 
-       m2.member_no=#{memberNo}
+       i.member_no=#{memberNo}
     <include refid="order1"/> 
-  </select>
-
-  <select id="findByNoInterest" resultMap="StudyMap">
-  <include refid="select1"/>
-    where 
-       m2.member_no=#{memberNo} AND st.study_no=#{studyNo}
-  </select>
-
-  <select id="findAllParticipateStudy" resultMap="StudyMap">
-    <include refid="selectfindParticipate"/>
-      where 
-       m2.member_no=#{memberNo} AND sm.status=#{myStatus}
-    <include refid="order1"/> 
-  </select>
-  
-  <select id="findByNoParticipateStudy" resultMap="StudyMap">
-    <include refid="selectfindParticipate"/>
-      where 
-       m2.member_no=#{memberNo} AND st.study_no=#{studyNo} AND sm.status=#{myStatus}
-  </select>
-  
-  <select id="findAllApplyStudy" resultMap="StudyMap" parameterType="int">
-   <include refid="selectfindParticipate"/>
-    where
-      m2.member_no=#{memberNo} AND sm.status=0
-    order by 
-      sm.study_no asc
-  </select>
-
-  <select id="findByNOApplyStudy" resultMap="StudyMap">
-   <include refid="selectfindParticipate"/>
-    where
-      m2.member_no=#{memberNo} AND sm.study_no=#{studyNo} AND sm.status=0
   </select>
 
   <delete id="delete" parameterType="int">
     delete from study
     where study_no=#{no}
   </delete>
-
-  <delete id="deleteStudyMember">
-    delete from study_member
-    where member_no=#{memberNo} AND study_no={studyNo}
+  
+  <delete id="deleteInterest">
+    delete from interest
+    where member_no=#{memberNo} and study_no=#{studyNo} 
   </delete>
-<!-- 
+
+
+  <!-- 
   <delete id="deleteInterest" parameterType="int">
     delete from interest
     where study_no=#{no}
@@ -340,6 +211,38 @@
    inner join interest i on st.study_no=i.study_no
     inner join member m on st.member_no=m.member_no
     inner join member m2 on i.member_no=m2.member_no
+    
+    <sql id="selectfindParticipate"> 
+   select 
+      sm.status,
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.price,
+      st.status,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.email writer_email,
+      m2.member_no member_no,
+      m2.name member_name,
+      m2.email member_email,
+      m3.member_no likeMember_no,
+      m3.email likeMember_email
+    from 
+      study_member sm
+    inner join member m2 on sm.member_no=m2.member_no
+    inner join study st on sm.study_no=st.study_no
+    inner join member m on st.member_no=m.member_no
+    left outer join interest i on sm.study_no=i.study_no 
+    left outer join member m3 on i.member_no=m3.member_no 
+  </sql>
     
   </sql>
   
