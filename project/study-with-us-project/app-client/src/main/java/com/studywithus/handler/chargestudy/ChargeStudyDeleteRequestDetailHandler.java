@@ -43,13 +43,13 @@ public class ChargeStudyDeleteRequestDetailHandler implements Command {
     System.out.printf("등록일: %s\n", chargeStudy.getRegisteredDate());
     System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers(), chargeStudy.getMaxMembers());
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
-    System.out.printf("좋아요수: %d\n", chargeStudy.getViewCount());
+    System.out.printf("좋아요수: %d\n", chargeStudy.getLikes());
     System.out.println();
 
-    System.out.println("1. 삭제");
-    System.out.println("0. 이전\n");
 
     while (true) {
+      System.out.println("1. 삭제");
+      System.out.println("0. 이전\n");
       int input = Prompt.inputInt("번호를 입력하세요. > ");
       System.out.println();
 
@@ -57,6 +57,7 @@ public class ChargeStudyDeleteRequestDetailHandler implements Command {
       if (input == 1) {
         chargeStudyDao.delete(no);
         sqlSession.commit();
+        return;
 
         // 0. 이전
       } else if (input == 0) {

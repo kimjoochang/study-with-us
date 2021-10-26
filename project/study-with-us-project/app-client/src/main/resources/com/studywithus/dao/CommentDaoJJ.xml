@@ -17,42 +17,43 @@
 		</association>
 	</resultMap>
 
-	<sql id="select1">
-		select
-		c.comment_no,
-		c.cmnt_no,
-		c.content,
-		c.register_date,
-		m.member_no,
-		m.email,
-		from
-		comment c
-		inner join member m on c.member_no=m.member_no
-		left outer join cmnt cm on
-		c.cmnt_no=cm.cmnt_no
-	</sql>
+<sql id="select1">
+    select
+    c.comment_no,
+    c.cmnt_no,
+    c.content,
+    c.register_date,
+    m.member_no,
+    m.email
+    from
+    comment c
+    inner join member m on c.member_no=m.member_no
+  </sql>
 
-	<select id="findAll" resultMap="CommentMap" parameterType="int">
-		<include refid="select1" />
-		order by comment_no asc
-	</select>
+  <select id="findAll" resultMap="CommentMap" parameterType="int">
+    <include refid="select1" />
+    where
+      c.study_no=#{cmntNo}
+    order by comment_no asc
+  </select>
 
-	<select id="findByNo" resultMap="CommentMap" parameterType="int">
-		<include refid="select1" />
-		where c.comment_no=#{no}
-	</select>
+  <select id="findByNo" resultMap="CommentMap" parameterType="int">
+    <include refid="select1" />
+    where 
+      c.comment_no=#{no}
+  </select>
 
-	<!--오류 Cannot add or update a child row: a foreign key constraint fails -->
-	<insert id="insert" parameterType="comment">
-		insert into
-		comment(writer_no,cmnt_no,content)
-		values(#{writer.no},#{cmnt.no},#{content})
-	</insert>
+  <!--오류 Cannot add or update a child row: a foreign key constraint fails -->
+  <insert id="insert" parameterType="comment">
+    insert into
+    comment(writer_no,cmnt_no,content)
+    values(#{writer.no},#{communityNo},#{content})
+  </insert>
 
-	<delete id="delete" parameterType="int">
-		delete from comment
-		where
-		comment_no=#{no}
-	</delete>
+  <delete id="delete" parameterType="int">
+    delete from comment
+    where
+    comment_no=#{no}
+  </delete>
 
 </mapper>
