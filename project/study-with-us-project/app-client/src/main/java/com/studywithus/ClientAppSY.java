@@ -9,6 +9,7 @@ import static com.studywithus.menu.Menu.ACCESS_MENTEE;
 import static com.studywithus.menu.Menu.ACCESS_MENTOR;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.HashMap;
 
 import org.apache.ibatis.io.Resources;
@@ -16,12 +17,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.studywithus.dao.MemberDao;
+import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.dao.ScheduleDao;
-import com.studywithus.dao.impl.MariadbMemberDaoSY;
+import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.dao.impl.MybatisScheduleDao;
-import com.studywithus.dao.impl.NetChargeStudyDao;
 import com.studywithus.dao.impl.NetCommunityDao;
-import com.studywithus.dao.impl.NetFreeStudyDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
 import com.studywithus.handler.Command;
@@ -88,13 +89,13 @@ import com.studywithus.util.Prompt;
 
 public class ClientAppSY {
 
-	SqlSession sqlSession;
 	Connection con;
 
 	RequestAgent requestAgent;
 
 	HashMap<String, Command> commandMap = new HashMap<>();
-	//	HashMap<String, List<Study>> applyFreeStudyMap = new HashMap<>();
+
+	/* [수정] */CommandRequest request = new CommandRequest(commandMap);
 
 	class MenuItem extends Menu {
 		String menuId;
@@ -123,18 +124,16 @@ public class ClientAppSY {
 
 	public ClientAppSY() throws Exception {
 
-		// 서버와 통신을 담당할 객체 준비
-		requestAgent = null;
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/team3db?user=team3&password=1111");
 
-		// Mybatis의 SqlSession 객체 준비
-		sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
-				"com/studywithus/pms/conf/mybatis-config.xml")).openSession();
-
+		SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+				"com/studywithus/conf/mybatis-config.xml")).openSession();
 
 		// 데이터 관리를 담당할 DAO 객체를 준비한다.
-		MemberDao memberDao = new MariadbMemberDaoSY(con);
-		NetFreeStudyDao freeStudyDao = new NetFreeStudyDao(requestAgent);
-		NetChargeStudyDao chargeStudyDao = new NetChargeStudyDao(requestAgent);
+		MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+		StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
+		MentorApplicationDao mentorApplicationDao = sqlSession.getMapper(MentorApplicationDao.class);
+		StudyMemberDao studyMemberdao = sqlSession.getMapper(StudyMemberDao.class);
 
 		NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
 		NetPaymentDao paymentDao = new NetPaymentDao(requestAgent);
@@ -142,7 +141,6 @@ public class ClientAppSY {
 
 		ScheduleDao jobsScheduleDao = new MybatisScheduleDao(sqlSession);
 		ScheduleDao examScheduleDao = new MybatisScheduleDao(sqlSession);
-
 
 		commandMap.put("/auth/logIn", new AuthLogInHandler(memberDao));
 		commandMap.put("/google/logIn", new SnsLogInHandler(memberDao));
@@ -161,14 +159,14 @@ public class ClientAppSY {
 		commandMap.put("/find/email", new FindEmailHandler(memberDao));
 		commandMap.put("/reset/password", new ResetPasswordHandler(memberDao));
 
-
 		commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberDao));
 
-		//		commandMap.put("/myInfo/list", new MyInfoHandler(memberDao));
+		// commandMap.put("/myInfo/list", new MyInfoHandler(memberDao));
 		//
 		commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(freeStudyDao));
 		commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(freeStudyDao));
-		//		commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(requestAgent));
+		// commandMap.put("/chargeInterest/list", new
+		// ChargeStudyInterestListHandler(requestAgent));
 		// commandMap.put("/mentorApplicant/add",
 		// new MentorApplicationAddHandler(mentorApplicationFormList, memberList));
 		// commandMap.put("/mentorApplicant/list",
@@ -192,12 +190,10 @@ public class ClientAppSY {
 		commandMap.put("/freeStudy/interestDetail", new FreeStudyInterestDetailHandler(freeStudyDao));
 		commandMap.put("/freeStudy/interestList", new FreeStudyInterestListHandler(freeStudyDao));
 
-
 		commandMap.put("/freeStudy/registerFreeStudyDetail", new RegisterFreeStudyDetailHandler(freeStudyDao));
 		commandMap.put("/freeStudy/registerFreeStudyList", new RegisterFreeStudyListHandler(freeStudyDao));
 		commandMap.put("/freeStudy/memberApprove", new FreeStudyMemberApproveHandler(freeStudyDao));
 		commandMap.put("/freeStudy/memberRefusal", new FreeStudyMemberRefusalHandler(freeStudyDao));
-
 
 		commandMap.put("/freeStudy/participateFreeStudyList", new ParticipateFreeStudyListHandler(freeStudyDao));
 		commandMap.put("/freeStudy/participateFreeStudyDetail", new ParticipateFreeStudyDetailHandler(freeStudyDao));
@@ -205,7 +201,8 @@ public class ClientAppSY {
 		commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(chargeStudyDao));
 		commandMap.put("/chargeStudy/add", new ChargeStudyAddHandler(chargeStudyDao));
 		commandMap.put("/chargeStudy/list", new ChargeStudyListHandler(chargeStudyDao));
-		//		commandMap.put("/chargeStudy/detail", new ChargeStudyDetailHandler_JC(chargeStudyDao, chargeStudyDetailMenuPrompt));
+		// commandMap.put("/chargeStudy/detail", new
+		// ChargeStudyDetailHandler_JC(chargeStudyDao, chargeStudyDetailMenuPrompt));
 		commandMap.put("/chargeStudy/update", new ChargeStudyUpdateHandler(chargeStudyDao));
 		commandMap.put("/chargeStudy/deleteRequest", new ChargeStudyDeleteRequestHandler(chargeStudyDao));
 		commandMap.put("/chargeStudy/deleteRequestCancel", new ChargeStudyDeleteRequestCancelHandler(chargeStudyDao));
@@ -219,14 +216,14 @@ public class ClientAppSY {
 
 		commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(chargeStudyDao));
 		commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(chargeStudyDao));
-		//  commandMap.put("/chargeInterest/detail",
-		//      new ChargeStudyInterestDetailHandler(chargeStudyDao, chargeStudyDetailMenuPrompt));
-		commandMap.put("/chargeStudy/interestDelete",
-				new ChargeStudyInterestDeleteHandler(chargeStudyDao));
+		// commandMap.put("/chargeInterest/detail",
+		// new ChargeStudyInterestDetailHandler(chargeStudyDao,
+		// chargeStudyDetailMenuPrompt));
+		commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(chargeStudyDao));
 
-		commandMap.put("/chargeStudy/registerChargeStudyList",
-				new RegisterChargeStudyListHandler(chargeStudyDao));
-		//		commandMap.put("/chargeStudy/registerChargeStudyDetail", new RegisterChargeStudyDetailHandler(chargeStudyDao));
+		commandMap.put("/chargeStudy/registerChargeStudyList", new RegisterChargeStudyListHandler(chargeStudyDao));
+		// commandMap.put("/chargeStudy/registerChargeStudyDetail", new
+		// RegisterChargeStudyDetailHandler(chargeStudyDao));
 
 		commandMap.put("/chargeStudy/participateChargeStudyList",
 				new ParticipateChargeStudyListHandler(chargeStudyDao));
@@ -238,31 +235,49 @@ public class ClientAppSY {
 		//
 		commandMap.put("/community/add", new CommunityAddHandler(communityDao));
 		commandMap.put("/community/list", new CommunityListHandler(communityDao));
-		//		commandMap.put("/community/detail", new CommunityDetailHandler(communityDao));
+		// commandMap.put("/community/detail", new
+		// CommunityDetailHandler(communityDao));
 		commandMap.put("/community/update", new CommunityUpdateHandler(communityDao));
 		commandMap.put("/community/delete", new CommunityDeleteHandler(communityDao));
 		commandMap.put("/community/search", new CommunitySearchHandler(communityDao));
 
-		//		commandMap.put("/communityQa/add", new CommunityAddHandler(requestAgent));
-		//		commandMap.put("/communityQa/list", new CommunityListHandler(requestAgent));
-		//		commandMap.put("/communityQa/detail", new CommunityDetailHandler(requestAgent, "/communityQa/update", "/communityQa/delete"));
-		//		commandMap.put("/communityQa/update", new CommunityUpdateHandler(requestAgent));
-		//		commandMap.put("/communityQa/delete", new CommunityDeleteHandler(requestAgent));
-		//		commandMap.put("/communityQa/search", new CommunitySearchHandler(requestAgent));
+		// commandMap.put("/communityQa/add", new CommunityAddHandler(requestAgent));
+		// commandMap.put("/communityQa/list", new CommunityListHandler(requestAgent));
+		// commandMap.put("/communityQa/detail", new
+		// CommunityDetailHandler(requestAgent, "/communityQa/update",
+		// "/communityQa/delete"));
+		// commandMap.put("/communityQa/update", new
+		// CommunityUpdateHandler(requestAgent));
+		// commandMap.put("/communityQa/delete", new
+		// CommunityDeleteHandler(requestAgent));
+		// commandMap.put("/communityQa/search", new
+		// CommunitySearchHandler(requestAgent));
 		//
-		//		commandMap.put("/communityInfo/add", new CommunityAddHandler(requestAgent));
-		//		commandMap.put("/communityInfo/list", new CommunityListHandler(requestAgent));
-		//		commandMap.put("/communityInfo/detail", new CommunityDetailHandler(requestAgent, "/communityInfo/update", "/communityInfo/delete"));
-		//		commandMap.put("/communityInfo/update", new CommunityUpdateHandler(requestAgent));
-		//		commandMap.put("/communityInfo/delete", new CommunityDeleteHandler(requestAgent));
-		//		commandMap.put("/communityInfo/search", new CommunitySearchHandler(requestAgent));
+		// commandMap.put("/communityInfo/add", new CommunityAddHandler(requestAgent));
+		// commandMap.put("/communityInfo/list", new
+		// CommunityListHandler(requestAgent));
+		// commandMap.put("/communityInfo/detail", new
+		// CommunityDetailHandler(requestAgent, "/communityInfo/update",
+		// "/communityInfo/delete"));
+		// commandMap.put("/communityInfo/update", new
+		// CommunityUpdateHandler(requestAgent));
+		// commandMap.put("/communityInfo/delete", new
+		// CommunityDeleteHandler(requestAgent));
+		// commandMap.put("/communityInfo/search", new
+		// CommunitySearchHandler(requestAgent));
 		//
-		//		commandMap.put("/communityTalk/add", new CommunityAddHandler(requestAgent));
-		//		commandMap.put("/communityTalk/list", new CommunityListHandler(requestAgent));
-		//		commandMap.put("/communityTalk/detail", new CommunityDetailHandler(requestAgent, "/communityTalk/update", "/communityTalk/delete"));
-		//		commandMap.put("/communityTalk/update", new CommunityUpdateHandler(requestAgent));
-		//		commandMap.put("/communityTalk/delete", new CommunityDeleteHandler(requestAgent));
-		//		commandMap.put("/communityTalk/search", new CommunitySearchHandler(requestAgent));
+		// commandMap.put("/communityTalk/add", new CommunityAddHandler(requestAgent));
+		// commandMap.put("/communityTalk/list", new
+		// CommunityListHandler(requestAgent));
+		// commandMap.put("/communityTalk/detail", new
+		// CommunityDetailHandler(requestAgent, "/communityTalk/update",
+		// "/communityTalk/delete"));
+		// commandMap.put("/communityTalk/update", new
+		// CommunityUpdateHandler(requestAgent));
+		// commandMap.put("/communityTalk/delete", new
+		// CommunityDeleteHandler(requestAgent));
+		// commandMap.put("/communityTalk/search", new
+		// CommunitySearchHandler(requestAgent));
 
 		commandMap.put("/myPost/list", new MyPostListHandler(communityDao));
 		commandMap.put("/myPost/detail", new MyPostDetailHandler(communityDao));
@@ -403,9 +418,9 @@ public class ClientAppSY {
 	private Menu createCommunityMenu() {
 		MenuGroup communityMenu = new MenuGroup("커뮤니티");
 
-		//		communityMenu.add(createCommunityInfoMenu());
-		//		communityMenu.add(createCommunityQaMenu());
-		//		communityMenu.add(createCommunityTalkMenu());
+		// communityMenu.add(createCommunityInfoMenu());
+		// communityMenu.add(createCommunityQaMenu());
+		// communityMenu.add(createCommunityTalkMenu());
 
 		communityMenu.add(new MenuItem("검색", "/communityQa/search"));
 		communityMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityQa/add"));
@@ -416,55 +431,57 @@ public class ClientAppSY {
 	}
 
 	// 커뮤니티 / 질문
-	//	private Menu createCommunityQaMenu() {
-	//		MenuGroup communityQaMenu = new MenuGroup("질문");
+	// private Menu createCommunityQaMenu() {
+	// MenuGroup communityQaMenu = new MenuGroup("질문");
 
-	//		communityQaMenu.add(new MenuItem("검색", "/communityQa/search"));
-	//		communityQaMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityQa/add"));
-	//		communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
-	//		communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
+	// communityQaMenu.add(new MenuItem("검색", "/communityQa/search"));
+	// communityQaMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityQa/add"));
+	// communityQaMenu.add(new MenuItem("조회", "/communityQa/list"));
+	// communityQaMenu.add(new MenuItem("상세보기", "/communityQa/detail"));
 	// [삭제] 상세보기 안으로 위치 변경
 	// communityQaMenu.add(new MenuItem("수정", ACCESS_GENERAL,
 	// "/communityQa/update"));
 	// communityQaMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
 	// "/communityQa/delete"));
 
-	//		return communityQaMenu;
-	//	}
+	// return communityQaMenu;
+	// }
 
 	// 커뮤니티 / 정보
-	//	private Menu createCommunityInfoMenu() {
-	//		MenuGroup communityInfoMenu = new MenuGroup("정보");
+	// private Menu createCommunityInfoMenu() {
+	// MenuGroup communityInfoMenu = new MenuGroup("정보");
 	//
-	//		communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
-	//		communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityInfo/add"));
-	//		communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
-	//		communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
+	// communityInfoMenu.add(new MenuItem("검색", "/communityInfo/search"));
+	// communityInfoMenu.add(new MenuItem("생성", ACCESS_GENERAL,
+	// "/communityInfo/add"));
+	// communityInfoMenu.add(new MenuItem("조회", "/communityInfo/list"));
+	// communityInfoMenu.add(new MenuItem("상세보기", "/communityInfo/detail"));
 	// [삭제] 상세보기 안으로 위치 변경
 	// communityInfoMenu.add(new MenuItem("수정", ACCESS_GENERAL,
 	// "/communityInfo/update"));
 	// communityInfoMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
 	// "/communityInfo/delete"));
 
-	//		return communityInfoMenu;
-	//	}
+	// return communityInfoMenu;
+	// }
 
 	// 커뮤니티 / 스몰톡
-	//	private Menu createCommunityTalkMenu() {
-	//		MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
+	// private Menu createCommunityTalkMenu() {
+	// MenuGroup communityTalkMenu = new MenuGroup("스몰톡");
 	//
-	//		communityTalkMenu.add(new MenuItem("검색", "/communityTalk/search"));
-	//		communityTalkMenu.add(new MenuItem("생성", ACCESS_GENERAL, "/communityTalk/add"));
-	//		communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
-	//		communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
+	// communityTalkMenu.add(new MenuItem("검색", "/communityTalk/search"));
+	// communityTalkMenu.add(new MenuItem("생성", ACCESS_GENERAL,
+	// "/communityTalk/add"));
+	// communityTalkMenu.add(new MenuItem("조회", "/communityTalk/list"));
+	// communityTalkMenu.add(new MenuItem("상세보기", "/communityTalk/detail"));
 	// [삭제] 상세보기 안으로 위치 변경
 	// communityTalkMenu.add(new MenuItem("수정", ACCESS_GENERAL,
 	// "/communityTalk/update"));
 	// communityTalkMenu.add(new MenuItem("삭제", ACCESS_GENERAL | ACCESS_ADMIN,
 	// "/communityTalk/delete"));
 
-	//		return communityTalkMenu;
-	//	}
+	// return communityTalkMenu;
+	// }
 
 	// ------------------------------ 일정 -----------------------------------------
 
@@ -637,7 +654,7 @@ public class ClientAppSY {
 		MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
 		freeInterestMenu.add(new MenuItem("조회", "/freeStudy/interestList"));
 		freeInterestMenu.add(new MenuItem("상세보기", "/freeStudy/interestDetail"));
-		//		freeInterestMenu.add(new MenuItem("삭제", "/freeInterest/delete"));
+		// freeInterestMenu.add(new MenuItem("삭제", "/freeInterest/delete"));
 
 		return freeInterestMenu;
 	}
@@ -788,7 +805,6 @@ public class ClientAppSY {
 		requestAgent.request("quit", null);
 
 		Prompt.close();
-
 
 		// DBMS와 연결을 끊는다.
 		con.close();
