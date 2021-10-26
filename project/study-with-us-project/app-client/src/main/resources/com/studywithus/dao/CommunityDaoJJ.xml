@@ -31,6 +31,12 @@
 		cm.content,
 		cm.register_date,
 		cm.view_count,
+		(select
+  	  count(*)
+	   from
+	    cmnt_like
+	   where
+		  cmnt_no=cm.cmnt_no) likes,
 		cf.cmnt_file_no,
 		cf.name,
 		m.member_no,

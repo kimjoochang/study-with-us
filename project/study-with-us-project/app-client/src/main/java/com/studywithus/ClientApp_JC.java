@@ -14,12 +14,12 @@ import com.studywithus.dao.CommentDao;
 import com.studywithus.dao.CommunityDao;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.dao.MentorApplicationDao;
+import com.studywithus.dao.PaymentDao;
+import com.studywithus.dao.ReviewDao;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.dao.impl.MariadbCommentDao;
 import com.studywithus.dao.impl.MariadbCommunityDao;
-import com.studywithus.dao.impl.NetPaymentDao;
-import com.studywithus.dao.impl.NetReviewDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.chargestudy.ChargeStudyAddHandler;
@@ -134,20 +134,18 @@ public class ClientApp_JC {
     MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
     StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
     MentorApplicationDao mentorApplicationDao = sqlSession.getMapper(MentorApplicationDao.class);
-    StudyMemberDao studyMemberdao = sqlSession.getMapper(StudyMemberDao.class);
-
-    //StudyDao studyDao = new MybatisStudyDao(sqlSession);
+    StudyMemberDao studyMemberDao = sqlSession.getMapper(StudyMemberDao.class);
     CommentDao commentDao = new MariadbCommentDao(con);
     CommunityDao communityDao = new MariadbCommunityDao(con);
+    PaymentDao paymentDao = sqlSession.getMapper(PaymentDao.class);
+    ReviewDao reviewDao = sqlSession.getMapper(ReviewDao.class);
 
 
     //    NetScheduleDao examScheduleDao = new NetScheduleDao(requestAgent);
-    NetPaymentDao paymentDao = new NetPaymentDao(requestAgent);
-    NetReviewDao reviewDao = new NetReviewDao(requestAgent);
     //NetChargeStudyDao chargeStudyDao = new NetChargeStudyDao(requestAgent);
     // NetMemberDao memberDao = new NetMemberDao(requestAgent);
     // NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
-    /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(studyDao, studyMemberdao, request);
+    /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(studyDao, studyMemberDao, request);
     //NetCommentDao commentDao = new NetCommentDao(requestAgent);
     //NetMentorApplicationDao netMentorApplicationDao = new NetMentorApplicationDao(requestAgent);
 
@@ -172,31 +170,31 @@ public class ClientApp_JC {
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(studyDao));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(studyDao,memberDao,sqlSession));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(studyDao));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(studyDao, studyMemberdao));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(studyDao, studyMemberDao));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(studyDao, sqlSession));
     //    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(studyDao, sqlSession));
 
-    commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(studyDao, studyMemberdao, sqlSession));
-    commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(studyMemberdao));
-    commandMap.put("/freeStudy/applyDetail", new FreeStudyApplyDetailHandler(studyMemberdao));
-    commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(studyMemberdao, sqlSession));
+    commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(studyDao, studyMemberDao, sqlSession));
+    commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(studyMemberDao));
+    commandMap.put("/freeStudy/applyDetail", new FreeStudyApplyDetailHandler(studyMemberDao));
+    commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(studyMemberDao, sqlSession));
 
     commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(studyDao, sqlSession));
     commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(studyDao));
     commandMap.put("/freeStudy/interestDetail", new FreeStudyInterestDetailHandler(studyDao));
     //    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(studyDao));
 
-    commandMap.put("/freeStudy/participationCancel", new FreeStudyParticipationCancelHandler(studyMemberdao, memberDao, sqlSession));
+    commandMap.put("/freeStudy/participationCancel", new FreeStudyParticipationCancelHandler(studyMemberDao, memberDao, sqlSession));
 
 
-    commandMap.put("/freeStudy/registerFreeStudyList", new RegisterFreeStudyListHandler(studyMemberdao));
-    commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(studyMemberdao));
-    commandMap.put("/freeStudy/registerFreeStudyDetail", new RegisterFreeStudyDetailHandler(studyMemberdao));
-    commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(studyMemberdao));
-    commandMap.put("/freeStudy/participateFreeStudyDetail", new ParticipateFreeStudyDetailHandler(studyMemberdao));
+    commandMap.put("/freeStudy/registerFreeStudyList", new RegisterFreeStudyListHandler(studyMemberDao));
+    commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(studyMemberDao));
+    commandMap.put("/freeStudy/registerFreeStudyDetail", new RegisterFreeStudyDetailHandler(studyMemberDao));
+    commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(studyMemberDao));
+    commandMap.put("/freeStudy/participateFreeStudyDetail", new ParticipateFreeStudyDetailHandler(studyMemberDao));
 
-    commandMap.put("/freeStudy/memberApprove", new FreeStudyMemberApproveHandler(studyMemberdao, memberDao, sqlSession));
-    commandMap.put("/freeStudy/memberRefusal", new FreeStudyMemberRefusalHandler(studyMemberdao, sqlSession));
+    commandMap.put("/freeStudy/memberApprove", new FreeStudyMemberApproveHandler(studyMemberDao, memberDao, sqlSession));
+    commandMap.put("/freeStudy/memberRefusal", new FreeStudyMemberRefusalHandler(studyMemberDao, sqlSession));
 
 
     commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationDao, sqlSession));
@@ -215,16 +213,16 @@ public class ClientApp_JC {
     commandMap.put("/chargeStudy/deleteRequestList", new ChargeStudyDeleteRequestListHandler(studyDao));
     commandMap.put("/chargeStudy/deleteRequestDetail", new ChargeStudyDeleteRequestDetailHandler(studyDao, sqlSession));
     commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(studyDao));
-    commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(memberDao, studyMemberdao, paymentDao, sqlSession));
+    commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(memberDao, studyMemberDao, paymentDao, sqlSession));
     commandMap.put("/chargeStudy/paymentDetail", new ChargeStudyPaymentDetailHandler(paymentDao, studyDao));
-    commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(paymentDao, studyMemberdao, sqlSession));
+    commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(paymentDao, studyMemberDao, sqlSession));
     commandMap.put("/chargeStudy/paymentList", new ChargeStudyPaymentListHandler(paymentDao, studyDao));
     commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(studyDao, sqlSession));
     //    commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(studyDao));
-    commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(studyMemberdao));
-    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler(studyMemberdao));
-    commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(studyMemberdao));
-    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(studyMemberdao));
+    commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(studyMemberDao));
+    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler(studyMemberDao));
+    commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(studyMemberDao));
+    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(studyMemberDao));
     commandMap.put("/review/add", new ReviewAddHandler(reviewDao, sqlSession));
     commandMap.put("/review/list", new ReviewListHandler(reviewDao));
     //

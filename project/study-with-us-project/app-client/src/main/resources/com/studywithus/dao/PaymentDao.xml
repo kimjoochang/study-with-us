@@ -49,7 +49,7 @@
   <insert id="insert" parameterType="Payment">
    insert into 
      payment(member_no,study_no,pay_method,status)
-    values(#{mentee_no},#{studyNo},#{paymentMethod},#{status}) 
+    values(#{mentee.no},#{studyNo},#{paymentMethod},#{status}) 
   </insert>
 
   <update id="update">
