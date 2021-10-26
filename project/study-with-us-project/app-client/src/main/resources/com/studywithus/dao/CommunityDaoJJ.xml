@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studywithus.dao.CommunityDaoJJ">
+
+	<resultMap type="Community" id="CommunityMap">
+		<id column="cmnt_no" property="no" />
+		<result column="category" property="category" />
+		<result column="title" property="email" />
+		<result column="content" property="content" />
+		<result column="register_date" property="registeredDate" />
+		<result column="view_count" property="viewCount" />
+		<result column="likes" property="like" />
+
+		<!-- <association property="cmnt_like" javaType="Int"> <id column="cmnt_no" 
+			property="cmntNo" /> <result column="member_no" property="memberNo" /> </association> -->
+		
+		<association property="writer" javaType="Member">
+			<id column="writer_no" property="memberNo" />
+			<result column="writer_email" property="email" />
+		</association>
+	</resultMap>
+
+	<sql id="select1">
+		select
+		cm.cmnt_no,
+		cm.category,
+		cm.title,
+		cm.content,
+		cm.register_date,
+		cm.view_count,
+		cf.cmnt_file_no,
+		cf.name,
+		m.member_no,
+		m.email
+		from
+		cmnt cm
+		inner join
+		member m on cm.member_no=m.member_no
+		left
+		outer join cmnt_file cf on cm.cmnt_no=cf.cmnt_no
+	</sql>
+
+	<sql id="order1">
+		order by
+		cmnt_no desc
+	</sql>
+
+	<select id="findAll" resultMap="CommunityMap">
+		<include refid="select1" />
+		<include refid="order1" />
+	</select>
+
+	<!-- ForLikes <select id="findAll" resultMap="CommunityMap"> select count(member_no) 
+		as likes from cmnt_like where cmnt_no=#{no} </select> -->
+
+	<!-- <select id="findAll" resultMap="CommunityMap"> select c.comment_no, 
+		c.content, c.register_date, m.member_no, m.email, mf.file_no, mf.name from 
+		comment c inner join member m on c.member_no=m.member_no left outer join 
+		member_file mf on m.member_no=mf.member_no where cmnt_no=#{no} </select> 
+		ForComment -->
+
+	<select id="findByNo" resultMap="CommunityMap"
+		parameterType="int">
+		<include refid="select1" />
+		where
+		cmnt_no=#{no}
+	</select>
+
+	<select id="findByKeyword" resultMap="CommunityMap"
+		parameterType="string">
+		<include refid="select1" />
+		where cm.title like
+		(concat('%',#{keyword},'%'))
+		or cm.content like
+		(concat('%',#{keyword},'%'))
+		or m.email
+		like (concat('%',#{keyword},'%'))
+		<include refid="order1" />
+	</select>
+
+	<update id="updateCount" parameterType="int">
+		update pms_board set
+		view_count = view_count + 1
+		where cmnt_no=#{no}
+	</update>
+
+	<!-- select count(member_no) as likes from cmnt_like where cmnt_no=#{no} -->
+
+	<insert id="insert" parameterType="community">
+		insert into
+		cmnt(category,title,content,member_no)
+		values(#{category},#{title},#{content},#{writer.no})
+	</insert>
+
+	<insert id="insertLikes">
+		insert into
+		cmnt_like(member_no,cmnt_no)
+		values(#{memberNo},#{cmntNo})
+	</insert>
+
+	<update id="update" parameterType="community">
+		update cmnt set
+		category=#{category},
+		title=#{title},
+		content=#{content}
+		where
+		cmnt_no=#{no}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from cmnt
+		where
+		cmnt_no=#{no}
+	</delete>
+
+	<delete id="deleteLikes">
+		delete from cmnt_like
+		where member_no=#{memberNo} and
+		cmnt_no=#{cmntNo}
+	</delete>
+<!--  -->
+</mapper>
+
+
+
+
+
+
+
