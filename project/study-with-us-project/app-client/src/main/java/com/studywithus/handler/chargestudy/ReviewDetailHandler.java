@@ -7,11 +7,11 @@ import com.studywithus.domain.Review;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 
-public class ReviewListHandler implements Command {
+public class ReviewDetailHandler implements Command {
 
   ReviewDao reviewDao;
 
-  public ReviewListHandler(ReviewDao reviewDao) {
+  public ReviewDetailHandler(ReviewDao reviewDao) {
     this.reviewDao = reviewDao;
   }
 
@@ -23,7 +23,7 @@ public class ReviewListHandler implements Command {
     double sum = 0;
     int count = 0;
 
-    System.out.println("[유료 스터디 / 후기 조회]\n");
+    System.out.println("[유료 스터디 / 후기 상세보기]\n");
     int no = (int) request.getAttribute("chargeNo");
 
     Collection<Review> reviewList = reviewDao.findAll(no);

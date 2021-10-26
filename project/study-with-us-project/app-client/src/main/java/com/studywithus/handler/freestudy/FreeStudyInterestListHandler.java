@@ -1,6 +1,6 @@
 package com.studywithus.handler.freestudy;
 
-import java.util.Collection;
+import java.util.List;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -20,7 +20,7 @@ public class FreeStudyInterestListHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[마이페이지 / 나의 관심 목록 / 무료 스터디 관심목록 / 조회]\n");
 
-    Collection<Study> freeStudyList = freeStudyDao.findAllInterest(AuthLogInHandler.getLoginUser().getNo());
+    List<Study> freeStudyList = freeStudyDao.findAllInterest(AuthLogInHandler.getLoginUser().getNo());
 
     if (freeStudyList.isEmpty()) {
       System.out.println("무료 스터디 관심목록이 존재하지 않습니다.");

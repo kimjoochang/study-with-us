@@ -41,10 +41,10 @@ public class ChargeStudyListHandler implements Command {
           chargeStudy.getEndDate(),
           status,
           chargeStudy.getRegisteredDate(),
-          chargeStudy.getMembers().size(),
+          chargeStudy.getMembers(),
           chargeStudy.getMaxMembers(),
           chargeStudy.getViewCount(),
-          chargeStudy.getLikeMembers().size());
+          chargeStudy.getLikes());
       System.out.println();
     }
   }

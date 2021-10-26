@@ -23,7 +23,7 @@ public class ChargeStudyInterestAddHandler implements Command {
 
     int no = (int) request.getAttribute("chargeNo");
 
-    if (studyDao.findByNo(no) == null) {
+    if (studyDao.findMyInterest(AuthLogInHandler.getLoginUser().getNo(), no) == 0) {
       System.out.println("해당 번호의 유료 스터디가 없습니다.");
       return;
     }

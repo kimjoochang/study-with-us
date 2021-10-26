@@ -33,8 +33,10 @@ import com.studywithus.handler.chargestudy.ChargeStudyInterestAddHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyInterestDetailHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyInterestListHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyListHandler;
+import com.studywithus.handler.chargestudy.ChargeStudyPaymentCancelHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyPaymentDetailHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyPaymentHandler;
+import com.studywithus.handler.chargestudy.ChargeStudyPaymentListHandler;
 import com.studywithus.handler.chargestudy.ChargeStudySearchHandler;
 import com.studywithus.handler.chargestudy.ChargeStudyUpdateHandler;
 import com.studywithus.handler.chargestudy.MentorApplicantApproveHandler;
@@ -56,16 +58,23 @@ import com.studywithus.handler.community.CommunitySearchHandler;
 import com.studywithus.handler.community.CommunityUpdateHandler;
 import com.studywithus.handler.freestudy.FreeStudyAddHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyCancelHandler;
+import com.studywithus.handler.freestudy.FreeStudyApplyDetailHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyHandler;
 import com.studywithus.handler.freestudy.FreeStudyApplyListHandler;
 import com.studywithus.handler.freestudy.FreeStudyDetailHandler;
 import com.studywithus.handler.freestudy.FreeStudyInterestAddHandler;
+import com.studywithus.handler.freestudy.FreeStudyInterestDetailHandler;
 import com.studywithus.handler.freestudy.FreeStudyInterestListHandler;
 import com.studywithus.handler.freestudy.FreeStudyListHandler;
+import com.studywithus.handler.freestudy.FreeStudyMemberApproveHandler;
+import com.studywithus.handler.freestudy.FreeStudyMemberRefusalHandler;
+import com.studywithus.handler.freestudy.FreeStudyParticipationCancelHandler;
 import com.studywithus.handler.freestudy.FreeStudySearchHandler;
 import com.studywithus.handler.freestudy.FreeStudyUpdateHandler;
+import com.studywithus.handler.freestudy.ParticipateFreeStudyDetailHandler;
 import com.studywithus.handler.freestudy.ParticipateFreeStudyListHandler;
 import com.studywithus.handler.freestudy.RegisterFreeStudyDetailHandler;
+import com.studywithus.handler.freestudy.RegisterFreeStudyListHandler;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.handler.user.AuthLogOutHandler;
 import com.studywithus.handler.user.FindEmailHandler;
@@ -138,7 +147,7 @@ public class ClientApp_JC {
     //NetChargeStudyDao chargeStudyDao = new NetChargeStudyDao(requestAgent);
     // NetMemberDao memberDao = new NetMemberDao(requestAgent);
     // NetCommunityDao communityDao = new NetCommunityDao(requestAgent);
-    /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(studyDao, request);
+    /*[추가]*/ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt = new ChargeStudyDetailMenuPrompt(studyDao, studyMemberdao, request);
     //NetCommentDao commentDao = new NetCommentDao(requestAgent);
     //NetMentorApplicationDao netMentorApplicationDao = new NetMentorApplicationDao(requestAgent);
 
@@ -160,25 +169,41 @@ public class ClientApp_JC {
     commandMap.put("/auth/membershipWithdrawal", new MembershipWithdrawalHandler(memberDao));
     commandMap.put("/myInfo/list", new MyInfoHandler());
     //
-    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(studyDao));
-    //    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(studyDao));
-    commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(studyDao));
-    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationDao, sqlSession));
-    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationDao));
     commandMap.put("/freeStudy/search", new FreeStudySearchHandler(studyDao));
     commandMap.put("/freeStudy/add", new FreeStudyAddHandler(studyDao,memberDao,sqlSession));
     commandMap.put("/freeStudy/list", new FreeStudyListHandler(studyDao));
-    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(studyMemberdao));
+    commandMap.put("/freeStudy/detail", new FreeStudyDetailHandler(studyDao, studyMemberdao));
     commandMap.put("/freeStudy/update", new FreeStudyUpdateHandler(studyDao, sqlSession));
     //    commandMap.put("/freeStudy/delete", new FreeStudyDeleteHandler(studyDao, sqlSession));
 
     commandMap.put("/freeStudy/apply", new FreeStudyApplyHandler(studyDao, studyMemberdao, sqlSession));
-    commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(studyMemberdao, sqlSession));
     commandMap.put("/freeStudy/applyList", new FreeStudyApplyListHandler(studyMemberdao));
+    commandMap.put("/freeStudy/applyDetail", new FreeStudyApplyDetailHandler(studyMemberdao));
+    commandMap.put("/freeStudy/applyCancel", new FreeStudyApplyCancelHandler(studyMemberdao, sqlSession));
+
     commandMap.put("/freeStudy/addInterest", new FreeStudyInterestAddHandler(studyDao, sqlSession));
-    //    commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(studyDao, sqlSession));
+    commandMap.put("/freeInterest/list", new FreeStudyInterestListHandler(studyDao));
+    commandMap.put("/freeStudy/interestDetail", new FreeStudyInterestDetailHandler(studyDao));
+    //    commandMap.put("/freeInterest/delete", new FreeStudyInterestDeleteHandler(studyDao));
+
+    commandMap.put("/freeStudy/participationCancel", new FreeStudyParticipationCancelHandler(studyMemberdao, memberDao, sqlSession));
+
+
+    commandMap.put("/freeStudy/registerFreeStudyList", new RegisterFreeStudyListHandler(studyMemberdao));
     commandMap.put("/freeStudy/registerStudyList", new RegisterFreeStudyDetailHandler(studyMemberdao));
+    commandMap.put("/freeStudy/registerFreeStudyDetail", new RegisterFreeStudyDetailHandler(studyMemberdao));
     commandMap.put("/freeStudy/participateStudyList", new ParticipateFreeStudyListHandler(studyMemberdao));
+    commandMap.put("/freeStudy/participateFreeStudyDetail", new ParticipateFreeStudyDetailHandler(studyMemberdao));
+
+    commandMap.put("/freeStudy/memberApprove", new FreeStudyMemberApproveHandler(studyMemberdao, memberDao, sqlSession));
+    commandMap.put("/freeStudy/memberRefusal", new FreeStudyMemberRefusalHandler(studyMemberdao, sqlSession));
+
+
+    commandMap.put("/mentorApplicant/add", new MentorApplicationAddHandler(mentorApplicationDao, sqlSession));
+    commandMap.put("/mentorApplicant/list", new MentorApplicationDetailHandler(mentorApplicationDao));
+    //    commandMap.put("/freeStudy/deleteInterest", new FreeStudyInterestDeleteHandler(studyDao, sqlSession));
+
+
 
     commandMap.put("/chargeStudy/search", new ChargeStudySearchHandler(studyDao));
     commandMap.put("/chargeStudy/add",new ChargeStudyAddHandler(studyDao, sqlSession));
@@ -189,17 +214,18 @@ public class ClientApp_JC {
     commandMap.put("/chargeStudy/deleteRequestCancel", new ChargeStudyDeleteRequestCancelHandler(studyDao, sqlSession));
     commandMap.put("/chargeStudy/deleteRequestList", new ChargeStudyDeleteRequestListHandler(studyDao));
     commandMap.put("/chargeStudy/deleteRequestDetail", new ChargeStudyDeleteRequestDetailHandler(studyDao, sqlSession));
-    commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(paymentDao, studyDao));
+    commandMap.put("/chargeInterest/list", new ChargeStudyInterestListHandler(studyDao));
+    commandMap.put("/chargeStudy/payment", new ChargeStudyPaymentHandler(memberDao, studyMemberdao, paymentDao, sqlSession));
     commandMap.put("/chargeStudy/paymentDetail", new ChargeStudyPaymentDetailHandler(paymentDao, studyDao));
-    //    commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(paymentDao, studyDao));
-    //    commandMap.put("/chargeStudy/paymentList", new ChargeStudyPaymentListHandler(paymentDao));
+    commandMap.put("/chargeStudy/paymentCancel", new ChargeStudyPaymentCancelHandler(paymentDao, studyMemberdao, sqlSession));
+    commandMap.put("/chargeStudy/paymentList", new ChargeStudyPaymentListHandler(paymentDao, studyDao));
     commandMap.put("/chargeStudy/interestAdd", new ChargeStudyInterestAddHandler(studyDao, sqlSession));
     //    commandMap.put("/chargeStudy/interestDelete", new ChargeStudyInterestDeleteHandler(studyDao));
-    commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(studyDao));
-    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler(studyDao));
-    commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(studyDao));
-    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(studyDao));
-    commandMap.put("/review/add", new ReviewAddHandler(reviewDao));
+    commandMap.put("/chargeStudy/registerChargeStudyList",new RegisterChargeStudyListHandler(studyMemberdao));
+    commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler(studyMemberdao));
+    commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(studyMemberdao));
+    commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(studyMemberdao));
+    commandMap.put("/review/add", new ReviewAddHandler(reviewDao, sqlSession));
     commandMap.put("/review/list", new ReviewListHandler(reviewDao));
     //
     //    commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList);
@@ -533,7 +559,7 @@ public class ClientApp_JC {
     MenuGroup freeStudyApplyMenu = new MenuGroup("무료 스터디 신청 내역", ACCESS_GENERAL);
     freeStudyApplyMenu.add(new MenuItem("조회", "/freeStudy/applyList"));
     // [삭제] 상세보기 안으로 위치 변경
-    // freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudyApply/detail"));
+    freeStudyApplyMenu.add(new MenuItem("상세보기", "/freeStudy/applyDetail"));
     // freeStudyApplyMenu.add(new MenuItem("삭제", "/freeStudyApply/delete"));
 
     return freeStudyApplyMenu;
@@ -544,12 +570,8 @@ public class ClientApp_JC {
   private Menu createRegisterFreeStudyMenu() {
 
     MenuGroup registerFreeStudyMenu = new MenuGroup("내가 생성한 무료 스터디", ACCESS_LEADER);
-    registerFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/registerStudyList"));
-    // [삭제] 상세보기와 통합
-    // registerFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/registerStudyList"));
-    // [삭제] 회의 후 안하기로 결정
-    // registerFreeStudyMenu.add(new MenuItem("삭제", "/registerFreeStudy/delete"));
-
+    registerFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/registerStudyList"));
+    registerFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/registerFreeStudyDetail"));
     return registerFreeStudyMenu;
   }
 
@@ -558,9 +580,7 @@ public class ClientApp_JC {
 
     MenuGroup participateFreeStudyMenu = new MenuGroup("내가 참여한 무료 스터디", Menu.ACCESS_MEMBER);
     participateFreeStudyMenu.add(new MenuItem("조회", "/freeStudy/participateStudyList"));
-    // [삭제] 회의 후 안하기로 결정
-    // participateFreeStudyMenu.add(new MenuItem("상세보기", "/participateFreeStudy/detail"));
-
+    participateFreeStudyMenu.add(new MenuItem("상세보기", "/freeStudy/participateFreeStudyDetail"));
     return participateFreeStudyMenu;
   }
 
@@ -603,7 +623,7 @@ public class ClientApp_JC {
 
     MenuGroup freeInterestMenu = new MenuGroup("무료 스터디 관심목록");
     freeInterestMenu.add(new MenuItem("조회", "/freeInterest/list"));
-    freeInterestMenu.add(new MenuItem("삭제", "/freeInterest/delete"));
+    freeInterestMenu.add(new MenuItem("상세보기", "/freeStudy/interestDetail"));
 
     return freeInterestMenu;
   }

@@ -15,7 +15,8 @@ public class FreeStudyDetailHandler implements Command {
   StudyMemberDao studyMemberDao;
   Study interest;
 
-  public FreeStudyDetailHandler(StudyMemberDao studyMemberDao) {
+  public FreeStudyDetailHandler(StudyDao freeStudyDao, StudyMemberDao studyMemberDao) {
+    this.freeStudyDao = freeStudyDao;
     this.studyMemberDao = studyMemberDao;
   }
 
@@ -118,14 +119,14 @@ public class FreeStudyDetailHandler implements Command {
         if (menuNo == 1) {
           // 신청하기를 아직 안 한 경우
           if (memberStatus != 0 || memberStatus != 1) {
-            request.getRequestDispatcher("/freeStudy/participationCancel").forward(request);
+            request.getRequestDispatcher("/freeStudy/apply").forward(request);
 
             // 신청하기를 이미 한 경우
           } else if (memberStatus == 0) {
-            request.getRequestDispatcher("/freeStudy/apply").forward(request);
+            request.getRequestDispatcher("/freeStudy/applyCancel").forward(request);
 
           } else if (memberStatus == 1) {
-            request.getRequestDispatcher("/freeStudy/applyCancel").forward(request);
+            request.getRequestDispatcher("/freeStudy/participationCancel").forward(request);
           }
 
         } else if (menuNo == 2) {

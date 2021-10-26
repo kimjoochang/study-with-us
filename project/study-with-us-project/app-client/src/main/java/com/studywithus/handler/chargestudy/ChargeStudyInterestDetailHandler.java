@@ -23,9 +23,9 @@ public class ChargeStudyInterestDetailHandler implements Command {
     System.out.println("[마이페이지 / 유료 스터디 관심목록 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    Study chargeStudy = chargeStudyDao.findByNoInterest(AuthLogInHandler.getLoginUser().getNo( ), no);
+    Study chargeStudy = chargeStudyDao.findByNo(no);
 
-    if (chargeStudy == null) {
+    if (chargeStudyDao.findMyInterest(AuthLogInHandler.getLoginUser().getNo( ), no) == 0) {
       System.out.println("해당 번호의 관심목록 추가된 스터디가 없습니다.\n");
       return;
     }
@@ -42,13 +42,9 @@ public class ChargeStudyInterestDetailHandler implements Command {
     System.out.printf("스터디 진행상태: %s\n", StudyStatusHelper.studyStatus(chargeStudy));
     System.out.printf("등록일: %s\n", chargeStudy.getRegisteredDate());
 
-    System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers().size(), chargeStudy.getMaxMembers());
+    System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers(), chargeStudy.getMaxMembers());
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
-    if (chargeStudy.getLikeMembers().isEmpty()) {
-      System.out.printf("좋아요 수: %d\n", 0);
-    } else {
-      System.out.printf("좋아요 수: %d\n", chargeStudy.getLikeMembers().size());
-    }
+    System.out.printf("좋아요 수: %d\n", chargeStudy.getLikes());
     System.out.println();
 
     request.setAttribute("chargeNo", no);

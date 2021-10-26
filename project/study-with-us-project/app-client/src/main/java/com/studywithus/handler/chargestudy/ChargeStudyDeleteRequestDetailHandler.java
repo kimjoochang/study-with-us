@@ -41,8 +41,7 @@ public class ChargeStudyDeleteRequestDetailHandler implements Command {
     System.out.printf("지역: %s\n", chargeStudy.getArea());
     System.out.printf("가격: %s\n", chargeStudy.getPrice());
     System.out.printf("등록일: %s\n", chargeStudy.getRegisteredDate());
-
-    System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers().size(), chargeStudy.getMaxMembers());
+    System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers(), chargeStudy.getMaxMembers());
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
     System.out.printf("좋아요수: %d\n", chargeStudy.getViewCount());
     System.out.println();
