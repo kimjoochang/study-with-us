@@ -57,6 +57,7 @@ public class MemberDetailHandler extends GenericServlet {
         out.printf("등록일: %s<br>\n", member.getRegisteredDate());
         out.println();
 
+        // out.printf(" <a href='update?no=%d'>[변경]</a><br>", member.getNo());
         out.println(" [변경]");
         out.printf(" <a href='delete?no=%d'>[삭제]</a>", member.getNo());
         out.println(" <a href='list'>[목록]</a><br>");

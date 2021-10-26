@@ -3,79 +3,44 @@ package com.studywithus.domain;
 import java.sql.Date;
 
 public class Payment {
-
-  private String menteeEmail; // 멘티(유료 스터디 결제자) 이메일
-  private int paidStudyNo; // 결제한 유료 스터디 게시글 번호
-  private String paymentMethod; // 결제 수단
+  private int studyNo;
+  private Member mentee;
+  private int paymentMethod; // 결제 수단
   private Date paymentDate; // 결제일
-  // [10.03 추가]
-  private String title; // 결제한 유료 스터디 제목
-  private String mentorName; // 결제한 유료 스터디 멘토
-  private int price; // 결제한 가격
-  private boolean visible;
 
+  // 기본 = 0
+  // 무료스터디 참여상태 (유료 - 결제완료) = 1 
+  // 무료스터디 탈퇴상태 (유료 - 결제취소)= 2
+  private int status; 
 
-  public boolean isVisible() {
-    return visible;
+  public int getStudyNo() {
+    return studyNo;
   }
-
-  public void setVisible(boolean visible) {
-    this.visible = visible;
+  public void setStudyNo(int studyNo) {
+    this.studyNo = studyNo;
   }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public String getMentorName() {
-    return mentorName;
-  }
-
-  public void setMentorName(String mentorName) {
-    this.mentorName = mentorName;
-  }
-
-  public int getPrice() {
-    return price;
-  }
-
-  public void setPrice(int price) {
-    this.price = price;
-  }
-
-  public int getPaidStudyNo() {
-    return paidStudyNo;
-  }
-
-  public void setPaidStudyNo(int paidStudyNo) {
-    this.paidStudyNo = paidStudyNo;
-  }
-
-  public String getPaymentMethod() {
+  public int getPaymentMethod() {
     return paymentMethod;
   }
-
-  public void setPaymentMethod(String paymentMethod) {
+  public void setPaymentMethod(int paymentMethod) {
     this.paymentMethod = paymentMethod;
   }
-
   public Date getPaymentDate() {
     return paymentDate;
   }
-
   public void setPaymentDate(Date paymentDate) {
     this.paymentDate = paymentDate;
   }
-
-  public String getMenteeEmail() {
-    return menteeEmail;
+  public int getStatus() {
+    return status;
   }
-
-  public void setMenteeEmail(String menteeEmail) {
-    this.menteeEmail = menteeEmail;
+  public void setStatus(int status) {
+    this.status = status;
+  }
+  public Member getMentee() {
+    return mentee;
+  }
+  public void setMentee(Member mentee) {
+    this.mentee = mentee;
   }
 }

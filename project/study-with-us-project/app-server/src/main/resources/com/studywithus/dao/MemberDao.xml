@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.studywithus.dao.MemberDaoJJ">
+<mapper namespace="com.studywithus.dao.MemberDao">
   
   <resultMap type="Member" id="MemberMap">
     <id column="member_no" property="no"/> 

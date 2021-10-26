@@ -7,7 +7,15 @@ public class Community extends Content {
   private int viewCount; // 조회수
   private int like; // 좋아요
   private int category; // 정보, 질문, 스몰톡
-  // private List<Member> members; // 회원별 게시글 조회용 리스트
+  private AttachmentFile communityFile;
+
+  public AttachmentFile getCommunityFile() {
+    return communityFile;
+  }
+
+  public void setCommunityFile(AttachmentFile communityFile) {
+    this.communityFile = communityFile;
+  }
 
   public Date getRegisteredDate() {
     return registeredDate;
@@ -41,11 +49,4 @@ public class Community extends Content {
     this.category = category;
   }
 
-  // public List<Member> getMembers() {
-  // return members;
-  // }
-
-  // public void setMembers(List<Member> members) {
-  // this.members = members;
-  // }
 }
