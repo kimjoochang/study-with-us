@@ -1,6 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
-import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,10 +10,10 @@ import com.studywithus.util.StudyStatusHelper;
 
 public class ParticipateChargeStudyDetailHandler implements Command {
 
-  StudyDao chargeStudyDao;
+  StudyMemberDao studyMemberDao;
 
-  public ParticipateChargeStudyDetailHandler(StudyDao chargeStudyDao) {
-    this.chargeStudyDao = chargeStudyDao;
+  public ParticipateChargeStudyDetailHandler(StudyMemberDao studyMemberDao) {
+    this.studyMemberDao = studyMemberDao;
   }
 
   @Override
@@ -23,8 +23,8 @@ public class ParticipateChargeStudyDetailHandler implements Command {
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
 
-    Study chargeStudy = chargeStudyDao.
-        findByNoParticipateStudy( AuthLogInHandler.getLoginUser().getNo( ), no);
+    Study chargeStudy = studyMemberDao.
+        findByNoStudy( AuthLogInHandler.getLoginUser().getNo( ), no, Study.PARTICIPANT_STATUS);
 
     if (chargeStudy == null || chargeStudy.getPrice() == 0) {
       System.out.println("해당 번호의 내가 참여한 유료 스터디가 없습니다.");
@@ -43,13 +43,9 @@ public class ParticipateChargeStudyDetailHandler implements Command {
     System.out.printf("스터디 진행상태: %s\n", StudyStatusHelper.studyStatus(chargeStudy));
     System.out.printf("등록일: %s\n", chargeStudy.getRegisteredDate());
 
-    System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers().size(), chargeStudy.getMaxMembers());
+    System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers(), chargeStudy.getMaxMembers());
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
-    if (chargeStudy.getLikeMembers().isEmpty()) {
-      System.out.printf("좋아요 수: %d\n", 0);
-    } else {
-      System.out.printf("좋아요 수: %d\n", chargeStudy.getLikeMembers().size());
-    }
+    System.out.printf("좋아요 수: %d\n", chargeStudy.getLikes());
     System.out.println();
 
     request.setAttribute("chargeNo", no);

@@ -1,18 +1,13 @@
 package com.studywithus.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.studywithus.domain.Payment;
 
 public interface PaymentDao {
   void insert(Payment payment) throws Exception;
-
-  List<Payment> findAll() throws Exception;
-
-  // [10.23 수정] mybatis 적용하면서 파라미터 값 수정함
-  Payment findByNo(int studyNo, int memberNo) throws Exception;
-
-  void update(Payment payment) throws Exception;
-
-  // [10.23 추가]
-  // void delete(Payment payment) throws Exception;
+  List<Payment> findAll(int no) throws Exception;
+  Payment findByNo(int memberNo, int studyNo) throws Exception;
+  void update(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo, @Param("status") int statusNo) throws Exception;
+  void delete(int memberNo, int studyNo) throws Exception;
 }

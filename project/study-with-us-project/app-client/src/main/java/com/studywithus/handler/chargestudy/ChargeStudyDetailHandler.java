@@ -42,13 +42,9 @@ public class ChargeStudyDetailHandler implements Command {
     System.out.printf("스터디 진행상태: %s\n", StudyStatusHelper.studyStatus(chargeStudy));
     System.out.printf("등록일: %s\n", chargeStudy.getRegisteredDate());
 
-    System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers().size(), chargeStudy.getMaxMembers());
+    System.out.printf("모집인원 = %d / %d\n", chargeStudy.getMembers(), chargeStudy.getMaxMembers());
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
-    if (chargeStudy.getLikeMembers().isEmpty()) {
-      System.out.printf("좋아요수: %d\n", 0);
-    } else {
-      System.out.printf("좋아요수: %d\n", chargeStudy.getLikeMembers().size());
-    }
+    System.out.printf("좋아요수: %d\n", chargeStudy.getLikes());
     System.out.println();
 
     request.setAttribute("chargeNo", no);

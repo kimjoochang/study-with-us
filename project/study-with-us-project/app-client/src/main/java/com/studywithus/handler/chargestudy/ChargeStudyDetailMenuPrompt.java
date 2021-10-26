@@ -1,7 +1,7 @@
 package com.studywithus.handler.chargestudy;
 
 import com.studywithus.dao.StudyDao;
-import com.studywithus.domain.Member;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
@@ -11,17 +11,19 @@ public class ChargeStudyDetailMenuPrompt {
 
   CommandRequest request;
   StudyDao chargeStudyDao;
+  StudyMemberDao studyMemberDao;
   Study chargeStudy;
-  Study interest;
 
+  int count;
+  Study findWriter;
   int paymentType = 0; // 메서드를 호출할 때, 관심 목록 존재 여부 구분을 위한 변수
 
   int no;
 
-
-  public ChargeStudyDetailMenuPrompt(StudyDao chargeStudyDao, CommandRequest request) {
+  public ChargeStudyDetailMenuPrompt(StudyDao chargeStudyDao, StudyMemberDao studyMemberDao, CommandRequest request) {
     this.request = request;
     this.chargeStudyDao = chargeStudyDao;
+    this.studyMemberDao = studyMemberDao;
   }
 
   protected void myStudySelectedMenu(Study study) throws Exception {
@@ -76,7 +78,7 @@ public class ChargeStudyDetailMenuPrompt {
     } else if (input == 2) {
 
       // 관심목록 추가 (관심 목록에 추가하지 않은 경우에 보이는 2번 메뉴)
-      if (interest == null) {
+      if (count == 0) {
         request.getRequestDispatcher("/chargeStudy/interestAdd").forward(request);
 
         // 관심목록 삭제 (관심 목록에 추가하지 않은 경우에 보이는 2번 메뉴)
@@ -94,7 +96,7 @@ public class ChargeStudyDetailMenuPrompt {
       }
 
     } else if (input == 4) {
-      if (findWriterByNo()) {
+      if (findWriter == null) {
         request.getRequestDispatcher("/review/add").forward(request);
 
       } else {
@@ -112,14 +114,7 @@ public class ChargeStudyDetailMenuPrompt {
   private int anotherStudyMenu() throws Exception {
     paymentType = 0;
 
-    interest = chargeStudyDao.findByNoInterest(AuthLogInHandler.getLoginUser().getNo( ), chargeStudy.getNo());
-
-    for (Member member : chargeStudy.getMembers()) {
-      if (member.getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-        paymentType = 1;
-        break;
-      }
-    }
+    count = chargeStudyDao.findMyInterest(AuthLogInHandler.getLoginUser().getNo( ), chargeStudy.getNo());
 
     if (paymentType == 0) {
       System.out.println("1. 결제");
@@ -128,7 +123,7 @@ public class ChargeStudyDetailMenuPrompt {
     }
 
     // 관심 목록이 없는 경우
-    if (interest == null) {
+    if (count == 0) {
       System.out.println("2. 관심목록 추가");
 
       // 관심 목록이 있는 경우
@@ -139,7 +134,8 @@ public class ChargeStudyDetailMenuPrompt {
     if (chargeStudy.getStudyStatus() == 2) {
       System.out.println("3. 후기 보기");
 
-      if (findWriterByNo()) {
+      findWriter = studyMemberDao.findByNoStudy(AuthLogInHandler.getLoginUser().getNo(), no, Study.OWNER_STATUS);  
+      if (findWriter == null) {
         System.out.println("4. 후기 작성");
       }
     }
@@ -168,14 +164,4 @@ public class ChargeStudyDetailMenuPrompt {
     return Prompt.inputInt("메뉴 번호를 선택하세요. > "); 
   }
 
-  private boolean findWriterByNo() throws Exception {
-
-    for (Study chargeStudy : chargeStudyDao.findAll()) {
-
-      if (chargeStudy.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-        return true;
-      }
-    }
-    return false;
-  }
 }

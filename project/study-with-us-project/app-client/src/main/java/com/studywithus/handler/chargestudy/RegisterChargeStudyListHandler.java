@@ -1,7 +1,7 @@
 package com.studywithus.handler.chargestudy;
 
 import java.util.Collection;
-import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,10 +10,10 @@ import com.studywithus.util.StudyStatusHelper;
 
 public class RegisterChargeStudyListHandler implements Command {
 
-  StudyDao chargeStudyDao;
+  StudyMemberDao studyMemberDao;
 
-  public RegisterChargeStudyListHandler(StudyDao chargeStudyDao) {
-    this.chargeStudyDao = chargeStudyDao;
+  public RegisterChargeStudyListHandler( StudyMemberDao studyMemberDao) {
+    this.studyMemberDao = studyMemberDao;
   }
 
   @Override
@@ -21,7 +21,7 @@ public class RegisterChargeStudyListHandler implements Command {
     System.out.println("[마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 유료 스터디]\n");
 
 
-    Collection<Study> chargeStudyList = chargeStudyDao.findAllRegisterStudy(AuthLogInHandler.getLoginUser().getNo());
+    Collection<Study> chargeStudyList = studyMemberDao.findAllStudy(AuthLogInHandler.getLoginUser().getNo(), Study.OWNER_STATUS);
 
     if (chargeStudyList.isEmpty()) {
       System.out.println("내가 생성한 유료 스터디가 없습니다.");
@@ -45,10 +45,10 @@ public class RegisterChargeStudyListHandler implements Command {
             chargeStudy.getEndDate(),
             status,
             chargeStudy.getRegisteredDate(),
-            chargeStudy.getMembers().size(),
+            chargeStudy.getMembers(),
             chargeStudy.getMaxMembers(),
             chargeStudy.getViewCount(),
-            chargeStudy.getLikeMembers().size());
+            chargeStudy.getLikes());
         System.out.println();
       }
     }

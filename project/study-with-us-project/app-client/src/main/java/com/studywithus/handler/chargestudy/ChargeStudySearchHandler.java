@@ -33,7 +33,7 @@ public class ChargeStudySearchHandler implements Command {
           chargeStudy.getWriter().getName(),
           chargeStudy.getRegisteredDate(),
           chargeStudy.getViewCount(), 
-          chargeStudy.getLikeMembers().size());
+          chargeStudy.getLikes());
       count++;
       return;
     } 

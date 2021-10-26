@@ -1,8 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
-import java.util.List;
-import com.studywithus.dao.ChargeStudyDao;
-import com.studywithus.domain.Study;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
@@ -11,35 +9,21 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyInterestDeleteHandler implements Command {
 
-  ChargeStudyDao chargeStudyDao;
-  InterestDao interestDao;
+  StudyDao chargeStudyDao;
 
-  public ChargeStudyInterestDeleteHandler(ChargeStudyDao chargeStudyDao, InterestDao interestDao) {
+  public ChargeStudyInterestDeleteHandler(StudyDao chargeStudyDao) {
     this.chargeStudyDao = chargeStudyDao;
-    this.interestDao = interestDao;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[마이페이지 / 유료 스터디 / 관심 목록 / 삭제]\n");
 
-    int type = 0;
-
     if (request.getAttribute("chargeNo") == null) {
 
       int no = Prompt.inputInt("삭제할 관심목록 번호를 입력하세요. > ");
 
-      Study chargeStudy = chargeStudyDao.findByNo(no);
-
-      for (Member likeMember : chargeStudy.getLikeMember()) {
-
-        if (likeMemberEmail.equals(AuthLogInHandler.getLoginUser().getEmail())) {
-          type = 1;
-          break;
-        }
-      }
-
-      if (type == 0) {
+      if (chargeStudyDao.findMyInterest(AuthLogInHandler.getLoginUser().getNo(), no) == 0) {
         System.out.println("해당 번호의 관심목록이 없습니다.\n");
         return;
       }
@@ -60,12 +44,7 @@ public class ChargeStudyInterestDeleteHandler implements Command {
         }
       }
 
-      List<String> likeMemberEmail = chargeStudy.getLikeMembersEmail();
-      likeMemberEmail.remove(AuthLogInHandler.getLoginUser().getEmail());
-
-      chargeStudy.setLikeMembersEmail(likeMemberEmail);
-
-      chargeStudyDao.update(chargeStudy);
+      chargeStudyDao.deleteInterest(AuthLogInHandler.getLoginUser().getNo(), no);
 
       System.out.println();
       System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");
@@ -74,9 +53,7 @@ public class ChargeStudyInterestDeleteHandler implements Command {
 
       int no = (int) request.getAttribute("chargeNo");
 
-      Study chargeStudy = chargeStudyDao.findByNo(no);
-
-      if (chargeStudy.getLikeMembersEmail().isEmpty()) {
+      if (chargeStudyDao.findMyInterest(AuthLogInHandler.getLoginUser().getNo(), no) == 0) {
         System.out.println("유료 스터디 관심목록이 존재하지 않습니다.\n");
         return;
       }
@@ -97,11 +74,7 @@ public class ChargeStudyInterestDeleteHandler implements Command {
         }
       }
 
-      List<String> likeMemberEmail = chargeStudy.getLikeMembersEmail();
-      likeMemberEmail.remove(AuthLogInHandler.getLoginUser().getEmail());
-      chargeStudy.setLikeMembersEmail(likeMemberEmail);
-
-      chargeStudyDao.update(chargeStudy);
+      chargeStudyDao.deleteInterest(AuthLogInHandler.getLoginUser().getNo(), no);
 
       System.out.println();
       System.out.println("유료 스터디 관심 목록을 삭제하였습니다.\n");

@@ -119,7 +119,7 @@
   
   <select id="findByNoStatus" resultType="map">
     select
-      sm.status, 
+      sm.status 
      from 
       study_member sm
       inner join member m on sm.member_no=m.member_no
@@ -142,7 +142,7 @@
 
   <delete id="delete">
     delete from study_member
-    where member_no=#{memberNo} AND study_no={studyNo}
+    where member_no=#{memberNo} AND study_no=#{studyNo}
   </delete>
    <!-- 
   <select id="findByNoStudy" resultMap="StudyMap" parameterType="int">

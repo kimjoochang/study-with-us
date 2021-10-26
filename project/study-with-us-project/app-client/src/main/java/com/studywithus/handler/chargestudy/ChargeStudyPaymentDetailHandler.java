@@ -1,6 +1,5 @@
 package com.studywithus.handler.chargestudy;
 
-import java.sql.Date;
 import com.studywithus.dao.PaymentDao;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Payment;
@@ -24,36 +23,32 @@ public class ChargeStudyPaymentDetailHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[마이페이지 / 유료 스터디 결제내역 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
-    Payment payment = paymentDao.findByNo(no, AuthLogInHandler.getLoginUser().getEmail());
+    Payment payment = paymentDao.findByNo(AuthLogInHandler.getLoginUser().getNo(), no);
 
-    if (payment == null || payment.getStatus()== 2) {
+    if (payment == null || payment.getStatus()== 1) {
       System.out.println();
       System.out.println("해당 번호의 결제내역이 없습니다.\n");
       return;
     }
 
-    Study chargeStudy = chargeStudyDao.findByNo(payment.getStudyNo());
+    Study study = chargeStudyDao.findByNo(no);
 
-    if (payment.getMemberNo() != AuthLogInHandler.getLoginUser().getNo()) {
-      System.out.println("해당 번호의 결제내역이 없습니다.\n");
-    }
-
-    System.out.printf("결제한 스터디 번호: %s\n", payment.getStudyNo());
-    System.out.printf("결제한 스터디 제목: %s\n", payment.getTitle());
-    System.out.printf("결제한 스터디 멘토: %s\n", payment.getMentorName());
-    System.out.printf("결제한 스터디 가격: %s\n", payment.getPrice());
+    System.out.printf("결제한 스터디 번호: %s\n", study.getNo());
+    System.out.printf("결제한 스터디 제목: %s\n", study.getTitle());
+    System.out.printf("결제한 스터디 멘토: %s\n", study.getWriter().getName());
+    System.out.printf("결제한 스터디 가격: %s\n", study.getPrice());
     System.out.printf("결제일: %s\n", payment.getPaymentDate());
     System.out.println();
 
-    if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == -1 ||
-        new Date(System.currentTimeMillis()).compareTo(chargeStudy.getEndDate()) == -1) {
+
+    if (study.getStudyStatus() == 0) {
 
       System.out.println("1. 결제 취소하기");
       System.out.println("0. 이전");
       int input = Prompt.inputInt("메뉴 번호를 선택하세요. > ");
 
       if(input == 1) {
-        request.setAttribute("chargeNo", payment.getPaidStudyNo());
+        request.setAttribute("chargeNo", no);
         request.getRequestDispatcher("/chargeStudy/paymentCancel").forward(request);
 
       } else if (input == 0) {

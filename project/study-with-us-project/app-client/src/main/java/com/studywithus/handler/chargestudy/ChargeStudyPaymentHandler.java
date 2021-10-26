@@ -1,7 +1,9 @@
 package com.studywithus.handler.chargestudy;
 
+import org.apache.ibatis.session.SqlSession;
+import com.studywithus.dao.MemberDao;
 import com.studywithus.dao.PaymentDao;
-import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -12,12 +14,16 @@ import com.studywithus.util.Prompt;
 
 public class ChargeStudyPaymentHandler implements Command {
 
+  MemberDao memberDao;
   PaymentDao paymentDao;
-  StudyDao chargeStudyDao;
+  StudyMemberDao studyMemberDao;
+  SqlSession sqlSession;
 
-  public ChargeStudyPaymentHandler(PaymentDao paymentDao, StudyDao chargeStudyDao) {
+  public ChargeStudyPaymentHandler(MemberDao memberDao, StudyMemberDao studyMemberDao, PaymentDao paymentDao, SqlSession sqlSession) {
+    this.memberDao = memberDao;
+    this.studyMemberDao = studyMemberDao;
     this.paymentDao = paymentDao;
-    this.chargeStudyDao = chargeStudyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -25,8 +31,6 @@ public class ChargeStudyPaymentHandler implements Command {
     System.out.println("[유료 스터디 / 상세보기 / 결제]\n");
 
     int no = (int) request.getAttribute("chargeNo");
-
-    Study chargeStudy = chargeStudyDao.findByNo(no);
 
     String input = Prompt.inputString("유료 스터디를 결제 하시겠습니까? (y/N) ");
 
@@ -60,14 +64,18 @@ public class ChargeStudyPaymentHandler implements Command {
 
       // 결제내역 생성해서 서버에 저장 요청
       Payment payment = new Payment();
-      payment.setMemberNo(AuthLogInHandler.getLoginUser().getNo());
-      payment.setStudyNo(chargeStudy.getNo());
+      payment.setMentee(AuthLogInHandler.getLoginUser());
+      payment.setStudyNo(no);
+      payment.setPaymentMethod(0);
+      payment.setStatus(0);
 
       paymentDao.insert(payment);
-
-      chargeStudyDao.update(chargeStudy);
+      studyMemberDao.insert(AuthLogInHandler.getLoginUser().getNo(), no, Study.PARTICIPANT_STATUS);
 
       AuthLogInHandler.userAccessLevel |= Menu.ACCESS_MENTEE;
+
+      sqlSession.commit();
+
     }
   }
 }

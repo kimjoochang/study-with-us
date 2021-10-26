@@ -114,7 +114,7 @@
    where study_no=#{no}  
   </update>
   
-  <select id="findAllIInterest" resultMap="StudyMap" parameterType="int">
+  <select id="findAllInterest" resultMap="StudyMap" parameterType="int">
   select 
       st.study_no,
       st.title,
