@@ -1,8 +1,9 @@
 package com.studywithus.handler.freestudy;
 
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
-import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -13,12 +14,12 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyMemberApproveHandler implements Command {
 
-  StudyDao freeStudyDao;
+  StudyMemberDao studyMemberDao;
   MemberDao memberDao;
   SqlSession sqlSession;
 
-  public FreeStudyMemberApproveHandler(StudyDao freeStudyDao, MemberDao memberDao, SqlSession sqlSession) {
-    this.freeStudyDao = freeStudyDao;
+  public FreeStudyMemberApproveHandler(StudyMemberDao studyMemberDao, MemberDao memberDao, SqlSession sqlSession) {
+    this.studyMemberDao = studyMemberDao;
     this.memberDao = memberDao;
     this.sqlSession = sqlSession;
   }
@@ -28,15 +29,17 @@ public class FreeStudyMemberApproveHandler implements Command {
     System.out.println("[마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 무료 스터디/ 상세보기 / 승인]\n");
     int no = (int) request.getAttribute("freeNo");
 
-    Study freeStudy = freeStudyDao.findByNoApplyStudy(AuthLogInHandler.getLoginUser().getNo(), no);
+    Study freeStudy = studyMemberDao.findByNoStudy(AuthLogInHandler.getLoginUser().getNo(), no, Study.OWNER_STATUS);
 
     if (freeStudy == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 
+    List<Member> applicants = studyMemberDao.findAllMember(no, Study.PARTICIPANT_STATUS);
+
     while (true) {
-      for (Member freeApplicant : freeStudy.getApplicants()) {
+      for (Member freeApplicant : applicants) {
         System.out.printf("[회원번호 = %d, 이름 = %s]", freeApplicant.getNo(), freeApplicant.getName());
       }
 
@@ -57,7 +60,7 @@ public class FreeStudyMemberApproveHandler implements Command {
         member.setUserAccessLevel(temp);
 
         memberDao.update(member);
-        freeStudyDao.updateStatus(applicantNo, no, 1);
+        studyMemberDao.update(applicantNo, no, 1);
         sqlSession.commit();
 
         System.out.println();

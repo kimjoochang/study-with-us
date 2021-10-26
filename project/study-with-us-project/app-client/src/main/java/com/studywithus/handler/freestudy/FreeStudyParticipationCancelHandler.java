@@ -2,7 +2,7 @@ package com.studywithus.handler.freestudy;
 
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
-import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -12,13 +12,13 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyParticipationCancelHandler implements Command {
 
-  StudyDao freeStudyDao;
+  StudyMemberDao studyMemberDao;
   MemberDao memberDao;
   SqlSession sqlSession;
 
 
-  public FreeStudyParticipationCancelHandler(StudyDao freeStudyDao, MemberDao memberDao, SqlSession sqlSession) {
-    this.freeStudyDao = freeStudyDao;
+  public FreeStudyParticipationCancelHandler(StudyMemberDao studyMemberDao, MemberDao memberDao, SqlSession sqlSession) {
+    this.studyMemberDao = studyMemberDao;
     this.memberDao = memberDao;
     this.sqlSession = sqlSession;
   }
@@ -28,8 +28,7 @@ public class FreeStudyParticipationCancelHandler implements Command {
     System.out.println("[무료 스터디 / 상세보기 / 참여 취소]\n");
     int no = (int) request.getAttribute("freeNo");
 
-    Study freeStudy = freeStudyDao.findByNoParticipateStudy
-        (AuthLogInHandler.getLoginUser().getNo(), no, 1);
+    Study freeStudy = studyMemberDao.findByNoStudy(AuthLogInHandler.getLoginUser().getNo(), no, Study.PARTICIPANT_STATUS);
 
     if (freeStudy == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -46,12 +45,14 @@ public class FreeStudyParticipationCancelHandler implements Command {
 
       } else if (input.equalsIgnoreCase("y")) {
 
-        freeStudyDao.deleteStudyMember(AuthLogInHandler.getLoginUser().getNo(), no);
+        studyMemberDao.delete(AuthLogInHandler.getLoginUser().getNo(), no);
 
         int temp = AuthLogInHandler.getLoginUser().getUserAccessLevel();
         AuthLogInHandler.getLoginUser().setUserAccessLevel((~temp) & Menu.ACCESS_MEMBER);
         System.out.println();
         System.out.println("무료 스터디 참여를 취소하였습니다.");
+
+        sqlSession.commit();
         return;
 
       } else {

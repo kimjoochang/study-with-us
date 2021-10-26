@@ -23,9 +23,11 @@ public class FreeStudyInterestDetailHandler implements Command {
     int no = Prompt.inputInt("번호를 입력하세요. > ");
     System.out.println();
 
-    Study freeStudy = freeStudyDao.findByNoInterest(AuthLogInHandler.getLoginUser().getNo( ), no);
+    Study freeStudy = freeStudyDao.findByNo(no);
 
-    if (freeStudy == null) {
+    int count = freeStudyDao.findMyInterest(AuthLogInHandler.getLoginUser().getNo(), no);
+
+    if (count == 0) {
       System.out.println("해당 번호의 관심목록 추가된 스터디가 없습니다.\n");
       return;
     }
@@ -47,13 +49,13 @@ public class FreeStudyInterestDetailHandler implements Command {
     }
     System.out.printf("시작일: %s\n", freeStudy.getStartDate());
     System.out.printf("종료일: %s\n", freeStudy.getEndDate());
-    System.out.printf("모집인원: %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
+    System.out.printf("모집인원: %d / %d\n", freeStudy.getMembers(), freeStudy.getMaxMembers());
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-    System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
+    System.out.printf("좋아요: %d\n", freeStudy.getLikes());
     System.out.println();
 
     request.setAttribute("freeNo", no);

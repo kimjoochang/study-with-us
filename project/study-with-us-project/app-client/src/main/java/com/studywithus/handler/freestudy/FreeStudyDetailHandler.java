@@ -1,6 +1,7 @@
 package com.studywithus.handler.freestudy;
 
 import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -11,10 +12,11 @@ import com.studywithus.util.StudyStatusHelper;
 public class FreeStudyDetailHandler implements Command {
 
   StudyDao freeStudyDao;
+  StudyMemberDao studyMemberDao;
   Study interest;
 
-  public FreeStudyDetailHandler(StudyDao freeStudyDao) {
-    this.freeStudyDao = freeStudyDao;
+  public FreeStudyDetailHandler(StudyMemberDao studyMemberDao) {
+    this.studyMemberDao = studyMemberDao;
   }
 
   @Override
@@ -47,13 +49,13 @@ public class FreeStudyDetailHandler implements Command {
     }
     System.out.printf("시작일: %s\n", freeStudy.getStartDate());
     System.out.printf("종료일: %s\n", freeStudy.getEndDate());
-    System.out.printf("모집인원: %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
+    System.out.printf("모집인원: %d / %d\n", freeStudy.getMembers(), freeStudy.getMaxMembers());
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-    System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
+    System.out.printf("좋아요: %d\n", freeStudy.getLikes());
     System.out.println();
 
     request.setAttribute("freeNo", no);
@@ -90,20 +92,19 @@ public class FreeStudyDetailHandler implements Command {
 
       while (true) {
 
-        Study participateStudy = freeStudyDao.findByNoParticipateStudy(AuthLogInHandler.getLoginUser().getNo(), no, 1);
-        Study applyStudy = freeStudyDao.findByNoApplyStudy(AuthLogInHandler.getLoginUser().getNo(), no);
+        int memberStatus = (int) studyMemberDao.findByNoStatus(AuthLogInHandler.getLoginUser().getNo(), no).get("status");
 
-        if (participateStudy != null) {
+        if (memberStatus == Study.PARTICIPANT_STATUS) {
           System.out.println("1. 참여 취소하기");
-        } else if (applyStudy == null) {
+        } else if (memberStatus != Study.PARTICIPANT_STATUS) {
           System.out.println("1. 신청하기");
-        } else {
+        } else if (memberStatus == Study.APPLICANT_STATUS) {
           System.out.println("1. 신청 취소하기");
         }
 
-        interest = freeStudyDao.findByNoInterest(AuthLogInHandler.getLoginUser().getNo( ), freeStudy.getNo());
+        int count = freeStudyDao.findMyInterest(AuthLogInHandler.getLoginUser().getNo( ), freeStudy.getNo());
 
-        if (interest == null) {
+        if (count == 0) {
           System.out.println("2. 관심목록 추가");
 
         } else {
@@ -116,20 +117,20 @@ public class FreeStudyDetailHandler implements Command {
 
         if (menuNo == 1) {
           // 신청하기를 아직 안 한 경우
-          if (participateStudy != null) {
+          if (memberStatus != 0 || memberStatus != 1) {
             request.getRequestDispatcher("/freeStudy/participationCancel").forward(request);
 
             // 신청하기를 이미 한 경우
-          } else if (applyStudy == null) {
+          } else if (memberStatus == 0) {
             request.getRequestDispatcher("/freeStudy/apply").forward(request);
 
-          } else {
+          } else if (memberStatus == 1) {
             request.getRequestDispatcher("/freeStudy/applyCancel").forward(request);
           }
 
         } else if (menuNo == 2) {
           // 관심목록에 없는 경우
-          if (interest == null) {
+          if (count == 0) {
             request.getRequestDispatcher("/freeStudy/addInterest").forward(request);
 
             // 관심목록에 이미 있는 경우

@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.studywithus.dao.StudyMemeberDao">
+<mapper namespace="com.studywithus.dao.StudyMemberDao">
   
  <resultMap type="Study" id="StudyMap">
     <id column="study_no" property="no"/> 
@@ -19,6 +19,7 @@
     <result column="price" property="price"/>
     <result column="status" property="studyStatus"/>
     <result column="likes" property="likes"/>
+    <result column="members" property="members"/>
        
     <association property="writer" javaType="Member">
       <id column="writer_no" property="no"/>
@@ -27,6 +28,7 @@
     </association>
   </resultMap>
   
+ 
   <resultMap type="Member" id="MemberMap">
     <id column="member_no" property="no"/> 
     <result column="name" property="name"/>
@@ -50,6 +52,20 @@
       st.del_status,
       st.price,
       st.status,
+      (select 
+      count(*) 
+      from 
+      interest
+      where
+      study_no=st.study_no) likes,
+      (select 
+      count(*) 
+      from 
+      study_member
+      where
+      study_no=st.study_no
+      and
+      status=1) members,
       m.member_no writer_no,
       m.name writer_name,
       m.email writer_email
@@ -68,10 +84,9 @@
       m.status,
       m.phone_number,
       m.access_level
-      from 
+     from 
       study_member sm
       inner join member m on sm.member_no=m.member_no
-      
   </sql>
   
   <select id="findAllStudy" resultMap="StudyMap">
@@ -81,13 +96,35 @@
     order by 
       st.study_no asc
   </select>
+
+  <select id="findByNoStudy" resultMap="StudyMap">
+    <include refid="selectStudy"/>
+    where
+      sm.member_no=#{memberNo} and sm.study_no=#{studyNo} and sm.status=#{myStatus}
+  </select>
   
   <select id="findAllMember" resultMap="MemberMap">
     <include refid="selectMember"/>
     where
-      sm.member_no=#{studyNo} and sm.status=#{myStatus}
+      sm.study_no=#{studyNo} and sm.status=#{myStatus}
     order by 
       sm.member_no asc
+  </select>
+
+  <select id="findByNoMember" resultMap="MemberMap">
+    <include refid="selectMember"/>
+    where
+       sm.member_no=#{memberNo} and sm.study_no=#{studyNo} and sm.status=#{myStatus}
+  </select>
+  
+  <select id="findByNoStatus" resultType="map">
+    select
+      sm.status, 
+     from 
+      study_member sm
+      inner join member m on sm.member_no=m.member_no
+    where
+       sm.member_no=#{memberNo} and sm.study_no=#{studyNo}
   </select>
             
   <insert id="insert">
@@ -107,8 +144,7 @@
     delete from study_member
     where member_no=#{memberNo} AND study_no={studyNo}
   </delete>
-  
-  <!-- 
+   <!-- 
   <select id="findByNoStudy" resultMap="StudyMap" parameterType="int">
    <include refid="selectStudy"/>
     where 

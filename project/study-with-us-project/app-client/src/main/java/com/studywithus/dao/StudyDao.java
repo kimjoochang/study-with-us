@@ -12,6 +12,7 @@ public interface StudyDao {
   void insertInterest(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
   void update(Study study) throws Exception;
   List<Study> findAllInterest(int no) throws Exception;
+  int findMyInterest(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
   void delete(int no) throws Exception;
   void deleteInterest(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
 }

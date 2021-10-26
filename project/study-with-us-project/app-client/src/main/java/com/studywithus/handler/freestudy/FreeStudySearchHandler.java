@@ -37,7 +37,7 @@ public class FreeStudySearchHandler implements Command {
         System.out.printf("[번호 = %d, 제목 = %s, 팀장 = %s, 등록일 = %s, 조회수 = %d, 좋아요 = %d]\n",
             freeStudy.getNo(), freeStudy.getTitle(), freeStudy.getWriter().getName(),
             freeStudy.getRegisteredDate(), freeStudy.getViewCount(),
-            freeStudy.getLikeMembers().size());
+            freeStudy.getLikes());
       }
     }
   }

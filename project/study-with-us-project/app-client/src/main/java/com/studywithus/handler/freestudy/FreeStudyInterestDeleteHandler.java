@@ -1,7 +1,6 @@
 package com.studywithus.handler.freestudy;
 
-import com.studywithus.dao.FreeStudyDao;
-import com.studywithus.domain.Study;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
@@ -9,11 +8,10 @@ import com.studywithus.util.Prompt;
 
 public class FreeStudyInterestDeleteHandler implements Command {
 
-  FreeStudyDao freeStudyDao;
+  StudyDao freeStudyDao;
 
-  public FreeStudyInterestDeleteHandler(FreeStudyDao freeStudyDao) {
+  public FreeStudyInterestDeleteHandler(StudyDao freeStudyDao) {
     this.freeStudyDao = freeStudyDao;
-    // super(freeStudyList);
   }
 
   @Override
@@ -21,7 +19,11 @@ public class FreeStudyInterestDeleteHandler implements Command {
     System.out.println("[무료 스터디 / 상세보기 / 관심 목록 / 삭제]\n");
     int no = (int) request.getAttribute("freeNo");
 
-    Study freeStudy = freeStudyDao.findByNo(no);
+    int count = freeStudyDao.findMyInterest(AuthLogInHandler.getLoginUser().getNo(), no);
+
+    if (count == 0) {
+      System.out.println("관심목록에 해당 스터디가 없습니다.");
+    }
 
     while (true) {
       String input = Prompt.inputString("무료 스터디 관심 목록을 삭제하시겠습니까? (y/N) ");
@@ -32,14 +34,8 @@ public class FreeStudyInterestDeleteHandler implements Command {
         return;
 
       } else if (input.equalsIgnoreCase("y")) {
-        for (int i = 0; i < freeStudy.getLikeMembers().size(); i++) {
-          if (freeStudy.getLikeMembers().get(i).getNo() == AuthLogInHandler.getLoginUser().getNo()) {
-            freeStudy.getLikeMembers().remove(i);
-            break;
-          }
-        }
 
-        freeStudyDao.update(freeStudy);
+        freeStudyDao.deleteInterest(AuthLogInHandler.getLoginUser().getNo(), no);
         System.out.println();
         System.out.println("무료 스터디 관심 목록을 삭제하였습니다.");
         return;

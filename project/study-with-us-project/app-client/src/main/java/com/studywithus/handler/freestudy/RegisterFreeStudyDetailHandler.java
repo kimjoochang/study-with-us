@@ -1,6 +1,7 @@
 package com.studywithus.handler.freestudy;
 
-import com.studywithus.dao.StudyDao;
+import java.util.List;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -11,10 +12,10 @@ import com.studywithus.util.StudyStatusHelper;
 
 public class RegisterFreeStudyDetailHandler implements Command {
 
-  StudyDao freeStudyDao;
+  StudyMemberDao studyMemberDao;
 
-  public RegisterFreeStudyDetailHandler(StudyDao freeStudyDao) {
-    this.freeStudyDao = freeStudyDao;
+  public RegisterFreeStudyDetailHandler(StudyMemberDao studyMemberDao) {
+    this.studyMemberDao = studyMemberDao;
   }
 
   @Override
@@ -22,8 +23,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
     System.out.println("[마이 페이지 / 나의 활동 / 나의 스터디 / 내가 생성한 무료 스터디/ 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    Study freeStudy = freeStudyDao.
-        findByNoRegisterStudy(AuthLogInHandler.getLoginUser().getNo( ), no);
+    Study freeStudy = studyMemberDao.findByNoStudy(AuthLogInHandler.getLoginUser().getNo( ), no, Study.OWNER_STATUS);
 
     if (freeStudy == null || freeStudy.getPrice() > 0) {
       System.out.println();
@@ -48,19 +48,21 @@ public class RegisterFreeStudyDetailHandler implements Command {
     }
     System.out.printf("시작일: %s\n", freeStudy.getStartDate());
     System.out.printf("종료일: %s\n", freeStudy.getEndDate());
-    System.out.printf("모집인원: %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
+    System.out.printf("모집인원: %d / %d\n", freeStudy.getMembers(), freeStudy.getMaxMembers());
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-    System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
+    System.out.printf("좋아요: %d\n", freeStudy.getLikes());
     System.out.println();
 
     request.setAttribute("freeNo", no);
 
+    List<Member> applicants = studyMemberDao.findAllMember(no, Study.APPLICANT_STATUS);
+
     // 무료 스터디 신청 회원 X
-    if (freeStudy.getApplicants().isEmpty()) {
+    if (applicants.isEmpty()) {
       System.out.println("스터디를 신청한 회원이 없습니다.\n");
       System.out.println("1. 수정");
       System.out.println("2. 삭제");
@@ -90,7 +92,7 @@ public class RegisterFreeStudyDetailHandler implements Command {
       // 무료 스터디 신청 회원 O
     } else {
       // 내가 생성한 무료 스터디 상세보기 안에서 신청자 명단 출력1
-      for (Member freeApplicant : freeStudy.getApplicants()) {
+      for (Member freeApplicant : applicants) {
         System.out.printf("[번호 = %d, 이름 = %s]", freeApplicant.getNo(), freeApplicant.getName());
       }
 
@@ -100,11 +102,11 @@ public class RegisterFreeStudyDetailHandler implements Command {
         int applicantNo = Prompt.inputInt("신청자 번호를 입력하세요. > ");
         // Member freeApplicant;
 
-        for (int i = 0; i < freeStudy.getApplicants().size(); i++) {
-          if (applicantNo == freeStudy.getApplicants().get(i).getNo()) {
-            System.out.printf("이름: %s\n", freeStudy.getApplicants().get(i).getName());
-            System.out.printf("이메일: %s\n", freeStudy.getApplicants().get(i).getEmail());
-            System.out.printf("휴대폰 번호: %s\n", freeStudy.getApplicants().get(i).getPhoneNumber());
+        for (Member applicant : applicants) {
+          if (applicantNo == applicant.getNo()) {
+            System.out.printf("이름: %s\n", applicant.getName());
+            System.out.printf("이메일: %s\n", applicant.getEmail());
+            System.out.printf("휴대폰 번호: %s\n", applicant.getPhoneNumber());
 
             System.out.println();
             System.out.println("1. 수정");
@@ -129,9 +131,6 @@ public class RegisterFreeStudyDetailHandler implements Command {
                 request.getRequestDispatcher("/freeStudy/memberApprove").forward(request);
 
                 return;
-                // freeStudy는 해당 스터디의 지원자 명단 확인, freeApplicant는 해당 스터디 정보에 멤버로 추가하기 위해 파라미터로 넘김
-                // studyMemberApproveHandler(freeApplicant, freeStudy);
-                // freeApplicant.setUserAccessLevel(Menu.ACCESS_MEMBER | Menu.ACCESS_GENERAL);
 
               } else if (input == 4) {
                 request.getRequestDispatcher("/freeStudy/memberRefusal").forward(request);

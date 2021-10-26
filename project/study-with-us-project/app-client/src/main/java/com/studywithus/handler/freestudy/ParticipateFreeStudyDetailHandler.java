@@ -1,6 +1,6 @@
 package com.studywithus.handler.freestudy;
 
-import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
@@ -10,10 +10,10 @@ import com.studywithus.util.StudyStatusHelper;
 
 public class ParticipateFreeStudyDetailHandler implements Command {
 
-  StudyDao freeStudyDao;
+  StudyMemberDao studyMemberDao;
 
-  public ParticipateFreeStudyDetailHandler(StudyDao freeStudyDao) {
-    this.freeStudyDao = freeStudyDao;
+  public ParticipateFreeStudyDetailHandler( StudyMemberDao studyMemberDao) {
+    this.studyMemberDao = studyMemberDao;
   }
 
   @Override
@@ -21,8 +21,7 @@ public class ParticipateFreeStudyDetailHandler implements Command {
     System.out.println("[마이 페이지 / 내가 참여한 무료 스터디 / 상세보기]\n");
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    Study freeStudy = freeStudyDao.
-        findByNoParticipateStudy( AuthLogInHandler.getLoginUser().getNo( ), no, 1);
+    Study freeStudy = studyMemberDao.findByNoStudy( AuthLogInHandler.getLoginUser().getNo( ), no, Study.PARTICIPANT_STATUS);
 
     if (freeStudy == null || freeStudy.getPrice() > 0) {
       System.out.println();
@@ -47,13 +46,13 @@ public class ParticipateFreeStudyDetailHandler implements Command {
     }
     System.out.printf("시작일: %s\n", freeStudy.getStartDate());
     System.out.printf("종료일: %s\n", freeStudy.getEndDate());
-    System.out.printf("모집인원: %d / %d\n", freeStudy.getMembers().size(), freeStudy.getMaxMembers());
+    System.out.printf("모집인원: %d / %d\n", freeStudy.getMembers(), freeStudy.getMaxMembers());
     System.out.printf("설명: %s\n", freeStudy.getContent());
     System.out.printf("등록일: %s\n", freeStudy.getRegisteredDate());
 
     freeStudy.setViewCount(freeStudy.getViewCount() + 1);
     System.out.printf("조회수: %d\n", freeStudy.getViewCount());
-    System.out.printf("좋아요: %d\n", freeStudy.getLikeMembers().size());
+    System.out.printf("좋아요: %d\n", freeStudy.getLikes());
     System.out.println();
 
     request.setAttribute("freeNo", no);
