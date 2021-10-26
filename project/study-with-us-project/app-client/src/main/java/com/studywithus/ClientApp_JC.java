@@ -225,7 +225,7 @@ public class ClientApp_JC {
     commandMap.put("/chargeStudy/registerChargeStudyDetail",new RegisterChargeStudyDetailHandler(studyMemberdao));
     commandMap.put("/chargeStudy/participateChargeStudyList", new ParticipateChargeStudyListHandler(studyMemberdao));
     commandMap.put("/chargeStudy/participateChargeStudyDetail", new ParticipateChargeStudyDetailHandler(studyMemberdao));
-    commandMap.put("/review/add", new ReviewAddHandler(reviewDao));
+    commandMap.put("/review/add", new ReviewAddHandler(reviewDao, sqlSession));
     commandMap.put("/review/list", new ReviewListHandler(reviewDao));
     //
     //    commandMap.put("/communityQa/add", new CommunityAddHandler(communityQaList);

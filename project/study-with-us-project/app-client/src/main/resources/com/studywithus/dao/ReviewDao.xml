@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studywithus.dao.ReviewDao">
+  
+  <resultMap type="Review" id="ReviewMap">
+    <id column="review_no" property="no"/>
+    <result column="study_no" property="studyNo"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="score" property="score"/>
+    <result column="register_date" property="registeredDate"/>
+
+  <association property="writer" javaType="member">
+      <id column="writer_no" property="no"/>
+      <result column="writer_email" property="email"/>
+    </association>
+  </resultMap>
+  
+  <sql id="select1">
+  select
+    r.review_no,
+    r.title,
+    r.content,
+    r.score,
+    r.register_date,
+    r.member_no writer_no,
+    m.email writer_email
+    from
+    review r
+    inner join study_member sm on r.member_no=sm.member_no
+    left join member m on m.member_no=sm.member_no
+  </sql>
+  
+  <select id="findAll" resultMap="ReviewMap" parameterType="int">
+     <include refid="select1"/>
+        where r.study_no=#{studyNo}
+        order by review_no asc
+  </select>
+
+	<insert id="insert" parameterType="Review">
+		insert into review(member_no,study_no,title,content,score)
+	        values(#{writer.no},#{studyNo},#{title},#{content},#{score})
+	</insert>
+	
+	<select id="findByNo" resultMap="ReviewMap">
+    <include refid="select1"/>
+       where r.member_no=#{memberNo} and r.study_no=#{studyMo}
+  </select>
+  
+  <update id="update" parameterType="Review">
+   update review set
+      title=#{title},
+      content=#{content},
+      score=#{score}
+   where 
+    review_no=#{no}
+  </update>
+	  
+  <delete id="delete" parameterType="int">
+    delete from review
+    where review_no=#{reviewNo}
+  </delete>
+
+<!-- 내가 쓴 댓글 모아보기 용 
+  <select id="findAllMyReview" resultMap="CommentMap" parameterType="int">
+     <include refid="select1"/>
+        where r.member_no=#{memberNo}
+        order by review_no asc
+  </select>
+  
+  -->
+            
+</mapper>
