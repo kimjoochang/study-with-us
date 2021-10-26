@@ -1,4 +1,4 @@
-package com.eomcs.pms.listener;
+package com.studywithus.listener;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebListener;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import com.eomcs.pms.dao.MemberDao;
+import com.studywithus.dao.MemberDao;
 
 @WebListener
 public class AppInitListener implements ServletContextListener {
