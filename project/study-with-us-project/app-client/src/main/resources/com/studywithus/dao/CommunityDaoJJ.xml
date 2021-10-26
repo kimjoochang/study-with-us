@@ -82,7 +82,7 @@
 	</select>
 
 	<update id="updateCount" parameterType="int">
-		update pms_board set
+		update cmnt set
 		view_count = view_count + 1
 		where cmnt_no=#{no}
 	</update>

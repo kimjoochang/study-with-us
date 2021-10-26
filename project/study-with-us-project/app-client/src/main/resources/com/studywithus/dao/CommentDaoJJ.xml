@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studywithus.dao.CommentDaoJJ">
+
+	<resultMap type="Comment" id="CommentMap">
+		<id column="comment_no" property="no" />
+		<result column="cmnt_no" property="communityNo" />
+		<result column="content" property="content" />
+		<result column="register_date" property="registeredDate" />
+
+		<association property="writer" javaType="member">
+			<id column="writer_no" property="memberNo" />
+			<result column="writer_email" property="email" />
+		</association>
+	</resultMap>
+
+	<sql id="select1">
+		select
+		c.comment_no,
+		c.cmnt_no,
+		c.content,
+		c.register_date,
+		m.member_no,
+		m.email,
+		from
+		comment c
+		inner join member m on c.member_no=m.member_no
+		left outer join cmnt cm on
+		c.cmnt_no=cm.cmnt_no
+	</sql>
+
+	<select id="findAll" resultMap="CommentMap" parameterType="int">
+		<include refid="select1" />
+		order by comment_no asc
+	</select>
+
+	<select id="findByNo" resultMap="CommentMap" parameterType="int">
+		<include refid="select1" />
+		where c.comment_no=#{no}
+	</select>
+
+	<!--오류 Cannot add or update a child row: a foreign key constraint fails -->
+	<insert id="insert" parameterType="comment">
+		insert into
+		comment(writer_no,cmnt_no,content)
+		values(#{writer.no},#{cmnt.no},#{content})
+	</insert>
+
+	<delete id="delete" parameterType="int">
+		delete from comment
+		where
+		comment_no=#{no}
+	</delete>
+
+</mapper>

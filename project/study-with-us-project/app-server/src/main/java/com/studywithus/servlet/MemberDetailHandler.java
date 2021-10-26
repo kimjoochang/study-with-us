@@ -53,7 +53,7 @@ public class MemberDetailHandler extends GenericServlet {
         out.printf("이메일: <input type='text' name='email' value='%s'><br>\n", member.getEmail());
         out.printf("암호: <input type='text' name='password'><br>\n");
         out.printf("사진: <input type='text' photo='photo'><br>\n", member.getPhoto());
-        out.printf("전화: <input type='text' tel='tel'><br>\n", member.getTel());
+        out.printf("전화: <input type='text' phoneNumber='phoneNumber'><br>\n", member.getPhoneNumber());
         out.printf("등록일: %s<br>\n", member.getRegisteredDate());
         out.println();
 

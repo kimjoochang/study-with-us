@@ -32,7 +32,7 @@ public class MemberFormHandler extends HttpServlet {
     out.println("이메일: <input type='text' name='email'><br>");
     out.println("암호: <input type='text' name='password'><br>");
     out.println("사진: <input type='text' name='photo'><br>");
-    out.println("전화: <input type='text' name='tel'><br>");
+    out.println("전화: <input type='text' name='phoneNumber'><br>");
     out.println("<button>등록</button><br>");
     out.println("</form>");
 

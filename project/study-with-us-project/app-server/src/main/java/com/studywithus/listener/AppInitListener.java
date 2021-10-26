@@ -21,7 +21,7 @@ public class AppInitListener implements ServletContextListener {
     try {
       // Mybatis의 SqlSession 객체 준비
       sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
-          "com/eomcs/pms/conf/mybatis-config.xml")).openSession();
+          "com/studywithus/conf/mybatis-config.xml")).openSession();
 
       // SqlSession 객체를 통해 MemberDao 구현체를 자동 생성한다.
       MemberDao memberDao = sqlSession.getMapper(MemberDao.class);

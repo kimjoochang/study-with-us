@@ -48,7 +48,7 @@ public class MemberListHandler extends GenericServlet {
             member.getNo(), 
             member.getName(), 
             member.getEmail(), 
-            member.getTel(), 
+            member.getPhoneNumber(), 
             member.getRegisteredDate());
       }
     } catch (Exception e) {
