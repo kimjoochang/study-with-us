@@ -17,7 +17,7 @@
 		</association>
 	</resultMap>
 
-	<select id="findAll" resultMap="CommentMap" parameterType="int">
+	<sql id="select1">
 		select
 		c.comment_no,
 		c.cmnt_no,
@@ -25,27 +25,20 @@
 		c.register_date,
 		m.member_no,
 		m.email,
-		mf.file_no,
-		mf.name
 		from
 		comment c
-		inner join member m on
-		c.member_no=m.member_no
+		inner join member m on c.member_no=m.member_no
 		left outer join cmnt cm on
-		c.cmnt_no=cm.cmnt_no 
+		c.cmnt_no=cm.cmnt_no
+	</sql>
+
+	<select id="findAll" resultMap="CommentMap" parameterType="int">
+		<include refid="select1" />
 		order by comment_no asc
 	</select>
 
 	<select id="findByNo" resultMap="CommentMap" parameterType="int">
-		select
-		c.comment_no,
-		c.content,
-		c.cmnt_no,
-		m.member_no,
-		m.email
-		from comment
-		inner join member m on c.member_no=m.member_no
-		left outer join cmnt cm c.cmnt_no=cm.cmnt_no
+		<include refid="select1" />
 		where c.comment_no=#{no}
 	</select>
 
