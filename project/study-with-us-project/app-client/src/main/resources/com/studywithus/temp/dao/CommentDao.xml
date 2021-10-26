@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="CommentDao">
+<mapper namespace="com.studywithus.dao.CommentDao">
 
 	<resultMap type="Comment" id="CommentMap">
 		<id column="comment_no" property="no" />
@@ -12,15 +12,15 @@
 		<result column="register_date" property="registeredDate" />
 
 		<association property="writer" javaType="member">
-			<id column="member_no" property="no" />
-			<result column="email" property="email" />
+			<id column="writer_no" property="memberNo" />
+			<result column="writer_email" property="email" />
 		</association>
-
 	</resultMap>
 
 	<select id="findAll" resultMap="CommentMap" parameterType="int">
 		select
 		c.comment_no,
+		c.cmnt_no,
 		c.content,
 		c.register_date,
 		m.member_no,
@@ -29,26 +29,37 @@
 		mf.name
 		from
 		comment c
-		inner join member m on c.member_no=m.member_no
-		left outer join member_file mf on m.member_no=mf.member_no where
-		cmnt_no=#{no}
+		inner join member m on
+		c.member_no=m.member_no
+		left outer join cmnt cm on
+		c.cmnt_no=cm.cmnt_no 
 		order by comment_no asc
 	</select>
 
-	<!-- <select id="findByNo" resultMap="CommentMap" parameterType="int"> select 
-		c.comment_no, c.content, c.cmnt_no, m.member_no, m.name, m.email from comment 
-		c inner join member m on c.member_no=m.member_no where c.comment_no=#{no} 
-		</select> -->
+	<select id="findByNo" resultMap="CommentMap" parameterType="int">
+		select
+		c.comment_no,
+		c.content,
+		c.cmnt_no,
+		m.member_no,
+		m.email
+		from comment
+		inner join member m on c.member_no=m.member_no
+		left outer join cmnt cm c.cmnt_no=cm.cmnt_no
+		where c.comment_no=#{no}
+	</select>
 
 	<!--오류 Cannot add or update a child row: a foreign key constraint fails -->
 	<insert id="insert" parameterType="comment">
-		insert into comment(content,member_no,cmnt_no)
-		values(#{content},#{writer},#{cmnt.no})
+		insert into
+		comment(writer_no,cmnt_no,content)
+		values(#{writer.no},#{cmnt.no},#{content})
 	</insert>
 
 	<delete id="delete" parameterType="int">
 		delete from comment
-		where comment_no=#{no}
+		where
+		comment_no=#{no}
 	</delete>
 
 </mapper>
