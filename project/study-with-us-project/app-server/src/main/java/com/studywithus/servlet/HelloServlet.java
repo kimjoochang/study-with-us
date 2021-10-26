@@ -1,4 +1,4 @@
-package com.eomcs.pms.servlet;
+package com.studywithus.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
