@@ -8,14 +8,27 @@
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
-    id 'application'
-    id 'eclipse'
+    id 'java'  // 자바 애플리케이션 빌드 관련 작업들을 추가한다.
+    id 'war' // 웹 애플리케이션 배포 파일을 생성하는 작업을 수행할 플러그인 장착
+    id 'eclipse-wtp' // 이클립스 IDE용 웹 프로젝트 관련 파일을 만들 때 사용할 도구가 들어 있는 플러그인 장착
+    // id 'application' // = 'java' 플러그인 + 애플리케이션 관련 작업
 }
 
 eclipse {
     project {
         name = "study-with-us-project-server"
     }
+}
+// 서블릿 컨테이너에 배치할 때 사용할 웹 애플리케이션 이름을 설정한다.
+// 이 이름은 .war 배치 파일을 만들 때도 사용한다.  
+ war {
+  archiveBaseName = "pms"
+  }
+  
+  // 자바 소스를 컴파일 할 때 적용할 옵션
+tasks.withType(JavaCompile) {
+    // $javac -encoding UTF-8 ...
+    options.encoding = 'UTF-8';
 }
 
 repositories {
@@ -24,6 +37,9 @@ repositories {
 }
 
 dependencies {
+  // 서블릿 API
+  implementation 'javax.servlet:javax.servlet-api:4.0.1'
+  
     // Google JSON 라이브러리
     implementation 'com.google.code.gson:gson:2.8.8'
     
@@ -32,9 +48,17 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.1-jre'
+    
+    // MariaDB JDBC 드라이버
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
+  
+    // Mybatis 퍼시스턴스 프레임워크
+    implementation 'org.mybatis:mybatis:3.5.7'
 }
 
-application {
+/*
+ application {
     // Define the main class for the application.
     mainClass = 'com.studywithus.ServerApp'
 }
+*/
