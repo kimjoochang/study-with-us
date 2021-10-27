@@ -12,18 +12,10 @@
     <result column="start_date" property="startDate"/>
     <result column="end_date" property="endDate"/>
        
-       <!-- 
-       [10/27 선영] 관리자만 스케줄 작성 가능하니 association 필요 없는 거 right? 
-    <association property="writer" javaType="Member">
-      <id column="writer_no" property="no"/>
-      <result column="writer_name" property="name"/>
-      <result column="writer_email" property="email"/>
-    </association>
-        -->
   </resultMap>
   
   <!-- 
-  [10/27 선영] 별명 sc 맞죠?
+
    -->
   <sql id="select1">
  select 
