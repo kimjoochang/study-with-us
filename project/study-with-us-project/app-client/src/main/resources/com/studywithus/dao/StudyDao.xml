@@ -154,6 +154,12 @@
     <include refid="order1"/> 
   </select>
   
+  <update id="updateCount" parameterType="int">
+    update study set
+    view_count = view_count + 1
+    where study_no=#{no}
+  </update>
+  
   <select id="findMyInterest" resultType="int">
   select
     count(*)

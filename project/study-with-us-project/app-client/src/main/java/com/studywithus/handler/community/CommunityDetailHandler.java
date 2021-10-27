@@ -1,6 +1,8 @@
 package com.studywithus.handler.community;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
+import com.studywithus.dao.CommentDao;
 import com.studywithus.dao.CommunityDao;
 import com.studywithus.domain.Comment;
 import com.studywithus.domain.Community;
@@ -12,9 +14,13 @@ import com.studywithus.util.Prompt;
 public class CommunityDetailHandler implements Command {
 
   CommunityDao communityDao;
+  CommentDao commentDao;
+  SqlSession sqlSession;
 
-  public CommunityDetailHandler(CommunityDao communityDao) {
+  public CommunityDetailHandler(CommunityDao communityDao, CommentDao commentDao, SqlSession sqlSession) {
     this.communityDao = communityDao;
+    this.commentDao = commentDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -38,9 +44,13 @@ public class CommunityDetailHandler implements Command {
     System.out.printf("조회수: %d\n", community.getViewCount());
     System.out.println();
 
-    System.out.println("-----------------------------------------------------------");
+    communityDao.updateCount(no);
+    sqlSession.commit();
 
-    for (Comment comment : community.getComments()) {
+    System.out.println("-----------------------------------------------------------");
+    List<Comment> comments = commentDao.findAll(no);
+
+    for (Comment comment : comments) {
 
       System.out.printf("번호 : %d | 작성자 이메일 : %s | 내용 : %s\n",
           comment.getNo(), comment.getWriter().getEmail(), comment.getContent());
@@ -49,7 +59,13 @@ public class CommunityDetailHandler implements Command {
 
     request.setAttribute("communityNo", no);
 
+    int count = 0;
 
+    for (Comment myComment : comments) {
+      if (AuthLogInHandler.getLoginUser().getNo() == myComment.getWriter().getNo()) {
+        count++;
+      }
+    }
 
     // 내가 쓴 글인 경우
     if (community.getWriter().getEmail().equals(AuthLogInHandler.getLoginUser().getEmail()) 
@@ -58,7 +74,7 @@ public class CommunityDetailHandler implements Command {
         System.out.println("1. 수정");
         System.out.println("2. 삭제");
         System.out.println("3. 댓글 작성");
-        if (findByEmail(community.getComments())) {
+        if (count != 0) {
           System.out.println("4. 댓글 삭제");
         }
         System.out.println("0. 이전");
@@ -95,7 +111,7 @@ public class CommunityDetailHandler implements Command {
 
       while (true) {
         System.out.println("1. 댓글 작성");
-        if (findByEmail(community.getComments())) {
+        if (count != 0) {
           System.out.println("2. 댓글 삭제");
         }
         System.out.println("0. 이전");
@@ -123,13 +139,5 @@ public class CommunityDetailHandler implements Command {
       }
     }
 
-  }
-  private boolean findByEmail(List<Comment> comments) {
-    for(Comment comment : comments) {
-      if (comment.getWriter().getEmail().equals(AuthLogInHandler.getLoginUser().getEmail())) {
-        return true;
-      } 
-    }
-    return false;
   }
 }

@@ -1,5 +1,6 @@
 package com.studywithus.handler.chargestudy;
 
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.handler.Command;
@@ -12,10 +13,12 @@ public class ChargeStudyDetailHandler implements Command {
 
   StudyDao chargeStudyDao;
   ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt;
+  SqlSession sqlSession;
 
-  public ChargeStudyDetailHandler(StudyDao chargeStudyDao, ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt) {
+  public ChargeStudyDetailHandler(StudyDao chargeStudyDao, ChargeStudyDetailMenuPrompt chargeStudyDetailMenuPrompt, SqlSession sqlSession) {
     this.chargeStudyDao = chargeStudyDao;
     this.chargeStudyDetailMenuPrompt = chargeStudyDetailMenuPrompt;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -46,6 +49,9 @@ public class ChargeStudyDetailHandler implements Command {
     System.out.printf("조회수: %d\n", chargeStudy.getViewCount());
     System.out.printf("좋아요수: %d\n", chargeStudy.getLikes());
     System.out.println();
+
+    chargeStudyDao.updateCount(no);
+    sqlSession.commit();
 
     request.setAttribute("chargeNo", no);
 

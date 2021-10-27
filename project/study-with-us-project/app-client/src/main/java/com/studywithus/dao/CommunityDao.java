@@ -1,6 +1,7 @@
 package com.studywithus.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.studywithus.domain.Community;
 
 // 역할
@@ -9,13 +10,19 @@ import com.studywithus.domain.Community;
 public interface CommunityDao {
   void insert(Community community) throws Exception;
 
-  List<Community> findAll() throws Exception;
+  void insertLikes (@Param("memberNo") int memberNo, @Param("cmntNo") int communityNo) throws Exception;
 
-  List<Community> findByKeyword(String keyword) throws Exception;
+  List<Community> findAll(int categoryNo) throws Exception;
+
+  List<Community> findByKeyword(@Param("keyword") String keyword,@Param("categoryNo") int categoryNo) throws Exception;
 
   Community findByNo(int no) throws Exception;
 
   void update(Community community) throws Exception;
 
   void delete(int no) throws Exception;
+
+  void deleteLikes (@Param("memberNo") int memberNo, @Param("cmntNo") int communityNo) throws Exception;
+
+  void updateCount(int no) throws Exception;
 }

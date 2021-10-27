@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.studywithus.dao.CommunityDaoJJ">
+<mapper namespace="com.studywithus.dao.CommunityDao">
 
 	<resultMap type="Community" id="CommunityMap">
 		<id column="cmnt_no" property="no" />
@@ -54,8 +54,10 @@
 		cmnt_no desc
 	</sql>
 
-	<select id="findAll" resultMap="CommunityMap">
+	<select id="findAll" resultMap="CommunityMap" parameterType="int">
 		<include refid="select1" />
+		where
+		  cm.category=#{}
 		<include refid="order1" />
 	</select>
 
@@ -68,17 +70,16 @@
 		member_file mf on m.member_no=mf.member_no where cmnt_no=#{no} </select> 
 		ForComment -->
 
-	<select id="findByNo" resultMap="CommunityMap"
-		parameterType="int">
+	<select id="findByNo" resultMap="CommunityMap" parameterType="int">
 		<include refid="select1" />
 		where
 		cmnt_no=#{no}
 	</select>
 
-	<select id="findByKeyword" resultMap="CommunityMap"
-		parameterType="string">
+	<select id="findByKeyword" resultMap="CommunityMap">
 		<include refid="select1" />
-		where cm.title like
+		where cm.category=#{categoryNo}
+		and cm.title like
 		(concat('%',#{keyword},'%'))
 		or cm.content like
 		(concat('%',#{keyword},'%'))
