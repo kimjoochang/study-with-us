@@ -26,8 +26,8 @@ public class HelloServlet implements Servlet {
       throws ServletException, IOException {
     res.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = res.getWriter();
-    out.println("안녕!");
     out.println("Hello!");
+    out.println("Welcome to STUDY WITH US!");
   }
 
   @Override

@@ -55,7 +55,7 @@ public class MemberUpdateHandler extends HttpServlet {
         member.setName(request.getParameter("name"));
         member.setEmail(request.getParameter("email"));
         member.setPassword(request.getParameter("password"));
-        member.setPhoneNumber(request.getParameter("tel"));
+        member.setPhoneNumber(request.getParameter("phoneNumber"));
 
         memberDao.update(member);
         sqlSession.commit();
