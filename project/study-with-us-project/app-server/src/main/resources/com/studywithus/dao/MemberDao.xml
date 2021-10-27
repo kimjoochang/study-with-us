@@ -49,9 +49,9 @@
       member_no=#{no}
   </select>
   
-  <select id="findByEmail" resultMap="MemberMap" parameterType="string">
+  <select id="findByEmail" resultType="int" parameterType="string">
     select 
-      email
+      count(*)
     from 
       member 
     where 
