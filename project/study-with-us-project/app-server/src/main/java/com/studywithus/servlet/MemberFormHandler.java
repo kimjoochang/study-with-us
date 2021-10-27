@@ -22,16 +22,15 @@ public class MemberFormHandler extends HttpServlet {
 
     out.println("<html>");
     out.println("<head>");
-    out.println("  <title>새회원</title>");
+    out.println("  <title>회원가입</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>새회원</h1>");
+    out.println("<h1>회원가입</h1>");
 
     out.println("<form action='add'>");
     out.println("이름: <input type='text' name='name'><br>");
     out.println("이메일: <input type='text' name='email'><br>");
     out.println("암호: <input type='text' name='password'><br>");
-    out.println("사진: <input type='text' name='photo'><br>");
     out.println("전화: <input type='text' name='phoneNumber'><br>");
     out.println("<button>등록</button><br>");
     out.println("</form>");

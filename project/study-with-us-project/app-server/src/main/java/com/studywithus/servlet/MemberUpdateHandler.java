@@ -14,8 +14,8 @@ import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 
 
-@WebServlet("/member/add")
-public class MemberAddHandler extends HttpServlet {
+@WebServlet("/member/update")
+public class MemberUpdateHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
@@ -37,25 +37,33 @@ public class MemberAddHandler extends HttpServlet {
 
     out.println("<html>");
     out.println("<head>");
-    out.println("  <title>회원등록</title>");
+    out.println("  <title>회원변경</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>회원등록결과</h1>");
-
-    Member member = new Member();
-
-    member.setName(request.getParameter("name"));
-    member.setEmail(request.getParameter("email"));
-    member.setPassword(request.getParameter("password"));
-    member.setPhoneNumber(request.getParameter("phoneNumber"));
+    out.println("<h1>회원변경결과</h1>");
 
     try {
-      memberDao.insert(member);
-      sqlSession.commit();
+      int no = Integer.parseInt(request.getParameter("no"));
 
-      out.println("회원을 등록했습니다.<br>");
+      Member member = memberDao.findByNo(no);
 
-      out.println("<a href='list'>[목록]</a><br>");
+      if (member == null) {
+        out.println("해당 번호의 회원이 없습니다.<br>");
+
+      } else {
+
+        member.setName(request.getParameter("name"));
+        member.setEmail(request.getParameter("email"));
+        member.setPassword(request.getParameter("password"));
+        member.setPhoneNumber(request.getParameter("tel"));
+
+        memberDao.update(member);
+        sqlSession.commit();
+
+        out.println("회원을 변경하였습니다.<br>");
+
+        out.println("<a href='list'>[목록]</a><br>");
+      }
 
     } catch (Exception e) {
       throw new ServletException(e);

@@ -56,9 +56,4 @@ dependencies {
     implementation 'org.mybatis:mybatis:3.5.7'
 }
 
-/*
- application {
-    // Define the main class for the application.
-    mainClass = 'com.studywithus.ServerApp'
-}
-*/
+
