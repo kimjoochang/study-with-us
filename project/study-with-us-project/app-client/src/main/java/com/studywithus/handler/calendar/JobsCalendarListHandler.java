@@ -1,16 +1,16 @@
-package com.studywithus.handler.schedule;
+package com.studywithus.handler.calendar;
 
 import java.util.Collection;
-import com.studywithus.dao.ScheduleDao;
-import com.studywithus.domain.Schedule;
+import com.studywithus.dao.CalendarDao;
+import com.studywithus.domain.Calendar;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 
-public class JobsScheduleListHandler implements Command {
+public class JobsCalendarListHandler implements Command {
 
-  ScheduleDao scheduleDao;
+  CalendarDao scheduleDao;
 
-  public JobsScheduleListHandler(ScheduleDao scheduleDao) {
+  public JobsCalendarListHandler(CalendarDao scheduleDao) {
     this.scheduleDao = scheduleDao;
   }
 
@@ -21,14 +21,14 @@ public class JobsScheduleListHandler implements Command {
     //int no = (int) request.getAttribute("scheduleNo");
     //Schedule jobsSchedule = scheduleDao.findByNo(no);
 
-    Collection<Schedule> scheduleList = scheduleDao.findAll();
+    Collection<Calendar> scheduleList = scheduleDao.findAll();
 
     if (scheduleList.isEmpty()) {
       System.out.println("이달의 시험일정 조회를 실패하였습니다.");
       return;
     }
 
-    for (Schedule jobsCalendar : scheduleList) {
+    for (Calendar jobsCalendar : scheduleList) {
       System.out.printf("[번호 = %d, 제목 = %s, 시작일 = %s, 종료일 = %s]\n", jobsCalendar.getNo(),
           jobsCalendar.getTitle(), jobsCalendar.getStartDate(), jobsCalendar.getEndDate());
     }

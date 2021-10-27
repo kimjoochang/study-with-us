@@ -1,16 +1,16 @@
-package com.studywithus.handler.schedule;
+package com.studywithus.handler.calendar;
 
-import com.studywithus.dao.ScheduleDao;
-import com.studywithus.domain.Schedule;
+import com.studywithus.dao.CalendarDao;
+import com.studywithus.domain.Calendar;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.util.Prompt;
 
-public class JobsScheduleDetailHandler implements Command {
+public class JobsCalendarDetailHandler implements Command {
 
-  ScheduleDao scheduleDao;
+  CalendarDao scheduleDao;
 
-  public JobsScheduleDetailHandler(ScheduleDao scheduleDao) {
+  public JobsCalendarDetailHandler(CalendarDao scheduleDao) {
     this.scheduleDao = scheduleDao;
   }
 
@@ -20,7 +20,7 @@ public class JobsScheduleDetailHandler implements Command {
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    Schedule jobsSchedule = scheduleDao.findByNo(no);
+    Calendar jobsSchedule = scheduleDao.findByNo(no);
 
     if (jobsSchedule == null) {
       System.out.println("해당 번호의 채용공고가 없습니다.");

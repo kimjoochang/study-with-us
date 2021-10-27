@@ -3,10 +3,10 @@ package com.studywithus.dao.impl;
 import java.sql.Connection;
 import java.util.List;
 
-import com.studywithus.dao.ScheduleDao;
-import com.studywithus.domain.Schedule;
+import com.studywithus.dao.CalendarDao;
+import com.studywithus.domain.Calendar;
 
-public class NetScheduleDao implements ScheduleDao{
+public class NetScheduleDao implements CalendarDao{
 
 	Connection con;
 
@@ -15,27 +15,27 @@ public class NetScheduleDao implements ScheduleDao{
 	}
 
 	@Override
-	public void insert(Schedule schedule) throws Exception {
+	public void insert(Calendar schedule) throws Exception {
 
 	}
 
 	@Override
-	public List<Schedule> findAll() throws Exception {
+	public List<Calendar> findAll() throws Exception {
 		return null;
 	}
 
 	@Override
-	public List<Schedule> findByKeyword(String keyword) throws Exception {
+	public List<Calendar> findByKeyword(String keyword) throws Exception {
 		return null;
 	}
 
 	@Override
-	public Schedule findByNo(int no) throws Exception {
+	public Calendar findByNo(int no) throws Exception {
 		return null;
 	}
 
 	@Override
-	public void update(Schedule schedule) throws Exception {
+	public void update(Calendar schedule) throws Exception {
 	}
 
 	@Override

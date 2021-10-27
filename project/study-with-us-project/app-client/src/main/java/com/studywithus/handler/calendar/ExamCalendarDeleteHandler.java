@@ -1,16 +1,16 @@
-package com.studywithus.handler.schedule;
+package com.studywithus.handler.calendar;
 
-import com.studywithus.dao.ScheduleDao;
-import com.studywithus.domain.Schedule;
+import com.studywithus.dao.CalendarDao;
+import com.studywithus.domain.Calendar;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.util.Prompt;
 
-public class ExamScheduleDeleteHandler implements Command {
+public class ExamCalendarDeleteHandler implements Command {
 
-  ScheduleDao scheduleDao;
+  CalendarDao scheduleDao;
 
-  public ExamScheduleDeleteHandler(ScheduleDao scheduleDao) {
+  public ExamCalendarDeleteHandler(CalendarDao scheduleDao) {
     this.scheduleDao = scheduleDao;
   }
 
@@ -20,7 +20,7 @@ public class ExamScheduleDeleteHandler implements Command {
 
     int no = (int) request.getAttribute("scheduleNo");
 
-    Schedule examSchedule = scheduleDao.findByNo(no);
+    Calendar examSchedule = scheduleDao.findByNo(no);
 
     if (examSchedule == null) {
       System.out.println("해당 번호의 시험일정이 없습니다.");

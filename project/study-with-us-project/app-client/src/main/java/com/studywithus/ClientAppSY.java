@@ -18,10 +18,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.studywithus.dao.MemberDao;
 import com.studywithus.dao.MentorApplicationDao;
-import com.studywithus.dao.ScheduleDao;
+import com.studywithus.dao.CalendarDao;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.dao.StudyMemberDao;
-import com.studywithus.dao.impl.MybatisScheduleDao;
+import com.studywithus.dao.impl.MybatisCalendarDao;
 import com.studywithus.dao.impl.NetCommunityDao;
 import com.studywithus.dao.impl.NetPaymentDao;
 import com.studywithus.dao.impl.NetReviewDao;
@@ -139,8 +139,8 @@ public class ClientAppSY {
 		NetPaymentDao paymentDao = new NetPaymentDao(requestAgent);
 		NetReviewDao reviewDao = new NetReviewDao(requestAgent);
 
-		ScheduleDao jobsScheduleDao = new MybatisScheduleDao(sqlSession);
-		ScheduleDao examScheduleDao = new MybatisScheduleDao(sqlSession);
+		CalendarDao jobsScheduleDao = new MybatisCalendarDao(sqlSession);
+		CalendarDao examScheduleDao = new MybatisCalendarDao(sqlSession);
 
 		commandMap.put("/auth/logIn", new AuthLogInHandler(memberDao));
 		commandMap.put("/google/logIn", new SnsLogInHandler(memberDao));

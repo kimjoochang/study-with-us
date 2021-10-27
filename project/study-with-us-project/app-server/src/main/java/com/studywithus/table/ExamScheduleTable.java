@@ -1,6 +1,6 @@
 package com.studywithus.table;
 
-import com.studywithus.domain.Schedule;
+import com.studywithus.domain.Calendar;
 import com.studywithus.server.DataProcessor;
 import com.studywithus.server.Request;
 import com.studywithus.server.Response;
@@ -8,10 +8,10 @@ import com.studywithus.server.Response;
 // 역할
 // - 이달의 시험일정 데이터를 처리하는 역할을 한다.
 // 
-public class ExamScheduleTable extends JsonDataTable<Schedule> implements DataProcessor {
+public class ExamScheduleTable extends JsonDataTable<Calendar> implements DataProcessor {
 
   public ExamScheduleTable() {
-    super("examSchedule.json", Schedule.class);
+    super("examSchedule.json", Calendar.class);
   }
 
   @Override
@@ -29,10 +29,10 @@ public class ExamScheduleTable extends JsonDataTable<Schedule> implements DataPr
   }
 
   private void insert(Request request, Response response) throws Exception {
-    Schedule examSchedule = request.getObject(Schedule.class);
+    Calendar examSchedule = request.getObject(Calendar.class);
 
     if (!list.isEmpty()) {
-      Schedule lastElement = list.get(list.size() - 1);
+      Calendar lastElement = list.get(list.size() - 1);
       examSchedule.setNo(lastElement.getNo() + 1);
     } else {
       examSchedule.setNo(1);
@@ -49,7 +49,7 @@ public class ExamScheduleTable extends JsonDataTable<Schedule> implements DataPr
 
   private void selectOne(Request request, Response response) throws Exception {
     int no = Integer.parseInt(request.getParameter("no"));
-    Schedule m = findByNo(no);
+    Calendar m = findByNo(no);
 
     if (m != null) {
       response.setStatus(Response.SUCCESS);
@@ -61,7 +61,7 @@ public class ExamScheduleTable extends JsonDataTable<Schedule> implements DataPr
   }
 
   private void update(Request request, Response response) throws Exception {
-    Schedule examSchedule = request.getObject(Schedule.class);
+    Calendar examSchedule = request.getObject(Calendar.class);
 
     int index = indexOf(examSchedule.getNo());
     if (index == -1) {
@@ -87,8 +87,8 @@ public class ExamScheduleTable extends JsonDataTable<Schedule> implements DataPr
     response.setStatus(Response.SUCCESS);
   }
 
-  private Schedule findByNo(int no) {
-    for (Schedule s : list) {
+  private Calendar findByNo(int no) {
+    for (Calendar s : list) {
       if (s.getNo() == no) {
         return s;
       }

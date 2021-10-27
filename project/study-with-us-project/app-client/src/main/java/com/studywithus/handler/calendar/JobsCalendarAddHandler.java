@@ -1,18 +1,18 @@
-package com.studywithus.handler.schedule;
+package com.studywithus.handler.calendar;
 
 import java.sql.Date;
-import com.studywithus.dao.ScheduleDao;
-import com.studywithus.domain.Schedule;
+import com.studywithus.dao.CalendarDao;
+import com.studywithus.domain.Calendar;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.handler.user.AuthLogInHandler;
 import com.studywithus.util.Prompt;
 
-public class JobsScheduleAddHandler implements Command {
+public class JobsCalendarAddHandler implements Command {
 
-  ScheduleDao scheduleDao;
+  CalendarDao scheduleDao;
 
-  public JobsScheduleAddHandler(ScheduleDao scheduleDao) {
+  public JobsCalendarAddHandler(CalendarDao scheduleDao) {
     this.scheduleDao = scheduleDao;
   }
 
@@ -20,7 +20,7 @@ public class JobsScheduleAddHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println("[이달의 채용공고 / 생성]\n");
 
-    Schedule jobsSchedule = new Schedule();
+    Calendar jobsSchedule = new Calendar();
 
     jobsSchedule.setTitle(Prompt.inputString("제목을 입력하세요. > "));
     jobsSchedule.setWriter(AuthLogInHandler.getLoginUser());

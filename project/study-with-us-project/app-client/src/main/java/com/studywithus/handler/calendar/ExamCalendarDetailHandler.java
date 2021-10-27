@@ -1,16 +1,16 @@
-package com.studywithus.handler.schedule;
+package com.studywithus.handler.calendar;
 
-import com.studywithus.dao.ScheduleDao;
-import com.studywithus.domain.Schedule;
+import com.studywithus.dao.CalendarDao;
+import com.studywithus.domain.Calendar;
 import com.studywithus.handler.Command;
 import com.studywithus.handler.CommandRequest;
 import com.studywithus.util.Prompt;
 
-public class ExamScheduleDetailHandler implements Command {
+public class ExamCalendarDetailHandler implements Command {
 
-  ScheduleDao scheduleDao;
+  CalendarDao scheduleDao;
 
-  public ExamScheduleDetailHandler(ScheduleDao scheduleDao) {
+  public ExamCalendarDetailHandler(CalendarDao scheduleDao) {
     this.scheduleDao = scheduleDao;
   }
 
@@ -20,7 +20,7 @@ public class ExamScheduleDetailHandler implements Command {
 
     int no = Prompt.inputInt("번호를 입력하세요. > ");
 
-    Schedule examSchedule = scheduleDao.findByNo(no);
+    Calendar examSchedule = scheduleDao.findByNo(no);
 
     if (examSchedule == null) {
       System.out.println("해당 번호의 일정이 없습니다.");
