@@ -62,7 +62,7 @@ public class AuthLogInHandler extends HttpServlet {
       loginUser = root;
       userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL;
       out.println("관리자 계정으로 로그인하였습니다.\n");
-      response.sendRedirect("http://localhost:8080/swu");
+      response.sendRedirect("http://localhost:8080/index");
 
     } else {
       try {
