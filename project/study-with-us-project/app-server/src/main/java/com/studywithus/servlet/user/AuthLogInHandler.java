@@ -62,21 +62,20 @@ public class AuthLogInHandler extends HttpServlet {
       loginUser = root;
       userAccessLevel = Menu.ACCESS_ADMIN | Menu.ACCESS_GENERAL;
       out.println("관리자 계정으로 로그인하였습니다.\n");
-      out.println("<br> <a href='/swu'>[메인]</a><br>");
+      response.sendRedirect("http://localhost:8080/swu");
 
     } else {
       try {
         Member member = memberDao.findMemberByEmailPassword(email, password);
 
         if (member != null) {
-          out.printf("%s님 환영합니다!\n", member.getName());
           loginUser = member;
           userAccessLevel = Menu.ACCESS_GENERAL;
-          out.println("<br> <a href='/swu'>[메인]</a><br>");
+          response.sendRedirect("http://localhost:8080/swu/index");
         }
       } catch (Exception e) {
         System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
-        out.println("<br> <a href='/swu'>[메인]</a><br>");
+        response.sendRedirect("http://localhost:8080/swu/member/loginForm");
         throw new ServletException();
       }
     }

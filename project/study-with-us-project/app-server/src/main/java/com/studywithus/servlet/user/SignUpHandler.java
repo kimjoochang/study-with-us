@@ -13,7 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 
-@WebServlet("/member/add")
+@WebServlet("/signUp/add")
 public class SignUpHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
   MemberDao memberDao;
@@ -80,12 +80,12 @@ public class SignUpHandler extends HttpServlet {
         sqlSession.commit();
 
         out.println("회원가입이 완료되었습니다.\n");
-        out.println("<br> <a href='/swu'>[메인]</a><br>");
+        response.sendRedirect("http://localhost:8080/swu/index");
+        return;
       } 
-      out.println("<br> <a href='/swu'>[메인]</a><br>");
-      out.println("<br> <a href='/swu/member/form'>[회원가입]</a><br>");
+      response.sendRedirect("http://localhost:8080/signUp/form");
     } catch (Exception e) {
-      out.println("<br> <a href='/swu'>[메인]</a><br>");
+      response.sendRedirect("http://localhost:8080/signUp/form");
       throw new ServletException();
     } 
 

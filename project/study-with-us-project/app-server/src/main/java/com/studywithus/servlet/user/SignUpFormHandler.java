@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/member/form")
+@WebServlet("/signUp/form")
 public class SignUpFormHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
