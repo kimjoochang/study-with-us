@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 
-@WebServlet("/join")
+@WebServlet("/user/join")
 public class JoinController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   MemberDao memberDao;

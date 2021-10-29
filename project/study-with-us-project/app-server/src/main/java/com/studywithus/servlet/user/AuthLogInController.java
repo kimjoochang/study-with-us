@@ -13,7 +13,7 @@ import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.menu.Menu;
 
-@WebServlet("login")
+@WebServlet("/user/login")
 public class AuthLogInController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   SqlSession sqlSession;

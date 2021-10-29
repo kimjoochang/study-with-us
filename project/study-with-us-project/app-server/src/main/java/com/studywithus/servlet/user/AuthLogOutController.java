@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.studywithus.menu.Menu;
 
-@WebServlet("/member/logout")
+@WebServlet("/user/logout")
 public class AuthLogOutController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
