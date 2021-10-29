@@ -5,7 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <div style='text-align: center;'>
   <title>유료 스터디 생성</title>
+  
   <style>
   label {
     margin-right: 5px;
@@ -14,6 +16,7 @@
     width: 60px;
   }
   </style>
+  </div>
 </head>
 
 <body>
@@ -35,7 +38,7 @@
 </select>
 <br>
 
-<label for='content'>내용
+<label for='content'>내용<br><br><br><br><br><br><br><br><br><br><br><br>
 <br></label>
 <textarea cols="50" rows="15" placeholder="개설할 스터디 내용을 입력해주세요.">
 </textarea>
@@ -48,7 +51,10 @@
 <label for='f-writer'>작성자</label> <input id='f-writer' type='text' name='name'><br>
 <br>
 <div style='text-align: center;'>
-<button>등록</button> <button>취소</button><br>
+
+<input type="reset" value="초기화">
+<input type="submit" value="등록">
+<button>취소</button><br>
 </div>
 </form>
 </body>

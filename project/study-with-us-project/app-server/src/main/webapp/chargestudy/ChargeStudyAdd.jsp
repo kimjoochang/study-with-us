@@ -1,5 +1,5 @@
 <%@page import="org.apache.ibatis.session.SqlSession"%>
-<%@page import="com.studywithus.servlet.user.AuthLogInHandler.java"%> //jsp import?
+<%@page import="com.studywithus.servlet.user.AuthLogInHandler.java"%>
 <%@page import="com.studywithus.dao.StudyDao"%>
 <%@page import="com.studywithus.domain.Study"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
