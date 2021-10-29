@@ -71,6 +71,8 @@
   <select id="findAll" resultMap="StudyMap">
     <include refid="select1"/>
     <include refid="order1"/>
+    where
+   <![CDATA[ price >=#{low} and price<#{high}]]>
   </select>
   
    <select id="findByKeyword" resultMap="StudyMap" parameterType="string">

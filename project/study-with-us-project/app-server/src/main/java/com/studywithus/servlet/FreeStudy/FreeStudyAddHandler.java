@@ -14,7 +14,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
-import com.studywithus.servlet.user.AuthLogInHandler;
+import com.studywithus.servlet.user.AuthLogInController;
 
 public class FreeStudyAddHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,7 +45,7 @@ public class FreeStudyAddHandler extends HttpServlet {
 
 		Study freeStudy = new Study();
 
-		freeStudy.setWriter(AuthLogInHandler.getLoginUser());
+		freeStudy.setWriter(AuthLogInController.getLoginUser());
 		freeStudy.setOnOffLine(Integer.parseInt(request.getParameter("onOffLine")));
 		freeStudy.setArea(request.getParameter("area"));
 		freeStudy.setTitle(request.getParameter("title"));

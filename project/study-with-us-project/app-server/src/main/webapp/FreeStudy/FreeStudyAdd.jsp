@@ -7,7 +7,7 @@
 <%
 Study freeStudy = new Study();
 
-freeStudy.setWriter(AuthLogInHandler.getLoginUser());
+freeStudy.setWriter(AuthLogInController.getLoginUser());
 freeStudy.setOnOffLine(Integer.parseInt(request.getParameter("onOffLine")));
 freeStudy.setArea(request.getParameter("area"));
 freeStudy.setTitle(request.getParameter("title"));

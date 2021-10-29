@@ -8,11 +8,11 @@
 
 <body>
 <h1>회원가입</h1>
-<form action='Join.jsp'>
+<form action='join'>
 이름: <input type='text' name='name'><br>
-이메일: <input type='text' name='email'><br>
-암호: <input type='text' name='password'><br>
-전화: <input type='text' name='phoneNumber'><br>
+이메일: <input type='email' name='email'><br>
+암호: <input type='password' name='password'><br>
+전화: <input type='text' placeholder="010-1234-1234" name='phoneNumber'><br>
 <button>등록</button><br>
 </form>
 </body>

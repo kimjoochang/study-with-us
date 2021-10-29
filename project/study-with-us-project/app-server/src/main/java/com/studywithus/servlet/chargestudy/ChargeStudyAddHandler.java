@@ -44,7 +44,7 @@ public class ChargeStudyAddHandler extends HttpServlet {
 
     Study chargeStudy = new Study();
 
-    chargeStudy.setWriter(AuthLogInHandler.getLoginUser());
+    chargeStudy.setWriter(AuthLogInController.getLoginUser());
     chargeStudy.setArea(Prompt.inputString("지역: "));
     chargeStudy.setTitle(Prompt.inputString("스터디 제목: "));
     chargeStudy.setContent(Prompt.inputString("스터디 설명: "));

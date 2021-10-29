@@ -50,7 +50,7 @@ public class ChargeStudyDetailHandler implements Command {
     request.setAttribute("chargeNo", no);
 
     // 본인이 작성한 글 상세보기 시 경우 보이는 메뉴
-    if (chargeStudy.getWriter().getNo() == AuthLogInHandler.getLoginUser().getNo()) {
+    if (chargeStudy.getWriter().getNo() == AuthLogInController.getLoginUser().getNo()) {
 
       chargeStudyDetailMenuPrompt.myStudySelectedMenu(chargeStudy);
 
