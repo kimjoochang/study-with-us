@@ -12,13 +12,12 @@
 <h1>STUDY WITH US</h1>
 
 <%
-Member member = AuthLogInController.getLoginUser();
-
+Member member = (Member)request.getAttribute("member");
 if (member == null) {
 %>
 <ul>
-<li><a href='user/JoinForm.jsp'>회원가입</a><br>
-<li><a href='user/login'>로그인</a><br>
+<li><a href='user/join'>회원가입</a><br>
+<li><a href='user/loginform'>로그인</a><br>
 <li><a href='community/List.jsp?no=0'>커뮤니티</a><br>
 </ul>
 <% } else { %>
