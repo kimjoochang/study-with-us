@@ -39,13 +39,13 @@ public class JoinController extends HttpServlet {
 
     try {
 
-      if (memberDao.findByEmail(member.getEmail()) != null) {
-        response.sendRedirect("JoinForm.jsp");
-      }
+      //      if (memberDao.findByEmail(member.getEmail()) != null) {
+      //        response.sendRedirect("JoinForm.jsp");
+      //      }
 
       memberDao.insert(member);
       sqlSession.commit();
-      response.sendRedirect("../index.jsp");
+      response.sendRedirect("/swu/index");
 
 
     } catch (Exception e) {

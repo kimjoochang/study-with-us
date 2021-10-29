@@ -17,7 +17,7 @@ Member member = AuthLogInController.getLoginUser();
 if (member == null) {
 %>
 <ul>
-<li><a href='user/join'>회원가입</a><br>
+<li><a href='user/JoinForm.jsp'>회원가입</a><br>
 <li><a href='user/login'>로그인</a><br>
 <li><a href='community/List.jsp?no=0'>커뮤니티</a><br>
 </ul>
