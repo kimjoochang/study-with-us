@@ -6,23 +6,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.studywithus.menu.Menu;
 
-@WebServlet("/user/logout")
-public class AuthLogOutController extends HttpServlet {
+@WebServlet("/user/joinform")
+public class JoinFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    AuthLogInController.loginUser.setUserAccessLevel(AuthLogInController.getUserAccessLevel());
-
-    AuthLogInController.loginUser = null;
-    AuthLogInController.userAccessLevel = Menu.ACCESS_LOGOUT;
-
-    request.setAttribute("member", AuthLogInController.loginUser);
-
-    request.getRequestDispatcher("../index.jsp").forward(request, response);
+    response.sendRedirect("JoinForm.jsp");
   }
 }

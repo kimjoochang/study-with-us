@@ -15,6 +15,6 @@ public class IndexController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    response.sendRedirect("/swu/index.jsp");
+    response.sendRedirect("/index.jsp");
   }
 }

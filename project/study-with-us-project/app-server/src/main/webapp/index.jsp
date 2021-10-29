@@ -16,14 +16,14 @@ Member member = (Member)request.getAttribute("member");
 if (member == null) {
 %>
 <ul>
-<li><a href='user/join'>회원가입</a><br>
+<li><a href='user/joinform'>회원가입</a><br>
 <li><a href='user/loginform'>로그인</a><br>
 <li><a href='community/List.jsp?no=0'>커뮤니티</a><br>
 </ul>
 <% } else { %>
 <br><h2>나의 정보</h2>
 <%=member.getName()%> 님 환영합니다!
-<br><a href='user/logout'>[로그아웃]</a>
+<br><a href='logout'>[로그아웃]</a>
 </body>
 </html>
 <% } %>

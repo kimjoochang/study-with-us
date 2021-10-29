@@ -59,7 +59,7 @@ public class AuthLogInController extends HttpServlet {
         loginUser = member;
         userAccessLevel = Menu.ACCESS_GENERAL;
         request.setAttribute("member", member);
-        request.getRequestDispatcher("/swu/index.jsp").forward(request, response);
+        request.getRequestDispatcher("../index.jsp").forward(request, response);
       }
     } catch (Exception e) {
       request.setAttribute("error", e);
