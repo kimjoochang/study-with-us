@@ -7,15 +7,8 @@
 <html>
 <head>
   <title>유료 스터디</title>
-  <style>
-  label {
-    margin-right: 5px;
-    text-align: right;
-    display: inline-block;
-    width: 60px;
-  }
-  </style>
 </head>
+
 <body>
 <h1>유료 스터디 상세보기</h1>
 	<form action='update'>

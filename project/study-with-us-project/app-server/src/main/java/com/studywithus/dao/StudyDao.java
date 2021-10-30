@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import com.studywithus.domain.Study;
 
 public interface StudyDao {
-  List<Study> findAll() throws Exception;
+  List<Study> findAll(@Param("low") int low, @Param("high") int high) throws Exception;
   List<Study> findByKeyword(String keyword) throws Exception;
   Study findByNo(int no) throws Exception;
   void insert(Study study) throws Exception;

@@ -68,12 +68,36 @@
       st.study_no asc
   </sql>
   
+  <![CDATA[
   <select id="findAll" resultMap="StudyMap">
-    <include refid="select1"/>
-    <include refid="order1"/>
-    where
-   <![CDATA[ price >=#{low} and price<#{high}]]>
+   select 
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.price,
+      st.status,
+      (select 
+      count(*) 
+      from 
+      interest
+      where
+      study_no=st.study_no) likes,
+      (select 
+      count(*) 
+      from 
+      study_member
+   where price >=#{low} and price<=#{high}
+    order by 
+      st.study_no asc
   </select>
+  ]]>
   
    <select id="findByKeyword" resultMap="StudyMap" parameterType="string">
   <include refid="select1"/>

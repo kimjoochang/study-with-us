@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 
-@WebServlet("/list")
+@WebServlet("/chargestudy/list")
 public class ChargeStudyListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
@@ -29,7 +29,7 @@ public class ChargeStudyListController extends GenericServlet {
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
     try {
-      Collection<Study> chargeStudyList = chargeStudyDao.findAll();
+      Collection<Study> chargeStudyList = chargeStudyDao.findAll(1,100);
 
       request.setAttribute("chargeStudyList", chargeStudyList);
 
@@ -37,7 +37,7 @@ public class ChargeStudyListController extends GenericServlet {
       requestDispatcher.forward(request, response);
 
     } catch (Exception e) {
-
+      System.out.println(e.getMessage());
       request.setAttribute("error", e);
       RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Error.jsp");
       requestDispatcher.forward(request, response);
