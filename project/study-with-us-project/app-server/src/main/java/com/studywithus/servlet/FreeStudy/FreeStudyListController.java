@@ -37,7 +37,7 @@ public class FreeStudyListController extends GenericServlet {
 
 			request.setAttribute("freeStudyList", freeStudyList);
 
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("FreeStudyList.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/FreeStudyList.jsp");
 			requestDispatcher.forward(request, response);
 
 		} catch (Exception e) {
