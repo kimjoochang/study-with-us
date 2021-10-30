@@ -29,18 +29,27 @@ public class FreeStudyListController extends GenericServlet {
 	@Override
 	public void service(ServletRequest request, ServletResponse response)
 			throws ServletException, IOException {
+
 		try {
-			// 클라이언트 요청을 처리하는데 필요한 데이터 준비
+			// 클라이언트한테 요청받을 때 쓸 변수
+			int freeStudyNo = Integer.parseInt(request.getParameter("no"));
+
 			Collection<Study> freeStudyList = studyDao.findAll();
 
-			// 뷰 컴포넌트가 준비한 데이터를 사용할 수 있도록 저장소에 보관한다.
-			request.setAttribute("freeStudyList", freeStudyList); // ?
-			request.getRequestDispatcher("freeStudy.jsp").forward(request, response); // ?
+			request.setAttribute("freeStudyNo", freeStudyNo); 
+
+			if (freeStudyList == null) {
+				request.getRequestDispatcher("FreeStudyList.jsp").forward(request, response);
+			}
+
+			request.setAttribute("freeStudyList", freeStudyList);
+			request.getRequestDispatcher("FreeStudyList.jsp").forward(request, response);
 
 		} catch (Exception e) {
-			// 오류를 출력할 때 사용할 수 있도록 예외 객체를 저장소에 보관한다.
+			System.out.println(e.getMessage());
 			request.setAttribute("error", e);
-			request.getRequestDispatcher("Error.jsp").forward(request, response);
+			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
+
 	}
 }
