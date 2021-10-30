@@ -1,12 +1,11 @@
-<%@page import="com.studywithus.dao.StudyDao"%>
-<%@page import="com.studywithus.domain.Study"%>
-<%@page import="java.util.Collection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+    pageEncoding="UTF-8"
+    trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>유료 스터디 목록</title>
+<title>유료 스터디</title>
 </head>
 <body>
 	<h1>유료 스터디 목록</h1>
@@ -23,45 +22,31 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% 
-  Collection<Study> chargeStudyList = studyDao.findAll();
-
-  for (Study chargeStudy : chargeStudyList) { 
-    if (chargeStudy.getPrice() != 0 ) { %>
+		
+  <c:forEach items="${chargeStudyList}" var="chargeStudy">
 			<tr>
-				<td><%=chargeStudy.getNo()%></td>
-				<td><a href='Detail.jsp?no=<%=chargeStudy.getNo()%>'><%=chargeStudy.get()%></a></td>
-        <td><%=chargeStudy.getTitle()%></td>
-        <td><%=chargeStudy.getContent()%></td>
-        <td><%=chargeStudy.getArea()%></td>
-        <td><%=chargeStudy.getPrice()%></td>
-        <td><%=chargeStudy.getWriter().getName()%></td>
-        <td><%=chargeStudy.getStartDate()%></td>
-        <td><%=chargeStudy.getEndDate()%></td>
-        <td><%=chargeStudy.getStudyStatus()%></td>
-        <td><%=chargeStudy.getRegisteredDate()%></td>
-        <td><%=chargeStudy.getMembers()%></td>
-        <td><%=chargeStudy.getMaxMembers()%></td>
-        <td><%=chargeStudy.getViewCount()%></td>
-        <td><%=chargeStudy.getLikes()%></td>
-			</tr>
-			<% } 
-    }%>
-		</tbody>
+				<td>${chargeStudy.no}</td>
+				<td><a href='Detail.jsp?no='>${chargeStudy.name}</a></td> 
+        <td>${chargeStudy.getTitle()}</td>
+        <td>${chargeStudy.getContent()}</td>
+        <td>${chargeStudy.getArea()}</td>
+        <td>${chargeStudy.getPrice()}</td>
+        <td>${chargeStudy.getWriter().getName()}</td>
+        <td>${chargeStudy.getStartDate()}</td>
+        <td>${chargeStudy.getEndDate()}</td>
+        <td>${chargeStudy.getStudyStatus()}</td>
+        <td>${chargeStudy.getRegisteredDate()}</td>
+        <td>${chargeStudy.getMembers()}</td>
+        <td>${chargeStudy.getMaxMembers()}</td>
+        <td>${chargeStudy.getViewCount()}</td>
+        <td>${chargeStudy.getLikes()}</td>
+        <!-- status 리스트에 출력되게 할/말 -->
+	</tr>
+  </c:forEach>
+ 
+	</tbody>
 	</table>
-</body>
-</html>
-<%!
- StudyDao studyDao;
-
-  public void jspInit() {
-    ServletConfig config = getServletConfig();
-    ServletContext servletContext = config.getServletContext();
-    studyDao = (StudyDao) servletContext.getAttribute("studyDao");
-  }
-  %>
-
-
-
+	</body>
+	</html>
 
 
