@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studywithus.dao.ScheduleDao">
+  
+  <resultMap type="Schedule" id="ScheduleMap">
+    <id column="calendar_no" property="no"/> 
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="start_date" property="startDate"/>
+    <result column="end_date" property="endDate"/>
+       
+  </resultMap>
+  
+  <!-- 
+
+   -->
+  <sql id="select1">
+ select 
+      sc.calendar_no,
+      sc.title,
+      sc.content,
+      sc.start_date,
+      sc.end_date
+  </sql>
+  
+  <sql id="order1">
+    order by 
+      st.study_no asc
+  </sql>
+  
+  <select id="findAll" resultMap="ScheduleMap">
+    <include refid="select1"/>
+    <include refid="order1"/>
+  </select>
+  
+   <select id="findByKeyword" resultMap="ScheduleMap" parameterType="string">
+  <include refid="select1"/>
+    where 
+      st.title like (concat('%',#{keyword},'%'))
+      or st.content like (concat('%',#{keyword},'%'))
+    <include refid="order1"/>
+   </select>
+            
+  <select id="findByNo" resultMap="ScheduleMap" parameterType="int">
+   <include refid="select1"/>
+    where 
+       st.study_no=#{no}
+  </select>
+  
+  <insert id="insert" parameterType="schedule">
+   insert into 
+     study(title,content,area,max_member,start_date,end_date,price,member_no)
+    values(#{title},#{content},#{area},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 
+  </insert>
+ 
+  <insert id="insertInterest">
+  insert into 
+    interest(member_no,study_no)
+    values(#{memberNo},#{studyNo})
+  </insert>
+
+  <update id="update" parameterType="chedule">
+   update study set
+      title=#{title},
+      content=#{content},
+      area=#{area},
+      view_count=#{viewCount},
+      max_member=#{maxMembers},
+      start_date=#{startDate},
+      end_date=#{endDate},
+      del_status=#{deleteStatus},
+      price=#{price},
+      status=#{studyStatus}     
+   where study_no=#{no}  
+  </update>
+  
+  <select id="findAllInterest" resultMap="ScheduleMap" parameterType="int">
+  select 
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.price,
+      st.status,
+      (select 
+      count(*) 
+      from 
+      interest
+      where
+      study_no=st.study_no) likes,
+      (select 
+      count(*) 
+      from 
+      study_member
+      where
+      study_no=st.study_no
+      and
+      status=1) members,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.email writer_email
+    from 
+      study st
+     left outer join interest i on st.study_no=i.study_no
+     inner join member m on m.member_no=st.member_no
+    where 
+       i.member_no=#{memberNo}
+    <include refid="order1"/> 
+  </select>
+  
+  <select id="findMyInterest" resultType="int">
+  select
+    count(*)
+    from
+    interest
+    where
+    member_no=#{memberNo} and study_no=#{studyNo}
+  </select>
+
+  <delete id="delete" parameterType="int">
+    delete from study
+    where study_no=#{no}
+  </delete>
+  
+  <delete id="deleteInterest">
+    delete from interest
+    where member_no=#{memberNo} and study_no=#{studyNo} 
+  </delete>
+</mapper>

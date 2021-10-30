@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studywithus.dao.PaymentDao">
+  
+  <resultMap type="Payment" id="PaymentMap">
+      <id column="member_no" property="studyNo"/>
+      <id column="study_no" property="studyNo"/>
+    <result column="pay_method" property="paymentMethod"/>
+    <result column="status" property="status"/>
+    <result column="register_date" property="paymentDate"/>
+       
+    <association property="mentee" javaType="Member">
+      <id column="mentee_no" property="no"/>
+      <result column="mentee_name" property="name"/>
+      <result column="mentee_email" property="email"/>
+    </association>
+  </resultMap>
+  <sql id="select1">
+ select
+      p.pay_method,
+      p.status,
+      p.register_date,
+      m.member_no mentee_no,
+      m.name mentee_name,
+      m.email mentee_email
+    from 
+      payment p
+    inner join study st on p.study_no=st.study_no
+    inner join member m on p.member_no=m.member_no
+  </sql>
+  
+  <select id="findAll" resultMap="PaymentMap" parameterType="int">
+    <include refid="select1"/>
+    where
+      p.member_no=#{memberNo}
+    order by 
+      p.study_no asc
+  </select>
+            
+  <select id="findByNo" resultMap="PaymentMap">
+   <include refid="select1"/>
+    where 
+      p.member_no=#{memberNo} and p.study_no=#{studyNo} 
+  </select>
+  
+  <insert id="insert" parameterType="Payment">
+   insert into 
+     payment(member_no,study_no,pay_method,status)
+    values(#{mentee.no},#{studyNo},#{paymentMethod},#{status}) 
+  </insert>
+
+  <update id="update">
+   update payment set
+      status=#{status}     
+    where member_no=#{memberNo} and study_no=#{studyNo}
+  </update>
+
+  <delete id="delete">
+    delete from payment
+    where member_no=#{memberNo} and study_no=#{studyNo}
+  </delete>
+</mapper>
