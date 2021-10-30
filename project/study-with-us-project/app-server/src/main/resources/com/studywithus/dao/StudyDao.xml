@@ -68,8 +68,8 @@
       st.study_no asc
   </sql>
   
-  <![CDATA[
   <select id="findAll" resultMap="StudyMap">
+  <![CDATA[
    select 
       st.study_no,
       st.title,
@@ -93,11 +93,21 @@
       count(*) 
       from 
       study_member
+      where
+      study_no=st.study_no
+      and
+      status=1) members,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.email writer_email
+    from 
+      study st
+    inner join member m on st.member_no=m.member_no
    where price >=#{low} and price<=#{high}
     order by 
       st.study_no asc
-  </select>
   ]]>
+  </select>
   
    <select id="findByKeyword" resultMap="StudyMap" parameterType="string">
   <include refid="select1"/>

@@ -33,7 +33,7 @@ public class ChargeStudyListController extends GenericServlet {
 
       request.setAttribute("chargeStudyList", chargeStudyList);
 
-      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/chargeStudy/chargeStudyList.jsp");
+      RequestDispatcher requestDispatcher = request.getRequestDispatcher("ChargeStudyList.jsp");
       requestDispatcher.forward(request, response);
 
     } catch (Exception e) {
