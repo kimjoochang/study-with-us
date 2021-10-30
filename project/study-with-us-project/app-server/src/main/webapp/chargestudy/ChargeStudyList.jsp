@@ -14,33 +14,54 @@
 	<table border='1'>
 		<thead>
 			<tr>
+				<th>번호</th>
 				<th>제목</th>
 				<th>지역</th>
-				<th>내용</th>
-				<th>금액</th>
 				<th>작성자</th>
+				<th>금액</th>
+				<th>시작일</th>
+				<th>종료일</th>
+				<th>모집인원</th>
+				<th>스터디 진행상태</th>
+				<th>등록일</th>
+				<th>조회수</th>
+				<th>좋아요수</th>
 			</tr>
 		</thead>
 		<tbody>
 		
+		https://mollangpiu.tistory.com/222
   <c:forEach items="${chargeStudyList}" var="chargeStudy">
+  
+  <c:choose>
+  <c:when test="${chargeStudy.studyStatus eq 0}">
+<c:set var="type" value="모집중"/>
+  </c:when>
+  </c:choose>
+  <c:choose>
+  <c:when test="${chargeStudy.studyStatus eq 1}">
+<c:set var="type" value="진행중"/>
+  </c:when>
+  </c:choose>
+  <c:choose>
+  <c:when test="${chargeStudy.studyStatus eq 2}">
+<c:set var="type" value="진행완료"/>
+  </c:when>
+  </c:choose>
+  
 			<tr>
 				<td>${chargeStudy.no}</td>
-				<td><a href='Detail.jsp?no='>${chargeStudy.name}</a></td> 
-        <td>${chargeStudy.getTitle()}</td>
-        <td>${chargeStudy.getContent()}</td>
-        <td>${chargeStudy.getArea()}</td>
-        <td>${chargeStudy.getPrice()}</td>
-        <td>${chargeStudy.getWriter().getName()}</td>
-        <td>${chargeStudy.getStartDate()}</td>
-        <td>${chargeStudy.getEndDate()}</td>
-        <td>${chargeStudy.getStudyStatus()}</td>
-        <td>${chargeStudy.getRegisteredDate()}</td>
-        <td>${chargeStudy.getMembers()}</td>
-        <td>${chargeStudy.getMaxMembers()}</td>
-        <td>${chargeStudy.getViewCount()}</td>
-        <td>${chargeStudy.getLikes()}</td>
-        <!-- status 리스트에 출력되게 할/말 -->
+				<td><a href='detail?no=${chargeStudy.no}'>${chargeStudy.title}</a></td> 
+        <td>${chargeStudy.area}</td>
+        <td>${chargeStudy.writer.name}</td>
+        <td>${chargeStudy.price}</td>
+        <td>${chargeStudy.startDate}</td>
+        <td>${chargeStudy.endDate}</td>
+        <td>${chargeStudy.members}/${chargeStudy.maxMembers}</td>
+        <td>${type}</td> 
+        <td>${chargeStudy.registeredDate}</td>
+        <td>${chargeStudy.viewCount}</td>
+        <td>${chargeStudy.likes}</td>
 	</tr>
   </c:forEach>
  
@@ -48,5 +69,6 @@
 	</table>
 	</body>
 	</html>
+
 
 

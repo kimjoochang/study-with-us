@@ -28,10 +28,10 @@
     <input id='f-maxMembers' type='text' name='maxMembers' value='${chargeStudy.maxMembers}'><br>
      
     <label for='f-members'>현재인원</label> 
-    <input id='f-members' type='text' name='members' value='${chargeStudy.members}'><br>
+    <input id='f-members' type='text' name='members' value='${chargeStudy.members}' readonly><br>
     
     <label for='f-price'>금액</label> 
-    <input id='f-price' type='text' name='price' value='${chargeStudy.price}'><br>
+    <input id='f-price' type='text' name='price' value='${chargeStudy.price}' readonly><br>
     
     <label for='f-startDate'>시작일</label> 
     <input id='f-startDate' type='date' name='startDate' value='${chargeStudy.startDate}'><br>
@@ -40,10 +40,10 @@
     <input id='f-endDate' type='date' name='endDate' value='${chargeStudy.endDate}'><br>
     
     <label for='f-likes'>좋아요</label> 
-    <input id='f-likes' type='text' name='likes' value='${chargeStudy.likes}'><br>
+    <input id='f-likes' type='text' name='likes' value='${chargeStudy.likes}' readonly><br>
     
     <label for='f-viewCount'>조회수</label> 
-    <input id='f-viewCount' type='text' name='viewCount' value='${chargeStudy.viewCount}'><br>
+    <input id='f-viewCount' type='text' name='viewCount' value='${chargeStudy.viewCount}' readonly><br>
     
     <label for='f-registeredDate'>등록일</label> 
     <span id='f-registeredDate'>${chargeStudy.registeredDate}</span><br>

@@ -1,4 +1,4 @@
-package com.studywithus.servlet.FreeStudy;
+package com.studywithus.servlet.freestudy;
 
 import java.io.IOException;
 import java.io.PrintWriter;
