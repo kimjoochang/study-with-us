@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
@@ -56,6 +57,10 @@ public class AuthLogInController extends HttpServlet {
       Member member = memberDao.findMemberByEmailPassword(email, password);
 
       if (member != null) {
+        HttpSession session = request.getSession();
+
+        session.setAttribute("session_email", email);
+        session.setAttribute("session_password", password);
         loginUser = member;
         userAccessLevel = Menu.ACCESS_GENERAL;
         //        request.setAttribute("member", member);

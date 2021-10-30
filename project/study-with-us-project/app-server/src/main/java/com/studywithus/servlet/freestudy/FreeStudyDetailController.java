@@ -1,7 +1,6 @@
-package com.studywithus.servlet.FreeStudy;
+package com.studywithus.servlet.freestudy;
 
 import java.io.IOException;
-import java.util.Collection;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
@@ -14,8 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 
-@WebServlet("/freeStudy/list")
-public class FreeStudyListController extends GenericServlet {
+@WebServlet("/freestudy/detail")
+public class FreeStudyDetailController extends GenericServlet {
 	private static final long serialVersionUID = 1L;
 
 	StudyDao studyDao;
@@ -31,22 +30,17 @@ public class FreeStudyListController extends GenericServlet {
 			throws ServletException, IOException {
 
 		try {
-			// 클라이언트한테 요청받을 때 쓸 변수
-			int freeStudyNo = Integer.parseInt(request.getParameter("no"));
+			int no = Integer.parseInt(request.getParameter("no"));
+			Study freeStudy = studyDao.findByNo(no);
 
-			Collection<Study> freeStudyList = studyDao.findAll();
+			if (freeStudy == null) {
+				throw new Exception("해당 번호의 무료 스터디가 없습니다.");
+			} 
 
-			request.setAttribute("freeStudyNo", freeStudyNo); 
-
-			if (freeStudyList == null) {
-				request.getRequestDispatcher("FreeStudyList.jsp").forward(request, response);
-			}
-
-			request.setAttribute("freeStudyList", freeStudyList);
-			request.getRequestDispatcher("FreeStudyList.jsp").forward(request, response);
+			request.setAttribute("freestudy", freeStudy);
+			request.getRequestDispatcher("/freestudy/FreeStudyDetail.jsp").forward(request, response);
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			request.setAttribute("error", e);
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
