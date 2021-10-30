@@ -2,6 +2,7 @@ package com.studywithus.servlet.FreeStudy;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -14,13 +15,12 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
-import com.studywithus.servlet.user.AuthLogInController;
 
-public class FreeStudyAddHandler extends HttpServlet {
+public class FreeStudyAddController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	StudyDao StudyDao;
 	SqlSession sqlSession;
+	StudyDao StudyDao;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -36,46 +36,18 @@ public class FreeStudyAddHandler extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		out.println("<html>");
-		out.println("<head>");
-		out.println("  <title>무료스터디 등록</title>");
-		out.println("</head>");
-		out.println("<body>");
-		out.println("<h1>무료스터디 등록결과</h1>");
-
 		Study freeStudy = new Study();
 
-		freeStudy.setWriter(AuthLogInController.getLoginUser());
+		//		freeStudy.setWriter(AuthLogInController.getLoginUser());
 		freeStudy.setOnOffLine(Integer.parseInt(request.getParameter("onOffLine")));
 		freeStudy.setArea(request.getParameter("area"));
 		freeStudy.setTitle(request.getParameter("title"));
 		freeStudy.setContent(request.getParameter("content"));
 		freeStudy.setMaxMembers(Integer.parseInt(request.getParameter("maxMembers")));
+		freeStudy.setStartDate(Date.valueOf(request.getParameter("startDate")));
+		freeStudy.setEndDate(Date.valueOf(request.getParameter("endDate")));
 
-		while (true) {
-			try {
-				freeStudy.setStartDate(request.inputDate("시작일을 입력하세요. ex) YYYY-MM-DD > "));
-			} catch (IllegalArgumentException e) {
-				System.out.println("다시 입력하세요.\n");
-				continue;
-			}
-
-			break;
-		}
-
-		while (true) {
-			try {
-				freeStudy.setEndDate(Prompt.inputDate("종료일을 입력하세요. ex) YYYY-MM-DD > "));
-
-			} catch (IllegalArgumentException e) {
-				System.out.println("다시 입력하세요.\n");
-				continue;
-			}
-
-			break;
-		}
 		try {
-
 			StudyDao.insert(freeStudy);
 			sqlSession.commit();
 
@@ -87,9 +59,6 @@ public class FreeStudyAddHandler extends HttpServlet {
 			out.println("목록 조회 오류!");
 			e.printStackTrace();
 		}
-
-		out.println("</body>");
-		out.println("</html>");
 
 		// 리프래시(refresh)
 		// 웹브라우저에게 서버가 보내준 HTML을 출력한 후 

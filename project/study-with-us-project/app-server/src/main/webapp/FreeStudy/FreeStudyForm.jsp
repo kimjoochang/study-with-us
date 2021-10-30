@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<h1>무료스터디</h1>
+<h1>무료 스터디 등록</h1>
 <form action='FreeStudyAdd.jsp'>
 
 <select name = "onOffLine">
@@ -145,8 +145,8 @@ function cat1_change(key,sel){
 <label for='f-title'>제목</label> <input id='f-title' type='text' name='photo'><br>
 <label for='f-content'>내용</label> <input id='f-content' type='text' name='tel'><br>
 <label for='f-maxMembers'>모집인원</label> <input id='f-tel' type='number' name='tel'><br>
-<label for='f-maxMembers'>시작일</label> <input id='f-tel' type='date' name='tel'><br>
-<label for='f-maxMembers'>종료일</label> <input id='f-tel' type='date' name='tel'><br>
+<label for='f-maxMembers'>시작일</label> <input id='f-tel' type='date' name='starDate'><br>
+<label for='f-maxMembers'>종료일</label> <input id='f-tel' type='date' name='endDate'><br>
 <button>등록</button><br>
 </form>
 </body>
