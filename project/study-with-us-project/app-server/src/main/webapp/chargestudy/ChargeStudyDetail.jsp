@@ -22,35 +22,35 @@
 	<label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${chargeStudy.no}' readonly><br>
     
-    <label for='f-name'>제목</label>
-    <input id='f-name' type='text' name='name' value='${chargeStudy.title}'><br>
+    <label for='f-title'>제목</label>
+    <input id='f-title' type='text' name='title' value='${chargeStudy.title}'><br>
     
-    <label for='f-no'>작성자</label> 
-    <input id='f-no' type='text' name='no' value='${chargeStudy.writer}' readonly><br>
+    <label for='f-writer'>작성자</label> 
+    <input id='f-writer' type='email' name='writer' value='${chargeStudy.writer}' readonly><br>
     
-    <label for='f-email'>내용</label> 
-    <input id='f-email' type='text' name='email' value='${chargeStudy.content}'><br>
+    <label for='f-content'>내용</label> 
+    <input id='f-content' type='text' name='content' value='${chargeStudy.content}'><br>
     
-    <label for='f-password'>모집인원</label> 
-    <input id='f-photo' type='text' name='photo' value='${chargeStudy.maxMembers}'><br>
+    <label for='f-maxMembers'>모집인원</label> 
+    <input id='f-maxMembers' type='text' name='maxMembers' value='${chargeStudy.maxMembers}'><br>
      
-    <label for='f-password'>현재인원</label> 
-    <input id='f-photo' type='text' name='photo' value='${chargeStudy.members}'><br>
+    <label for='f-members'>현재인원</label> 
+    <input id='f-members' type='text' name='members' value='${chargeStudy.members}'><br>
     
-    <label for='f-photo'>금액</label> 
-    <input id='f-photo' type='text' name='photo' value='${chargeStudy.price}'><br>
+    <label for='f-price'>금액</label> 
+    <input id='f-price' type='text' name='price' value='${chargeStudy.price}'><br>
     
-    <label for='f-tel'>시작일</label> 
-    <input id='f-tel' type='text' name='tel' value='${chargeStudy.startDate}'><br>
+    <label for='f-startDate'>시작일</label> 
+    <input id='f-startDate' type='date' name='startDate' value='${chargeStudy.startDate}'><br>
     
-    <label for='f-tel'>종료일</label> 
-    <input id='f-tel' type='text' name='tel' value='${chargeStudy.endDate}'><br>
+    <label for='f-endDate'>종료일</label> 
+    <input id='f-endDate' type='date' name='endDate' value='${chargeStudy.endDate}'><br>
     
-    <label for='f-tel'>좋아요</label> 
-    <input id='f-tel' type='text' name='tel' value='${chargeStudy.likes}'><br>
+    <label for='f-likes'>좋아요</label> 
+    <input id='f-likes' type='text' name='likes' value='${chargeStudy.likes}'><br>
     
-    <label for='f-tel'>조회수</label> 
-    <input id='f-tel' type='text' name='tel' value='${chargeStudy.viewCount}'><br>
+    <label for='f-viewCount'>조회수</label> 
+    <input id='f-viewCount' type='text' name='viewCount' value='${chargeStudy.viewCount}'><br>
     
     <label for='f-registeredDate'>등록일</label> 
     <span id='f-registeredDate'>${chargeStudy.registeredDate}</span><br>
