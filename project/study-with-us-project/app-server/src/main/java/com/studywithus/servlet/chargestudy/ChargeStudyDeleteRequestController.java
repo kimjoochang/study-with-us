@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 
-@WebServlet("/deleteRequest")
+@WebServlet("chargestudy/deleterequest")
 public class ChargeStudyDeleteRequestController  extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,7 @@ public class ChargeStudyDeleteRequestController  extends HttpServlet {
       Study chargeStudy = chargeStudyDao.findByNo(no);
 
       if (chargeStudy == null) {
-        throw new Exception("해당 번호의 유료 스터디 회원이 없습니다.");
+        throw new Exception("해당 번호의 유료 스터디가 존재하지 않습니다.");
       }
 
       chargeStudyDao.delete(no);

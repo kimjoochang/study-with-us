@@ -29,7 +29,7 @@ public class ChargeStudyListController extends GenericServlet {
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
     try {
-      Collection<Study> chargeStudyList = chargeStudyDao.findAll(1,100);
+      Collection<Study> chargeStudyList = chargeStudyDao.findAll(1,10000000);
 
       request.setAttribute("chargeStudyList", chargeStudyList);
 
