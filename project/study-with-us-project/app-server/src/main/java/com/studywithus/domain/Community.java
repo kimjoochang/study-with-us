@@ -3,6 +3,11 @@ package com.studywithus.domain;
 import java.sql.Date;
 
 public class Community extends Content {
+  public final String SMALLTALK_COMMUNITY = "스몰톡";
+  public final String INFO_COMMUNITY = "정보";
+  public final String QA_COMMUNITY = "질문";
+
+
   private Date registeredDate; // 게시글 등록일
   private int viewCount; // 조회수
   private int like; // 좋아요

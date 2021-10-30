@@ -1,12 +1,10 @@
-<%@page import="com.studywithus.domain.Study"%>
-<%@page import="com.studywithus.dao.StudyDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>무료스터디 상세</title>
+  <title>무료 스터디</title>
   <style>
   label {
     margin-right: 5px;
@@ -17,16 +15,8 @@
   </style>
 </head>
 <body>
-<h1>회원 상세</h1>
-<%
-int no = Integer.parseInt(request.getParameter("no"));
-Study freeStudy = StudyDao.findByNo(no);
+<h1>무료 스터디 상세</h1>
 
-if (freeStudy == null) {%>
-    해당 번호의 회원이 없습니다.
-<%
-} else {
-%>
 <form action='StudyUpdate.jsp'>
     <label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='<%=freeStudy.getNo()%>' readonly><br>

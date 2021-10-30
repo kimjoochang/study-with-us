@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studywithus.dao.MentorApplicationDao">
+
+	<resultMap type="MentorApplication" id="MentorApplicationMap">
+		<id column="member_no" property="no"/>
+		<result column="introduction" property="selfIntroduction"/>
+		<result column="subject" property="chargeStudySubject"/>
+		<result column="apply_date" property="registeredDate"/>
+		<result column="status" property="status"/>
+		<result column="remarks" property="remarks"/>
+		
+		<association property="applicant" javaType="Member">
+		  <id column="applicant_no" property="no"/>
+      <result column="applicant_name" property="name"/>
+      <result column="applicant_email" property="email"/>
+		</association>
+	</resultMap>
+	
+	<sql id="select1">
+	select
+      mt.member_no,
+      mt.introduction,
+      mt.subject,
+      mt.apply_date,
+      mt.status,
+      mt.remarks,
+      m.member_no applicant_no,
+      m.name applicant_name,
+      m.email applicant_email
+    from
+      mentor mt
+    inner join member m on mt.member_no=m.member_no
+	</sql>
+
+	<select id="findAll" resultMap="MentorApplicationMap">
+		<include refid="select1"/>
+		order by mt.member_no asc
+	</select>
+
+	<select id="findByNo" resultMap="MentorApplicationMap" parameterType="int">
+		<include refid="select1"/>
+		where mt.member_no=#{no}
+	</select>
+
+	<insert id="insert" parameterType="member">
+		insert into mentor(member_no,introduction,subject)
+		values(#{no},#{selfIntroduction},#{chargeStudySubject})
+	</insert>
+
+	<update id="update" parameterType="member">
+		update mentor set
+			introduction=#{selfIntroduction},
+			subject=#{chargeStudySubject},
+			status=#{status},
+			remarks=#{remarks},
+			member_no=#{no}
+		where member_no=#{no}
+	</update>
+
+</mapper>
+
+
+
+
+
+
+
