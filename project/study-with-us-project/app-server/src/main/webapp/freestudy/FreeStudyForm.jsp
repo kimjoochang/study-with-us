@@ -17,7 +17,7 @@
 
 <body>
 <h1>무료 스터디 등록</h1>
-<form action='FreeStudyAdd.jsp'>
+<form action='add'>
 
 <select name = "onOffLine">
     <option value="none"selected>---선택---</option>
@@ -50,9 +50,7 @@
    <option>-선택-</option>
   </select>
 <script language=javascript>
-
  
-
  var cat1_num = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
  var cat1_name = new Array('서울','부산','대구','인천','광주','대전','울산','강원','경기','경남','경북','전남','전북','제주','충남','충북');
 
@@ -142,12 +140,16 @@ function cat1_change(key,sel){
 </form>
 
 
-<label for='f-title'>제목</label> <input id='f-title' type='text' name='photo'><br>
-<label for='f-content'>내용</label> <input id='f-content' type='text' name='tel'><br>
-<label for='f-maxMembers'>정원</label> <input id='f-tel' type='number' name='tel'><br>
-<label for='f-maxMembers'>시작일</label> <input id='f-tel' type='date' name='starDate'><br>
-<label for='f-maxMembers'>종료일</label> <input id='f-tel' type='date' name='endDate'><br>
-<button>등록</button><br>
+<label for='title'>제목</label> <input id='f-title' type='text' name='photo'><br>
+
+<label for='content'>내용</label> <input type='text' name='tel'><br>
+<label for='maxMembers'>정원</label> <input type='number' name='tel'><br>
+<label for='startDate'>시작일</label> <input type='date' name='starDate'><br>
+<label for='endDate'>종료일</label> <input type='date' name='endDate'><br>
+
+<input type="reset" value="초기화">
+<input type="submit" value="등록">
+<button>취소</button><br>
 </form>
 </body>
 </html>

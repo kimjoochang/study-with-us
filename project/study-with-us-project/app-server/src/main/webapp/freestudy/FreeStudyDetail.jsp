@@ -14,18 +14,21 @@
   }
   </style>
 </head>
+
 <body>
-<h1>무료 스터디 상세</h1>
-<form action='Update'>
+<h1>무료 스터디 상세보기</h1>
+<form action='detail'>
     <label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${freeStudy.no}' readonly><br>
     
     <label for='f-title'>제목</label>
     <input id='f-title' type='text' name='title' value='${freeStudy.title}'><br>
     
+    <!-- 팀장? 작성자? -->
     <label for='f-name'>팀장</label> 
     <input id='f-name' type='text' name='name' value='${freeStudy.writer.name}'><br>
     
+    <!-- 설명? 내용? -->
     <label for='f-content'>설명</label> 
     <input id='f-content' type='text' name='content' value='${freeStudy.content}'><br>
     
