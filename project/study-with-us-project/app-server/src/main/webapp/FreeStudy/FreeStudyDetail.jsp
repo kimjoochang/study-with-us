@@ -16,44 +16,52 @@
 </head>
 <body>
 <h1>무료 스터디 상세</h1>
-
-<form action='StudyUpdate.jsp'>
+<form action='Update'>
     <label for='f-no'>번호</label> 
-    <input id='f-no' type='text' name='no' value='<%=freeStudy.getNo()%>' readonly><br>
+    <input id='f-no' type='text' name='no' value='${freeStudy.no}' readonly><br>
     
-    <label for='f-name'>이름</label>
-    <input id='f-name' type='text' name='name' value='<%=freeStudy.getName()%>'><br>
+    <label for='f-title'>제목</label>
+    <input id='f-title' type='text' name='title' value='${freeStudy.title}'><br>
     
-    <label for='f-email'>이메일</label> 
-    <input id='f-email' type='email' name='email' value='<%=freeStudy.getEmail()%>'><br>
+    <label for='f-name'>팀장</label> 
+    <input id='f-name' type='text' name='name' value='${freeStudy.writer.name}'><br>
     
-    <label for='f-password'>암호</label> 
-    <input id='f-password' type='password' name='password'><br>
+    <label for='f-content'>설명</label> 
+    <input id='f-content' type='text' name='content' value='${freeStudy.content}'><br>
     
-    <label for='f-photo'>사진</label> 
-    <input id='f-photo' type='text' name='photo' value='<%=freeStudy.getPhoto()%>'><br>
+    <label for='f-status'>스터디 진행상태</label> 
+    <input id='f-status' type='text' name='status' value='${freeStudy.status}'><br>
     
-    <label for='f-tel'>전화</label> 
-    <input id='f-tel' type='tel' name='tel' value='<%=freeStudy.getTel()%>'><br>
+    <label for='f-onOffLine'>온오프라인</label> 
+    <input id='f-onOffLine' type='text' name='onOffLine' value='${freeStudy.status}'><br>
     
+    <label for='f-startDate'>시작일</label> 
+    <input id='f-startDate' type='date' name='startDate' value='${freeStudy.status}'><br>
+     
+    <label for='f-endDate'>종료일</label> 
+    <input id='f-endDate' type='date' name='endDate' value='${freeStudy.status}'><br>
+
+    <label for='f-maxMembers'>모집인원</label> 
+    <input id='f-maxMembers' type='text' name='maxMembers' value='${freeStudy.status}'><br>
+     
+    <label for='f-maxMembers'>현재인원</label> 
+    <input id='f-maxMembers' type='text' name='members' value='${freeStudy.status}'><br>
+        
+    <label for='f-viewCount'>조회수</label> 
+    <input id='f-viewCount' type='text' name='viewCount' value='${freeStudy.getTel}'><br>
+    
+    <label for='f-likes'>좋아요</label> 
+    <input id='f-likes' type='text' name='likes' value='${freeStudy.getTel}'><br>
+
     <label for='f-registeredDate'>등록일</label> 
-    <span id='f-registeredDate'><%=freeStudy.getRegisteredDate()%></span><br>
+    <span id='f-registeredDate' ${freeStudy.getRegisteredDate}></span><br>
+    
 <button>변경</button>
- <a href='StudyDelete.jsp?no=<%=freeStudy.getNo()%>'>[삭제]</a> <a href='StudyList.jsp'>[목록]</a><br>
+ <a href='delete.jsp?no=${freeStudy.getNo}'>[삭제]</a> <a href='list.jsp'>[목록]</a><br>
 </form>
-<%}%>
+
 </body>
 </html>
-<%! // <== declaration element(tag)
-// 자바 서블릿 클래스를 만들 때 그 클래스에 들어갈 변수와 메서드를 이 태그 안에 작성한다.
-    StudyDao StudyDao;
-
-    public void jspInit() {
-      ServletConfig config = getServletConfig();
-      ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-      StudyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("StudyDao");
-    }
-%>
 
 
 

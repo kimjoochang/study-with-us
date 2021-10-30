@@ -7,6 +7,7 @@ import java.sql.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 
+@WebServlet("/freestudy/add")
 public class FreeStudyAddController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
