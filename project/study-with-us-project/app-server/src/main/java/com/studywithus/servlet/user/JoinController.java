@@ -45,10 +45,11 @@ public class JoinController extends HttpServlet {
 
       memberDao.insert(member);
       sqlSession.commit();
-      response.sendRedirect("../index.jsp");
+      response.sendRedirect("/swu");
 
 
     } catch (Exception e) {
+      System.out.println(e.getMessage());
       request.setAttribute("error", e);
       request.getRequestDispatcher("Error.jsp").forward(request, response);
     } 

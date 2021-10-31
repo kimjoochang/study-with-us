@@ -30,20 +30,24 @@ public class CommunityListController extends HttpServlet {
 
     try {
       // 클라이언트한테 요청받을 때 쓸 변수
-      int categoryNo = Integer.parseInt(request.getParameter("no"));
+      if (request.getAttribute("categoryNo") == null) {
 
-      Collection<Community> communityList = communityDao.findAll(categoryNo);
+        int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
 
-      request.setAttribute("categoryNo", categoryNo);
+        Collection<Community> communityList = communityDao.findAll(categoryNo);
 
-      if (communityList == null) {
-        request.getRequestDispatcher("CommunityList.jsp").forward(request, response);
+        request.setAttribute("categoryNo", categoryNo);
+        request.setAttribute("communityList", communityList);
+
+      } else {
+        request.setAttribute("categoryNo", request.getAttribute("categoryNo"));
+
       }
 
-      request.setAttribute("communityList", communityList);
       request.getRequestDispatcher("CommunityList.jsp").forward(request, response);
 
     } catch (Exception e) {
+      System.out.println(e.getStackTrace());
       System.out.println(e.getMessage());
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);

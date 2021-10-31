@@ -4,14 +4,16 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.CommunityDao;
 import com.studywithus.domain.Community;
-import com.studywithus.handler.user.AuthLogInHandler;
+import com.studywithus.domain.Member;
 
+@WebServlet("/community/add")
 public class CommunityAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -22,27 +24,35 @@ public class CommunityAddController extends HttpServlet {
   public void init(ServletConfig config) throws ServletException {
     ServletContext servletContext = config.getServletContext();
     communityDao = (CommunityDao) servletContext.getAttribute("communityDao");
+    sqlSession = (SqlSession) servletContext.getAttribute("sqlSession");
   }
-
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
 
-    request.getSess
-    Community community = new Community();
+    try {
+      int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
 
-    community.setCategory(categoryNo);
-    community.setTitle(request.getParameter("title"));
-    community.setContent(request.getParameter("content"));
-    community.setWriter(AuthLogInHandler.getLoginUser());
+      Member writer = (Member) request.getSession(false).getAttribute("loginUser");
 
-    communityDao.insert(community);
+      Community community = new Community();
 
-    sqlSession.commit();
+      community.setCategory(categoryNo);
+      community.setTitle(request.getParameter("title"));
+      community.setContent(request.getParameter("content"));
+      community.setWriter(writer);
 
-    System.out.println();
-    System.out.println("커뮤니티 등록이 완료되었습니다.");
+      communityDao.insert(community);
+
+      sqlSession.commit();
+
+      request.setAttribute("categoryNo", categoryNo);
+      request.getRequestDispatcher("list").forward(request, response);
+
+    } catch (Exception e) {
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+    }
   }
 }

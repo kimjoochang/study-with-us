@@ -11,7 +11,6 @@
 <form action='login' method="post">
 이메일: <input type='text' name='email'><br>
 비밀번호: <input type='password' name='password'><br>
-<%session.set %>
 <button>로그인</button><br>
 </form>
 </body>

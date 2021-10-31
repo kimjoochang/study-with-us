@@ -58,15 +58,12 @@ public class AuthLogInController extends HttpServlet {
 
       if (member != null) {
         HttpSession session = request.getSession();
-
-        session.setAttribute("session_email", email);
-        session.setAttribute("session_password", password);
-        loginUser = member;
-        userAccessLevel = Menu.ACCESS_GENERAL;
-        //        request.setAttribute("member", member);
-        request.getRequestDispatcher("../index.jsp").forward(request, response);
+        session.setAttribute("loginUser", member);
       }
+      response.sendRedirect("/swu");
+
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("Error.jsp").forward(request, response);
     }

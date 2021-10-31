@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.studywithus.menu.Menu;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/user/logout")
 public class AuthLogOutController extends HttpServlet {
@@ -16,13 +16,8 @@ public class AuthLogOutController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    AuthLogInController.loginUser.setUserAccessLevel(AuthLogInController.getUserAccessLevel());
-
-    AuthLogInController.loginUser = null;
-    AuthLogInController.userAccessLevel = Menu.ACCESS_LOGOUT;
-
-    request.setAttribute("member", AuthLogInController.loginUser);
-
-    request.getRequestDispatcher("../index.jsp").forward(request, response);
+    HttpSession loginUser = request.getSession();
+    loginUser.invalidate();
+    response.sendRedirect("/swu");
   }
 }

@@ -8,7 +8,7 @@
 
 <body>
 <h1>회원가입</h1>
-<form action='join'>
+<form action='join'  method="post">
 이름: <input type='text' name='name'><br>
 이메일: <input type='email' name='email'><br>
 암호: <input type='password' name='password'><br>
