@@ -14,7 +14,7 @@ import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 import com.studywithus.servlet.user.AuthLogInController;
 
-@WebServlet("/add")
+@WebServlet("/chargestudy/add")
 public class ChargeStudyAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
