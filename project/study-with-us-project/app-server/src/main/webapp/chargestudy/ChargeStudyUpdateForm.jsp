@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<h1>유료 스터디 상세보기</h1>
+<h1>유료 스터디 수정</h1>
 	<form action='update'>
 	<label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${chargeStudy.no}' readonly><br>

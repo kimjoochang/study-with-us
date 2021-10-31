@@ -9,10 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
-import com.studywithus.servlet.user.AuthLogInController;
 
 @WebServlet("/chargestudy/add")
 public class ChargeStudyAddController extends HttpServlet {
@@ -32,15 +33,23 @@ public class ChargeStudyAddController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    Study chargeStudy = new Study();
+    HttpSession session = request.getSession(false);
 
-    chargeStudy.setWriter(AuthLogInController.getLoginUser());
-    chargeStudy.setArea(request.getParameter("area"));
+    if (session.getAttribute("loginUser") == null) {
+      response.sendRedirect("list");
+      return;
+    }
+
+    Study chargeStudy = new Study();
+    Member writer = (Member) request.getSession(false).getAttribute("loginUser");
+
     chargeStudy.setTitle(request.getParameter("title"));
+    chargeStudy.setArea(request.getParameter("area"));
     chargeStudy.setContent(request.getParameter("content"));
+    chargeStudy.setWriter(writer);
     chargeStudy.setMaxMembers(Integer.parseInt(request.getParameter("maxMembers")));
     chargeStudy.setPrice(Integer.parseInt(request.getParameter("price")));
-    chargeStudy.setStartDate(Date.valueOf(request.getParameter("startedDate")));
+    chargeStudy.setStartDate(Date.valueOf(request.getParameter("startDate")));
     chargeStudy.setEndDate(Date.valueOf(request.getParameter("endDate")));
 
     try {

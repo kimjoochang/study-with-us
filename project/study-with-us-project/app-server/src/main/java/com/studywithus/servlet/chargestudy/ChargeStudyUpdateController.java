@@ -44,8 +44,8 @@ public class ChargeStudyUpdateController extends HttpServlet {
       chargeStudy.setTitle(request.getParameter("title"));
       chargeStudy.setContent(request.getParameter("content"));
       chargeStudy.setMaxMembers(Integer.parseInt(request.getParameter("maxMembers")));
-      // chargeStudy.setPrice(Integer.parseInt(request.getParameter("price")));
-      chargeStudy.setStartDate(Date.valueOf(request.getParameter("startedDate")));
+      chargeStudy.setPrice(Integer.parseInt(request.getParameter("price")));
+      chargeStudy.setStartDate(Date.valueOf(request.getParameter("startDate")));
       chargeStudy.setEndDate(Date.valueOf(request.getParameter("endDate")));
 
       chargeStudyDao.update(chargeStudy);

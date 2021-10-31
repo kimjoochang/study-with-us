@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-    
+    <jsp>
+
 <!DOCTYPE html>
+<html lang="ko">
 <html>
 <head>
   <div style='text-align: center;'>
@@ -40,21 +42,20 @@
 
 <label for='content'>내용<br><br><br><br><br><br><br><br><br><br><br>
 <br></label>
-<textarea cols="50" rows="15" placeholder="개설할 스터디 내용을 입력해주세요.">
+<textarea name ="content" cols="50" rows="15" placeholder="개설할 스터디 내용을 입력해주세요.">
 </textarea>
 <br>
 <label for='startDate'>시작일</label> <input id='startDate' type='date' name='startDate'><br>
 <label for='endDate'>종료일</label> <input id='endDate' type='date' name='endDate'><br>
 <label for='maxMembers'>정원</label> <input id='maxMembers' type='text' name='maxMembers'><br>
 <label for='price'>금액</label> <input id='price' type='text' name='price'><br>
+<label for='f-writer'>작성자</label> 
+<input id='f-writer' type='email' name='writer' value='${chargeStudy.writer}' readonly><br>
 
-<label for='writer'>작성자</label> <input id='writer' type='text' name='name'><br>
-<br>
 <div style='text-align: center;'>
-
 <input type="reset" value="초기화">
-<input type="submit" value="등록">
-<!--  <button>등록</button><br>-->
+<!--<input type="submit" value="등록">-->
+<button>등록</button>
 <button>취소</button><br>
 </div>
 </form>
