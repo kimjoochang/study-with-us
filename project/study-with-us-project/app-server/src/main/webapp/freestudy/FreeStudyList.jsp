@@ -35,17 +35,17 @@
 <c:forEach items="${freeStudyList}" var="freeStudy">
 
   <c:choose>
-  <c:when test="${chargeStudy.studyStatus eq 0}">
+  <c:when test="${freeStudy.studyStatus eq 0}">
 <c:set var="type" value="모집중"/>
   </c:when>
   </c:choose>
   <c:choose>
-  <c:when test="${chargeStudy.studyStatus eq 1}">
+  <c:when test="${freeStudy.studyStatus eq 1}">
 <c:set var="type" value="진행중"/>
   </c:when>
   </c:choose>
   <c:choose>
-  <c:when test="${chargeStudy.studyStatus eq 2}">
+  <c:when test="${freeStudy.studyStatus eq 2}">
 <c:set var="type" value="진행완료"/>
   </c:when>
   </c:choose>
@@ -53,18 +53,16 @@
   <tr>
     <td>${freeStudy.no}</td>
     <td><a href='detail?no=${freeStudy.no}'>${freeStudy.title}</a></td> 
-    <td>${freeStudy.title}</td> 
     <td>${freeStudy.writer.name}</td> 
     <td>${freeStudy.startDate}</td>
     <td>${freeStudy.endDate}</td>
     <td>${freeStudy.onOffLine}</td>
     <td>${freeStudy.area}</td>
     <td>${freeStudy.members}/${freeStudy.maxMembers}</td>
-    <td>${freeStudy.status}</td>
+    <td>${type}</td>
     <td>${freeStudy.registeredDate}</td>
     <td>${freeStudy.viewCount}</td>
     <td>${freeStudy.likes}</td>
-
   </tr>
 </c:forEach>
 

@@ -14,41 +14,44 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 
 import com.studywithus.dao.StudyDao;
-import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
-@WebServlet("/freestudy/add")
-public class FreeStudyAddController extends HttpServlet {
+@WebServlet("/freestudy/update")
+public class FreeStudyUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	SqlSession sqlSession;
-	StudyDao StudyDao;
+	StudyDao freeStudyDao;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		ServletContext servletContext = config.getServletContext();
 		sqlSession = (SqlSession) servletContext.getAttribute("sqlSession");
-		StudyDao = (StudyDao) servletContext.getAttribute("studyDao");
+		freeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
 	}
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Study freeStudy = new Study();
-		Member writer = (Member) request.getSession(false).getAttribute("loginUser");
-
-		freeStudy.setWriter(writer);
-		freeStudy.setOnOffLine(Integer.parseInt(request.getParameter("onOffLine")));
-		freeStudy.setArea(request.getParameter("h_area1")+request.getParameter("h_area2"));
-		freeStudy.setTitle(request.getParameter("title"));
-		freeStudy.setContent(request.getParameter("content"));
-		freeStudy.setMaxMembers(Integer.parseInt(request.getParameter("maxMembers")));
-		freeStudy.setStartDate(Date.valueOf(request.getParameter("startDate")));
-		freeStudy.setEndDate(Date.valueOf(request.getParameter("endDate")));
-
 		try {
-			StudyDao.insert(freeStudy);
+			int no = Integer.parseInt(request.getParameter("no"));
+
+			Study freeStudy = freeStudyDao.findByNo(no);
+
+			if (freeStudy == null) {
+				throw new Exception("해당 번호의 무료 스터디가 없습니다.");
+			} 
+
+			freeStudy.setOnOffLine(Integer.parseInt(request.getParameter("onOffLine")));
+			freeStudy.setArea(request.getParameter("area"));
+			freeStudy.setTitle(request.getParameter("title"));
+			freeStudy.setContent(request.getParameter("content"));
+			freeStudy.setMaxMembers(Integer.parseInt(request.getParameter("maxMembers")));
+			freeStudy.setStartDate(Date.valueOf(request.getParameter("startDate")));
+			freeStudy.setEndDate(Date.valueOf(request.getParameter("endDate")));
+
+			freeStudyDao.update(freeStudy);
 			sqlSession.commit();
 
 			response.sendRedirect("list");
@@ -56,9 +59,13 @@ public class FreeStudyAddController extends HttpServlet {
 		} catch (Exception e) {
 			request.setAttribute("error", e);
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
-
 		}
 	}
 }
+
+
+
+
+
 
 

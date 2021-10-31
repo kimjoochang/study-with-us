@@ -1,4 +1,4 @@
-package com.studywithus.servlet.FreeStudy;
+package com.studywithus.servlet.freestudy;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -43,7 +43,6 @@ public class FreeStudyListController extends GenericServlet {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			request.setAttribute("error", e);
-
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Error.jsp");
 			requestDispatcher.forward(request, response);
 		}
