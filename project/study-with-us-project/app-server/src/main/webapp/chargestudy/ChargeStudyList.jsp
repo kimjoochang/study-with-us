@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>유료 스터디 목록</h1>
-	<a href='Form.jsp'>유료 스터디</a>
+	<a href='form'>유료 스터디</a>
 	<br>
 	<table border='1'>
 		<thead>
@@ -30,7 +30,6 @@
 		</thead>
 		<tbody>
 		
-		https://mollangpiu.tistory.com/222
   <c:forEach items="${chargeStudyList}" var="chargeStudy">
   
   <c:choose>
