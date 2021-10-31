@@ -59,7 +59,7 @@
     <td>${freeStudy.onOffLine}</td>
     <td>${freeStudy.area}</td>
     <td>${freeStudy.members}/${freeStudy.maxMembers}</td>
-    <td>${freeStudy.status}</td>
+    <td>${type}</td>
     <td>${freeStudy.registeredDate}</td>
     <td>${freeStudy.viewCount}</td>
     <td>${freeStudy.likes}</td>

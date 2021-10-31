@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -36,22 +35,12 @@ public class FreeStudyAddController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession Session = request.getSession(false);
-
-		if (Session.getAttribute("loginUser") == null) {
-			response.sendRedirect("list");
-			return;
-		}
-
-		//		response.setContentType("text/html;charset=UTF-8");
-		//		PrintWriter out = response.getWriter();
-
 		Study freeStudy = new Study();
-		Member writer = (Member) request.getSession(false).getAttribute("logginUser");
+		Member writer = (Member) request.getSession(false).getAttribute("loginUser");
 
-		//		freeStudy.setWriter(AuthLogInController.getLoginUser());
+		freeStudy.setWriter(writer);
 		freeStudy.setOnOffLine(Integer.parseInt(request.getParameter("onOffLine")));
-		freeStudy.setArea(request.getParameter("area"));
+		freeStudy.setArea(request.getParameter("h_area1")+request.getParameter("h_area2"));
 		freeStudy.setTitle(request.getParameter("title"));
 		freeStudy.setContent(request.getParameter("content"));
 		freeStudy.setMaxMembers(Integer.parseInt(request.getParameter("maxMembers")));
@@ -69,7 +58,6 @@ public class FreeStudyAddController extends HttpServlet {
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 
 		}
-		//		response.setHeader("Refresh", "1;url=list");
 	}
 }
 
