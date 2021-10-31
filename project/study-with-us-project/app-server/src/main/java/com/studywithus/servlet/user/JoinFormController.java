@@ -14,7 +14,6 @@ public class JoinFormController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
-    response.sendRedirect("JoinForm.jsp");
+    request.getRequestDispatcher("JoinForm.jsp").forward(request, response);
   }
 }

@@ -8,7 +8,7 @@
 	<resultMap type="Community" id="CommunityMap">
 		<id column="cmnt_no" property="no"/>
 		<result column="category" property="category"/>
-		<result column="title" property="email"/>
+		<result column="title" property="title"/>
 		<result column="content" property="content"/>
 		<result column="register_date" property="registeredDate"/>
 		<result column="view_count" property="viewCount"/>
@@ -39,8 +39,8 @@
 		  cmnt_no=cm.cmnt_no) likes,
 		cf.cmnt_file_no,
 		cf.name,
-		m.member_no,
-		m.email
+		m.member_no writer_no,
+		m.email writer_email
 		from
 		cmnt cm
 		inner join
@@ -73,7 +73,7 @@
 	<select id="findByNo" resultMap="CommunityMap" parameterType="int">
 		<include refid="select1" />
 		where
-		cmnt_no=#{no}
+		cm.cmnt_no=#{no}
 	</select>
 
 	<select id="findByKeyword" resultMap="CommunityMap">

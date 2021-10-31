@@ -16,29 +16,29 @@
   <c:when test="${categoryNo eq 0}">
 <c:set var="type" value="정보"/>
 <ul>
-<li><a href='list?no=1'>질문 커뮤니티</a><br>
-<li><a href='list?no=2'>스몰톡 커뮤니티</a><br>
+<li><a href='list?categoryNo=1'>질문 커뮤니티</a><br>
+<li><a href='list?categoryNo=2'>스몰톡 커뮤니티</a><br>
 </ul>
   </c:when>
   
   <c:when test="${categoryNo eq 1}">
 <c:set var="type" value="질문"/>
 <ul>
-<li><a href='list?no=0'>정보 커뮤니티</a><br>
-<li><a href='list?no=2'>스몰톡 커뮤니티</a><br>
+<li><a href='list?categoryNo=0'>정보 커뮤니티</a><br>
+<li><a href='list?categoryNo=2'>스몰톡 커뮤니티</a><br>
 </ul>
   </c:when>
 
   <c:when test="${categoryNo eq 2}">
 <c:set var="type" value="스몰톡"/>
 <ul>
-<li><a href='list?no=0'>정보 커뮤니티</a><br>
-<li><a href='list?no=1'>질문 커뮤니티</a><br>
+<li><a href='list?categoryNo=0'>정보 커뮤니티</a><br>
+<li><a href='list?categoryNo=1'>질문 커뮤니티</a><br>
 </ul>
   </c:when>
 </c:choose>
 
-<a href='form?no=${categoryNo}'>글쓰기</a><br>
+<a href='form?categoryNo=${categoryNo}'>글쓰기</a><br>
 <br>
 <table border='1'>
 <thead>

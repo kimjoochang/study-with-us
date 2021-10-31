@@ -15,6 +15,6 @@ public class LoginFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    response.sendRedirect("LoginForm.jsp");
+    request.getRequestDispatcher("LoginForm.jsp").forward(request, response);
   }
 }

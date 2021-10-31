@@ -11,29 +11,30 @@
 <c:choose>
 <c:when test="${categoryNo eq 0}">
 <c:set var="type" value="정보"/>
-<a href='form?no=1'>질문</a>
+<a href='form?categoryNo=1'>질문</a>
 &nbsp &nbsp
-<a href='form?no=2'>스몰톡</a>
+<a href='form?categoryNo=2'>스몰톡</a>
 </c:when>
 
 <c:when test="${categoryNo eq 1}">
 <c:set var="type" value="질문"/>
-<a href='form?no=0'>정보</a>
+<a href='form?categoryNo=0'>정보</a>
 &nbsp &nbsp
-<a href='form?no=2'>스몰톡</a>
+<a href='form?categoryNo=2'>스몰톡</a>
 </c:when>
 
 <c:when test="${categoryNo eq 2}">
 <c:set var="type" value="스몰톡"/>
-<a href='form?no=0'>정보</a>
+<a href='form?categoryNo=0'>정보</a>
 &nbsp &nbsp
-<a href='form?no=1'>질문</a>
+<a href='form?categoryNo=1'>질문</a>
 </c:when>
 </c:choose>
 
 <h1>커뮤니티 등록</h1>
-<form action='add?no=${categoryNo}'>
-카테고리 : ${type}
+<form action='add'>
+카테고리 : ${type}<br>
+<input type='hidden' name='categoryNo' value='${categoryNo}'><br>
 커뮤니티 제목: <br><input type='text' name='title'><br>
 커뮤니티 내용<br> 
 <textarea name="content" id="textarea" cols="50" rows="5"></textarea><br>

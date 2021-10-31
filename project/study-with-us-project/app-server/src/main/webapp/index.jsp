@@ -12,20 +12,25 @@
 <h1>STUDY WITH US</h1>
 
 <%
-Member member = (Member)request.getAttribute("member");
-if (member == null) {
+Member loginUser = (Member) session.getAttribute("loginUser");
+if (loginUser == null) {
 %>
 <ul>
 <li><a href='user/joinform'>회원가입</a><br>
 <li><a href='user/loginform'>로그인</a><br>
-<li><a href='community/list?no=0'>커뮤니티</a><br>
+<li><a href='community/list?categoryNo=0'>커뮤니티</a><br>
 <li><a href='freestudy/list'>무료 스터디</a><br>
 <li><a href='chargestudy/list'>유료 스터디</a><br>
 </ul>
 <% } else { %>
 <br><h2>나의 정보</h2>
-<%=member.getName()%> 님 환영합니다!
-<br><a href='logout'>[로그아웃]</a>
+<%=loginUser.getName()%> 님 환영합니다!
+<ul>
+<li><a href='community/list?categoryNo=0'>커뮤니티</a><br>
+<li><a href='freestudy/list'>무료 스터디</a><br>
+<li><a href='chargestudy/list'>유료 스터디</a><br>
+<li><a href='logout'>[로그아웃]</a><br>
+</ul>
 </body>
 </html>
 <% } %>
