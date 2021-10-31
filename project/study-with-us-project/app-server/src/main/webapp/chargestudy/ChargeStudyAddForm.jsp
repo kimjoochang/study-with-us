@@ -1,29 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+    
 <%@page import="com.studywithus.domain.Member"%>
 <% Member loginUser = (Member) session.getAttribute("loginUser"); %>
+
 
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-  <div style='text-align: center;'>
   <title>유료 스터디</title>
-  
   <style>
-  label {
-    margin-right: 5px;
-    text-align: right;
-    display: inline-block;
-    width: 60px;
-  }
-  </style>
-  </div>
+    label {
+      margin-right: 5px;
+      text-align: right;
+      display: inline-block;
+      width: 60px;
+    }
+    </style>
 </head>
 
 <body>
-  
 <h1>유료 스터디 등록</h1>
 <form action='add'>
 
@@ -41,7 +39,7 @@
 </select>
 <br>
 
-<label for='content'>내용<br><br><br><br><br><br><br><br><br><br><br>
+<label for='content'>내용<br><br><br><br><br><br><br><br><br><br><br><br>
 <br></label>
 <textarea name ="content" cols="50" rows="15" placeholder="등록할 스터디 내용을 입력해주세요.">
 </textarea>
@@ -50,9 +48,9 @@
 <label for='endDate'>종료일</label> <input id='endDate' type='date' name='endDate'><br>
 <label for='maxMembers'>정원</label> <input id='maxMembers' type='text' name='maxMembers' placeholder="ex) 6명"><br>
 <label for='price'>금액</label> <input id='price' type='text' name='price' placeholder="ex) 10000"><br>
-<label for='f-writer'>작성자</label> 
-<input id='f-writer' type='email' name='writer1' value='${loginUser.email}' readonly><br>
-</form>
+<label for='writer'>작성자</label> 
+<input id='writer' type='email' name='writer' value='${loginUser.email}' readonly><br>
+
 <br>
 <div style='text-align: center;'>
 <input type="reset" value="초기화">

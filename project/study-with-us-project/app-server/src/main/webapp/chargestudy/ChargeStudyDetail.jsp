@@ -19,7 +19,7 @@
     <input id='f-title' type='text' name='title' value='${chargeStudy.title}' readonly><br>
     
     <label for='f-writer'>작성자</label> 
-    <input id='f-writer' type='email' name='writer' value='${chargeStudy.writer}' readonly><br>
+    <input id='f-writer' type='email' name='writer' value='${chargeStudy.writer.email}' readonly><br>
     
     <label for='f-content'>내용</label> 
     <input id='f-content' type='text' name='content' value='${chargeStudy.content}' readonly><br>
