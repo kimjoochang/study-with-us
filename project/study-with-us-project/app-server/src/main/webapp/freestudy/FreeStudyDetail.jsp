@@ -33,16 +33,16 @@
     <input id='f-content' type='text' name='content' value='${freeStudy.content}'><br>
     
     <label for='f-status'>스터디 진행상태</label> 
-    <input id='f-status' type='text' name='status' value='${freeStudy.status}'><br>
+    <input id='f-status' type='text' name='status' value='${freeStudy.studyStatus}'><br>
     
     <label for='f-onOffLine'>온오프라인</label> 
     <input id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}'><br>
     
     <label for='f-startDate'>시작일</label> 
-    <input id='f-startDate' type='date' name='startDate' value='${freeStudy.status}'><br>
+    <input id='f-startDate' type='date' name='startDate' value='${freeStudy.startDate}'><br>
      
     <label for='f-endDate'>종료일</label> 
-    <input id='f-endDate' type='date' name='endDate' value='${freeStudy.status}'><br>
+    <input id='f-endDate' type='date' name='endDate' value='${freeStudy.endDate}'><br>
 
     <label for='f-maxMembers'>모집인원</label> 
     <input id='f-maxMembers' type='number' name='maxMembers' value='${freeStudy.maxMembers}'><br>
@@ -57,10 +57,10 @@
     <input id='f-likes' type='text' name='likes' value='${freeStudy.likes}'><br>
 
     <label for='f-registeredDate'>등록일</label> 
-    <span id='f-registeredDate' ${freeStudy.getRegisteredDate}></span><br>
+    <span id='f-registeredDate' ${freeStudy.registeredDate}></span><br>
     
 <button>수정</button>
- <a href='delete.jsp?no=${freeStudy.getNo}'>[삭제]</a> <a href='list.jsp'>[목록]</a><br>
+ <a href='delete.jsp?no=${freeStudy.no}'>[삭제]</a> <a href='list.jsp'>[목록]</a><br>
 </form>
 
 </body>

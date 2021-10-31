@@ -46,6 +46,5 @@ public class FreeStudyListController extends GenericServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Error.jsp");
 			requestDispatcher.forward(request, response);
 		}
-
 	}
 }
