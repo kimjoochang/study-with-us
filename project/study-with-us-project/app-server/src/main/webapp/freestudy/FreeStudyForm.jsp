@@ -1,8 +1,13 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    trimDirectiveWhitespaces="true" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
+  <div style='text-align: center;'>
   <title>무료 스터디</title>
+
   <style>
   label {
     margin-right: 5px;
@@ -10,23 +15,24 @@
     display: inline-block;
     width: 60px;
   }
-  </style>
+    </style>
+  </div>
 </head>
 
 <body>
 <h1>무료 스터디 등록</h1>
 <form action='add'>
-
+  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+  
 <select name = "onOffLine">
-    <option value="none"selected>---선택---</option>
-      <option value="onLine">온라인</option>
-      <option value="offLine" selected="selected">오프라인</option>
+  <option value="" selected>---온/오프라인---</option>
+  <option value="온라인">온라인</option>
+  <option value="오프라인" selected="selected">오프라인</option>
 </select>
 
-
-<form name="form1">
+<!-- <form name="form1"> -->
   <select name="h_area1" onChange="cat1_change(this.value,h_area2)" >
-   <option>-선택-</option>
+   <option>--시/도--</option>
 <option value='1'>서울</option>
 <option value='2'>부산</option>
 <option value='3'>대구</option>
@@ -46,8 +52,11 @@
   </select>
   
   <select name="h_area2">
-   <option>-선택-</option>
+   <option>--구/군--</option>
   </select>
+
+  <!--
+
 <script language=javascript>
  
  var cat1_num = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
@@ -136,19 +145,26 @@ function cat1_change(key,sel){
 }
 
 </script>
-</form>
+ </form> -->
+ 
+<br> <br> 
+<label for='title'>제목</label> <input type='text' name='title'><br>
 
-
-<label for='title'>제목</label> <input id='f-title' type='text' name='photo'><br>
-
-<label for='content'>내용</label> <input type='text' name='tel'><br>
-<label for='maxMembers'>정원</label> <input type='number' name='tel'><br>
-<label for='startDate'>시작일</label> <input type='date' name='starDate'><br>
+<label for='content'>내용 <br><br><br><br><br><br><br><br><br>
+<br></label>
+<textarea cols="40" rows="10" placeholder="개설할 무료 스터디 내용을 입력해주세요.">
+</textarea>
+<br>
+<label for='maxMembers'>정원</label> <input type='number' name='maxMembers'><br>
+<label for='startDate'>시작일</label> <input type='date' name='startDate'><br>
 <label for='endDate'>종료일</label> <input type='date' name='endDate'><br>
+<br>
 
+&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 <input type="reset" value="초기화">
 <input type="submit" value="등록">
 <button>취소</button><br>
+</div>
 </form>
 </body>
 </html>

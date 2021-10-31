@@ -1,7 +1,6 @@
 package com.studywithus.servlet.FreeStudy;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 
 import javax.servlet.ServletConfig;
@@ -11,10 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.studywithus.dao.StudyDao;
+import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
 @WebServlet("/freestudy/add")
@@ -35,10 +36,18 @@ public class FreeStudyAddController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		HttpSession Session = request.getSession(false);
+
+		if (Session.getAttribute("loginUser") == null) {
+			response.sendRedirect("list");
+			return;
+		}
+
+		//		response.setContentType("text/html;charset=UTF-8");
+		//		PrintWriter out = response.getWriter();
 
 		Study freeStudy = new Study();
+		Member writer = (Member) request.getSession(false).getAttribute("logginUser");
 
 		//		freeStudy.setWriter(AuthLogInController.getLoginUser());
 		freeStudy.setOnOffLine(Integer.parseInt(request.getParameter("onOffLine")));
@@ -53,19 +62,14 @@ public class FreeStudyAddController extends HttpServlet {
 			StudyDao.insert(freeStudy);
 			sqlSession.commit();
 
-			out.println("무료스터디 등록이 완료되었습니다.\n");
-
-			out.println("<a href='list'>[목록]</a><br>");
+			response.sendRedirect("list");
 
 		} catch (Exception e) {
-			out.println("목록 조회 오류!");
-			e.printStackTrace();
-		}
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 
-		// 리프래시(refresh)
-		// 웹브라우저에게 서버가 보내준 HTML을 출력한 후 
-		// 1초가 경과하면 지정한 URL을 다시 요청하도록 명령한다.
-		response.setHeader("Refresh", "1;url=list");
+		}
+		//		response.setHeader("Refresh", "1;url=list");
 	}
 }
 

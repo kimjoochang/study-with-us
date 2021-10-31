@@ -1,5 +1,3 @@
-<%@page import="com.studywithus.domain.Study"%>
-<%@page import="org.apache.ibatis.session.SqlSession"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
