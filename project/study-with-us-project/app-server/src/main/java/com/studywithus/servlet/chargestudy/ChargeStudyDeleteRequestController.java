@@ -13,6 +13,7 @@ import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Study;
 
 @WebServlet("/chargestudy/deleterequest")
+
 public class ChargeStudyDeleteRequestController  extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -35,7 +36,6 @@ public class ChargeStudyDeleteRequestController  extends HttpServlet {
       Study chargeStudy = chargeStudyDao.findByNo(no);
 
       if (chargeStudy == null) {
-        response.sendRedirect("list");
         throw new Exception("해당 번호의 유료 스터디가 존재하지 않습니다.");
       }
 
