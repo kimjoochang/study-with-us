@@ -31,13 +31,8 @@ public class ChargeStudyDetailController extends HttpServlet {
       int no = Integer.parseInt(request.getParameter("no"));
       Study chargeStudy = chargeStudyDao.findByNo(no);
 
-      if (chargeStudy == null) {
-        response.sendRedirect("list");
-        throw new Exception("해당 번호의 유료 스터디가 존재하지 않습니다.");
-      }
-
       request.setAttribute("chargeStudy", chargeStudy);
-      request.getRequestDispatcher("ChargeStudyDetail.jsp").forward(request, response);
+      request.getRequestDispatcher("/chargestudy/ChargeStudyDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
