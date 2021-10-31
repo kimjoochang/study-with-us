@@ -22,7 +22,7 @@
 <body>
   
 <h1>유료 스터디 등록</h1>
-<form action='Add.jsp'>
+<form action='add'>
 
 <label for='title'>제목</label> <input id='title' type='text' name='title'>
 <br>
@@ -38,7 +38,7 @@
 </select>
 <br>
 
-<label for='content'>내용<br><br><br><br><br><br><br><br><br><br><br><br>
+<label for='content'>내용<br><br><br><br><br><br><br><br><br><br><br>
 <br></label>
 <textarea cols="50" rows="15" placeholder="개설할 스터디 내용을 입력해주세요.">
 </textarea>
@@ -54,6 +54,7 @@
 
 <input type="reset" value="초기화">
 <input type="submit" value="등록">
+<!--  <button>등록</button><br>-->
 <button>취소</button><br>
 </div>
 </form>
