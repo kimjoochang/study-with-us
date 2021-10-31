@@ -33,14 +33,15 @@ public class FreeStudyDetailController extends GenericServlet {
 			int no = Integer.parseInt(request.getParameter("no"));
 			Study freeStudy = studyDao.findByNo(no);
 
-			if (freeStudy == null) {
-				throw new Exception("해당 번호의 무료 스터디가 없습니다.");
-			} 
+			//			if (freeStudy == null) {
+			//				throw new Exception("해당 번호의 무료 스터디가 없습니다.");
+			//			} 
 
-			request.setAttribute("freestudy", freeStudy);
+			request.setAttribute("freeStudy", freeStudy);
 			request.getRequestDispatcher("/freestudy/FreeStudyDetail.jsp").forward(request, response);
 
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			request.setAttribute("error", e);
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}

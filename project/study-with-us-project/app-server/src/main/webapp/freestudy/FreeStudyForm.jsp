@@ -30,32 +30,31 @@
   <option value=1 selected="selected">오프라인</option>
 </select>
 
-<form name="form1"> 
+<!-- <form name="form1"> -->
   <select name="h_area1" onChange="cat1_change(this.value,h_area2)" >
    <option>--시/도--</option>
-<option value='1'>서울</option>
-<option value='2'>부산</option>
-<option value='3'>대구</option>
-<option value='4'>인천</option>
-<option value='5'>광주</option>
-<option value='6'>대전</option>
-<option value='7'>울산</option>
-<option value='8'>강원</option>
-<option value='9'>경기</option>
-<option value='10'>경남</option>
-<option value='11'>경북</option>
-<option value='12'>전남</option>
-<option value='13'>전북</option>
-<option value='14'>제주</option>
-<option value='15'>충남</option>
-<option value='16'>충북</option>
+<option value='서울'>서울</option>
+<option value='부산'>부산</option>
+<option value='대구'>대구</option>
+<option value='인천'>인천</option>
+<option value='광주'>광주</option>
+<option value='대전'>대전</option>
+<option value='울산'>울산</option>
+<option value='강원'>강원</option>
+<option value='경기'>경기</option>
+<option value='경남'>경남</option>
+<option value='경북'>경북</option>
+<option value='전남'>전남</option>
+<option value='전북'>전북</option>
+<option value='제주'>제주</option>
+<option value='충남'>충남</option>
+<option value='충북'>충북</option>
   </select>
   
   <select name="h_area2">
    <option>--구/군--</option>
   </select>
-
-<!-- 
+<!--  
 <script language=javascript>
  
  var cat1_num = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
@@ -145,19 +144,24 @@ function cat1_change(key,sel){
 
 </script>
  </form>
-  -->
-  
+-->
 <br> <br> 
-<label for='title'>제목</label> <input type='text' name='title'><br>
+<label for='title'>제목</label> 
+<input type='text' name='title'><br>
 
 <label for='content'>내용 <br><br><br><br><br><br><br><br><br>
 <br></label>
 <textarea cols="40" rows="10" name="content" placeholder="개설할 무료 스터디 내용을 입력해주세요.">
 </textarea>
 <br>
-<label for='maxMembers'>정원</label> <input type='number' name='maxMembers'><br>
-<label for='startDate'>시작일</label> <input type='date' name='startDate'><br>
-<label for='endDate'>종료일</label> <input type='date' name='endDate'><br>
+<label for='f-maxMembers'>정원</label> 
+<input type='number' name='maxMembers'><br>
+
+<label for='f-startDate'>시작일</label> 
+<input type='date' name='startDate'><br>
+
+<label for='f-endDate'>종료일</label> 
+<input type='date' name='endDate'><br>
 <br>
 
 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
