@@ -52,6 +52,7 @@ public class FreeStudyDetailController extends HttpServlet {
 			// 좋아요 여부
 			int result =  freeStudyDao.checkLikeByMember(member.getNo(), freeStudyNo);
 
+			//			int no = Integer.parseInt(request.getParameter("no"));
 			Study freeStudy = freeStudyDao.findByNo(freeStudyNo);
 
 			//	jsp에서 무료 스터디 작성자랑 로그인한 사람이 같은지 다른지에 따라 메뉴 다르게 출력하기 위해
