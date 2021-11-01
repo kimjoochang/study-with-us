@@ -29,20 +29,21 @@ public class CommunityListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+      int categoryNo;
       // 클라이언트한테 요청받을 때 쓸 변수
       if (request.getAttribute("categoryNo") == null) {
 
-        int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
-
-        Collection<Community> communityList = communityDao.findAll(categoryNo);
-
+        categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
         request.setAttribute("categoryNo", categoryNo);
-        request.setAttribute("communityList", communityList);
 
       } else {
-        request.setAttribute("categoryNo", request.getAttribute("categoryNo"));
-
+        categoryNo = (int)request.getAttribute("categoryNo");
+        request.setAttribute("categoryNo", categoryNo);
       }
+
+      Collection<Community> communityList = communityDao.findAll(categoryNo);
+
+      request.setAttribute("communityList", communityList);
 
       request.getRequestDispatcher("CommunityList.jsp").forward(request, response);
 
