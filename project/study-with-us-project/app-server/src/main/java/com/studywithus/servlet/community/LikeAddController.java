@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.CommunityDao;
+import com.studywithus.domain.Member;
 
 @WebServlet("/community/likes/add")
-public class LikesController extends HttpServlet {
+public class LikeAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CommunityDao communityDao;
@@ -29,9 +30,15 @@ public class LikesController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    // HttpSession session = request.getSession(false);
+    Member member = (Member) request.getSession().getAttribute("loginUser");
+    int communityNo = Integer.parseInt(request.getParameter("no"));
 
     try {
+      communityDao.insertLikes(member.getNo(), communityNo);
+      sqlSession.commit();
+
+      request.setAttribute("no", communityNo);
+      request.getRequestDispatcher("/community/detail").forward(request, response);
 
 
     } catch (Exception e) {

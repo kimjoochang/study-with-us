@@ -59,14 +59,16 @@
 <a href='/swu/community/list?categoryNo=${community.category}'>[목록]</a><br>
 </c:when>
 
-<c:when test="${checkWriter eq 2}" and test="${result eq 0}">
-<a href='like/add?no=${community.no}'>[좋아요 추가]</a>
-</c:when>
+<c:when test="${checkWriter eq 2}">
+<c:if test="${result eq 0}">
+<a href='/swu/community/likes/add?no=${community.no}'>[좋아요 추가]</a>
+</c:if>
+<c:if test="${result eq 1}">
+<a href='/swu/community/likes/delete?no=${community.no}'>[좋아요 삭제]</a>
+</c:if>
 
-<c:when test="${checkWriter eq 2}" and test="${result eq 1}">
-<a href='like/delete?no=${community.no}'>[좋아요 삭제]</a>
-</c:when>
 <a href='/swu/community/list?categoryNo=${community.category}'>[목록]</a><br>
+</c:when>
 </c:choose>
 </form>
 
