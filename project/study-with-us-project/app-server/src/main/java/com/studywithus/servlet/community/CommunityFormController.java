@@ -20,12 +20,9 @@ public class CommunityFormController extends HttpServlet{
 
     if (session.getAttribute("loginUser") == null) {
       response.sendRedirect("/swu/user/loginform");
-      return;
 
     } else {
-      int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
-
-      request.setAttribute("categoryNo", categoryNo);
+      request.setAttribute("categoryNo", Integer.parseInt(request.getParameter("categoryNo")));
       request.getRequestDispatcher("CommunityForm.jsp").forward(request, response);
     }
   }

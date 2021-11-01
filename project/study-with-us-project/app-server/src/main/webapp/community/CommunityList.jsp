@@ -58,7 +58,7 @@
 <tr>
     <td>${community.no}</td>
     <td>${type}</td>
-    <td><a href='Detail.jsp?no=${community.no}'>${community.title}</a></td> 
+    <td><a href='detail?no=${community.no}'>${community.title}</a></td> 
     <td>${community.writer.email}</td> 
     <td>${community.viewCount}</td> 
     <td>${community.like}</td> 

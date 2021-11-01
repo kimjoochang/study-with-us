@@ -12,7 +12,7 @@
 		<result column="register_date" property="registeredDate" />
 
 		<association property="writer" javaType="member">
-			<id column="writer_no" property="memberNo" />
+			<id column="writer_no" property="no" />
 			<result column="writer_email" property="email" />
 		</association>
 	</resultMap>
@@ -23,8 +23,8 @@
     c.cmnt_no,
     c.content,
     c.register_date,
-    m.member_no,
-    m.email
+    m.member_no writer_no,
+    m.email writer_email
     from
     comment c
     inner join member m on c.member_no=m.member_no
@@ -33,7 +33,7 @@
   <select id="findAll" resultMap="CommentMap" parameterType="int">
     <include refid="select1" />
     where
-      c.study_no=#{cmntNo}
+      c.cmnt_no=#{cmntNo}
     order by comment_no asc
   </select>
 
@@ -46,7 +46,7 @@
   <!--오류 Cannot add or update a child row: a foreign key constraint fails -->
   <insert id="insert" parameterType="comment">
     insert into
-    comment(writer_no,cmnt_no,content)
+    comment(member_no,cmnt_no,content)
     values(#{writer.no},#{communityNo},#{content})
   </insert>
 
