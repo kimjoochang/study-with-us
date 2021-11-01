@@ -51,6 +51,7 @@ public class ChargeStudyAddController extends HttpServlet {
       response.sendRedirect("list");
 
     } catch (Exception e) {
+      sqlSession.rollback();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

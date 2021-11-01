@@ -49,13 +49,18 @@ public class CommunityDetailController extends HttpServlet {
         communityNo = (int) request.getAttribute("no");
       }
 
+      Member member = (Member) request.getSession().getAttribute("loginUser");
+
+      // 좋아요 여부
+      int result =  communityDao.checkLikesByMember(member.getNo(), communityNo);
+
       Community community = communityDao.findByNo(communityNo);
       List<Comment> comments= commentDao.findAll(communityNo);
 
       //      jsp에서 커뮤 작성자랑 로그인한 사람이 같은지 다른지에 따라 메뉴 다르게 출력하기 위해
-      int num = checkWriter((Member) request.getSession(false).getAttribute("loginUser"),
-          community.getWriter().getNo());
+      int num = checkWriter(member,community.getWriter().getNo());
 
+      request.setAttribute("result", result);
       request.setAttribute("checkWriter", num);
       request.setAttribute("community", community);
       request.setAttribute("comments", comments);

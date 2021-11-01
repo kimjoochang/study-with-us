@@ -102,6 +102,12 @@
 		values(#{category},#{title},#{content},#{writer.no})
 	</insert>
 
+  <select id="checkLikesByMember" resultType="int">
+    select count(*) from cmnt_like
+    where
+    member_no=#{memberNo} and cmnt_no=#{cmntNo}
+  </select>
+
 	<insert id="insertLikes">
 		insert into
 		cmnt_like(member_no,cmnt_no)

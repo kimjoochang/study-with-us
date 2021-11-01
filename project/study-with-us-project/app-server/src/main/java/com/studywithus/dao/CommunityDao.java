@@ -25,4 +25,6 @@ public interface CommunityDao {
   void deleteLikes (@Param("memberNo") int memberNo, @Param("cmntNo") int communityNo) throws Exception;
 
   void updateCount(int no) throws Exception;
+
+  int checkLikesByMember (@Param("memberNo") int memberNo, @Param("cmntNo") int communityNo) throws Exception;
 }
