@@ -90,11 +90,48 @@
   </sql>
   
   <select id="findAllStudy" resultMap="StudyMap">
-    <include refid="selectStudy"/>
+    <![CDATA[
+     select 
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.price,
+      st.status,
+      (select 
+      count(*) 
+      from 
+      interest
+      where
+      study_no=st.study_no) likes,
+      (select 
+      count(*) 
+      from 
+      study_member
+      where
+      study_no=st.study_no
+      and
+      status=1) members,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.email writer_email
+    from 
+      study_member sm
+    inner join study st on sm.study_no=st.study_no
+    inner join member m on st.member_no=m.member_no
     where
       sm.member_no=#{memberNo} and sm.status=#{myStatus}
+      and
+      price >=#{low} and price<=#{high}
     order by 
       st.study_no asc
+      ]]>
   </select>
 
   <select id="findByNoStudy" resultMap="StudyMap">

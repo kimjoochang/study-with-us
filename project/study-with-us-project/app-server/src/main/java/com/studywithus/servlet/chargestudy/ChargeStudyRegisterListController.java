@@ -1,6 +1,8 @@
 package com.studywithus.servlet.chargestudy;
 
 import java.io.IOException;
+import java.util.Collection;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,59 +10,48 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
-@WebServlet("/chargestudy/deleterequest")
-
-public class ChargeStudyDeleteRequestController  extends HttpServlet {
+@WebServlet("/chargestudy/registerlist")
+public class ChargeStudyRegisterListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao chargeStudyDao;
-  SqlSession sqlSession;
+  StudyMemberDao studyMemberDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext servletContext = config.getServletContext();
-    sqlSession = (SqlSession) servletContext.getAttribute("sqlSession");
     chargeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
+    studyMemberDao = (StudyMemberDao) servletContext.getAttribute("studyMemberDao");
   }
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      Study chargeStudy = chargeStudyDao.findByNo(no);
-
       Member member = (Member) request.getSession().getAttribute("loginUser");
 
       if (member == null) {
         response.sendRedirect("/swu/user/loginform");
-
-      } else if (member.getNo() != chargeStudy.getWriter().getNo()) {
-        throw new Exception("삭제권한이 없습니다.");
       }
 
-      if (chargeStudy == null) {
-        throw new Exception("해당 번호의 유료 스터디가 존재하지 않습니다.");
-      }
+      Collection<Study> chargeStudyList = 
+          studyMemberDao.findAllStudy(member.getNo(),Study.OWNER_STATUS,1,10000000);
 
-      chargeStudy.setDeleteStatus(1);
+      request.setAttribute("chargeStudyList", chargeStudyList);
 
-      chargeStudyDao.update(chargeStudy);
-      sqlSession.commit();
-
-      response.sendRedirect("list");
+      RequestDispatcher requestDispatcher = request.getRequestDispatcher("ChargeStudyRegisterList.jsp");
+      requestDispatcher.forward(request, response);
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      sqlSession.rollback();
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Error.jsp");
+      requestDispatcher.forward(request, response);
     }
   }
 }

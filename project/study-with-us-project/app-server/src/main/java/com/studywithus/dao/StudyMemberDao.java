@@ -7,7 +7,7 @@ import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
 public interface StudyMemberDao {
-  List<Study> findAllStudy(@Param("memberNo") int memberNo, @Param("myStatus") int statusNo) throws Exception;
+  List<Study> findAllStudy(@Param("memberNo") int memberNo, @Param("myStatus") int statusNo, @Param("low") int low, @Param("high") int high) throws Exception;
   Study findByNoStudy(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo, @Param("myStatus") int statusNo) throws Exception;
   List<Member>findAllMember(@Param("studyNo") int studyNo, @Param("myStatus") int statusNo) throws Exception;
   Member findByNoMember(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo, @Param("myStatus") int statusNo) throws Exception;

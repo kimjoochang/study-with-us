@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/chargestudy/addform")
+@WebServlet("/chargestudy/form")
 public class ChargeStudyAddFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class ChargeStudyAddFormController extends HttpServlet {
     HttpSession session = request.getSession(false);
 
     if (session.getAttribute("loginUser") == null) {
-      response.sendRedirect("list");
+      response.sendRedirect("/swu/user/loginform");
       return;
     }
 

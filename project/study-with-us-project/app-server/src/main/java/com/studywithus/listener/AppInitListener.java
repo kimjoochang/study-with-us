@@ -11,6 +11,7 @@ import com.studywithus.dao.CommentDao;
 import com.studywithus.dao.CommunityDao;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 
 @WebListener
 public class AppInitListener implements ServletContextListener {
@@ -31,13 +32,13 @@ public class AppInitListener implements ServletContextListener {
       CommunityDao communityDao = sqlSession.getMapper(CommunityDao.class);
       CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
       StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
+      StudyMemberDao studyMemberDao = sqlSession.getMapper(StudyMemberDao.class);
 
       /* 
       // 상동
       MentorApplicationDao mentorApplicationDao = sqlSession.getMapper(MentorApplicationDao.class);
       ReviewDao reviewDao = sqlSession.getMapper(ReviewDao.class);
       ScheduleDao scheduleDao = sqlSession.getMapper(ScheduleDao.class);
-      StudyMemberDao studyMemberDao = sqlSession.getMapper(StudyMemberDao.class);
       PaymentDao paymentDao = sqlSession.getMapper(PaymentDao.class);
        */
 
@@ -51,13 +52,13 @@ public class AppInitListener implements ServletContextListener {
       servletContext.setAttribute("commentDao", commentDao);
       servletContext.setAttribute("studyDao", studyDao);
       servletContext.setAttribute("sqlSession", sqlSession); // dao마다 하나씩 해줘야되나
+      servletContext.setAttribute("studyMemberDao", studyMemberDao);
       /*
       // 상동
       servletContext.setAttribute("memberDao", commentDao);
       servletContext.setAttribute("mentorApplicationDao", mentorApplicationDao);
       servletContext.setAttribute("reviewDao", reviewDao);
       servletContext.setAttribute("scheduleDao", scheduleDao);
-      servletContext.setAttribute("studyMemberDao", studyMemberDao);
       servletContext.setAttribute("paymentDao", paymentDao);
        */
 
