@@ -59,7 +59,7 @@
     <input id='f-likes' type='text' name='likes' value='${freeStudy.likes}' readonly><br>
 
     <label for='f-registeredDate'>등록일</label> 
-    <span id='f-registeredDate'${freeStudy.registeredDate}></span><br>
+    <span id='f-registeredDate'>${freeStudy.registeredDate}</span><br>
     
     
 <c:choose>
