@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>커뮤니티 조회</title>
 <script language="javascript">
-function addCommunity() {window.open("form?categoryNo=${categoryNo}","width=400","height=300");}
+function addCommunity() {window.open("form?categoryNo=${categoryNo}","width=300","height=300");}
 </script>
 </head>
 

@@ -51,7 +51,7 @@
     
     <c:choose>
 <c:when test="${loginUser eq null}">
-<a href='/swu/freestudy/list'>[목록]</a><br>
+<a href='/swu/chargerstudy/list'>[목록]</a><br>
 </c:when>
 
 <c:when test="${checkWriter eq 1}">
@@ -62,11 +62,11 @@
 
 <c:when test="${checkWriter eq 2}">
 <c:if test="${result eq 0}">
-<a href=>[좋아요 추가]</a>
+<a href='/swu/chargestudy/interest/add?no=${chargeStudy.no}'>[관심목록 추가]</a>
 </c:if>
 
 <c:if test="${result eq 1}">
-<a href=>[좋아요 삭제]</a>
+<a href='/swu/chargestudy/interest/delete?no=${chargeStudy.no}'>[관심목록 삭제]</a>
 </c:if>
 
 <a href='/swu/chargestudy/list'>[목록]</a><br>
