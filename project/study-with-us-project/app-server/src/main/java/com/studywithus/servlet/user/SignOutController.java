@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
-import com.studywithus.domain.Comment;
 import com.studywithus.domain.Member;
 
 public class SignOutController extends HttpServlet {
@@ -53,12 +52,15 @@ public class SignOutController extends HttpServlet {
         sqlSession.commit();
       }
 
-      catch (Exception e) {
-        sqlSession.rollback();
-        e.printStackTrace();
-        request.setAttribute("error", e);
+      request.setAttribute("no", Integer.parseInt(request.getParameter("no")));
+      //어디로 전달해야되냐
+      request.getRequestDispatcher("/user/signout").forward(request, response);
 
-      }
+    } catch (Exception e) {
+      sqlSession.rollback();
+      e.printStackTrace();
+      request.setAttribute("error", e);
     }
   }
+} 
 
