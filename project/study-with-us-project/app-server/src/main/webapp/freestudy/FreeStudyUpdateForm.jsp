@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +16,11 @@
 </head>
 
 <body>
-<h1>무료 스터디 상세보기</h1>
-<form action='detail'>
-    <label for='f-no'>번호</label> 
-    <input id='f-no' type='text' name='no' value='${freeStudy.no}' readonly><br>
+<h1>무료 스터디 수정</h1>
+<form action='update'>
     
     <label for='f-title'>제목</label>
-    <input id='f-title' type='text' name='title' value='${freeStudy.title}' readonly><br>
+    <input id='f-title' type='text' name='title' value='${freeStudy.title}' ><br>
     
     <!-- 팀장? 작성자? -->
     <label for='f-name'>팀장</label> 
@@ -31,7 +28,7 @@
     
     <!-- 설명? 내용? -->
     <label for='f-content'>설명</label> 
-    <input id='f-content' type='text' name='content' value='${freeStudy.content}' readonly><br>
+    <input id='f-content' type='text' name='content' value='${freeStudy.content}' ><br>
     
     <label for='f-status'>스터디 진행상태</label> 
     <input id='f-status' type='text' name='status' value='${freeStudy.studyStatus}' readonly><br>
@@ -40,13 +37,13 @@
     <input id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly><br>
     
     <label for='f-startDate'>시작일</label> 
-    <input id='f-startDate' type='date' name='startDate' value='${freeStudy.startDate}' readonly><br>
+    <input id='f-startDate' type='date' name='startDate' value='${freeStudy.startDate}' ><br>
      
     <label for='f-endDate'>종료일</label> 
-    <input id='f-endDate' type='date' name='endDate' value='${freeStudy.endDate}' readonly><br>
+    <input id='f-endDate' type='date' name='endDate' value='${freeStudy.endDate}' ><br>
 
     <label for='f-maxMembers'>모집인원</label> 
-    <input id='f-maxMembers' type='number' name='maxMembers' value='${freeStudy.maxMembers}' readonly><br>
+    <input id='f-maxMembers' type='number' name='maxMembers' value='${freeStudy.maxMembers}' ><br>
      
     <label for='f-maxMembers'>현재인원</label> 
     <input id='f-maxMembers' type='number' name='members' value='${freeStudy.members}' readonly><br>
@@ -60,34 +57,17 @@
     <label for='f-registeredDate'>등록일</label> 
     <span id='f-registeredDate'${freeStudy.registeredDate}></span><br>
     
-    
-<c:choose>
-<c:when test="${loginUser eq null}">
-<a href='/swu/freeStudy/list'>[목록]</a><br>
-</c:when>
-
-<c:when test="${checkWriter eq 1}">
-<a href='updateform?no=${freeStudy.no}'>[변경]</a> 
-<a href='delete?no=${freeStudy.no}'>[삭제]</a> 
-<a href='/swu/freeStudy/list'>[목록]</a><br>
-</c:when>
-
-<c:when test="${checkWriter eq 2}">
-<c:if test="${result eq 0}">
-<a href='/swu/freeStudy/likes/add?no=${freeStudy.no}'>[좋아요 추가]</a>
-</c:if>
-
-<c:if test="${result eq 1}">
-<a href='/swu/freeStudy/likes/delete?no=${freeStudy.no}'>[좋아요 삭제]</a>
-</c:if>
-
-<a href='/swu/freeStudy/list'>[목록]</a><br>
-</c:when>
-</c:choose>
+ <button>변경</button> <a href='/swu/freeStudy/detail?no=${freeStudy.no}'>[취소]</a> 
 </form>
 
 </body>
 </html>
+
+
+
+
+
+
 
 
 
