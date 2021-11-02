@@ -57,8 +57,6 @@
 </nav>
 </head>
 <body>
-
-
 <%
 Member loginUser = (Member) session.getAttribute("loginUser");
 if (loginUser == null) {
