@@ -46,7 +46,7 @@ public class SignOutController extends HttpServlet {
 
       Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 
-      if(loginUser.getNo() == no) {
+      if(loginUser.getNo() == member.getNo()) {
 
         memberDao.delete(no);
         sqlSession.commit();
@@ -60,6 +60,7 @@ public class SignOutController extends HttpServlet {
       sqlSession.rollback();
       e.printStackTrace();
       request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 } 
