@@ -69,19 +69,19 @@
 <c:when test="${checkWriter eq 1}">
 <a href='updateform?no=${freeStudy.no}'>[변경]</a> 
 <a href='delete?no=${freeStudy.no}'>[삭제]</a> 
-<a href='/swu/freeStudy/list'>[목록]</a><br>
+<a href='/swu/freestudy/list'>[목록]</a><br>
 </c:when>
 
 <c:when test="${checkWriter eq 2}">
 <c:if test="${result eq 0}">
-<a href='/swu/freeStudy/likes/add?no=${freeStudy.no}'>[좋아요 추가]</a>
+<a href='/swu/freestudy/likes/add?no=${freeStudy.no}'>[좋아요 추가]</a>
 </c:if>
 
 <c:if test="${result eq 1}">
-<a href='/swu/freeStudy/likes/delete?no=${freeStudy.no}'>[좋아요 삭제]</a>
+<a href='/swu/freestudy/likes/delete?no=${freeStudy.no}'>[좋아요 삭제]</a>
 </c:if>
 
-<a href='/swu/freeStudy/list'>[목록]</a><br>
+<a href='/swu/freestudy/list'>[목록]</a><br>
 </c:when>
 </c:choose>
 </form>
