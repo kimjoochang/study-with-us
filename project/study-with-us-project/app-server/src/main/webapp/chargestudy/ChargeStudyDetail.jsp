@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 
 <body>
 <h1>유료 스터디 상세보기</h1>
-	<form action='update'>
+	<form action='updateform'>
 	<label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${chargeStudy.no}' readonly><br>
     
@@ -47,9 +48,30 @@
     
     <label for='f-registeredDate'>등록일</label> 
     <span id='f-registeredDate'>${chargeStudy.registeredDate }</span><br>
-	
-	<button>변경</button>
-	 <a href='delete?no=${chargeStudy.no}'>[삭제]</a> <a href='list'>[목록]</a><br>
+    
+    <c:choose>
+<c:when test="${loginUser eq null}">
+<a href='/swu/chargerstudy/list'>[목록]</a><br>
+</c:when>
+
+<c:when test="${checkWriter eq 1}">
+<a href='updateform?no=${chargeStudy.no}'>[수정]</a> 
+<a href='delete?no=${community.no}'>[삭제]</a> 
+<a href='/swu/chargestudy/list'>[목록]</a><br>
+</c:when>
+
+<c:when test="${checkWriter eq 2}">
+<c:if test="${result eq 0}">
+<a href='/swu/chargestudy/interest/add?no=${chargeStudy.no}'>[관심목록 추가]</a>
+</c:if>
+
+<c:if test="${result eq 1}">
+<a href='/swu/chargestudy/interest/delete?no=${chargeStudy.no}'>[관심목록 삭제]</a>
+</c:if>
+
+<a href='/swu/chargestudy/list'>[목록]</a><br>
+</c:when>
+</c:choose>
 	</form>
 
 </body>

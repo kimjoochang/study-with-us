@@ -9,7 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>커뮤니티 조회</title>
+<script language="javascript">
+function addCommunity() {window.open("form?categoryNo=${categoryNo}","width=300","height=300");}
+</script>
 </head>
+
 
 <body>
 <c:choose>
@@ -38,7 +42,7 @@
   </c:when>
 </c:choose>
 
-<a href='form?categoryNo=${categoryNo}'>글쓰기</a><br>
+<input type="button" value="글쓰기" onclick="addCommunity();"/>
 <br>
 <table border='1'>
 <thead>

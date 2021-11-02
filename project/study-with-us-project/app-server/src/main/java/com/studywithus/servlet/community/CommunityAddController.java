@@ -51,6 +51,7 @@ public class CommunityAddController extends HttpServlet {
       request.getRequestDispatcher("list").forward(request, response);
 
     } catch (Exception e) {
+      System.out.println(e.getMessage());
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

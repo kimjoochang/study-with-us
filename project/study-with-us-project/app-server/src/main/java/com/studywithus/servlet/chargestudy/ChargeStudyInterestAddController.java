@@ -8,18 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
-import com.studywithus.domain.Study;
+import com.studywithus.domain.Member;
 
-@WebServlet("/chargestudy/updateform")
-public class ChargeStudyUpdateFormController extends HttpServlet {
+@WebServlet("/chargestudy/interest/add")
+public class ChargeStudyInterestAddController extends HttpServlet {
+
   private static final long serialVersionUID = 1L;
 
   StudyDao chargeStudyDao;
+  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext servletContext = config.getServletContext();
+    sqlSession = (SqlSession) servletContext.getAttribute("sqlSession");
     chargeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
   }
 
@@ -28,15 +32,27 @@ public class ChargeStudyUpdateFormController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+      int chargStudyNo = Integer.parseInt(request.getParameter("no"));
 
-      Study chargeStudy = chargeStudyDao.findByNo(Integer.parseInt(request.getParameter("no")));
+      Member member = (Member) request.getSession().getAttribute("loginUser");
 
-      request.setAttribute("chargeStudy", chargeStudy);
+      if (member == null) {
+        response.sendRedirect("list");
+      }
 
-      request.getRequestDispatcher("/chargestudy/ChargeStudyUpdateForm.jsp").forward(request, response);
-    }catch (Exception e) {
+      chargeStudyDao.insertInterest(member.getNo(), chargStudyNo);
+
+      sqlSession.commit();
+
+      request.setAttribute("no", chargStudyNo);
+      request.getRequestDispatcher("/chargestudy/detail").forward(request, response);
+
+    } catch (Exception e) {
+      sqlSession.rollback();
+      System.out.println(e.getMessage());
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
+
   }
 }

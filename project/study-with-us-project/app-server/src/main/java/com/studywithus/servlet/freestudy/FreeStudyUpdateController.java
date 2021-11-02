@@ -33,30 +33,36 @@ public class FreeStudyUpdateController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		int no = Integer.parseInt(request.getParameter("no"));
 
 		try {
-			int no = Integer.parseInt(request.getParameter("no"));
-
 			Study freeStudy = freeStudyDao.findByNo(no);
 
 			if (freeStudy == null) {
 				throw new Exception("해당 번호의 무료 스터디가 없습니다.");
 			} 
 
-			freeStudy.setOnOffLine(Integer.parseInt(request.getParameter("onOffLine")));
-			freeStudy.setArea(request.getParameter("area"));
+			//			freeStudy.setOnOffLine(Integer.parseInt(request.getParameter("onOffLine")));
+			//			freeStudy.setArea(request.getParameter("area"));
 			freeStudy.setTitle(request.getParameter("title"));
 			freeStudy.setContent(request.getParameter("content"));
 			freeStudy.setMaxMembers(Integer.parseInt(request.getParameter("maxMembers")));
 			freeStudy.setStartDate(Date.valueOf(request.getParameter("startDate")));
 			freeStudy.setEndDate(Date.valueOf(request.getParameter("endDate")));
 
+			freeStudy.setWriter(freeStudy.getWriter());
+			freeStudy.setOnOffLine(freeStudy.getOnOffLine());
+			freeStudy.setArea(freeStudy.getArea());
+			freeStudy.setRegisteredDate(freeStudy.getRegisteredDate());
+
 			freeStudyDao.update(freeStudy);
+
 			sqlSession.commit();
 
-			response.sendRedirect("list");
+			request.getRequestDispatcher("detail").forward(request, response);
 
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			request.setAttribute("error", e);
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}

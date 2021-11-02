@@ -196,6 +196,12 @@
     where study_no=#{no}
   </update>
   
+  <select id="checkLikesByMember" resultType="int">
+    select count(*) from interest
+    where
+    member_no=#{memberNo} and study_no=#{studyNo}
+  </select>
+  
   <select id="findMyInterest" resultType="int">
   select
     count(*)

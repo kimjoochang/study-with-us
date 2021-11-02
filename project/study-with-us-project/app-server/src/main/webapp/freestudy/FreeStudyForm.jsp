@@ -7,19 +7,31 @@
 <head>
   <div style='text-align: center;'>
   <title>무료 스터디</title>
-
+  
   <style>
-  label {
-    margin-right: 5px;
-    text-align: right;
-    display: inline-block;
-    width: 60px;
+    div {
+      background-image: url(STUDYWITHUS\ LOGO.jpg);
+      float: left;
+      background-repeat: no-repeat;
+    }
+  
+  #d1{
+    background-size: 65px;
   }
+    label {
+      margin-right: 5px;
+      text-align: right;
+      display: inline-block;
+      width: 60px;
+
+    }
+
     </style>
   </div>
 </head>
 
 <body>
+  <div id="d1">
 <h1>무료 스터디 등록</h1>
 <form action='add'>
   &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
