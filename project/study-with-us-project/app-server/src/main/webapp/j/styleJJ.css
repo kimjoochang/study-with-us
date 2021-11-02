@@ -28,8 +28,13 @@
     }
     .nav{
         display:flex;
+        text-align: right;
     }
 
     .nav > li {
         margin-left:84px;
     }
+
+    .selector-for-some-widget {
+        box-sizing: content-box;
+      }
