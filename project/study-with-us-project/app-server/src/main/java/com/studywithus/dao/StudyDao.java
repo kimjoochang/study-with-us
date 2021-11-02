@@ -14,7 +14,7 @@ public interface StudyDao {
   void delete(int no) throws Exception;
 
   // 나의 관심목록 스터디
-  List<Study> findAllInterest(int no) throws Exception;
+  List<Study> findAllInterest(@Param("memberNo") int memberNo, @Param("low") int low, @Param("high") int high) throws Exception;
   int findMyInterest(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
 
   // 관심목록 추가

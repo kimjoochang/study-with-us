@@ -7,6 +7,9 @@
 <title>STUDY WITH US</title>
 </head>
 <body>
-마이페이지
+<ul>
+<li> <a href="/swu/chargestudy/interest"></a>나의 유료스터디 관심목록
+
+</ul>
 </body>
 </html>
