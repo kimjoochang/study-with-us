@@ -18,6 +18,8 @@
 <body>
 <h1>무료 스터디 수정</h1>
 <form action='update'>
+    <label for='f-no'>번호</label> 
+    <input id='f-no' type='text' name='no' value='${freeStudy.no}' readonly><br>
     
     <label for='f-title'>제목</label>
     <input id='f-title' type='text' name='title' value='${freeStudy.title}' ><br>
