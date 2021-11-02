@@ -18,11 +18,6 @@ public class FindEmailController extends HttpServlet {
   SqlSession sqlSession;
   MemberDao memberDao;
 
-  // static Member loginUser;
-  // public static Member getLoginUser() {
-  //   return loginUser;
-  // }
-
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext servletContext = config.getServletContext();
@@ -36,20 +31,36 @@ public class FindEmailController extends HttpServlet {
 
     String name = request.getParameter("name");
     String phoneNumber = request.getParameter("phoneNumber");
-    //    Member loginUser = AuthLogInHandler.getLoginUser();
+    //  String email = null;
 
     try {
-      Member member = memberDao.findMemberByNamePhoneNumber(name,phoneNumber);
-      String email = request.getParameter("email");
+      Member member =  memberDao.findMemberByNamePhoneNumber(name, phoneNumber);
 
-      //      if (member != null) {
-      //        HttpSession session = request.getSession();
-      //        session.setAttribute("member", member);
-      //      }
+      if (member != null) {
 
-      response.sendRedirect("/swu/findemail");
+        String email = member.getEmail();
+
+        int index = email.length()-3; // 
+        String tempEmail = email.substring(0,3); //0~3번 문자까지 보여주고
+
+        for(int i=0; i<index; i++) {
+          tempEmail+="*";} // 나머지 *처리
+
+        email = tempEmail; // 별표처리된 이메일 대입
+        //request.setAttribute("email", email);
+        request.setAttribute("email", member.getEmail());
+        request.getRequestDispatcher("ShowEmail.jsp").forward(request, response);
+
+        sqlSession.commit();
+
+        // 얘를 뷰에 넣어야하는건가?....
+        // System.out.println(name + " 회원님의 아이디는 " + member.getEmail() + " 입니다.\n");
+
+      }
+      response.sendRedirect("/swu");
 
     } catch (Exception e) {
+      sqlSession.rollback();
       e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("Error.jsp").forward(request, response);

@@ -50,7 +50,7 @@ public class AppInitListener implements ServletContextListener {
       servletContext.setAttribute("communityDao", communityDao);
       servletContext.setAttribute("commentDao", commentDao);
       servletContext.setAttribute("studyDao", studyDao);
-      servletContext.setAttribute("sqlSession", sqlSession); // dao마다 하나씩 해줘야되나
+      servletContext.setAttribute("sqlSession", sqlSession); 
       /*
       // 상동
       servletContext.setAttribute("memberDao", commentDao);
