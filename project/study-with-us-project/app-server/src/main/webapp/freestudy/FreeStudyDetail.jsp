@@ -63,7 +63,7 @@
     
 <c:choose>
 <c:when test="${loginUser eq null}">
-<a href='/swu/freeStudy/list'>[목록]</a><br>
+<a href='/swu/freestudy/list'>[목록]</a><br>
 </c:when>
 
 <c:when test="${checkWriter eq 1}">

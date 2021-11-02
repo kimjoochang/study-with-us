@@ -29,7 +29,7 @@ if (loginUser == null) {
 <li><a href='community/list?categoryNo=0'>커뮤니티</a><br>
 <li><a href='freestudy/list'>무료 스터디</a><br>
 <li><a href='chargestudy/list'>유료 스터디</a><br>
-<li><a href='logout'>[로그아웃]</a><br>
+<li><a href='user/logout'>로그아웃</a><br>
 </ul>
 </body>
 </html>

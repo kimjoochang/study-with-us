@@ -40,13 +40,16 @@ public class ChargeStudyUpdateController extends HttpServlet {
         throw new Exception("해당 번호의 회원이 없습니다.");
       } 
 
-      chargeStudy.setArea(request.getParameter("area"));
       chargeStudy.setTitle(request.getParameter("title"));
+      chargeStudy.setArea(chargeStudy.getArea());
       chargeStudy.setContent(request.getParameter("content"));
+      chargeStudy.setWriter(chargeStudy.getWriter());
       chargeStudy.setMaxMembers(Integer.parseInt(request.getParameter("maxMembers")));
-      chargeStudy.setPrice(Integer.parseInt(request.getParameter("price")));
+      chargeStudy.setPrice(chargeStudy.getPrice());
       chargeStudy.setStartDate(Date.valueOf(request.getParameter("startDate")));
       chargeStudy.setEndDate(Date.valueOf(request.getParameter("endDate")));
+      chargeStudy.setRegisteredDate(chargeStudy.getRegisteredDate());
+
 
       chargeStudyDao.update(chargeStudy);
       sqlSession.commit();

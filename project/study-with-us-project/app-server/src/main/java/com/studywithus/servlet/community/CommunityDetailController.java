@@ -38,6 +38,7 @@ public class CommunityDetailController extends HttpServlet {
 
     try {
       int communityNo;
+      int result;
 
       // 요청이 detail.jsp에서 왔다면
       if (request.getAttribute("no") == null) {
@@ -51,8 +52,12 @@ public class CommunityDetailController extends HttpServlet {
 
       Member member = (Member) request.getSession().getAttribute("loginUser");
 
-      // 좋아요 여부
-      int result =  communityDao.checkLikesByMember(member.getNo(), communityNo);
+      if (member == null) {
+        result = 0;
+      } else {
+        // 좋아요 여부
+        result =  communityDao.checkLikesByMember(member.getNo(), communityNo);
+      }
 
       Community community = communityDao.findByNo(communityNo);
       List<Comment> comments= commentDao.findAll(communityNo);

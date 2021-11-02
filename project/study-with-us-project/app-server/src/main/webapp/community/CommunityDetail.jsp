@@ -54,7 +54,7 @@
 </c:when>
 
 <c:when test="${checkWriter eq 1}">
-<a href='updateform?no=${community.no}'>[변경]</a> 
+<a href='updateform?no=${community.no}'>[수정]</a> 
 <a href='delete?no=${community.no}'>[삭제]</a> 
 <a href='/swu/community/list?categoryNo=${community.category}'>[목록]</a><br>
 </c:when>

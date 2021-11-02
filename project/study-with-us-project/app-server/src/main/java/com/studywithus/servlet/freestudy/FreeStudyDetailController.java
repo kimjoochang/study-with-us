@@ -33,7 +33,7 @@ public class FreeStudyDetailController extends HttpServlet {
 
     try {
       int freeStudyNo;
-
+      int result;
       // 요청이 detail.jsp에서 왔다면
       if (request.getAttribute("no") == null) {
         freeStudyNo = Integer.parseInt(request.getParameter("no"));
@@ -46,10 +46,13 @@ public class FreeStudyDetailController extends HttpServlet {
 
       Member member = (Member) request.getSession().getAttribute("loginUser");
 
-      // 좋아요 여부
-      int result =  freeStudyDao.checkLikesByMember(member.getNo(), freeStudyNo);
+      if (member == null) {
+        result = 0;
+      } else {
+        // 좋아요 여부
+        result =  freeStudyDao.checkLikesByMember(member.getNo(), freeStudyNo);
+      }
 
-      //			int no = Integer.parseInt(request.getParameter("no"));
       Study freeStudy = freeStudyDao.findByNo(freeStudyNo);
 
       //	jsp에서 무료 스터디 작성자랑 로그인한 사람이 같은지 다른지에 따라 메뉴 다르게 출력하기 위해

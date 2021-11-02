@@ -8,17 +8,63 @@
 </head>
 
 <style>
-#menu_bar{
-  float:left;
+body {
+    margin: 0 auto;
+    width:1000px;
 }
 
+#header{
+    margin-top: 50px;
+    display: flex;
+    height: 50px;
+}
+
+#logo{
+    margin-left: 50px;
+    width: 60%;
+}
+
+#category_menu{
+    display: flex;
+    height: 15%;
+}
+
+#menu {
+    width:10%;
+}
 
 ul{
-  list-style:none;
+    list-style:none;
+}
+
+li{
+    height: 30px;
+}
+
+a{  
+    text-align: center;
+    height:20px;
+    width: 50px;
+    border : solid 2px green;
+    border-radius: 20%;
+    margin-top: 2%;
+    margin-right: 20px;
+    text-decoration: none;
 }
 
 #main{
-  width:100%;
+    display: flex;
+
+}
+
+#input_form{
+    padding-top: 5%;
+    margin: 0 auto;
+}
+
+#button{
+    float:right;
+    margin-right: 10px;
 }
 </style>
 <c:choose>
@@ -34,7 +80,6 @@ ul{
 <c:set var="type" value="스몰톡"/>
 </c:when>
 </c:choose>
-카테고리 : ${type}<br>
 
 <div id="main">
     <div id="input_form">
@@ -45,15 +90,15 @@ ul{
             <a href='form?categoryNo=2'>스몰톡</a>
         </div>
         
-        <form action='add'>
+        <form action='add' target="CommunityList.jsp">
             카테고리 : ${type}<br>
             <input type='hidden' name='categoryNo' value='${categoryNo}'><br>
             제목 <br><input type='text' name='title' size=48 maxlength=30><br><br>
             내용<br> 
             <textarea name="content" id="textarea" cols="50" rows="10"></textarea><br><br><br>
+        <input id=button type="submit" onclick="window.close()" value="등록">
+        <input id=button type="button" onclick="window.close()" value="취소">
         </form>
-        <input id=button type="button" onclick="location.href='add'" value="등록">
-        <input id=button type="button" onclick="location.href='list?no=0'" value="취소">
     </div>
 </div>
 </body>

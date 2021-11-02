@@ -42,8 +42,7 @@ function addCommunity() {window.open("form?categoryNo=${categoryNo}","width=400"
   </c:when>
 </c:choose>
 
-<input type="button" value="글쓰기" onclick="addCommunity(${categoryNo});"/>
-<a href='form?categoryNo=${categoryNo}'>글쓰기</a><br>
+<input type="button" value="글쓰기" onclick="addCommunity();"/>
 <br>
 <table border='1'>
 <thead>
