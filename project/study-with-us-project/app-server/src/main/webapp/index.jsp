@@ -26,6 +26,7 @@ if (loginUser == null) {
 <br><h2>나의 정보</h2>
 <%=loginUser.getName()%> 님 환영합니다!
 <ul>
+<li><a href='mypage'>마이페이지</a><br>
 <li><a href='community/list?categoryNo=0'>커뮤니티</a><br>
 <li><a href='freestudy/list'>무료 스터디</a><br>
 <li><a href='chargestudy/list'>유료 스터디</a><br>
