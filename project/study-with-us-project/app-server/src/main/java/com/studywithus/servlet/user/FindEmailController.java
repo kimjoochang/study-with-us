@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
@@ -41,11 +40,13 @@ public class FindEmailController extends HttpServlet {
 
     try {
       Member member = memberDao.findMemberByNamePhoneNumber(name,phoneNumber);
+      String email = request.getParameter("email");
 
-      if (member != null) {
-        HttpSession session = request.getSession();
-        session.setAttribute("loginUser", member);
-      }
+      //      if (member != null) {
+      //        HttpSession session = request.getSession();
+      //        session.setAttribute("member", member);
+      //      }
+
       response.sendRedirect("/swu/findemail");
 
     } catch (Exception e) {
