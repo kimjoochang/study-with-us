@@ -60,7 +60,7 @@
     <span id='f-registeredDate' ${freeStudy.registeredDate}></span><br>
     
 <button>수정</button>
- <a href='delete.jsp?no=${freeStudy.no}'>[삭제]</a> <a href='list.jsp'>[목록]</a><br>
+ <a href='delete.jsp?no=${freeStudy.no}'>[삭제]</a> <a href='list'>[목록]</a><br>
 </form>
 
 </body>
