@@ -13,9 +13,9 @@ import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
-@WebServlet("/chargestudy/deleterequest")
+@WebServlet("/chargestudy/deletecancel")
 
-public class ChargeStudyDeleteRequestController  extends HttpServlet {
+public class ChargeStudyDeleteCancelController  extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao chargeStudyDao;
@@ -49,7 +49,7 @@ public class ChargeStudyDeleteRequestController  extends HttpServlet {
         throw new Exception("해당 번호의 유료 스터디가 존재하지 않습니다.");
       }
 
-      chargeStudy.setDeleteStatus(1);
+      chargeStudy.setDeleteStatus(0);
 
       chargeStudyDao.update(chargeStudy);
       sqlSession.commit();

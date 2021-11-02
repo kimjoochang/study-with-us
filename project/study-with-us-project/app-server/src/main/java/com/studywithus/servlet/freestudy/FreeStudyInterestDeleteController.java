@@ -1,4 +1,4 @@
-package com.studywithus.servlet.chargestudy;
+package com.studywithus.servlet.freestudy;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -11,54 +11,38 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Member;
-import com.studywithus.domain.Study;
 
-@WebServlet("/chargestudy/deleterequest")
-
-public class ChargeStudyDeleteRequestController  extends HttpServlet {
+@WebServlet("/freestudy/interest/delete")
+public class FreeStudyInterestDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  StudyDao chargeStudyDao;
+  StudyDao freeStudyDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext servletContext = config.getServletContext();
+    freeStudyDao = (StudyDao) servletContext.getAttribute("freeStudyDao");
     sqlSession = (SqlSession) servletContext.getAttribute("sqlSession");
-    chargeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
   }
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    Member member = (Member) request.getSession().getAttribute("loginUser");
+    int freeStudyNo = Integer.parseInt(request.getParameter("no"));
+
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      Study chargeStudy = chargeStudyDao.findByNo(no);
-
-      Member member = (Member) request.getSession().getAttribute("loginUser");
-
-      if (member == null) {
-        response.sendRedirect("list");
-
-      } else if (member.getNo() != chargeStudy.getWriter().getNo()) {
-        throw new Exception("삭제권한이 없습니다.");
-      }
-
-      if (chargeStudy == null) {
-        throw new Exception("해당 번호의 유료 스터디가 존재하지 않습니다.");
-      }
-
-      chargeStudy.setDeleteStatus(1);
-
-      chargeStudyDao.update(chargeStudy);
+      freeStudyDao.deleteInterest(member.getNo(), freeStudyNo);
       sqlSession.commit();
 
-      response.sendRedirect("list");
+      request.setAttribute("no", freeStudyNo);
+      request.getRequestDispatcher("/freestudy/detail").forward(request, response);
+
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      sqlSession.rollback();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

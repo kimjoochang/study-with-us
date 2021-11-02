@@ -150,7 +150,8 @@
    where study_no=#{no}  
   </update>
   
-  <select id="findAllInterest" resultMap="StudyMap" parameterType="int">
+  <select id="findAllInterest" resultMap="StudyMap">
+  <![CDATA[
   select 
       st.study_no,
       st.title,
@@ -187,7 +188,11 @@
      inner join member m on m.member_no=st.member_no
     where 
        i.member_no=#{memberNo}
-    <include refid="order1"/> 
+       and
+       price >=#{low} and price<=#{high}
+      order by 
+      st.study_no asc
+       ]]>
   </select>
   
   <update id="updateCount" parameterType="int">

@@ -7,10 +7,59 @@
 <html>
 <head>
   <title>무료 스터디</title>
+<style>
+  
+  
+  
+  #input1 {
+    width: 80px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: rgb(139, 48, 230);
+    color: rgb(228, 228, 228);
+    xborder: 5px solid rgb(129, 26, 231);
+    box-shadow: 3px 3px 0px 0px rgb(19, 17, 17);
+    margin: 5px;
+  }
+
+  
+body {
+  border: solid 3px rgb(139, 48, 230);
+  padding: 10px;
+  line-height: 20px
+}
+
+xdiv {
+  border: solid 4px rebeccapurple;
+  margin: 20px;
+  color: white;
+  width: 350px;
+  display: inline-block;
+}
+
+
+
+
+</style>
+
+
+
+
 </head>
 <body>
-  <h1>무료 스터디 등록</h1>
-  <a href='form'>무료 스터디</a>
+  <h1>무료 스터디 조회</h1>
+  <p>
+  <div id="status">스터디 진행상태</div>
+
+  <input id="input1" type="submit" value="모집중">
+  <input id="input1" type="submit" value="진행중">
+  <input id="input1" type="submit" value="진행완료">
+  
+  <hr size="2" noshade color="gray">
+
+</p>
+
+  <a href='form'>무료 스터디 작성</a>
   <br>
   <table border='1'>
     <thead>
@@ -24,7 +73,6 @@
         <!-- 오프라인일 경우만 -->
         <th>지역</th> 
         <th>모집인원</th>
-        <th>스터디 진행상태</th>
         <th>등록일</th>
         <th>조회수</th>
         <th>좋아요수</th>

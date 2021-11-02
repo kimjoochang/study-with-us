@@ -13,15 +13,14 @@ public interface StudyDao {
   void updateCount(int no) throws Exception;
   void delete(int no) throws Exception;
 
-  // 11.02 하선영
-  // findAllInterest 이거 필요한건가? CmntDao 에는 없어서 질문!
-  List<Study> findAllInterest(int no) throws Exception;
+  // 나의 관심목록 스터디
+  List<Study> findAllInterest(@Param("memberNo") int memberNo, @Param("low") int low, @Param("high") int high) throws Exception;
   int findMyInterest(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
+
+  // 관심목록 추가
   void insertInterest(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
   void deleteInterest(@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
 
-  void insertLike (@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
-  void deleteLike (@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
   int checkLikesByMember (@Param("memberNo") int memberNo, @Param("studyNo") int studyNo) throws Exception;
 
 

@@ -26,10 +26,10 @@
     <input id='f-content' type='text' name='content' value='${chargeStudy.content}' readonly><br>
     
     <label for='f-maxMembers'>모집인원</label> 
-    <input id='f-maxMembers' type='text' name='maxMembers' value='${chargeStudy.maxMembers}' readonly><br>
+    <input id='f-maxMembers' type='number' name='maxMembers' value='${chargeStudy.maxMembers}' readonly><br>
      
     <label for='f-members'>현재인원</label> 
-    <input id='f-members' type='text' name='members' value='${chargeStudy.members}' readonly><br>
+    <input id='f-members' type='number' name='members' value='${chargeStudy.members}' readonly><br>
     
     <label for='f-price'>금액</label> 
     <input id='f-price' type='text' name='price' value='${chargeStudy.price}' readonly><br>
@@ -56,7 +56,12 @@
 
 <c:when test="${checkWriter eq 1}">
 <a href='updateform?no=${chargeStudy.no}'>[수정]</a> 
-<a href='delete?no=${community.no}'>[삭제]</a> 
+<c:if test="${chargeStudy.deleteStatus eq 0}">
+<a href='deleterequest?no=${chargeStudy.no}'>[삭제요청]</a> 
+</c:if>
+<c:if test="${chargeStudy.deleteStatus eq 1}">
+<a href='deletecancel?no=${chargeStudy.no}'>[삭제요청 취소]</a> 
+</c:if>
 <a href='/swu/chargestudy/list'>[목록]</a><br>
 </c:when>
 

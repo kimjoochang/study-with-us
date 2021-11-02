@@ -17,7 +17,7 @@ public class Study extends Content {
   private Date startDate; // 스터디 시작일
   private Date endDate; // 스터디 종료일
   private int studyStatus; // 모집중 = 0, 진행중 = 1, 진행완료 = 2
-  private int likes;
+  private int likes; // 스터디 관심목록
   // 기본값 = 0, 
   // 삭제요청(유료) = 1 
   // 삭제(무료)/삭제요청 승인(가격이 0 이상) = 2
