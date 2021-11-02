@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
@@ -19,6 +20,7 @@ public class ChargeStudyAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao chargeStudyDao;
+  StudyMemberDao studyMemberDao;
   SqlSession sqlSession;
 
   @Override
@@ -26,6 +28,7 @@ public class ChargeStudyAddController extends HttpServlet {
     ServletContext servletContext = config.getServletContext();
     sqlSession = (SqlSession) servletContext.getAttribute("sqlSession");
     chargeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
+    studyMemberDao = (StudyMemberDao) servletContext.getAttribute("studyMemberDao");
   }
 
   @Override
@@ -46,12 +49,14 @@ public class ChargeStudyAddController extends HttpServlet {
 
     try {
       chargeStudyDao.insert(chargeStudy);
+      studyMemberDao.insert(writer.getNo(), chargeStudy.getNo(), Study.OWNER_STATUS);
       sqlSession.commit();
 
       response.sendRedirect("list");
 
     } catch (Exception e) {
       sqlSession.rollback();
+      System.out.println(e.getMessage());
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

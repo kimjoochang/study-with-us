@@ -37,7 +37,7 @@ public class ChargeStudyInterestAddController extends HttpServlet {
       Member member = (Member) request.getSession().getAttribute("loginUser");
 
       if (member == null) {
-        response.sendRedirect("list");
+        response.sendRedirect("/swu/user/loginform");
       }
 
       chargeStudyDao.insertInterest(member.getNo(), chargStudyNo);

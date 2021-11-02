@@ -123,7 +123,8 @@
        st.study_no=#{no}
   </select>
   
-  <insert id="insert" parameterType="study">
+  <insert id="insert" parameterType="study"
+  useGeneratedKeys="true" keyColumn="study_no" keyProperty="no">
    insert into 
      study(title,content,area,max_member,start_date,end_date,price,member_no)
     values(#{title},#{content},#{area},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 

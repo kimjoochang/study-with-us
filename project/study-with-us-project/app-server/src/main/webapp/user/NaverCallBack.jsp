@@ -6,12 +6,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>네이버로그인</title>
+    <title>네이버 로그인</title>
   </head>
   <body>
   <%
-    String clientId = "bRLBJz2apGu012YSfN9x";//애플리케이션 클라이언트 아이디값";
-    String clientSecret = "qcgVQQIfmA";//애플리케이션 클라이언트 시크릿값";
+    String clientId = "bRLBJz2apGu012YSfN9x";
+    String clientSecret = "qcgVQQIfmA";
     String code = request.getParameter("code");
     String state = request.getParameter("state");
     String redirectURI = URLEncoder.encode("YOUR_CALLBACK_URL", "UTF-8");

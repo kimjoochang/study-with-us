@@ -39,7 +39,7 @@ public class ChargeStudyDeleteCancelController  extends HttpServlet {
       Member member = (Member) request.getSession().getAttribute("loginUser");
 
       if (member == null) {
-        response.sendRedirect("list");
+        response.sendRedirect("/swu/user/loginform");
 
       } else if (member.getNo() != chargeStudy.getWriter().getNo()) {
         throw new Exception("삭제권한이 없습니다.");

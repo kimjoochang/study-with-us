@@ -56,7 +56,7 @@
 <input type="reset" value="초기화">
 <!--<input type="submit" value="등록">-->
 <button>등록</button>
-<button>취소</button><br>
+<button type="button" onclick="location.href='list'">취소</button><br>
 </div>
 </form>
 </body>

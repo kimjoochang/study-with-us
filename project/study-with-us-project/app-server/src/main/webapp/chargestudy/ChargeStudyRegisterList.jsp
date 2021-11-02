@@ -8,7 +8,7 @@
 <title>유료 스터디</title>
 </head>
 <body>
-	<h1>유료 스터디 관심목록</h1>
+	<h1>내가 개설한 유료 스터디 목록</h1>
 	<br>
 	<table border='1'>
 		<thead>

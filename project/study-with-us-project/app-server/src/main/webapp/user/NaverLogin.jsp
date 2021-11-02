@@ -4,11 +4,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>네이버로그인</title>
+    <title>네이버 로그인</title>
   </head>
   <body>
   <%
-    String clientId = "bRLBJz2apGu012YSfN9x";//애플리케이션 클라이언트 아이디값";
+    String clientId = "bRLBJz2apGu012YSfN9x";
     String redirectURI = URLEncoder.encode("qcgVQQIfmA", "UTF-8");
     SecureRandom random = new SecureRandom();
     String state = new BigInteger(130, random).toString();
