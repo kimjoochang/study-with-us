@@ -70,7 +70,7 @@ a{
 
 <div id="main">
     <div id="input_form">      
-        <form action='apply' target="../index.jsp">
+        <form action='add' target="../index.jsp">
             주제<br> 
         <textarea name="subject" id="textarea" cols="50" rows="10" placeholder="개설할 스터디 주제를 입력해주세요."></textarea><br><br><br>
             자기소개<br> 

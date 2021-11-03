@@ -9,5 +9,5 @@ public interface MentorApplicationDao {
   List<MentorApplication> findAll() throws Exception;
   MentorApplication findByNo(int no) throws Exception;
   void update(MentorApplication mentorApplication) throws Exception;
-  //void delete(String mentorApplicantEmail) throws Exception;
+  void delete(int memberNo) throws Exception;
 }

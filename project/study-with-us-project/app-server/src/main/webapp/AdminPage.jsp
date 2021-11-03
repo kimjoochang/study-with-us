@@ -10,7 +10,7 @@
 <body>
 <ul>
 <li> <a href='/swu/chargestudy/deleterequestlist'>스터디 관리</a><br>
-<li> <a href='/swu/mentor/applicationList'>멘토 승인 관리</a><br>
+<li> <a href='/swu/mentorapplication/list'>멘토 승인 관리</a><br>
 </ul>
 </body>
 </html>

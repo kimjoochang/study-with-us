@@ -14,7 +14,7 @@ import com.studywithus.domain.Member;
 import com.studywithus.domain.MentorApplication;
 import com.studywithus.menu.Menu;
 
-@WebServlet("/mentor/apply")
+@WebServlet("/mentorapplication/add")
 public class MentorApplicationAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -48,8 +48,7 @@ public class MentorApplicationAddController extends HttpServlet {
 
       // 신청서가 이미 있으면서 아직 승인/거절 결정이 안났다면 (visible이 true라면)
       if (mentorApplicantEmail != null && mentorApplicantEmail.getStatus() == 0) {
-        System.out.println("이미 멘토 신청이 완료되었습니다.");
-        return;
+        response.sendRedirect("/swu");
       }
 
       MentorApplication mentorApplication = new MentorApplication();
@@ -60,6 +59,8 @@ public class MentorApplicationAddController extends HttpServlet {
 
       mentorApplicationDao.insert(mentorApplication);
       sqlSession.commit();
+
+      request.getRequestDispatcher("/swu/index").forward(request, response);
 
     } catch (Exception e) {
       System.out.println(e.getMessage());

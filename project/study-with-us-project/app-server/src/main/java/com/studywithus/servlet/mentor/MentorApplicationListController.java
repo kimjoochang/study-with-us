@@ -43,7 +43,7 @@ public class MentorApplicationListController extends HttpServlet {
 
       request.setAttribute("mentorApplicantList", mentorApplicantList);
 
-      request.getRequestDispatcher("MentorApplicationList.jsp").forward(request, response);
+      request.getRequestDispatcher("/mentor/MentorApplicationList.jsp").forward(request, response);
 
 
     } catch (Exception e) {

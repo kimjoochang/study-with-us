@@ -12,10 +12,10 @@ import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.domain.Member;
-import com.studywithus.menu.Menu;
+import com.studywithus.domain.MentorApplication;
 
-@WebServlet("/mentorapplication/approve")
-public class MentorApproveController extends HttpServlet {
+@WebServlet("/mentorapplication/reject")
+public class MentorRejectController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MentorApplicationDao mentorApplicationDao;
@@ -43,16 +43,10 @@ public class MentorApproveController extends HttpServlet {
     int applicantNo = Integer.parseInt(request.getParameter("no"));
 
     try {
-      Member applicant = memberDao.findByNo(applicantNo);
-
-      int temp = applicant.getUserAccessLevel();
-      temp |= Menu.ACCESS_MENTOR;
-      applicant.setUserAccessLevel(temp);
-
-      memberDao.update(applicant);
-      mentorApplicationDao.delete(applicantNo);
+      MentorApplication mentorApplication = mentorApplicationDao.findByNo(applicantNo);
+      mentorApplication.setRemarks(request.getParameter("remarks"));
       sqlSession.commit();
-      request.getRequestDispatcher("/mentor/MentorApplicationList.jsp").forward(request, response);
+      request.getRequestDispatcher("MentorApplicationDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       System.out.println(e.getMessage());

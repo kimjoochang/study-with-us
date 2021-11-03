@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/mentor/form")
+@WebServlet("/mentorapplication/form")
 public class MentorApplicationFormController extends HttpServlet{
 
   private static final long serialVersionUID = 1L;
@@ -22,7 +22,7 @@ public class MentorApplicationFormController extends HttpServlet{
       response.sendRedirect("/swu/user/loginform");
 
     } else {
-      request.getRequestDispatcher("MentorApplicationForm.jsp").forward(request, response);
+      request.getRequestDispatcher("/mentor/MentorApplicationForm.jsp").forward(request, response);
     }
   }
 }
