@@ -17,6 +17,7 @@
 <li><a href='user/joinform'>회원가입</a><br>
 <li><a href='user/findemail'>아이디 찾기</a><br>
 <li><a href='user/loginform'>로그인</a><br>
+<li><a href='auth/naver'>네이버 로그인</a><br>
 <li><a href='community/list?categoryNo=0'>커뮤니티</a><br>
 <li><a href='freestudy/list'>무료 스터디</a><br>
 <li><a href='chargestudy/list'>유료 스터디</a><br>
