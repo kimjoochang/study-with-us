@@ -28,9 +28,9 @@
 <br><h2>나의 정보</h2>
 <c:out value="${loginUser.name}"/>님 환영합니다!
 <ul>
-<c:if test="${loginUser.userAccessLevel | 16}">
+
 <li><a href='mypage'>마이페이지</a><br>
-</c:if>
+
 <c:if test="${loginUser.userAccessLevel ne 32}">
 <li><a href='mypage'>마이페이지</a><br>
 </c:if>
