@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 
-public class SignOutController extends HttpServlet {
+public class MembershipWithdrawalController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
@@ -53,8 +53,10 @@ public class SignOutController extends HttpServlet {
       }
 
       request.setAttribute("no", Integer.parseInt(request.getParameter("no")));
-      //어디로 전달해야되냐
-      request.getRequestDispatcher("/user/signout").forward(request, response);
+      //어디로 전달을 해야되나..?
+      // request.getRequestDispatcher("/user/mem").forward(request, response);
+
+      response.sendRedirect("../");
 
     } catch (Exception e) {
       sqlSession.rollback();
