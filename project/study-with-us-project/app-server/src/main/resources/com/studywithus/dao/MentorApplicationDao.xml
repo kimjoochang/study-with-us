@@ -22,7 +22,6 @@
 	
 	<sql id="select1">
 	select
-      mt.member_no,
       mt.introduction,
       mt.subject,
       mt.apply_date,
