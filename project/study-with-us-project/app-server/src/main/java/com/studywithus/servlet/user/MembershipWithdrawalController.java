@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.domain.Member;
 
+@WebServlet("/user/delete")
 public class MembershipWithdrawalController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -44,17 +46,17 @@ public class MembershipWithdrawalController extends HttpServlet {
 
       Member member = memberDao.findByNo(no);
 
-      Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+      // Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+      // if(loginUser.getNo() == member.getNo()) {
 
-      if(loginUser.getNo() == member.getNo()) {
-
-        memberDao.delete(no);
-        sqlSession.commit();
+      if (member == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
       }
 
-      request.setAttribute("no", Integer.parseInt(request.getParameter("no")));
-      //어디로 전달을 해야되나..?
-      // request.getRequestDispatcher("/user/mem").forward(request, response);
+      //  if(loginUser.getNo() == no) {
+      memberDao.delete(no);
+      sqlSession.commit();
+      //    }
 
       response.sendRedirect("../");
 
