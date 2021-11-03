@@ -6,7 +6,7 @@ public class MentorApplication {
   private int no;
   private Member applicant;
   private String selfIntroduction; 
-  private String chargeStudySubject; 
+  private String subject; 
   private Date registeredDate; 
   private int status; // 0 = 미정, 1 = 승인, 2 = 거절
   private String remarks;
@@ -43,12 +43,12 @@ public class MentorApplication {
     this.selfIntroduction = selfIntroduction;
   }
 
-  public String getChargeStudySubject() {
-    return chargeStudySubject;
+  public String getSubject() {
+    return subject;
   }
 
-  public void setChargeStudySubject(String chargeStudySubject) {
-    this.chargeStudySubject = chargeStudySubject;
+  public void setSubject(String subject) {
+    this.subject = subject;
   }
 
   public Date getRegisteredDate() {
