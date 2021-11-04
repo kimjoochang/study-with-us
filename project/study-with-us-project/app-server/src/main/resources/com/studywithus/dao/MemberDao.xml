@@ -9,6 +9,7 @@
     <id column="member_no" property="no"/> 
     <result column="name" property="name"/>
     <result column="email" property="email"/>
+    <result column="nickname" property="nickname"/>
     <result column="password" property="password"/>
     <result column="phone_number" property="phoneNumber"/>
     <result column="join_date" property="registeredDate"/>
@@ -22,6 +23,7 @@
       member_no,
       name,
       email,
+      nickname,
       phone_number,
       join_date,
       status,
@@ -38,6 +40,7 @@
       member_no,
       name,
       email,
+      nickname,
       phone_number,
       join_date,
       status,
@@ -70,6 +73,7 @@
         member_no,
         name,
         email,
+        nickname,
         phone_number,
         join_date,
         status,
@@ -84,6 +88,7 @@
         member_no,
         name,
         email,
+        nickname,
         phone_number,
         join_date,
         status,
@@ -98,11 +103,12 @@
 		 insert into member(
 	      name,
 	      email,
+	      nickname,
 	      password,
 	      phone_number,
 	      status,
 	      access_level)
-		  values(#{name},#{email},password(#{password}),#{phoneNumber},#{status},#{userAccessLevel})
+		  values(#{name},#{email},#{nickname},password(#{password}),#{phoneNumber},#{status},#{userAccessLevel})
 		</insert>
 		  
 		<update id="updatePassword" parameterType="member">
@@ -115,6 +121,7 @@
 		 update member set
 	      name=#{name},
 	      email=#{email},
+	      nickname=#{nickname},
 	      join_date=#{registeredDate},
 	      status=#{status},
 	      last_date=#{lastDate},

@@ -13,7 +13,14 @@ public class Member {
   private Date lastDate; // 회원 마지막 접속일
   private int userAccessLevel; // 권한
   private AttachmentFile memberFile;
+  private String Nickname;
 
+  public String getNickname() {
+    return Nickname;
+  }
+  public void setNickname(String nickname) {
+    Nickname = nickname;
+  }
   public int getNo() {
     return no;
   }

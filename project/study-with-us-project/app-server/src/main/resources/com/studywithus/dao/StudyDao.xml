@@ -10,6 +10,7 @@
     <result column="title" property="title"/>
     <result column="content" property="content"/>
     <result column="area" property="area"/>
+    <result column="category" property="category"/>
     <result column="register_date" property="registeredDate"/>
     <result column="view_count" property="viewCount"/>
     <result column="max_member" property="maxMembers"/>
@@ -23,6 +24,7 @@
     <association property="writer" javaType="Member">
       <id column="writer_no" property="no"/>
       <result column="writer_name" property="name"/>
+      <result column="writer_nickname" property="nickname"/>
       <result column="writer_email" property="email"/>
     </association>
   </resultMap>
@@ -33,6 +35,7 @@
       st.title,
       st.content,
       st.area,
+      st.category,
       st.register_date,
       st.view_count,
       st.max_member,
@@ -57,6 +60,7 @@
       status=1) members,
       m.member_no writer_no,
       m.name writer_name,
+      m.nickname writer_nickname,
       m.email writer_email
     from 
       study st
@@ -75,6 +79,7 @@
       st.title,
       st.content,
       st.area,
+      st.category,
       st.register_date,
       st.view_count,
       st.max_member,
@@ -99,6 +104,7 @@
       sm.status=1) members,
       m.member_no writer_no,
       m.name writer_name,
+      m.nickname writer_nickname,
       m.email writer_email
     from 
       study st
@@ -126,8 +132,8 @@
   <insert id="insert" parameterType="study"
   useGeneratedKeys="true" keyColumn="study_no" keyProperty="no">
    insert into 
-     study(title,content,area,max_member,start_date,end_date,price,member_no)
-    values(#{title},#{content},#{area},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 
+     study(title,content,area,category,max_member,start_date,end_date,price,member_no)
+    values(#{title},#{content},#{area},#{category},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 
   </insert>
  
   <insert id="insertInterest">
@@ -141,6 +147,7 @@
       title=#{title},
       content=#{content},
       area=#{area},
+      category=#{category},
       view_count=#{viewCount},
       max_member=#{maxMembers},
       start_date=#{startDate},
@@ -158,6 +165,7 @@
       st.title,
       st.content,
       st.area,
+      st.category,
       st.register_date,
       st.view_count,
       st.max_member,
@@ -182,6 +190,7 @@
       status=1) members,
       m.member_no writer_no,
       m.name writer_name,
+      m.nickname writer_nickname,
       m.email writer_email
     from 
       study st

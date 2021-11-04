@@ -31,6 +31,9 @@
     <!-- 설명? 내용? -->
     <label for='f-content'>설명</label> 
     <input id='f-content' type='text' name='content' value='${freeStudy.content}' ><br>
+
+    <label for='f-category'>설명</label> 
+    <input id='f-category' type='text' name='category' value='${freeStudy.category}' ><br>
     
     <label for='f-status'>스터디 진행상태</label> 
     <input id='f-status' type='text' name='status' value='${freeStudy.studyStatus}' readonly><br>

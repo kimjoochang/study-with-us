@@ -46,6 +46,7 @@
 <br>
 <label for='startDate'>시작일</label> <input id='startDate' type='date' name='startDate'><br>
 <label for='endDate'>종료일</label> <input id='endDate' type='date' name='endDate'><br>
+<label for='category'>카테고리</label> <input id='category' type='text' name='category'><br>
 <label for='maxMembers'>정원</label> <input id='maxMembers' type='text' name='maxMembers' placeholder="ex) 6명"><br>
 <label for='price'>금액</label> <input id='price' type='text' name='price' placeholder="ex) 10000"><br>
 <label for='writer'>작성자</label> 

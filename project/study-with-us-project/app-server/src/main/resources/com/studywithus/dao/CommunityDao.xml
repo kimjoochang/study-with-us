@@ -20,6 +20,7 @@
 		<association property="writer" javaType="Member">
 			<id column="writer_no" property="no"/>
 			<result column="writer_email" property="email"/>
+			<result column="writer_nickname" property="nickname"/>
 		</association>
 	</resultMap>
 
@@ -40,6 +41,7 @@
 		cf.cmnt_file_no,
 		cf.name,
 		m.member_no writer_no,
+		m.nickname writer_nickname,
 		m.email writer_email
 		from
 		cmnt cm

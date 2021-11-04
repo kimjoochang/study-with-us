@@ -40,6 +40,7 @@ public class ChargeStudyAddController extends HttpServlet {
 
     chargeStudy.setTitle(request.getParameter("title"));
     chargeStudy.setArea(request.getParameter("area"));
+    chargeStudy.setCategory(request.getParameter("category"));
     chargeStudy.setContent(request.getParameter("content"));
     chargeStudy.setWriter(writer);
     chargeStudy.setMaxMembers(Integer.parseInt(request.getParameter("maxMembers")));

@@ -13,6 +13,7 @@
 
 		<association property="writer" javaType="member">
 			<id column="writer_no" property="no" />
+			<id column="writer_nickname" property="nickname" />
 			<result column="writer_email" property="email" />
 		</association>
 	</resultMap>
@@ -24,6 +25,7 @@
     c.content,
     c.register_date,
     m.member_no writer_no,
+    m.nickname writer_nickname,
     m.email writer_email
     from
     comment c

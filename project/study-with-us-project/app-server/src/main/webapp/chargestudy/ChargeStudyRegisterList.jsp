@@ -16,6 +16,7 @@
 				<th>번호</th>
 				<th>제목</th>
 				<th>지역</th>
+				<th>카테고리</th>
 				<th>작성자</th>
 				<th>금액</th>
 				<th>시작일</th>
@@ -51,6 +52,7 @@
 				<td>${chargeStudy.no}</td>
 				<td><a href='detail?no=${chargeStudy.no}'>${chargeStudy.title}</a></td> 
         <td>${chargeStudy.area}</td>
+        <td>${chargeStudy.category}</td>
         <td>${chargeStudy.writer.name}</td>
         <td>${chargeStudy.price}</td>
         <td>${chargeStudy.startDate}</td>

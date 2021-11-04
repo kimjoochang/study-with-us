@@ -25,6 +25,9 @@
     <label for='f-content'>내용</label> 
     <input id='f-content' type='text' name='content' value='${chargeStudy.content}' readonly><br>
     
+    <label for='f-category'>카테고리</label> 
+    <input id='f-category' type='text' name='category' value='${chargeStudy.category}' readonly><br>
+    
     <label for='f-maxMembers'>모집인원</label> 
     <input id='f-maxMembers' type='number' name='maxMembers' value='${chargeStudy.maxMembers}' readonly><br>
      

@@ -166,6 +166,9 @@ function cat1_change(key,sel){
 <textarea cols="40" rows="10" name="content" placeholder="개설할 무료 스터디 내용을 입력해주세요.">
 </textarea>
 <br>
+<label for='f-category'>카테고리</label> 
+<input type='text' name='category'><br>
+
 <label for='f-maxMembers'>정원</label> 
 <input type='number' name='maxMembers'><br>
 

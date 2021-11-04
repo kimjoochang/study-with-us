@@ -34,6 +34,7 @@ public class JoinController extends HttpServlet {
 
     member.setName(request.getParameter("name"));
     member.setEmail(request.getParameter("email"));
+    member.setNickname(request.getParameter("nickname"));
     member.setPassword(request.getParameter("password"));
     member.setPhoneNumber(request.getParameter("phoneNumber"));
 

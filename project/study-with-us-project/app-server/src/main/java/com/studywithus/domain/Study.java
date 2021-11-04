@@ -23,6 +23,15 @@ public class Study extends Content {
   // 삭제(무료)/삭제요청 승인(가격이 0 이상) = 2
   private int deleteStatus;
   private int price; // 유료 스터디 가격
+  private String category;
+
+  public String getCategory() {
+    return category;
+  }
+
+  public void setCategory(String category) {
+    this.category = category;
+  }
 
   public int getMembers() {
     return members;

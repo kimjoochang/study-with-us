@@ -95,6 +95,7 @@ CREATE TABLE study (
   content       TEXT         NOT NULL COMMENT '내용', -- 내용
   area          VARCHAR(255) NOT NULL COMMENT '지역', -- 지역
   on_off        INTEGER      NOT NULL DEFAULT 0 COMMENT '온오프라인', -- 온오프라인
+  category      VARCHAR(255) NOT NULL COMMENT '카테고리', -- 카테고리
   register_date DATETIME     NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
   view_count    INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
   max_member    INTEGER      NOT NULL COMMENT '모집인원', -- 모집인원

@@ -10,6 +10,7 @@
     <result column="title" property="title"/>
     <result column="content" property="content"/>
     <result column="area" property="area"/>
+    <result column="category" property="category"/>
     <result column="register_date" property="registeredDate"/>
     <result column="view_count" property="viewCount"/>
     <result column="max_member" property="maxMembers"/>
@@ -24,6 +25,7 @@
     <association property="writer" javaType="Member">
       <id column="writer_no" property="no"/>
       <result column="writer_name" property="name"/>
+      <result column="writer_nickname" property="nickname"/>
       <result column="writer_email" property="email"/>
     </association>
   </resultMap>
@@ -32,6 +34,7 @@
   <resultMap type="Member" id="MemberMap">
     <id column="member_no" property="no"/> 
     <result column="name" property="name"/>
+    <result column="nickname" property="nickname"/>
     <result column="email" property="email"/>
     <result column="phone_number" property="phoneNumber"/>
     <result column="status" property="status"/>
@@ -44,6 +47,7 @@
       st.title,
       st.content,
       st.area,
+      st.category,
       st.register_date,
       st.view_count,
       st.max_member,
@@ -68,6 +72,7 @@
       status=1) members,
       m.member_no writer_no,
       m.name writer_name,
+      m.nickname writer_nickname,
       m.email writer_email
     from 
       study_member sm
@@ -80,6 +85,7 @@
       sm.status, 
       m.member_no,
       m.name,
+      m.nickname,
       m.email,
       m.status,
       m.phone_number,
@@ -96,6 +102,7 @@
       st.title,
       st.content,
       st.area,
+      st.category,
       st.register_date,
       st.view_count,
       st.max_member,
@@ -120,6 +127,7 @@
       status=1) members,
       m.member_no writer_no,
       m.name writer_name,
+      m.nickname writer_nickname,
       m.email writer_email
     from 
       study_member sm
