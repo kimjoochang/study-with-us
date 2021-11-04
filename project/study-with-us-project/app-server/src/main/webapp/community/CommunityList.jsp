@@ -126,8 +126,8 @@ a{
   <div class="modal_content">
     <div class="modal_close"><a href="#">닫기</a></div>
     <div>
-    
     <c:choose>
+    
 <c:when test="${categoryNo eq 0}">
 <c:set var="type" value="정보"/>
 </c:when>
