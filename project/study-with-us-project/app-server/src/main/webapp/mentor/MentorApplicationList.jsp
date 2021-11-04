@@ -24,7 +24,7 @@
 </thead>
 <tbody>
 
-<c:forEach items="${applicationList}" var="application">
+<c:forEach items="${mentorApplicantList}" var="application">
 <tr>
     <td>${application.applicant.no}</td>
     <td><a href='detail?no=${application.applicant.no}'>${application.applicant.name}</a></td> 

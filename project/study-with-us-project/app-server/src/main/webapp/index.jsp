@@ -8,6 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>STUDY WITH US</title>
+<script language="javascript">
+function applyMentor() {window.open("mentorapplication/form","width=300","height=300");}
+</script>
 </head>
 <body>
 <h1>STUDY WITH US</h1>
@@ -29,14 +32,16 @@
 <c:out value="${loginUser.name}"/>님 환영합니다!
 <ul>
 
-<li><a href='mypage'>마이페이지</a><br>
+<c:if test="${loginUser.userAccessLevel eq 32}">
+<li><a href='adminpage'>관리자페이지</a><br>
+</c:if>
 
 <c:if test="${loginUser.userAccessLevel ne 32}">
 <li><a href='mypage'>마이페이지</a><br>
 </c:if>
-<c:if test="${loginUser.userAccessLevel eq 32}">
-<li><a href='adminpage'>관리자페이지</a><br>
-</c:if>
+
+<li><input type="button" value="멘토 신청하기" onclick="applyMentor();"/>
+
 <li><a href='community/list?categoryNo=0'>커뮤니티</a><br>
 <li><a href='freestudy/list'>무료 스터디</a><br>
 <li><a href='chargestudy/list'>유료 스터디</a><br>
