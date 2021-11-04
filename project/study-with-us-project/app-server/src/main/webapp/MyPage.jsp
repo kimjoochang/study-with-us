@@ -14,6 +14,9 @@
 <li> <a href='/swu/chargestudy/registerlist'>내가 생성한 스터디</a><br>
 <li> <a href='/swu/chargestudy/participatelist'>내가 참여한 스터디</a><br>
 
+<!-- 제이 추가 -->
+<input type="button" value="회원탈퇴" onclick="changeForm(1)">
+
 </ul>
 </body>
 </html>

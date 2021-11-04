@@ -86,17 +86,17 @@
       (select 
       count(*) 
       from 
-      interest
+      interest i
       where
-      study_no=st.study_no) likes,
+      i.study_no=st.study_no) likes,
       (select 
       count(*) 
       from 
-      study_member
+      study_member sm
       where
-      study_no=st.study_no
+      sm.study_no=st.study_no
       and
-      status=1) members,
+      sm.status=1) members,
       m.member_no writer_no,
       m.name writer_name,
       m.email writer_email
