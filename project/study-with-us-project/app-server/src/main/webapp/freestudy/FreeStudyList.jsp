@@ -51,6 +51,45 @@ xdiv {
   <p>
   <div id="status">스터디 진행상태</div>
 
+  <div class="ola-booking">
+    <div class="booking-tab">
+        <div class="tab-btn-wrapper text-center">
+            <a href="/" class="tab tab-active">모집중</a> </div>
+        <div class="tab-btn-wrapper text-center">
+            
+                <a href="/outstation" class="tab">Outstation</a>
+            
+        </div>
+        <div class="tab-btn-wrapper text-center">
+            
+                <a href="/rentals" class="tab">Rentals</a>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <iframe src="https://bookingwidget.olacabs.com" class="city-iframe"></iframe>
+</div>
+    <div class="booking-tab">
+    <div class="tab-btn-wrapper text-center">
+                                    
+    <a href="/" class="tab tab-active">City Taxi</a>
+                                    
+    </div>
+    <div class="tab-btn-wrapper text-center">
+                                    
+    <a href="/outstation" class="tab">Outstation</a>
+                                    
+    </div>
+    <div class="tab-btn-wrapper text-center">
+                                    
+    <a href="/rentals" class="tab">Rentals</a>
+                                    
+    </div>
+    <div class="clearfix"></div>
+    </div>
+
+
+
   <input id="input1" type="submit" value="모집중">
   <input id="input1" type="submit" value="진행중">
   <input id="input1" type="submit" value="진행완료">
