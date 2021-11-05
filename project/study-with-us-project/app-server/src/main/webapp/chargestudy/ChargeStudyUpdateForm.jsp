@@ -52,7 +52,7 @@
     <span id='f-registeredDate'>${chargeStudy.registeredDate}</span><br>
 	
 	<button>변경</button>
-	 <a href='delete?no=${chargeStudy.no}'>[삭제]</a> <a href='list'>[목록]</a><br>
+	 <a href='list'>[목록]</a><br>
 	</form>
 
 </body>

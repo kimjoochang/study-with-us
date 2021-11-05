@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.studywithus.dao.CommentDao;
 import com.studywithus.dao.CommunityDao;
+import com.studywithus.dao.DeleteRequestFormDao;
 import com.studywithus.dao.MemberDao;
 import com.studywithus.dao.MentorApplicationDao;
 import com.studywithus.dao.StudyDao;
@@ -34,6 +35,7 @@ public class AppInitListener implements ServletContextListener {
       CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
       StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
       StudyMemberDao studyMemberDao = sqlSession.getMapper(StudyMemberDao.class);
+      DeleteRequestFormDao deleteRequestFormDao = sqlSession.getMapper(DeleteRequestFormDao.class);
       MentorApplicationDao mentorApplicationDao = sqlSession.getMapper(MentorApplicationDao.class);
 
       /* 
@@ -56,6 +58,7 @@ public class AppInitListener implements ServletContextListener {
       servletContext.setAttribute("sqlSession", sqlSession); // dao마다 하나씩 해줘야되나
       servletContext.setAttribute("studyMemberDao", studyMemberDao);
       servletContext.setAttribute("mentorApplicationDao", mentorApplicationDao);
+      servletContext.setAttribute("deleteRequestFormDao", deleteRequestFormDao);
       /*
       // 상동
       servletContext.setAttribute("memberDao", commentDao);

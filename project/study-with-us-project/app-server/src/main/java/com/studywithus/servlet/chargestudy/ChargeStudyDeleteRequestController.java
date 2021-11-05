@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
+import com.studywithus.dao.DeleteRequestFormDao;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.domain.DeleteRequestForm;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
@@ -20,12 +22,14 @@ public class ChargeStudyDeleteRequestController  extends HttpServlet {
 
   StudyDao chargeStudyDao;
   SqlSession sqlSession;
+  DeleteRequestFormDao deleteRequestFormDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext servletContext = config.getServletContext();
     sqlSession = (SqlSession) servletContext.getAttribute("sqlSession");
     chargeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
+    deleteRequestFormDao = (DeleteRequestFormDao) servletContext.getAttribute("deleteRequestFormDao");
   }
 
   @Override
@@ -34,6 +38,7 @@ public class ChargeStudyDeleteRequestController  extends HttpServlet {
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
+      String reason = request.getParameter("reason");
       Study chargeStudy = chargeStudyDao.findByNo(no);
 
       Member member = (Member) request.getSession().getAttribute("loginUser");
@@ -52,6 +57,13 @@ public class ChargeStudyDeleteRequestController  extends HttpServlet {
       chargeStudy.setDeleteStatus(1);
 
       chargeStudyDao.update(chargeStudy);
+
+      DeleteRequestForm deleteRequestForm = new DeleteRequestForm();
+
+      deleteRequestForm.setStudyNo(no);
+      deleteRequestForm.setReason(reason);
+
+      deleteRequestFormDao.insert(deleteRequestForm);
       sqlSession.commit();
 
       response.sendRedirect("list");

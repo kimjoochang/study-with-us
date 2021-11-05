@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studywithus.dao.DeleteRequestFormDao">
+  
+ <resultMap type="DeleteRequestForm" id="DeleteRequestFormMap">
+    <id column="request_no" property="no"/> 
+    <result column="study_no" property="studyNo"/>
+    <result column="reason" property="reason"/>
+    <result column="remarks" property="remarks"/>
+    <result column="register_date" property="registeredDate"/>
+  </resultMap>
+  
+  <sql id="select1">
+  select
+      dr.request_no, 
+      dr.study_no,
+      dr.reason,
+      dr.remarks,
+      dr.register_date
+    from 
+      delete_request dr
+      inner join study st on dr.study_no=st.study_no
+  </sql>
+  
+  <select id="findAllForAdmin" resultMap="DeleteRequestFormMap">
+  <include refid="select1"/>
+    where
+      st.del_status=1
+    order by 
+      dr.request_no asc;
+  </select>
+  
+  <select id="findAllForMember" resultMap="DeleteRequestFormMap" parameterType="int">
+  <include refid="select1"/>
+    where
+      dr.study_no=#{studyNo}
+    order by 
+      dr.request_no asc;
+  </select>
+
+  <select id="findByNo" resultMap="DeleteRequestFormMap" parameterType="int">
+    <include refid="select1"/>
+    where
+      dr.request_no=#{no}
+  </select>
+            
+  <insert id="insert" parameterType="DeleteRequestForm">
+   insert into 
+     delete_request(study_no,reason)
+    values(#{studyNo},#{reason}) 
+  </insert>
+  
+  <update id="updateRemarks" parameterType="DeleteRequestForm">
+    update delete_request set
+      remarks=#{remarks}
+    where
+      request_no=#{no}
+  </update>
+
+  <delete id="delete" parameterType="int">
+    delete from delete_request
+    where request_no=#{no}
+  </delete>
+
+</mapper>
