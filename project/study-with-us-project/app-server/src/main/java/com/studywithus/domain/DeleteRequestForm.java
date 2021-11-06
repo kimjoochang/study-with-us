@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class DeleteRequestForm {
   private int no;
-  private int studyNo;
+  private Study study;
   private String reason;
   private String remarks;
   private Date registeredDate;
@@ -15,11 +15,11 @@ public class DeleteRequestForm {
   public void setNo(int no) {
     this.no = no;
   }
-  public int getStudyNo() {
-    return studyNo;
+  public Study getStudy() {
+    return study;
   }
-  public void setStudyNo(int studyNo) {
-    this.studyNo = studyNo;
+  public void setStudy(Study study) {
+    this.study = study;
   }
   public String getReason() {
     return reason;

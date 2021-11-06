@@ -6,7 +6,7 @@
 <mapper namespace="com.studywithus.dao.MentorApplicationDao">
 
 	<resultMap type="MentorApplication" id="MentorApplicationMap">
-		<id column="member_no" property="no"/>
+		<id column="application_no" property="no"/>
 		<result column="introduction" property="selfIntroduction"/>
 		<result column="subject" property="subject"/>
 		<result column="apply_date" property="registeredDate"/>
@@ -16,55 +16,72 @@
 		<association property="applicant" javaType="Member">
 		  <id column="applicant_no" property="no"/>
       <result column="applicant_name" property="name"/>
+      <result column="applicant_nickname" property="nickname"/>
       <result column="applicant_email" property="email"/>
 		</association>
 	</resultMap>
 	
 	<sql id="select1">
 	select
-      mt.introduction,
-      mt.subject,
-      mt.apply_date,
-      mt.status,
-      mt.remarks,
+      ap.application_no,
+      ap.introduction,
+      ap.subject,
+      ap.apply_date,
+      ap.status,
+      ap.remarks,
       m.member_no applicant_no,
       m.name applicant_name,
+      m.nickname applicant_nickname,
       m.email applicant_email
     from
-      mentor mt
-    inner join member m on mt.member_no=m.member_no
+      application ap
+    inner join member m on ap.member_no=m.member_no
 	</sql>
 
 	<select id="findAll" resultMap="MentorApplicationMap">
 		<include refid="select1"/>
-		order by mt.member_no asc
+		where
+		ap.status=0
+		order by ap.application_no asc
 	</select>
 
 	<select id="findByNo" resultMap="MentorApplicationMap" parameterType="int">
 		<include refid="select1"/>
-		where mt.member_no=#{no}
+		where ap.application_no=#{no}
 	</select>
 
-	<insert id="insert" parameterType="member">
-		insert into mentor(member_no,introduction,subject)
-		values(#{no},#{selfIntroduction},#{subject})
+	<insert id="insert" parameterType="Mentorapplication">
+		insert into application(member_no,introduction,subject)
+		values(#{applicant.no},#{selfIntroduction},#{subject})
 	</insert>
 
-	<update id="update" parameterType="member">
-		update mentor set
+	<update id="update" parameterType="Mentorapplication">
+		update application set
 			introduction=#{selfIntroduction},
 			subject=#{subject},
 			status=#{status},
 			remarks=#{remarks},
-			member_no=#{no}
-		where member_no=#{no}
+		where application_no=#{no}
+	</update>
+
+	<update id="updateApproveStatus" parameterType="Mentorapplication">
+		update application set
+			status=#{status},
+		where application_no=#{no}
+	</update>
+
+	<update id="updateRejectStatus" parameterType="Mentorapplication">
+		update application set
+			status=#{status},
+			remarks=#{remarks},
+		where application_no=#{no}
 	</update>
 	
 	<delete id="delete" parameterType="int">
 	 delete from mentor
 	 where member_no=#{memberNo}
 	</delete>
-
+	
 </mapper>
 
 

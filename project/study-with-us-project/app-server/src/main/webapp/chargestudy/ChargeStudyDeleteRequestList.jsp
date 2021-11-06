@@ -6,64 +6,133 @@
 <html>
 <head>
 <title>유료 스터디</title>
+<style>
+ul{
+    list-style:none;
+}
+
+li{
+    height: 30px;
+}
+
+a{  
+    text-align: center;
+    height:20px;
+    width: 50px;
+    border-radius: 20%;
+    margin-top: 2%;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+#main{
+    display: flex;
+
+}
+
+#input_form{
+    padding-top: 5%;
+    margin: 0 auto;
+}
+
+.modal_content{
+        display: none;
+        width: 500px;
+        height: 500px;
+        position: absolute;
+        top:50%;
+        left: 50%;
+        margin: -250px 0 0 -250px;
+        background:#eee;
+        z-index: 2;
+    }
+    .modal_background{
+        display: none;
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color:rgba(0, 0,0, 0.5);
+        top:0;
+        left: 0;
+        z-index: 1;
+    }
+    .modal_close{
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        top: -30px;
+        right: 0;
+    }
+    .modal_close> a{
+        display: block;
+        width: 100%;
+        height: 100%;
+        background:url(https://img.icons8.com/metro/26/000000/close-window.png);
+        text-indent: -9999px;
+    }
+</style>
+
+<script>
+    window.onload = function() {
+ 
+    function onClick() {
+        document.querySelector('.modal_content').style.display ='block';
+        document.querySelector('.modal_background').style.display ='block';
+    }   
+    function offClick() {
+        document.querySelector('.modal_content').style.display ='none';
+        document.querySelector('.modal_background').style.display ='none';
+    }
+ 
+    document.getElementById('write_modal').addEventListener('click', onClick);
+    document.querySelector('.modal_close').addEventListener('click', offClick);
+};
+</script>
 </head>
 <body>
-	<h1>유료 스터디 목록</h1>
+	<h1>삭제요청 스터디 목록</h1>
 	<a href='form'>유료 스터디</a>
 	<br>
 	<table border='1'>
 		<thead>
 			<tr>
 				<th>번호</th>
-				<th>제목</th>
-				<th>지역</th>
-				<th>카테고리</th>
-				<th>작성자</th>
-				<th>금액</th>
-				<th>시작일</th>
-				<th>종료일</th>
-				<th>모집인원</th>
-				<th>스터디 진행상태</th>
-				<th>등록일</th>
-				<th>조회수</th>
-				<th>좋아요수</th>
+				<th>스터디 제목</th>
+				<th>스터디 시작일</th>
+				<th>스터디 종료일</th>
+				<th>삭제 요청일</th>
+				<th>삭제 사유</th>
 			</tr>
 		</thead>
 		<tbody>
 		
-  <c:forEach items="${chargeStudyList}" var="chargeStudy">
-  
-  <c:choose>
-  <c:when test="${chargeStudy.studyStatus eq 0}">
-<c:set var="type" value="모집중"/>
-  </c:when>
-  </c:choose>
-  <c:choose>
-  <c:when test="${chargeStudy.studyStatus eq 1}">
-<c:set var="type" value="진행중"/>
-  </c:when>
-  </c:choose>
-  <c:choose>
-  <c:when test="${chargeStudy.studyStatus eq 2}">
-<c:set var="type" value="진행완료"/>
-  </c:when>
-  </c:choose>
+  <c:forEach items="${deleteRequestFormList}" var="requestForm">
   
 			<tr>
-				<td>${chargeStudy.no}</td>
-				<td><a href='detail?no=${chargeStudy.no}'>${chargeStudy.title}</a></td> 
-        <td>${chargeStudy.area}</td>
-        <td>${chargeStudy.category}</td>
-        <td>${chargeStudy.writer.name}</td>
-        <td>${chargeStudy.price}</td>
-        <td>${chargeStudy.startDate}</td>
-        <td>${chargeStudy.endDate}</td>
-        <td>${chargeStudy.members}/${chargeStudy.maxMembers}</td>
-        <td>${type}</td> 
-        <td>${chargeStudy.registeredDate}</td>
-        <td>${chargeStudy.viewCount}</td>
-        <td>${chargeStudy.likes}</td>
-	</tr>
+				<td>${requestForm.no}</td>
+				<td><a href='detail?no=${requestForm.no}'>${requestForm.study.title}</a></td> 
+        <td>${requestForm.study.startDate}</td>
+        <td>${requestForm.study.endDate}</td>
+        <td>${requestForm.registeredDate}</td>
+				<td><button id="write_modal">읽기</button></td> 
+      </tr>
+<div class="modal_background"></div>
+  <div class="modal_content">
+    <div class="modal_close"><a href="#">닫기</a></div>
+    <div>
+    <div id="main">
+    <div id="input_form">
+        <form action='' target="ChargeStudyDeleteRequestList.jsp">
+            
+            <textarea name="content" id="textarea" cols="50" rows="10"readonly>${requestForm.reason}</textarea>
+        <input id=button type="submit" onclick="offClick()" value="승인">
+        <input id=button type="button" onclick="offClick()" value="거절">
+        </form>
+    </div>
+</div>
+    </div>
+  </div>
   </c:forEach>
  
 	</tbody>

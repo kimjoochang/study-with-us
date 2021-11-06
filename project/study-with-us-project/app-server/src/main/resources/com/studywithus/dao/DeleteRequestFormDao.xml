@@ -7,19 +7,30 @@
   
  <resultMap type="DeleteRequestForm" id="DeleteRequestFormMap">
     <id column="request_no" property="no"/> 
-    <result column="study_no" property="studyNo"/>
     <result column="reason" property="reason"/>
     <result column="remarks" property="remarks"/>
     <result column="register_date" property="registeredDate"/>
+    
+    <association property="study" javaType="Study">
+    <id column="study_no" property="no"/> 
+    <result column="title" property="title"/>
+    <result column="start_date" property="startDate"/>
+    <result column="end_date" property="endDate"/>
+     <result column="del_status" property="deleteStatus"/>
+    </association>
   </resultMap>
   
   <sql id="select1">
   select
       dr.request_no, 
-      dr.study_no,
       dr.reason,
       dr.remarks,
-      dr.register_date
+      dr.register_date,
+      st.study_no,
+      st.title,
+      st.start_date,
+      st.end_date,
+      st.del_status
     from 
       delete_request dr
       inner join study st on dr.study_no=st.study_no
@@ -36,7 +47,7 @@
   <select id="findAllForMember" resultMap="DeleteRequestFormMap" parameterType="int">
   <include refid="select1"/>
     where
-      dr.study_no=#{studyNo}
+      st.study_no=#{studyNo}
     order by 
       dr.request_no asc;
   </select>
@@ -50,7 +61,7 @@
   <insert id="insert" parameterType="DeleteRequestForm">
    insert into 
      delete_request(study_no,reason)
-    values(#{studyNo},#{reason}) 
+    values(#{study.no},#{reason}) 
   </insert>
   
   <update id="updateRemarks" parameterType="DeleteRequestForm">

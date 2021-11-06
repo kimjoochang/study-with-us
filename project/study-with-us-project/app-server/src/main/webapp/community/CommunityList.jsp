@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>커뮤니티 조회</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 ul{
     list-style:none;
@@ -74,6 +75,14 @@ a{
         background:url(https://img.icons8.com/metro/26/000000/close-window.png);
         text-indent: -9999px;
     }
+    
+    body {
+    width : 1000px;
+    margin : 0 auto;
+    }
+    
+    .wrapper {
+    }
 </style>
 
 <script>
@@ -95,6 +104,7 @@ a{
 </head>
 
 <body>
+<div class="wrapper">
 <c:choose>
   <c:when test="${categoryNo eq 0}">
 <c:set var="type" value="정보"/>
@@ -164,37 +174,57 @@ a{
     </div>
   </div>
 
-
-
-<!--<input type="button" value="글쓰기" onclick="addCommunity();"/> -->
-<br>
-<table border='1'>
-<thead>
-  <tr>
-    <th>번호</th>
-    <th>카테고리</th>
-    <th>제목</th>
-    <th>작성자</th>
-    <th>조회수</th>
-    <th>좋아요</th>
-    <th>등록일</th>
-  </tr>
-</thead>
-<tbody>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">번호</th>
+        <th scope="col">카테고리</th>
+        <th scope="col">제목</th>
+        <th scope="col">작성자</th>
+        <th scope="col">등록일</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
 
 <c:forEach items="${communityList}" var="community">
+<c:choose>
+<c:when test="${community.category eq 0}">
+<c:set var="type" value="정보"/>
+</c:when>
+
+<c:when test="${community.category eq 1}">
+<c:set var="type" value="질문"/>
+</c:when>
+
+<c:when test="${community.category eq 2}">
+<c:set var="type" value="스몰톡"/>
+</c:when>
+</c:choose>
+
 <tr>
-    <td>${community.no}</td>
-    <td>${type}</td>
-    <td><a href='detail?no=${community.no}'>${community.title}</a></td> 
-    <td>${community.writer.email}</td> 
-    <td>${community.viewCount}</td> 
-    <td>${community.like}</td> 
-    <td>${community.registeredDate}</td>
-</tr>
+        <th scope="row">${community.no}</th>
+        <td>${type}</td>
+        <td>${community.title}</td>
+        <td>${community.writer.nickname}</td>
+        <td>${community.registeredDate}</td>
+        <td>
+        <ul>
+          <li>
+            조회수사진
+            <span>${community.viewCount}</span>
+          </li>
+          <li>
+            좋아요사진
+            <span>${community.like}</span>
+          </li>
+          </ul>
+        </td>
+      </tr>
 </c:forEach>
 </tbody>
 </table>
+ </div>
 </body>
 </html>
 
