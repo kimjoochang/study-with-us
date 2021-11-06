@@ -10,7 +10,7 @@
 
 <style>
   xdiv {
-    xdisplay: inline-block;
+    display: inline-block;
     border: 1px solid black;
     margin: 5px;
     padding: 10px;
@@ -243,18 +243,18 @@ word-break: keep-all;
 }
 
 main {
-  box-sizing: border-box;
+box-sizing: border-box;
 color: rgb(0, 0, 0);
 display: flex;
 flex-direction: column;
 font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 height: 5422px;
-width: 711px;
+xwidth: 711px;
 margin: 0 auto;
 }
 
 .main_main {
- display: flex;
+ xdisplay: flex;
  flex-direction: column;
  box-sizing: inherit;
 }
@@ -282,7 +282,7 @@ padding-inline-start: 0px;
 padding-left: 0px;
 padding-right: 0px;
 padding-top: 0px;
-width: 711px;
+xwidth: 711px;
 }
 
 li {
@@ -327,6 +327,19 @@ transition-timing-function: ease-in;
 width: 323.5px;
 }
 
+.on_offline {
+box-sizing: border-box;
+color: rgb(0, 0, 0);
+cursor: pointer;
+display: block;
+font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+height: 100px;
+list-style-image: none;
+list-style-position: outside;
+list-style-type: none;
+text-align: center;
+}
+
 span {
   box-sizing: border-box;
 color: rgb(0, 0, 0);
@@ -353,6 +366,28 @@ padding-right: 0px;
 padding-top: 0px;
 text-align: left;
 width: 275.5px;
+}
+
+.on_offline_status {
+  xbox-sizing: border-box;
+cursor: pointer;
+xdisplay: block;
+font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+font-size: 16px;
+xheight: 15px;
+xlist-style-image: none;
+xlist-style-position: outside;
+xlist-style-type: none;
+xmargin-block-end: 0px;
+xmargin-block-start: 0px;
+xmargin-bottom: 0px;
+xmargin-inline-end: 0px;
+xmargin-inline-start: 0px;
+margin-left: -82px;
+margin-right: 0px;
+margin-top: 80px;
+text-align: center;
+xwidth: px;
 }
 
 section{
@@ -404,7 +439,6 @@ width: 40.3125px;
 </head>
 <body>
   <h1>무료 스터디 조회</h1>
-  <p>
     
     <br>
     <input id="input1" type="submit" value="모집중">
@@ -441,13 +475,13 @@ width: 40.3125px;
   <main>
     <div class="main_main">
 
-      
       <ul>
         <li>
-          <h1 class="studyTitle"> 제목 </h1>
+          <h1 class="studyTitle"> 제목1 </h1>
           <span>
-            <img src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/onlineIcon.png">
-            
+            <img class="on_offline"
+            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/onlineIcon.png">
+            <p class="on_offline_status">온라인,지명</p>
           </span>
           
           <section>
@@ -472,10 +506,11 @@ width: 40.3125px;
         </li>
         
         <li>
-          <h1 class="studyTitle"> 제목 </h1>
+          <h1 class="studyTitle"> 제목2 </h1>
           <span>
-            <img src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/offLineIcon2.png">
-            
+            <img class="on_offline"
+            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/offLineIcon2.png">
+            <p class="on_offline_status">온라인,지명</p>
           </span>
           
           <section>
@@ -504,8 +539,10 @@ width: 40.3125px;
         <li>
           <h1 class="studyTitle"> 제목 </h1>
           <span>
-            <img src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/offLineIcon2.png">
-            
+            <img class="on_offline"
+            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/offLineIcon2.png">
+            <p class="on_offline_status">온라인,지명</p>
+
           </span>
           
           <section>
@@ -533,7 +570,8 @@ width: 40.3125px;
         <li>
           <h1 class="studyTitle"> 제목 </h1>
           <span>
-            <img src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/offLineIcon2.png">
+            <img class="on_offline"
+            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/offLineIcon2.png">
             
           </span>
           
@@ -561,9 +599,10 @@ width: 40.3125px;
 
 
         <li>
-          <h1 class="studyTitle"> 제목 </h1>
+          <h1 class="studyTitle"> 제목5 </h1>
           <span>
-            <img src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/offLineIcon2.png">
+            <img class="on_offline"
+            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/offLineIcon2.png">
             
           </span>
           
@@ -587,6 +626,65 @@ width: 40.3125px;
             </div>
           </section>
         </li>
+
+        <li>
+          <h1 class="studyTitle"> 제목6 </h1>
+          <span>
+            <img class="on_offline"
+            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/offLineIcon2.png">
+            
+          </span>
+          
+          <section>
+            <div class="info_item">
+              <img class="icon"
+              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/fillingHeartIcon.png">
+              <p class="icon_count">1</p>
+            </div>
+            
+            <div class="info_item">
+              <img class="icon"
+              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/eyeIcon copy.png">
+              <p class="icon_count">1</p>
+            </div>
+            
+            <div class="info_item">
+              <img class="icon"
+              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/speechBalloonIcon copy.png">              
+              <p class="icon_count">1</p>
+            </div>
+          </section>
+        </li>
+
+        <li>
+          <h1 class="studyTitle"> 제목7 </h1>
+          <span>
+            <img class="on_offline"
+            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/offLineIcon2.png">
+            
+          </span>
+          
+          <section>
+            <div class="info_item">
+              <img class="icon"
+              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/fillingHeartIcon.png">
+              <p class="icon_count">1</p>
+            </div>
+            
+            <div class="info_item">
+              <img class="icon"
+              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/eyeIcon copy.png">
+              <p class="icon_count">1</p>
+            </div>
+            
+            <div class="info_item">
+              <img class="icon"
+              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/speechBalloonIcon copy.png">              
+              <p class="icon_count">1</p>
+            </div>
+          </section>
+        </li>
+
 
       </ul>
       
