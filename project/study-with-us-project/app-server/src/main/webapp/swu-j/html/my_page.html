@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="copyright" content="MACode ID, https://macodeid.com/">
+
+  <title>스터디위더스: 마이페이지</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+ <!-- <link rel="stylesheet" href="../assets/vendor/animate/animate.css"> -->
+
+  <link rel="stylesheet" href="../assets/css/theme.css">
+
+</head>
+
+<style>
+
+ul.sub, .my-menu-list {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  width: 150px;
+  background: #eeeef1;
+  height: 100%;
+  overflow: auto;
+  position: fixed;
+  border-radius: 3px;
+}
+
+ul.sub li a {
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  color: rgb(82, 71, 92);
+  font-weight: bold;
+}
+
+ul.sub li a:hover {
+  background: #8e8aad;
+  color: #fff;
+}
+
+ul.sub li a.home {
+  background : rgb(150, 144, 144);
+  color: #fff;
+}
+
+.cd1 {
+  margin-left: 120px;
+}
+
+.divider-sub {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 16px;
+  width: 86px;
+  height: 3px;
+  border-radius: 40px;
+  background-color: #827e9e;
+}
+
+.profile-icon{
+  text-align:center;
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+.my-menu-list{
+  text-align:center;
+}
+
+.my-menu-list .sub{
+  margin-top:20px
+}
+
+
+</style>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
+      <div class="container">
+        <!--<a href="#" class="navbar-brand">스터디<span class="text-primary">위더스</span></a>-->
+        <img src="../assets/img/swu_text.png" alt="">
+
+        <div class="navbar-collapse collapse" id="navbarContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="service.html">Study</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">Mentoring</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">Community</a>
+            </li>
+            <li class="nav-item">
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+            <span class="navbar-toggler-icon"></span>
+      </div>
+    </nav>
+
+
+  <div class="page-section" id="myinfo">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 py-3 wow fadeInUp">
+          <span class="subhead">my page</span>
+          <!--<h2 class="title-section">나의 정보</h2>-->
+          <div class="divider-sub"></div>
+
+          <ul class="my-menu-list">
+            <div class="profile-icon">
+            
+            <img src="../assets/img/profile.png">
+          </div>
+            <li class ="userid">jeje2kim 님</li>
+            <ul class=sub>
+            <li><a href="#">나의 정보</a></li>
+            <li><a href="#">결제 내역</a></li>
+            <li><a href="#">관심 목록</a></li>
+            <li><a href="#">나의 활동</a></li>
+          </ul>
+          </ul>
+        
+        </div>
+      </div>
+    </div> <!-- .container -->
+  </div> <!-- .page-section -->
+
+<script src="../assets/js/jquery-3.5.1.min.js"></script>
+
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="../assets/vendor/wow/wow.min.js"></script>
+
+<script src="../assets/js/theme.js"></script>
+  
+</body>
+</html>
