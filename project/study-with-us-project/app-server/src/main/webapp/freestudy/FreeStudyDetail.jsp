@@ -25,11 +25,9 @@
     <label for='f-title'>제목</label>
     <input id='f-title' type='text' name='title' value='${freeStudy.title}' readonly><br>
     
-    <!-- 팀장? 작성자? -->
     <label for='f-name'>작성자</label> 
     <input id='f-name' type='text' name='name' value='${freeStudy.writer.name}' readonly><br>
     
-    <!-- 설명? 내용? -->
     <label for='f-content'>내용</label> 
     <input id='f-content' type='text' name='content' value='${freeStudy.content}' readonly><br>
 
@@ -48,7 +46,6 @@
     <label for='f-endDate'>종료일</label> 
     <input id='f-endDate' type='date' name='endDate' value='${freeStudy.endDate}' readonly><br>
 
-    <!-- 11.02 선영 질문 모집인원 현재인원 type : number? text? -->
     <label for='f-maxMembers'>모집인원</label> 
     <input id='f-maxMembers' type='number' name='maxMembers' value='${freeStudy.maxMembers}' readonly><br>
      
