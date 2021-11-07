@@ -60,7 +60,7 @@ public class ChargeStudyDeleteRequestController  extends HttpServlet {
 
       DeleteRequestForm deleteRequestForm = new DeleteRequestForm();
 
-      deleteRequestForm.setStudyNo(no);
+      deleteRequestForm.setStudy(chargeStudy);
       deleteRequestForm.setReason(reason);
 
       deleteRequestFormDao.insert(deleteRequestForm);

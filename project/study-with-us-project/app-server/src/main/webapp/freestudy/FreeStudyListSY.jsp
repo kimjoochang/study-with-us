@@ -21,7 +21,6 @@
   }
 
   #input1 {
-    
     width: 80px;
     height: 30px;
     border-radius: 4px;
@@ -243,14 +242,14 @@ word-break: keep-all;
 }
 
 main {
-box-sizing: border-box;
-color: rgb(0, 0, 0);
-display: flex;
-flex-direction: column;
-font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-height: 5422px;
+  box-sizing: border-box;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  height: 5422px;
+  margin: 0 auto;
 xwidth: 711px;
-margin: 0 auto;
 }
 
 .main_main {
@@ -324,7 +323,7 @@ transition-delay: 0s;
 transition-duration: 0.2s;
 transition-property: transform;
 transition-timing-function: ease-in;
-width: 323.5px;
+width: 300px;
 }
 
 .on_offline {
@@ -469,9 +468,8 @@ width: 40.3125px;
   </c:when>
   </c:choose>
   
-<div class="wrapper">
 
-  
+<div class="wrapper">
   <main>
     <div class="main_main">
 

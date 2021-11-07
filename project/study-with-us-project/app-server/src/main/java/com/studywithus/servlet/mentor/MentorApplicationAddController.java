@@ -53,20 +53,19 @@ public class MentorApplicationAddController extends HttpServlet {
 
       MentorApplication mentorApplication = new MentorApplication();
 
-      mentorApplication.setNo(member.getNo());
+      mentorApplication.setApplicant(member);
       mentorApplication.setSelfIntroduction(request.getParameter("selfIntro"));
       mentorApplication.setSubject(request.getParameter("subject"));
 
       mentorApplicationDao.insert(mentorApplication);
       sqlSession.commit();
 
-      request.getRequestDispatcher("/swu/index").forward(request, response);
+      request.getRequestDispatcher("../index").forward(request, response);
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      sqlSession.rollback();
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+      sqlSession.rollback();
     }
   }
 }
