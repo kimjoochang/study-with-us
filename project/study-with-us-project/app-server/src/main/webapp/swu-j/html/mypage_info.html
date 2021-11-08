@@ -38,8 +38,8 @@
 }
 
 .userid{
- font-size:15px;
- color: #3a3846;
+ font-size:14px;
+ color: #3b3a44;
 }
 
 ul.sub, .my-menu-list {
@@ -104,13 +104,88 @@ ul.sub li a.home {
 }
 
 .content-section{
-  width: 750px;
-  height: 900px;
+  width: 900px;
+  height: 920px;
   background-color: #eeeef1;
   border-radius: 3px;
   margin-top: 0px;
   margin-left: 180px;
 }
+
+.subject{
+  font-size: 20px;
+  margin-left: 30px;
+  padding-top: 35px;
+}
+
+.box1{
+  width: 800px;
+  height: 300px;
+  border-top: 2px solid rgb(153, 152, 152);
+  border-radius: 3px;
+  padding: 30px;
+  margin-top:15px;
+  margin-left:20px;
+  box-sizing:border-box
+}
+
+  .box2{
+  width: 800px;
+  height: 150px;
+  border-top: 2px solid rgb(153, 152, 152);
+  border-bottom: 2px solid rgb(153, 152, 152);
+  border-radius: 3px;
+  padding: 30px;
+  margin-top:15px;
+  margin-left:20px;
+  box-sizing:border-box
+}
+
+.box3{
+  width: 800px;
+  height: 100px;
+  
+  padding: 30px;
+  margin-top:0px;
+  margin-left:10px;
+  box-sizing:border-box
+}
+
+input{
+  all: unset;
+}
+
+.attribute{
+ text-align: justify;
+  
+}
+
+.photo{
+  padding: 15px;
+  font-size: 12px;
+}
+
+ .nickname, .email {
+  padding: 20px;
+  font-size: 12px;
+}
+
+.file{
+  padding: 20px;
+  margin-left:57px;
+}
+.pwd{
+  font-size: 12px;
+  padding-top:20px;
+  padding-right:22px;
+}
+
+.ph {
+  margin-top: 0px;
+  padding: 20px;
+  font-size: 12px;
+}
+
 
 </style>
 
@@ -166,7 +241,62 @@ ul.sub li a.home {
             <li><a href="#">나의 활동</a></li>
           </ul>
           </ul>
-          <div class="content-section"> </div>
+          <div class="content-section"> 
+
+<form>
+  <section class="all-contents">
+
+    <div class="subject"> 개인 정보 </div>
+
+    <div class="box1">
+
+      <div class="attribute">
+      사진 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input class="photo" type="text" value="사진을 등록하여 계정 맞춤 설정"></input>
+      <!---->
+      <input class="file" type="file" name="fileName"></div>
+      <hr>
+      <div class="box">
+
+      닉네임 &nbsp;&nbsp;&nbsp;&nbsp;
+      <input class="nickname" value="쫄지마"></input>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-primary btn-sm">변경</button><br>
+      이메일 &nbsp;&nbsp;&nbsp;&nbsp;
+      <input class="email" type="email" name="email" id="email" value="studywithus@gmail.com"></input> 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      <button type="button" class="btn btn-primary btn-sm">변경</button><br>
+      비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input class="pwd" type="password" name="my_password" id="my_password" value="11111111"></input>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      <button type="button" class="btn btn-primary btn-sm">변경</button> 
+      </div></div>
+
+
+      <div class="subject"> 연락처 정보 </div>
+      <div class="box2">
+        
+      휴대폰  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input class="ph" type="text" value="010-1234-5678"></input>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      <button type="button" class="btn btn-primary btn-sm">변경</button> 
+    </div>
+    <div class="box3">
+      <span class="with"><button type="button" class="btn btn-secondary btn-sm">회원 탈퇴</button></div></span>
+    </div>
+  </div>
+
+
+</section>
+</form>
+
+
+
+  </div>
+
+
+
+
+
+
+
         </div>
       </div>
           
