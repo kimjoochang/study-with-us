@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+ul{
+    list-style:none;
+  }
+  
+  .categorys li {
+    margin-bottom: 20px;
+  border-bottom: solid 2px gray;
+}
+
+.side_menu .li{
+    margin-top : 4px;
+    border:solid 1px;
+    border-radius: 20%;
+    height: 30px;
+}
+
+tr {
+  text-align: center;
+}
+
+body {
+  width : 1000px;
+  margin : 0 auto;
+}
+
+.side_menu {
+  margin-right: 30px;
+  float: left;
+}
+.wrapper_wrapper{
+  display:flex;
+margin:0 auto;
+height:10px;
+
+}
+
+.wrapper {
+margin-top :50px;
+  display:flex;
+}
+
+
+.list {
+  width : 70%;
+  position : fixed;
+}
