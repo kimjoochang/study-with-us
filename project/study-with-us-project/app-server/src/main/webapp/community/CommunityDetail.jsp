@@ -10,8 +10,118 @@
 <meta charset="UTF-8">
 <title>커뮤니티 상세</title>
 </head>
-<body>
+ <style>
+      body {
+        width : 2000px;
+        margin : 0 auto;
+      }
+      .wrapper {
+        width : 500px;
+      }
+      .cmnt_title{
+        text-align: center;
+        width : 70%
+      }
+      .cmnt_type {
+        margin-top : 20px;
+      }
+      .category {
+        padding-bottom: 10px;
+      }
+      .cmnt_info {
+        display : flex;
+        justify-content: space-between;
+      }
 
+
+      .cmnt_body {
+        border-top: solid 2px;
+        margin : 10px 0px;
+      }
+      .cmnt_content {
+        margin-top : 10px;
+      }
+      .cmnt_icon{
+        display: flex;
+        justify-content: flex-end;
+      }
+      .info_item{
+        align-items: center;
+        box-sizing: border-box;
+        color: rgb(0, 0, 0);
+        cursor: pointer;
+        display: flex;
+        font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        font-size: 12px;
+        height: 39px;
+        justify-content: center;
+        list-style-image: none;
+        list-style-position: outside;
+        list-style-type: none;
+        text-align: left;
+        margin: 0px 20px;
+        width: 40.3125px; 
+      } 
+
+      .icon {
+        width: 20px;
+      }
+
+      .icon_count {
+        color: white;
+        margin-left: 2px;
+      }
+
+      .comment_header {
+        font-size: 20px;
+        font-weight : bold;
+      }
+      textarea {
+      margin-top: 15px;
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      box-sizing: border-box;
+      border: solid 2px #1E90FF;
+      border-radius: 5px;
+      font-size: 12px;
+      resize: both;
+    }
+    .comment_button {
+      margin-top : 10px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .comment_list{
+      border-bottom: solid 2px;
+      list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    }
+    .profile{
+      width:10%;
+      margin-right: 30px;
+    }
+    .comment_write_info{
+      font-size: 12px;
+      margin-bottom: 20px;
+      display: flex;
+    }
+    .comment_content {
+      font-weight: normal;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    </style>
+    
+<body>
 <c:choose>
 <c:when test="${community.category eq 0}">
 <c:set var="type" value="정보"/>
@@ -26,28 +136,77 @@
 </c:when>
 </c:choose>
 
-<form>
-    <label for='f-no'>번호</label> 
-    <span id='f-no'>${community.no}</span><br>
+<div class="wrapper">
+    <section class="cmnt_header">
+      <div class="cmnt_title">
+        <span>${community.title}</span>
+      </div>
+      <div class="cmnt_info">
+        <p>${community.writer.nickname}</p> 
+        <p>${community.registeredDate}</p>
+      </div>
+      <div class="cmnt_type">
+        <span class="category">카테고리 : ${type}</span>
+      </div>
+    </section>
     
-    <label for='f-title'>제목</label>
-    <span id='f-title'>${community.title}</span><br>
+     <section class="cmnt_body">
+      <div class="cmnt_content">
+       ${community.content}
+      </div>
+      <div class="cmnt_icon">
+        <div class="info_item">
+          <img class="icon"
+               src="user">              
+          <p class="icon_count">${community.viewCount}</p>
+
+          <div class="info_item">
+            <img class="icon"
+                 src="user">              
+            <p class="icon_count">${community.like}</p>
+        </div>
+      </div>
+      </div>
+    </section>
     
-    <label for='f-content'>내용</label> 
-    <span id='f-content'>${community.content}</span><br>
-    
-    <label for='f-writer'>작성자</label> 
-    <span id='f-writer'>${community.writer.email}</span><br>
-    
-    <label for='f-viewCount'>조회수</label> 
-    <span id='f-viewCount'>${community.viewCount}</span><br>
-    
-    <label for='f-like'>좋아요</label> 
-    <span id='f-like'>${community.like}</span><br>
-    
-    <label for='f-registeredDate'>등록일</label> 
-    <span id='f-registeredDate'>${community.registeredDate}</span><br>
-    
+     <section class="comment_header">
+      <div class="comment_count">
+        ${fn:length(comments)}개의 댓글이 있습니다.
+      </div>
+     </section>
+   <div class="comment_input">
+        <textarea placeholder="댓글을 입력하세요."></textarea>
+      </div>
+
+      <div class="comment_button">
+        <button type="button" onclick="location.href='/swu/community/comment/add';">댓글 등록</button>
+      </div>
+      
+    <c:forEach items="${comments}" var="comment">
+       <ul class="comment_list">
+        <li class="comment_wrapper">
+          <section class="comment_info">
+            <div class="comment_write_info">
+              <img class="profile" src="user">
+              <div class="comment_member_info">
+                <div>${comment.writer.nickname}</div>
+                <div>${comment.registeredDate}</div>
+              </div>
+            </div>
+          </section>
+          <section class="comment_content">
+            ${comment.content}
+          </section>
+        </li>
+      </ul>
+    </c:forEach>
+    </div>
+</body>
+</html>
+
+<!--<a href='/swu/community/comment/delete?commentNo=${comment.no}&communityNo=${comment.communityNo}'>[삭제]</a>-->
+
+<!-- 
 <c:choose>
 <c:when test="${loginUser eq null}">
 <a href='/swu/community/list?categoryNo=${community.category}'>[목록]</a><br>
@@ -71,28 +230,4 @@
 </c:when>
 </c:choose>
 </form>
-
-   <br>
-      <div id= "comments">
-        <div id="comments-head" class="comment-row">
-          <span id="comments-count">${fn:length(comments)}</span>
-        </div>
-      </div>
-      
-    <form action='/swu/community/comment/add'>
-      <div class="comment-row">
-      <input type="hidden" id="communityNo" name="communityNo" value="${community.no}">
-        <textarea id="content" name="content" rows=2 placeHolder="댓글 입력"></textarea>
-        <br>
-        <button type="submit">작성</button>
-      </div>
-    </form>
-
-    <c:forEach items="${comments}" var="comment">
-      <div class="comment-row">
-        ${comment.registeredDate} &nbsp ${comment.writer.email}&nbsp${comment.content} &nbsp
-        <a href='/swu/community/comment/delete?commentNo=${comment.no}&communityNo=${comment.communityNo}'>[삭제]</a>
-        </div>
-       </c:forEach>
-</body>
-</html>
+ -->
