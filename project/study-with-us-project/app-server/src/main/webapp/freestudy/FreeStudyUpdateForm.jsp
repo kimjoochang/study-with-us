@@ -14,124 +14,135 @@
   }
 
 
-  .freepageformat{
-    -webkit-font-smoothing: antialiased;
-    background-color: rgb(255, 255, 255);
-    box-sizing: border-box;
-    color: rgb(0, 10, 18);
-    display: block;
-    font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
-    font-size: 16px;
-    font-weight: normal;
-    height: 13659.859375px;
-    line-height: 24px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 0px;
-    min-height: 820px;
-    overflow-x: visible;
-    overflow-y: visible;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-top: 0px;
-    text-rendering: optimizeSpeed;
-    width: 845px;
-  }
-
   .freepagetop{
     -webkit-font-smoothing: antialiased;
-background-attachment: scroll;
-background-clip: border-box;
-background-color: rgba(0, 0, 0, 0);
-background-image: linear-gradient(rgb(255, 255, 255) 70%, rgb(255, 255, 255) 70px);
-background-origin: padding-box;
-background-position-x: 0%;
-background-position-y: 0%;
-background-size: auto;
-box-sizing: border-box;
-color: rgb(0, 10, 18);
-display: block;
-font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
-font-size: 16px;
-font-weight: normal;
-height: 632px;
-line-height: 24px;
-padding-bottom: 24px;
-padding-left: 0px;
-padding-right: 0px;
-padding-top: 32px;
-text-rendering: optimizeSpeed;
-width: 845px;
+    background-attachment: scroll;
+    font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
+    font-size: 14px;
+    font-weight: bolder;
+    line-height: 24px;
+    padding-top: 32px;
+    width: 845px;
+    height: 1000px;
   }
 
+  ul {
+    float: left;
+  }
 
   .menu {
-background-attachment: scroll;
-background-clip: border-box;
-background-color: rgb(255, 255, 255);
-background-image: none;
-background-origin: padding-box;
-background-position-x: 0%;
-background-position-y: 0%;
-background-size: auto;
-border-bottom-left-radius: 24px;
-border-bottom-right-radius: 24px;
-border-top-left-radius: 24px;
-border-top-right-radius: 24px;
-box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 25px 0px;
-box-sizing: border-box;
-color: rgb(0, 0, 0);
-cursor: pointer;
-display: list-item;
-text-align: center;
-font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-height: 500px;
-list-style-image: none;
-list-style-position: outside;
-list-style-type: none;
-margin-bottom: 10px;
-margin-left: 40px;
-margin-right: 40px;
-margin-top: 10px;
-opacity: 1;
-padding-bottom: 24px;
-padding-left: 24px;
-padding-right: 24px;
-padding-top: 24px;
-position: relative;
-text-align: left;
-transition-delay: 0s;
-transition-duration: 0.2s;
-transition-property: transform;
-transition-timing-function: ease-in;
-width: 750px;
+
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgb(255, 255, 255);
+
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 25px 0px;
+    box-sizing: border-box;
+
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    display: list-item;
+    text-align: center;
+    font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    width: 750px;
+    xheight: 500px;
+
+    margin-bottom: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+    opacity: 1;
+
+    padding-bottom: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 24px;
+
+    text-align: left;
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+    transition-property: transform;
+    transition-timing-function: ease-in;
   }
 
   fieldset {
     border: 0px;
   }
 
+.date {
+  white-space: nowrap;
+  text-align: left;
+  word-spacing:0px;
+  letter-spacing:0px;
+}
+
+  label {
+    text-align: left;
+    width: 100px;
+    margin-left: 10px;
+  }
+  
   input {
-    xall: unset;
     border: none;
     width: 560px;
   }
 
-button {
-  text-align: center;
-    width: 110px;
+  .input3 {
+    text-align: center;
+    width: 107px;
     height: 30px;
     border-radius: 4px;
     background-color: rgb(246, 245, 252);
     color: rgb(117, 109, 170);
     border: 2px solid rgb(117, 109, 170);
-    box-shadow: 2px 2px 0px 0px rgb(77, 72, 72);
     margin: 5px;
+  }
+
+  /*input3,4 속성 같은데 사각형크기 왜 다르니?*/
+  .input4 {
+    text-align: center;
+    font-weight:700;
+    font-size: 15px;
+    width: 107px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(117, 109, 170);
+    border: 2px solid rgb(202, 199, 224);
+    margin: 5px;
+  }
+
+  .info_item{
+align-items: center;
+box-sizing: border-box;
+color: rgb(0, 0, 0);
+cursor: pointer;
+display: flex;
+font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+font-size: 12px;
+height: 18px;
+list-style-image: none;
+list-style-position: outside;
+list-style-type: none;
+text-align: left;
+width: 50px;
 }
 
-  a {
+.icon {
+  width: 20px;
+  margin-left: 10px;
+}
+
+.icon_count {
+  margin-left: 2px;
+}
+
+
+a {
   text-decoration-line: none;
   float: left;
   text-align: center;
@@ -149,20 +160,34 @@ a:link { color: rgb(246, 245, 252); }
 a:visited { color: rgb(210, 207, 226); }
 a:link { text-decoration: none; text-shadow: 0 0 24px; }
 a:visited { text-decoration: none; text-shadow: none; }
-
-
+  
   </style>
 </head>
 
-<body id="freepageformat">
+<body>
 
 <header class="freepagetop">
  
 <h1>무료 스터디 수정</h1>
 <form action='update'>
 
+  <ul>
+    <label class="input3" for='f-area'>스터디종류</label> 
+    <input class="input4" type="text" value="무료스터디">
+
+    <label class="input3" for='f-onOffLine'>온오프라인</label> 
+    <input class="input4" id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly>
+  
+    <label class="input3" for='f-area'>지역</label> 
+    <input class="input4" id='f-area' type='text' name='area' value='${freeStudy.area}' readonly>
+    <br>
+
+  </ul>
+
+  <br>
   <fieldset class="menu">
 
+    <hr>
     <label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${freeStudy.no}' readonly><br>
     
