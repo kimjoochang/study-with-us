@@ -11,55 +11,9 @@
 <title>커뮤니티 조회</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<style>
-ul{
-    list-style:none;
-  }
-  
-  .categorys li {
-    margin-bottom: 20px;
-  border-bottom: solid 2px gray;
-}
+ <link rel="stylesheet" href="../css/bootstrap.css">
 
-.side_menu .li{
-    margin-top : 4px;
-    border:solid 1px;
-    border-radius: 20%;
-    height: 30px;
-}
-
-tr {
-  text-align: center;
-}
-
-body {
-  width : 1000px;
-  margin : 0 auto;
-}
-
-.side_menu {
-  margin-right: 30px;
-  float: left;
-}
-.wrapper_wrapper{
-  display:flex;
-margin:0 auto;
-height:10px;
-
-}
-
-.wrapper {
-margin-top :50px;
-  display:flex;
-}
-
-
-.list {
-  width : 70%;
-  position : fixed;
-}
-</style>
-
+ <link rel="stylesheet" href="../css/theme.css">
 </head>
 
 <body>
