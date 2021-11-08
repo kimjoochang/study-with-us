@@ -23,17 +23,135 @@
       text-align: right;
       display: inline-block;
       width: 60px;
-
     }
+    
+  .freepageformat{
+    -webkit-font-smoothing: antialiased;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    color: rgb(0, 10, 18);
+    display: block;
+    font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
+    font-size: 16px;
+    font-weight: normal;
+    height: 13659.859375px;
+    line-height: 24px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    min-height: 820px;
+    overflow-x: visible;
+    overflow-y: visible;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    text-rendering: optimizeSpeed;
+    width: 845px;
+  }
+
+  .freepagetop{
+    -webkit-font-smoothing: antialiased;
+background-attachment: scroll;
+background-clip: border-box;
+background-color: rgba(0, 0, 0, 0);
+background-image: linear-gradient(rgb(255, 255, 255) 70%, rgb(255, 255, 255) 70px);
+background-origin: padding-box;
+background-position-x: 0%;
+background-position-y: 0%;
+background-size: auto;
+box-sizing: border-box;
+color: rgb(0, 10, 18);
+display: block;
+font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
+font-size: 16px;
+font-weight: normal;
+height: 632px;
+line-height: 24px;
+padding-bottom: 24px;
+padding-left: 0px;
+padding-right: 0px;
+padding-top: 32px;
+text-rendering: optimizeSpeed;
+width: 845px;
+  }
+
+  fieldset {
+    border: 0px;
+  }
+
+
+  .menu {
+background-attachment: scroll;
+background-clip: border-box;
+background-color: rgb(255, 255, 255);
+background-image: none;
+background-origin: padding-box;
+background-position-x: 0%;
+background-position-y: 0%;
+background-size: auto;
+border-bottom-left-radius: 24px;
+border-bottom-right-radius: 24px;
+border-top-left-radius: 24px;
+border-top-right-radius: 24px;
+box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 25px 0px;
+box-sizing: border-box;
+color: rgb(0, 0, 0);
+cursor: pointer;
+display: list-item;
+text-align: center;
+font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+height: 500px;
+list-style-image: none;
+list-style-position: outside;
+list-style-type: none;
+margin-bottom: 10px;
+margin-left: 40px;
+margin-right: 40px;
+margin-top: 10px;
+opacity: 1;
+padding-bottom: 24px;
+padding-left: 24px;
+padding-right: 24px;
+padding-top: 24px;
+position: relative;
+text-align: left;
+transition-delay: 0s;
+transition-duration: 0.2s;
+transition-property: transform;
+transition-timing-function: ease-in;
+width: 750px;
+  }
+
+  .button {
+    text-align: center;
+    width: 110px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: rgb(246, 245, 252);
+    color: rgb(117, 109, 170);
+    border: 2px solid rgb(117, 109, 170);
+    box-shadow: 2px 2px 0px 0px rgb(77, 72, 72);
+    margin: 5px;
+  }
+
+    input {
+    width: 560px;
+  }
 
     </style>
   </div>
 </head>
 
-<body>
+<body id="freepageformat">
+  <header class="freepagetop">
+
   <div id="d1">
 <h1>무료 스터디 등록</h1>
 <form action='add'>
+  <fieldset class="menu">
+
   &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
   
 <select name = "onOffLine">
@@ -180,11 +298,15 @@ function cat1_change(key,sel){
 <br>
 
 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-<input type="reset" value="초기화">
-<input type="submit" value="등록">
-<button>취소</button><br>
+<input class="button" type="reset" value="초기화">
+<input class="button" type="submit" value="등록">
+<button class="button">취소</button><br>
 </div>
+
+</fieldset>
 </form>
+
+</header>
 </body>
 </html>
 

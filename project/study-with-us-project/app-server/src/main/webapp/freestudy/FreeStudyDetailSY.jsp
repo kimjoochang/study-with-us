@@ -8,6 +8,7 @@
   
   <title>무료 스터디</title>
   <style>
+    
   label {
     margin-right: 5px;
     text-align: right;
@@ -15,143 +16,99 @@
     width: 60px;
   }
 
-  .freepageformat{
-    -webkit-font-smoothing: antialiased;
-    background-color: rgb(255, 255, 255);
-    box-sizing: border-box;
-    color: rgb(0, 10, 18);
-    display: block;
-    font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
-    font-size: 16px;
-    font-weight: normal;
-    height: 13659.859375px;
-    line-height: 24px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 0px;
-    min-height: 820px;
-    overflow-x: visible;
-    overflow-y: visible;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-top: 0px;
-    text-rendering: optimizeSpeed;
-    width: 845px;
-  }
-
   .freepagetop{
     -webkit-font-smoothing: antialiased;
-background-attachment: scroll;
-background-clip: border-box;
-background-color: rgba(0, 0, 0, 0);
-background-image: linear-gradient(rgb(255, 255, 255) 70%, rgb(255, 255, 255) 70px);
-background-origin: padding-box;
-background-position-x: 0%;
-background-position-y: 0%;
-background-size: auto;
-box-sizing: border-box;
-color: rgb(0, 10, 18);
-display: block;
-font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
-font-size: 16px;
-font-weight: normal;
-height: 632px;
-line-height: 24px;
-padding-bottom: 24px;
-padding-left: 0px;
-padding-right: 0px;
-padding-top: 32px;
-text-rendering: optimizeSpeed;
-width: 845px;
+    background-attachment: scroll;
+    font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
+    font-size: 14px;
+    font-weight: bolder;
+    line-height: 24px;
+    padding-top: 32px;
+    width: 845px;
+    height: 1000px;
   }
 
   ul {
     float: left;
   }
 
-  div {
-    display: inline-block;
-  } 
-
   .menu {
-background-attachment: scroll;
-background-clip: border-box;
-background-color: rgb(255, 255, 255);
-background-image: none;
-background-origin: padding-box;
-background-position-x: 0%;
-background-position-y: 0%;
-background-size: auto;
-border-bottom-left-radius: 24px;
-border-bottom-right-radius: 24px;
-border-top-left-radius: 24px;
-border-top-right-radius: 24px;
-box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 25px 0px;
-box-sizing: border-box;
-color: rgb(0, 0, 0);
-cursor: pointer;
-display: list-item;
-text-align: center;
-font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-height: 500px;
-list-style-image: none;
-list-style-position: outside;
-list-style-type: none;
-margin-bottom: 10px;
-margin-left: 40px;
-margin-right: 40px;
-margin-top: 10px;
-opacity: 1;
-padding-bottom: 24px;
-padding-left: 24px;
-padding-right: 24px;
-padding-top: 24px;
-position: relative;
-text-align: left;
-transition-delay: 0s;
-transition-duration: 0.2s;
-transition-property: transform;
-transition-timing-function: ease-in;
-width: 750px;
-  }
 
-  .form-group {
+    background-attachment: scroll;
+    background-clip: border-box;
     background-color: rgb(255, 255, 255);
+
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 25px 0px;
+    box-sizing: border-box;
+
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    display: list-item;
+    text-align: center;
+    font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    width: 750px;
+    xheight: 500px;
+
+    margin-bottom: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+    opacity: 1;
+
+    padding-bottom: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 24px;
+
+    text-align: left;
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+    transition-property: transform;
+    transition-timing-function: ease-in;
   }
 
   fieldset {
     border: 0px;
   }
 
-  .form-group-title {
--webkit-font-smoothing: antialiased;
-box-sizing: border-box;
-color: rgb(0, 0, 0);
-display: block;
-font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
-font-size: 26px;
-font-weight: bold;
-height: 39px;
-letter-spacing: -0.30000001192092896px;
-margin-top: 0px;
-xmargin-bottom: 24px;
-text-rendering: optimizeSpeed;
-width: 393.59375px;
-  }
-
   label {
     text-align: left;
-    width: 110px;
+    width: 100px;
+    margin-left: 10px;
   }
   
   input {
-    all:unset
+    border: none;
+    width: 560px;
   }
 
-  .f-no {
- 
+  .input3 {
+    text-align: center;
+    width: 107px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: rgb(246, 245, 252);
+    color: rgb(117, 109, 170);
+    border: 2px solid rgb(117, 109, 170);
+    margin: 5px;
+  }
+
+  /*input3,4 속성 같은데 사각형크기 왜 다르니?*/
+  .input4 {
+    text-align: center;
+    font-weight:700;
+    font-size: 15px;
+    width: 107px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(117, 109, 170);
+    border: 2px solid rgb(202, 199, 224);
+    margin: 5px;
   }
 
   .info_item{
@@ -173,23 +130,13 @@ width: 50px;
 
 .icon {
   width: 20px;
+  margin-left: 10px;
 }
 
 .icon_count {
   margin-left: 2px;
 }
 
-#input2 {
-    float: right;
-    width: 110px;
-    height: 30px;
-    border-radius: 4px;
-    background-color: rgb(246, 245, 252);
-    color: rgb(117, 109, 170);
-    border: 2px solid rgb(117, 109, 170);
-    box-shadow: 2px 2px 0px 0px rgb(77, 72, 72);
-    margin: 5px;
-  }
 
 a {
   text-decoration-line: none;
@@ -209,64 +156,41 @@ a:link { color: rgb(246, 245, 252); }
 a:visited { color: rgb(210, 207, 226); }
 a:link { text-decoration: none; text-shadow: 0 0 24px; }
 a:visited { text-decoration: none; text-shadow: none; }
-
-
+  
   </style>
+
+
 </head>
-
-<body id="freepageformat" >
-
+<body>
 <header class="freepagetop">
 
   <h1>무료 스터디 상세보기</h1>
-  
   <form action="detail" >
 
-    <ul class="ul">
-      <div> 스터디 종류 
-
-        <input class = "input" type="text">
-      </div> 
-      
-        <label for='f-no'>온오프라인</label> 
-        <input id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly><br>
-      </div>
-
-      <div> 지역 
-        <input type="text">
-      </div>
+    <ul>
+      <label class="input3" for='f-area'>스터디종류</label> 
+      <input class="input4" type="text" value="무료스터디">
+  
+      <label class="input3" for='f-onOffLine'>온오프라인</label> 
+      <input class="input4" id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly>
+    
+      <label class="input3" for='f-area'>지역</label> 
+      <input class="input4" id='f-area' type='text' name='area' value='${freeStudy.area}' readonly>
+      <br>
 
     </ul>
-    
-    <br>
 
+    <br>
     <fieldset class="menu">
 
-      <section>
-        <div class="info_item">
-          <img class="icon"
-          src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/fillingHeartIcon.png">
-          <p class="icon_count">1</p>
-        </div>
-        
-        <div class="info_item">
-          <img class="icon"
-          src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/eyeIcon copy.png">
-          <p class="icon_count">1</p>
-        </div>
-        
-        <div class="info_item">
-          <img class="icon"
-          src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/speechBalloonIcon copy.png">              
-          <p class="icon_count">1</p>
-        </div>
-      </section>
-      
       <div class="form-group">
         <label for='f-no'>번호</label> 
         <input id='f-no' type='text' name='no' value='${freeStudy.no}' readonly><br>
       </div>
       
+      <hr>
+
+
       <div class="form-group">
         <label for='f-title'>제목</label>
         <input id='f-title' type='text' name='title' value='${freeStudy.title}' readonly><br>
@@ -293,8 +217,8 @@ a:visited { text-decoration: none; text-shadow: none; }
       </div>
       
       <div class="form-group">
-        <label for='f-onOffLine'>온오프라인</label> 
-        <input id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly><br>
+        <label for='f-area'>지역</label> 
+        <input id='f-area' type='text' name='area' value='${freeStudy.area}' readonly><br>
       </div>
 
       <div class="form-group">
@@ -336,11 +260,23 @@ a:visited { text-decoration: none; text-shadow: none; }
         <label for='f-registeredDate'>등록일</label> 
         <span id='f-registeredDate'>${freeStudy.registeredDate}</span><br>
       </div>
-      
-    </fieldset>
-      <!--
-        <div class="button-group">
-      -->
+
+        <section>
+          <div class="info_item">
+            <img class="icon"
+            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/fillingHeartIcon.png">
+            <p class="icon_count">1</p>
+          
+            <img class="icon"
+            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/eyeIcon copy.png">
+            <p class="icon_count">1</p>
+          
+            <img class="icon"
+            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/speechBalloonIcon copy.png">              
+            <p class="icon_count">1</p>
+          </div>
+        </section>
+
         <c:choose>
           <c:when test="${loginUser eq null}">
             <a href='/swu/freestudy/list' class="button-group"> 목록 </a><br>
@@ -363,16 +299,16 @@ a:visited { text-decoration: none; text-shadow: none; }
             <c:if test="${result eq 1}">
               <a class = "interestIcon" href='/swu/freestudy/interest/delete?no=${freeStudy.no}' class="button-group"> 관심목록 삭제 </a>
             </c:if>
-
+            
           </c:when>
-
+          
         </c:choose>
-    </form>
-  </header> <!-- freestudytop-->
+      </fieldset>
+
+    </form> <!-- freestudy-detail-->
+  </header> <!-- freestudy-top-->
 </div>
   
-  
-
 </body> <!--무료스터디 제일 큰 포맷-->
 </html>
 
