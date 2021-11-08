@@ -49,11 +49,12 @@ ul.sub, .my-menu-list {
   margin: 0px;
   width: 150px;
   background: #eeeef1;
-  height: 785px;
+  height: 810px;
   overflow: hidden;
   position: fixed;
   border-radius: 3px;
 }
+
 
 ul.sub li a {
   text-decoration: none;
@@ -84,7 +85,7 @@ ul.sub li a.home {
   display: block;
   margin-top: 10px;
   margin-bottom: 16px;
-  width: 128px;
+  width: 86px;
   height: 3px;
   border-radius: 40px;
   background-color: #827e9e;
@@ -105,27 +106,86 @@ ul.sub li a.home {
 }
 
 .content-section{
-  width: 920px;
-  height: 900px;
+  width: 900px;
+  height: 920px;
   background-color: #eeeef1;
   border-radius: 3px;
   margin-top: 0px;
   margin-left: 180px;
 }
-.page_subject {
-  margin-left: 15px;
-}
 
-.title {
-  font-weight: bold;
+.subject{
   font-size: 20px;
-  padding: 20px 0px;
-  border-bottom: solid 1px;
+  margin-left: 30px;
+  padding-top: 35px;
 }
 
-.table-content {
-  text-align: center;
-  margin-top : 20px 
+.box1{
+  width: 800px;
+  height: 300px;
+  border-top: 2px solid rgb(153, 152, 152);
+  border-radius: 3px;
+  padding: 30px;
+  margin-top:15px;
+  margin-left:20px;
+  box-sizing:border-box
+}
+
+  .box2{
+  width: 800px;
+  height: 150px;
+  border-top: 2px solid rgb(153, 152, 152);
+  border-bottom: 2px solid rgb(153, 152, 152);
+  border-radius: 3px;
+  padding: 30px;
+  margin-top:15px;
+  margin-left:20px;
+  box-sizing:border-box
+}
+
+.box3{
+  width: 800px;
+  height: 100px;
+  
+  padding: 30px;
+  margin-top:0px;
+  margin-left:10px;
+  box-sizing:border-box
+}
+
+input{
+  all: unset;
+}
+
+.attribute{
+ text-align: justify;
+  
+}
+
+.photo{
+  padding: 15px;
+  font-size: 12px;
+}
+
+ .nickname, .email {
+  padding: 20px;
+  font-size: 12px;
+}
+
+.file{
+  padding: 20px;
+  margin-left:57px;
+}
+.pwd{
+  font-size: 12px;
+  padding-top:20px;
+  padding-right:22px;
+}
+
+.ph {
+  margin-top: 0px;
+  padding: 20px;
+  font-size: 12px;
 }
 
 
@@ -164,7 +224,7 @@ ul.sub li a.home {
    <div class="container">
        <div class="col-lg-6 py-3 wow fadeInUp">
          
-         <span class="subhead">admin page</span>
+         <span class="subhead">my page</span>
          <!--<h2 class="title-section">나의 정보</h2>-->
          <div class="divider-sub"></div>
          
@@ -173,44 +233,82 @@ ul.sub li a.home {
           <ul class="my-menu-list">
             <div class="profile-icon">
             
-            <img src="../assets/img/manager.png">
+            <img src="../assets/img/profile.png">
           </div>
-          <li class ="userid">admin</li>
-          <ul class=sub>
-          <li><a href="#">회원 관리</a></li>
-          <li><a href="#">스터디 관리</a></li>
-          <li><a href="#">캘린더 관리</a></li>
+            <li class ="userid">jeje2kim 님</li>
+            <ul class=sub>
+            <li><a href="#">나의 정보</a></li>
+            <li><a href="#">결제 내역</a></li>
+            <li><a href="#">관심 목록</a></li>
+            <li><a href="#">나의 활동</a></li>
           </ul>
           </ul>
-          <div class="content-section">
-            <div class="title">
-              <span class="page_subject">멘토승인 관리</span>
-            </div>
-              <div class="table-content">
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">이름</th>
-                        <th scope="col">이메일</th>
-                        <th scope="col">신청내역</th>
-                        <th scope="col">신청일</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">주창</th>
-                        <td>jc@test.com</td>
-                        <td>아이콘</td>
-                        <td>2021-11-11</td>
-                        <td><button>승인</button></td>
-                        <td><button>거절</button></td>
-                      </tr>
-                    </tbody>
-                </table>    
-              </div>     
-          </div>
+          <div class="content-section"> 
+
+<form>
+  <section class="all-contents">
+
+    <div class="subject"> 결제 내역 </div>
+
+    <div class="box1">
+      <div class="table-content">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">결제번호</th>
+                <th scope="col">결제일</th>
+                <th scope="col">상태</th>
+                <th scope="col">스터디명</th>
+                <th scope="col">결제금액</th>
+                <th scope="col">거래명세서</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <th scope="row">107320</th>
+                <td>2021-11-08</td>
+                <td>결제 완료</td>
+                <td>개발자 취업 가이드</td>
+                <td>133,300</td>
+                <td><button type="button" class="btn btn-primary btn-sm">보기</button> </td>
+              </tr>
+
+              <tr>
+                <th scope="row">105671</th>
+                <td>2021-10-11</td>
+                <td>결제 취소</td>
+                <td>면접 스킬 업 멘토링</td>
+                <td>70,000</td>
+                <td><button type="button" class="btn btn-primary btn-sm">보기</button> </td>
+              </tr>
+
+              <tr>
+                <th scope="row">104011</th>
+                <td>2021-09-07</td>
+                <td>결제 완료</td>
+                <td>파이썬 프로그래밍</td>
+                <td>89,000</td>
+                <td><button type="button" class="btn btn-primary btn-sm">보기</button> </td>
+              </tr>
+
+            </tbody>
+        </table>    
+      </div>     
+    
+</section>
+</form>
+
+
+
+  </div>
+
+
+
+
+
+
+
         </div>
       </div>
           
