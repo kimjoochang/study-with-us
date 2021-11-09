@@ -191,11 +191,13 @@
       </div>
      </section>
    <div class="comment_input">
-        <textarea placeholder="댓글을 입력하세요."></textarea>
-      </div>
-
+      <form action='comment/add' method='post'>
+      <input type='hidden' name='communityNo' value='${community.no}'>
+        <textarea name="content" placeholder="댓글을 입력하세요."></textarea>
       <div class="comment_button">
-        <button type="button" onclick="location.href='/swu/community/comment/add';">댓글 등록</button>
+        <input type="submit" value="댓글 등록">
+      </div>
+      </form>
       </div>
       
     <c:forEach items="${comments}" var="comment">
@@ -218,6 +220,12 @@
     </c:forEach>
     </div>
     </div>
+    
+    <script>
+    const addComment = () => {
+     location.replace('comment/add?communityNo=${community.no}')
+    }
+    </script>
 </body>
 </html>
 

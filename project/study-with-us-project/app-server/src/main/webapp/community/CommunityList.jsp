@@ -28,18 +28,19 @@
 		<jsp:include page="../header.jsp"></jsp:include>
 
 		<c:choose>
-			<c:when test="${categoryNo eq 0}">
-				<c:set var="type" value="정보" />
-			</c:when>
+              <c:when test="${community.category eq 0}">
+                <c:set var="cmntType" value="정보" />
+              </c:when>
 
-			<c:when test="${categoryNo eq 1}">
-				<c:set var="type" value="질문" />
-			</c:when>
+              <c:when test="${community.category eq 1}">
+                <c:set var="cmntType" value="질문" />
+              </c:when>
 
-			<c:when test="${categoryNo eq 2}">
-				<c:set var="type" value="스몰톡" />
-			</c:when>
-		</c:choose>
+              <c:when test="${community.category eq 2}">
+                <c:set var="cmntType" value="스몰톡" />
+              </c:when>
+            </c:choose>
+
 		<!-- 글쓰기 버튼 -->
 		<div class="add-button">
 			<button id="open">글쓰기</button>
@@ -53,11 +54,12 @@
 				<!--모달 화면-->
 				<div class="modal_content">
 					<div class="form_category_menu">
-						<a href='form?categoryNo=0'>정보</a> <a href='form?categoryNo=1'>질문</a>
-						<a href='form?categoryNo=2'>스몰톡</a>
+						<a class="info_box" href='form?categoryNo=0'>정보</a> 
+						<a class="qa_box" href='form?categoryNo=1'>질문</a>
+						<a class="talk_box" href='form?categoryNo=2'>스몰톡</a>
 					</div>
 					<div class="form_box">
-						<form action='add' target="CommunityList.jsp">
+						<form action='add' target="CommunityList.jsp" method='post'>
 							<input type='hidden' name='categoryNo' value='${categoryNo}'>
 							<input class="form_input_title" type='text' name='title' size=36
 								maxlength=30 placeholder="제목을 입력하세요.">
@@ -77,9 +79,9 @@
 		<div class="main-wrapper">
 			<div class="side_menu">
 				<ul class="categorys">
-					<li><a href='list?categoryNo=0'>정보 커뮤니티</a><br>
-					<li><a href='list?categoryNo=1'>질문 커뮤니티</a><br>
-					<li><a href='list?categoryNo=2'>스몰톡 커뮤니티</a><br>
+					<li><a class="info_text" href='list?categoryNo=0'>정보 커뮤니티</a><br>
+					<li><a class="qa_text" href='list?categoryNo=1'>질문 커뮤니티</a><br>
+					<li><a class="talk_text" href='list?categoryNo=2'>스몰톡 커뮤니티</a><br>
 				</ul>
 			</div>
 
@@ -87,7 +89,6 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col">번호</th>
 							<th scope="col">카테고리</th>
 							<th scope="col">제목</th>
 							<th scope="col">작성자</th>
@@ -112,7 +113,6 @@
 						</c:choose>
 						<tbody>
 							<tr>
-								<th scope="row">${community.no}</th>
 								<td>${type}</td>
 								<td><a href='detail?no=${community.no}'>${community.title}</a></td>
 								<td>${community.writer.nickname}</td>
@@ -134,6 +134,35 @@
 	</div>
 
 	<script>
+	let type;
+	let box;
+	let text;
+
+	const changeColor = () => {
+	  if (${categoryNo} === 0) {
+	    text = document.querySelector('.info_text');
+	    box =  document.querySelector('.info_box');
+
+	    text.classList.add('ctry_text_color');
+	    box.classList.add('ctry_box_color');
+	    
+	  } else if (${categoryNo} === 1) {
+	    text = document.querySelector('.qa_text');
+	    box =  document.querySelector('.qa_box');
+	    text.classList.add('ctry_text_color');
+	    box.classList.add('ctry_box_color');
+	    
+	  } else {
+	    text = document.querySelector('.talk_text');
+	    box =  document.querySelector('.talk_box');
+
+	    text.classList.add('ctry_text_color');
+	    box.classList.add('ctry_box_color');
+	  }
+	}
+	
+	changeColor();
+	
   const openBtn = document.getElementById('open');
 //onModal button
 

@@ -41,9 +41,10 @@ public class CommentAddController extends HttpServlet {
 
     try {
       Member writer = (Member) request.getSession(false).getAttribute("loginUser");
+      int communityNo = Integer.parseInt(request.getParameter("communityNo"));
 
       Comment comment = new Comment();
-      comment.setCommunityNo(Integer.parseInt(request.getParameter("communityNo")));
+      comment.setCommunityNo(communityNo);
       comment.setContent(request.getParameter("content"));
       comment.setWriter(writer);
 
@@ -51,8 +52,10 @@ public class CommentAddController extends HttpServlet {
 
       sqlSession.commit();
 
-      request.setAttribute("no", Integer.parseInt(request.getParameter("communityNo")));
-      request.getRequestDispatcher("/community/detail").forward(request, response);
+      response.sendRedirect("../detail?no="+ communityNo);
+
+      //      request.setAttribute("no", Integer.parseInt(request.getParameter("communityNo")));
+      //      request.getRequestDispatcher("/community/detail").forward(request, response);
 
     } catch (Exception e) {
       System.out.println(e.getMessage());

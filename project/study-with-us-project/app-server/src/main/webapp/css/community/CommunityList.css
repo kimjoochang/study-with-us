@@ -4,9 +4,31 @@
 }
 
 .categorys li {
-	color: black;
-	margin-bottom: 10px;
+	margin-bottom: 50px;
 }
+.categorys li a{
+	text-decoration: none;
+
+	}
+
+.categorys li a:hover {
+color : #898798;
+}
+
+.info_text {
+	font-weight: bold;
+	color : black;
+}
+
+.qa_text {
+	font-weight: bold;
+	color : black;
+}
+.talk_text {
+	font-weight: bold;
+	color : black;
+}
+
 
 #cmnt_add {
 	margin-bottom: 3px;
@@ -25,6 +47,7 @@
 }
 
 .lists {
+	text-align: center;
 	color: black;
 	margin-top: 20px;
 	width: 80%;
@@ -71,6 +94,10 @@ h1 {
 	display: none;
 }
 
+.table th td {
+	margin : 15px;
+}
+
 .form_category_menu {
 	margin-top: 10px;
 	display: flex;
@@ -78,8 +105,23 @@ h1 {
 }
 
 .form_category_menu a {
+	border : solid 1px #898798;
+	border-radius : 5px;
+	color : black;
 	font-size: 15px;
 	text-decoration: none;
+}
+
+.info_box {
+	padding : 5px 10px;
+}
+
+.qa_box {
+	padding : 5px 10px;
+}
+
+.talk_box {
+	padding : 5px 10px;
 }
 
 .form_input_title {
@@ -97,10 +139,22 @@ h1 {
 	flex-direction: row-reverse;
 }
 
+ .table td a {
+	color : black;
+}
+
 .form_buttons input {
 	margin-right: 15px;
 }
 
 .form_box {
 	margin-left: 25px;
+}
+
+.ctry_text_color {
+	color : #898798;
+}
+
+.ctry_box_color {
+	background-color : #898798;
 }
