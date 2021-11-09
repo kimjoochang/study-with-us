@@ -1,24 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    trimDirectiveWhitespaces="true" %>
-    
+pageEncoding="UTF-8"
+trimDirectiveWhitespaces="true" %>
+
 <!DOCTYPE html>
 <html>
-<head>
-  <div style='text-align: center;'>
-  <title>무료 스터디</title>
-  
-  <style>
-    /*
-    div {
-      background-image: url(STUDYWITHUS\ LOGO.jpg);
-      float: left;
-      background-repeat: no-repeat;
-    }
-    
-    #d1{
-      background-size: 65px;
-    }
+  <head>
+    <div style='text-align: center;'>
+      <title>무료 스터디</title>
+      
+      <link rel="stylesheet" href="../css/theme.css">
+      <link rel="stylesheet" href="../css/bootstrap.css">
+      </head>
+
+      <style>
+        /*
+        div {
+          background-image: url(STUDYWITHUS\ LOGO.jpg);
+          float: left;
+          background-repeat: no-repeat;
+        }
+        
+        #d1{
+          background-size: 65px;
+        }
     */
     label {
       margin-right: 5px;
@@ -194,9 +198,12 @@ a:visited { text-decoration: none; text-shadow: none; }
   
     </style>
   </div>
-</head>
 
 <body id="freepageformat">
+
+  <div class="container">
+  <jsp:include page="../header.jsp"></jsp:include>
+    
   <header class="freepagetop">
 
   <div id="d1">
@@ -372,12 +379,12 @@ function cat1_change(key,sel){
 <c:choose>
   <c:when test="${loginUser eq null}">
 
-<div class = "buttons">
-  <a href='/swu/freestudy/list' class="button-group"> 목록 </a><br>
-  <a href='/swu/freestudy/add' class="button-group"> 등록 </a> 
-  <input class="input5" type="reset" value="초기화">
-</div>
-
+  <div>
+    <input class="input5" type="reset" value="초기화">
+    <input class="input5" type="submit" value="등록">
+    <button class="input5">취소</button><br>
+  </div>
+    
   </c:when>
 
 
@@ -385,6 +392,8 @@ function cat1_change(key,sel){
 </form>
 
 </header>
+
+  </div> <!-- container -->
 </body>
 </html>
 
