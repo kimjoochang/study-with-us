@@ -8,7 +8,7 @@
 
   <meta name="copyright" content="MACode ID, https://macodeid.com/">
 
-  <title>마이페이지 : 나의정보</title>
+  <title>마이페이지 : 나의활동</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
@@ -131,28 +131,7 @@ ul.sub li a.home {
   box-sizing:border-box
 }
 
-  .box2{
-  width: 800px;
-  height: 150px;
-  border-top: 2px solid rgb(153, 152, 152);
-  border-bottom: 2px solid rgb(153, 152, 152);
-  border-radius: 3px;
-  padding: 30px;
-  margin-top:15px;
-  margin-left:20px;
-  box-sizing:border-box
-}
-
-.box3{
-  width: 800px;
-  height: 100px;
   
-  padding: 30px;
-  margin-top:0px;
-  margin-left:10px;
-  box-sizing:border-box
-}
-
 input{
   all: unset;
 }
@@ -188,6 +167,18 @@ input{
   font-size: 12px;
 }
 
+.buttons{
+  margin-top:20px;
+  margin-left:25px;
+  margin-bottom:0px;
+  padding-bottom:0px;
+}
+
+.btn {
+  height:35px;
+  width: 109px;
+  font-size:12px;
+}
 
 </style>
 
@@ -245,59 +236,66 @@ input{
           </ul>
           <div class="content-section"> 
 
-<form>
+
   <section class="all-contents">
 
-    <div class="subject"> 결제 내역 </div>
+    <div class="box0">
+    <div class="subject"> 나의 활동 </div>
+    </div>
+
+    <div class="buttons">
+    <button type="button" class="btn btn-primary btn-sm">나의 스터디</button>
+    <button type="button" class="btn btn-primary btn-sm">나의 게시글</button><br>
+    </div>
 
     <div class="box1">
       <div class="table-content">
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">결제번호</th>
-                <th scope="col">결제일</th>
-                <th scope="col">상태</th>
-                <th scope="col">스터디명</th>
-                <th scope="col">결제금액</th>
-                <th scope="col">거래명세서</th>
+                <th scope="col">번호</th>
+                <th scope="col">카테고리</th>
+                <th scope="col">제목</th>
+                <th scope="col">등록일</th>
               </tr>
             </thead>
 
             <tbody>
               <tr>
-                <th scope="row">107320</th>
-                <td>2021-11-08</td>
-                <td>결제 완료</td>
-                <td>개발자 취업 가이드</td>
-                <td>133,300</td>
-                <td><button type="button" class="btn btn-primary btn-sm">보기</button> </td>
+                <th scope="row">109088</th>
+                <td>질문</td>
+                <td>자바 공부 어떻게 하시나요?</td>
+                <td>2021-11-09</td>
               </tr>
 
               <tr>
-                <th scope="row">105671</th>
-                <td>2021-10-11</td>
-                <td>결제 취소</td>
-                <td>면접 스킬 업 멘토링</td>
-                <td>70,000</td>
-                <td><button type="button" class="btn btn-primary btn-sm">보기</button> </td>
+                <th scope="row">107891</th>
+                <td>정보</td>
+                <td>취준생의 SI기업 면접 후기 공유</td>
+                <td>2021-09-09</td>
               </tr>
-<!---->
+
               <tr>
-                <th scope="row">104011</th>
-                <td>2021-09-07</td>
-                <td>결제 완료</td>
-                <td>파이썬 프로그래밍</td>
-                <td>89,000</td>
-                <td><button type="button" class="btn btn-primary btn-sm">보기</button> </td>
+                <th scope="row">100101</th>
+                <td>스몰톡</td>
+                <td>인생이란 뭘까요...?</td>
+                <td>2021-05-12</td>
               </tr>
+
+              <tr>
+                <th scope="row">100011</th>
+                <td>스몰톡</td>
+                <td>오늘 제 생일이에요</td>
+                <td>2021-04-07</td>
+              </tr>
+
 
             </tbody>
         </table>    
       </div>     
     
 </section>
-</form>
+
 
 
 
