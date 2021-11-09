@@ -9,6 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>커뮤니티 상세</title>
+
+<link rel="stylesheet" href="../css/bootstrap.css">
+
+<link rel="stylesheet" href="../css/theme.css">
 </head>
  <style>
       body {
@@ -19,8 +23,8 @@
         width : 500px;
       }
       .cmnt_title{
+        margin-bottom : 50px;
         text-align: center;
-        width : 70%
       }
       .cmnt_type {
         margin-top : 20px;
@@ -39,7 +43,8 @@
         margin : 10px 0px;
       }
       .cmnt_content {
-        margin-top : 10px;
+        margin-top : 20px;
+        height : 200px;
       }
       .cmnt_icon{
         display: flex;
@@ -118,10 +123,21 @@
       font-size: 15px;
       margin-bottom: 10px;
     }
+    .container {
+    
+    }
+    
+    .wrapper {
+      margin : 0 auto;
+      margin-top : 100px;
+    text_align : center;
+    }
 
     </style>
     
 <body>
+  <jsp:include page="../header.jsp"></jsp:include>
+<div class="container">
 <c:choose>
 <c:when test="${community.category eq 0}">
 <c:set var="type" value="정보"/>
@@ -200,6 +216,7 @@
         </li>
       </ul>
     </c:forEach>
+    </div>
     </div>
 </body>
 </html>

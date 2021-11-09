@@ -43,7 +43,6 @@ public class CommentAddController extends HttpServlet {
       Member writer = (Member) request.getSession(false).getAttribute("loginUser");
 
       Comment comment = new Comment();
-
       comment.setCommunityNo(Integer.parseInt(request.getParameter("communityNo")));
       comment.setContent(request.getParameter("content"));
       comment.setWriter(writer);
