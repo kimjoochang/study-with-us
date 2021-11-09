@@ -6,31 +6,29 @@
 <html>
 <head>
 <title>유료 스터디</title>
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="../css/study/StudyList.css"> 
 </head>
+
 <body>
-	<h1>유료 스터디 목록</h1>
-	<a href='form'>유료 스터디</a>
+	<div class="container">
+	<jsp:include page="../header.jsp"></jsp:include>
+
+	<h1>멘토링 스터디 목록</h1>
+
+	<br class="inputs">
+    <input id="input1" type="button" value="모집중">
+    <input id="input1" type="button" value="진행중">
+    <input id="input1" type="button" value="진행완료">
+
+	<a href='form'>멘토링 스터디 작성</a>
+	</br>
+
+	<hr size="2" noshade color="gray">
+
 	<br>
-	<table border='1'>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>지역</th>
-				<th>카테고리</th>
-				<th>작성자</th>
-				<th>금액</th>
-				<th>시작일</th>
-				<th>종료일</th>
-				<th>모집인원</th>
-				<th>스터디 진행상태</th>
-				<th>등록일</th>
-				<th>조회수</th>
-				<th>좋아요수</th>
-			</tr>
-		</thead>
-		<tbody>
-		
+			
   <c:forEach items="${chargeStudyList}" var="chargeStudy">
   
   <c:choose>
@@ -68,6 +66,7 @@
  
 	</tbody>
 	</table>
+	</div> <!-- container -->
 	</body>
 	</html>
 
