@@ -3,234 +3,32 @@ pageEncoding="UTF-8"
 trimDirectiveWhitespaces="true" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+
   <head>
-    <div style='text-align: center;'>
       <title>무료 스터디</title>
       
       <link rel="stylesheet" href="../css/theme.css">
       <link rel="stylesheet" href="../css/bootstrap.css">
+      <link rel="stylesheet" href="../css/study/StudyAddForm.css">
       </head>
 
-      <style>
-        /*
-        div {
-          background-image: url(STUDYWITHUS\ LOGO.jpg);
-          float: left;
-          background-repeat: no-repeat;
-        }
-        
-        #d1{
-          background-size: 65px;
-        }
-    */
-    label {
-      margin-right: 5px;
-      text-align: right;
-      display: inline-block;
-      width: 60px;
-    }
-  
-    .freepagetop{
-    -webkit-font-smoothing: antialiased;
-    background-attachment: scroll;
-    font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
-    font-size: 14px;
-    font-weight: bolder;
-    line-height: 24px;
-    padding-top: 32px;
-    width: 845px;
-    height: 1000px;
-  }
+</header>
 
-  ul {
-    float: left;
-  }
-
-  .menu {
-
-    background-attachment: scroll;
-    background-clip: border-box;
-    background-color: rgb(255, 255, 255);
-
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 25px 0px;
-    box-sizing: border-box;
-
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    display: list-item;
-    text-align: center;
-    font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    width: 750px;
-    xheight: 500px;
-
-    margin-bottom: 10px;
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-top: 10px;
-    opacity: 1;
-
-    padding-bottom: 24px;
-    padding-left: 24px;
-    padding-right: 24px;
-    padding-top: 24px;
-
-    text-align: left;
-    transition-delay: 0s;
-    transition-duration: 0.2s;
-    transition-property: transform;
-    transition-timing-function: ease-in;
-  }
-
-  fieldset {
-    border: 0px;
-  }
-
-.date {
-  white-space: nowrap;
-  text-align: left;
-  word-spacing:0px;
-  letter-spacing:0px;
-}
-
-  label {
-    text-align: left;
-    width: 100px;
-    margin-left: 10px;
-  }
-  
-  input {
-    xborder: none;
-    width: 560px;
-  }
-
-  .input3 {
-    text-align: center;
-    width: 107px;
-    height: 30px;
-    border-radius: 4px;
-    background-color: rgb(246, 245, 252);
-    color: rgb(117, 109, 170);
-    border: 2px solid rgb(117, 109, 170);
-    margin: 5px;
-  }
-
-  /*input3,4 속성 같은데 사각형크기 왜 다르니?*/
-  .input4 {
-    text-align: center;
-    font-weight:700;
-    font-size: 15px;
-    width: 107px;
-    height: 30px;
-    border-radius: 4px;
-    background-color: rgb(255, 255, 255);
-    color: rgb(117, 109, 170);
-    border: 2px solid rgb(202, 199, 224);
-    margin: 5px;
-  }
-
-  .input5 {
-    text-decoration-line: none;
-  float: left;
-  text-align: center;
-    width: 110px;
-    height: 30px;
-    border-radius: 4px;
-    background-color: rgb(117, 109, 170);
-    color: rgb(96, 86, 161);
-    border: 2px solid rgb(117, 109, 170);
-    box-shadow: 2px 2px 0px 0px rgb(77, 72, 72);
-    margin: 5px;
-  }
-
-  .info_item{
-align-items: center;
-box-sizing: border-box;
-color: rgb(0, 0, 0);
-cursor: pointer;
-display: flex;
-font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-font-size: 12px;
-height: 18px;
-list-style-image: none;
-list-style-position: outside;
-list-style-type: none;
-text-align: left;
-width: 50px;
-}
-
-.icon {
-  width: 20px;
-  margin-left: 10px;
-}
-
-.icon_count {
-  margin-left: 2px;
-}
-
-.buttons {
-  display: flex;
-  background-color: red;
-}
-
-a {
-  text-decoration-line: none;
-  float: left;
-  text-align: center;
-    width: 110px;
-    height: 30px;
-    border-radius: 4px;
-    background-color: rgb(117, 109, 170);
-    color: rgb(96, 86, 161);
-    border: 2px solid rgb(117, 109, 170);
-    box-shadow: 2px 2px 0px 0px rgb(77, 72, 72);
-    margin: 5px;
-}
-
-a:link { color: rgb(246, 245, 252); }
-a:visited { color: rgb(210, 207, 226); }
-a:link { text-decoration: none; text-shadow: 0 0 24px; }
-a:visited { text-decoration: none; text-shadow: none; }
-  
-    </style>
-  </div>
-
-<body id="freepageformat">
-
+<body>
   <div class="container">
   <jsp:include page="../header.jsp"></jsp:include>
     
   <header class="freepagetop">
 
-  <div id="d1">
-<h1>무료 스터디 등록</h1>
+    <h1>스터디 등록</h1>
 <form action='add'>
 
-  <ul>
-    <label class="input3" for='f-area'>스터디종류</label> 
-    <input class="input4" type="text" value="무료스터디">
-
-    <label class="input3" for='f-onOffLine'>온오프라인</label> 
-    <input class="input4" id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly>
-  
-    <label class="input3" for='f-area'>지역</label> 
-    <input class="input4" id='f-area' type='text' name='area' value='${freeStudy.area}' readonly>
-    <br>
-
-  </ul>
-
   <fieldset class="menu">
-
-  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-  
 <select name = "onOffLine">
-  <option value="" selected>---온/오프라인---</option>
+  <option value="" selected="selected">---온/오프라인---</option>
   <option value=0>온라인</option>
-  <option value=1 selected="selected">오프라인</option>
+  <option value=1 >오프라인</option>
 </select>
 
 <!-- <form name="form1"> -->
@@ -257,7 +55,7 @@ a:visited { text-decoration: none; text-shadow: none; }
   <select name="h_area2">
    <option>--구/군--</option>
   </select>
-<!--  
+
 <script language=javascript>
  
  var cat1_num = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
@@ -345,15 +143,13 @@ function cat1_change(key,sel){
  }
 }
 
-</script>
+</script> <!-- h_area2 -->
  </form>
--->
-<br> <br> 
+
 <label for='title'>제목</label> 
 <input type='text' name='title'><br>
 
-<label for='content'>내용 <br><br><br><br><br><br><br><br><br>
-<br></label>
+<label for='content'>내용</label>
 <textarea cols="40" rows="10" name="content" placeholder="개설할 무료 스터디 내용을 입력해주세요.">
 </textarea>
 <br>
@@ -370,30 +166,17 @@ function cat1_change(key,sel){
 <input type='date' name='endDate'><br>
 <br>
 
-<!--
-  <input class="input5" type="reset" value="초기화">
-  <input class="input5" type="submit" value="등록">
-  <button class="input5">취소</button><br>
-</div>
--->
-<c:choose>
-  <c:when test="${loginUser eq null}">
-
   <div>
     <input class="input5" type="reset" value="초기화">
     <input class="input5" type="submit" value="등록">
-    <button class="input5">취소</button><br>
+    <button class="input5" onclick="location.href='list'">취소</button><br>
   </div>
     
-  </c:when>
-
-
 </fieldset>
 </form>
 
-</header>
 
-  </div> <!-- container -->
+</div> <!-- container -->
 </body>
 </html>
 

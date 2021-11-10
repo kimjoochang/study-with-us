@@ -16,20 +16,20 @@ trimDirectiveWhitespaces="true" %>
   <div class="container">
   <jsp:include page="../header.jsp"></jsp:include>
 
-  <h1>스터디 목록
-  </h1>
+  <h1>스터디 목록</h1>
     
     <br class="inputs">
     <input id="input1" type="button" value="모집중">
     <input id="input1" type="button" value="진행중">
     <input id="input1" type="button" value="진행완료">
 
-    <a class=input2 href='form'>무료 스터디 작성</a>
+    <a class=input2 href='form'>스터디 작성</a>
     </br>
 
     <hr size="2" noshade color="gray">
 
     <br>
+
 <c:forEach items="${freeStudyList}" var="freeStudy">
   <c:choose>
   <c:when test="${freeStudy.studyStatus eq 0}">
@@ -50,7 +50,6 @@ trimDirectiveWhitespaces="true" %>
   </c:choose>
   
 <div class="wrapper">
-  <main>
     <div class="main_main">
 
       <ul class="uldesign">
@@ -113,7 +112,7 @@ trimDirectiveWhitespaces="true" %>
               
             </div>
           </section>
-        </li>
+        </li> <!--lidestin-->
         
 </c:forEach>
 

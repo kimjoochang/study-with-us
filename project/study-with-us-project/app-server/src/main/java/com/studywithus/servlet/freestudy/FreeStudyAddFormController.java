@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/freestudy/form")
-public class FreeStudyFormController extends HttpServlet {
+
+public class FreeStudyAddFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -18,12 +19,12 @@ public class FreeStudyFormController extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession Session = request.getSession(false);
-
+		/*
 		if (Session.getAttribute("loginUser") == null) {
-			response.sendRedirect("list");
+			response.sendRedirect("/swu/user/loginform");
 			return;
 		}
-
+		 */
 		request.getRequestDispatcher("/freestudy/FreeStudyForm.jsp").forward(request, response);
 	}
 }

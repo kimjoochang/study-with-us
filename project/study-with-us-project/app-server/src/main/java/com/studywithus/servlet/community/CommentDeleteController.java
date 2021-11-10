@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.CommentDao;
 import com.studywithus.domain.Comment;
-import com.studywithus.domain.Member;
 
 @WebServlet("/community/comment/delete")
 public class CommentDeleteController extends HttpServlet {
@@ -36,15 +35,10 @@ public class CommentDeleteController extends HttpServlet {
 
       Comment comment = commentDao.findByNo(commentNo);
 
-      Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+      commentDao.delete(commentNo);
+      sqlSession.commit();
 
-      if(loginUser.getNo() == comment.getWriter().getNo()) {
-        commentDao.delete(commentNo);
-        sqlSession.commit();
-      }
-
-      request.setAttribute("no", Integer.parseInt(request.getParameter("communityNo")));
-      request.getRequestDispatcher("/community/detail").forward(request, response);
+      response.sendRedirect("../detail?no="+ comment.getCommunityNo());
 
     } catch (Exception e) {
       sqlSession.rollback();

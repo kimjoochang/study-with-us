@@ -47,9 +47,10 @@ public class CommunityAddController extends HttpServlet {
 
       sqlSession.commit();
 
-      request.setAttribute("categoryNo", categoryNo);
-      request.getRequestDispatcher("list").forward(request, response);
-
+      //      request.setAttribute("categoryNo", categoryNo);
+      //      request.setAttribute("requestByAdd", 0);
+      //      request.getRequestDispatcher("list?categoryNo="+categoryNo).forward(request, response);
+      response.sendRedirect("list?categoryNo="+categoryNo);
     } catch (Exception e) {
       System.out.println(e.getMessage());
       request.setAttribute("error", e);
