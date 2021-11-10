@@ -4,14 +4,25 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <title>유료 스터디</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="../css/study/StudyUpdateForm.css">
 </head>
 
 <body>
+  <div class="container">
+    <jsp:include page="../header.jsp"></jsp:include>
+      
+<header class="freepagetop">
+
 <h1>유료 스터디 수정</h1>
 	<form action='update'>
+
+  <fieldset class="menu">
+
 	<label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${chargeStudy.no}' readonly><br>
     
@@ -53,7 +64,12 @@
 	
 	<button>변경</button>
 	 <a href='list'>[목록]</a><br>
+
+  </fieldset>
+
 	</form>
 
+  </header>
+</div> <!-- container -->
 </body>
 </html>

@@ -11,19 +11,23 @@
 
 <head>
   <title>유료 스터디</title>
-  <style>
-    label {
-      margin-right: 5px;
-      text-align: right;
-      display: inline-block;
-      width: 60px;
-    }
-    </style>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="../css/study/StudyAddForm.css">
 </head>
-
+  
 <body>
-<h1>유료 스터디 등록</h1>
+  <div class="container">
+    <jsp:include page="../header.jsp"></jsp:include>
+
+<header class="freepagetop">
+
+<h1>멘토링 등록</h1>
 <form action='add'>
+
+<fieldset class="menu">
+
+<div class="menu_box1">
 
 <label for='title'>제목</label> <input id='title' type='text' name='title' placeholder="제목을 입력해주세요.">
 <br>
@@ -32,7 +36,9 @@
   <option value="" selected="selected">시/도</option>
   <option value="서울" >서울</option>
   <option value="경기">경기</option>
-</select><select name = "area">
+</select>
+
+<select name = "area">
   <option value="" selected="selected">구/군</option>
   <option value="강남" >강남</option>
   <option value="서초">분당</option>
@@ -52,14 +58,20 @@
 <label for='writer'>작성자</label> 
 <input id='writer' type='email' name='writer' value='${loginUser.email}' readonly><br>
 
+</div>
+
 <br>
 <div style='text-align: center;'>
-<input type="reset" value="초기화">
+<input class="input5" type="reset" value="초기화">
 <!--<input type="submit" value="등록">-->
-<button>등록</button>
-<button type="button" onclick="location.href='list'">취소</button><br>
+<button class="input5">등록</button>
+<button class="input5" type="button" onclick="location.href='list'">취소</button><br>
 </div>
+
+</fieldset> <!-- menu-->
 </form>
+</header> <!-- -->
+</div> <!-- container -->
 </body>
 </html>
 
