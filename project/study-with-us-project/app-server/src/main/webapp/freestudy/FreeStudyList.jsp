@@ -51,7 +51,7 @@ trimDirectiveWhitespaces="true" %>
   </c:when>
   </c:choose>
   
-        <li class="lidesign">
+        <li class="lidesign"> <a href='detail?no=${freeStudy.no}'></a>
           <h1 class="studyTitle"> ${freeStudy.title} </h1>
           <span>
             <img class="on_offline"
@@ -86,6 +86,15 @@ trimDirectiveWhitespaces="true" %>
 </div> <!-- wrapper -->
 
 </div> <!-- container -->
+
+<script>
+  var trList = document.querySelectorAll("li"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+  trList.forEach(function(trTag) {
+    trTag.onclick = (e) => {
+      window.location.href = e.currentTarget.querySelector("a").href;
+    };
+  });
+  </script>
 </body>
 </html>
 

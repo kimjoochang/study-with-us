@@ -47,7 +47,9 @@ public class ChargeStudyDetailController extends HttpServlet {
       Member member = (Member) request.getSession().getAttribute("loginUser");
 
       if (member == null) {
-        result = 0;
+        response.sendRedirect("/swu/user/loginform");
+        return;
+
       } else {
         // 좋아요 여부
         result =  chargeStudyDao.checkLikesByMember(member.getNo(), chargStudyNo);

@@ -57,7 +57,7 @@
          width: 90px; 
       }
       
-      . community_button {
+      #community_button {
         font-size : 12px;
       }
       
@@ -149,7 +149,7 @@
      justify-content: space-between;
     }
  
-    .delete_comment_button {
+    #delete_comment_button {
       color : black;
       font-size : 10px;
     }   
@@ -197,8 +197,10 @@
       </div>
       <div class="cmnt_icon">
         <div class="community_buttons">
-          <a class="community_button" href="">수정</a>
-          <a class="community_button" href="">삭제</a>
+        <c:if test="${loginUser.no eq community.writer.no}">
+          <a id="community_button" href="">수정</a>
+          <a id="community_button" href="">삭제</a>
+          </c:if>
         </div>
         <div class="info_item">
           <img class="icon"
@@ -244,7 +246,9 @@
           <section class="comment_content">
             <div class ="comment_content_box">
             <p>${comment.content}</p>
-            <a class ="delete_comment_button" href='comment/delete?commentNo=${comment.no}'>삭제</a>
+            <c:if test="${loginUser.no eq comment.writer.no}">
+            <a id ="delete_comment_button" href='comment/delete?commentNo=${comment.no}'>삭제</a>
+            </c:if>
             </div>
           </section>
         </li>
@@ -257,22 +261,31 @@
     const addComment = () => {
      location.replace('comment/add?communityNo=${community.no}')
     }
-    console.log(loginUser);
-    console.log(loginUserNo);
     
-    const loginUserNo = ${loginUser.no}
-    const writerNo = ${community.writer.no}
-    const deleteCommentBtn = document.querySelector('.delete_comment_button');
-    const CmntBtns = document.querySelector('.community_button');
+    <!--
+    const deleteCommentBtn = document.getElementById('delete_comment_button');
+    const CmntBtns = document.getElementById('community_button');
     
+    const writerNo = ${community.writer.no};
+    const commentWriterNo = "<c:out value='${comment.writer.no}'/>"
+    const loginUserNo = "<c:out value='${loginUser.no}'/>"
+
+    const cmntButtonVisible = () => {
+    if (loginUserNo != writerNo || String(loginUserNo) == "") {
+    	CmntBtns.style.display = "none";
+    }
+    }
     
     const buttonVisible = () => {
-    if (loginUserNo !== writerNo) {
-    	deleteCommentBtn.classList.add('hidden');
-    	CmntBtns.classList.add('hidden');
+    if (loginUserNo != comment.writer.no || String(loginUserNo) == "") {
+    	console.log(1);
+    	deleteCommentBtn.style.display = "none";
     }
     }
+    
+    cmntButtonVisible();
     buttonVisible();
+    -->
     </script>
 </body>
 </html>
