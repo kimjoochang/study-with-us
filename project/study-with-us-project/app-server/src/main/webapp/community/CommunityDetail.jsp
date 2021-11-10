@@ -48,8 +48,19 @@
       }
       .cmnt_icon{
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
       }
+      
+      .community_buttons {
+        display : flex;
+        justify-content: space-between;
+         width: 90px; 
+      }
+      
+      . community_button {
+        font-size : 12px;
+      }
+      
       .info_item{
         align-items: center;
         box-sizing: border-box;
@@ -132,6 +143,20 @@
       margin-top : 100px;
     text_align : center;
     }
+    
+    .comment_content_box {
+     display : flex;
+     justify-content: space-between;
+    }
+ 
+    .delete_comment_button {
+      color : black;
+      font-size : 10px;
+    }   
+    
+    .hidden {
+  display: none;
+}
 
     </style>
     
@@ -171,6 +196,10 @@
        ${community.content}
       </div>
       <div class="cmnt_icon">
+        <div class="community_buttons">
+          <a class="community_button" href="">수정</a>
+          <a class="community_button" href="">삭제</a>
+        </div>
         <div class="info_item">
           <img class="icon"
                src="user">              
@@ -213,7 +242,10 @@
             </div>
           </section>
           <section class="comment_content">
-            ${comment.content}
+            <div class ="comment_content_box">
+            <p>${comment.content}</p>
+            <a class ="delete_comment_button" href='comment/delete?commentNo=${comment.no}'>삭제</a>
+            </div>
           </section>
         </li>
       </ul>
@@ -225,6 +257,22 @@
     const addComment = () => {
      location.replace('comment/add?communityNo=${community.no}')
     }
+    console.log(loginUser);
+    console.log(loginUserNo);
+    
+    const loginUserNo = ${loginUser.no}
+    const writerNo = ${community.writer.no}
+    const deleteCommentBtn = document.querySelector('.delete_comment_button');
+    const CmntBtns = document.querySelector('.community_button');
+    
+    
+    const buttonVisible = () => {
+    if (loginUserNo !== writerNo) {
+    	deleteCommentBtn.classList.add('hidden');
+    	CmntBtns.classList.add('hidden');
+    }
+    }
+    buttonVisible();
     </script>
 </body>
 </html>

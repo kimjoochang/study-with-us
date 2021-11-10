@@ -69,6 +69,7 @@ color : #898798;
 }
 
 .modal_overlay {
+	position:fixed;
 	width: 100%;
 	height: 100%;
 }

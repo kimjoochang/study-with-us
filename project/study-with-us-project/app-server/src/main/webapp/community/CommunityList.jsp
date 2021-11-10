@@ -191,6 +191,14 @@ closeBtn.addEventListener('click', closeModal);
 
 //overlay.addEventListener('click', closeModal);
 //모달창 영역 밖
+
+
+var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+trList.forEach(function(trTag) {
+  trTag.onclick = (e) => {
+    window.location.href = e.currentTarget.querySelector("a").href;
+  };
+});
   </script>
 </body>
 </html>
