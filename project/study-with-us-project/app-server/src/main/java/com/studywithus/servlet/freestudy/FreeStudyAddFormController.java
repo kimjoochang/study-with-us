@@ -18,13 +18,13 @@ public class FreeStudyAddFormController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession Session = request.getSession(false);
-		/*
+		HttpSession Session = request.getSession();
+
 		if (Session.getAttribute("loginUser") == null) {
 			response.sendRedirect("/swu/user/loginform");
 			return;
 		}
-		 */
-		request.getRequestDispatcher("/freestudy/FreeStudyForm.jsp").forward(request, response);
+
+		request.getRequestDispatcher("/freestudy/FreeStudyAddForm.jsp").forward(request, response);
 	}
 }

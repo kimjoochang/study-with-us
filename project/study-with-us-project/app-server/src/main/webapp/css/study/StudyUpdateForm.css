@@ -154,3 +154,8 @@ a:link { color: rgb(246, 245, 252); }
 a:visited { color: rgb(210, 207, 226); }
 a:link { text-decoration: none; text-shadow: 0 0 24px; }
 a:visited { text-decoration: none; text-shadow: none; }
+
+.button-update {
+	display: flex;
+  align-content: center;
+}
