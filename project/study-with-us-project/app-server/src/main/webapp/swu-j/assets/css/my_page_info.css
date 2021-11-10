@@ -1,0 +1,167 @@
+@charset "UTF-8";
+
+.container{
+  margin-bottom: 70px;
+}
+
+.myinfo-wrapper {
+  padding-bottom: 100px;
+  color: #898798;
+  overflow: hidden;
+}
+
+.both{
+  position: fixed;
+  display: absolute;
+  height: 800px;
+}
+
+.userid{
+ font-size:14px;
+ color: #3b3a44;
+}
+
+ul.sub, .my-menu-list {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+  width: 150px;
+  background: #eeeef1;
+  height: 810px;
+  overflow: hidden;
+  position: fixed;
+  border-radius: 3px;
+}
+
+ul.sub li a {
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  color: rgb(82, 71, 92);
+  font-weight: bold;
+  
+}
+
+ul.sub li a:hover {
+  background: #8e8aad;
+  color: #fff;
+}
+
+ul.sub li a.home {
+  background : rgb(150, 144, 144);
+  color: #fff;
+  height: auto;
+  
+}
+
+.cd1 {
+  margin-left: 120px;
+}
+
+.divider-sub {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 16px;
+  width: 86px;
+  height: 3px;
+  border-radius: 40px;
+  background-color: #827e9e;
+}
+
+.profile-icon{
+  text-align:center;
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+.my-menu-list{
+  text-align:center;
+}
+
+.my-menu-list .sub{
+  margin-top:15px
+}
+
+.content-section{
+  width: 900px;
+  height: 920px;
+  background-color: #eeeef1;
+  border-radius: 3px;
+  margin-top: 0px;
+  margin-left: 180px;
+}
+
+.subject{
+  font-size: 20px;
+  margin-left: 30px;
+  padding-top: 35px;
+}
+
+.box1{
+  width: 800px;
+  height: 300px;
+  border-top: 2px solid rgb(153, 152, 152);
+  border-radius: 3px;
+  padding: 30px;
+  margin-top:15px;
+  margin-left:20px;
+  box-sizing:border-box
+}
+
+  .box2{
+  width: 800px;
+  height: 150px;
+  border-top: 2px solid rgb(153, 152, 152);
+  border-bottom: 2px solid rgb(153, 152, 152);
+  border-radius: 3px;
+  padding: 30px;
+  margin-top:15px;
+  margin-left:20px;
+  box-sizing:border-box
+}
+
+.box3{
+  width: 800px;
+  height: 100px;
+  
+  padding: 30px;
+  margin-top:0px;
+  margin-left:10px;
+  box-sizing:border-box
+}
+
+input{
+  all: unset;
+}
+
+.attribute{
+ text-align: justify;
+  
+}
+
+.photo{
+  padding: 15px;
+  font-size: 12px;
+}
+
+ .nickname, .email {
+  padding: 20px;
+  font-size: 12px;
+}
+
+.file{
+  padding: 20px;
+  margin-left:57px;
+}
+.pwd{
+  font-size: 12px;
+  padding-top:20px;
+  padding-right:22px;
+}
+
+.ph {
+  margin-top: 0px;
+  padding: 20px;
+  font-size: 12px;
+}
+
