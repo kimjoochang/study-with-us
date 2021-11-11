@@ -13,6 +13,8 @@
 
   <title>스터디위더스: 메인</title>
 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/maicons.css">
@@ -27,6 +29,19 @@
 
 </head>
 
+<style>
+  /*
+  @font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/roboto/v29/KFOlCnqEu92Fr1MmSU5fCRc4EsA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+*/
+</style>
+
 <body>
 
   <!-- Back to top button -->
@@ -36,7 +51,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
       <div class="container">
         <!--<a href="#" class="navbar-brand">스터디<span class="text-primary">위더스</span></a>-->
-        <img src="../assets/img/swu_text.png" alt="">
+        <img src="img/swu_text.png" alt="">
 
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
@@ -84,12 +99,15 @@
           <div class="col-md-6 py-5 wow zoomIn">
             <div class="img-fluid text-center">
              
-             <img class="img_main" src="../assets/img/urban-working-remotely.png">
+              <!-- 교체할말
+             <img class="img_main" src="img/urban-working-remotely.png"> -->
+             <img class="img_main" src="img/clip-1675.png">
              
             </div>
           </div>
         </div>
-        <a href="#about" class="btn-scroll" data-role="smoothscroll"><span class="mai-arrow-down"></span></a>
+        <!--<a href="#about" class="btn-scroll" data-role="smoothscroll"><span class="icon-arrow-down"></span></a>-->
+        <a href="#about" class="btn-scroll" data-role="smoothscroll"><img src="img/down-arrow .png"></img></span></a>
       </div>
     </div>
   </header>
@@ -159,7 +177,7 @@
         </div>
         <div class="col-lg-6 py-3 wow fadeInRight">
           <div class="img-fluid py-3 text-center">
-            <img class="img_sub" src="../assets/img/gummy-macbook.png" alt="">
+            <img class="img_sub" src="img/gummy-macbook.png" alt="">
           </div>
         </div>
       </div>
@@ -182,7 +200,7 @@
           <div class="card-blog">
             <div class="header">
               <div class="post-thumb">
-                <img src="../assets/img/st-cr.png" >
+                <img src="img/st-cr.png" >
               </div>
             </div>
             <div class="body">
@@ -196,7 +214,7 @@
           <div class="card-blog">
             <div class="header">
               <div class="post-thumb">
-                <img src="../assets/img/cal.png">
+                <img src="img/cal.png">
               </div>
             </div>
             <div class="body">
@@ -210,7 +228,7 @@
           <div class="card-blog">
             <div class="header">
               <div class="post-thumb">
-                <img src="../assets/img/saving.png">
+                <img src="img/saving.png">
               </div>
             </div>
             <div class="body">
@@ -250,7 +268,7 @@
 
 <script src="js/google-maps.js"></script>
 
-<script src="../assets/vendor/wow/wow.min.js"></script>
+<script src="js/wow.min.js"></script>
 
 <script src="js/theme.js"></script>
   

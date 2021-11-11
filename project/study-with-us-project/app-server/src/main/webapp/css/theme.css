@@ -39,6 +39,11 @@ body {
 */
 }
 
+.img_main{
+  height:400px;
+  width:300px;
+}
+
 a {
   color: #6C55F9;
   text-decoration: none;
@@ -1392,7 +1397,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .page-banner.home-banner .btn-scroll:hover {
   text-decoration: none;
-  background-color: #6C55F9;
+  background-color: #8178bd;
   color: #fff;
 }
 
