@@ -20,15 +20,17 @@ trimDirectiveWhitespaces="true" %>
     
   <header class="freepagetop">
 
-    <h1>스터디 등록</h1>
-
     
-  <form action='add'>
-
-  <fieldset class="menu">
-  <div class="study-form-content">
-
-    <div class="study-area-div">
+    
+    <form action='add'>
+      
+      <div class="study-box">
+      <fieldset class="menu">
+        <div class="study-form-content">
+          
+          <h1 class="study-content-category">스터디 등록</h1>
+          <hr>
+    <div class="study-content-line">
 
       <label for='area'>지역</label>
       <select name = onOffLine>
@@ -158,26 +160,47 @@ trimDirectiveWhitespaces="true" %>
 -->
 </div> <!--study-area-div-->
 
-<label for='title'>제목</label> 
-<input type='text' name='title'><br>
+<div class="study-content-line">
+  <label class="study-content-label" for='title'>제목</label> 
+  <input type='text' name='title'><br>
+</div>
 
-<label for='content'>내용</label>
-<textarea cols="40" rows="10" name="content" placeholder="개설할 무료 스터디 내용을 입력해주세요."> </textarea>
-  <br>
-  <label for='f-category'>카테고리</label> <input type='text' name='category'><br>
-  <label for='f-maxMembers'>정원</label> <input type='number' name='maxMembers'><br>
-  <label for='f-startDate'>시작일</label> <input type='date' name='startDate'><br>
-  <label for='f-endDate'>종료일</label> <input type='date' name='endDate'><br>
+<div class="study-content-line">
+  <label class="study-content-label" for='content'>내용</label> 
+  <textarea class="f-content" cols="69" rows="10" placeholder="개설할 무료 스터디 내용을 입력해주세요."></textarea>
+</div>
+
+<div class="study-content-line">
+  <label class="study-content-label" for='f-category'>카테고리</label> 
+  <input type='text' name='category'><br>
+</div>
+
+<div class="study-content-line">
+  <label class="study-content-label" for='f-maxMembers'>정원</label> 
+  <input type='number' name='maxMembers'><br>
+  
+<div class="study-content-line">
+  <label class="study-content-label" for='f-startDate'>시작일</label> 
+  <input type='date' name='startDate'><br>
+</div>
+ 
+<div class="study-content-line">
+  <label class="study-content-label" for='f-endDate'>종료일</label> 
+  <input type='date' name='endDate'><br>
+</div>
 
 </div><!--study-form-content-->
+<br>
 
-<div>
+<div class="study-bottom-button">
   <input class="input5" type="reset" value="초기화">
   <input class="input5" type="submit" value="등록">
   <button class="input5" onclick="location.href='list'">취소</button><br>
 </div>
 
 </fieldset>
+</div> <!-- study-box-->
+
  </form>
 </header>
 

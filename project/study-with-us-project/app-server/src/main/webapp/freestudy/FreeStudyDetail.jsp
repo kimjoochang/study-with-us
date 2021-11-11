@@ -30,7 +30,6 @@ trimDirectiveWhitespaces="true" %>
       <label class="input3" for='f-area'>지역</label> 
       <input class="input4" id='f-area' type='text' name='area' value='${freeStudy.area}' readonly>
       <br>
-
     </ul>
 
     <br>
@@ -43,9 +42,6 @@ trimDirectiveWhitespaces="true" %>
       
       <hr>
 
-      <div>
-        
-      </div>
       <div class="form-group">
         <label for='f-title'>제목</label>
         <input id='f-title' type='text' name='title' value='${freeStudy.title}' readonly><br>
@@ -136,18 +132,16 @@ trimDirectiveWhitespaces="true" %>
 
         <c:choose>
           <c:when test="${loginUser eq null}">
-            <a href='/swu/freestudy/list' class="button-group"> 목록 </a><br>
+            <a href='/swu/freestudy/list' class="button-group"> 목록 </a>
           </c:when>
           
-          <br>
           <c:when test="${checkWriter eq 1}">
             <a href='updateform?no=${freeStudy.no}' class="button-group"> 수정 </a> 
             <a href='delete?no=${freeStudy.no}' class="button-group"> 삭제 </a> 
-            <a href='/swu/freestudy/list' class="button-group"> 목록 </a><br>
+            <a href='/swu/freestudy/list' class="button-group"> 목록 </a>
             
           </c:when>
           
-          <br>
           <c:when test="${checkWriter eq 2}">
             <c:if test="${result eq 0}">
               <a class= "interestIcon" href='/swu/freestudy/interest/add?no=${freeStudy.no}' class="button-group"> 관심목록 추가</a>
@@ -158,8 +152,8 @@ trimDirectiveWhitespaces="true" %>
             </c:if>
             
           </c:when>
-          
         </c:choose>
+        
       </fieldset>
 
     </form> <!-- freestudy-detail-->

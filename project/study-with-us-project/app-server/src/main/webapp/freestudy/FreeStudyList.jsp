@@ -16,16 +16,18 @@ trimDirectiveWhitespaces="true" %>
   <div class="container">
   <jsp:include page="../header.jsp"></jsp:include>
 
-  <h1>스터디 목록</h1>
+  <h1 class="study-content-category">스터디 목록</h1>
+  <hr>
     
-    <br class="inputs">
-    <input id="input1" type="button" value="모집중">
-    <input id="input1" type="button" value="진행중">
-    <input id="input1" type="button" value="진행완료">
+  <div class="study-input-collection">
+  <input id="input1" type="button" value="모집중">
+  <input id="input1" type="button" value="진행중">
+  <input id="input1" type="button" value="진행완료">
+  
+  <a class=input2 href='form'>스터디 작성</a>
+  </div>
+  <br>
 
-    <a class=input2 href='form'>스터디 작성</a>
-
-    <hr size="2" noshade color="gray">
 
 <div class="wrapper">
     <div class="main_main">

@@ -4,6 +4,11 @@
     margin-left: 100px;
   }
 
+  .study-content-category {
+    font-size: medium;
+    font-weight: bolder;
+  }
+
   #input1 {
     width: 100px;
     height: 40px;
@@ -205,8 +210,8 @@ main {
   box-sizing: border-box;
   color: rgb(0, 0, 0);
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
 font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 height: 520px;
 list-style-image: none;

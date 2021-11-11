@@ -46,7 +46,7 @@
 <br>
 
 <label for='content'>내용</label>
-<textarea name ="content" cols="50" rows="15" placeholder="등록할 스터디 내용을 입력해주세요.">
+<textarea name ="content" cols="69" rows="15" placeholder="등록할 스터디 내용을 입력해주세요.">
 </textarea>
 <br>
 <label for='startDate'>시작일</label> <input id='startDate' type='date' name='startDate'><br>
