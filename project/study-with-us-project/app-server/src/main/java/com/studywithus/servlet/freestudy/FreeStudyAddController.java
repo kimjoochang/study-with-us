@@ -59,9 +59,10 @@ public class FreeStudyAddController extends HttpServlet {
 			response.sendRedirect("list");
 
 		} catch (Exception e) {
+			sqlSession.rollback();
+			System.out.println(e.getMessage());
 			request.setAttribute("error", e);
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
-
 		}
 	}
 }

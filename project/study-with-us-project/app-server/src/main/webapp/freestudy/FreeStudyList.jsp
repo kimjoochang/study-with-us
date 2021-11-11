@@ -24,11 +24,13 @@ trimDirectiveWhitespaces="true" %>
     <input id="input1" type="button" value="진행완료">
 
     <a class=input2 href='form'>스터디 작성</a>
-    </br>
 
     <hr size="2" noshade color="gray">
 
-    <br>
+<div class="wrapper">
+    <div class="main_main">
+
+      <ul class="uldesign">
 
 <c:forEach items="${freeStudyList}" var="freeStudy">
   <c:choose>
@@ -49,11 +51,7 @@ trimDirectiveWhitespaces="true" %>
   </c:when>
   </c:choose>
   
-<div class="wrapper">
-    <div class="main_main">
-
-      <ul class="uldesign">
-        <li class="lidesign">
+        <li class="lidesign"> <a href='detail?no=${freeStudy.no}'></a>
           <h1 class="studyTitle"> ${freeStudy.title} </h1>
           <span>
             <img class="on_offline"
@@ -82,43 +80,21 @@ trimDirectiveWhitespaces="true" %>
             </div>
           </section>
         </li>
-         
-        <li class="lidesign">
-          <h1 class="studyTitle"> 제목2 </h1>
-          <span>
-            <img class="on_offline"
-            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/offLineIcon2.png">
-            <p class="on_offline_status">온라인,지명</p>
-          </span>
-          
-          <section>
-            <div class="info_item">
-              <img class="icon"
-              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/fillingHeartIcon.png">
-              <p class="icon_count">1</p>
-            </div>
-            
-            <div class="info_item">
-              <img class="icon"
-              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/eyeIcon copy.png">
-              <p class="icon_count">1</p>
-            </div>
-            
-            <div class="info_item">
-              <img class="icon"
-              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/speechBalloonIcon copy.png">              
-              <p class="icon_count">1</p>
-              
-              
-            </div>
-          </section>
-        </li> <!--lidestin-->
-        
 </c:forEach>
+</ul> <!-- uldesign -->
+</div> <!-- main_main -->
+</div> <!-- wrapper -->
 
-</tbody>
-</table>
 </div> <!-- container -->
+
+<script>
+  var trList = document.querySelectorAll("li"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+  trList.forEach(function(trTag) {
+    trTag.onclick = (e) => {
+      window.location.href = e.currentTarget.querySelector("a").href;
+    };
+  });
+  </script>
 </body>
 </html>
 

@@ -39,10 +39,10 @@
     <input id='f-category' type='text' name='category' value='${chargeStudy.category}'><br>
     
     <label for='f-maxMembers'>모집인원</label> 
-    <input id='f-maxMembers' type='text' name='maxMembers' value='${chargeStudy.maxMembers}'><br>
+    <input id='f-maxMembers' type='number' name='maxMembers' value='${chargeStudy.maxMembers}'><br>
      
     <label for='f-members'>현재인원</label> 
-    <input id='f-members' type='text' name='members' value='${chargeStudy.members}' readonly><br>
+    <input id='f-members' type='number' name='members' value='${chargeStudy.members}' readonly><br>
     
     <label for='f-price'>금액</label> 
     <input id='f-price' type='text' name='price' value='${chargeStudy.price}' readonly><br>

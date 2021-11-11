@@ -36,7 +36,10 @@
 
   <fieldset class="menu">
 
+    <label for='f-no'>스터디 수정</label> 
+
     <hr>
+    
     <label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${freeStudy.no}' readonly><br>
     
@@ -81,9 +84,12 @@
     <label for='f-registeredDate'>등록일</label> 
     <span id='f-registeredDate'${freeStudy.registeredDate}></span><br>
     
- <button>변경</button> 
- <a href='/swu/freeStudy/detail?no=${freeStudy.no}' class="button-group"> 취소</a> 
 
+    <div class="button-update">
+      <button class="input3">변경</button> 
+      <a href='/swu/freeStudy/detail?no=${freeStudy.no}' class="button-group"> 취소</a> 
+    </div>
+      
 </fieldset>
 
 </form>
