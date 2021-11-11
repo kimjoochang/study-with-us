@@ -10,11 +10,20 @@ public class Community extends Content {
   private Date registeredDate; // 게시글 등록일
   private int viewCount; // 조회수
   private int like; // 좋아요
+  private int commentCount; // 댓글수
   private int category; // 정보, 질문, 스몰톡
   private AttachmentFile communityFile;
 
   public AttachmentFile getCommunityFile() {
     return communityFile;
+  }
+
+  public int getCommentCount() {
+    return commentCount;
+  }
+
+  public void setCommentCount(int commentCount) {
+    this.commentCount = commentCount;
   }
 
   public void setCommunityFile(AttachmentFile communityFile) {

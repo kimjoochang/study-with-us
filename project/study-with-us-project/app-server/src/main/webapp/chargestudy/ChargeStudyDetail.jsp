@@ -8,9 +8,21 @@
 <html>
 <head>
   <title>유료 스터디</title>
+   <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/study/StudyDetail.css">
+<style>
+ input {
+ all : unset;
+ }
+</style>
+
 </head>
 
 <body>
+  <div class="container">
+  <jsp:include page="../header.jsp"></jsp:include>
+  
 <h1>유료 스터디 상세보기</h1>
 	<form action='updateform'>
 	<label for='f-no'>번호</label> 
@@ -83,6 +95,7 @@
 </c:when>
 </c:choose>
 	</form>
+</div>
 
 </body>
 </html>

@@ -8,6 +8,11 @@ label {
   width: 60px;
 }
 
+.study-content-category {
+  font-size: medium;
+  font-weight: bolder;
+}
+
 .freepagetop{
 -webkit-font-smoothing: antialiased;
 background-attachment: scroll;
@@ -24,8 +29,12 @@ xul {
 float: left;
 }
 
-.menu {
+.study-box {
+  display: flex;
+  justify-content: center;
+}
 
+.menu {
 background-attachment: scroll;
 background-clip: border-box;
 background-color: rgb(255, 255, 255);
@@ -68,7 +77,19 @@ transition-timing-function: ease-in;
 }
 
 fieldset {
-border: 0px;
+justify-content: center;
+flex-wrap: wrap;
+display: inline-block;
+
+}
+
+.study-content-line {
+
+}
+
+.study-content-label {
+  
+  margin-top: 0px;
 }
 
 .date {
@@ -122,7 +143,7 @@ width: 110px;
 height: 30px;
 border-radius: 4px;
 background-color: rgb(117, 109, 170);
-color: rgb(96, 86, 161);
+color: rgb(202, 199, 224);
 border: 2px solid rgb(117, 109, 170);
 box-shadow: 2px 2px 0px 0px rgb(77, 72, 72);
 margin: 5px;
@@ -162,3 +183,9 @@ background-color: red;
 .input5:visited { color: rgb(210, 207, 226); }
 .input5:link { text-decoration: none; text-shadow: 0 0 24px; }
 .input5:visited { text-decoration: none; text-shadow: none; }
+
+.study-bottom-button {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
