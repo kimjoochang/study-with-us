@@ -51,7 +51,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
       <div class="container">
         <!--<a href="#" class="navbar-brand">스터디<span class="text-primary">위더스</span></a>-->
-        <img src="img/swu_text.png" alt="">
+        <div class=""></div><img src="img/swu_text.png" alt="">
 
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
@@ -99,10 +99,10 @@
           <div class="col-md-6 py-5 wow zoomIn">
             <div class="img-fluid text-center">
              
-              <!-- 교체할말
-             <img class="img_main" src="img/urban-working-remotely.png"> -->
-             <img class="img_main" src="img/clip-1675.png">
-             
+              <!-- 교체할/말
+             <img class="img_main" src="img/urban-working-remotely.png"> 
+             <img class="img_main" src="img/clip-1675.png">-->
+             <img class="img_main_urban" src="img/urban-858.png">
             </div>
           </div>
         </div>
