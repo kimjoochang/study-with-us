@@ -21,6 +21,17 @@
 
 <link rel="stylesheet" href="../css/community/CommunityList.css">
 
+<style>
+.icon {
+  width : 15px;
+}
+
+ul {
+  list-style : none;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -118,13 +129,24 @@
 								<td>${community.writer.nickname}</td>
 								<td>${community.registeredDate}</td>
 								<td>
-
-									<ul>
-										<li>조회수사진 <span>${community.viewCount}</span>
-										</li>
-										<li>좋아요사진 <span>${community.like}</span>
-										</li>
-									</ul>
+								  <div>
+								  </div>
+									  <ul>
+		                  <li class="icon_box">
+											  <img class="icon" src="../img/eyeIcon.png">
+											  <span>${community.viewCount}</span>
+		                  </li>
+		                  
+		                  <li class="icon_box">
+											  <img class="icon" src="../img/eyeIcon.png">
+											  <span>${community.viewCount}</span>
+		                  </li>
+		                  
+		                  <li class="icon_box">
+											  <img class="icon" src="../img/eyeIcon.png">
+											  <span>${community.viewCount}</span>
+									  </ul>
+                  </td>
 							</tr>
 						</tbody>
 					</c:forEach>

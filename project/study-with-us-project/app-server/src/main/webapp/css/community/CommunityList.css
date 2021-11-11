@@ -1,3 +1,8 @@
+
+.ul{
+	list-style: none;
+}
+
 .categorys {
 	margin-top: 20px;
 	list-style: none;
@@ -159,3 +164,4 @@ h1 {
 .ctry_box_color {
 	background-color : #898798;
 }
+

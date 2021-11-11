@@ -12,6 +12,7 @@
 		<result column="content" property="content"/>
 		<result column="register_date" property="registeredDate"/>
 		<result column="view_count" property="viewCount"/>
+		<result column="comment_count" property="commentCount"/>
 		<result column="likes" property="like"/>
 
 		<!-- <association property="cmnt_like" javaType="Int"> <id column="cmnt_no" 
@@ -38,6 +39,12 @@
 	    cmnt_like
 	   where
 		  cmnt_no=cm.cmnt_no) likes,
+		(select
+  	  count(*)
+	   from
+	    comment
+	   where
+		  cmnt_no=cm.cmnt_no) comment_count,
 		cf.cmnt_file_no,
 		cf.name,
 		m.member_no writer_no,

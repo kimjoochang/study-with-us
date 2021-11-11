@@ -12,8 +12,8 @@
 </head>
 
 <body>
-	<div class="container">
 	<jsp:include page="../header.jsp"></jsp:include>
+	<div class="container">
 
 	<h1>멘토링 목록</h1>
 
@@ -50,7 +50,7 @@
     <div class="main_main">
 
       <ul class="uldesign">
-        <li class="lidesign">
+        <li class="lidesign"><a href='detail?no=${chargeStudy.no}'></a>"
           <h1 class="studyTitle"> ${Study.title} </h1>
           <span>
             <img class="on_offline"
@@ -83,28 +83,17 @@
       
       </div> <!--main_main-->
       </div> <!--wrapper-->
-  <!--
-    <tr>
-      <td>${chargeStudy.no}</td>
-      <td><a href='detail?no=${chargeStudy.no}'>${chargeStudy.title}</a></td> 
-      <td>${chargeStudy.area}</td>
-      <td>${chargeStudy.category}</td>
-      <td>${chargeStudy.writer.name}</td>
-      <td>${chargeStudy.price}</td>
-      <td>${chargeStudy.startDate}</td>
-      <td>${chargeStudy.endDate}</td>
-      <td>${chargeStudy.members}/${chargeStudy.maxMembers}</td>
-      <td>${type}</td> 
-      <td>${chargeStudy.registeredDate}</td>
-      <td>${chargeStudy.viewCount}</td>
-      <td>${chargeStudy.likes}</td>
-    </tr>
-  -->
   </c:forEach>
- 
-	</tbody>
-	</table>
 	</div> <!-- container -->
+	
+	<script>
+	var trList = document.querySelectorAll("li"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+	trList.forEach(function(trTag) {
+	  trTag.onclick = (e) => {
+	    window.location.href = e.currentTarget.querySelector("a").href;
+	  };
+	});
+	</script>
 	</body>
 	</html>
 
