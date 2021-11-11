@@ -21,7 +21,7 @@
 
   <link rel="stylesheet" href="css/bootstrap.css">
 
-  <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
+  <link rel="stylesheet" href="css/animate.css">
 
   <link rel="stylesheet" href="css/theme.css">
 
@@ -40,6 +40,17 @@
   unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 */
+.arrow{
+padding:0px;
+margin-left:-3px;
+margin-right:10px;
+}
+
+.img_main{
+  height:410px;
+  width:430px;
+  }
+  
 </style>
 
 <body>
@@ -51,12 +62,12 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
       <div class="container">
         <!--<a href="#" class="navbar-brand">스터디<span class="text-primary">위더스</span></a>-->
-        <div class=""></div><img src="img/swu_text.png" alt="">
+        <img src="img/swu_text.png" alt="">
 
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="">Home</a>
+              <a class="nav-link" href="">Log in</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="freestudy/list">Study</a>
@@ -102,12 +113,12 @@
               <!-- 교체할/말
              <img class="img_main" src="img/urban-working-remotely.png"> 
              <img class="img_main" src="img/clip-1675.png">-->
-             <img class="img_main_urban" src="img/urban-858.png">
+             <img class="img_main" src="img/urban-858.png"></img>
             </div>
           </div>
         </div>
         <!--<a href="#about" class="btn-scroll" data-role="smoothscroll"><span class="icon-arrow-down"></span></a>-->
-        <a href="#about" class="btn-scroll" data-role="smoothscroll"><img src="img/down-arrow .png"></img></span></a>
+        <a href="#about" class="btn-scroll" data-role="smoothscroll"><img class="arrow" src="img/down-arrow .png"></img></a>
       </div>
     </div>
   </header>
@@ -251,7 +262,7 @@
           스터디위더스 <br>
           Addr. 서울특별시 강남구 역삼동 12-7번지. <br>
           02 - 123 - 4567 <br>
-          COPYRIGHT 2021. TEAM3. ALL RIGHT RESERVED.
+          COPYRIGHT 2021. TEAM3. ALL RIGHT RESERVED.<br>
           
           Illustration by 
           <a href="https://icons8.com/illustrations/author/602b6fa7123f993a3afdba7b">  Victoria Chepkasova</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
@@ -260,7 +271,6 @@
     </div>
   </div>
 
-</div>
 
 <script src="js/jquery-3.5.1.min.js"></script>
 

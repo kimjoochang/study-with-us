@@ -1,16 +1,19 @@
 @charset "UTF-8";
+
 .footer{
   display: flex;
   background: #8e8aad;
-  padding:30px;
-  margin : 0 auto;
-  opacity: 0.7;
+  margin-top: 70px;
+  opacity: 0.8;
+  padding: 40px;
 }
+
 .footer > div:first-child {
   flex:3;
   text-align: center;
   color: #fff;
 }
+
 .footer > div:last-child {
   flex:9;
   color: #fff;

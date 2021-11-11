@@ -20,6 +20,11 @@
   --light: #F6F5FC;
 }
 
+.img_main_urban{
+height:300px;
+width:300px;
+}
+
 body {
   font-family: 'Noto Sans KR', sans-serif;
   line-height: 1.5;

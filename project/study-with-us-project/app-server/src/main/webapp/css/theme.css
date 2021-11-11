@@ -24,6 +24,7 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   line-height: 1.5;
   color: #2D2B3A;
+}
 /*
   @font-face{
   font-family: 'InfinitySans-RegularA1';
@@ -37,13 +38,9 @@ body {
   line-height: 1.5;
   color: #2D2B3A;
 */
-}
 
-.img_main{
-  height:400px;
-  width:300px;
-}
 
+  
 a {
   color: #6C55F9;
   text-decoration: none;
