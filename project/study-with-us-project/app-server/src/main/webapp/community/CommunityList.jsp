@@ -30,6 +30,10 @@ ul {
   list-style : none;
 }
 
+.icon_td {
+  width : 30px;
+}
+
 </style>
 
 </head>
@@ -104,7 +108,9 @@ ul {
 							<th scope="col">제목</th>
 							<th scope="col">작성자</th>
 							<th scope="col">등록일</th>
-							<th scope="col"></th>
+							<th scope="col"> </th>
+							<th scope="col"> </th>
+							<th scope="col"> </th>
 						</tr>
 					</thead>
 
@@ -128,25 +134,18 @@ ul {
 								<td><a href='detail?no=${community.no}'>${community.title}</a></td>
 								<td>${community.writer.nickname}</td>
 								<td>${community.registeredDate}</td>
-								<td>
-								  <div>
-								  </div>
-									  <ul>
-		                  <li class="icon_box">
-											  <img class="icon" src="../img/eyeIcon.png">
-											  <span>${community.viewCount}</span>
-		                  </li>
-		                  
-		                  <li class="icon_box">
-											  <img class="icon" src="../img/eyeIcon.png">
-											  <span>${community.viewCount}</span>
-		                  </li>
-		                  
-		                  <li class="icon_box">
-											  <img class="icon" src="../img/eyeIcon.png">
-											  <span>${community.viewCount}</span>
-									  </ul>
-                  </td>
+								<td class="icon_td">
+								  <img class="icon" src="../img/eyeIcon.png">
+  							  <span>${community.viewCount}</span>
+                </td>
+                <td class="icon_td">
+								  <img class="icon" src="../img/fillingHeartIcon.png">
+								  <span>${community.like}</span>
+                </td>
+                <td class="icon_td">
+								  <img class="icon" src="../img/speechBalloon.png">
+  							  <span>${community.commentCount}</span>
+                </td>
 							</tr>
 						</tbody>
 					</c:forEach>
