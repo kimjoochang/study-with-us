@@ -8,6 +8,16 @@ label {
   width: 60px;
 }
 
+.study-content-category {
+  font-size: medium;
+  font-weight: bolder;
+}
+
+.study-info-icon {
+  display: flex;
+  text-align: right;
+}
+
 .freepagetop{
   -webkit-font-smoothing: antialiased;
   background-attachment: scroll;
@@ -129,7 +139,7 @@ margin-left: 2px;
 }
 
 
-a {
+xa {
 text-decoration-line: none;
 float: left;
 text-align: center;
@@ -147,3 +157,9 @@ a:link { color: rgb(246, 245, 252); }
 a:visited { color: rgb(210, 207, 226); }
 a:link { text-decoration: none; text-shadow: 0 0 24px; }
 a:visited { text-decoration: none; text-shadow: none; }
+
+.study-bottom-button {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}

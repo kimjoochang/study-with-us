@@ -20,8 +20,6 @@ trimDirectiveWhitespaces="true" %>
     
   <header class="freepagetop">
 
-    
-    
     <form action='add'>
       
       <div class="study-box">
@@ -30,8 +28,8 @@ trimDirectiveWhitespaces="true" %>
           
           <h1 class="study-content-category">스터디 등록</h1>
           <hr>
-    <div class="study-content-line">
 
+    <div class="study-area-div">
       <label for='area'>지역</label>
       <select name = onOffLine>
         <option value="" selected="selected">---온/오프라인---</option>
@@ -161,31 +159,32 @@ trimDirectiveWhitespaces="true" %>
 </div> <!--study-area-div-->
 
 <div class="study-content-line">
-  <label class="study-content-label" for='title'>제목</label> 
-  <input type='text' name='title'><br>
+  <label for='title'>제목</label> 
+  <input id='title' type='text' name='title' placeholder="제목을 입력해주세요.">
 </div>
 
 <div class="study-content-line">
   <label class="study-content-label" for='content'>내용</label> 
-  <textarea class="f-content" cols="69" rows="10" placeholder="개설할 무료 스터디 내용을 입력해주세요."></textarea>
+  <textarea  cols="69" rows="10" name='content' placeholder="개설할 무료 스터디 내용을 입력해주세요."></textarea>
 </div>
 
 <div class="study-content-line">
-  <label class="study-content-label" for='f-category'>카테고리</label> 
+  <label class="study-content-label" for='category'>카테고리</label> 
   <input type='text' name='category'><br>
 </div>
 
 <div class="study-content-line">
-  <label class="study-content-label" for='f-maxMembers'>정원</label> 
-  <input type='number' name='maxMembers'><br>
-  
+  <label class="study-content-label" for='maxMembers'>정원</label> 
+  <input type='number' id='maxMembers' name='maxMembers' placeholder="ex) 6명"정원><br>
+</div>  
+
 <div class="study-content-line">
-  <label class="study-content-label" for='f-startDate'>시작일</label> 
+  <label class="study-content-label" for='startDate'>시작일</label> 
   <input type='date' name='startDate'><br>
 </div>
  
 <div class="study-content-line">
-  <label class="study-content-label" for='f-endDate'>종료일</label> 
+  <label class="study-content-label" for='endDate'>종료일</label> 
   <input type='date' name='endDate'><br>
 </div>
 

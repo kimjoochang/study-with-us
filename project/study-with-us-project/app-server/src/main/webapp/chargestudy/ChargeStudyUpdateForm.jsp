@@ -18,10 +18,11 @@
       
 <header class="freepagetop">
 
-<h1>유료 스터디 수정</h1>
-	<form action='update'>
+  <form action='update'>
+    <fieldset class="menu">
 
-  <fieldset class="menu">
+    <h1 class="study-content-category">멘토링 수정</h1>
+    <hr>
 
 	<label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${chargeStudy.no}' readonly><br>
@@ -62,8 +63,10 @@
     <label for='f-registeredDate'>등록일</label> 
     <span id='f-registeredDate'>${chargeStudy.registeredDate}</span><br>
 	
-	<button>변경</button>
-	 <a href='list'>[목록]</a><br>
+    <div class="study-bottom-button">
+	    <button class="input3">변경</button>
+	    <a href='list'>목록</a><br>
+    </div> 
 
   </fieldset>
 

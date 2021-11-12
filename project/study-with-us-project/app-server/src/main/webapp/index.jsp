@@ -42,13 +42,13 @@
 */
 .arrow{
 padding:0px;
-margin-left:-3px;
+margin-left:-2px;
 margin-right:10px;
 }
 
 .img_main{
-  height:410px;
-  width:430px;
+  height:390px;
+  width:410px;
   }
   
 </style>
@@ -62,7 +62,7 @@ margin-right:10px;
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
       <div class="container">
         <!--<a href="#" class="navbar-brand">스터디<span class="text-primary">위더스</span></a>-->
-        <img src="img/swu_text.png" alt="">
+        <a href="/swu/"><img src="img/swu_text.png" alt="LOGO"></a>
 
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
@@ -74,11 +74,15 @@ margin-right:10px;
             </li>
             <li class="nav-item">
               <a class="nav-link" href="chargestudy/list">Mentoring</a>
+            
+            <!-- 마이페이지/관리자페이지로 대체할 듯
             </li>
             <li class="nav-item">
               <a class="nav-link" href="community/list?categoryNo=0">Community</a>
             </li>
-             <!-- 여기 햄버거 & 드롭다운 추가해야 함-->
+            -->
+            
+             <!-- 여기 햄버거 & 드롭다운 추가해야 함 // 보류? -->
                 <li class="nav-item">
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"></button>
                 <span class="navbar-toggler-icon"></span>
@@ -207,11 +211,12 @@ margin-right:10px;
       </div>
 
       <div class="row mt-5">
+
         <div class="col-lg-4 py-3 wow fadeInUp">
           <div class="card-blog">
             <div class="header">
               <div class="post-thumb">
-                <img src="img/st-cr.png" >
+                <a href="freestudy/list"><img src="img/st-cr.png"></img></a>
               </div>
             </div>
             <div class="body">
@@ -221,6 +226,37 @@ margin-right:10px;
           </div>
         </div>
         
+        
+        <div class="col-lg-4 py-3 wow fadeInUp">
+          <div class="card-blog">
+            <div class="header">
+              <div class="post-thumb">
+                <a href="community/list?categoryNo=0"><img src="img/cmnt.png"></img></a>
+              </div>
+            </div>
+            <div class="body">
+              <h5 class="post-title"><a href="community/list?categoryNo=0">커뮤니티</a></h5>
+              <div class="post-date">스터디위더스 회원들과 소통하고 정보를 나누어보세요</div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="col-lg-4 py-3 wow fadeInUp">
+          <div class="card-blog">
+            <div class="header">
+              <div class="post-thumb">
+                <a href="mentorapplication/form"><img src="img/mentor.png"></img></a>
+              </div>
+            </div>
+            <div class="body">
+              <h5 class="post-title"><a href="mentorapplication/form">멘토 신청하기</a></h5>
+              <div class="post-date">멘토가 되어 자신 있는 분야의 스터디를 이끌어보세요 </div>
+            </div>
+          </div>
+        </div>
+        
+        <!--
         <div class="col-lg-4 py-3 wow fadeInUp">
           <div class="card-blog">
             <div class="header">
@@ -234,21 +270,7 @@ margin-right:10px;
             </div>
           </div>
         </div>
-
-        <div class="col-lg-4 py-3 wow fadeInUp">
-          <div class="card-blog">
-            <div class="header">
-              <div class="post-thumb">
-                <img src="img/saving.png">
-              </div>
-            </div>
-            <div class="body">
-              <h5 class="post-title"><a href="chargestudy/list">멘토링 구경하기</a></h5>
-              <div class="post-date">검증된 멘토들과 함께하는 유료 멘토링에도 참여해보세요</div>
-            </div>
-          </div>
-        </div>
-
+        -->
         
         <div class="col-12 mt-4 text-center wow fadeInUp">
           <div class="post-date"><br><br><br><br> 아직 회원이 아니신가요?</div><br>

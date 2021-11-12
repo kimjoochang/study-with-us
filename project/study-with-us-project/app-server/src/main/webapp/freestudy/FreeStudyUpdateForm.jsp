@@ -16,28 +16,12 @@
       
 <header class="freepagetop">
  
-<h1>무료 스터디 수정</h1>
-<form action='update'>
-
-  <!--
-    <ul>
-      <label class="input3" for='f-area'>스터디종류</label> 
-      <input class="input4" type="text" value="무료스터디">
+  <form action='update'>
+    
+    <fieldset class="menu">
       
-      <label class="input3" for='f-onOffLine'>온오프라인</label> 
-      <input class="input4" id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly>
       
-      <label class="input3" for='f-area'>지역</label> 
-      <input class="input4" id='f-area' type='text' name='area' value='${freeStudy.area}' readonly>
-      <br>
-      
-    </ul>
-  -->
-
-  <fieldset class="menu">
-
-    <label for='f-no'>스터디 수정</label> 
-
+    <h1 class="study-content-category">스터디 수정</h1>
     <hr>
     
     <label for='f-no'>번호</label> 
@@ -46,12 +30,10 @@
     <label for='f-title'>제목</label>
     <input id='f-title' type='text' name='title' value='${freeStudy.title}' ><br>
     
-    <!-- 팀장? 작성자? -->
-    <label for='f-name'>팀장</label> 
+    <label for='f-name'>작성자</label> 
     <input id='f-name' type='text' name='name' value='${freeStudy.writer.name}' readonly><br>
     
-    <!-- 설명? 내용? -->
-    <label for='f-content'>설명</label> 
+    <label for='f-content'>내용</label> 
     <input id='f-content' type='text' name='content' value='${freeStudy.content}' ><br>
 
     <label for='f-category'>설명</label> 
@@ -85,7 +67,7 @@
     <span id='f-registeredDate'${freeStudy.registeredDate}></span><br>
     
 
-    <div class="button-update">
+    <div class="study-bottom-button">
       <button class="input3">변경</button> 
       <a href='/swu/freeStudy/detail?no=${freeStudy.no}' class="button-group"> 취소</a> 
     </div>

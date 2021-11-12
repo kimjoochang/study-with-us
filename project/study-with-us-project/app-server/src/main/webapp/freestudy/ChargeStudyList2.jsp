@@ -5,41 +5,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>유료 스터디</title>
-<link rel="stylesheet" href="../css/theme.css">
-<link rel="stylesheet" href="../css/bootstrap.css">
-<link rel="stylesheet" href="../css/study/StudyList.css"> 
+  <meta charset="UTF-8">
+  <title>유료 스터디</title>
+
+  <base target="_self"/>
+
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="../css/study/StudyList.css"> 
 </head>
 
 <body>
+  <div class="container">
 	<jsp:include page="../header.jsp"></jsp:include>
-	<div class="container">
 
-	<h1>멘토링 목록</h1>
+  <h1 class="study-content-category">멘토링 목록</h1>
+  <hr>
 
-	<br class="inputs">
+  <div class="study-input-collection">
     <input id="input1" type="button" value="모집중">
     <input id="input1" type="button" value="진행중">
     <input id="input1" type="button" value="진행완료">
-
-	<a class=input2 href='form'>멘토링 작성</a>
-	</br>
-
-	<hr size="2" noshade color="gray">
+	  <a class=input2 href='form'>멘토링 작성</a>
+  </div>
 
 	<br>
-			
+		
+  <div class="wrapper">
+    <div class="main_main">
+
+      <ul class="uldesign">
+        
   <c:forEach items="${chargeStudyList}" var="chargeStudy">
   <c:choose>
   <c:when test="${chargeStudy.studyStatus eq 0}">
 <c:set var="type" value="모집중"/>
   </c:when>
   </c:choose>
+
   <c:choose>
   <c:when test="${chargeStudy.studyStatus eq 1}">
 <c:set var="type" value="진행중"/>
   </c:when>
   </c:choose>
+
   <c:choose>
   <c:when test="${chargeStudy.studyStatus eq 2}">
 <c:set var="type" value="진행완료"/>
@@ -56,34 +65,44 @@
             <img class="on_offline"
             src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/onlineIcon.png">
             <p class="on_offline_status">${chargeStudy.onOffLine},${chargeStudy.area}</p>
+ 
+        <li class="lidesign"> <a href='detail?no=${chargeStudy.no}'></a>
+          <h1 class="studyTitle"> ${Study.title} </h1>
+          <span>
+            <img class="on_offline"
+            src="../img/offlineIcon2.png">
+            <p class="on_offline_status">${freeStudy.onOffLine}.${freeStudy.area}</p>
           </span>
           
           <section>
             <div class="info_item">
-
-              <img class="icon"
-              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/fillingHeartIcon.png">
               <p class="icon_count">${chargeStudy.likes}</p>
+            <img class="icon"
+              src="../img/fillingHeartIcon.png">
+              <p class="icon_count">${freeStudy.likes}</p>
             </div>
             
             <div class="info_item">
-              <img class="icon"
-              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/eyeIcon copy.png">
               <p class="icon_count">${chargeStudy.viewCount}</p>
+              <img class="icon"
+              src="../img/eyeIcon.png">
+              <p class="icon_count">${freeStudy.viewCount}</p>
             </div>
             
             <div class="info_item">
-              <img class="icon"
-              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/speechBalloonIcon copy.png">              
               <p class="icon_count"></p>
+              <img class="icon"
+              src="../img/speechBalloon.png">              
+              <p class="icon_count">1</p>
             </div>
           </section>
         </li> <!--lidesign-->
-      </ul> <!-- uldesign -->
+    </c:forEach>
+    </ul> <!-- uldesign -->
       
-      </div> <!--main_main-->
-      </div> <!--wrapper-->
-  </c:forEach>
+  </div> <!--wrapper-->
+  </div> <!--main_main-->
+  
 	</div> <!-- container -->
 	
 	<script>
