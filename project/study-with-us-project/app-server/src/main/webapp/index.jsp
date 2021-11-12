@@ -69,7 +69,7 @@ margin-right:10px;
               </li>
               
               <li class="nav-item">
-                <a class="nav-link" href="chargestudy/list">My Page</a>
+                <a class="nav-link" href="/swu/mypage">My Page</a>
               </li>
             </ul>
            </div>
