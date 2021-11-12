@@ -8,6 +8,8 @@
 <html>
 <head>
   <title>유료 스터디</title>
+  <base target="_self"/>
+  
    <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/study/StudyDetail.css">
@@ -15,6 +17,58 @@
  input {
  all : unset;
  }
+ 
+ .modal {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_overlay {
+  position:fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.modal_content {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  width: 490px;
+  height: 550px;
+  background-color: white;
+  padding: 30px 0px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+    rgba(0, 0, 0, 0.23);
+}
+
+.form_box {
+  margin : 35px;
+}
+
+h1 {
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.button_box {
+display : flex;
+justify-content : flex-end;
+margin-right : 5px;
+text-align: center;
+}
+.request_button, #close {
+  margin-right : 15px;
+}
+ 
 </style>
 
 </head>
@@ -73,11 +127,12 @@
 <a href='updateform?no=${chargeStudy.no}'>[수정]</a> 
 
 <c:if test="${chargeStudy.deleteStatus eq 0}">
-<a href='deleterequestform?no=${chargeStudy.no}'>[삭제요청]</a> 
+<a id ="open" href='#'>[삭제요청 취소]</a> 
 </c:if>
 
 <c:if test="${chargeStudy.deleteStatus eq 1}">
 <a href='deletecancel?no=${chargeStudy.no}'>[삭제요청 취소]</a> 
+
 </c:if>
 <a href='/swu/chargestudy/list'>[목록]</a><br>
 </c:when>
@@ -95,7 +150,64 @@
 </c:when>
 </c:choose>
 	</form>
+	
+	<!-- 모달창 -->
+    <!--이벤트 발생 시 hidden 삭제-->
+    <div class="modal hidden">
+      <!--모달 활성화 시 흐린 배경 표현-->
+      <div class="modal_overlay">
+        <!--모달 화면-->
+        <div class="modal_content">
+          <div class="form_box">
+          <h1>삭제요청서 등록</h1>
+            <form action='deleterequest' method='post'>
+             <input type ="hidden" name="no" value="${chargeStudy.no}"/>
+							<label for='reason'></label>
+							<textarea name ="reason" cols="50" rows="15" placeholder="삭제 사유를 입력해주세요.">
+							</textarea>
+							<br>
+							<div class = "button_box">
+							<button id="close" onclick="offClick()">취소</button><br>
+							<button type="submit" class ="request_button" onclick="offClick()">등록</button>
+							</div>
+            </form>
+          </div>
+        </div> <!-- modal_content -->
+      </div> <!-- modal_overlay -->
+    </div> <!-- modal_hidden -->
 </div>
+
+<script>
+const openBtn = document.getElementById('open');
+//onModal button
+
+const closeBtn = document.getElementById('close');
+//offModal button
+
+const modal = document.querySelector('.modal');
+//HTML에서의 모달 최상위 요소
+
+const overlay = document.querySelector('.modal_overlay');
+//모달창이 활성화되면 흐린 배경을 표현하는 요소
+
+const openModal = () => {
+modal.classList.remove('hidden');
+}
+
+const closeModal = () => {
+modal.classList.add('hidden');
+}
+
+openBtn.addEventListener('click', openModal);
+//onModal
+
+closeBtn.addEventListener('click', closeModal);
+//모달창 내부의 닫기 버튼
+
+//overlay.addEventListener('click', closeModal);
+//모달창 영역 밖
+
+</script>
 
 </body>
 </html>

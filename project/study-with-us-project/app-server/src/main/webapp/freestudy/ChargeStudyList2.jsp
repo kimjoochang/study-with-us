@@ -50,12 +50,12 @@
     <div class="main_main">
 
       <ul class="uldesign">
-        <li class="lidesign"><a href='detail?no=${chargeStudy.no}'></a>"
-          <h1 class="studyTitle"> ${Study.title} </h1>
+        <li class="lidesign"><a href='detail?no=${chargeStudy.no}'></a>
+          <h1 class="studyTitle"> ${chargeStudy.title} </h1>
           <span>
             <img class="on_offline"
             src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/onlineIcon.png">
-            <p class="on_offline_status">${freeStudy.onOffLine},${freeStudy.area}</p>
+            <p class="on_offline_status">${chargeStudy.onOffLine},${chargeStudy.area}</p>
           </span>
           
           <section>
@@ -63,19 +63,19 @@
 
               <img class="icon"
               src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/fillingHeartIcon.png">
-              <p class="icon_count">${freeStudy.likes}</p>
+              <p class="icon_count">${chargeStudy.likes}</p>
             </div>
             
             <div class="info_item">
               <img class="icon"
               src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/eyeIcon copy.png">
-              <p class="icon_count">${freeStudy.viewCount}</p>
+              <p class="icon_count">${chargeStudy.viewCount}</p>
             </div>
             
             <div class="info_item">
               <img class="icon"
               src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/speechBalloonIcon copy.png">              
-              <p class="icon_count">1</p>
+              <p class="icon_count"></p>
             </div>
           </section>
         </li> <!--lidesign-->

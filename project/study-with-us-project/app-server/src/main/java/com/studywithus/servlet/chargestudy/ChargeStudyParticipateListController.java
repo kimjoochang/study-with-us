@@ -14,8 +14,8 @@ import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
-@WebServlet("/chargestudy/registerlist")
-public class ChargeStudyRegisterListController extends HttpServlet {
+@WebServlet("/chargestudy/participatelist")
+public class ChargeStudyParticipateListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao chargeStudyDao;
@@ -39,7 +39,7 @@ public class ChargeStudyRegisterListController extends HttpServlet {
       }
 
       Collection<Study> chargeStudyList = 
-          studyMemberDao.findAllStudy(member.getNo(),Study.OWNER_STATUS,1,10000000);
+          studyMemberDao.findAllStudy(member.getNo(),Study.PARTICIPANT_STATUS,1,10000000);
 
       request.setAttribute("studyList", chargeStudyList);
 

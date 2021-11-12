@@ -7,14 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/adminpage")
-public class AdminPageController extends HttpServlet {
+@WebServlet("/mypage/myactivity")
+public class MyChargeStudyActivityController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    request.getRequestDispatcher("AdminPage.jsp").forward(request, response);
+    response.sendRedirect("../chargestudy/registerlist");
+    //    request.getRequestDispatcher("../chargestudy/registerlist").forward(request, response);
   }
 }
