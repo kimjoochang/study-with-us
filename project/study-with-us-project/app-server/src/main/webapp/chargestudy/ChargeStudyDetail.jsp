@@ -152,7 +152,7 @@ text-align: center;
         </c:if>
 
         <c:if test="${chargeStudy.deleteStatus eq 1}">
-          <input type="button" id="del_req_cancel_button" onclick="reqCancel2" value="삭제요청 취소">
+          <input type="button" onclick="reqCancel();" value="삭제요청 취소">
         </c:if>
     </c:if>
     
@@ -182,7 +182,7 @@ text-align: center;
 							<textarea name ="reason" cols="50" rows="15" placeholder="삭제 사유를 입력해주세요."></textarea>
 							<br>
 							<div class = "button_box">
-							<input type="reset" id="close" onclick="offClick()" value="취소">
+							<input type="reset" id="close" onclick=reqCancel value="취소">
 							<button type="submit" class ="request_button">등록</button>
 							</div>
             </form>
@@ -192,6 +192,18 @@ text-align: center;
     </div> <!-- modal_hidden -->
 </div>
 
+<script>
+const reqCancel = () => {
+	 if (!confirm("삭제요청을 취소하시겠습니까?")) {
+	     console.log(1);
+	          return;
+	      } else {
+	     console.log(2);
+	    location.href = "deletecancel?no=${chargeStudy.no}";
+	      }
+	     console.log(3);
+}
+</script>
 <script>
 const openBtn = document.getElementById('open');
 //onModal button
@@ -221,26 +233,6 @@ closeBtn.addEventListener('click', closeModal);
 
 //overlay.addEventListener('click', closeModal);
 //모달창 영역 밖
-
-const cancelBtn = document.getElementById('del_req_cancel_button');
-
-const reqCancel2 = function cancel() {
-	 if (!confirm("삭제요청을 취소하시겠습니까?")) {
-		location.href = "deletecancel";
-	    } else {
-	    	  return;
-	    }
-}
-
-const reqCancel = () => {
-	confirm("삭제요청을 취소하시겠습니까?");
-	
-	if (confirm === true) {
-	}
-}
-
-cancelBtn.addEventListener('click', reqCancel2);
-
 </script>
 
 </body> <!--무료스터디 제일 큰 포맷-->
