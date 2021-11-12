@@ -6,6 +6,9 @@ trimDirectiveWhitespaces="true" %>
 <html>
   <head>
     <title>무료 스터디</title>
+
+    <base target="_self"/>
+
     <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/study/StudyDetail.css">
@@ -17,30 +20,50 @@ trimDirectiveWhitespaces="true" %>
   
 <header class="freepagetop">
 
-  <h1>무료 스터디 상세보기</h1>
   <form action="detail" >
-
-    <ul class="uldesign">
-      <label class="input3" for='f-area'>스터디종류</label> 
-      <input class="input4" type="text" value="무료스터디">
-  
-      <label class="input3" for='f-onOffLine'>온오프라인</label> 
-      <input class="input4" id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly>
     
-      <label class="input3" for='f-area'>지역</label> 
-      <input class="input4" id='f-area' type='text' name='area' value='${freeStudy.area}' readonly>
-      <br>
-    </ul>
-
-    <br>
+    <!--
+      <ul class="uldesign">
+        <label class="input3" for='f-area'>스터디종류</label> 
+        <input class="input4" type="text" value="무료스터디">
+        
+        <label class="input3" for='f-onOffLine'>온오프라인</label> 
+        <input class="input4" id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly>
+        
+        <label class="input3" for='f-area'>지역</label> 
+        <input class="input4" id='f-area' type='text' name='area' value='${freeStudy.area}' readonly>
+        <br>
+      </ul>
+    -->
+    
     <fieldset class="menu">
-
+      
+      <h1 class="study-content-category">스터디 상세보기</h1>
+      
+      <section class="study-info-icon">
+        <div class="item2">
+          <div class="info_item">
+            <img class="icon"
+            src="../img/fillingHeartIcon.png">
+            <p class="icon_count">1</p>
+            
+            <img class="icon"
+            src="../img/eyeIcon.png">
+            <p class="icon_count">1</p>
+            
+            <img class="icon"
+            src="../img/speechBalloon.png">              
+            <p class="icon_count">1</p>
+          </div>
+        </div> <!-- item2 -->
+      </section>
+      <hr>
+      
       <div class="form-group">
         <label for='f-no'>번호</label> 
         <input id='f-no' type='text' name='no' value='${freeStudy.no}' readonly><br>
       </div>
       
-      <hr>
 
       <div class="form-group">
         <label for='f-title'>제목</label>
@@ -112,48 +135,33 @@ trimDirectiveWhitespaces="true" %>
         <span id='f-registeredDate'>${freeStudy.registeredDate}</span><br>
       </div>
 
-        <section>
-          <div class="item2">
-            <div class="info_item">
-              <img class="icon"
-              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/fillingHeartIcon.png">
-              <p class="icon_count">1</p>
-              
-              <img class="icon"
-              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/eyeIcon copy.png">
-              <p class="icon_count">1</p>
-              
-              <img class="icon"
-              src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/speechBalloonIcon copy.png">              
-              <p class="icon_count">1</p>
-            </div>
-          </div> <!-- item2 -->
-        </section>
+ 
 
-        <c:choose>
-          <c:when test="${loginUser eq null}">
-            <a href='/swu/freestudy/list' class="button-group"> 목록 </a>
-          </c:when>
-          
-          <c:when test="${checkWriter eq 1}">
-            <a href='updateform?no=${freeStudy.no}' class="button-group"> 수정 </a> 
-            <a href='delete?no=${freeStudy.no}' class="button-group"> 삭제 </a> 
-            <a href='/swu/freestudy/list' class="button-group"> 목록 </a>
-            
-          </c:when>
-          
-          <c:when test="${checkWriter eq 2}">
-            <c:if test="${result eq 0}">
-              <a class= "interestIcon" href='/swu/freestudy/interest/add?no=${freeStudy.no}' class="button-group"> 관심목록 추가</a>
-            </c:if>
-            
-            <c:if test="${result eq 1}">
-              <a class = "interestIcon" href='/swu/freestudy/interest/delete?no=${freeStudy.no}' class="button-group"> 관심목록 삭제 </a>
-            </c:if>
-            
-          </c:when>
-        </c:choose>
-        
+        <div class="study-bottom-button">
+            <c:choose>
+              <c:when test="${loginUser eq null}">
+                <a class="button-group" href='/swu/freestudy/list'> 목록 </a>
+              </c:when>
+              
+              <c:when test="${checkWriter eq 1}">
+                <a class="button-group" href='updateform?no=${freeStudy.no}'> 수정 </a> 
+                <a class="button-group" href='delete?no=${freeStudy.no}'> 삭제 </a> 
+                <a class="button-group" href='/swu/freestudy/list'> 목록 </a>
+                
+              </c:when>
+              
+              <c:when test="${checkWriter eq 2}">
+                <c:if test="${result eq 0}">
+                  <a class= "interestIcon" href='/swu/freestudy/interest/add?no=${freeStudy.no}' class="button-group"> 관심목록 추가</a>
+                </c:if>
+                
+                <c:if test="${result eq 1}">
+                  <a class = "interestIcon" href='/swu/freestudy/interest/delete?no=${freeStudy.no}' class="button-group"> 관심목록 삭제 </a>
+                </c:if>
+                
+              </c:when>
+            </c:choose>
+          </div>
       </fieldset>
 
     </form> <!-- freestudy-detail-->

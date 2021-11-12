@@ -7,6 +7,10 @@ label {
   width: 60px;
 }
 
+.study-content-category {
+  font-size: medium;
+  font-weight: bolder;
+}
 
 .freepagetop{
   -webkit-font-smoothing: antialiased;
@@ -157,4 +161,10 @@ a:visited { text-decoration: none; text-shadow: none; }
 .button-update {
 	display: flex;
   align-content: center;
+}
+
+.study-bottom-button {
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }

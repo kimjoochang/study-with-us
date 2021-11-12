@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
+<title>마이페이지 : 나의활동</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
 
-<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="../css/theme.css">
 
 <style>
 .container {
@@ -120,27 +121,6 @@ ul.sub li a.home {
 	box-sizing: border-box
 }
 
-.box2 {
-	width: 800px;
-	height: 150px;
-	border-top: 2px solid rgb(153, 152, 152);
-	border-bottom: 2px solid rgb(153, 152, 152);
-	border-radius: 3px;
-	padding: 30px;
-	margin-top: 15px;
-	margin-left: 20px;
-	box-sizing: border-box
-}
-
-.box3 {
-	width: 800px;
-	height: 100px;
-	padding: 30px;
-	margin-top: 0px;
-	margin-left: 10px;
-	box-sizing: border-box
-}
-
 input {
 	all: unset;
 }
@@ -175,11 +155,33 @@ input {
 	padding: 20px;
 	font-size: 12px;
 }
-</style>
 
+.buttons {
+	margin-top: 20px;
+	margin-left: 25px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+<!-- 수정 -->
+.btn {
+  margin-left : 5px;
+	height: 40px;
+	width: 109px;
+	font-size: 10px;
+}
+
+.study_category{
+  display : flex;
+  justify-content : space-around;
+  width : 100px;
+  margin-top : 10px;
+  margin-left : 25px;
+}
+</style>
 </head>
 
 <body>
+<!-- 내생스 / 유료 -->
 	<div class="container">
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="col-lg-6 py-3 wow fadeInUp">
@@ -192,78 +194,77 @@ input {
 			<div class="both">
 				<ul class="my-menu-list">
 					<div class="profile-icon">
-						<img src="img/profile.png">
+
+						<img src="../img/profile.png"">
 					</div>
-					<li class="userid">jeje2kim 님</li>
+					<li class="userid">${loginUser.nickname}님</li>
 					<ul class=sub>
 						<li><a href="#">나의 정보</a></li>
 						<li><a href="#">결제 내역</a></li>
 						<li><a href="#">관심 목록</a></li>
-						<li><a href="mypage/myactivity">나의 활동</a></li>
+						<li><a href="#">나의 활동</a></li>
 					</ul>
 				</ul>
 				<div class="content-section">
 
-					<form>
-						<section class="all-contents">
+					<section class="all-contents">
 
-							<div class="subject">개인 정보</div>
+						<div class="box0">
+							<div class="subject">나의 활동</div>
+						</div>
 
-							<div class="box1">
+						<div class="buttons">
+							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='../chargestudy/registerlist';">내가 등록한 스터디</button>
+							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='../chargestudy/participatelist';">내가 참여한 스터디</button>
+							<button type="button" class="btn btn-primary btn-sm">나의 게시글</button>
+							<br>
+						</div>
+						<!-- 수정 -->
+            <div class ="study_category">
+            <a href="../freestudy/registerlist">무료</a>
+            <a href="../chargestudy/registerlist">유료</a>
+            </div>						
 
-								<div class="attribute">
-									사진 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="photo"
-										type="text" value="사진을 등록하여 계정 맞춤 설정"></input>
-									<!---->
-									<input class="file" type="file" name="fileName">
-								</div>
-								<hr>
-								<div class="box">
-
-									닉네임 &nbsp;&nbsp;&nbsp;&nbsp; <input class="nickname"
-										value="쫄지마"></input>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<button type="button" class="btn btn-primary btn-sm">변경</button>
-									<br> 이메일 &nbsp;&nbsp;&nbsp;&nbsp; <input class="email"
-										type="email" name="email" id="email"
-										value="studywithus@gmail.com"></input>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<button type="button" class="btn btn-primary btn-sm">변경</button>
-									<br> 비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
-										class="pwd" type="password" name="my_password"
-										id="my_password" value="11111111"></input>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<button type="button" class="btn btn-primary btn-sm">변경</button>
-								</div>
+						<div class="box1">
+							<div class="table-content">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">제목</th>
+											<th scope="col">카테고리</th>
+											<th scope="col">금액</th>
+											<th scope="col">멘티 수</th>
+											<th scope="col">시작일</th>
+											<th scope="col">종료일</th>
+											<th scope="col">멘티 관리</th>
+										</tr>
+									</thead>
+									<c:forEach items="${studyList}" var="study">
+										<tbody>
+											<tr>
+												<td>${study.title}</td>
+												<td>${study.category}</td>
+												<td>${study.price}</td>
+												<td>${study.members}</td>
+												<td>${study.startDate}</td>
+												<td>${study.endDate}</td>
+												<td>링크&아이콘 자리</td>
+											</tr>
+										</tbody>
+									</c:forEach>
+								</table>
 							</div>
+					</section>
 
-
-							<div class="subject">연락처 정보</div>
-							<div class="box2">
-
-								휴대폰 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="ph" type="text"
-									value="010-1234-5678"></input>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button type="button" class="btn btn-primary btn-sm">변경</button>
-							</div>
-							<div class="box3">
-								<span class="with">
-								<button type="button" class="btn btn-secondary btn-sm">회원 탈퇴</button>
-							</div>
-							</span>
 				</div>
-			</div>
-			</section>
-			</form>
 
+			</div>
 		</div>
 
 	</div>
 	</div>
-
 	</div>
-	</div>
-	</div>
+	<!-- .container -->
 
 	<script src="../assets/js/jquery-3.5.1.min.js"></script>
 

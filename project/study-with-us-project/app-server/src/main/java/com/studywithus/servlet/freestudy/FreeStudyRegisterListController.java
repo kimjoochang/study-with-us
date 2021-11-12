@@ -1,4 +1,4 @@
-package com.studywithus.servlet.chargestudy;
+package com.studywithus.servlet.freestudy;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -14,17 +14,17 @@ import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
-@WebServlet("/chargestudy/registerlist")
-public class ChargeStudyRegisterListController extends HttpServlet {
+@WebServlet("/freestudy/registerlist")
+public class FreeStudyRegisterListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  StudyDao chargeStudyDao;
+  StudyDao freeStudyDao;
   StudyMemberDao studyMemberDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext servletContext = config.getServletContext();
-    chargeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
+    freeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
     studyMemberDao = (StudyMemberDao) servletContext.getAttribute("studyMemberDao");
   }
 
@@ -38,12 +38,12 @@ public class ChargeStudyRegisterListController extends HttpServlet {
         response.sendRedirect("/swu/user/loginform");
       }
 
-      Collection<Study> chargeStudyList = 
-          studyMemberDao.findAllStudy(member.getNo(),Study.OWNER_STATUS,1,10000000);
+      Collection<Study> freeStudyList = 
+          studyMemberDao.findAllStudy(member.getNo(),Study.OWNER_STATUS,0,0);
 
-      request.setAttribute("studyList", chargeStudyList);
+      request.setAttribute("studyList", freeStudyList);
 
-      request.getRequestDispatcher("../MyPage_chargeStudy.jsp").forward(request, response);   
+      request.getRequestDispatcher("../MyPage_freeStudy.jsp").forward(request, response);   
 
       return;
     } catch (Exception e) {
