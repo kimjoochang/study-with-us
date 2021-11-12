@@ -8,23 +8,44 @@
 <html>
 <head>
   <title>유료 스터디</title>
+
+  <base target="_self"/>
+
    <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/study/StudyDetail.css">
-<style>
- input {
- all : unset;
- }
-</style>
-
 </head>
 
 <body>
   <div class="container">
   <jsp:include page="../header.jsp"></jsp:include>
   
-<h1>유료 스터디 상세보기</h1>
-	<form action='updateform'>
+  <header class="freepagetop">
+    <form action="detail" >
+
+    <fieldset class="menu">
+      <h1 class="study-content-category">멘토링 상세보기</h1>
+      
+     <section class="study-info-icon">
+        <div class="item2">
+          <div class="info_item">
+            <img class="icon"
+            src="../img/fillingHeartIcon.png">
+            <p class="icon_count">1</p>
+            
+            <img class="icon"
+            src="../img/eyeIcon.png">
+            <p class="icon_count">1</p>
+            
+            <img class="icon"
+            src="../img/speechBalloon.png">              
+            <p class="icon_count">1</p>
+          </div>
+        </div> <!-- item2 -->
+      </section>
+
+      <hr>
+
 	<label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${chargeStudy.no}' readonly><br>
     
@@ -64,38 +85,44 @@
     <label for='f-registeredDate'>등록일</label> 
     <span id='f-registeredDate'>${chargeStudy.registeredDate }</span><br>
     
+    <div class="study-bottom-button">
     <c:choose>
 <c:when test="${loginUser eq null}">
-<a href='/swu/chargerstudy/list'>[목록]</a><br>
+<a href='/swu/chargerstudy/list'>목록</a><br>
 </c:when>
 
 <c:when test="${checkWriter eq 1}">
-<a href='updateform?no=${chargeStudy.no}'>[수정]</a> 
+<a href='updateform?no=${chargeStudy.no}'>수정</a> 
 
 <c:if test="${chargeStudy.deleteStatus eq 0}">
-<a href='deleterequestform?no=${chargeStudy.no}'>[삭제요청]</a> 
+<a href='deleterequestform?no=${chargeStudy.no}'>삭제요청</a> 
 </c:if>
 
 <c:if test="${chargeStudy.deleteStatus eq 1}">
-<a href='deletecancel?no=${chargeStudy.no}'>[삭제요청 취소]</a> 
+<a href='deletecancel?no=${chargeStudy.no}'>삭제요청 취소</a> 
 </c:if>
-<a href='/swu/chargestudy/list'>[목록]</a><br>
+<a href='/swu/chargestudy/list'>목록</a><br>
 </c:when>
 
 <c:when test="${checkWriter eq 2}">
 <c:if test="${result eq 0}">
-<a href='/swu/chargestudy/interest/add?no=${chargeStudy.no}'>[관심목록 추가]</a>
+<a href='/swu/chargestudy/interest/add?no=${chargeStudy.no}'>관심목록 추가</a>
 </c:if>
 
 <c:if test="${result eq 1}">
-<a href='/swu/chargestudy/interest/delete?no=${chargeStudy.no}'>[관심목록 삭제]</a>
+<a href='/swu/chargestudy/interest/delete?no=${chargeStudy.no}'>관심목록 삭제</a>
 </c:if>
 
-<a href='/swu/chargestudy/list'>[목록]</a><br>
+<a href='/swu/chargestudy/list'>목록</a><br>
 </c:when>
 </c:choose>
-	</form>
-</div>
 
-</body>
+</div>
+</fieldset>
+
+</form> <!-- freestudy-detail-->
+</header> <!-- freestudy-top-->
+</div> <!-- container -->
+
+</body> <!--무료스터디 제일 큰 포맷-->
 </html>
