@@ -6,6 +6,12 @@
   License URI: https://creativecommons.org/licenses/by/4.0/
   Version: 1.0
  */
+ @font-face {
+  font-family: 'InfinitySans-RegularA1';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
   --primary: #6C55F9;
@@ -21,7 +27,8 @@
 }
 
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  /*font-family: 'Lato', sans-serif;*/
+  font-family: 'InfinitySans-RegularA1';
   line-height: 1.5;
   color: #2D2B3A;
 }
@@ -33,14 +40,7 @@ body {
   font-style: normal;
 }
 */
-/*
-  font-family: "Work Sans", sans-serif;
-  line-height: 1.5;
-  color: #2D2B3A;
-*/
 
-
-  
 a {
   color: #6C55F9;
   text-decoration: none;
@@ -48,7 +48,7 @@ a {
 }
 
 a:hover {
-  color: #5641df;
+  color: #6C55F9;
   text-decoration: underline;
 }
 

@@ -13,9 +13,10 @@
 
   <title>스터디위더스: 메인</title>
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+ <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+   -->
 
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+ <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet"> -->
 
   <link rel="stylesheet" href="css/maicons.css">
 
@@ -30,27 +31,18 @@
 </head>
 
 <style>
-  /*
-  @font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/roboto/v29/KFOlCnqEu92Fr1MmSU5fCRc4EsA.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-*/
+
 .arrow{
 padding:0px;
-margin-left:-2px;
+margin-left:-2.6px;
 margin-right:10px;
 }
 
 .img_main{
-  height:390px;
-  width:410px;
+  height:360px;
+  width:390px;
   }
-  
+
 </style>
 
 <body>
@@ -67,25 +59,25 @@ margin-right:10px;
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="">Log in</a>
+              <a class="nav-link" href="user/loginform">Log in</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="freestudy/list">Study</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="chargestudy/list">Mentoring</a>
-            
-            <!-- 마이페이지/관리자페이지로 대체할 듯
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="community/list?categoryNo=0">Community</a>
-            </li>
-            -->
-            
-             <!-- 여기 햄버거 & 드롭다운 추가해야 함 // 보류? -->
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="chargestudy/list">My Page</a>
+              </li>
+            </ul>
+           </div>
+
+             <!-- 여기 햄버거 & 드롭다운 추가해야 함 // 보류?
                 <li class="nav-item">
                 <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"></button>
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>-->
               <!-- ver.bootstrap
              <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -106,17 +98,13 @@ margin-right:10px;
       <div class="page-banner home-banner">
         <div class="row align-items-center flex-wrap-reverse h-100">
           <div class="col-md-6 py-5 wow fadeInLeft">
-            <h1 class="mb-4">Let's Study With Us!</h1>
-            <p class="text-lg text-grey mb-5">내가 원하는 분야의 어쩌고 블라블라 한 눈에 살펴볼 수 있는 하면서 일단 스터디위더스 소개를 적자. </p> 
+            <h1 class="mb-4">Let's Study with Us!</h1>
+            <p class="text-lg text-grey mb-5">내가 원하는 분야의 스터디를 한 눈에 살펴보고 자유롭게 참여할 수 있는 스터디위더스 웹 사이트입니다. </p> 
             <p> 그리고 이제 여기 밑에 어쩌고를 기반으로 어쩌고저쩌고 그랬습니다 하면서 우리 프로젝트 소개 이만큼만 적으면 되겠지 아니면 위에 문장이랑 아예 합쳐서 적을까?</p>
             <!-- <a href="#" class="btn btn-primary btn-split">Watch Video <div class="fab"><span class="mai-play"></span></div></a> -->
           </div>
           <div class="col-md-6 py-5 wow zoomIn">
             <div class="img-fluid text-center">
-             
-              <!-- 교체할/말
-             <img class="img_main" src="img/urban-working-remotely.png"> 
-             <img class="img_main" src="img/clip-1675.png">-->
              <img class="img_main" src="img/urban-858.png"></img>
             </div>
           </div>
@@ -142,7 +130,7 @@ margin-right:10px;
             <div class="body">
               <h5 class="text-secondary">일반기업</h5>
               <p>We help you define your SEO objective & develop a realistic strategy with you</p>
-              <a href="service.html" class="btn btn-primary">Read More</a>
+              <a href="service.html" class="btn btn-primary">Read more</a>
             </div>
           </div>
         </div>
@@ -156,7 +144,7 @@ margin-right:10px;
             <div class="body">
               <h5 class="text-secondary">공기업/공무원</h5>
               <p>We help you define your SEO objective & develop a realistic strategy with you</p>
-              <a href="service.html" class="btn btn-primary">Read More</a>
+              <a href="service.html" class="btn btn-primary">Read more</a>
             </div>
           </div>
         </div>
@@ -169,7 +157,7 @@ margin-right:10px;
             <div class="body">
               <h5 class="text-secondary">프로그래밍</h5>
               <p>We help you define your SEO objective & develop a realistic strategy with you</p>
-              <a href="service.html" class="btn btn-primary">Read More</a>
+              <a href="service.html" class="btn btn-primary">Read more</a>
             </div>
           </div>
         </div>
@@ -183,12 +171,12 @@ margin-right:10px;
       <div class="row align-items-center">
         <div class="col-lg-6 py-3 wow fadeInUp">
           <span class="subhead">About us</span>
-          <h2 class="title-section">TEAM3</h2>
+          <h2 class="title-section">Team3</h2>
           <div class="divider"></div>
 
           <p>여기에 이제 프로젝트 설명이 들어갈 예정입니당. 사이트를 왜 만들게 되었는지, 어떤 기능들을 구현했는지 간단하게 적어두면 좋을 섹션인 것 같아</p>
           <p>조원 이름이랑 깃헙 주소를 넣을까 말까 고민이다 안 넣으면 그냥 이렇게 간단한 소개만 넣을까?</p>
-          <a href="about.html" class="btn btn-primary mt-3">Read More</a>
+          <a href="about.html" class="btn btn-primary mt-3">Read more</a>
         </div>
         <div class="col-lg-6 py-3 wow fadeInRight">
           <div class="img-fluid py-3 text-center">
