@@ -82,7 +82,7 @@ ul {
 								cols="40" rows="5"></textarea>
 							<div class="form_buttons">
 								<input type="submit" onclick="offClick()" value="등록"> 
-								<input id="close" type="button" onclick="offClick()" value="취소">
+								<input id="close" type="button" value="취소">
 							</div>
 						</form>
 					</div>

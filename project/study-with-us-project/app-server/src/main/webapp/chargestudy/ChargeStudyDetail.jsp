@@ -70,11 +70,6 @@ text-align: center;
 }
  
 </style>
-  <base target="_self"/>
-
-   <link rel="stylesheet" href="../css/theme.css">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/study/StudyDetail.css">
 </head>
 
 <body>
@@ -147,27 +142,21 @@ text-align: center;
     <span id='f-registeredDate'>${chargeStudy.registeredDate }</span><br>
     
     <div class="study-bottom-button">
-    <c:choose>
-<c:when test="${loginUser eq null}">
-<a href='/swu/chargerstudy/list'>목록</a><br>
-</c:when>
+    
+<a href='#'>목록</a><br>
+    
+    <c:if test="${checkWriter eq 1}">
+      <a href='updateform?no=${chargeStudy.no}'>수정</a> 
+        <c:if test="${chargeStudy.deleteStatus eq 0}">
+          <a id ="open" href='#'>[삭제요청]</a> 
+        </c:if>
 
-<c:when test="${checkWriter eq 1}">
-<a href='updateform?no=${chargeStudy.no}'>수정</a> 
-
-<c:if test="${chargeStudy.deleteStatus eq 0}">
-<a id ="open" href='#'>[삭제요청 취소]</a> 
-</c:if>
-
-<c:if test="${chargeStudy.deleteStatus eq 1}">
-<a href='deletecancel?no=${chargeStudy.no}'>[삭제요청 취소]</a> 
-
-
-</c:if>
-<a href='/swu/chargestudy/list'>목록</a><br>
-</c:when>
-
-<c:when test="${checkWriter eq 2}">
+        <c:if test="${chargeStudy.deleteStatus eq 1}">
+          <a href='deletecancel?no=${chargeStudy.no}'>[삭제요청 취소]</a> 
+        </c:if>
+    </c:if>
+    
+    <c:if test="${checkWriter eq 2}">
 <c:if test="${result eq 0}">
 <a href='/swu/chargestudy/interest/add?no=${chargeStudy.no}'>관심목록 추가</a>
 </c:if>
@@ -175,10 +164,7 @@ text-align: center;
 <c:if test="${result eq 1}">
 <a href='/swu/chargestudy/interest/delete?no=${chargeStudy.no}'>관심목록 삭제</a>
 </c:if>
-
-<a href='/swu/chargestudy/list'>목록</a><br>
-</c:when>
-</c:choose>
+    </c:if>
 	</form>
 	
 	<!-- 모달창 -->
@@ -198,7 +184,7 @@ text-align: center;
 							<br>
 							<div class = "button_box">
 							<button id="close" onclick="offClick()">취소</button><br>
-							<button type="submit" class ="request_button" onclick="offClick()">등록</button>
+							<button type="reset" class ="request_button">등록</button>
 							</div>
             </form>
           </div>
@@ -206,11 +192,6 @@ text-align: center;
       </div> <!-- modal_overlay -->
     </div> <!-- modal_hidden -->
 </div>
-</fieldset>
-
-</form> <!-- freestudy-detail-->
-</header> <!-- freestudy-top-->
-</div> <!-- container -->
 
 <script>
 const openBtn = document.getElementById('open');
