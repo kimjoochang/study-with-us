@@ -261,8 +261,8 @@ margin-right:10px;
         -->
         
         <div class="col-12 mt-4 text-center wow fadeInUp">
-          <div class="post-date"><br><br><br><br> 아직 회원이 아니신가요?</div><br>
-          <a href="" class="btn btn-primary">Join Us</a><br><br>
+          <div class="post-date"><br><br><br><br> 더 많은 기능을 이용해볼까요?</div><br>
+          <a href="/swu/user/Join_ver3.jsp" class="btn btn-primary">Start with Us</a><br><br>
         </div>
       </div>
       <!--풋터-->

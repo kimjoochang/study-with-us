@@ -1,5 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -133,12 +136,15 @@
           <label data-error="wrong" data-success="right">이메일</label>
         </div>
 
+<!-- 
         <div class="md-form">
           <input type="password" class="form-control validate">
           <label data-error="wrong" data-success="right">비밀번호</label>
-          <p class="font-small blue-text d-flex justify-content-end"><a href="#" class="blue-text sl-1">아이디 찾기</a>
-          /<a href="#" class="blue-text sl-1">비밀번호 재설정</a></p><br>
         </div>
+         -->  
+         
+          <p class="font-small blue-text d-flex justify-content-end"><a href="#" class="blue-text sl-1">아이디 찾기</a>
+        <!--    /<a href="#" class="blue-text sl-1">비밀번호 재설정</a></p><br> -->
 
         <div class="text-center mb-3">
           <button type="button" class="btn btn-primary1 btn-block z-depth-1a">스터디위더스 시작하기</button><br><hr>
