@@ -77,8 +77,8 @@ text-align: center;
   <jsp:include page="../header.jsp"></jsp:include>
   
   <header class="freepagetop">
-    <form action="detail" >
 
+    <form action="detail" >
     <fieldset class="menu">
       <h1 class="study-content-category">멘토링 상세보기</h1>
       
@@ -139,7 +139,7 @@ text-align: center;
     <input id='f-viewCount' type='text' name='viewCount' value='${chargeStudy.viewCount}' readonly><br>
     
     <label for='f-registeredDate'>등록일</label> 
-    <span id='f-registeredDate'>${chargeStudy.registeredDate }</span><br>
+    <span id='f-registeredDate'>${chargeStudy.registeredDate}</span><br>
     
     <div class="study-bottom-button">
     
@@ -148,11 +148,11 @@ text-align: center;
     <c:if test="${checkWriter eq 1}">
       <a href='updateform?no=${chargeStudy.no}'>수정</a> 
         <c:if test="${chargeStudy.deleteStatus eq 0}">
-          <a id ="open" href='#'>[삭제요청]</a> 
+          <a id ="open" href='#'>삭제요청</a> 
         </c:if>
 
         <c:if test="${chargeStudy.deleteStatus eq 1}">
-          <a href='deletecancel?no=${chargeStudy.no}'>[삭제요청 취소]</a> 
+          <input type="button" onclick="reqCancel();" value="삭제요청 취소">
         </c:if>
     </c:if>
     
@@ -179,12 +179,11 @@ text-align: center;
             <form action='deleterequest' method='post'>
              <input type ="hidden" name="no" value="${chargeStudy.no}"/>
 							<label for='reason'></label>
-							<textarea name ="reason" cols="50" rows="15" placeholder="삭제 사유를 입력해주세요.">
-							</textarea>
+							<textarea name ="reason" cols="50" rows="15" placeholder="삭제 사유를 입력해주세요."></textarea>
 							<br>
 							<div class = "button_box">
-							<button id="close" onclick="offClick()">취소</button><br>
-							<button type="reset" class ="request_button">등록</button>
+							<input type="reset" id="close" onclick=reqCancel value="취소">
+							<button type="submit" class ="request_button">등록</button>
 							</div>
             </form>
           </div>
@@ -193,6 +192,18 @@ text-align: center;
     </div> <!-- modal_hidden -->
 </div>
 
+<script>
+const reqCancel = () => {
+	 if (!confirm("삭제요청을 취소하시겠습니까?")) {
+	     console.log(1);
+	          return;
+	      } else {
+	     console.log(2);
+	    location.href = "deletecancel?no=${chargeStudy.no}";
+	      }
+	     console.log(3);
+}
+</script>
 <script>
 const openBtn = document.getElementById('open');
 //onModal button
@@ -222,7 +233,6 @@ closeBtn.addEventListener('click', closeModal);
 
 //overlay.addEventListener('click', closeModal);
 //모달창 영역 밖
-
 </script>
 
 </body> <!--무료스터디 제일 큰 포맷-->
