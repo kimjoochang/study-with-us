@@ -15,6 +15,7 @@ public class AdminPageController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    request.getRequestDispatcher("AdminPage.jsp").forward(request, response);
+    response.sendRedirect("chargestudy/deleterequestlist");
+    //request.getRequestDispatcher("AdminPage_s.jsp").forward(request, response);
   }
 }

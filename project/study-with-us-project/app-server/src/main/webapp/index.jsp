@@ -13,6 +13,7 @@
 
   <title>스터디위더스: 메인</title>
 
+  <base target="_self"/>
  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
    -->
 
@@ -42,6 +43,68 @@ margin-right:10px;
   height:360px;
   width:390px;
   }
+  
+  .modal {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_overlay {
+  position:fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.modal_content {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  width: 490px;
+  height: 550px;
+  background-color: white;
+  padding: 30px 0px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+    rgba(0, 0, 0, 0.23);
+}
+
+.hidden {
+  display: none;
+}
+
+.form_box {
+  margin : 35px;
+}
+
+.hidden {
+  display: none;
+}
+
+.button_box {
+display : flex;
+justify-content : flex-end;
+margin-right : 5px;
+text-align: center;
+}
+.form_buttons {
+  display : flex;
+  justify-content: flex-end;
+  width : 360px;
+}
+  
+.request_button, #close {
+  margin-right : 15px;
+}
+
+input {
+ all : unset;
+ }
+
 
 </style>
 
@@ -238,11 +301,38 @@ margin-right:10px;
               </div>
             </div>
             <div class="body">
-              <h5 class="post-title"><a href="mentorapplication/form">멘토 신청하기</a></h5>
+              <h5 class="post-title"><a id= "open" href="#">멘토 신청하기</a></h5>
               <div class="post-date">멘토가 되어 자신 있는 분야의 스터디를 이끌어보세요 </div>
             </div>
           </div>
         </div>
+        
+                  <!-- 모달창 -->
+    <!--이벤트 발생 시 hidden 삭제-->
+    <div class="modal hidden">
+      <!--모달 활성화 시 흐린 배경 표현-->
+      <div class="modal_overlay">
+        <!--모달 화면-->
+        <div class="modal_content">
+          <div class="form_box">
+            <form action='mentorapplication/add' method='post'>
+              <input class="form_input_title" type='text' name='selfIntro' size=36
+                maxlength=30 placeholder="멘토링 소개에 들어갈 자기소개를 입력하세요.">
+              <textarea class="input_content" name="content" id="textarea"
+                cols="40" rows="5"></textarea>
+              <input class="form_input_title" type='text' name='subject' size=36
+                maxlength=30 placeholder="개설할 멘토링 주제를 입력하세요.">
+              <textarea class="input_content" name="content" id="textarea"
+                cols="40" rows="5"></textarea>
+              <div class="form_buttons">
+                <input type="submit" onclick="offClick()" value="등록"> 
+                <input id="close" type="button" value="취소">
+              </div>
+            </form>
+          </div>
+        </div> <!-- modal_content -->
+      </div> <!-- modal_overlay -->
+    </div> <!-- modal_hidden -->
         
         <!--
         <div class="col-lg-4 py-3 wow fadeInUp">
@@ -281,6 +371,32 @@ margin-right:10px;
     </div>
   </div>
 
+<script>
+const openBtn = document.getElementById('open');
+//onModal button
+
+const closeBtn = document.getElementById('close');
+//offModal button
+
+const modal = document.querySelector('.modal');
+//HTML에서의 모달 최상위 요소
+
+const overlay = document.querySelector('.modal_overlay');
+//모달창이 활성화되면 흐린 배경을 표현하는 요소
+
+const openModal = () => {
+modal.classList.remove('hidden');
+}
+
+const closeModal = () => {
+modal.classList.add('hidden');
+}
+
+openBtn.addEventListener('click', openModal);
+//onModal
+
+closeBtn.addEventListener('click', closeModal);
+</script>
 
 <script src="js/jquery-3.5.1.min.js"></script>
 

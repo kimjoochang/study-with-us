@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
+import com.studywithus.dao.DeleteRequestFormDao;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
@@ -20,12 +21,14 @@ public class ChargeStudyDeleteCancelController  extends HttpServlet {
 
   StudyDao chargeStudyDao;
   SqlSession sqlSession;
+  DeleteRequestFormDao deleteRequestFormDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext servletContext = config.getServletContext();
     sqlSession = (SqlSession) servletContext.getAttribute("sqlSession");
     chargeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
+    deleteRequestFormDao = (DeleteRequestFormDao) servletContext.getAttribute("deleteRequestFormDao");
   }
 
   @Override
@@ -52,6 +55,7 @@ public class ChargeStudyDeleteCancelController  extends HttpServlet {
       chargeStudy.setDeleteStatus(0);
 
       chargeStudyDao.update(chargeStudy);
+      deleteRequestFormDao.delete(no);
       sqlSession.commit();
 
       response.sendRedirect("list");
