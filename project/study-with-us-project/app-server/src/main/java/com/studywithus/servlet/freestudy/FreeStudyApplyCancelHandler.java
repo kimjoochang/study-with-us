@@ -39,8 +39,7 @@ public class FreeStudyApplyCancelHandler extends HttpServlet {
       studyMemberDao.delete(member.getNo(), no);
       sqlSession.commit();
 
-      request.setAttribute("no", no);
-      request.getRequestDispatcher("detail").forward(request, response);
+      response.sendRedirect("detail?no="+no);
 
     } catch (Exception e) {
       sqlSession.rollback();

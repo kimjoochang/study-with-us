@@ -59,8 +59,7 @@ public class FreeStudyApplyController extends HttpServlet {
       studyMemberDao.insert(member.getNo(), no, Study.APPLICANT_STATUS);
       sqlSession.commit();
 
-      request.setAttribute("no", no);
-      request.getRequestDispatcher("detail").forward(request, response);
+      response.sendRedirect("detail?no="+no);
 
     } catch (Exception e) {
       sqlSession.rollback();

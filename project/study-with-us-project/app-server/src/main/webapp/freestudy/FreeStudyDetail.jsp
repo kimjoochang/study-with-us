@@ -55,7 +55,7 @@
 							<img class="icon-top" src="../img/people.png">
 							<input class="input3" id='f-members/maxMembers' type='text'
 								name='members/maxMembers'
-								value='${freeStudy.members/freeStudy.maxMembers}' readonly>
+								value='${freeStudy.members} / ${freeStudy.maxMembers}' readonly>
 
 						</ul>
 					</div>
@@ -74,7 +74,7 @@
 
 					<div class="form-group">
 						<label for='f-name'>작성자</label> <input id='f-name' type='text'
-							name='name' value='${freeStudy.writer.name}' readonly>
+							name='name' value='${freeStudy.writer.nickname}' readonly>
 					</div>
 
 					<div class="form-group">
@@ -141,10 +141,10 @@
 						<div class="item2">
 							<div class="info_item">
 								<img class="icon" src="../img/fillingHeartIcon.png">
-								<p class="icon_count">1</p>
+								<p class="icon_count">${freeStudy.likes}</p>
 
 								<img class="icon" src="../img/eyeIcon.png">
-								<p class="icon_count">1</p>
+								<p class="icon_count">${freeStudy.viewCount}</p>
 
 							</div>
 						</div>
