@@ -44,7 +44,7 @@ margin-right:10px;
   width:390px;
   }
   
-  .modal {
+  .modal1 {
   top: 0;
   left: 0;
   width: 100%;
@@ -54,13 +54,13 @@ margin-right:10px;
   align-items: center;
 }
 
-.modal_overlay {
+.modal1_overlay {
   position:fixed;
   width: 100%;
   height: 100%;
 }
 
-.modal_content {
+.modal1_content {
   position: fixed;
   top: 30%;
   left: 40%;
@@ -106,6 +106,38 @@ input {
  }
 
 
+  .btn-primary1{
+    background: #756daa;
+    color:snow;
+    border-radius: 70px;
+  }
+
+    .st-sns{
+      font-size:5px;
+    }
+
+    .row{
+      margin-left:5px;
+      margin-right:5px;
+    }
+    
+    .sns_container{
+    display: flex;
+    text-align:center;
+    justify-content:space-evenly;
+    margin-top:15px;
+    }
+
+  .title_img{
+    margin:30px 10px;
+    text-align:center;
+    justify-content: center;
+  }
+
+  .sign-buttons{
+    margin-top: 50%;
+  }
+
 </style>
 
 <body>
@@ -122,7 +154,7 @@ input {
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="user/loginform">Log in</a>
+              <a id="open1" class="nav-link" href="#">Log in</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="freestudy/list">Study</a>
@@ -307,12 +339,9 @@ input {
           </div>
         </div>
         
-                  <!-- 모달창 -->
-    <!--이벤트 발생 시 hidden 삭제-->
+        <!-- 
     <div class="modal hidden">
-      <!--모달 활성화 시 흐린 배경 표현-->
       <div class="modal_overlay">
-        <!--모달 화면-->
         <div class="modal_content">
           <div class="form_box">
             <form action='mentorapplication/add' method='post'>
@@ -330,10 +359,10 @@ input {
               </div>
             </form>
           </div>
-        </div> <!-- modal_content -->
-      </div> <!-- modal_overlay -->
-    </div> <!-- modal_hidden -->
-        
+        </div> 
+      </div> 
+    </div> 
+         -->
         <!--
         <div class="col-lg-4 py-3 wow fadeInUp">
           <div class="card-blog">
@@ -352,7 +381,7 @@ input {
         
         <div class="col-12 mt-4 text-center wow fadeInUp">
           <div class="post-date"><br><br><br><br> 더 많은 기능을 이용해볼까요?</div><br>
-          <a href="/swu/user/Join_ver3.jsp" class="btn btn-primary">Start with Us</a><br><br>
+          <a id="open2" href="#" class="btn btn-primary">Start with Us</a><br><br>
         </div>
       </div>
       <!--풋터-->
@@ -368,20 +397,152 @@ input {
           <a href="https://icons8.com/illustrations/author/602b6fa7123f993a3afdba7b">  Victoria Chepkasova</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
         </div>
       </div>
+      <div class="modal1 hidden">
+      <!--모달 활성화 시 흐린 배경 표현-->
+      <div class="modal1_overlay">
+        <!--모달 화면-->
+        <div class="modal1_content">
+          <div class="sign-buttons">
+  <div class="d-flex justify-content-center">
+
+    <!--회원가입 버튼 -->
+    <div class="text-center">
+      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">SIGN UP<i class="fas fa-user-plus ml-3"></i></a>
+    </div>
+
+    <!--로그인 버튼-->
+    <div class="text-center">
+      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage">&nbsp;&nbsp;LOG IN&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
+    </div>
+  </div>
+</div>
+
+        </div> <!-- modal_content -->
+      </div> <!-- modal_overlay -->
+    </div> <!-- modal_hidden -->
     </div>
   </div>
 
+
+
+
+<div class="modal fade" id="signupPage">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        
+        <div class="modal-header text-center">
+          <h5 class="modal-title w-100 dark-grey-text font-weight-bold">Sign Up</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
+        </div>
+
+        <div class="title_img"><img src="../img/swu_text.png"></img></div>
+        
+
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <input type="text" class="form-control validate">
+            <label data-error="wrong" data-success="right">이름</label>
+          </div>
+
+          <div class="md-form mb-5">
+            <input type="email" class="form-control validate">
+            <label data-error="wrong" data-success="right">이메일</label>
+          </div>
+
+          <div class="md-form mb-5">
+            <input type="text" class="form-control validate">
+            <label data-error="wrong" data-success="right">닉네임</label>
+          </div>
+
+          <div class="md-form mb-5">
+            <input type="password" class="form-control validate">
+            <label data-error="wrong" data-success="right">비밀번호</label>
+          </div>
+
+          <div class="md-form mb-5">
+            <input type="password" class="form-control validate">
+            <label data-error="wrong" data-success="right">비밀번호 확인</label>
+          </div>
+          
+          <div class="md-form mb-5">
+            <input type="text" class="form-control validate">
+            <label data-error="wrong" data-success="right">휴대폰 번호</label>
+          </div>
+        </div>
+          
+        <div class="modal-footer d-flex justify-content-center">
+          <button class="btn btn-primary1">스터디위더스 시작하기</button><br><hr>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!--LOG IN 누르면 나오는 모달 창 내용들--> 
+
+<div class="modal fade" id="signinPage">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header text-center">
+        <h5 class="modal-title w-100 dark-grey-text font-weight-bold">Log In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
+      </div>
+
+      <div class="title_img"><img src="../img/스터디위더스.png"></img></div>
+
+      <div class="modal-body mx-4">
+        <div class="md-form">
+          <input type="email" class="form-control validate">
+          <label data-error="wrong" data-success="right">이메일</label>
+        </div>
+
+<!-- 
+        <div class="md-form">
+          <input type="password" class="form-control validate">
+          <label data-error="wrong" data-success="right">비밀번호</label>
+        </div>
+         -->  
+         
+          <p class="font-small blue-text d-flex justify-content-end"><a href="#" class="blue-text sl-1">아이디 찾기</a>
+        <!--    /<a href="#" class="blue-text sl-1">비밀번호 재설정</a></p><br> -->
+
+        <div class="text-center mb-3">
+          <button type="button" class="btn btn-primary1 btn-block z-depth-1a">스터디위더스 시작하기</button><br><hr>
+          <!--<button type="button" class="btn btn-primary btn-block z-depth-1a">스터디위더스 시작하기</button>-->
+        </div>
+
+        <div class="st-sns">
+        <p class="font-small dark-grey-text d-flex justify-content-center">or</p>
+        <p class="font-small dark-grey-text d-flex justify-content-center">SNS로 시작하기</p>
+      </div>
+
+        <div class="row my-3 justify-content-center">
+        
+          <div class="sns_container">
+            <div class="sns_icon"> <a><img src="../img/facebook.png"></img></a></div>
+            <div class="sns_icon"><a><img src="../img/twitter.png"></img></a></div>
+            <div class="sns_icon"><a><img src="../img/google.png"></img></a></div>
+            <div class="sns_icon"><a><img src="../img/instagram.png"></img></a></div>
+        </div><!--container-->
+        
+        </div><!--row my-3 justify-content-center-->
+      </div>
+    </div>
+    </div> 
+  </div>
+
 <script>
-const openBtn = document.getElementById('open');
+const openBtn = document.getElementById('open1');
+const openBtn2 = document.getElementById('open2');
 //onModal button
 
-const closeBtn = document.getElementById('close');
+const closeBtn = document.getElementById('close1');
 //offModal button
 
-const modal = document.querySelector('.modal');
+const modal = document.querySelector('.modal1');
 //HTML에서의 모달 최상위 요소
 
-const overlay = document.querySelector('.modal_overlay');
+const overlay = document.querySelector('.modal1_overlay');
 //모달창이 활성화되면 흐린 배경을 표현하는 요소
 
 const openModal = () => {
@@ -392,10 +553,14 @@ const closeModal = () => {
 modal.classList.add('hidden');
 }
 
+openBtn2.addEventListener('click', openModal);
 openBtn.addEventListener('click', openModal);
 //onModal
 
 closeBtn.addEventListener('click', closeModal);
+
+overlay.addEventListener('click', closeModal);
+//모달창 영역 밖
 </script>
 
 <script src="js/jquery-3.5.1.min.js"></script>
@@ -407,6 +572,15 @@ closeBtn.addEventListener('click', closeModal);
 <script src="js/wow.min.js"></script>
 
 <script src="js/theme.js"></script>
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
   
 </body>
 </html>

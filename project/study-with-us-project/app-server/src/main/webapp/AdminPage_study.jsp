@@ -155,7 +155,7 @@ ul.sub li a.home {
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col">제목</th>
+									<th scope="col">스터디 제목</th>
 									<th scope="col">신청자</th>
 									<th scope="col">요청일</th>
 									<th scope="col">삭제 사유</th>
