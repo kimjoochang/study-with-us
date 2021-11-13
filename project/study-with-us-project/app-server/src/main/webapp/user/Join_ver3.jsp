@@ -46,12 +46,19 @@
     text-align:center;
     justify-content: center;
   }
+
+  .sign-buttons{
+    margin-top: 50%;
+  }
   </style>
 
 
 <body>
 
+
+  
   <!--Buttons-->
+<div class="sign-buttons">
   <div class="d-flex justify-content-center">
 
     <!--회원가입 버튼 -->
@@ -64,6 +71,7 @@
       <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage">&nbsp;&nbsp;LOG IN&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
     </div>
   </div>
+</div>
 
   <!--SIGN UP 누르면 나오는 모달 창 내용들-->
   <div class="modal fade" id="signupPage">
