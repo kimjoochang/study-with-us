@@ -48,8 +48,8 @@ public class MentorApplicationListController extends HttpServlet {
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+      //      request.setAttribute("error", e);
+      //      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
