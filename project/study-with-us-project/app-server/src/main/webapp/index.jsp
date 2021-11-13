@@ -50,33 +50,37 @@ margin-right:10px;
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: between-evenly;
   align-items: center;
+   z-index: 10 !important;
 }
 
 .modal1_overlay {
-  position:fixed;
+  position:relative;
   width: 100%;
   height: 100%;
 }
 
 .modal1_content {
   position: fixed;
+  text-align: center;
   top: 30%;
-  left: 40%;
-  width: 490px;
+  left: 21%;
+  width: 600px;
   height: 550px;
-  background-color: white;
-  padding: 30px 0px;
+  background-color: snow;
+  padding: 30px 30px;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
     rgba(0, 0, 0, 0.23);
+  z-index: 10 !important;
 }
 
 .hidden {
   display: none;
 }
 
+/*
 .form_box {
   margin : 35px;
 }
@@ -91,12 +95,13 @@ justify-content : flex-end;
 margin-right : 5px;
 text-align: center;
 }
+
 .form_buttons {
   display : flex;
   justify-content: flex-end;
   width : 360px;
 }
-  
+  */
 .request_button, #close {
   margin-right : 15px;
 }
@@ -104,7 +109,6 @@ text-align: center;
 input {
  all : unset;
  }
-
 
   .btn-primary1{
     background: #756daa;
@@ -119,6 +123,8 @@ input {
     .row{
       margin-left:5px;
       margin-right:5px;
+      position: relative;
+      z-index:-100;
     }
     
     .sns_container{
@@ -154,7 +160,7 @@ input {
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a id="open1" class="nav-link" href="#">Log in</a>
+              <a id="open1" class="nav-link" href="#">Sign Up / In</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="freestudy/list">Study</a>
@@ -397,6 +403,8 @@ input {
           <a href="https://icons8.com/illustrations/author/602b6fa7123f993a3afdba7b">  Victoria Chepkasova</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
         </div>
       </div>
+
+      <!-- ***** 로그인/회원가입 시 모달창 *****-->
       <div class="modal1 hidden">
       <!--모달 활성화 시 흐린 배경 표현-->
       <div class="modal1_overlay">
@@ -407,12 +415,12 @@ input {
 
     <!--회원가입 버튼 -->
     <div class="text-center">
-      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">SIGN UP<i class="fas fa-user-plus ml-3"></i></a>
+      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">Sign up<i class="fas fa-user-plus ml-3"></i></a>
     </div>
 
     <!--로그인 버튼-->
     <div class="text-center">
-      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage">&nbsp;&nbsp;LOG IN&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
+      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage">&nbsp;&nbsp;Sign in&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
     </div>
   </div>
 </div>
@@ -435,7 +443,7 @@ input {
           <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
         </div>
 
-        <div class="title_img"><img src="../img/swu_text.png"></img></div>
+        <div class="title_img"><img src="img/스터디위더스.png"></img></div>
         
 
         <div class="modal-body mx-3">
@@ -484,14 +492,15 @@ input {
     <div class="modal-content">
       
       <div class="modal-header text-center">
-        <h5 class="modal-title w-100 dark-grey-text font-weight-bold">Log In</h5>
+        <h5 class="modal-title w-100 dark-grey-text font-weight-bold">Sign In</h5>
         <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
       </div>
 
-      <div class="title_img"><img src="../img/스터디위더스.png"></img></div>
+      <div class="title_img"><img src="img/스터디위더스.png"></img></div>
 
       <div class="modal-body mx-4">
         <div class="md-form">
+          <form action='login' method="post">
           <input type="email" class="form-control validate">
           <label data-error="wrong" data-success="right">이메일</label>
         </div>
@@ -510,6 +519,7 @@ input {
           <button type="button" class="btn btn-primary1 btn-block z-depth-1a">스터디위더스 시작하기</button><br><hr>
           <!--<button type="button" class="btn btn-primary btn-block z-depth-1a">스터디위더스 시작하기</button>-->
         </div>
+      </form>
 
         <div class="st-sns">
         <p class="font-small dark-grey-text d-flex justify-content-center">or</p>
@@ -519,10 +529,10 @@ input {
         <div class="row my-3 justify-content-center">
         
           <div class="sns_container">
-            <div class="sns_icon"> <a><img src="../img/facebook.png"></img></a></div>
-            <div class="sns_icon"><a><img src="../img/twitter.png"></img></a></div>
-            <div class="sns_icon"><a><img src="../img/google.png"></img></a></div>
-            <div class="sns_icon"><a><img src="../img/instagram.png"></img></a></div>
+            <div class="sns_icon"> <a><img src="img/facebook.png"></img></a></div>
+            <div class="sns_icon"><a><img src="img/twitter.png"></img></a></div>
+            <div class="sns_icon"><a><img src="img/google.png"></img></a></div>
+            <div class="sns_icon"><a><img src="img/instagram.png"></img></a></div>
         </div><!--container-->
         
         </div><!--row my-3 justify-content-center-->
