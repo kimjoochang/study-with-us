@@ -138,6 +138,12 @@
 <c:if test="${result eq 1}">
 <a class="input-button-bottom" href='/swu/chargestudy/interest/delete?no=${chargeStudy.no}'>관심목록 삭제</a>
 </c:if>
+<!-- 결제 취소 조건 좀 더 고민해야함! 
+(스터디멤버 테이블에서 스터디번호와 회원번호 주고 멤버상태에 따라 구분할 지 ,
+ 결제테이블에서 스터디번호와 회원번호 주고 존재 여부로 확인할지) 
+<a class="input-button-bottom" href='#'>결제</a>
+<a class="input-button-bottom" href='#'>결제취소</a>
+ -->
     </c:if>
 	</form>
 	

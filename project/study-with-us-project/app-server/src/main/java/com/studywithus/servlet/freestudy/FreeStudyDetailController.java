@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
@@ -18,12 +19,14 @@ public class FreeStudyDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao freeStudyDao;
+  StudyMemberDao studyMemberDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext servletContext = config.getServletContext();
     freeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
+    studyMemberDao = (StudyMemberDao) servletContext.getAttribute("studyMemberDao");
     sqlSession = (SqlSession) servletContext.getAttribute("sqlSession");
   }
 
@@ -33,7 +36,9 @@ public class FreeStudyDetailController extends HttpServlet {
 
     try {
       int freeStudyNo;
-      int result;
+      int likeResult; // 좋아요 여부
+      int participateResult = 0; // 스터디 참여 여부
+
       // 요청이 detail.jsp에서 왔다면
       if (request.getAttribute("no") == null) {
         freeStudyNo = Integer.parseInt(request.getParameter("no"));
@@ -47,10 +52,20 @@ public class FreeStudyDetailController extends HttpServlet {
       Member member = (Member) request.getSession().getAttribute("loginUser");
 
       if (member == null) {
-        result = 0;
+        likeResult = 0;
+
       } else {
         // 좋아요 여부
-        result =  freeStudyDao.checkLikesByMember(member.getNo(), freeStudyNo);
+        likeResult =  freeStudyDao.checkLikesByMember(member.getNo(), freeStudyNo);
+
+        Member participant = studyMemberDao.findByNoMember(member.getNo(), freeStudyNo, Study.APPLICANT_STATUS);
+
+        if (participant == null) {
+          participateResult = 0;
+
+        } else {
+          participateResult = 1;
+        }
       }
 
       Study freeStudy = freeStudyDao.findByNo(freeStudyNo);
@@ -59,7 +74,8 @@ public class FreeStudyDetailController extends HttpServlet {
       int num = checkWriter(member,freeStudy.getWriter().getNo());
 
       request.setAttribute("freeStudy", freeStudy);
-      request.setAttribute("result", result);
+      request.setAttribute("result", likeResult);
+      request.setAttribute("participateResult", participateResult);
       request.setAttribute("checkWriter", num);
 
       sqlSession.commit();
