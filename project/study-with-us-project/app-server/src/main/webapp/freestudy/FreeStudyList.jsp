@@ -37,24 +37,24 @@ trimDirectiveWhitespaces="true" %>
 
       <ul class="uldesign">
 
-<c:forEach items="${freeStudyList}" var="freeStudy">
-  <c:choose>
-  <c:when test="${freeStudy.studyStatus eq 0}">
-<c:set var="type" value="모집중"/>
-  </c:when>
-  </c:choose>
+      <c:forEach items="${freeStudyList}" var="freeStudy">
+        <c:choose>
+        <c:when test="${freeStudy.studyStatus eq 0}">
+      <c:set var="type" value="모집중"/>
+        </c:when>
+        </c:choose>
 
-  <c:choose>
-  <c:when test="${freeStudy.studyStatus eq 1}">
-<c:set var="type" value="진행중"/>
-  </c:when>
-  </c:choose>
+        <c:choose>
+        <c:when test="${freeStudy.studyStatus eq 1}">
+      <c:set var="type" value="진행중"/>
+        </c:when>
+        </c:choose>
 
-  <c:choose>
-  <c:when test="${freeStudy.studyStatus eq 2}">
-<c:set var="type" value="진행완료"/>
-  </c:when>
-  </c:choose>
+        <c:choose>
+        <c:when test="${freeStudy.studyStatus eq 2}">
+      <c:set var="type" value="진행완료"/>
+        </c:when>
+        </c:choose>
   
         <li class="lidesign"> <a href='detail?no=${freeStudy.no}'></a>
           <h1 class="studyTitle"> ${freeStudy.title} </h1>

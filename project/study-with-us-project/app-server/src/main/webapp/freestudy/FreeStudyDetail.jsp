@@ -169,13 +169,37 @@ trimDirectiveWhitespaces="true" %>
                 
               </c:when>
             </c:choose>
-          </div>
-      </fieldset>
 
-    </form> <!-- freestudy-detail-->
-  </header> <!-- freestudy-top-->
-</div> <!-- container -->
+            <!-- 관심목록 추가하기 버튼 -->
+		        <div class="interest-add-button">
+                <button id="open">
+                <img class="icon" src="../img/fillingHeartIcon.png">
+                </button>
+            </div> <!-- interest-add-button -->
+            
+          </div> <!--study-bottom-button-->
+      </fieldset> <!--menu-->
+
+    </form> <!--detail-->
+  </header> <!--freestudy-top-->
+</div> <!--container-->
   
+<script>
+  
+  const openBtn = document.getElementById('open');
+  // interest-add-button
+  
+  const closeBtn = document.getElementById('close');
+  // interest-add-button
+ 
+  var trList = document.querySelectorAll("li"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+  trList.forEach(function(trTag) {
+    trTag.onclick = (e) => {
+      window.location.href = e.currentTarget.querySelector("a").href;
+    };
+  });
+  </script>
+
 </body> <!--무료스터디 제일 큰 포맷-->
 
 </html>
