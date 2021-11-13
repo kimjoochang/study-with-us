@@ -231,11 +231,11 @@ input {
 									<thead>
 										<tr>
 											<th scope="col">제목</th>
-											<th scope="col">카테고리</th>
 											<th scope="col">지역</th>
 											<th scope="col">팀원 수</th>
 											<th scope="col">시작일</th>
 											<th scope="col">종료일</th>
+											<th scope="col">신청자 관리</th>
 											<th scope="col">팀원 관리</th>
 										</tr>
 									</thead>
@@ -243,12 +243,12 @@ input {
 										<tbody>
 											<tr>
 												<td>${study.title}</td>
-												<td>${study.category}</td>
 												<td>${study.area}</td>
 												<td>${study.members}</td>
 												<td>${study.startDate}</td>
 												<td>${study.endDate}</td>
-												<td>링크&아이콘 자리</td>
+												<td>링크&아이콘</td>
+												<td>링크&아이콘</td>
 											</tr>
 										</tbody>
 									</c:forEach>

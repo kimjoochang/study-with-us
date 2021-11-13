@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.studywithus.dao.CommunityDao;
 import com.studywithus.domain.Community;
 
-@WebServlet("/community/list")
-public class CommunityListController extends HttpServlet {
+@WebServlet("/community/search")
+public class CommunitySearchController extends HttpServlet  {
   private static final long serialVersionUID = 1L;
 
   CommunityDao communityDao;
@@ -28,32 +28,24 @@ public class CommunityListController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    String keyword = request.getParameter("keyword");
+
+    int categoryNo = 0;
+
     try {
-      int categoryNo;
-      // 클라이언트한테 요청받을 때 쓸 변수
-      if (request.getAttribute("categoryNo") == null) {
-
-        categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
-        request.setAttribute("categoryNo", categoryNo);
-
-      } else {
-        categoryNo = (int)request.getAttribute("categoryNo");
-        request.setAttribute("categoryNo", categoryNo);
-      }
-
-      Collection<Community> communityList = communityDao.findAll(categoryNo);
+      Collection<Community> communityList = communityDao.findByKeyword(keyword, categoryNo);
 
       request.setAttribute("communityList", communityList);
+      request.setAttribute("categoryNo", categoryNo);
 
       request.getRequestDispatcher("CommunityList.jsp").forward(request, response);
 
     } catch (Exception e) {
-      e.printStackTrace();
       System.out.println(e.getStackTrace());
       System.out.println(e.getMessage());
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
 
-  }
+  }  
 }
