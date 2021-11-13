@@ -69,7 +69,7 @@
 
     <div class="study-bottom-button">
       <button class="input3">변경</button> 
-      <a href='/swu/freeStudy/detail?no=${freeStudy.no}' class="button-group"> 취소</a> 
+      <a href='list'> 목록 </a> 
     </div>
       
 </fieldset>

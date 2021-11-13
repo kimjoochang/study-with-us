@@ -18,6 +18,11 @@
     <result column="end_date" property="endDate"/>
      <result column="del_status" property="deleteStatus"/>
     </association>
+    
+    <association property="applicant" javaType="Member">
+      <id column="member_no" property="no"/> 
+      <result column="name" property="name"/>
+    </association>
   </resultMap>
   
   <sql id="select1">
@@ -30,10 +35,13 @@
       st.title,
       st.start_date,
       st.end_date,
-      st.del_status
+      st.del_status,
+      m.member_no,
+      m.name
     from 
       delete_request dr
       inner join study st on dr.study_no=st.study_no
+      inner join member m on st.member_no=m.member_no
   </sql>
   
   <select id="findAllForAdmin" resultMap="DeleteRequestFormMap">

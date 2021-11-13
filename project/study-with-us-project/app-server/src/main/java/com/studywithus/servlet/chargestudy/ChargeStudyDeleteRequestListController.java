@@ -36,7 +36,7 @@ public class ChargeStudyDeleteRequestListController extends GenericServlet {
 
       request.setAttribute("deleteRequestFormList", deleteRequestFormList);
 
-      RequestDispatcher requestDispatcher = request.getRequestDispatcher("ChargeStudyDeleteRequestList.jsp");
+      RequestDispatcher requestDispatcher = request.getRequestDispatcher("../AdminPage_study.jsp");
       requestDispatcher.forward(request, response);
 
     } catch (Exception e) {

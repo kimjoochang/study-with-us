@@ -31,6 +31,7 @@ trimDirectiveWhitespaces="true" %>
 
     <div class="study-area-div">
       <label for='area'>지역</label>
+      
       <select name = onOffLine>
         <option value="" selected="selected">---온/오프라인---</option>
         <option value=0>온라인</option>
@@ -165,12 +166,12 @@ trimDirectiveWhitespaces="true" %>
 
 <div class="study-content-line">
   <label class="study-content-label" for='content'>내용</label> 
-  <textarea  cols="69" rows="10" name='content' placeholder="개설할 무료 스터디 내용을 입력해주세요."></textarea>
+  <textarea  cols="69" rows="10" name='content' placeholder="개설할 스터디 내용을 입력해주세요."></textarea>
 </div>
 
 <div class="study-content-line">
   <label class="study-content-label" for='category'>카테고리</label> 
-  <input type='text' name='category'><br>
+  <input type='text' name='category' placeholder="개설할 스터디 카테고리를 입력해주세요."><br>
 </div>
 
 <div class="study-content-line">

@@ -8,7 +8,6 @@ trimDirectiveWhitespaces="true" %>
   <head>
     <meta charset="UTF-8">
     <title>무료 스터디</title>
-
     <base target="_self"/>
 
     <link rel="stylesheet" href="../css/theme.css">
@@ -24,13 +23,14 @@ trimDirectiveWhitespaces="true" %>
   <hr>
     
   <div class="study-input-collection">
-    <input id="input1" type="button" value="모집중">
-    <input id="input1" type="button" value="진행중">
-    <input id="input1" type="button" value="진행완료">
-    <a class=input2 href='form'>스터디 작성</a>
-  </div>
+  <input id="input1" type="button" value="모집중">
+  <input id="input1" type="button" value="진행중">
+  <input id="input1" type="button" value="진행완료">
   
+  <a class=input2 href='form'>스터디 작성</a>
+  </div>
   <br>
+
 
 <div class="wrapper">
     <div class="main_main">
@@ -57,14 +57,12 @@ trimDirectiveWhitespaces="true" %>
   </c:choose>
   
         <li class="lidesign"> <a href='detail?no=${freeStudy.no}'></a>
-          <div class="study-package">
-            <h1 class="studyTitle"> ${freeStudy.title} </h1>
-            <span>
-              <img class="on_offline"
-              src="../img/onlineIcon.png">
-              <p class="on_offline_status">${freeStudy.onOffLine},${freeStudy.area}</p>
-            </span>
-          </div>
+          <h1 class="studyTitle"> ${freeStudy.title} </h1>
+          <span>
+            <img class="on_offline"
+            src="../img/onlineIcon.png">
+            <p class="on_offline_status">${freeStudy.onOffLine},${freeStudy.area}</p>
+          </span>
           
           <section>
             <div class="info_item">
@@ -78,12 +76,6 @@ trimDirectiveWhitespaces="true" %>
               <img class="icon"
               src="../img/eyeIcon.png">
               <p class="icon_count">${freeStudy.viewCount}</p>
-            </div>
-            
-            <div class="info_item">
-              <img class="icon"
-              src="../img/speechBalloon.png">              
-              <p class="icon_count">1</p>
             </div>
           </section>
         </li>

@@ -4,11 +4,18 @@ import java.sql.Date;
 
 public class DeleteRequestForm {
   private int no;
+  private Member applicant;
   private Study study;
   private String reason;
   private String remarks;
   private Date registeredDate;
 
+  public Member getApplicant() {
+    return applicant;
+  }
+  public void setApplicant(Member applicant) {
+    this.applicant = applicant;
+  }
   public int getNo() {
     return no;
   }
