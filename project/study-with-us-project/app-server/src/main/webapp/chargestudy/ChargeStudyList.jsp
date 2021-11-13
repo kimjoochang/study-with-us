@@ -55,47 +55,30 @@
   </c:when>
   </c:choose>
   
-  <div class="wrapper">
-    <div class="main_main">
-
-      <ul class="uldesign">
         <li class="lidesign"><a href='detail?no=${chargeStudy.no}'></a>
           <h1 class="studyTitle"> ${chargeStudy.title} </h1>
-          <span>
-            <img class="on_offline"
-            src="/Users/haseon-yeong/git/study-with-us/project/study-with-us-project/app-server/src/main/webapp/freestudy/onlineIcon.png">
-            <p class="on_offline_status">${chargeStudy.onOffLine},${chargeStudy.area}</p>
  
-        <li class="lidesign"> <a href='detail?no=${chargeStudy.no}'></a>
-          <h1 class="studyTitle"> ${Study.title} </h1>
           <span>
             <img class="on_offline"
-            src="../img/offlineIcon2.png">
+            src="../img/offLineIcon2.png">
             <p class="on_offline_status">${freeStudy.onOffLine}.${freeStudy.area}</p>
           </span>
           
           <section>
             <div class="info_item">
-              <p class="icon_count">${chargeStudy.likes}</p>
-            <img class="icon"
+
+              <img class="icon"
               src="../img/fillingHeartIcon.png">
-              <p class="icon_count">${freeStudy.likes}</p>
+              <p class="icon_count">${chargeStudy.likes}</p>
             </div>
             
             <div class="info_item">
-              <p class="icon_count">${chargeStudy.viewCount}</p>
               <img class="icon"
               src="../img/eyeIcon.png">
-              <p class="icon_count">${freeStudy.viewCount}</p>
-            </div>
-            
-            <div class="info_item">
-              <p class="icon_count"></p>
-              <img class="icon"
-              src="../img/speechBalloon.png">              
-              <p class="icon_count">1</p>
+              <p class="icon_count">${chargeStudy.viewCount}</p>
             </div>
           </section>
+
         </li> <!--lidesign-->
     </c:forEach>
     </ul> <!-- uldesign -->
