@@ -167,7 +167,6 @@
 			</div> <!--item2-->
 		</section>
 
-
 		
 		<section class="study-info-icon">
 			<div class="item2">
@@ -239,7 +238,8 @@
 				</c:if> <!-- checkWriter eq 2 -->
 			</div> <!-- item2 -->
 	  	</section> <!--  회원(2) != 작성자 -->
-					
+		<!-- 관심목록 추가/삭제 아이콘 출력 끝!!! -->
+		
 
 		  <!--회원(1) = 작성자-->
 		  	<c:if test="${checkWriter eq 1}">
