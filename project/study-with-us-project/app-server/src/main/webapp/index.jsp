@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -185,7 +188,12 @@ text-align: center;
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
+              <c:if test="${loginUser eq null}">
               <a id="open1" class="nav-link" href="#">Sign Up / In</a>
+              </c:if>
+              <c:if test="${loginUser ne null}">
+              <a id="open1" class="nav-link" href="user/logout">Logout</a>
+              </c:if>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="freestudy/list">Study</a>
@@ -194,9 +202,16 @@ text-align: center;
               <a class="nav-link" href="chargestudy/list">Mentoring</a>
               </li>
               
-              <li class="nav-item">
+              <c:if test="${loginUser ne null}">
+              <c:if test="${loginUser.userAccessLevel eq 32}">
+                <a class="nav-link" href="/swu/adminpage">Admin Page</a>
+              </c:if>
+              <c:if test="${loginUser.userAccessLevel ne 32}">
                 <a class="nav-link" href="/swu/mypage">My Page</a>
+              </c:if>
+              <li class="nav-item">
               </li>
+              </c:if>
             </ul>
            </div>
 

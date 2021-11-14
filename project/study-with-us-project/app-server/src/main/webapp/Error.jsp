@@ -18,7 +18,9 @@
   <script src="${contextRoot}/node_modules/sweetalert2/dist/sweetalert2.js"></script>
 </head>
 <body>
+
 <div class="container">
+<h5>유효하지 않은 요청입니다. </h5>
 
 <jsp:include page="/header.jsp"/>
  
