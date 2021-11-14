@@ -29,9 +29,37 @@
 
   <link rel="stylesheet" href="css/footer.css">
 
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
 </head>
 
 <style>
+
+.modal-header{
+  display: fixed;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 100 !important;
+}
+
+.md-form .validate {
+    margin-bottom: 2.5rem;
+}
+
+.validate{
+  padding: 0px;
+  margin:0 auto;
+  width:120px;
+  height:120px;
+
+}
+
+.join_btn_4_space{
+  display: flex;
+  text-align:center;
+  justify-content:space-evenly;
+  margin: 10px;
+}
 
 .arrow{
 padding:0px;
@@ -50,9 +78,9 @@ margin-right:10px;
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: between-evenly;
+  justify-content: space-evenly;
   align-items: center;
-   z-index: 10 !important;
+   z-index: 100 !important;
 }
 
 .modal1_overlay {
@@ -65,10 +93,10 @@ margin-right:10px;
   position: fixed;
   text-align: center;
   top: 30%;
-  left: 21%;
+  left: 30%;
   width: 600px;
   height: 550px;
-  background-color: snow;
+  background-color: rgb(246, 238, 253);
   padding: 30px 30px;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
@@ -400,7 +428,7 @@ input {
           COPYRIGHT 2021. TEAM3. ALL RIGHT RESERVED.<br>
           
           Illustration by 
-          <a href="https://icons8.com/illustrations/author/602b6fa7123f993a3afdba7b">  Victoria Chepkasova</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
+          <a href="https://icons8.com/illustrations/author/602b6fa7123f993a3afdba7b"> Victoria Chepkasova</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
         </div>
       </div>
 
@@ -413,15 +441,17 @@ input {
           <div class="sign-buttons">
   <div class="d-flex justify-content-center">
 
+<div class="join_btn_4_space">
     <!--회원가입 버튼 -->
     <div class="text-center">
       <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">Sign up<i class="fas fa-user-plus ml-3"></i></a>
-    </div>
-
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <!--로그인 버튼-->
     <div class="text-center">
       <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage">&nbsp;&nbsp;Sign in&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
     </div>
+</div> <!-- join_btn_4_space -->
+    
   </div>
 </div>
 
@@ -500,26 +530,26 @@ input {
 
       <div class="modal-body mx-4">
         <div class="md-form">
-          <form action='login' method="post">
+          <!--<form action='login' method="post">-->
           <input type="email" class="form-control validate">
           <label data-error="wrong" data-success="right">이메일</label>
         </div>
 
-<!-- 
+ 
         <div class="md-form">
           <input type="password" class="form-control validate">
           <label data-error="wrong" data-success="right">비밀번호</label>
         </div>
-         -->  
+        
          
           <p class="font-small blue-text d-flex justify-content-end"><a href="#" class="blue-text sl-1">아이디 찾기</a>
-        <!--    /<a href="#" class="blue-text sl-1">비밀번호 재설정</a></p><br> -->
+           /<a href="#" class="blue-text sl-1">비밀번호 재설정</a></p><br> 
 
         <div class="text-center mb-3">
           <button type="button" class="btn btn-primary1 btn-block z-depth-1a">스터디위더스 시작하기</button><br><hr>
           <!--<button type="button" class="btn btn-primary btn-block z-depth-1a">스터디위더스 시작하기</button>-->
         </div>
-      </form>
+      <!--</form>-->
 
         <div class="st-sns">
         <p class="font-small dark-grey-text d-flex justify-content-center">or</p>
