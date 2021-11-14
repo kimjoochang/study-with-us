@@ -35,29 +35,28 @@
 
 <style>
 
+.md-form.mb-5{
+  margin:10px;
+}
+
 .modal-header{
   display: fixed;
   justify-content: space-evenly;
   align-items: center;
-  z-index: 100 !important;
-}
-
-.md-form .validate {
-    margin-bottom: 2.5rem;
+  z-index: 2000 !important;
 }
 
 .validate{
   padding: 0px;
   margin:0 auto;
-  width:120px;
-  height:120px;
-
+  width:300px;
+  height:35px;
 }
 
 .join_btn_4_space{
   display: flex;
   text-align:center;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
   margin: 10px;
 }
 
@@ -478,33 +477,33 @@ input {
 
         <div class="modal-body mx-3">
           <div class="md-form mb-5">
-            <input type="text" class="form-control validate">
-            <label data-error="wrong" data-success="right">이름</label>
+            <label data-error="wrong" data-success="right">이름
+            <input type="text" class="form-control validate"></label>
           </div>
 
           <div class="md-form mb-5">
-            <input type="email" class="form-control validate">
             <label data-error="wrong" data-success="right">이메일</label>
+            <input type="email" class="form-control validate">
           </div>
 
           <div class="md-form mb-5">
-            <input type="text" class="form-control validate">
             <label data-error="wrong" data-success="right">닉네임</label>
+            <input type="text" class="form-control validate">
           </div>
 
           <div class="md-form mb-5">
-            <input type="password" class="form-control validate">
             <label data-error="wrong" data-success="right">비밀번호</label>
+            <input type="password" class="form-control validate">
           </div>
 
           <div class="md-form mb-5">
-            <input type="password" class="form-control validate">
             <label data-error="wrong" data-success="right">비밀번호 확인</label>
+            <input type="password" class="form-control validate">
           </div>
           
           <div class="md-form mb-5">
-            <input type="text" class="form-control validate">
             <label data-error="wrong" data-success="right">휴대폰 번호</label>
+            <input type="text" class="form-control validate">
           </div>
         </div>
           
@@ -531,14 +530,14 @@ input {
       <div class="modal-body mx-4">
         <div class="md-form">
           <!--<form action='login' method="post">-->
-          <input type="email" class="form-control validate">
           <label data-error="wrong" data-success="right">이메일</label>
+          <input type="email" class="form-control validate">
         </div>
 
  
         <div class="md-form">
-          <input type="password" class="form-control validate">
           <label data-error="wrong" data-success="right">비밀번호</label>
+          <input type="password" class="form-control validate">
         </div>
         
          
@@ -552,8 +551,8 @@ input {
       <!--</form>-->
 
         <div class="st-sns">
-        <p class="font-small dark-grey-text d-flex justify-content-center">or</p>
-        <p class="font-small dark-grey-text d-flex justify-content-center">SNS로 시작하기</p>
+        <p class="font-medium dark-grey-text d-flex justify-content-center">or</p>
+        <p class="font-medium dark-grey-text d-flex justify-content-center">SNS로 시작하기</p>
       </div>
 
         <div class="row my-3 justify-content-center">
