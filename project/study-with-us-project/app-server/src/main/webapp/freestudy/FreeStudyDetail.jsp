@@ -253,7 +253,7 @@
 			<!--회원(2) != 작성자-->
 			<c:if test="${checkWriter eq 2}">
 				
-			<!-- 관심목록은 위에 구현했으니까 밑에는 우선 빼겠슴니다-->
+			<!-- 관심목록 추가 삭제는 위에 구현했으니까 밑에는 우선 빼겠슴니다-->
 			<!--
 				<c:if test="${result eq 0}">
 					<a class="input-button-bottom" href='/swu/freestudy/list'> 목록 </a>
