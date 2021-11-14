@@ -109,6 +109,16 @@ margin-right:10px;
   display: none;
 }
 
+.email_able {
+color:#fff; 
+display: none;
+}
+
+.id_already {
+ color:#6A82FB;
+ display: none;
+ }
+
 /*
 .form_box {
   margin : 35px;
@@ -550,7 +560,10 @@ text-align: center;
         <form action='user/login' method="post">
         <div class="md-form">
           <label data-error="wrong" data-success="right">이메일</label>
-          <input type="email" name='email' class="form-control validate">
+          <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkId()" />
+        <span class="email_able">사용 가능한 이메일입니다.</span>
+        <span class="email_disable">이미 사용중인 이메일입니다.</span>
+          
         </div>
 
         <div class="md-form">
@@ -638,6 +651,25 @@ overlay.addEventListener('click', closeModal);
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
-  
+
+  <!-- 아이디 중복검사용 Ajax 사용하려고 추가함 -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    function checkEmail(){
+        var email = $('#email').val(); //id값이 "email"인 입력란의 값을 저장?
+        $.ajax({
+            url:'/user/emailCheck', //Controller에서 인식할 주소 설정해주기
+            type:'post', //POST 방식으로 전달
+            data:{id:email},
+            success:function(){
+                console.log("처리 성공 시 변경되는 내용");
+            },
+            error:function(){
+                alert("에러입니다");
+            }
+        });
+    };
+</script>
+
 </body>
 </html>
