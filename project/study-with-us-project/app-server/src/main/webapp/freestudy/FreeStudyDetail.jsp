@@ -13,6 +13,13 @@
 <link rel="stylesheet" href="../css/study/StudyDetail.css">
 </head>
 
+<style type="text/css">
+    .interest_icon {
+      width : 50px;
+    }
+    </style>
+</head>
+
 <body>
 	<div class="container">
 		<jsp:include page="../header.jsp"></jsp:include>
@@ -41,21 +48,16 @@
 					<div class="icon-form-group" align:right;>
 						<ul class="uldesign">
 							<img class="icon-top" src="../img/category.png">
-							<input class="input3" id='f-category' type='text' name='category'
-								value='${freeStudy.category}' readonly>
+							<input class="input3" id='f-category' type='text' name='category' value='${freeStudy.category}' readonly>
 
 							<img class="icon-top" src="../img/onlineIcon.png">
-							<input class="input3" id='f-onOffLine' type='number'
-								name='onOffLine' value='${freeStudy.onOffLine}' readonly>
+							<input class="input3" id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly>
 
 							<img class="icon-top" src="../img/area.png">
-							<input class="input3" id='f-area' type='text' name='area'
-								value='${freeStudy.area}' readonly>
+							<input class="input3" id='f-area' type='text' name='area' value='${freeStudy.area}' readonly>
 
 							<img class="icon-top" src="../img/people.png">
-							<input class="input3" id='f-members/maxMembers' type='text'
-								name='members/maxMembers'
-								value='${freeStudy.members} / ${freeStudy.maxMembers}' readonly>
+							<input class="input3" id='f-members/maxMembers' type='text' name='members/maxMembers' value='${freeStudy.members} / ${freeStudy.maxMembers}' readonly>
 
 						</ul>
 					</div>
@@ -145,11 +147,64 @@
 
 								<img class="icon" src="../img/eyeIcon.png">
 								<p class="icon_count">${freeStudy.viewCount}</p>
-
 							</div>
-						</div>
-						<!-- item2 -->
-					</section>
+						</div> <!-- item2 -->
+					</section><!-- 해당 스터디 관심목록 수, 조회수 확인용 아이콘 -->
+					
+		<!-- 관심목록 추가/삭제 기능 및 아이콘 출력 -->
+    <section class="study-info-icon">
+      <div class="item2">
+        <div class="info_item">
+        
+    <!-- 글쓴이(0) = 비회원 -->
+    <!-- 
+    <c:if test="${checkWriter eq 0}">
+<img class="icon" src="../img/emptyHeartIcon.png"><p class="icon_count">${chargeStudy.likes}</p> 
+    </c:if>
+     -->   
+    
+    <!-- 글쓴이(1) = 작성자-->
+    <c:if test="${checkWriter eq 1}">
+    <!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
+      <c:if test="${result eq 0}">
+        <div class="interest_icon" >
+         <a href='interest/add?no=${freeStudy.no}'><img class="icon" src="../img/emptyHeartIcon.png"></a>
+         <p class="icon_count">${freeStudy.like}</p> 
+        </div>
+      </c:if>
+          
+    <!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
+      <c:if test="${result eq 1}">
+        <div class="interest_icon" >
+          <a href='interest/delete?no=${freeStudy.no}'><img class="icon" src="../img/fillingHeartIcon.png"></a>
+          <p class="icon_count">${freeStudy.like}</p> 
+        </div>
+      </c:if>
+    </c:if>
+
+    <!-- 글쓴이(2) != 작성자-->
+    <c:if test="${checkWriter eq 2}">
+    <!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
+      <c:if test="${result eq 0}">
+        <div class="interest_icon" >
+         <a href='interest/add?no=${freeStudy.no}'><img class="icon" src="../img/emptyHeartIcon.png"></a>
+         <p class="icon_count">${freeStudy.like}</p> 
+        </div>
+      </c:if>
+          
+      <!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
+      <c:if test="${result eq 1}">
+        <div class="interest_icon" >
+          <a href='interest/delete?no=${freeStudy.no}'><img class="icon" src="../img/fillingHeartIcon.png"></a>
+          <p class="icon_count">${freeStudy.like}</p> 
+        </div>
+      </c:if>
+    </c:if>
+         <img class="icon" src="../img/eyeIcon.png"> <p class="icon_count">${freeStudy.viewCount}</p> 
+        </div>
+      </div> <!-- item2 -->
+    </section> <!--  관심목록 추가 삭제  -->
+					
 					<a class="input-button-bottom" href='/swu/freestudy/list'> 목록 </a>
 
 					<c:if test="${checkWriter eq 1}">
@@ -176,9 +231,6 @@
 		          <a class="input-button-bottom" href='applycancel?no=${freeStudy.no}'>스터디 신청 취소</a>
 		          </c:if>
            </c:if> 
-
-
-
 
 <!--  
 					<div class="study-bottom-button">
@@ -217,27 +269,14 @@
 -->
 						<!-- 관심목록 추가하기 버튼 -->
 						<!-- interest-add-button -->
+				</fieldset> <!--menu-->
 
-					</div>
-					<!--study-bottom-button-->
-				</fieldset>
-				<!--menu-->
-
-			</form>
-			<!--detail-->
-		</header>
-		<!--freestudy-top-->
-	</div>
-	<!--container-->
+			</form> <!--detail-->
+		</header> <!--freestudy-top-->
+		
+		</div>   <!--container-->
 
 	<script>
-  
-  const openBtn = document.getElementById('open');
-  // interest-add-button
-  
-  const closeBtn = document.getElementById('close');
-  // interest-add-button
- 
   var trList = document.querySelectorAll("li"); // 리턴 객체는 HTMLCollection 타입 객체이다.
   trList.forEach(function(trTag) {
     trTag.onclick = (e) => {
