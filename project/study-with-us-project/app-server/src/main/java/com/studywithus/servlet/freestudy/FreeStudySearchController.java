@@ -23,7 +23,7 @@ public class FreeStudySearchController extends HttpServlet  {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		ServletContext servletContext = config.getServletContext();
-		freeStudyDao = (StudyDao) servletContext.getAttribute("freeStudyDao");
+		freeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
 	}
 
 	@Override

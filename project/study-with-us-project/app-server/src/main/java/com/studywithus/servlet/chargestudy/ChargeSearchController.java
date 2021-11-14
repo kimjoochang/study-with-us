@@ -23,7 +23,7 @@ public class ChargeSearchController extends HttpServlet  {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		ServletContext servletContext = config.getServletContext();
-		chargeStudyDao = (StudyDao) servletContext.getAttribute("chargeStudyDao");
+		chargeStudyDao = (StudyDao) servletContext.getAttribute("studyDao");
 	}
 
 	@Override
