@@ -20,7 +20,7 @@
 <body>
 
 <div class="container">
-<h5>유효하지 않은 요청입니다. </h5>
+<h3>유효하지 않은 요청입니다.</h3><br>
 
 <jsp:include page="/header.jsp"/>
  
