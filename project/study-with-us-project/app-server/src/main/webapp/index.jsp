@@ -633,6 +633,33 @@ overlay.addEventListener('click', closeModal);
 //모달창 영역 밖
 </script>
 
+<!-- 아이디 중복검사용 Ajax 사용하려고 추가함 -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript">
+    function checkEmail(){
+        var email = $('#email').val(); //id값이 "email"인 입력란의 값을 저장?
+        $.ajax({
+            url:'/user/emailCheck', //Controller에서 인식할 주소 설정해주기
+            type:'post', //POST 방식으로 전달
+            data:{id:email},
+            
+            success:function(cnt){
+               if(cnt != 1){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+                     $('.email_ok').css("display","inline-block"); 
+                     $('.email_already').css("display", "none");
+                 } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+                     $('.email_already').css("display","inline-block");
+                     $('.email_ok').css("display", "none");
+                 }
+             },
+             error:function(){
+                 alert("에러입니다");
+             }
+         });
+         };
+     </script>
+     
 <script src="js/jquery-3.5.1.min.js"></script>
 
 <script src="js/bootstrap.bundle.min.js"></script>
@@ -652,24 +679,8 @@ overlay.addEventListener('click', closeModal);
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
 
-  <!-- 아이디 중복검사용 Ajax 사용하려고 추가함 -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
-    function checkEmail(){
-        var email = $('#email').val(); //id값이 "email"인 입력란의 값을 저장?
-        $.ajax({
-            url:'/user/emailCheck', //Controller에서 인식할 주소 설정해주기
-            type:'post', //POST 방식으로 전달
-            data:{id:email},
-            success:function(){
-                console.log("처리 성공 시 변경되는 내용");
-            },
-            error:function(){
-                alert("에러입니다");
-            }
-        });
-    };
-</script>
+  
 
+  
 </body>
 </html>

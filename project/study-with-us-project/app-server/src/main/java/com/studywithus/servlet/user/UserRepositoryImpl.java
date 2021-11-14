@@ -15,3 +15,4 @@ public class UserRepositoryImpl implements UserRepository {
     int cnt = sqlSession.selectOne(NAMESPACE+".emailCheck", email);
     return cnt;
   }
+}
