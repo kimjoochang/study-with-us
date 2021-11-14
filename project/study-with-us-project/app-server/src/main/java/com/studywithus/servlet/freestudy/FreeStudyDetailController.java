@@ -83,7 +83,7 @@ public class FreeStudyDetailController extends HttpServlet {
 
 			sqlSession.commit();
 
-			request.getRequestDispatcher("/freestudy/FreeStudyDetail.jsp").forward(request, response);
+			request.getRequestDispatcher("FreeStudyDetail.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			sqlSession.rollback();

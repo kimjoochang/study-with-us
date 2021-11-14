@@ -139,94 +139,48 @@ text-align: center;
     <input id='f-endDate' type='date' name='endDate' value='${chargeStudy.endDate}' readonly><br>
     
 
-		<!-- 관심목록 추가/삭제 아이콘 출력 -->
-		<!-- 글쓴이(0) = 비회원 -->
-		<section class="study-info-icon">
-			<div class="item2">
-				<c:if test="${checkWriter eq 0}">
-						<div class="info_item">
-						<img class="icon" src="../img/fillingHeartIcon.png">
-						<p class="icon_count">${chargeStudy.likes}</p> 
-						
-						<img class="icon" src="../img/eyeIcon.png">
-						<p class="icon_count">${chargeStudy.viewCount}</p>
-					</div> <!--info_item-->
-				</c:if> <!--글쓴이(0) 비회원-->
-			</div> <!--item2-->
-		</section>
+    <section class="study-info-icon">
+      <div class="item2">
+        <div class="info_item">
+    <c:if test="${checkWriter eq 0}">
+<img class="icon" src="../img/emptyHeartIcon.png"><p class="icon_count">${chargeStudy.likes}</p> 
+    </c:if>
+    
+    <c:if test="${checkWriter eq 1}">
+      <c:if test="${result eq 0}">
+        <div class="interest_icon" >
+         <a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/emptyHeartIcon.png"></a>
+         <p class="icon_count">${chargeStudy.likes}</p> 
+        </div>
+      </c:if>
+          
+      <c:if test="${result eq 1}">
+        <div class="interest_icon" >
+          <a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/fillingHeartIcon.png"></a>
+          <p class="icon_count">${chargeStudy.likes}</p> 
+        </div>
+      </c:if>
+    </c:if>
 
-		
-		<section class="study-info-icon">
-			<div class="item2">
-				<!-- 회원(1) = 작성자-->
-				<c:if test="${checkWriter eq 1}">
-					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
-						<c:if test="${result eq 0}">
-							<div class="info_item">
-								<img class="icon" src="../img/fillingHeartIcon.png">
-								<p class="icon_count">${chargeStudy.likes}</p> 
-								
-								<img class="icon" src="../img/eyeIcon.png">
-								<p class="icon_count">${chargeStudy.viewCount}</p>
-
-								<a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/interestAdd.png"></a>
-								<p class="icon_count">${chargeStudy.likes}</p> 
-							</div> <!--info_item-->
-						</c:if> <!-- 글쓴이(1) 관심목록 추가 전 -->
-				
-						<!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
-						<c:if test="${result eq 1}">
-							<div class="info_item">
-								<img class="icon" src="../img/fillingHeartIcon.png">
-								<p class="icon_count">${chargeStudy.likes}</p> 
-								
-								<img class="icon" src="../img/eyeIcon.png">
-								<p class="icon_count">${chargeStudy.viewCount}</p>
-
-								<a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/interestDelete.png"></a>
-								<p class="icon_count">${chargeStudy.likes}</p> 
-							</div> <!--info_item-->
-						</c:if> <!-- 글쓴이(1) 관심목록 추가 상태인 경우 -->
-				</c:if> <!--checkWriter eq 1-->
-			</div> <!-- item2 -->
-	  	</section> <!--  회원(1) = 작성자 -->
-
-
-	  <section class="study-info-icon">
-			<div class="item2">
-				<!-- 회원(2) != 작성자-->
-				<c:if test="${checkWriter eq 2}">
-					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
-					<c:if test="${result eq 0}">
-						<div class="info_item">
-							<img class="icon" src="../img/fillingHeartIcon.png">
-								<p class="icon_count">${chargeStudy.likes}</p> 
-								
-								<img class="icon" src="../img/eyeIcon.png">
-								<p class="icon_count">${chargeStudy.viewCount}</p>
-
-								<a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/interestAdd.png"></a>
-								<p class="icon_count">${chargeStudy.likes}</p> 
-							</div> <!--info_item-->
-						</c:if> <!-- 회원(2) 관심목록 추가 전 -->
-							
-						<!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
-						<c:if test="${result eq 1}">
-							<div class="info_item">
-								<img class="icon" src="../img/fillingHeartIcon.png">
-								<p class="icon_count">${chargeStudy.likes}</p> 
-								
-								<img class="icon" src="../img/eyeIcon.png">
-								<p class="icon_count">${chargeStudy.viewCount}</p>
-
-								<a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/interestDelete.png"></a>
-								<p class="icon_count">${chargeStudy.likes}</p> 
-							</div> <!--info_item-->
-						</c:if> <!-- 회원(2) 관심목록 추가 상태인 경우 -->
-				</c:if> <!-- checkWriter eq 2 -->
-			</div> <!-- item2 -->
-	  	</section> <!--  회원(2) != 작성자 -->
-		<!-- 관심목록 추가/삭제 아이콘 출력 끝!!! -->
+    <c:if test="${checkWriter eq 2}">
+      <c:if test="${result eq 0}">
+        <div class="interest_icon" >
+         <a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/emptyHeartIcon.png"></a>
+         <p class="icon_count">${chargeStudy.likes}</p> 
+        </div>
+      </c:if>
+          
+      <c:if test="${result eq 1}">
+        <div class="interest_icon" >
+          <a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/fillingHeartIcon.png"></a>
+          <p class="icon_count">${chargeStudy.likes}</p> 
+        </div>
+      </c:if>
+    </c:if>
+         <img class="icon" src="../img/eyeIcon.png">  <p class="icon_count">${chargeStudy.viewCount}</p> 
+        </div>
+      </div> <!-- item2 -->
+    </section>
 
 
     <!--

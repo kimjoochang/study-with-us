@@ -34,21 +34,25 @@ public class FreeStudyInterestAddController extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			Member member = (Member) request.getSession().getAttribute("loginUser");
 			int freeStudyNo = Integer.parseInt(request.getParameter("no"));
+
+			Member member = (Member) request.getSession().getAttribute("loginUser");
 
 			if (member == null) {
 				response.sendRedirect("/swu/user/loginform");
 			}
 
 			freeStudyDao.insertInterest(member.getNo(), freeStudyNo);
+
 			sqlSession.commit();
 
-			request.setAttribute("no", freeStudyNo);
-			request.getRequestDispatcher("/freestudy/detail").forward(request, response);
+			response.sendRedirect("../detail?no=" + freeStudyNo);
 
+			//      request.setAttribute("no", chargeStudyNo);
+			//      request.getRequestDispatcher("/chargestudy/detail").forward(request, response);
 
 		} catch (Exception e) {
+			sqlSession.rollback();
 			System.out.println(e.getMessage());
 			request.setAttribute("error", e);
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);

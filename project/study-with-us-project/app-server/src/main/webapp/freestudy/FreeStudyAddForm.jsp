@@ -195,7 +195,7 @@ trimDirectiveWhitespaces="true" %>
 <div class="study-bottom-button">
   <input class="input5" type="reset" value="초기화">
   <input class="input5" type="submit" value="등록">
-  <button class="input5" onclick="location.href='list'">취소</button><br>
+  <a class="input5" href='/swu/freestudy/list'> 취소 </a>
 </div>
 
 </fieldset>

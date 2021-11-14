@@ -32,13 +32,10 @@ public class ChargeSearchController extends HttpServlet  {
 
 		String keyword = request.getParameter("keyword");
 
-		int chargeStudyNo = 0;
-
 		try {
-			Collection<Study> chargeStudyList = chargeStudyDao.findByKeyword(keyword, chargeStudyNo);
+			Collection <Study> chargeStudyList = chargeStudyDao.findByKeyword(keyword);
 
 			request.setAttribute("chargeStudyList", chargeStudyList);
-			request.setAttribute("chargeStudyNo", chargeStudyNo);
 
 			request.getRequestDispatcher("ChargeStudyList.jsp").forward(request, response);
 
