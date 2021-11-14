@@ -1,7 +1,7 @@
 package com.studywithus.servlet.community;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -41,7 +41,7 @@ public class CommunityListController extends HttpServlet {
         request.setAttribute("categoryNo", categoryNo);
       }
 
-      Collection<Community> communityList = communityDao.findAll(categoryNo);
+      List<Community> communityList = communityDao.findAll(categoryNo);
 
       request.setAttribute("communityList", communityList);
 

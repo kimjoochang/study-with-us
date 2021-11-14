@@ -14,6 +14,12 @@
    <link rel="stylesheet" href="../css/theme.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/study/StudyDetail.css">
+    
+    <style type="text/css">
+    .interest_icon {
+      width : 50px;
+    }
+    </style>
 </head>
 
 <body>
@@ -83,14 +89,42 @@
     <section class="study-info-icon">
       <div class="item2">
         <div class="info_item">
-          <img class="icon"
-          src="../img/fillingHeartIcon.png">
-          <p class="icon_count">1</p>
+    <c:if test="${checkWriter eq 0}">
+<img class="icon" src="../img/emptyHeartIcon.png"><p class="icon_count">${chargeStudy.likes}</p> 
+    </c:if>
+    
+    <c:if test="${checkWriter eq 1}">
+      <c:if test="${result eq 0}">
+        <div class="interest_icon" >
+         <a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/emptyHeartIcon.png"></a>
+         <p class="icon_count">${chargeStudy.likes}</p> 
+        </div>
+      </c:if>
           
-          <img class="icon"
-          src="../img/eyeIcon.png">
-          <p class="icon_count">1</p>
+      <c:if test="${result eq 1}">
+        <div class="interest_icon" >
+          <a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/fillingHeartIcon.png"></a>
+          <p class="icon_count">${chargeStudy.likes}</p> 
+        </div>
+      </c:if>
+    </c:if>
+
+    <c:if test="${checkWriter eq 2}">
+      <c:if test="${result eq 0}">
+        <div class="interest_icon" >
+         <a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/emptyHeartIcon.png"></a>
+         <p class="icon_count">${chargeStudy.likes}</p> 
+        </div>
+      </c:if>
           
+      <c:if test="${result eq 1}">
+        <div class="interest_icon" >
+          <a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/fillingHeartIcon.png"></a>
+          <p class="icon_count">${chargeStudy.likes}</p> 
+        </div>
+      </c:if>
+    </c:if>
+         <img class="icon" src="../img/eyeIcon.png">  <p class="icon_count">${chargeStudy.viewCount}</p> 
         </div>
       </div> <!-- item2 -->
     </section>
@@ -131,13 +165,6 @@
     </c:if>
     
     <c:if test="${checkWriter eq 2}">
-<c:if test="${result eq 0}">
-<a class="input-button-bottom" href='/swu/chargestudy/interest/add?no=${chargeStudy.no}'>관심목록 추가</a>
-</c:if>
-
-<c:if test="${result eq 1}">
-<a class="input-button-bottom" href='/swu/chargestudy/interest/delete?no=${chargeStudy.no}'>관심목록 삭제</a>
-</c:if>
 <!-- 결제 취소 조건 좀 더 고민해야함! 
 (스터디멤버 테이블에서 스터디번호와 회원번호 주고 멤버상태에 따라 구분할 지 ,
  결제테이블에서 스터디번호와 회원번호 주고 존재 여부로 확인할지) 

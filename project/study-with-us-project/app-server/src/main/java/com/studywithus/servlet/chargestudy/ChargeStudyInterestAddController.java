@@ -32,7 +32,7 @@ public class ChargeStudyInterestAddController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int chargStudyNo = Integer.parseInt(request.getParameter("no"));
+      int chargeStudyNo = Integer.parseInt(request.getParameter("no"));
 
       Member member = (Member) request.getSession().getAttribute("loginUser");
 
@@ -40,12 +40,14 @@ public class ChargeStudyInterestAddController extends HttpServlet {
         response.sendRedirect("/swu/user/loginform");
       }
 
-      chargeStudyDao.insertInterest(member.getNo(), chargStudyNo);
+      chargeStudyDao.insertInterest(member.getNo(), chargeStudyNo);
 
       sqlSession.commit();
 
-      request.setAttribute("no", chargStudyNo);
-      request.getRequestDispatcher("/chargestudy/detail").forward(request, response);
+      response.sendRedirect("../detail?no=" + chargeStudyNo);
+
+      //      request.setAttribute("no", chargeStudyNo);
+      //      request.getRequestDispatcher("/chargestudy/detail").forward(request, response);
 
     } catch (Exception e) {
       sqlSession.rollback();
