@@ -144,7 +144,7 @@ text-align: center;
   }
 
     .st-sns{
-      font-size:5px;
+      font-size: 14px;
     }
 
     .row{
@@ -169,7 +169,6 @@ text-align: center;
   .sign-buttons{
     margin-top: 50%;
   }
-
 </style>
 
 <body>
@@ -437,7 +436,7 @@ text-align: center;
         <!--모달 화면-->
         <div class="modal1_content">
 
-          <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
+        <!--  <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button> -->
 
           <div class="sign-buttons">
   <div class="d-flex justify-content-center">
@@ -446,6 +445,7 @@ text-align: center;
     <div class="text-center">
       <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">Sign up<i class="fas fa-user-plus ml-3"></i></a>
     </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
     <!--로그인 버튼-->
     <div class="text-center">
       <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage">&nbsp;&nbsp;Sign in&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
@@ -461,8 +461,6 @@ text-align: center;
   </div>
 
 
-
-
 <div class="modal fade" id="signupPage">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -473,44 +471,43 @@ text-align: center;
         </div>
 
         <div class="title_img"><img src="img/스터디위더스.png"></img></div>
-        
 
         <div class="modal-body mx-3">
 
           <form action="user/join" method="post"><!-- 추가-->
             
-            <div class="md-form mb-5">
+            <!--<div class="md-form mb-5">일단-->
             <label data-error="wrong" data-success="right">이름</label>
-            <input type="text" name="name" class="form-control validate" >
+            <input type="text" name="name" class="form-control validate" placeholder="이름을 입력하세요" required >
           </div>
 
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">이메일</label>
-            <input type="email" name="email" class="form-control validate">
+            <input type="email" name="email" class="form-control validate" placeholder="이메일을 입력하세요" required>
           </div>
 
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">닉네임</label>
-            <input type="text" name="nickName" class="form-control validate">
+            <input type="text" name="nickname" class="form-control validate" placeholder="닉네임을 입력하세요" required>
           </div>
 
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">비밀번호</label>
-            <input type="password" name="password" class="form-control validate">
+            <input type="password" name="password" class="form-control validate" placeholder="비밀번호를 입력하세요" required>
           </div>
 
         <!--
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">비밀번호 확인</label>
-            <input type="password" class="form-control validate">
+            <input type="password" name="password_confirm" class="form-control validate">
           </div>
         -->  
 
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">휴대폰 번호</label>
-            <input type="text" class="form-control validate">
+            <input type="text" name="phoneNumber" class="form-control validate" placeholder="010-1234-5678" required>
           </div>
-        </div>
+        <!--</div>주석-->
           
         <div class="modal-footer d-flex justify-content-center">
           <button class="btn btn-primary1">스터디위더스 시작하기</button><br><hr>
@@ -535,27 +532,27 @@ text-align: center;
       <div class="title_img"><img src="img/스터디위더스.png"></img></div>
       <!--추가-->
       <div class="modal-body mx-4">
-        <form action='/user/login' method="post">
+
+        <form action='user/login' method="post">
         <div class="md-form">
           <label data-error="wrong" data-success="right">이메일</label>
           <input type="email" name='email' class="form-control validate">
         </div>
 
         <div class="md-form">
-          
           <label data-error="wrong" data-success="right">비밀번호</label>
           <input type="password" name='password' class="form-control validate">
-        </div>
+        </div><br>
         
-         
-          <p class="font-small blue-text d-flex justify-content-end"><a href="#" class="blue-text sl-1">아이디 찾기</a>
-           /<a href="#" class="blue-text sl-1">비밀번호 재설정</a></p><br> 
-
         <div class="text-center mb-3">
-          <button type="button" class="btn btn-primary1 btn-block z-depth-1a">스터디위더스 시작하기</button><br><hr>
+           <button class="btn btn-primary1">스터디위더스 시작하기</button><br>
+         <!--   <button type="button" class="btn btn-primary1 btn-block z-depth-1a">스터디위더스 시작하기</button><br><hr> -->
           <!--<button type="button" class="btn btn-primary btn-block z-depth-1a">스터디위더스 시작하기</button>-->
         </div>
      </form>
+     
+         <br><p class="font-small blue-text d-flex justify-content-end"><a href="#" class="blue-text sl-1">아이디</a>
+           &nbsp;/&nbsp; <a href="#" class="blue-text sl-1">비밀번호 찾기</a></p><br><hr>
 
         <div class="st-sns">
         <p class="font-large dark-grey-text d-flex justify-content-center">or</p>
