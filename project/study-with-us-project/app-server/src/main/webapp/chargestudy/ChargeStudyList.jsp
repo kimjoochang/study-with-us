@@ -19,6 +19,57 @@
   <div class="container">
 	<jsp:include page="../header.jsp"></jsp:include>
 
+<!-- 검색창 -->
+<div class="search-view">
+  <form class="search-form" action="search">
+    <input type="search" name="keyword" placeholder="키워드를 검색해주세요." class="search-input">
+    <button type="submit" class="search-button">
+        <img class="reading-glasses-icon" src="../img/search icon.png"></button>
+      <!--
+    </button>
+      <div class="search-option">
+        <div>
+          <input name="type" type="radio" value="type-users" id="type-users">
+          <label for="type-users">
+            <svg class="edit-pen-title">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
+            </svg>
+            <span>Users</span>
+          </label>
+        </div>
+        
+        <div>
+          <input name="type" type="radio" value="type-posts" id="type-posts">
+          <label for="type-posts">
+            <svg class="edit-pen-title">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#post"></use>
+            </svg>
+            <span>Posts</span>
+          </label>
+        </div>
+        <div>
+          <input name="type" type="radio" value="type-images" id="type-images">
+          <label for="type-images">
+            <svg class="edit-pen-title">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#images"></use>
+            </svg>
+            <span>Images</span>
+          </label>
+        </div>
+        <div>
+          <input name="type" type="radio" value="type-special" id="type-special" checked="">
+          <label for="type-special">
+            <svg class="edit-pen-title">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#special"></use>
+            </svg>
+            <span>Special</span>
+          </label>
+        </div>
+      </div>
+    -->
+    </form> 
+  </div> <!--검색창-->
+
   <h1 class="study-content-category">멘토링 목록</h1>
   <hr>
 
