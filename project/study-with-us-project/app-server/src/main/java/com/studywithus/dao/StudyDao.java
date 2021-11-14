@@ -9,7 +9,7 @@ import com.studywithus.domain.Study;
 public interface StudyDao {
 	List<Study> findAll(@Param("low") int low, @Param("high") int high) throws Exception;
 
-	List<Study> findByKeyword(@Param("keyword") String keyword,@Param("categoryNo") int categoryNo) throws Exception;
+	List<Study> findByKeyword(String keyword) throws Exception;
 
 	Study findByNo(int no) throws Exception;
 

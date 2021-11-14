@@ -3,7 +3,6 @@ package com.studywithus.servlet.freestudy;
 import java.io.IOException;
 import java.util.Collection;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -33,21 +32,19 @@ public class FreeStudySearchController extends HttpServlet  {
 
 		String keyword = request.getParameter("keyword");
 
-		int freeStudyNo = 0;
-
 		try {
-			Collection<Study> freeStudyList = freeStudyDao.findByKeyword(keyword, freeStudyNo);
+			Collection <Study> freeStudyList = freeStudyDao.findByKeyword(keyword);
 
 			request.setAttribute("freeStudyList", freeStudyList);
-			request.setAttribute("freeStudyNo", freeStudyNo);
 
-			request.getRequestDispatcher("freeStudyList.jsp").forward(request, response);
+			request.getRequestDispatcher("FreeStudyList.jsp").forward(request, response);
 
 		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
 			System.out.println(e.getMessage());
 			request.setAttribute("error", e);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Error.jsp");
-			requestDispatcher.forward(request, response);}
+			request.getRequestDispatcher("/Error.jsp").forward(request, response);
+		}
 
 	}  
 }
