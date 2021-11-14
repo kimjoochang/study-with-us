@@ -149,14 +149,14 @@ text-align: center;
     <c:if test="${checkWriter eq 1}">
       <c:if test="${result eq 0}">
         <div class="interest_icon" >
-         <a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/interestAdd.png"></a>
+         <a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/emptyHeartIcon.png"></a>
          <p class="icon_count">${chargeStudy.likes}</p> 
         </div>
       </c:if>
           
       <c:if test="${result eq 1}">
         <div class="interest_icon" >
-          <a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/interestDelete.png"></a>
+          <a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/fillingHeartIcon.png"></a>
           <p class="icon_count">${chargeStudy.likes}</p> 
         </div>
       </c:if>
@@ -165,14 +165,14 @@ text-align: center;
     <c:if test="${checkWriter eq 2}">
       <c:if test="${result eq 0}">
         <div class="interest_icon" >
-         <a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/interestAdd.png"></a>
+         <a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/emptyHeartIcon.png"></a>
          <p class="icon_count">${chargeStudy.likes}</p> 
         </div>
       </c:if>
           
       <c:if test="${result eq 1}">
         <div class="interest_icon" >
-          <a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/interestDelete.png"></a>
+          <a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/fillingHeartIcon.png"></a>
           <p class="icon_count">${chargeStudy.likes}</p> 
         </div>
       </c:if>

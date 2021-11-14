@@ -69,35 +69,33 @@
         </div>
       -->
 
-					<div class="form-group">
-						<label for='f-title'>제목</label> <input id='f-title' type='text'
-							name='title' value='${freeStudy.title}' readonly>
-					</div>
+		<div class="form-group">
+			<label for='f-title'>제목</label> <input id='f-title' type='text'
+				name='title' value='${freeStudy.title}' readonly>
+		</div>
 
-					<div class="form-group">
-						<label for='f-name'>작성자</label> <input id='f-name' type='text'
-							name='name' value='${freeStudy.writer.nickname}' readonly>
-					</div>
+		<div class="form-group">
+			<label for='f-name'>작성자</label> <input id='f-name' type='text'
+				name='name' value='${freeStudy.writer.nickname}' readonly>
+		</div>
 
-					<div class="form-group">
-						<label class="study-content2" for='f-content'>내용</label> <input
-							class="study-content-box" id='f-content' type='text'
-							name='content' cols="69" rows="10" value='${freeStudy.content}'
-							readonly>
-					</div>
+		<div class="form-group">
+			<label class="study-content2" for='f-content'>내용</label> <input
+				class="study-content-box" id='f-content' type='text'
+				name='content' cols="69" rows="10" value='${freeStudy.content}' readonly>
+		</div>
 
-					<div class="form-group">
-						<label for='f-startDate'>시작일</label> <input id='f-startDate'
-							type='date' name='startDate' value='${freeStudy.startDate}'
-							readonly>
-					</div>
+		<div class="form-group">
+			<label for='f-startDate'>시작일</label> <input id='f-startDate'
+				type='date' name='startDate' value='${freeStudy.startDate}' readonly>
+		</div>
 
-					<div class="form-group">
-						<label for='f-endDate'>종료일</label> <input id='f-endDate'
-							type='date' name='endDate' value='${freeStudy.endDate}' readonly>
-					</div>
+		<div class="form-group">
+			<label for='f-endDate'>종료일</label> <input id='f-endDate'
+				type='date' name='endDate' value='${freeStudy.endDate}' readonly>
+		</div>
 
-					<!--
+		<!--
         <div class="form-group">
           <label for='f-category'>카테고리</label> 
           <input id='f-category' type='text' name='category' value='${freeStudy.category}' readonly>
@@ -139,98 +137,147 @@
         </div>
       -->
 
-					<section class="study-info-icon">
-						<div class="item2">
+	  <!--
+		  <section class="study-info-icon">
+			  <div class="item2">
+				  <div class="info_item">
+					  <img class="icon" src="../img/fillingHeartIcon.png">
+					  <p class="icon_count">${freeStudy.likes}</p>
+					  
+					  <img class="icon" src="../img/eyeIcon.png">
+					  <p class="icon_count">${freeStudy.viewCount}</p>
+					</div>
+				</div>
+			</section>
+		-->
+
+		<!-- 관심목록 추가/삭제 아이콘 출력 -->
+		<!-- 글쓴이(0) = 비회원 -->
+		<section class="study-info-icon">
+			<div class="item2">
+				<c:if test="${checkWriter eq 0}">
+						<div class="info_item">
+						<img class="icon" src="../img/fillingHeartIcon.png">
+						<p class="icon_count">${freeStudy.likes}</p> 
+						
+						<img class="icon" src="../img/eyeIcon.png">
+						<p class="icon_count">${freeStudy.viewCount}</p>
+					</div> <!--info_item-->
+				</c:if> <!--글쓴이(0) 비회원-->
+			</div> <!--item2-->
+		</section>
+
+
+		
+		<section class="study-info-icon">
+			<div class="item2">
+				<!-- 회원(1) = 작성자-->
+				<c:if test="${checkWriter eq 1}">
+					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
+						<c:if test="${result eq 0}">
 							<div class="info_item">
 								<img class="icon" src="../img/fillingHeartIcon.png">
-								<p class="icon_count">${freeStudy.likes}</p>
-
+								<p class="icon_count">${freeStudy.likes}</p> 
+								
 								<img class="icon" src="../img/eyeIcon.png">
 								<p class="icon_count">${freeStudy.viewCount}</p>
-							</div>
-						</div> <!-- item2 -->
-					</section><!-- 해당 스터디 관심목록 수, 조회수 확인용 아이콘 -->
-					
-		<!-- 관심목록 추가/삭제 기능 및 아이콘 출력 -->
-    <section class="study-info-icon">
-      <div class="item2">
-        <div class="info_item">
-        
-    <!-- 글쓴이(0) = 비회원 -->
-    <!-- 
-    <c:if test="${checkWriter eq 0}">
-<img class="icon" src="../img/emptyHeartIcon.png"><p class="icon_count">${chargeStudy.likes}</p> 
-    </c:if>
-     -->   
-    
-    <!-- 글쓴이(1) = 작성자-->
-    <c:if test="${checkWriter eq 1}">
-    <!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
-      <c:if test="${result eq 0}">
-        <div class="interest_icon" >
-         <a href='interest/add?no=${freeStudy.no}'><img class="icon" src="../img/emptyHeartIcon.png"></a>
-         <p class="icon_count">${freeStudy.like}</p> 
-        </div>
-      </c:if>
-          
-    <!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
-      <c:if test="${result eq 1}">
-        <div class="interest_icon" >
-          <a href='interest/delete?no=${freeStudy.no}'><img class="icon" src="../img/fillingHeartIcon.png"></a>
-          <p class="icon_count">${freeStudy.like}</p> 
-        </div>
-      </c:if>
-    </c:if>
 
-    <!-- 글쓴이(2) != 작성자-->
-    <c:if test="${checkWriter eq 2}">
-    <!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
-      <c:if test="${result eq 0}">
-        <div class="interest_icon" >
-         <a href='interest/add?no=${freeStudy.no}'><img class="icon" src="../img/emptyHeartIcon.png"></a>
-         <p class="icon_count">${freeStudy.like}</p> 
-        </div>
-      </c:if>
-          
-      <!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
-      <c:if test="${result eq 1}">
-        <div class="interest_icon" >
-          <a href='interest/delete?no=${freeStudy.no}'><img class="icon" src="../img/fillingHeartIcon.png"></a>
-          <p class="icon_count">${freeStudy.like}</p> 
-        </div>
-      </c:if>
-    </c:if>
-         <img class="icon" src="../img/eyeIcon.png"> <p class="icon_count">${freeStudy.viewCount}</p> 
-        </div>
-      </div> <!-- item2 -->
-    </section> <!--  관심목록 추가 삭제  -->
+								<a href='interest/add?no=${freeStudy.no}'><img class="icon" src="../img/interestAdd.png"></a>
+								<p class="icon_count">${freeStudy.likes}</p> 
+							</div> <!--info_item-->
+						</c:if> <!-- 글쓴이(1) 관심목록 추가 전 -->
+				
+						<!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
+						<c:if test="${result eq 1}">
+							<div class="info_item">
+								<img class="icon" src="../img/fillingHeartIcon.png">
+								<p class="icon_count">${freeStudy.likes}</p> 
+								
+								<img class="icon" src="../img/eyeIcon.png">
+								<p class="icon_count">${freeStudy.viewCount}</p>
+
+								<a href='interest/delete?no=${freeStudy.no}'><img class="icon" src="../img/interestDelete.png"></a>
+								<p class="icon_count">${freeStudy.likes}</p> 
+							</div> <!--info_item-->
+						</c:if> <!-- 글쓴이(1) 관심목록 추가 상태인 경우 -->
+				</c:if> <!--checkWriter eq 1-->
+			</div> <!-- item2 -->
+	  	</section> <!--  회원(1) = 작성자 -->
+
+
+	  <section class="study-info-icon">
+			<div class="item2">
+				<!-- 회원(2) != 작성자-->
+				<c:if test="${checkWriter eq 2}">
+					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
+					<c:if test="${result eq 0}">
+						<div class="info_item">
+							<img class="icon" src="../img/fillingHeartIcon.png">
+								<p class="icon_count">${freeStudy.likes}</p> 
+								
+								<img class="icon" src="../img/eyeIcon.png">
+								<p class="icon_count">${freeStudy.viewCount}</p>
+
+								<a href='interest/add?no=${freeStudy.no}'><img class="icon" src="../img/interestAdd.png"></a>
+								<p class="icon_count">${freeStudy.likes}</p> 
+							</div> <!--info_item-->
+						</c:if> <!-- 회원(2) 관심목록 추가 전 -->
+							
+						<!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
+						<c:if test="${result eq 1}">
+							<div class="info_item">
+								<img class="icon" src="../img/fillingHeartIcon.png">
+								<p class="icon_count">${freeStudy.likes}</p> 
+								
+								<img class="icon" src="../img/eyeIcon.png">
+								<p class="icon_count">${freeStudy.viewCount}</p>
+
+								<a href='interest/delete?no=${freeStudy.no}'><img class="icon" src="../img/interestDelete.png"></a>
+								<p class="icon_count">${freeStudy.likes}</p> 
+							</div> <!--info_item-->
+						</c:if> <!-- 회원(2) 관심목록 추가 상태인 경우 -->
+				</c:if> <!-- checkWriter eq 2 -->
+			</div> <!-- item2 -->
+	  	</section> <!--  회원(2) != 작성자 -->
 					
+
+		  <!--회원(1) = 작성자-->
+		  	<c:if test="${checkWriter eq 1}">
+				<a class="input-button-bottom" href='/swu/freestudy/list'> 목록 </a>
+				<a class="input-button-bottom" href='updateform?no=${freeStudy.no}'>수정</a>
+				<c:if test="${freeStudy.deleteStatus eq 0}">
+				<a class="input-button-bottom" href='delete?no=${freeStudy.no}'>삭제 </a>
+				</c:if>
+			</c:if>
+					
+			<!--회원(2) != 작성자-->
+			<c:if test="${checkWriter eq 2}">
+				
+			<!-- 관심목록은 위에 구현했으니까 밑에는 우선 빼겠슴니다-->
+			<!--
+				<c:if test="${result eq 0}">
 					<a class="input-button-bottom" href='/swu/freestudy/list'> 목록 </a>
-
-					<c:if test="${checkWriter eq 1}">
-						<a class="input-button-bottom" href='updateform?no=${freeStudy.no}'>수정</a>
-						<c:if test="${freeStudy.deleteStatus eq 0}">
-							<a class="input-button-bottom" href='delete?no=${freeStudy.no}'>삭제 </a>
-						</c:if>
-					</c:if>
+		            <a class="input-button-bottom" href='/swu/freestudy/interest/add?no=${freeStudy.no}' class="button-group"> 관심목록 추가</a>
+		        </c:if>
+				
+		        <c:if test="${result eq 1}"> 
+					<a class="input-button-bottom" href='/swu/freestudy/list'> 목록 </a>
+					<a class="input-button-bottom" href='/swu/freestudy/interest/delete?no=${freeStudy.no}' class="button-group"> 관심목록 삭제 </a>
+		        </c:if>
+			-->
+				
+				<c:if test="${participateResult eq 0}">
+					<a class="input-button-bottom" href='/swu/freestudy/list'> 목록 </a>
+					<a class="input-button-bottom" href='apply?no=${freeStudy.no}'>스터디 신청</a>
+				</c:if>
 					
-					<c:if test="${checkWriter eq 2}">
-							 <c:if test="${result eq 0}">
-		              <a class="input-button-bottom" href='/swu/freestudy/interest/add?no=${freeStudy.no}' class="button-group"> 관심목록 추가</a>
-		            </c:if>
-		
-		            <c:if test="${result eq 1}"> 
-		            <a class="input-button-bottom" href='/swu/freestudy/interest/delete?no=${freeStudy.no}' class="button-group"> 관심목록 삭제 </a>
-		            </c:if>
-		          
-		          <c:if test="${participateResult eq 0}">
-		          <a class="input-button-bottom" href='apply?no=${freeStudy.no}'>스터디 신청</a>
-		          </c:if>
-		
-		          <c:if test="${participateResult eq 1}">
-		          <a class="input-button-bottom" href='applycancel?no=${freeStudy.no}'>스터디 신청 취소</a>
-		          </c:if>
-           </c:if> 
+				<c:if test="${participateResult eq 1}">
+					<a class="input-button-bottom" href='/swu/freestudy/list'> 목록 </a>
+					<a class="input-button-bottom" href='applycancel?no=${freeStudy.no}'>스터디 신청 취소</a>
+				</c:if>
+			</c:if> 
+			<!--  스터디 신청/취소 유료 결제 모달 폼이랑 같이 진행하는 건가?-->
+					
 
 <!--  
 					<div class="study-bottom-button">
@@ -289,6 +336,3 @@
 <!--무료스터디 제일 큰 포맷-->
 
 </html>
-
-
-
