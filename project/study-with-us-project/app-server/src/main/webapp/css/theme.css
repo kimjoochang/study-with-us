@@ -6,6 +6,7 @@
   License URI: https://creativecommons.org/licenses/by/4.0/
   Version: 1.0
  */
+
  @font-face {
   font-family: 'InfinitySans-RegularA1';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
@@ -1027,14 +1028,15 @@ a.text-dark:hover, a.text-dark:focus {
 
 .navbar {
   min-height: 70px;
+  z-index: 800;
 }
 
 .navbar.sticky {
-  z-index: 1080;
+  z-index: 800;
 }
 
 .navbar.sticky.fixed ~ * {
-  margin-top: 70px;
+  margin-top: 800px;
 }
 
 .navbar.sticky.fixed {
@@ -1044,7 +1046,7 @@ a.text-dark:hover, a.text-dark:focus {
   width: 100%;
   animation: navTransition .5s ease;
   box-shadow: 0 2px 6px rgba(100, 95, 136, 0.15);
-  z-index: 1080;
+  z-index: 800;
 }
 
 @keyframes navTransition {
@@ -1091,7 +1093,6 @@ a.text-dark:hover, a.text-dark:focus {
   font-weight: 500;
   color: #59547c;
 }
-
 
 @media (min-width: 576px) {
   .navbar-expand-sm .navbar-nav {

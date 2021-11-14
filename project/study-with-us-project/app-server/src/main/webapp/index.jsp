@@ -129,13 +129,13 @@ text-align: center;
   width : 360px;
 }
   */
-.request_button, #close {
-  margin-right : 15px;
-}
+    .request_button, #close {
+      margin-right : 15px;
+    }
 
-input {
- all : unset;
- }
+    input {
+    all : unset;
+    }
 
   .btn-primary1{
     background: #756daa;
@@ -151,7 +151,6 @@ input {
       margin-left:5px;
       margin-right:5px;
       position: relative;
-      z-index:-100;
     }
     
     .sns_container{
@@ -437,10 +436,12 @@ input {
       <div class="modal1_overlay">
         <!--모달 화면-->
         <div class="modal1_content">
+
+          <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
+
           <div class="sign-buttons">
   <div class="d-flex justify-content-center">
 
-<div class="join_btn_4_space">
     <!--회원가입 버튼 -->
     <div class="text-center">
       <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">Sign up<i class="fas fa-user-plus ml-3"></i></a>
@@ -449,7 +450,6 @@ input {
     <div class="text-center">
       <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage">&nbsp;&nbsp;Sign in&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
     </div>
-</div> <!-- join_btn_4_space -->
     
   </div>
 </div>
@@ -476,31 +476,36 @@ input {
         
 
         <div class="modal-body mx-3">
-          <div class="md-form mb-5">
-            <label data-error="wrong" data-success="right">이름
-            <input type="text" class="form-control validate"></label>
+
+          <form action="user/join" method="post"><!-- 추가-->
+            
+            <div class="md-form mb-5">
+            <label data-error="wrong" data-success="right">이름</label>
+            <input type="text" name="name" class="form-control validate" >
           </div>
 
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">이메일</label>
-            <input type="email" class="form-control validate">
+            <input type="email" name="email" class="form-control validate">
           </div>
 
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">닉네임</label>
-            <input type="text" class="form-control validate">
+            <input type="text" name="nickName" class="form-control validate">
           </div>
 
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">비밀번호</label>
-            <input type="password" class="form-control validate">
+            <input type="password" name="password" class="form-control validate">
           </div>
 
+        <!--
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">비밀번호 확인</label>
             <input type="password" class="form-control validate">
           </div>
-          
+        -->  
+
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">휴대폰 번호</label>
             <input type="text" class="form-control validate">
@@ -510,6 +515,8 @@ input {
         <div class="modal-footer d-flex justify-content-center">
           <button class="btn btn-primary1">스터디위더스 시작하기</button><br><hr>
         </div>
+      </form>
+
       </div>
     </div>
   </div>
@@ -526,18 +533,18 @@ input {
       </div>
 
       <div class="title_img"><img src="img/스터디위더스.png"></img></div>
-
+      <!--추가-->
       <div class="modal-body mx-4">
+        <form action='/user/login' method="post">
         <div class="md-form">
-          <!--<form action='login' method="post">-->
           <label data-error="wrong" data-success="right">이메일</label>
-          <input type="email" class="form-control validate">
+          <input type="email" name='email' class="form-control validate">
         </div>
 
- 
         <div class="md-form">
+          
           <label data-error="wrong" data-success="right">비밀번호</label>
-          <input type="password" class="form-control validate">
+          <input type="password" name='password' class="form-control validate">
         </div>
         
          
@@ -548,11 +555,11 @@ input {
           <button type="button" class="btn btn-primary1 btn-block z-depth-1a">스터디위더스 시작하기</button><br><hr>
           <!--<button type="button" class="btn btn-primary btn-block z-depth-1a">스터디위더스 시작하기</button>-->
         </div>
-      <!--</form>-->
+     </form>
 
         <div class="st-sns">
-        <p class="font-medium dark-grey-text d-flex justify-content-center">or</p>
-        <p class="font-medium dark-grey-text d-flex justify-content-center">SNS로 시작하기</p>
+        <p class="font-large dark-grey-text d-flex justify-content-center">or</p>
+        <p class="font-large dark-grey-text d-flex justify-content-center">SNS로 시작하기</p>
       </div>
 
         <div class="row my-3 justify-content-center">
