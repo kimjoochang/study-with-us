@@ -99,13 +99,21 @@ text-align: center;
           <input class="input3" id='f-area' type='text' name='area' value='${chargeStudy.area}' readonly>
         
           <img class="icon-top" src="../img/people.png">
-          <input class="input3" id='f-members/maxMembers' type='text' name='members/maxMembers' value='${chargeStudy.members/chargeStudy.maxMembers}' readonly>
+          <input class="input3" id='f-members/maxMembers' type='text' name='members/maxMembers' value='${chargeStudy.members} / ${chargeStudy.maxMembers}' readonly>
+          
+          <img class="icon-top" src="../img/won.png">
+          <input class="input3" id='f-price' type='text' name='members/maxMembers' value='${chargeStudy.price}' readonly>
         </ul>
       </div>
 
 <!--
   <label for='f-no'>번호</label> 
   <input id='f-no' type='text' name='no' value='${chargeStudy.no}' readonly><br>
+
+    <div class="form-group">
+      <label for='f-price'>금액</label> 
+      <input id='f-price' type='text' name='price' value='${chargeStudy.price}' readonly><br>
+    </div>
 -->
 
     <div class="form-group">
@@ -118,10 +126,6 @@ text-align: center;
       <input id='f-writer' type='email' name='writer' value='${chargeStudy.writer.email}' readonly><br>
     </div>
 
-    <div class="form-group">
-      <label for='f-price'>금액</label> 
-      <input id='f-price' type='text' name='price' value='${chargeStudy.price}' readonly><br>
-    </div>
 
     <div class="form-group">
       <label class="study-content2" for='f-content'>내용</label> 

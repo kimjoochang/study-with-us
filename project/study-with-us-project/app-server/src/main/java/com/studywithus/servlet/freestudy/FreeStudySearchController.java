@@ -3,6 +3,7 @@ package com.studywithus.servlet.freestudy;
 import java.io.IOException;
 import java.util.Collection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -43,11 +44,10 @@ public class FreeStudySearchController extends HttpServlet  {
 			request.getRequestDispatcher("freeStudyList.jsp").forward(request, response);
 
 		} catch (Exception e) {
-			System.out.println(e.getStackTrace());
 			System.out.println(e.getMessage());
 			request.setAttribute("error", e);
-			request.getRequestDispatcher("/Error.jsp").forward(request, response);
-		}
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Error.jsp");
+			requestDispatcher.forward(request, response);}
 
 	}  
 }
