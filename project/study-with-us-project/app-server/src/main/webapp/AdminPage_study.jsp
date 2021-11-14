@@ -119,6 +119,43 @@ ul.sub li a.home {
 	text-align: center;
 	margin-top: 20px
 }
+
+.icon {
+	width: 25px;
+}
+
+.modal {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal_overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+
+.modal_content {
+	position: fixed;
+	top: 30%;
+	left: 40%;
+	width: 400px;
+	height: 450px;
+	background-color: white;
+	padding: 30px 0px;
+	border-radius: 10px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+		rgba(0, 0, 0, 0.23);
+}
+
+.hidden {
+	display: none;
+}
 </style>
 
 </head>
@@ -168,18 +205,60 @@ ul.sub li a.home {
 										<td>${deleteRequestForm.study.title}</td>
 										<td>${deleteRequestForm.applicant.name}</td>
 										<td>${deleteRequestForm.registeredDate}</td>
-										<td>아이콘(모달)</td>
+										<td><a id="open" href="#"><img class="icon"
+												src="../img/document.png"></a></td>
 										<!--deleteRequestForm.reason -->
 									</tr>
 								</tbody>
+							<div class="modal hidden">
+								<div class="modal_content">
+									<div class="form_box">
+										<form action='add' target="CommunityList.jsp" method='post'>
+											<input type='hidden' name='categoryNo' value='${categoryNo}'>
+											<textarea class="input_content" name="content" id="textarea"
+										     cols="40" rows="5">${deleteRequestForm.reason}</textarea>
+											<div class="form_buttons">
+												<input type="submit" onclick="offClick()" value="등록">
+												<input id="close" type="button" value="취소">
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>	
 							</c:forEach>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
+	
+	<script>
+	const openBtn = document.getElementById('open');
+	//onModal button
+
+	const closeBtn = document.getElementById('close');
+	//offModal button
+
+	const modal = document.querySelector('.modal');
+	//HTML에서의 모달 최상위 요소
+
+	const overlay = document.querySelector('.modal_overlay');
+	//모달창이 활성화되면 흐린 배경을 표현하는 요소
+
+	const openModal = () => {
+	  modal.classList.remove('hidden');
+	}
+
+	const closeModal = () => {
+	  modal.classList.add('hidden');
+	}
+
+	openBtn.addEventListener('click', openModal);
+	//onModal
+
+	closeBtn.addEventListener('click', closeModal);
+	</script>
 
 
 	<script src="../assets/js/jquery-3.5.1.min.js"></script>

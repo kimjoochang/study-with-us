@@ -19,6 +19,55 @@
     .interest_icon {
       width : 50px;
     }
+ #close, button {
+ all : unset;
+ }
+ 
+ .modal {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal_overlay {
+  position:fixed;
+  width: 100%;
+  height: 100%;
+}
+.modal_content {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  width: 490px;
+  height: 550px;
+  background-color: white;
+  padding: 30px 0px;
+  padding-left : 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+    rgba(0, 0, 0, 0.23);
+}
+.form_box {
+  margin : 35px;
+}
+h1 {
+  margin: 0;
+}
+.hidden {
+  display: none;
+}
+.button_box {
+display : flex;
+justify-content : flex-end;
+margin-right : 25px;
+text-align: center;
+}
+.request_button, #close {
+  margin-right : 15px;
+}
     </style>
 </head>
 
