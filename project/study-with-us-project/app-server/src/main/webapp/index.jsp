@@ -557,14 +557,15 @@ text-align: center;
       </div>
 
       <div class="title_img"><img src="img/스터디위더스.png"></img></div>
-      <!--추가-->
+      <!-- 추가 -->
       <div class="modal-body mx-4">
 
         <form action='user/login' method="post">
         <div class="md-form">
-          <label data-error="wrong" data-success="right">이메일</label>
-          <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkEmail()" />
-        
+       <label data-error="wrong" data-success="right"> 이메일 </label> 
+   <!--  얘를 빼보자 <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkEmail()" />
+         -->
+        <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" />
         <span class="email_ok">사용 가능한 이메일입니다.</span>
         <span class="email_already">이미 사용중인 이메일입니다.</span>
           
@@ -577,6 +578,8 @@ text-align: center;
         
         <div class="text-center mb-3">
            <button class="btn btn-primary1">스터디위더스 시작하기</button><br>
+           
+           
          <!--   <button type="button" class="btn btn-primary1 btn-block z-depth-1a">스터디위더스 시작하기</button><br><hr> -->
           <!--<button type="button" class="btn btn-primary btn-block z-depth-1a">스터디위더스 시작하기</button>-->
         </div>
