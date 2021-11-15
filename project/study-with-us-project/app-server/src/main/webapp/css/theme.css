@@ -1027,7 +1027,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 
 .navbar {
-  min-height: 70px;
+  min-height: 100px;
   z-index: 800;
 }
 

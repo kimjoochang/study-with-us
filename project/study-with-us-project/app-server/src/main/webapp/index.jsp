@@ -81,7 +81,7 @@ margin-right:10px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-   z-index: 100 !important;
+  z-index: 100 !important;
 }
 
 .modal1_overlay {
@@ -154,6 +154,7 @@ text-align: center;
     background: #756daa;
     color:snow;
     border-radius: 70px;
+
   }
 
     .st-sns{
@@ -173,13 +174,13 @@ text-align: center;
     margin-top:15px;
     }
 
-  .title_img{
+  .title_img {
     margin:30px 10px;
     text-align:center;
     justify-content: center;
   }
 
-  .sign-buttons{
+  .sign-buttons {
     margin-top: 50%;
   }
 </style>
@@ -197,6 +198,7 @@ text-align: center;
 
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
+          
             <li class="nav-item active">
               <c:if test="${loginUser eq null}">
               <a id="open1" class="nav-link" href="#">Sign Up / In</a>
@@ -241,7 +243,7 @@ text-align: center;
                   </ul>
                 </div>
                 -->
-      </div>
+      </div><!-- container -->
     </nav>
 
 <!-- 대표 메뉴 세 개 나오는 파트-->
@@ -460,24 +462,24 @@ text-align: center;
       <div class="modal1_overlay">
         <!--모달 화면-->
         <div class="modal1_content">
+          <div class="sign-buttons">
+              <div class="d-flex justify-content-center">
+					
+					    <!--회원가입 버튼 -->
+					    <div class="text-center">
+					      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">Sign up<i class="fas fa-user-plus ml-3"></i></a>
+					    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
+					    <!--로그인 버튼-->
+					    <div class="text-center">
+					      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage">&nbsp;&nbsp;&nbsp;&nbsp;Sign in&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
+					    </div>
+					    
+					  </div>
+					</div>
+
 
         <!--  <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button> -->
-
-          <div class="sign-buttons">
-  <div class="d-flex justify-content-center">
-
-    <!--회원가입 버튼 -->
-    <div class="text-center">
-      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">Sign up<i class="fas fa-user-plus ml-3"></i></a>
-    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-    <!--로그인 버튼-->
-    <div class="text-center">
-      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage">&nbsp;&nbsp;Sign in&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
-    </div>
-    
-  </div>
-</div>
 
         </div> <!-- modal_content -->
       </div> <!-- modal_overlay -->
@@ -503,7 +505,7 @@ text-align: center;
             
             <!--<div class="md-form mb-5">일단-->
             <label data-error="wrong" data-success="right">이름</label>
-            <input type="text" name="name" class="form-control validate" placeholder="이름을 입력하세요" required >
+            <input type="text" name="name" class="form-control validate" placeholder="이름을 입력하세요" required>
           </div>
 
           <div class="md-form mb-5">
@@ -562,6 +564,7 @@ text-align: center;
         <div class="md-form">
           <label data-error="wrong" data-success="right">이메일</label>
           <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkId()" />
+        
         <span class="email_able">사용 가능한 이메일입니다.</span>
         <span class="email_disable">이미 사용중인 이메일입니다.</span>
           
@@ -588,15 +591,14 @@ text-align: center;
       </div>
 
         <div class="row my-3 justify-content-center">
-        
           <div class="sns_container">
             <div class="sns_icon"> <a><img src="img/facebook.png"></img></a></div>
             <div class="sns_icon"><a><img src="img/twitter.png"></img></a></div>
             <div class="sns_icon"><a><img src="img/google.png"></img></a></div>
             <div class="sns_icon"><a><img src="img/instagram.png"></img></a></div>
-        </div><!--container-->
-        
+        </div><!--sns_container-->
         </div><!--row my-3 justify-content-center-->
+        
       </div>
     </div>
     </div> 
