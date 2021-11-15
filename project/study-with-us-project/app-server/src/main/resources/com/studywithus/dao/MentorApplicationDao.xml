@@ -64,16 +64,16 @@
 		where application_no=#{no}
 	</update>
 
-	<update id="updateApproveStatus" parameterType="Mentorapplication">
+	<update id="updateApproveStatus" parameterType="int">
 		update application set
-			status=#{status},
+			status=1
 		where application_no=#{no}
 	</update>
 
 	<update id="updateRejectStatus" parameterType="Mentorapplication">
 		update application set
-			status=#{status},
-			remarks=#{remarks},
+			status=2,
+			remarks=#{remarks}
 		where application_no=#{no}
 	</update>
 	

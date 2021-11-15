@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 : 회원관리</title>
+<title>스터디위더스 : 스터디관리</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
@@ -125,37 +125,42 @@ ul.sub li a.home {
 }
 
 .modal {
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.modal_overlay {
-	position: fixed;
-	width: 100%;
-	height: 100%;
+ .modal_overlay {
+  position:fixed;
+  width: 100%;
+  height: 100%;
 }
 
 .modal_content {
-	position: fixed;
-	top: 30%;
-	left: 40%;
-	width: 400px;
-	height: 450px;
-	background-color: white;
-	padding: 30px 0px;
-	border-radius: 10px;
-	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
-		rgba(0, 0, 0, 0.23);
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  width: 400px;
+  height: 450px;
+  background-color: white;
+  padding: 30px 0px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+    rgba(0, 0, 0, 0.23);
+}
+
+h1 {
+  margin: 0;
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
+
 </style>
 
 </head>
@@ -199,32 +204,67 @@ ul.sub li a.home {
 								</tr>
 							</thead>
 							<c:forEach items="${deleteRequestFormList}"
-								var="deleteRequestForm">
+								var="deleteRequestForm" varStatus="vs">
 								<tbody>
 									<tr>
 										<td>${deleteRequestForm.study.title}</td>
 										<td>${deleteRequestForm.applicant.name}</td>
 										<td>${deleteRequestForm.registeredDate}</td>
-										<td><a id="open" href="#"><img class="icon"
-												src="../img/document.png"></a></td>
+										<td><a id="open" onclick="openModal(${vs.index});" href="#"><img class="icon" src="../img/document.png"></a></td>
 										<!--deleteRequestForm.reason -->
 									</tr>
 								</tbody>
-							<div class="modal hidden">
-								<div class="modal_content">
-									<div class="form_box">
-										<form action='add' target="CommunityList.jsp" method='post'>
-											<input type='hidden' name='categoryNo' value='${categoryNo}'>
-											<textarea class="input_content" name="content" id="textarea"
-										     cols="40" rows="5">${deleteRequestForm.reason}</textarea>
-											<div class="form_buttons">
-												<input type="submit" onclick="offClick()" value="등록">
-												<input id="close" type="button" value="취소">
+
+								<!-- 모달창 -->
+								<!--이벤트 발생 시 hidden 삭제-->
+								<div id="${vs.index}" class ="modal hidden">
+									<!--모달 활성화 시 흐린 배경 표현-->
+									<div class="modal_overlay">
+										<!--모달 화면-->
+										<div class="modal_content">
+											<div class="form_box">
+												<form action='requestapprove' method='post'>
+												  <input type="hidden" name="no" value="${deleteRequestForm.no}">
+												   <input type="hidden" name="studyNo" value="${deleteRequestForm.study.no}">
+                          <textarea class="input_content" name="content"
+                            id="textarea" cols="40" rows="5">${deleteRequestForm.reason}</textarea>
+                          <div class="form_buttons">
+                            <input type="submit" value="승인">
+                            <input id="modal_close_btn" type="button" onclick="closeModal(${vs.index});" value="거절">
+                          </div>
+                        </form>
 											</div>
-										</form>
+										</div>
+										<!-- modal_content -->
 									</div>
+									<!-- modal_overlay -->
 								</div>
-							</div>	
+								<!-- modal_hidden -->
+								
+								<!-- 거절사유 모달 -->
+								<div id="reason_${vs.index}" class ="modal hidden">
+                  <!--모달 활성화 시 흐린 배경 표현-->
+                  <div class="modal_overlay">
+                    <!--모달 화면-->
+                    <div class="modal_content">
+                      <div class="form_box">
+                        <form action='requestreject' method='post'>
+                        <input type="hidden" name="studyNo" value="${deleteRequestForm.study.no}">
+                          <input type="hidden" name="no" value="${deleteRequestForm.no}">
+                          <textarea class="input_content" name= "remarks"
+                            id="textarea" cols="40" rows="5" placeholder="거절 사유를 입력하세요."></textarea>
+                          <div class="form_buttons">
+                            <input type="submit" value="작성">
+                            <input id="modal_close_btn" type="button" onclick="closeReasonModal(${vs.index});" value="취소">
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- modal_content -->
+                  </div>
+                  <!-- modal_overlay -->
+                </div>
+                <!-- modal_hidden -->
 							</c:forEach>
 						</table>
 					</div>
@@ -232,35 +272,37 @@ ul.sub li a.home {
 			</div>
 		</div>
 	</div>
-	
+
 	<script>
-	const openBtn = document.getElementById('open');
-	//onModal button
-
-	const closeBtn = document.getElementById('close');
-	//offModal button
-
-	const modal = document.querySelector('.modal');
-	//HTML에서의 모달 최상위 요소
-
-	const overlay = document.querySelector('.modal_overlay');
-	//모달창이 활성화되면 흐린 배경을 표현하는 요소
-
-	const openModal = () => {
-	  modal.classList.remove('hidden');
+ // 삭제사유 모달 여는 함수
+	const openModal = (e) => {
+	const modal = document.getElementById(e);
+		console.log(modal);
+		 modal.classList.remove('hidden');
 	}
+	
+	// 삭제사유에서 거절 누르면 거절 사유 여는 함수
+	const closeModal = (e) => {
+	  const modal = document.getElementById(e);
+	     modal.classList.add('hidden');
+	 
+	 const param = "reason_" + e;
+	 
+	 console.log(param);
+	 const reasonModal = document.getElementById(param);
+		console.log(reasonModal);
+		reasonModal.classList.remove('hidden');
+	  }
 
-	const closeModal = () => {
-	  modal.classList.add('hidden');
-	}
+	// 거절 사유 모달 여는 함수
+	const closeReasonModal = (e) => {
+	 const param = "reason_" + e;
+	  const reasonModal = document.getElementById(param);
+	     reasonModal.classList.add('hidden');
+	  }
 
-	openBtn.addEventListener('click', openModal);
-	//onModal
-
-	closeBtn.addEventListener('click', closeModal);
 	</script>
-
-
+	
 	<script src="../assets/js/jquery-3.5.1.min.js"></script>
 
 	<script src="../assets/js/bootstrap.bundle.min.js"></script>

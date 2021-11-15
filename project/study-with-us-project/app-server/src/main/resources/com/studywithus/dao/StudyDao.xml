@@ -110,6 +110,8 @@
       study st
     inner join member m on st.member_no=m.member_no
    where price >=#{low} and price<=#{high}
+    and 
+    st.del_status != 2
     order by 
       st.study_no asc
   ]]>
@@ -200,8 +202,11 @@
        i.member_no=#{memberNo}
        and
        price >=#{low} and price<=#{high}
+       and
+       st.del_status != 2
       order by 
       st.study_no asc
+      
        ]]>
   </select>
   

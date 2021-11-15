@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자페이지 : 회원관리</title>
+<title>스터디위더스 : 회원관리</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
@@ -120,6 +120,42 @@ ul.sub li a.home {
 	margin-top: 20px
 }
 
+.modal {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ .modal_overlay {
+  position:fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.modal_content {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  width: 400px;
+  height: 450px;
+  background-color: white;
+  padding: 30px 0px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+    rgba(0, 0, 0, 0.23);
+}
+
+h1 {
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
 
 </style>
 
@@ -167,15 +203,68 @@ ul.sub li a.home {
 								</tr>
 							</thead>
 							<c:forEach items="${mentorApplicantList}"
-								var="mentorApplication">
+								var="mentorApplication" varStatus="vs">
 								<tbody>
 									<tr>
 										<td>${mentorApplication.applicant.name}</td>
 										<td>${mentorApplication.registeredDate}</td>
-										<td>아이콘(모달)</td>
+                    <td><a id="open" onclick="openModal(${vs.index});" href="#"><img class="icon" src="../img/document.png"></a></td>
 										<!--deleteRequestForm.reason -->
 									</tr>
 								</tbody>
+								
+								<!-- 모달창 -->
+                <!--이벤트 발생 시 hidden 삭제-->
+                <div id="${vs.index}" class ="modal hidden">
+                  <!--모달 활성화 시 흐린 배경 표현-->
+                  <div class="modal_overlay">
+                    <!--모달 화면-->
+                    <div class="modal_content">
+                      <div class="form_box">
+                        <form action='approve' method='post'>
+                        <input type="hidden" name="no" value="${mentorApplication.no}">
+                        <input type="hidden" name="applicantNo" value="${mentorApplication.applicant.no}">
+                          <textarea class="input_content" name="selfIntro"
+                            id="textarea" cols="40" rows="5">${mentorApplication.selfIntroduction}</textarea>
+                            
+                          <textarea class="input_content" name="subject"
+                            id="textarea" cols="40" rows="5">${mentorApplication.subject}</textarea>
+                          <div class="form_buttons">
+                            <input type="submit" value="승인">
+                            <input id="modal_close_btn" type="button" onclick="closeModal(${vs.index});" value="거절">
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- modal_content -->
+                  </div>
+                  <!-- modal_overlay -->
+                </div>
+                <!-- modal_hidden -->
+								
+								<div id="reason_${vs.index}" class ="modal hidden">
+                  <!--모달 활성화 시 흐린 배경 표현-->
+                  <div class="modal_overlay">
+                    <!--모달 화면-->
+                    <div class="modal_content">
+                      <div class="form_box">
+                        <form action='reject' method='post'>
+                          <input type="hidden" name="no" value="${mentorApplication.no}">
+                          <textarea class="input_content" name="remarks"
+                            id="textarea" cols="40" rows="5" placeholder="거절 사유를 입력하세요."></textarea>
+                          <div class="form_buttons">
+                            <input type="submit" value="작성">
+                            <input id="modal_close_btn" type="button" onclick="closeReasonModal(${vs.index});" value="취소">
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- modal_content -->
+                  </div>
+                  <!-- modal_overlay -->
+                </div>
+                <!-- modal_hidden -->
+                
 							</c:forEach>
 						</table>
 					</div>
@@ -185,6 +274,37 @@ ul.sub li a.home {
 
 	</div>
 
+  <script>
+
+//삭제사유 모달 여는 함수
+  const openModal = (e) => {
+  const modal = document.getElementById(e);
+    console.log(modal);
+     modal.classList.remove('hidden');
+  }
+  
+  // 삭제사유에서 거절 누르면 거절 사유 여는 함수
+  const closeModal = (e) => {
+    const modal = document.getElementById(e);
+       modal.classList.add('hidden');
+   
+   const param = "reason_" + e;
+   
+   console.log(param);
+   const reasonModal = document.getElementById(param);
+    console.log(reasonModal);
+    reasonModal.classList.remove('hidden');
+    }
+
+  // 거절 사유 모달 여는 함수
+  const closeReasonModal = (e) => {
+   const param = "reason_" + e;
+    const reasonModal = document.getElementById(param);
+       reasonModal.classList.add('hidden');
+    }
+
+  </script>
+  
 
 	<script src="../assets/js/jquery-3.5.1.min.js"></script>
 
