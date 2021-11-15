@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +9,7 @@
 </head>
 
 <body>
-<form method = "post" action="user/findemail">
+<form method ="post" action="findemail">
   <table border = "2"  align = "center">
       <caption><h1>아이디 찾기</h1></caption>
       <tr>
@@ -34,6 +36,16 @@
   </table>
   <div class="button">
   
+  <c:if test="${email ne null}">
+  <c:if test="${email ne 0}">
+     회원님의 아이디는 <c:out value="${email}"/> 입니다.
+     <a>비밀번호 찾기</a> <br><br><br><br><br><br> <a>메인</a> 
+  </c:if>
+  
+  <c:if test="${email eq 0}">
+    일치하는 정보를 찾을 수 없습니다.
+  </c:if>
+</c:if>  
 </div>
 </form>     
 
