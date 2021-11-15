@@ -13,7 +13,7 @@
 
   <meta name="copyright" content="MACode ID, https://macodeid.com/">
 
-  <title>스터디위더스: 메인</title>
+  <title>스터디위더스 : 메인</title>
 
   <base target="_self"/>
  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
@@ -64,7 +64,7 @@
 
 .arrow{
 padding:0px;
-margin-left:-2.6px;
+margin-left:-2.55px;
 margin-right:10px;
 }
 
@@ -110,7 +110,7 @@ margin-right:10px;
   display: none;
 }
 
-.email_able {
+.email_ok {
 color:#fff; 
 display: none;
 }
@@ -152,7 +152,7 @@ text-align: center;
 
   .btn-primary1{
     background: #756daa;
-    color:snow;
+    color: snow;
     border-radius: 70px;
 
   }
@@ -467,7 +467,7 @@ text-align: center;
 					
 					    <!--회원가입 버튼 -->
 					    <div class="text-center">
-					      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">Sign up&nbsp;<i class="fas fa-user-plus ml-3"></i></a>
+					      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">&nbsp;Sign up&nbsp;<i class="fas fa-user-plus ml-3"></i></a>
 					    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
 					    <!--로그인 버튼-->
@@ -479,7 +479,7 @@ text-align: center;
 					</div>
 
 
-        <!--  <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button> -->
+     <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
 
         </div> <!-- modal_content -->
       </div> <!-- modal_overlay -->
@@ -565,8 +565,8 @@ text-align: center;
           <label data-error="wrong" data-success="right">이메일</label>
           <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkEmail()" />
         
-        <span class="email_able">사용 가능한 이메일입니다.</span>
-        <span class="email_disable">이미 사용중인 이메일입니다.</span>
+        <span class="email_ok">사용 가능한 이메일입니다.</span>
+        <span class="email_already">이미 사용중인 이메일입니다.</span>
           
         </div>
 
@@ -582,8 +582,11 @@ text-align: center;
         </div>
      </form>
      
-         <br><p class="font-small blue-text d-flex justify-content-end"><a href="/swu/user/findemail" class="blue-text sl-1">아이디</a>
-           &nbsp;/&nbsp; <a href="/swu/user/resetpwd" class="blue-text sl-1">비밀번호 찾기</a></p><br><hr>
+         <br>
+         <p class="font-small blue-text d-flex justify-content-end">
+         <a href="user/findemail" class="blue-text sl-1">Forgot ID</a> &nbsp;/&nbsp;
+         <a href="user/resetpwd" class="blue-text sl-1">PWD</a></p>
+         <br><hr>
 
         <div class="st-sns">
         <p class="font-large dark-grey-text d-flex justify-content-center">or</p>

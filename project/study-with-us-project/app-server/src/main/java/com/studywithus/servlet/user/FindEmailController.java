@@ -43,8 +43,8 @@ public class FindEmailController extends HttpServlet {
         int index = email.length()-3; // 
         String tempEmail = email.substring(0,3); //0~3번 문자까지 보여주고
 
-        for(int i=0; i<index; i++) {
-          tempEmail+="*";} // 나머지 *처리
+        for(int i = 0; i < index; i++) {
+          tempEmail += "*";} // 나머지 *처리
 
         email = tempEmail; // 별표처리된 이메일 대입
         //request.setAttribute("email", email);
@@ -63,7 +63,7 @@ public class FindEmailController extends HttpServlet {
       sqlSession.rollback();
       e.printStackTrace();
       request.setAttribute("error", e);
-      request.getRequestDispatcher("Error.jsp").forward(request, response);
+      request.getRequestDispatcher("/../Error.jsp").forward(request, response);
     }
   }
 }

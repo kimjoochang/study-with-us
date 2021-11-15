@@ -20,7 +20,7 @@
 <form action='user/resetpwd' method="post">
 
   <h1>비밀번호 변경</h1>
-  <table border = 2  align = center>
+  <table border = "2"  align = "center">
       <caption><h3>회원정보 확인</h3></caption>
       <tr>
       <th>
@@ -46,7 +46,7 @@
   </table>
   
  <button>비밀번호 변경하러 가기</button> 
- <button><a href='/swu/'>취소</a></button> 
+ <button><a href='/../'>취소</a></button> 
 </form>
 
 </body>

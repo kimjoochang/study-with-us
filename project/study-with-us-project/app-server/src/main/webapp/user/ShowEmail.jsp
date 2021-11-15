@@ -7,12 +7,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>스터디 위더스</title>
+  <title>스터디위더스 : 아이디찾기</title>
 </head>
 
 <body>
   <h1>아이디 찾기 결과</h1>
-<form action='showemail'  method="post">
+<form action='showemail' method="post">
  
 <% String email = (String)request.getAttribute("email");%>
  

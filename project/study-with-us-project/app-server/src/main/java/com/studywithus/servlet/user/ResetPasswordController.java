@@ -39,17 +39,13 @@ public class ResetPasswordController extends HttpServlet {
       if (member == null) {
         throw new Exception("해당 정보의 회원이 없습니다.");
       } 
-
-      member.setPassword(request.getParameter("password"));
-
-      memberDao.update(member);
       sqlSession.commit();
 
-      response.sendRedirect("/swu");
+      response.sendRedirect("/..");
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-      request.getRequestDispatcher("Error.jsp").forward(request, response);
+      request.getRequestDispatcher("/../Error.jsp").forward(request, response);
 
     }
   }

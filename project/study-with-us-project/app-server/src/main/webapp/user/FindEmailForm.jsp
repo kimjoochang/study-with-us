@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>스터디 위더스</title>
+  <title>스터디위더스</title>
 </head>
 
 <body>
-<form method = "post" action="findemail">
+<form method = "post" action="user/findemail">
   <table border = "2"  align = "center">
       <caption><h1>아이디 찾기</h1></caption>
       <tr>
