@@ -45,8 +45,11 @@ public class MentorRejectController extends HttpServlet {
     try {
       MentorApplication mentorApplication = mentorApplicationDao.findByNo(applicantNo);
       mentorApplication.setRemarks(request.getParameter("remarks"));
+
+      mentorApplicationDao.updateRejectStatus(mentorApplication);
       sqlSession.commit();
-      request.getRequestDispatcher("MentorApplicationDetail.jsp").forward(request, response);
+
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       System.out.println(e.getMessage());

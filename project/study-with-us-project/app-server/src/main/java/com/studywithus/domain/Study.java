@@ -20,7 +20,6 @@ public class Study extends Content {
   private int likes; // 스터디 관심목록
   // 기본값 = 0, 
   // 삭제요청(유료) = 1 
-  // 삭제(무료)/삭제요청 승인(가격이 0 이상) = 2
   private int deleteStatus;
   private int price; // 유료 스터디 가격
   private String category;

@@ -40,19 +40,26 @@ public class MentorApproveController extends HttpServlet {
       response.sendRedirect("/swu/user/loginform");
     }
 
-    int applicantNo = Integer.parseInt(request.getParameter("no"));
+    int no = Integer.parseInt(request.getParameter("no"));
+    int applicantNo = Integer.parseInt(request.getParameter("applicantNo"));
 
     try {
       Member applicant = memberDao.findByNo(applicantNo);
+
+      System.out.println(1);
 
       int temp = applicant.getUserAccessLevel();
       temp |= Menu.ACCESS_MENTOR;
       applicant.setUserAccessLevel(temp);
 
       memberDao.update(applicant);
-      mentorApplicationDao.delete(applicantNo);
+      System.out.println(2);
+      mentorApplicationDao.updateApproveStatus(no);
+      System.out.println(3);
+
       sqlSession.commit();
-      request.getRequestDispatcher("/mentor/MentorApplicationList.jsp").forward(request, response);
+
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       System.out.println(e.getMessage());

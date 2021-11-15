@@ -48,6 +48,8 @@
   <include refid="select1"/>
     where
       st.del_status=1
+      and
+      dr.remarks=null
     order by 
       dr.request_no asc;
   </select>
