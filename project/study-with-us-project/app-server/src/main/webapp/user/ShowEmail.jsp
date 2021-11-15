@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.studywithus.dao.MemberDao"%>  
 <%@page import="com.studywithus.domain.Member"%>  
 
@@ -12,9 +14,14 @@
 
 <body>
   <h1>아이디 찾기 결과</h1>
-<form action='showemail' method="post">
  
-<% String email = (String)request.getAttribute("email");%>
+ <c:if test="${email ne null}">
+     회원님의 아이디는 <c:out value="${email}"/> 입니다.
+  </c:if>
+  
+  <c:if test="${email eq null}">
+    일치하는 정보를 찾을 수 없습니다.
+  </c:if>
  
  <!--${member.name}님의 아이디는 ${member.email} 입니다.-->
  
