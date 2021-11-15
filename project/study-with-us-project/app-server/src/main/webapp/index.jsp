@@ -467,7 +467,7 @@ text-align: center;
 					
 					    <!--회원가입 버튼 -->
 					    <div class="text-center">
-					      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">Sign up<i class="fas fa-user-plus ml-3"></i></a>
+					      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">Sign up&nbsp;<i class="fas fa-user-plus ml-3"></i></a>
 					    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
 					    <!--로그인 버튼-->
@@ -563,7 +563,7 @@ text-align: center;
         <form action='user/login' method="post">
         <div class="md-form">
           <label data-error="wrong" data-success="right">이메일</label>
-          <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkId()" />
+          <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkEmail()" />
         
         <span class="email_able">사용 가능한 이메일입니다.</span>
         <span class="email_disable">이미 사용중인 이메일입니다.</span>
@@ -582,8 +582,8 @@ text-align: center;
         </div>
      </form>
      
-         <br><p class="font-small blue-text d-flex justify-content-end"><a href="#" class="blue-text sl-1">아이디</a>
-           &nbsp;/&nbsp; <a href="#" class="blue-text sl-1">비밀번호 찾기</a></p><br><hr>
+         <br><p class="font-small blue-text d-flex justify-content-end"><a href="/swu/user/findemail" class="blue-text sl-1">아이디</a>
+           &nbsp;/&nbsp; <a href="/swu/user/resetpwd" class="blue-text sl-1">비밀번호 찾기</a></p><br><hr>
 
         <div class="st-sns">
         <p class="font-large dark-grey-text d-flex justify-content-center">or</p>

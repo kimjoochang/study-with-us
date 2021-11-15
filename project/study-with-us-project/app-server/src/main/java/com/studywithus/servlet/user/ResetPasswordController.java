@@ -45,11 +45,11 @@ public class ResetPasswordController extends HttpServlet {
       memberDao.update(member);
       sqlSession.commit();
 
-      response.sendRedirect("/swu/index");
+      response.sendRedirect("/swu");
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+      request.getRequestDispatcher("Error.jsp").forward(request, response);
 
     }
   }
