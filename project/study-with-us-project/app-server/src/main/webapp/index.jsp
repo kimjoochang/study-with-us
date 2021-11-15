@@ -115,7 +115,7 @@ color:#fff;
 display: none;
 }
 
-.id_already {
+.email_already {
  color:#6A82FB;
  display: none;
  }
