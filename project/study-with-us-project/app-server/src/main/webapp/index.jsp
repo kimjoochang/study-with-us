@@ -94,10 +94,11 @@ margin-right:10px;
   position: fixed;
   text-align: center;
   top: 30%;
-  left: 30%;
-  width: 600px;
-  height: 550px;
-  background-color: rgb(246, 238, 253);
+  left: 35%;
+  width: 50%;
+  height: 55%;
+  background-color: snow;
+  opacity: 0.95;
   padding: 30px 30px;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
