@@ -166,7 +166,7 @@ trimDirectiveWhitespaces="true" %>
 
 <div class="study-content-line">
   <label class="study-content-label" for='content'>내용</label> 
-  <textarea  cols="69" rows="10" name='content' placeholder="개설할 스터디 내용을 입력해주세요."></textarea>
+  <textarea cols="69" rows="10" name='content' placeholder="개설할 스터디 내용을 입력해주세요."></textarea>
 </div>
 
 <div class="study-content-line">
