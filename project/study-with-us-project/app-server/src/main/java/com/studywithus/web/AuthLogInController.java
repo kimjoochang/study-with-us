@@ -18,7 +18,7 @@ public class AuthLogInController {
   @Autowired MemberDao memberDao;
   @Autowired ServletContext sc;
 
-  @PostMapping("/auth/login")
+  @PostMapping("/user/login")
   public ModelAndView login(String email, String password, String saveEmail, HttpServletResponse response, HttpSession session) throws Exception {
 
     Cookie cookie = null;
