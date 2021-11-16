@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>스터디 위더스</title>
+  <title>스터디위더스 : 이메일찾기</title>
 
   <base target="_self" />
 
@@ -192,22 +193,24 @@
   <jsp:include page="../header.jsp"></jsp:include>
     <div class="container"> 
 
-      <header class="freepagetop">
+  <!--    <header class="freepagetop"> -->
+      
         <form method = "post" action="findemail">
         <fieldset class="menu">
 
         <div class=" resetpassword-header text-center">
           <h5 class="modal-title w-100 dark-grey-text font-weight-bold">&nbsp; &nbsp; 아이디 찾기</h5>
         </div>
-      <hr>
+        <hr>
 
         <div class="title_img"><img src="../img/스터디위더스.png"></img></div>
 
 
         <div class="pw-content">
+        
           <div class="pw-content-line">
             <label class = "pw-label" for='name'>이름</label> 
-            <input class = "pw-content-input"  type = "text" name ="name" placeholder="홍길동" required>
+            <input class = "pw-content-input"  type = "text" name ="name" placeholder="이름을 입력하세요" required>
           </div>
 
           <div class="pw-content-line">
@@ -218,11 +221,28 @@
           <div class="pw-find-button">
             <input class="input-button-find" type="submit" value="찾기"> 
           </div> 
+          
         </div> <!--pw-content-->
 
         </fieldset> <!--menu-->
-        </form>     
-      </header> <!--freepagetop-->
+        
+        <div class="button">
+  
+  <c:if test="${email ne null}">
+  <c:if test="${email ne 0}">
+     회원님의 아이디는 <c:out value="${email}"/> 입니다.
+     <a>비밀번호 찾기</a> <br><br><br><br><br><br> <a>메인</a> 
+  </c:if>
+  
+  <c:if test="${email eq 0}">
+    일치하는 정보를 찾을 수 없습니다.
+  </c:if>
+</c:if>  
+</div>
+
+</form>     
+        
+   <!--    </header>freepagetop-->
 
     </div> <!-- container -->
   <jsp:include page="../footer.jsp"></jsp:include>

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<form method ="post" action="findemail">
+<!-- <form method ="post" action="findemail"> 테스트용 주석처리-->
   <table border = "2"  align = "center">
       <caption><h1>아이디 찾기</h1></caption>
       <tr>
