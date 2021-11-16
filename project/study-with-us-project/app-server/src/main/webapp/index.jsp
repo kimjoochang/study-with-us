@@ -106,6 +106,39 @@ margin-right:10px;
   z-index: 10 !important;
 }
 
+  .modal2 {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: 100 !important;
+}
+
+.modal2_overlay {
+  position:relative;
+  width: 100%;
+  height: 100%;
+}
+
+.modal2_content {
+  position: fixed;
+  text-align: center;
+  top: 30%;
+  left: 35%;
+  width: 50%;
+  height: 55%;
+  background-color: snow;
+  opacity: 0.95;
+  padding: 30px 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+    rgba(0, 0, 0, 0.23);
+  z-index: 10 !important;
+}
+
 .hidden {
   display: none;
 }
@@ -391,16 +424,16 @@ text-align: center;
               </div>
             </div>
             <div class="body">
-              <h5 class="post-title"><a id= "open" href="#">멘토 신청하기</a></h5>
+              <h5 class="post-title"><a id="open2" href="#">멘토 신청하기</a></h5>
               <div class="post-date">멘토가 되어 자신 있는 분야의 스터디를 이끌어보세요 </div>
             </div>
           </div>
         </div>
         
-        <!-- 
-    <div class="modal hidden">
-      <div class="modal_overlay">
-        <div class="modal_content">
+        
+    <div class="modal2 hidden">
+      <div class="modal2_overlay">
+        <div class="modal2_content">
           <div class="form_box">
             <form action='mentorapplication/add' method='post'>
               <input class="form_input_title" type='text' name='selfIntro' size=36
@@ -413,14 +446,14 @@ text-align: center;
                 cols="40" rows="5"></textarea>
               <div class="form_buttons">
                 <input type="submit" onclick="offClick()" value="등록"> 
-                <input id="close" type="button" value="취소">
+                <input id="close2" type="button" value="취소">
               </div>
             </form>
           </div>
         </div> 
       </div> 
     </div> 
-         -->
+         
         <!--
         <div class="col-lg-4 py-3 wow fadeInUp">
           <div class="card-blog">
@@ -462,24 +495,24 @@ text-align: center;
       <div class="modal1_overlay">
         <!--모달 화면-->
         <div class="modal1_content">
+     <button type="button" class="close" data-dismiss="modal" aria-lable="close" onclick="closeModal();">&times;</button>
           <div class="sign-buttons">
               <div class="d-flex justify-content-center">
 					
 					    <!--회원가입 버튼 -->
 					    <div class="text-center">
-					      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage">&nbsp;Sign up&nbsp;<i class="fas fa-user-plus ml-3"></i></a>
+					      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage" onclick="closeModal();">&nbsp;Sign up&nbsp;<i class="fas fa-user-plus ml-3"></i></a>
 					    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
 					    <!--로그인 버튼-->
 					    <div class="text-center">
-					      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage">&nbsp;&nbsp;&nbsp;&nbsp;Sign in&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
+					      <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage" onclick="closeModal();">&nbsp;&nbsp;&nbsp;&nbsp;Sign in&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
 					    </div>
 					    
 					  </div>
 					</div>
 
 
-     <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
 
         </div> <!-- modal_content -->
       </div> <!-- modal_overlay -->
@@ -616,29 +649,40 @@ const openBtn2 = document.getElementById('open2');
 //onModal button
 
 const closeBtn = document.getElementById('close1');
+const closeBtn2 = document.getElementById('close2');
 //offModal button
 
 const modal = document.querySelector('.modal1');
+const modal2 = document.querySelector('.modal2');
 //HTML에서의 모달 최상위 요소
 
 const overlay = document.querySelector('.modal1_overlay');
+const overlay2 = document.querySelector('.modal2_overlay');
 //모달창이 활성화되면 흐린 배경을 표현하는 요소
 
 const openModal = () => {
 modal.classList.remove('hidden');
 }
+const openModal2 = () => {
+modal2.classList.remove('hidden');
+}
 
 const closeModal = () => {
 modal.classList.add('hidden');
 }
+const closeModal2 = () => {
+modal2.classList.add('hidden');
+}
 
-openBtn2.addEventListener('click', openModal);
+openBtn2.addEventListener('click', openModal2);
 openBtn.addEventListener('click', openModal);
 //onModal
 
+closeBtn2.addEventListener('click', closeModal2);
 closeBtn.addEventListener('click', closeModal);
 
 overlay.addEventListener('click', closeModal);
+overlay2.addEventListener('click', closeModal2);
 //모달창 영역 밖
 </script>
 
