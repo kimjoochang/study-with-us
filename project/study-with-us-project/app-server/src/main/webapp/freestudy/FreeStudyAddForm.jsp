@@ -179,6 +179,8 @@ trimDirectiveWhitespaces="true" %>
   <input type='number' id='maxMembers' name='maxMembers' placeholder="ex) 6명"정원><br>
 </div>  
 
+<%Date nowDate = new Date(System.currentTimeMillis()); %>
+
 <div class="study-content-line">
   <label class="study-content-label" for='startDate'>시작일</label> 
   <input type='date' name='startDate'><br>
@@ -205,6 +207,8 @@ trimDirectiveWhitespaces="true" %>
 </header>
 
 </div> <!-- container -->
+
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
 

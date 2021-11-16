@@ -331,7 +331,8 @@
     };
   });
   </script>
-
+  
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <!--무료스터디 제일 큰 포맷-->
 
