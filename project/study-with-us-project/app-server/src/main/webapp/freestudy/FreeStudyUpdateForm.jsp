@@ -10,13 +10,6 @@
   <link rel="stylesheet" href="../css/study/StudyUpdateForm.css">
 </head>
 
-<style>
-  .study-update-input {
-    border: 1px;
-    border-style: solid black;
-  }
-</style>
-
 <body>
   <div class="container">
     <jsp:include page="../header.jsp"></jsp:include>
