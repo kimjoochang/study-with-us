@@ -18,7 +18,7 @@
       
 <header class="freepagetop">
 
-  <form action='update'>
+  <form action='update?no=${chargeStudy.no}' method='post'>
     <fieldset class="menu">
 
       <h1 class="study-content-category">
@@ -43,7 +43,7 @@
 
       <div class="form-group">  
         <label for='f-writer'>작성자</label> 
-        <input class="study-update-input" id='f-writer' type='email' name='writer' value='${chargeStudy.writer.email}' readonly><br>
+        <input class="study-update-input" id='f-writer' type='email' value='${chargeStudy.writer.email}' readonly><br>
       </div>
       
       <div class="form-group">

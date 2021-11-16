@@ -10,9 +10,9 @@
 
   <base target="_self"/>
 
-  <link rel="stylesheet" href="../../css/theme.css">
-  <link rel="stylesheet" href="../../css/bootstrap.css">
-  <link rel="stylesheet" href="../../css/study/StudyList.css"> 
+  <link rel="stylesheet" href="${contextPath}css/theme.css">
+  <link rel="stylesheet" href="${contextPath}/app/css/bootstrap.css">
+  <link rel="stylesheet" href="${contextPath}/app/css/study/StudyList.css"> 
 </head>
 
 <body>
@@ -24,7 +24,7 @@
   <form class="search-form" action="search">
     <input type="search" name="keyword" placeholder="키워드를 검색해주세요." class="search-input">
     <button type="submit" class="search-button">
-        <img class="reading-glasses-icon" src="../../img/search icon.png"></button>
+        <img class="reading-glasses-icon" src="${contextPath}/img/search icon.png"></button>
       <!--
     </button>
       <div class="search-option">

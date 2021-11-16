@@ -22,7 +22,7 @@
     <jsp:include page="../header.jsp"></jsp:include>
 
 <header class="freepagetop">
-  <form action='add'>
+  <form action='add' method="post">
 
     <div class="study-box">
       <fieldset class="menu">
@@ -65,7 +65,7 @@
 
 <div class="study-content-line">
   <label for='endDate'>종료일</label> 
-  <input id='endDate' type='date' min = "<%=nowDate%>" name='endDate'>
+  <input id='endDate' type='date' min ="<%=nowDate%>" name='endDate'>
 </div>
 
 <div class="study-content-line">
