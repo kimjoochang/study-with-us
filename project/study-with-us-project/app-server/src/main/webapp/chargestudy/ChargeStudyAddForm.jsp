@@ -3,6 +3,7 @@
     trimDirectiveWhitespaces="true" %>
     
 <%@page import="com.studywithus.domain.Member"%>
+<%@ page import="java.sql.Date"%>
 <% Member loginUser = (Member) session.getAttribute("loginUser"); %>
 
 
@@ -56,8 +57,10 @@
 </textarea>
 </div>
 
-<label for='startDate'>시작일</label> <input id='startDate' type='date' name='startDate'>
-<label for='endDate'>종료일</label> <input id='endDate' type='date' name='endDate'>
+<%Date nowDate = new Date(System.currentTimeMillis()); %>
+
+<label for='startDate'>시작일</label> <input id='startDate' type='date' min ="<%=nowDate%>" name='startDate'>
+<label for='endDate'>종료일</label> <input id='endDate' type='date' min = "<%=nowDate%>" name='endDate'>
 <label for='category'>카테고리</label> <input id='category' type='text' name='category'>
 <label for='maxMembers'>정원</label> <input id='maxMembers' type='number' name='maxMembers' placeholder="ex) 6명">
 <label for='price'>금액</label> <input id='price' type='text' name='price' placeholder="ex) 10000">
