@@ -7,9 +7,9 @@
 <html lang="ko">
 <head>
   <title>스터디위더스 : 멘토링수정</title>
-  <link rel="stylesheet" href="../css/theme.css">
-  <link rel="stylesheet" href="../css/bootstrap.css">
-  <link rel="stylesheet" href="../css/study/StudyUpdateForm.css">
+  <link rel="stylesheet" href="${contextPath}/css/theme.css">
+  <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+  <link rel="stylesheet" href="${contextPath}/css/study/StudyUpdateForm.css">
 </head>
 
 <body>
@@ -101,10 +101,10 @@
 	<section class="study-info-icon">
 		<div class="item2">
 					<div class="info_item">
-					<img class="icon" src="../img/fillingHeartIcon.png">
+					<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
 					<p class="icon_count">${freeStudy.likes}</p> 
 						
-					<img class="icon" src="../img/eyeIcon.png">
+					<img class="icon" src="${contextPath}/img/eyeIcon.png">
 					<p class="icon_count">${freeStudy.viewCount}</p>
 				</div> <!--info_item-->
 		</div> <!--item2-->
