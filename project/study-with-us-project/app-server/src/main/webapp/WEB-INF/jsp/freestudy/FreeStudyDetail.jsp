@@ -8,9 +8,9 @@
 
 <base target="_self" />
 
-<link rel="stylesheet" href="../css/theme.css">
-<link rel="stylesheet" href="../css/bootstrap.css">
-<link rel="stylesheet" href="../css/study/StudyDetail.css">
+ <link rel="stylesheet" href="${contextPath}/css/theme.css">
+    <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+    <link rel="stylesheet" href="${contextPath}/css/study/StudyList.css">
 </head>
 
 <style type="text/css">

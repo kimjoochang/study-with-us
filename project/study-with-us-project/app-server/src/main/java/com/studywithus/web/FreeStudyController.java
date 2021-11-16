@@ -22,8 +22,7 @@ public class FreeStudyController {
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
     mv.addObject("pageTitle", "스터디위더스 : 스터디등록");
-    mv.addObject("contentUrl", "freestudy/FreeStudyForm.jsp");
-    // mv.setViewName("freestudy/FreeStudyForm");
+    mv.setViewName("freestudy/FreeStudyAddForm");
     return mv;
   }
 
@@ -64,8 +63,7 @@ public class FreeStudyController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("freeStudy", freeStudy);
     mv.addObject("pageTitle", "스터디위더스 : 스터디상세");
-    mv.addObject("contentUrl", "freestudy/FreeStudyDetail.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("freestudy/FreeStudyDetail");
     return mv;
   }
 
@@ -77,14 +75,15 @@ public class FreeStudyController {
       throw new Exception("해당 번호의 스터디가 없습니다.");
     } 
 
-    freeStudyDao.update(freeStudy);
-    sqlSessionFactory.openSession().commit();
-
+    //freeStudyDao.update(freeStudy);
+    //sqlSessionFactory.openSession().commit();
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:list");
+    mv.addObject("freeStudy", freeStudy);
+    mv.addObject("pageTitle", "스터디위더스 : 수정");
+    mv.setViewName("freestudy/FreeStudyUpdateForm");
     return mv;
   }
-
+  /* 삭제 기능 미구현이라 일단 주석 처리함
   @GetMapping("/freestudy/delete")
   public ModelAndView delete(int no) throws Exception {
 
@@ -100,5 +99,5 @@ public class FreeStudyController {
     mv.setViewName("redirect:list");
     return mv;
   }
-
+   */
 }

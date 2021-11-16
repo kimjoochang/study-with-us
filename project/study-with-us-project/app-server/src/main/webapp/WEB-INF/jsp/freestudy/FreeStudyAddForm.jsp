@@ -1,7 +1,11 @@
 <%@page import="com.studywithus.domain.Member"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"
 trimDirectiveWhitespaces="true" %>
+
+<%@ page import="java.sql.Date"%>
+
 <% Member loginUser = (Member) session.getAttribute("loginUser"); %>
 
 <!DOCTYPE html>
@@ -9,9 +13,9 @@ trimDirectiveWhitespaces="true" %>
 
   <head>
       <title>스터디위더스 : 스터디등록</title>
-      <link rel="stylesheet" href="../css/theme.css">
-      <link rel="stylesheet" href="../css/bootstrap.css">
-      <link rel="stylesheet" href="../css/study/StudyAddForm.css">
+      <link rel="stylesheet" href="${contextPath}/css/theme.css">
+      <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+      <link rel="stylesheet" href="${contextPath}/css/study/StudyAddForm.css">
   </head>
 
 <body>
@@ -197,7 +201,7 @@ trimDirectiveWhitespaces="true" %>
 <div class="study-bottom-button">
   <input class="input5" type="reset" value="초기화">
   <input class="input5" type="submit" value="등록">
-  <a class="input5" href='/swu/freestudy/list'> 취소 </a>
+  <button class="input5" type="button" onclick="location.href='list'">취소</button><br>
 </div>
 
 </fieldset>
