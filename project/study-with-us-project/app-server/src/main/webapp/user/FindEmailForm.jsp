@@ -185,12 +185,11 @@
   text-align: left;
   margin-right: -130px;
 }
-
   </style>
 
 
 <body>
-  <jsp:include page="../header.jsp"></jsp:include>
+   <jsp:include page="../WEB-INF/jsp/header.jsp"></jsp:include>
     <div class="container"> 
 
   <!--    <header class="freepagetop"> -->
@@ -231,7 +230,7 @@
   <c:if test="${email ne null}">
   <c:if test="${email ne 0}">
      회원님의 아이디는 <c:out value="${email}"/> 입니다.
-     <a>비밀번호 찾기</a> <br><br><br><br><br><br> <a>메인</a> 
+     <a href="">비밀번호 찾기</a> <br><br><br><br><br><br> <a href="/swu/">메인</a> 
   </c:if>
   
   <c:if test="${email eq 0}">
@@ -245,7 +244,7 @@
    <!--    </header>freepagetop-->
 
     </div> <!-- container -->
-  <jsp:include page="../footer.jsp"></jsp:include>
+    <jsp:include page="../WEB-INF/jsp/footer.jsp"></jsp:include> 
 
 </body>
 </html>
