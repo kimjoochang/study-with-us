@@ -109,45 +109,45 @@
       -webkit-font-smoothing: antialiased;
       background-attachment: scroll;
       font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
-  font-size: 14px;
-  font-weight: bolder;
-  line-height: 24px;
-  padding-top: 32px;
-  width: 845px;
-  height: 1000px;
-}
+      font-size: 14px;
+      font-weight: bolder;
+      line-height: 24px;
+      padding-top: 32px;
+      width: 845px;
+      height: 1000px;
+    }
 
-.menu {
+  .menu {
 
-  display: flex;
-    vertical-align: middle;
-  display: inline-block;
-  text-align: center;
-  position: relative;
-  -webkit-font-smoothing: antialiased;
-  background-attachment: scroll;
-  font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
-  font-size: 14px;
-  font-weight: bolder;
-  line-height: 24px;
-  padding-top: 32px;
-  width: 845px;
-  xheight: 1000px;
+    display: flex;
+      vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    background-attachment: scroll;
+    font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
+    font-size: 14px;
+    font-weight: bolder;
+    line-height: 24px;
+    padding-top: 32px;
+    width: 845px;
+    xheight: 1000px;
 
-  position: relative;
-  display: -ms-flexbox;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  xwidth: 100%;
-  pointer-events: auto;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.2);
-  border-radius: 0.3rem;
-  outline: 0;
+    position: relative;
+    display: -ms-flexbox;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    xwidth: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 0.3rem;
+    outline: 0;
 
 
-  background-attachment: scroll;
+    background-attachment: scroll;
     background-clip: border-box;
     background-color: rgb(255, 255, 255);
     border-bottom-left-radius: 13px;
