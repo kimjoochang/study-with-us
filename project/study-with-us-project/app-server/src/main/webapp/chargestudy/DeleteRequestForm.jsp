@@ -10,7 +10,7 @@
 <html lang="ko">
 
 <head>
-  <title>유료 스터디</title>
+  <title>스터디위더스 : 멘토링삭제요청등록</title>
   <style>
     label {
       margin-right: 5px;

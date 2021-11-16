@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>무료 스터디 등록</title>
+  <title>스터디위더스 : 스터디등록결과</title>
 </head>
 <body>
   

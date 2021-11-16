@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>유료 스터디</title>
+<title>스터디위더스 : 멘토링삭제요청목록</title>
 <style>
 ul{
     list-style:none;

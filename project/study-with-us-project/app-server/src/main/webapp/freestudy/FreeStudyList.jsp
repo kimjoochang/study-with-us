@@ -7,7 +7,7 @@ trimDirectiveWhitespaces="true" %>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>무료 스터디</title>
+    <title>스터디위더스 : 스터디목록</title>
     <base target="_self"/>
 
     <link rel="stylesheet" href="../css/theme.css">

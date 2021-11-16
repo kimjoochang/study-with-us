@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>무료 스터디</title>
+<title>스터디위더스 : 스터디상세보기</title>
 
 <base target="_self" />
 
