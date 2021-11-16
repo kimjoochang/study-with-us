@@ -42,7 +42,6 @@ public class ChargeStudyAddController extends HttpServlet {
     chargeStudy.setArea(request.getParameter("area"));
     chargeStudy.setCategory(request.getParameter("category"));
     chargeStudy.setContent(request.getParameter("content"));
-    chargeStudy.setWriter(writer);
     chargeStudy.setMaxMembers(Integer.parseInt(request.getParameter("maxMembers")));
     chargeStudy.setPrice(Integer.parseInt(request.getParameter("price")));
     chargeStudy.setStartDate(Date.valueOf(request.getParameter("startDate")));
