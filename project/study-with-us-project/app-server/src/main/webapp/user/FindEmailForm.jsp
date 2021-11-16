@@ -238,11 +238,8 @@
   </c:if>
 </c:if>  
 </div>
-
 </form>     
-        
    <!--    </header>freepagetop-->
-
     </div> <!-- container -->
     <jsp:include page="../WEB-INF/jsp/footer.jsp"></jsp:include> 
 
