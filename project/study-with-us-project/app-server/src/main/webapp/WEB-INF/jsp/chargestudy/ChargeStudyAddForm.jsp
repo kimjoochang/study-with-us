@@ -12,14 +12,14 @@
 
 <head>
   <title>스터디위더스 : 멘토링등록</title>
-  <link rel="stylesheet" href="../css/theme.css">
-  <link rel="stylesheet" href="../css/bootstrap.css">
-  <link rel="stylesheet" href="../css/study/StudyAddForm.css">
+  <link rel="stylesheet" href="${contextPath}/css/css/theme.css">
+  <link rel="stylesheet" href="${contextPath}/css/css/bootstrap.css">
+  <link rel="stylesheet" href="${contextPath}/css/css/study/StudyAddForm.css">
 </head>
   
 <body>
   <div class="container">
-    <jsp:include page="../header.jsp"></jsp:include>
+    <jsp:include page="../jsp/header.jsp"></jsp:include>
 
 <header class="freepagetop">
   <form action='add' method="post">
