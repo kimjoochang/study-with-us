@@ -27,7 +27,7 @@ public class AuthLogInController {
 
       cookie = new Cookie("email", email);
       cookie.setMaxAge(60 * 60 * 24 * 7);
-      //cookie.setPath(sc.getContextPath() + "/app/user"); // 예) http://localhost:8080/pms/app/auth
+      // cookie.setPath(sc.getContextPath() + "/app/user"); // 예) http://localhost:8080/pms/app/auth
 
     } else {
       cookie = new Cookie("email", "");
@@ -42,7 +42,7 @@ public class AuthLogInController {
 
     if (loginUser != null) {
       session.setAttribute("loginUser", loginUser);
-      mv.setViewName("redirect:../");
+      mv.setViewName("redirect:../index");
 
     } else {
       //? mv.addObject("refresh", "2;url=loginForm");
@@ -59,7 +59,7 @@ public class AuthLogInController {
     session.invalidate();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:../");
+    mv.setViewName("redirect:../index");
     return mv;
   }
 }

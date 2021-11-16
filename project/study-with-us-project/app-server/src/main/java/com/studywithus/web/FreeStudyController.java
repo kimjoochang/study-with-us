@@ -70,14 +70,14 @@ public class FreeStudyController {
   }
 
   @PostMapping("/freestudy/update")
-  public ModelAndView update(Board board) throws Exception {
+  public ModelAndView update(Study freeStudy) throws Exception {
 
-    Board oldBoard = boardDao.findByNo(board.getNo());
-    if (oldBoard == null) {
-      throw new Exception("해당 번호의 게시글이 없습니다.");
+    Study oldFreeStudy = freeStudyDao.findByNo(freeStudy.getNo());
+    if (oldFreeStudy == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
     } 
 
-    boardDao.update(board);
+    freeStudyDao.update(freeStudy);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -88,12 +88,12 @@ public class FreeStudyController {
   @GetMapping("/freestudy/delete")
   public ModelAndView delete(int no) throws Exception {
 
-    Board board = boardDao.findByNo(no);
-    if (board == null) {
-      throw new Exception("해당 번호의 게시글이 없습니다.");
+    Study freeStudy = freeStudyDao.findByNo(no);
+    if (freeStudy == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
     }
 
-    boardDao.delete(no);
+    freeStudyDao.delete(no);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
