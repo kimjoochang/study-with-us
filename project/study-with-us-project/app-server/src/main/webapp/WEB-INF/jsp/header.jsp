@@ -24,16 +24,16 @@
                 <div class="navbar-collapse collapse" id="navbarContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                    <a class="nav-link" href="/swu/">Home</a>
+                    <a class="nav-link" href="/swu/app/index">Home</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/swu/freestudy/list">Study</a>
+                    <a class="nav-link" href="freestudy/list">Study</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/swu/chargestudy/list">Mentoring</a>
+                    <a class="nav-link" href="chargestudy/list">Mentoring</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="/swu/community/list?categoryNo=0">Community</a>
+                    <a class="nav-link" href="community/list?categoryNo=0">Community</a>
                     </li>
                     <!-- 여기 햄버거 & 드롭다운 추가해야 함-->
                         <li class="nav-item">

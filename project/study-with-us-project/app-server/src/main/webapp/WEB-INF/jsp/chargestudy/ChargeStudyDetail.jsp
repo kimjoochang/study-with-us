@@ -11,9 +11,9 @@
 
   <base target="_self"/>
   
-   <link rel="stylesheet" href="../css/theme.css">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/study/StudyDetail.css">
+   <link rel="stylesheet" href="${contextPath}/css/theme.css">
+    <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+    <link rel="stylesheet" href="${contextPath}/css/study/StudyDetail.css">
     
     <style type="text/css">
     .interest_icon {
@@ -92,16 +92,16 @@ text-align: center;
 
       <div class="icon-form-group" align: right;>
         <ul class="uldesign">          
-          <img class="icon-top" src="../img/category.png">
+          <img class="icon-top" src="${contextPath}/img/category.png">
           <input class="input3" id='f-category' type='text' name='category' value='${chargeStudy.category}' readonly>
           
-          <img class="icon-top" src="../img/area.png">
+          <img class="icon-top" src="${contextPath}/img/area.png">
           <input class="input3" id='f-area' type='text' name='area' value='${chargeStudy.area}' readonly>
         
-          <img class="icon-top" src="../img/people.png">
+          <img class="icon-top" src="${contextPath}/img/people.png">
           <input class="input3" id='f-members/maxMembers' type='text' name='members/maxMembers' value='${chargeStudy.members} / ${chargeStudy.maxMembers}' readonly>
           
-          <img class="icon-top" src="../img/won.png">
+          <img class="icon-top" src="${contextPath}/img/won.png">
           <input class="input3" id='f-price' type='text' name='members/maxMembers' value='${chargeStudy.price}' readonly>
         </ul>
       </div>
@@ -143,12 +143,12 @@ text-align: center;
 		<!-- 글쓴이(0) = 비회원 -->
 		<section class="study-info-icon">
 			<div class="item2">
-				<c:if test="${checkWriter eq 0}">
+				<c:if test="${loginUser eq null}">
 						<div class="info_item">
-						<img class="icon" src="../img/fillingHeartIcon.png">
+						<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
 						<p class="icon_count">${chargeStudy.likes}</p> 
 						
-						<img class="icon" src="../img/eyeIcon.png">
+						<img class="icon" src="${contextPath}/img/eyeIcon.png">
 						<p class="icon_count">${chargeStudy.viewCount}</p>
 					</div> <!--info_item-->
 				</c:if> <!--글쓴이(0) 비회원-->
@@ -159,17 +159,17 @@ text-align: center;
 		<section class="study-info-icon">
 			<div class="item2">
 				<!-- 회원(1) = 작성자-->
-				<c:if test="${checkWriter eq 1}">
+				<c:if test="${chargeStudy.writer.no eq loginUser.no}">
 					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
 						<c:if test="${result eq 0}">
 							<div class="info_item">
-								<img class="icon" src="../img/fillingHeartIcon.png">
+								<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
 								<p class="icon_count">${chargeStudy.likes}</p> 
 								
-								<img class="icon" src="../img/eyeIcon.png">
+								<img class="icon" src="${contextPath}/img/eyeIcon.png">
 								<p class="icon_count">${chargeStudy.viewCount}</p>
 
-								<a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/interestAdd.png"></a>
+								<a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="${contextPath}/img/interestAdd.png"></a>
 								<p class="icon_count">${chargeStudy.likes}</p> 
 							</div> <!--info_item-->
 						</c:if> <!-- 글쓴이(1) 관심목록 추가 전 -->
@@ -177,13 +177,13 @@ text-align: center;
 						<!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
 						<c:if test="${result eq 1}">
 							<div class="info_item">
-								<img class="icon" src="../img/fillingHeartIcon.png">
+								<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
 								<p class="icon_count">${chargeStudy.likes}</p> 
 								
-								<img class="icon" src="../img/eyeIcon.png">
+								<img class="icon" src="${contextPath}/img/eyeIcon.png">
 								<p class="icon_count">${chargeStudy.viewCount}</p>
 
-								<a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/interestDelete.png"></a>
+								<a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="${contextPath}/img/interestDelete.png"></a>
 								<p class="icon_count">${chargeStudy.likes}</p> 
 							</div> <!--info_item-->
 						</c:if> <!-- 글쓴이(1) 관심목록 추가 상태인 경우 -->
@@ -195,14 +195,14 @@ text-align: center;
 	  <section class="study-info-icon">
 			<div class="item2">
 				<!-- 회원(2) != 작성자-->
-				<c:if test="${checkWriter eq 2}">
+				<c:if test="${chargeStudy.writer.no ne loginUser.no}">
 					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
 					<c:if test="${result eq 0}">
 						<div class="info_item">
-							<img class="icon" src="../img/fillingHeartIcon.png">
+							<img class="icon" src="${contextPath}img/fillingHeartIcon.png">
 								<p class="icon_count">${chargeStudy.likes}</p> 
 								
-								<img class="icon" src="../img/eyeIcon.png">
+								<img class="icon" src="${contextPath}img/eyeIcon.png">
 								<p class="icon_count">${chargeStudy.viewCount}</p>
 
 								<a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/interestAdd.png"></a>
@@ -250,9 +250,9 @@ text-align: center;
     -->
 
     
-<a href='#'>목록</a><br>
+<a href='list'>목록</a><br>
     
-    <c:if test="${checkWriter eq 1}">
+    <c:if test="${chargeStudy.writer.no eq loginUser.no}">
       <a class="input-button-bottom" href='updateform?no=${chargeStudy.no}'>수정</a> 
         <c:if test="${chargeStudy.deleteStatus eq 0}">
           <a class="input-button-bottom" id ="open" href='#'>삭제요청</a> 

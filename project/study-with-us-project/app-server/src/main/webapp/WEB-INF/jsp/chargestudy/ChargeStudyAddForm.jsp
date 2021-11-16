@@ -12,14 +12,14 @@
 
 <head>
   <title>스터디위더스 : 멘토링등록</title>
-  <link rel="stylesheet" href="${contextPath}/css/css/theme.css">
-  <link rel="stylesheet" href="${contextPath}/css/css/bootstrap.css">
-  <link rel="stylesheet" href="${contextPath}/css/css/study/StudyAddForm.css">
+  <link rel="stylesheet" href="${contextPath}/css/theme.css">
+  <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+  <link rel="stylesheet" href="${contextPath}/css/study/StudyAddForm.css">
 </head>
   
 <body>
   <div class="container">
-    <jsp:include page="../jsp/header.jsp"></jsp:include>
+    <jsp:include page="../header.jsp"></jsp:include>
 
 <header class="freepagetop">
   <form action='add' method="post">
@@ -85,7 +85,7 @@
 
   <label for='writer'>작성자</label> 
 
-<input id='writer' type='email' name='writer' value='${loginUser.email}' readonly><br>
+<input id='writer' type='email' value='${loginUser.email}' readonly><br>
 
 </div>
 
