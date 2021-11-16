@@ -24,6 +24,26 @@ label {
   height: 1000px;
 }
 
+.input5 {
+  text-align: center;
+  width: 60px;
+  height: 23px;
+  border-radius: 16px;
+  background-color: rgb(117, 109, 170);
+  color: rgb(246, 245, 252);
+  border: 2px solid rgb(117, 109, 170);
+  xmargin: 5px;
+  margin-left: 7px;
+}
+
+.study-registered-date {
+  text-align: right;
+  float: right;
+  font-weight: 500;
+  margin-top: 2px;
+  margin-right: 5px;
+}
+
 ul {
   float: left;
 }
@@ -78,8 +98,8 @@ letter-spacing:0px;
 }
 
 .study-update-input {
-  border: 1px;
-  border-style: solid black;
+  border: none;
+  width: 560px; 
 }
 
 label {
@@ -88,8 +108,12 @@ label {
   margin-left: 10px;
 }
 
+.study-content-box {
+  vertical-align: top;
+  height: 140px;
+}
+
 input {
-  xborder: none;
   width: 560px;
 }
 
@@ -143,25 +167,25 @@ margin-left: 10px;
 margin-left: 2px;
 }
 
-
-a {
-text-decoration-line: none;
-float: left;
-text-align: center;
+.study-a {
+  text-emphasis-color: rgb(210, 207, 226);
+  text-decoration-line: none;
+  float: left;
+  text-align: center;
   width: 110px;
   height: 30px;
   border-radius: 4px;
   background-color: rgb(117, 109, 170);
-  color: rgb(96, 86, 161);
+  color: rgb(210, 207, 226);
   border: 2px solid rgb(117, 109, 170);
   box-shadow: 2px 2px 0px 0px rgb(77, 72, 72);
   margin: 5px;
 }
 
-a:link { color: rgb(246, 245, 252); }
-a:visited { color: rgb(210, 207, 226); }
-a:link { text-decoration: none; text-shadow: 0 0 24px; }
-a:visited { text-decoration: none; text-shadow: none; }
+xa:link { color: rgb(246, 245, 252); }
+xa:visited { color: rgb(210, 207, 226); }
+xa:link { text-decoration: none; text-shadow: 0 0 24px; }
+xa:visited { text-decoration: none; text-shadow: none; }
 
 .button-update {
 	display: flex;
@@ -173,3 +197,46 @@ a:visited { text-decoration: none; text-shadow: none; }
   text-align: center;
   justify-content: center;
 }
+  
+.study-info-icon {
+  margin-left: 545px;
+  display: flex;
+  text-align: right;
+}
+
+.item2 {
+  margin-left: 30px;}
+
+  .info_item{
+    align-items: center;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    display: flex;
+    font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    height: 18px;
+    xjustify-content: center;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    text-align: left;
+    width: 50px;
+    
+    text-align: right;
+    float: right;
+    font-weight: 500;
+    margin-top: 2px;
+    margin-right: 5px;
+    }
+
+    .icon {
+      width: 20px;
+      margin-left: 10px;
+      }
+
+.icon_count {
+  margin-left: 2px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  }

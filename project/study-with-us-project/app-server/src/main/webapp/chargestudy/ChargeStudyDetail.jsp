@@ -341,5 +341,6 @@ closeBtn.addEventListener('click', closeModal);
 //모달창 영역 밖
 </script>
 
-</body> <!--무료스터디 제일 큰 포맷-->
+<jsp:include page="../footer.jsp"></jsp:include>
+</body> <!--유료스터디 제일 큰 포맷-->
 </html>

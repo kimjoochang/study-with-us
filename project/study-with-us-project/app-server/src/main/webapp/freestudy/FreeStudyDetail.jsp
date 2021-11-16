@@ -80,8 +80,8 @@
 		</div>
 
 		<div class="form-group">
-			<label class="study-content2" for='f-content'>내용</label> <input
-				class="study-content-box" id='f-content' type='text'
+			<label class="study-content2" for='f-content'>내용</label> 
+			<input class="study-content-box" id='f-content' type='text'
 				name='content' cols="69" rows="10" value='${freeStudy.content}' readonly>
 		</div>
 
@@ -331,7 +331,8 @@
     };
   });
   </script>
-
+  
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <!--무료스터디 제일 큰 포맷-->
 
