@@ -1,4 +1,4 @@
-<%@page import="com.studywithus.servlet.user.AuthLogInController"%>
+<%@page import="com.studywithus.web.user.AuthLogInController"%>
 <%@page import="com.studywithus.domain.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
