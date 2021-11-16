@@ -25,11 +25,9 @@
     display: inline-block;
     width: 60px;
   }
-
   body {
     background: #EDECF5;
   }
-
   .content {
   display: flex;
   vertical-align: middle;
@@ -45,7 +43,6 @@
   padding-top: 32px;
   width: 845px;
   xheight: 1000px;
-
   position: relative;
   display: -ms-flexbox;
   -ms-flex-direction: column;
@@ -57,7 +54,6 @@
   border: 1px solid rgba(0,0,0,.2);
   border-radius: 0.3rem;
   outline: 0;
-
   background-attachment: scroll;
   background-clip: border-box;
   background-color: rgb(255, 255, 255);
@@ -68,18 +64,15 @@
   box-shadow: rgb(0 0 0 / 15%) 0px 5px 25px 0px;
   box-sizing: border-box;
 }
-
   .btn-primary1{
     background: #756daa;
     color:snow;
     border-radius: 70px;
     width: 500px;
   }
-
     .st-sns{
       font-size:5px;
     }
-
     .row{
       margin-left:5px;
       margin-right:5px;
@@ -91,38 +84,20 @@
     justify-content:space-evenly;
     margin-top:15px;
     }
-
   .title_img{
     margin:30px 10px;
     text-align:center;
     justify-content: center;
   }   /*기존 join_ver*/
-
-
-<<<<<<< HEAD
-    .freepagetop{
-      -webkit-font-smoothing: antialiased;
-      background-attachment: scroll;
-      font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
-      font-size: 14px;
-      font-weight: bolder;
-      line-height: 24px;
-      padding-top: 32px;
-      width: 845px;
-      height: 1000px;
-    }
-=======
 .study-with-us-loga-image { 
   margin-top: -20px;
 }
-
 .uldesign {
   padding-left: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-
 .freepagetop{
   -webkit-font-smoothing: antialiased;
   background-attachment: scroll;
@@ -134,9 +109,7 @@
   width: 845px;
   height: 1000px;
 }
-
 .menu {
-
   display: flex;
     vertical-align: middle;
   display: inline-block;
@@ -151,7 +124,6 @@
   padding-top: 32px;
   width: 845px;
   height: 500px;
-
   position: relative;
   display: -ms-flexbox;
   -ms-flex-direction: column;
@@ -163,39 +135,7 @@
   border: 1px solid rgba(0,0,0,.2);
   border-radius: 0.3rem;
   outline: 0;
->>>>>>> fa4a51f57af0064a6306005ae3e8b0e27e7fbb1d
-
-  .menu {
-
-    display: flex;
-      vertical-align: middle;
-    display: inline-block;
-    text-align: center;
-    position: relative;
-    -webkit-font-smoothing: antialiased;
-    background-attachment: scroll;
-    font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;
-    font-size: 14px;
-    font-weight: bolder;
-    line-height: 24px;
-    padding-top: 32px;
-    width: 845px;
-    xheight: 1000px;
-
-    position: relative;
-    display: -ms-flexbox;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    xwidth: 100%;
-    pointer-events: auto;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.2);
-    border-radius: 0.3rem;
-    outline: 0;
-
-
-    background-attachment: scroll;
+  background-attachment: scroll;
     background-clip: border-box;
     background-color: rgb(255, 255, 255);
     border-bottom-left-radius: 13px;
@@ -205,12 +145,9 @@
     box-shadow: rgb(0 0 0 / 15%) 0px 5px 25px 0px;
     box-sizing: border-box;
 }
-
 .pw-find-button {
   margin-top: 10px;
-
 }
-
 .input-button-find {
   text-decoration-line: none;
   float: center;
@@ -224,7 +161,6 @@
   box-shadow: 2px 2px 0px 0px rgb(77, 72, 72);
   margin: 5px;
 }
-
 .input-button-change {
   justify-content: center; 
   text-decoration-line: none;
@@ -239,8 +175,6 @@ border: 2px solid rgb(117, 109, 170);
 box-shadow: 2px 2px 0px 0px rgb(77, 72, 72);
 margin: 5px;
 }
-
-
 .input-button-cancle {
   justify-content: center; 
   text-decoration-line: none;
@@ -255,18 +189,14 @@ border: 2px solid rgb(117, 109, 170);
 box-shadow: 2px 2px 0px 0px rgb(77, 72, 72);
 margin: 5px;
 }
-
-
 .pw-content-input {
   width: 200px;
 }
-
 .pw-label {
   width: 200px;
   text-align: left;
   margin-right: -130px;
 }
-
 </style>
 
 <body>
@@ -330,12 +260,3 @@ margin: 5px;
 <jsp:include page="../footer.jsp"></jsp:include>
 </body> <!--body-->
 </html>
-
-
-
-
-
-
-
-
-
