@@ -10,9 +10,9 @@
 
   <base target="_self"/>
 
-  <link rel="stylesheet" href="../css/theme.css">
-  <link rel="stylesheet" href="../css/bootstrap.css">
-  <link rel="stylesheet" href="../css/study/StudyList.css"> 
+  <link rel="stylesheet" href="../../css/theme.css">
+  <link rel="stylesheet" href="../../css/bootstrap.css">
+  <link rel="stylesheet" href="../../css/study/StudyList.css"> 
 </head>
 
 <body>
@@ -24,7 +24,7 @@
   <form class="search-form" action="search">
     <input type="search" name="keyword" placeholder="키워드를 검색해주세요." class="search-input">
     <button type="submit" class="search-button">
-        <img class="reading-glasses-icon" src="../img/search icon.png"></button>
+        <img class="reading-glasses-icon" src="../../img/search icon.png"></button>
       <!--
     </button>
       <div class="search-option">
@@ -111,7 +111,7 @@
  
           <span>
             <img class="on_offline"
-            src="../img/offLineIcon2.png">
+            src="../../img/offLineIcon2.png">
             <p class="on_offline_status">${freeStudy.onOffLine}.${freeStudy.area}</p>
           </span>
           
@@ -119,13 +119,13 @@
             <div class="info_item">
 
               <img class="icon"
-              src="../img/fillingHeartIcon.png">
+              src="../../img/fillingHeartIcon.png">
               <p class="icon_count">${chargeStudy.likes}</p>
             </div>
             
             <div class="info_item">
               <img class="icon"
-              src="../img/eyeIcon.png">
+              src="../../img/eyeIcon.png">
               <p class="icon_count">${chargeStudy.viewCount}</p>
             </div>
           </section>
