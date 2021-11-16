@@ -91,19 +91,20 @@ margin-right:10px;
 }
 
 .modal1_content {
-  position: fixed;
-  text-align: center;
-  top: 30%;
-  left: 35%;
-  width: 50%;
-  height: 55%;
-  background-color: snow;
-  opacity: 0.95;
-  padding: 30px 30px;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
-    rgba(0, 0, 0, 0.23);
-  z-index: 10 !important;
+    position: fixed;
+    text-align: center;
+    top: 20%;
+    bottom: 30%;
+    left: 38%;
+    width: 600px;
+    height: 600px;
+    background-color: white;
+    opacity: 0.95;
+    padding: 40px 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+    z-index: 10 !important;
+    align-items: center;
 }
 
   .modal2 {
@@ -598,7 +599,7 @@ text-align: center;
        <label data-error="wrong" data-success="right"> 이메일 </label> 
    <!--  얘를 빼보자 <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkEmail()" />
          -->
-        <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" />
+        <input type="email" id = "email" name='email' class="form-control validate" autocomplete="" />
         <span class="email_ok">사용 가능한 이메일입니다.</span>
         <span class="email_already">이미 사용중인 이메일입니다.</span>
           
