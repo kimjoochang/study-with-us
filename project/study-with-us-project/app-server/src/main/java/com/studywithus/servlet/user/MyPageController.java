@@ -15,6 +15,9 @@ public class MyPageController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    request.getRequestDispatcher("MyPage.jsp").forward(request, response);
+
+    response.sendRedirect("MyPage.jsp");
+
+    //    request.getRequestDispatcher("MyPage.jsp").forward(request, response);
   }
 }

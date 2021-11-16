@@ -194,7 +194,7 @@ input {
 					<div class="profile-icon">
 						<img src="img/profile.png">
 					</div>
-					<li class="userid">jeje2kim 님</li>
+					<li class="userid">${loginUser.nickname}님</li>
 					<ul class=sub>
 						<li><a href="#">나의 정보</a></li>
 						<li><a href="#">결제 내역</a></li>
