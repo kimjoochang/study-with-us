@@ -23,9 +23,7 @@
     일치하는 정보를 찾을 수 없습니다.
   </c:if>
  
- <!--${member.name}님의 아이디는 ${member.email} 입니다.-->
- 
  <br><button>로그인</button> <button>비밀번호 찾기</button>
-</form>
+
 </body>
 </html>

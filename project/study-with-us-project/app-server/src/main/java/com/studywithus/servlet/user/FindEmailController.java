@@ -40,17 +40,14 @@ public class FindEmailController extends HttpServlet {
 
         String email = member.getEmail();
 
-        int index = email.length()-3; // 
-        String tempEmail = email.substring(0,3); //0~3번 문자까지 보여주고
+        int index = email.length()-4; // 
+        String tempEmail = email.substring(0,4); //0~3번 문자까지 보여주고
 
         for(int i = 0; i < index; i++) {
           tempEmail += "*";} // 나머지 *처리
 
         email = tempEmail; // 별표처리된 이메일 대입
         request.setAttribute("email", email);
-
-        // 얘를 뷰에 넣어야하는건가?....
-        // System.out.println(name + " 회원님의 아이디는 " + member.getEmail() + " 입니다.\n");
 
       } else {
         request.setAttribute("email", null);
