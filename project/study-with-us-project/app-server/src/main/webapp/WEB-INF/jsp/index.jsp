@@ -21,15 +21,15 @@
 
  <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet"> -->
 
-  <link rel="stylesheet" href="css/maicons.css">
+  <link rel="stylesheet" href="../css/maicons.css">
 
-  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="../css/bootstrap.css">
 
-  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="../css/animate.css">
 
-  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="../css/theme.css">
 
-  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="../css/footer.css">
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 
@@ -228,7 +228,7 @@ text-align: center;
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
       <div class="container">
         <!--<a href="#" class="navbar-brand">스터디<span class="text-primary">위더스</span></a>-->
-        <a href="/swu/"><img src="img/swu_text.png" alt="LOGO"></a>
+        <a href="/swu/"><img src="../img/swu_text.png" alt="LOGO"></a>
 
         <div class="navbar-collapse collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
@@ -292,12 +292,12 @@ text-align: center;
           </div>
           <div class="col-md-6 py-5 wow zoomIn">
             <div class="img-fluid text-center">
-             <img class="img_main" src="img/urban-858.png"></img>
+             <img class="img_main" src="../img/urban-858.png"></img>
             </div>
           </div>
         </div>
         <!--<a href="#about" class="btn-scroll" data-role="smoothscroll"><span class="icon-arrow-down"></span></a>-->
-        <a href="#about" class="btn-scroll" data-role="smoothscroll"><img class="arrow" src="img/down-arrow .png"></img></a>
+        <a href="#about" class="btn-scroll" data-role="smoothscroll"><img class="arrow" src="../img/down-arrow .png"></img></a>
       </div>
     </div>
   </header>
@@ -367,7 +367,7 @@ text-align: center;
         </div>
         <div class="col-lg-6 py-3 wow fadeInRight">
           <div class="img-fluid py-3 text-center">
-            <img class="img_sub" src="img/gummy-macbook.png" alt="">
+            <img class="img_sub" src="../img/gummy-macbook.png" alt="">
           </div>
         </div>
       </div>
@@ -391,7 +391,7 @@ text-align: center;
           <div class="card-blog">
             <div class="header">
               <div class="post-thumb">
-                <a href="freestudy/list"><img src="img/st-cr.png"></img></a>
+                <a href="freestudy/list"><img src="../img/st-cr.png"></img></a>
               </div>
             </div>
             <div class="body">
@@ -406,7 +406,7 @@ text-align: center;
           <div class="card-blog">
             <div class="header">
               <div class="post-thumb">
-                <a href="community/list?categoryNo=0"><img src="img/cmnt.png"></img></a>
+                <a href="community/list?categoryNo=0"><img src="../img/cmnt.png"></img></a>
               </div>
             </div>
             <div class="body">
@@ -421,7 +421,7 @@ text-align: center;
           <div class="card-blog">
             <div class="header">
               <div class="post-thumb">
-                <a href="mentorapplication/form"><img src="img/mentor.png"></img></a>
+                <a href="mentorapplication/form"><img src="../img/mentor.png"></img></a>
               </div>
             </div>
             <div class="body">
@@ -531,7 +531,7 @@ text-align: center;
           <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
         </div>
 
-        <div class="title_img"><img src="img/스터디위더스.png"></img></div>
+        <div class="title_img"><img src="../img/스터디위더스.png"></img></div>
 
         <div class="modal-body mx-3">
 
@@ -590,7 +590,7 @@ text-align: center;
         <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
       </div>
 
-      <div class="title_img"><img src="img/스터디위더스.png"></img></div>
+      <div class="title_img"><img src="../img/스터디위더스.png"></img></div>
       <!-- 추가 -->
       <div class="modal-body mx-4">
 
@@ -632,10 +632,10 @@ text-align: center;
 
         <div class="row my-3 justify-content-center">
           <div class="sns_container">
-            <div class="sns_icon"> <a><img src="img/facebook.png"></img></a></div>
-            <div class="sns_icon"><a><img src="img/twitter.png"></img></a></div>
-            <div class="sns_icon"><a><img src="img/google.png"></img></a></div>
-            <div class="sns_icon"><a><img src="img/instagram.png"></img></a></div>
+            <div class="sns_icon"> <a><img src="../img/facebook.png"></img></a></div>
+            <div class="sns_icon"><a><img src="../img/twitter.png"></img></a></div>
+            <div class="sns_icon"><a><img src="../img/google.png"></img></a></div>
+            <div class="sns_icon"><a><img src="../img/instagram.png"></img></a></div>
         </div><!--sns_container-->
         </div><!--row my-3 justify-content-center-->
         
@@ -714,24 +714,24 @@ overlay2.addEventListener('click', closeModal2);
          };
      </script>
      
-<script src="js/jquery-3.5.1.min.js"></script>
+<script src="../js/jquery-3.5.1.min.js"></script>
 
-<script src="js/bootstrap.bundle.min.js"></script>
+<script src="../js/bootstrap.bundle.min.js"></script>
 
-<script src="js/google-maps.js"></script>
+<script src="../js/google-maps.js"></script>
 
-<script src="js/wow.min.js"></script>
+<script src="../js/wow.min.js"></script>
 
-<script src="js/theme.js"></script>
+<script src="../js/theme.js"></script>
 
   <!-- jQuery -->
-  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
   <!-- Bootstrap tooltips -->
-  <script type="text/javascript" src="js/popper.min.js"></script>
+  <script type="text/javascript" src="../js/popper.min.js"></script>
   <!-- Bootstrap core JavaScript -->
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
-  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script type="text/javascript" src="../js/mdb.min.js"></script>
 
   
 
