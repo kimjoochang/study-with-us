@@ -18,14 +18,6 @@ public class AuthLogInController {
   @Autowired MemberDao memberDao;
   @Autowired ServletContext sc;
 
-  @GetMapping("/user/loginForm")
-  public ModelAndView loginForm() {
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("pageTitle", "스터디위더스 : 로그인");
-    mv.setViewName("LoginForm");
-    return mv;
-  }
-
   @PostMapping("/auth/login")
   public ModelAndView login(String email, String password, String saveEmail, HttpServletResponse response, HttpSession session) throws Exception {
 
@@ -61,13 +53,13 @@ public class AuthLogInController {
     return mv;
   }
 
-  @GetMapping("/auth/logout")
+  @GetMapping("/user/logout")
   public ModelAndView logout(HttpSession session) throws Exception {
 
     session.invalidate();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:loginForm");
+    mv.setViewName("redirect:../");
     return mv;
   }
 }
