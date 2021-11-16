@@ -8,7 +8,7 @@ trimDirectiveWhitespaces="true" %>
 <html lang="ko">
 
   <head>
-      <title>무료 스터디</title>
+      <title>스터디위더스 : 스터디등록</title>
       <link rel="stylesheet" href="../css/theme.css">
       <link rel="stylesheet" href="../css/bootstrap.css">
       <link rel="stylesheet" href="../css/study/StudyAddForm.css">

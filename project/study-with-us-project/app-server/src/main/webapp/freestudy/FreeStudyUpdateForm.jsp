@@ -4,11 +4,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <title>무료 스터디</title>
+  <title>스터디위더스 : 스터디수정</title>
   <link rel="stylesheet" href="../css/theme.css">
   <link rel="stylesheet" href="../css/bootstrap.css">
   <link rel="stylesheet" href="../css/study/StudyUpdateForm.css">
 </head>
+
+<style>
+  .study-update-input {
+    border: 1px;
+    border-style: solid black;
+  }
+</style>
 
 <body>
   <div class="container">
@@ -28,16 +35,16 @@
     <input id='f-no' type='text' name='no' value='${freeStudy.no}' readonly><br>
     
     <label for='f-title'>제목</label>
-    <input id='f-title' type='text' name='title' value='${freeStudy.title}' ><br>
+    <input class="study-update-input" id='f-title' type='text' name='title' value='${freeStudy.title}' ><br>
     
     <label for='f-name'>작성자</label> 
     <input id='f-name' type='text' name='name' value='${freeStudy.writer.name}' readonly><br>
     
     <label for='f-content'>내용</label> 
-    <input id='f-content' type='text' name='content' value='${freeStudy.content}' ><br>
+    <input class="study-update-input" id='f-content' type='text' name='content' value='${freeStudy.content}' ><br>
 
     <label for='f-category'>설명</label> 
-    <input id='f-category' type='text' name='category' value='${freeStudy.category}' ><br>
+    <input class="study-update-input" id='f-category' type='text' name='category' value='${freeStudy.category}' ><br>
     
     <label for='f-status'>스터디 진행상태</label> 
     <input id='f-status' type='text' name='status' value='${freeStudy.studyStatus}' readonly><br>
@@ -46,13 +53,13 @@
     <input id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly><br>
     
     <label for='f-startDate'>시작일</label> 
-    <input id='f-startDate' type='date' name='startDate' value='${freeStudy.startDate}' ><br>
+    <input class="study-update-input" id='f-startDate' type='date' name='startDate' value='${freeStudy.startDate}' ><br>
      
     <label for='f-endDate'>종료일</label> 
-    <input id='f-endDate' type='date' name='endDate' value='${freeStudy.endDate}' ><br>
+    <input class="study-update-input" id='f-endDate' type='date' name='endDate' value='${freeStudy.endDate}' ><br>
 
     <label for='f-maxMembers'>모집인원</label> 
-    <input id='f-maxMembers' type='number' name='maxMembers' value='${freeStudy.maxMembers}' ><br>
+    <input class="study-update-input" id='f-maxMembers' type='number' name='maxMembers' value='${freeStudy.maxMembers}' ><br>
      
     <label for='f-maxMembers'>현재인원</label> 
     <input id='f-maxMembers' type='number' name='members' value='${freeStudy.members}' readonly><br>

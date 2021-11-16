@@ -6,7 +6,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>유료 스터디</title>
+  <title>스터디위더스 : 멘토링목록</title>
 
   <base target="_self"/>
 

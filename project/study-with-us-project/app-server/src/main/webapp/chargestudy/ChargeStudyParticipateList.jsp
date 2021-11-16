@@ -5,10 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>유료 스터디</title>
+<title>스터디위더스 : 관심목록</title>
 </head>
 <body>
-	<h1>유료 스터디 관심목록</h1>
+	<h1>멘토링 관심목록</h1>
 	<br>
 	<table border='1'>
 		<thead>

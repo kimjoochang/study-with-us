@@ -11,7 +11,7 @@
 <html lang="ko">
 
 <head>
-  <title>유료 스터디</title>
+  <title>스터디위더스 : 멘토링등록</title>
   <link rel="stylesheet" href="../css/theme.css">
   <link rel="stylesheet" href="../css/bootstrap.css">
   <link rel="stylesheet" href="../css/study/StudyAddForm.css">

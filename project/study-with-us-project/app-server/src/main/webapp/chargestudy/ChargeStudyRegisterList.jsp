@@ -5,10 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>유료 스터디</title>
+<title>스터디위더스 : 내가개설한멘토링목록</title>
 </head>
 <body>
-	<h1>내가 개설한 유료 스터디 목록</h1>
+	<h1>내가 개설한 멘토링 목록</h1>
 	<br>
 	<table border='1'>
 		<thead>
