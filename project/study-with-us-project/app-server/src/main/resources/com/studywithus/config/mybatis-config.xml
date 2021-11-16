@@ -5,7 +5,7 @@
 <configuration>
 
 
-  <properties resource="com/studywithus/conf/jdbc.properties"></properties>
+  <properties resource="com/studywithus/config/jdbc.properties"></properties>
 
   <typeAliases>
     <package name="com.studywithus.domain"/>
