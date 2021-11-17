@@ -207,8 +207,8 @@ textarea {
 				<div class="cmnt_icon">
 					<div class="community_buttons">
 						<c:if test="${loginUser.no eq community.writer.no}">
-							<a id="community_button" href="">수정</a>
-							<a id="community_button" href="">삭제</a>
+							<a id="community_button" href="updateform?no=${community.no}">수정</a>
+							<a id="community_button" href="delete?no=${community.no}">삭제</a>
 						</c:if>
 					</div>
 					<div class="info_item">

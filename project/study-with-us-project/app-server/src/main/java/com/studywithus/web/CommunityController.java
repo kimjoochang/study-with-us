@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.studywithus.dao.CommentDao;
 import com.studywithus.dao.CommunityDao;
+import com.studywithus.domain.Comment;
 import com.studywithus.domain.Community;
 import com.studywithus.domain.Member;
 
@@ -20,6 +22,7 @@ public class CommunityController {
 
 	@Autowired SqlSessionFactory sqlSessionFactory;
 	@Autowired CommunityDao communityDao;
+	@Autowired CommentDao commentDao;
 
 	@GetMapping("/community/list")
 	public ModelAndView list(int no) throws Exception {
@@ -59,6 +62,8 @@ public class CommunityController {
 	public ModelAndView detail(int no) throws Exception {
 		Community community = communityDao.findByNo(no);
 
+		Collection<Comment> commentList = commentDao.findAll(no);
+
 		if (community == null) {
 			throw new Exception("해당 번호의 게시글이 없습니다.");
 		}
@@ -66,6 +71,7 @@ public class CommunityController {
 		communityDao.updateCount(no);
 
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("comments", commentList);
 		mv.addObject("community", community);
 		mv.addObject("pageTitle", "스터디위더스 : 커뮤니티상세보기");
 		mv.setViewName("community/CommunityDetail");
@@ -90,24 +96,23 @@ public class CommunityController {
 		return mv;
 	}
 
-	/*
+	@GetMapping("/community/delete")
+	public ModelAndView delete(int communityNo) throws Exception {
 
-  @GetMapping("/board/delete")
-  public ModelAndView delete(int no) throws Exception {
+		Community community = communityDao.findByNo(communityNo);
+		if (community == null) {
+			throw new Exception("해당 번호의 게시글이 없습니다.");
+		}
 
-    Board board = boardDao.findByNo(no);
-    if (board == null) {
-      throw new Exception("해당 번호의 게시글이 없습니다.");
-    }
+		communityDao.delete(communityNo);
+		sqlSessionFactory.openSession().commit();
 
-    boardDao.delete(no);
-    sqlSessionFactory.openSession().commit();
-
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:list");
-    return mv;
-  }
-	 */
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:list?no=" + community.getCategory());
+		//		mv.setViewName("redirect:list?no=" + community.getCategory());
+		//		mv.setViewName("redirect:list?no=" + community.getNo());
+		return mv;
+	}
 }
 
 
