@@ -24,7 +24,7 @@ trimDirectiveWhitespaces="true" %>
       <form class="search-form" action="search">
         <input type="search" name="keyword" placeholder="키워드를 검색해주세요." class="search-input">
         <button type="submit" class="search-button">
-            <img class="reading-glasses-icon" src="../img/search icon.png"></button>
+            <img class="reading-glasses-icon" src="${contextPath}/img/search icon.png"></button>
           <!--
         </button>
           <div class="search-option">
@@ -109,9 +109,10 @@ trimDirectiveWhitespaces="true" %>
   
         <li class="lidesign"> <a href='detail?no=${freeStudy.no}'></a>
           <h1 class="studyTitle"> ${freeStudy.title} </h1>
+          
           <span>
             <img class="on_offline"
-            src="../img/onlineIcon.png">
+            src="${contextPath}/img/onlineIcon.png">
             <p class="on_offline_status">${freeStudy.onOffLine},${freeStudy.area}</p>
           </span>
           
@@ -119,13 +120,13 @@ trimDirectiveWhitespaces="true" %>
             <div class="info_item">
 
               <img class="icon"
-              src="../img/fillingHeartIcon.png">
+              src="${contextPath}/img/fillingHeartIcon.png">
               <p class="icon_count">${freeStudy.likes}</p>
             </div>
             
             <div class="info_item">
               <img class="icon"
-              src="../img/eyeIcon.png">
+              src="${contextPath}/img/eyeIcon.png">
               <p class="icon_count">${freeStudy.viewCount}</p>
             </div>
           </section>
@@ -149,12 +150,5 @@ trimDirectiveWhitespaces="true" %>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
-
-
-
-
-
-
-
 
 
