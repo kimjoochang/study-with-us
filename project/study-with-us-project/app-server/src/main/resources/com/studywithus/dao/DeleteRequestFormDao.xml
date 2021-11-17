@@ -83,7 +83,7 @@
 
   <delete id="delete" parameterType="int">
     delete from delete_request
-    where request_no=#{no}
+    where study_no=#{no}
   </delete>
 
 </mapper>

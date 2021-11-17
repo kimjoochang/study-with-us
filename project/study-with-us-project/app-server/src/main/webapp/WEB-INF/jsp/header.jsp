@@ -27,13 +27,13 @@
                     <a class="nav-link" href="/swu/app/index">Home</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="freestudy/list">Study</a>
+                    <a class="nav-link" href="/swu/app/freestudy/list">Study</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="chargestudy/list">Mentoring</a>
+                    <a class="nav-link" href="/swu/app/chargestudy/list">Mentoring</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="community/list?categoryNo=0">Community</a>
+                    <a class="nav-link" href="/swu/app/community/list?categoryNo=0">Community</a>
                     </li>
                     <!-- 여기 햄버거 & 드롭다운 추가해야 함-->
                         <li class="nav-item">
