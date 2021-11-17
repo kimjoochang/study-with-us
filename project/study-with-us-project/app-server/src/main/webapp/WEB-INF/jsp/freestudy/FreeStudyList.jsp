@@ -12,8 +12,8 @@ trimDirectiveWhitespaces="true" %>
 
     <link rel="stylesheet" href="${contextPath}/css/theme.css">
     <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
-    <link rel="stylesheet" href="${contextPath}/css/study/StudyList.css">
-  </head>
+    <link rel="stylesheet" href="${contextPath}/css/study/StudyList.css"> 
+</head>
 
 <body>
   <div class="container">

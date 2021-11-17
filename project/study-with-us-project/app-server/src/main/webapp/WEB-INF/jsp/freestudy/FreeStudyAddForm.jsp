@@ -1,9 +1,8 @@
-<%@page import="com.studywithus.domain.Member"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"
 trimDirectiveWhitespaces="true" %>
 
+<%@page import="com.studywithus.domain.Member"%>
 <%@ page import="java.sql.Date"%>
 
 <% Member loginUser = (Member) session.getAttribute("loginUser"); %>
@@ -187,12 +186,17 @@ trimDirectiveWhitespaces="true" %>
 
 <div class="study-content-line">
   <label class="study-content-label" for='startDate'>시작일</label> 
-  <input type='date' name='startDate'><br>
+  <input id='startDate' type='date' min ="<%=nowDate%>" name='startDate'>
 </div>
  
 <div class="study-content-line">
   <label class="study-content-label" for='endDate'>종료일</label> 
-  <input type='date' name='endDate'><br>
+  <input id='endDate' type='date' min ="<%=nowDate%>" name='endDate'>
+</div>
+
+<div class="study-content-line">
+  <label for='category'>카테고리</label> 
+  <input id='category' type='text' name='category'>
 </div>
 
 </div><!--study-form-content-->
