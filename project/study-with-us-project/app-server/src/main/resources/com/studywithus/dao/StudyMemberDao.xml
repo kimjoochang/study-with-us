@@ -137,6 +137,8 @@
       sm.member_no=#{memberNo} and sm.status=#{myStatus}
       and
       price >=#{low} and price<=#{high}
+      and
+      del_status != 2
     order by 
       st.study_no asc
       ]]>

@@ -10,9 +10,9 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
 
-<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="${contextPath}/css/theme.css">
 
 <style>
 .container {
@@ -180,8 +180,8 @@ h1 {
 					</div>
 					<li class="userid">admin</li>
 					<ul class=sub>
-						<li><a class="detail_menu" href="../mentorapplication/list">회원 관리</a></li>
-						<li><a class="detail_menu" href="../chargestudy/deleterequestlist">스터디 관리</a></li>
+						<li><a class="detail_menu" href="mentorapplicationlist">회원 관리</a></li>
+						<li><a class="detail_menu" href="deleterequestlist">스터디 관리</a></li>
 						<li><a href="#">캘린더 관리</a></li>
 					</ul>
 				</ul>
@@ -208,7 +208,7 @@ h1 {
 									<tr>
 										<td>${mentorApplication.applicant.name}</td>
 										<td>${mentorApplication.registeredDate}</td>
-                    <td><a id="open" onclick="openModal(${vs.index});" href="#"><img class="icon" src="../img/document.png"></a></td>
+                    <td><a id="open" onclick="openModal(${vs.index});" href="#"><img class="icon" src="${contextPath}/img/document.png"></a></td>
 										<!--deleteRequestForm.reason -->
 									</tr>
 								</tbody>

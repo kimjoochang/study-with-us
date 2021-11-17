@@ -251,10 +251,10 @@ text-align: center;
               
               <c:if test="${loginUser ne null}">
               <c:if test="${loginUser.userAccessLevel eq 32}">
-                <a class="nav-link" href="adminpage">Admin Page</a>
+                <a class="nav-link" href="adminpage/deleterequestlist">Admin Page</a>
               </c:if>
               <c:if test="${loginUser.userAccessLevel ne 32}">
-                <a class="nav-link" href="mypage">My Page</a>
+                <a class="nav-link" href="mypage/chargeregisterlist">My Page</a>
               </c:if>
               <li class="nav-item">
               </li>
@@ -293,7 +293,7 @@ text-align: center;
           </div>
           <div class="col-md-6 py-5 wow zoomIn">
             <div class="img-fluid text-center">
-             <img class="img_main" src="../img/urban-858.png"></img>
+             <img class="img_main" src="${contextPath}/img/urban-858.png"></img>
             </div>
           </div>
         </div>
