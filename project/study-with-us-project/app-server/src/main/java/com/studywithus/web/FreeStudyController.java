@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
@@ -17,6 +18,7 @@ public class FreeStudyController {
 
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired StudyDao freeStudyDao;
+  @Autowired StudyMemberDao studyMemberDao;
 
   @GetMapping("/freestudy/form")
   public ModelAndView form() {
@@ -26,12 +28,26 @@ public class FreeStudyController {
     return mv;
   }
 
+  @GetMapping("/freestudy/search")
+  public ModelAndView search(String keyword) throws Exception {
+
+    Collection <Study> freeStudyList = freeStudyDao.findByKeyword(keyword);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("freeStudyList", freeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 스터디검색결과");
+    mv.setViewName("freestudy/FreeStudyList");
+    return mv;
+  }
+
   @PostMapping("/freestudy/add")
   public ModelAndView add(Study freeStudy, HttpSession session) throws Exception {
 
-    freeStudy.setWriter((Member) session.getAttribute("loginUser"));
+    Member freeMember = (Member) session.getAttribute("loginUser");
+    freeStudy.setWriter(freeMember);
 
     freeStudyDao.insert(freeStudy);
+    studyMemberDao.insert(freeMember.getNo(), freeStudy.getNo(), Study.OWNER_STATUS);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -51,7 +67,10 @@ public class FreeStudyController {
   }
 
   @GetMapping("/freestudy/detail")
-  public ModelAndView detail(int no) throws Exception {
+  public ModelAndView detail(int no, HttpSession session) throws Exception {
+
+    int result; // 관심목록 추가 여부 확인용 임시 변수
+
     Study freeStudy = freeStudyDao.findByNo(no);
 
     if (freeStudy == null) {
@@ -60,8 +79,17 @@ public class FreeStudyController {
 
     freeStudyDao.updateCount(no);
 
+    Member freeMember = (Member)session.getAttribute("loginUser");
+
+    if (freeMember != null) {
+      result =  freeStudyDao.checkLikesByMember(freeMember.getNo(), no);
+    } else {
+      result = 0;
+    }
+
     ModelAndView mv = new ModelAndView();
     mv.addObject("freeStudy", freeStudy);
+    mv.addObject("result", result);
     mv.addObject("pageTitle", "스터디위더스 : 스터디상세");
     mv.setViewName("freestudy/FreeStudyDetail");
     return mv;
@@ -85,7 +113,7 @@ public class FreeStudyController {
   }
 
   @GetMapping("/freestudy/updateform")
-  public ModelAndView updateform(int no) throws Exception {
+  public ModelAndView updateForm(int no) throws Exception {
     Study freeStudy = freeStudyDao.findByNo(no);
 
     if (freeStudy == null) {
@@ -99,7 +127,6 @@ public class FreeStudyController {
     return mv;
   }
 
-  /* 삭제 기능 미구현이라 일단 주석 처리함
   @GetMapping("/freestudy/delete")
   public ModelAndView delete(int no) throws Exception {
 
@@ -115,5 +142,87 @@ public class FreeStudyController {
     mv.setViewName("redirect:list");
     return mv;
   }
-   */
+
+  @GetMapping("/freestudy/interest/add")
+  public ModelAndView interestAdd(int no, HttpSession session) throws Exception {
+
+    Study oldFreeStudy= freeStudyDao.findByNo(no);
+
+    if (oldFreeStudy == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
+    } 
+
+    int memberNo = ((Member) session.getAttribute("loginUser")).getNo();
+
+    freeStudyDao.insertInterest(memberNo, no);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../detail?no=" + no);
+    return mv;
+  }
+
+  @GetMapping("/freestudy/interest/delete")
+  public ModelAndView interestDelete(int no, HttpSession session) throws Exception {
+
+    Study oldFreeStudy= freeStudyDao.findByNo(no);
+
+    if (oldFreeStudy == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
+    } 
+
+    int memberNo = ((Member) session.getAttribute("loginUser")).getNo();
+
+    freeStudyDao.deleteInterest(memberNo, no);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../detail?no=" + no);
+    return mv;
+  }
+
+  @GetMapping("/mypage/freeregisterlist")
+  public ModelAndView freeRegisterList(HttpSession session) throws Exception {
+
+    Member freeMember = (Member) session.getAttribute("loginUser");
+
+    Collection<Study> freeStudyList = 
+        studyMemberDao.findAllStudy(freeMember.getNo(),Study.OWNER_STATUS,0,0);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("freeStudyList", freeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 내가 생성한 스터디");
+    mv.setViewName("../jsp/MyPage_freeStudy");
+    return mv;
+  }
+
+  @GetMapping("/mypage/freeparticipatelist")
+  public ModelAndView freeParticipateList(HttpSession session) throws Exception {
+
+    Member freeMember = (Member) session.getAttribute("loginUser");
+
+    Collection<Study> freeStudyList = 
+        studyMemberDao.findAllStudy(freeMember.getNo(),Study.PARTICIPANT_STATUS,0,0);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("freeStudyList", freeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 내가 참여한 스터디");
+    mv.setViewName("../jsp/MyPage_freeStudy");
+    return mv;
+  }
+
+  @GetMapping("/mypage/freeinterestlist")
+  public ModelAndView freeInterestList(HttpSession session) throws Exception {
+
+    Member freeMember = (Member) session.getAttribute("loginUser");
+
+    Collection<Study> freeStudyList = freeStudyDao.findAllInterest(freeMember.getNo(),0,0);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("chargeStudyList", freeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 나의 관심목록");
+    mv.setViewName("../jsp/chargestudy/ChargeStudyInterestList");
+    return mv;
+  }
+
 }

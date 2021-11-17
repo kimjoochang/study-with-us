@@ -30,7 +30,7 @@ public class ChargeStudyController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("chargeStudyList", chargeStudyList);
-    mv.addObject("pageTitle", "스터디위더스 : 검색 결과");
+    mv.addObject("pageTitle", "스터디위더스 : 멘토링검색결과");
     mv.setViewName("chargestudy/ChargeStudyList");
     return mv;
   }
@@ -54,7 +54,7 @@ public class ChargeStudyController {
   @GetMapping("/chargestudy/form")
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
-    mv.addObject("pageTitle", "스터디위더스 : 멘토링 등록");
+    mv.addObject("pageTitle", "스터디위더스 : 멘토링등록");
     mv.setViewName("chargestudy/ChargeStudyAddForm");
     return mv;
   }
@@ -66,7 +66,7 @@ public class ChargeStudyController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("chargeStudyList", chargeStudyList);
-    mv.addObject("pageTitle", "스터디위더스 : 멘토링 목록");
+    mv.addObject("pageTitle", "스터디위더스 : 멘토링목록");
     mv.setViewName("chargestudy/ChargeStudyList");
     return mv;
   }
@@ -79,7 +79,7 @@ public class ChargeStudyController {
     Study chargeStudy = chargeStudyDao.findByNo(no);
 
     if (chargeStudy == null) {
-      throw new Exception("해당 번호의 스터디가 없습니다.");
+      throw new Exception("해당 번호의 멘토링이 없습니다.");
     }
 
     chargeStudyDao.updateCount(no);
@@ -95,7 +95,7 @@ public class ChargeStudyController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("chargeStudy", chargeStudy);
     mv.addObject("result", result);
-    mv.addObject("pageTitle", "스터디위더스 : 상세보기");
+    mv.addObject("pageTitle", "스터디위더스 : 멘토링상세");
     mv.setViewName("chargestudy/ChargeStudyDetail");
     return mv;
   }
@@ -105,12 +105,12 @@ public class ChargeStudyController {
     Study chargeStudy = chargeStudyDao.findByNo(no);
 
     if (chargeStudy == null) {
-      throw new Exception("해당 번호의 스터디가 없습니다.");
+      throw new Exception("해당 번호의 멘토링이 없습니다.");
     }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("chargeStudy", chargeStudy);
-    mv.addObject("pageTitle", "스터디위더스 : 수정");
+    mv.addObject("pageTitle", "스터디위더스 : 멘토링수정");
     mv.setViewName("chargestudy/ChargeStudyUpdateForm");
     return mv;
   }
@@ -119,7 +119,7 @@ public class ChargeStudyController {
   public ModelAndView update(Study chargeStudy) throws Exception {
     Study oldStudy= chargeStudyDao.findByNo(chargeStudy.getNo());
     if (oldStudy == null) {
-      throw new Exception("해당 번호의 스터디가 없습니다.");
+      throw new Exception("해당 번호의 멘토링이 없습니다.");
     } 
 
     chargeStudyDao.update(chargeStudy);
@@ -135,7 +135,7 @@ public class ChargeStudyController {
     Study chargeStudy = chargeStudyDao.findByNo(no);
 
     if (chargeStudy == null) {
-      throw new Exception("해당 번호의 스터디가 없습니다.");
+      throw new Exception("해당 번호의 멘토링이 없습니다.");
     }
 
     chargeStudy.setDeleteStatus(1);
@@ -159,7 +159,7 @@ public class ChargeStudyController {
     Study chargeStudy = chargeStudyDao.findByNo(no);
 
     if (chargeStudy == null) {
-      throw new Exception("해당 번호의 스터디가 없습니다.");
+      throw new Exception("해당 번호의 멘토링이 없습니다.");
     }
 
     chargeStudy.setDeleteStatus(0);
@@ -179,7 +179,7 @@ public class ChargeStudyController {
     Study oldStudy= chargeStudyDao.findByNo(no);
 
     if (oldStudy == null) {
-      throw new Exception("해당 번호의 스터디가 없습니다.");
+      throw new Exception("해당 번호의 멘토링이 없습니다.");
     } 
 
     int memberNo = ((Member) session.getAttribute("loginUser")).getNo();
@@ -198,7 +198,7 @@ public class ChargeStudyController {
     Study oldStudy= chargeStudyDao.findByNo(no);
 
     if (oldStudy == null) {
-      throw new Exception("해당 번호의 스터디가 없습니다.");
+      throw new Exception("해당 번호의 멘토링이 없습니다.");
     } 
 
     int memberNo = ((Member) session.getAttribute("loginUser")).getNo();
@@ -217,7 +217,7 @@ public class ChargeStudyController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("deleteRequestFormList", deleteRequestFormList);
-    mv.addObject("pageTitle", "스터디위더스 : 삭제요청 목록");
+    mv.addObject("pageTitle", "스터디위더스 : 삭제요청목록");
     mv.setViewName("../jsp/AdminPage_study");
     return mv;
   }
@@ -228,7 +228,7 @@ public class ChargeStudyController {
     Study study = chargeStudyDao.findByNo(studyNo);
 
     if (study == null) {
-      throw new Exception("해당 번호의 스터디가 없습니다.");
+      throw new Exception("해당 번호의 멘토링이 없습니다.");
     } 
 
     study.setDeleteStatus(2);
@@ -249,7 +249,7 @@ public class ChargeStudyController {
     Study study = chargeStudyDao.findByNo(studyNo);
 
     if (study == null) {
-      throw new Exception("해당 번호의 스터디가 없습니다.");
+      throw new Exception("해당 번호의 멘토링이 없습니다.");
     } 
 
     study.setDeleteStatus(0);
