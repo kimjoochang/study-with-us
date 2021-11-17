@@ -16,12 +16,11 @@
     <link rel="stylesheet" href="${contextPath}/css/study/StudyDetail.css">
 </head>
 
-<style type="text/css">
+  <style type="text/css"> 
     .interest_icon {
       width : 50px;
     }
-    </style>
-</head>
+  </style>
 
 <body>
 	<div class="container">

@@ -78,7 +78,7 @@
 
       <div class="form-group">
         <label for='f-maxMembers'>모집인원</label> 
-        <input id='f-maxMembers' type='number' name='maxMembers' value='${freeStudy.maxMembers}' ><br>
+        <input id='f-maxMembers' type='number' name='maxMembers' value='${freeStudy.maxMembers}' readonly><br>
       </div>
 
       <div class="form-group">

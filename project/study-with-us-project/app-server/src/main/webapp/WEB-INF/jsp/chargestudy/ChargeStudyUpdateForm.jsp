@@ -63,7 +63,7 @@
       
       <div class="form-group">
         <label for='f-area'>지역</label> 
-        <input id='f-area' type='text' name='area' value='${freeStudy.area}' readonly><br>
+        <input id='f-area' type='text' name='area' value='${chargeStudy.area}' readonly><br>
       </div>
       
       <div class="form-group">
@@ -78,7 +78,7 @@
       
       <div class="form-group">
         <label for='f-maxMembers'>모집인원</label> 
-        <input id='f-maxMembers' type='number' name='maxMembers' value='${chargeStudy.maxMembers}'><br>
+        <input id='f-maxMembers' type='number' name='maxMembers' value='${chargeStudy.maxMembers}' readonly><br>
       </div>
       
       <div class="form-group">
