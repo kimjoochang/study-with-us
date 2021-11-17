@@ -71,18 +71,34 @@ public class FreeStudyController {
   public ModelAndView update(Study freeStudy) throws Exception {
 
     Study oldFreeStudy = freeStudyDao.findByNo(freeStudy.getNo());
+
     if (oldFreeStudy == null) {
       throw new Exception("해당 번호의 스터디가 없습니다.");
     } 
 
-    //freeStudyDao.update(freeStudy);
-    //sqlSessionFactory.openSession().commit();
+    freeStudyDao.update(freeStudy);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:detail?no=" + freeStudy.getNo());
+    return mv;
+  }
+
+  @GetMapping("/freestudy/updateform")
+  public ModelAndView updateform(int no) throws Exception {
+    Study freeStudy = freeStudyDao.findByNo(no);
+
+    if (freeStudy == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
+    }
+
     ModelAndView mv = new ModelAndView();
     mv.addObject("freeStudy", freeStudy);
-    mv.addObject("pageTitle", "스터디위더스 : 수정");
+    mv.addObject("pageTitle", "스터디위더스 : 스터디수정");
     mv.setViewName("freestudy/FreeStudyUpdateForm");
     return mv;
   }
+
   /* 삭제 기능 미구현이라 일단 주석 처리함
   @GetMapping("/freestudy/delete")
   public ModelAndView delete(int no) throws Exception {
