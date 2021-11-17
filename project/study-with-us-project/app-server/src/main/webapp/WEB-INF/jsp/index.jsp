@@ -251,10 +251,10 @@ text-align: center;
               
               <c:if test="${loginUser ne null}">
               <c:if test="${loginUser.userAccessLevel eq 32}">
-                <a class="nav-link" href="adminpage">Admin Page</a>
+                <a class="nav-link" href="adminpage/deleterequestlist">Admin Page</a>
               </c:if>
               <c:if test="${loginUser.userAccessLevel ne 32}">
-                <a class="nav-link" href="mypage">My Page</a>
+                <a class="nav-link" href="mypage/chargeregisterlist">My Page</a>
               </c:if>
               <li class="nav-item">
               </li>

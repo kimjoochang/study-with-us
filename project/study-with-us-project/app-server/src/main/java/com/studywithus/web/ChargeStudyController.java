@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.studywithus.dao.DeleteRequestFormDao;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.DeleteRequestForm;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
@@ -20,6 +21,7 @@ public class ChargeStudyController {
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired StudyDao chargeStudyDao;
   @Autowired DeleteRequestFormDao deleteRequestFormDao;
+  @Autowired StudyMemberDao studyMemberDao;
 
   @GetMapping("/chargestudy/search")
   public ModelAndView search(String keyword) throws Exception {
@@ -36,9 +38,12 @@ public class ChargeStudyController {
   @PostMapping("/chargestudy/add")
   public ModelAndView add(Study chargeStudy, HttpSession session) throws Exception {
 
-    chargeStudy.setWriter((Member) session.getAttribute("loginUser"));
+    Member member = (Member) session.getAttribute("loginUser");
+
+    chargeStudy.setWriter(member);
 
     chargeStudyDao.insert(chargeStudy);
+    studyMemberDao.insert(member.getNo(), chargeStudy.getNo(), Study.OWNER_STATUS);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -260,6 +265,50 @@ public class ChargeStudyController {
 
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:deleterequestlist");
+    return mv;
+  }
+
+  @GetMapping("/mypage/chargeregisterlist")
+  public ModelAndView chargeRegisterList(HttpSession session) throws Exception {
+
+    Member member = (Member) session.getAttribute("loginUser");
+
+    Collection<Study> chargeStudyList = 
+        studyMemberDao.findAllStudy(member.getNo(),Study.OWNER_STATUS,1,10000000);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("studyList", chargeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 내가 생성한 스터디");
+    mv.setViewName("../jsp/MyPage_chargeStudy");
+    return mv;
+  }
+
+  @GetMapping("/mypage/chargeparticipatelist")
+  public ModelAndView chargeParticipateList(HttpSession session) throws Exception {
+
+    Member member = (Member) session.getAttribute("loginUser");
+
+    Collection<Study> chargeStudyList = 
+        studyMemberDao.findAllStudy(member.getNo(),Study.PARTICIPANT_STATUS,1,10000000);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("studyList", chargeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 내가 참여한 스터디");
+    mv.setViewName("../jsp/MyPage_chargeStudy");
+    return mv;
+  }
+
+  @GetMapping("/mypage/chargeinterestlist")
+  public ModelAndView chargeInterestList(HttpSession session) throws Exception {
+
+    Member member = (Member) session.getAttribute("loginUser");
+
+    Collection<Study> chargeStudyList = chargeStudyDao.findAllInterest(member.getNo(),1,10000000);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("chargeStudyList", chargeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 나의 관심목록");
+    mv.setViewName("../jsp/chargestudy/ChargeStudyInterestList");
     return mv;
   }
 

@@ -10,9 +10,9 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
 
-<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="${contextPath}/css/theme.css">
 
 <style>
 .container {
@@ -214,15 +214,15 @@ input {
 						</div>
 
 						<div class="buttons">
-							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='../chargestudy/registerlist';">내가 등록한 스터디</button>
-							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='../chargestudy/participatelist';">내가 참여한 스터디</button>
+							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='chargeregisterlist';">내가 등록한 스터디</button>
+							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='chargeparticipatelist';">내가 참여한 스터디</button>
 							<button type="button" class="btn btn-primary btn-sm">나의 게시글</button>
 							<br>
 						</div>
 						<!-- 수정 -->
             <div class ="study_category">
             <a href="../freestudy/registerlist">무료</a>
-            <a href="../chargestudy/registerlist">유료</a>
+            <a href="chargeregisterlist">유료</a>
             </div>						
 
 						<div class="box1">
