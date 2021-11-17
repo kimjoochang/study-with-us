@@ -293,7 +293,7 @@ text-align: center;
           </div>
           <div class="col-md-6 py-5 wow zoomIn">
             <div class="img-fluid text-center">
-             <img class="img_main" src="../img/urban-858.png"></img>
+             <img class="img_main" src="${contextPath}/img/urban-858.png"></img>
             </div>
           </div>
         </div>

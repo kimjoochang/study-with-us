@@ -184,8 +184,8 @@ h1 {
 					</div>
 					<li class="userid">admin</li>
 					<ul class=sub>
-						<li><a href="mentorapplication/list">회원 관리</a></li>
-						<li><a href="../chargestudy/deleterequestlist">스터디 관리</a></li>
+						<li><a href="mentorapplicationlist">회원 관리</a></li>
+						<li><a href="deleterequestlist">스터디 관리</a></li>
 						<li><a href="#">캘린더 관리</a></li>
 					</ul>
 				</ul>
