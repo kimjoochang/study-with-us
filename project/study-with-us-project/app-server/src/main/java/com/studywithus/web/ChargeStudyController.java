@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import com.studywithus.dao.DeleteRequestFormDao;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.domain.DeleteRequestForm;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Study;
 
@@ -17,6 +19,19 @@ public class ChargeStudyController {
 
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired StudyDao chargeStudyDao;
+  @Autowired DeleteRequestFormDao deleteRequestFormDao;
+
+  @GetMapping("/chargestudy/search")
+  public ModelAndView search(String keyword) throws Exception {
+
+    Collection <Study> chargeStudyList = chargeStudyDao.findByKeyword(keyword);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("chargeStudyList", chargeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 검색 결과");
+    mv.setViewName("chargestudy/ChargeStudyList");
+    return mv;
+  }
 
   @PostMapping("/chargestudy/add")
   public ModelAndView add(Study chargeStudy, HttpSession session) throws Exception {
@@ -52,7 +67,10 @@ public class ChargeStudyController {
   }
 
   @GetMapping("/chargestudy/detail")
-  public ModelAndView detail(int no) throws Exception {
+  public ModelAndView detail(int no, HttpSession session) throws Exception {
+
+    int result;
+
     Study chargeStudy = chargeStudyDao.findByNo(no);
 
     if (chargeStudy == null) {
@@ -61,15 +79,24 @@ public class ChargeStudyController {
 
     chargeStudyDao.updateCount(no);
 
+    Member member = (Member) session.getAttribute("loginUser");
+
+    if (member != null) {
+      result =  chargeStudyDao.checkLikesByMember(member.getNo(), no);
+    } else {
+      result = 0;
+    }
+
     ModelAndView mv = new ModelAndView();
     mv.addObject("chargeStudy", chargeStudy);
+    mv.addObject("result", result);
     mv.addObject("pageTitle", "스터디위더스 : 상세보기");
     mv.setViewName("chargestudy/ChargeStudyDetail");
     return mv;
   }
 
   @GetMapping("/chargestudy/updateform")
-  public ModelAndView form(int no) throws Exception {
+  public ModelAndView updateForm(int no) throws Exception {
     Study chargeStudy = chargeStudyDao.findByNo(no);
 
     if (chargeStudy == null) {
@@ -95,6 +122,144 @@ public class ChargeStudyController {
 
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:detail?no=" + chargeStudy.getNo());
+    return mv;
+  }
+
+  @PostMapping("/chargestudy/deleterequest")
+  public ModelAndView deleteRequest(int no, String reason) throws Exception {
+    Study chargeStudy = chargeStudyDao.findByNo(no);
+
+    if (chargeStudy == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
+    }
+
+    chargeStudy.setDeleteStatus(1);
+
+    DeleteRequestForm deleteRequestForm = new DeleteRequestForm();
+    deleteRequestForm.setStudy(chargeStudy);
+    deleteRequestForm.setReason(reason);
+
+    chargeStudyDao.update(chargeStudy);
+    deleteRequestFormDao.insert(deleteRequestForm);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:detail?no=" + chargeStudy.getNo());
+    return mv;
+  }
+
+  @GetMapping("/chargestudy/deletecancel")
+  public ModelAndView deleteCancel(int no) throws Exception {
+
+    Study chargeStudy = chargeStudyDao.findByNo(no);
+
+    if (chargeStudy == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
+    }
+
+    chargeStudy.setDeleteStatus(0);
+
+    chargeStudyDao.update(chargeStudy);
+    deleteRequestFormDao.delete(no);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:detail?no=" + chargeStudy.getNo());
+    return mv;
+  }
+
+  @GetMapping("/chargestudy/interest/add")
+  public ModelAndView interestAdd(int no, HttpSession session) throws Exception {
+
+    Study oldStudy= chargeStudyDao.findByNo(no);
+
+    if (oldStudy == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
+    } 
+
+    int memberNo = ((Member) session.getAttribute("loginUser")).getNo();
+
+    chargeStudyDao.insertInterest(memberNo, no);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../detail?no=" + no);
+    return mv;
+  }
+
+  @GetMapping("/chargestudy/interest/delete")
+  public ModelAndView interestDelete(int no, HttpSession session) throws Exception {
+
+    Study oldStudy= chargeStudyDao.findByNo(no);
+
+    if (oldStudy == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
+    } 
+
+    int memberNo = ((Member) session.getAttribute("loginUser")).getNo();
+
+    chargeStudyDao.deleteInterest(memberNo, no);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../detail?no=" + no);
+    return mv;
+  }
+
+  @GetMapping("/adminpage/deleterequestlist")
+  public ModelAndView deleteRequestList() throws Exception {
+    Collection<DeleteRequestForm> deleteRequestFormList = deleteRequestFormDao.findAllForAdmin();
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("deleteRequestFormList", deleteRequestFormList);
+    mv.addObject("pageTitle", "스터디위더스 : 삭제요청 목록");
+    mv.setViewName("../jsp/AdminPage_study");
+    return mv;
+  }
+
+  @PostMapping("/adminpage/requestapprove")
+  public ModelAndView requestApprove(int no, int studyNo) throws Exception {
+
+    Study study = chargeStudyDao.findByNo(studyNo);
+
+    if (study == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
+    } 
+
+    study.setDeleteStatus(2);
+
+    deleteRequestFormDao.delete(no);
+    chargeStudyDao.update(study);
+
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:deleterequestlist");
+    return mv;
+  }
+
+  @PostMapping("/adminpage/requestreject")
+  public ModelAndView requestReject(int no, int studyNo, String remarks) throws Exception {
+
+    Study study = chargeStudyDao.findByNo(studyNo);
+
+    if (study == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
+    } 
+
+    study.setDeleteStatus(0);
+
+    DeleteRequestForm deleteRequestForm = deleteRequestFormDao.findByNo(no);
+
+    deleteRequestForm.setRemarks(remarks);
+
+    deleteRequestFormDao.updateRemarks(deleteRequestForm);
+    chargeStudyDao.update(study);
+
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:deleterequestlist");
     return mv;
   }
 

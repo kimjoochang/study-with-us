@@ -4,7 +4,6 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +13,7 @@ import com.studywithus.dao.CommentDao;
 import com.studywithus.domain.Comment;
 import com.studywithus.domain.Member;
 
-@WebServlet("/community/comment/add")
+//@WebServlet("/community/comment/add")
 public class CommentAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

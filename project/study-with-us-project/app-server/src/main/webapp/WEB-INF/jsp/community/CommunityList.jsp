@@ -15,11 +15,11 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
 
-<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="${contextPath}/css/theme.css">
 
-<link rel="stylesheet" href="../css/community/CommunityList.css">
+<link rel="stylesheet" href="${contextPath}/css/community/CommunityList.css">
 
 <style>
 .icon {
@@ -100,7 +100,7 @@ h1 {
 			<form class="search-form" action="search">
 				<input type="search" name="keyword" placeholder="키워드를 검색해주세요." class="search-input">
 				<button type="submit" class="search-button">
-						<img class="reading-glasses-icon" src="../img/search icon.png"></button>
+						<img class="reading-glasses-icon" src="${contextPath}/img/search icon.png"></button>
 					<!--
 				</button>
 					<div class="search-option">
@@ -225,15 +225,15 @@ h1 {
 								<td>${community.writer.nickname}</td>
 								<td>${community.registeredDate}</td>
 								<td class="icon_td">
-								  <img class="icon" src="../img/eyeIcon.png">
+								  <img class="icon" src="${contextPath}/img/eyeIcon.png">
   							  <span>${community.viewCount}</span>
                 </td>
                 <td class="icon_td">
-								  <img class="icon" src="../img/fillingHeartIcon.png">
+								  <img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
 								  <span>${community.like}</span>
                 </td>
                 <td class="icon_td">
-								  <img class="icon" src="../img/speechBalloon.png">
+								  <img class="icon" src="${contextPath}/img/speechBalloon.png">
   							  <span>${community.commentCount}</span>
                 </td>
 							</tr>

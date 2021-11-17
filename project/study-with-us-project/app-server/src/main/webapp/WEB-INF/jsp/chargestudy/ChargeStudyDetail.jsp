@@ -199,13 +199,13 @@ text-align: center;
 					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
 					<c:if test="${result eq 0}">
 						<div class="info_item">
-							<img class="icon" src="${contextPath}img/fillingHeartIcon.png">
+							<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
 								<p class="icon_count">${chargeStudy.likes}</p> 
 								
-								<img class="icon" src="${contextPath}img/eyeIcon.png">
+								<img class="icon" src="${contextPath}/img/eyeIcon.png">
 								<p class="icon_count">${chargeStudy.viewCount}</p>
 
-								<a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="../img/interestAdd.png"></a>
+								<a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="${contextPath}/img/interestAdd.png"></a>
 								<p class="icon_count">${chargeStudy.likes}</p> 
 							</div> <!--info_item-->
 						</c:if> <!-- 회원(2) 관심목록 추가 전 -->
@@ -213,14 +213,13 @@ text-align: center;
 						<!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
 						<c:if test="${result eq 1}">
 							<div class="info_item">
-								<img class="icon" src="../img/fillingHeartIcon.png">
+								<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
 								<p class="icon_count">${chargeStudy.likes}</p> 
 								
-								<img class="icon" src="../img/eyeIcon.png">
+								<img class="icon" src="${contextPath}/img/eyeIcon.png">
 								<p class="icon_count">${chargeStudy.viewCount}</p>
 
-								<a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="../img/interestDelete.png"></a>
-								<p class="icon_count">${chargeStudy.likes}</p> 
+								<a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="${contextPath}/img/interestDelete.png"></a>
 							</div> <!--info_item-->
 						</c:if> <!-- 회원(2) 관심목록 추가 상태인 경우 -->
 				</c:if> <!-- checkWriter eq 2 -->

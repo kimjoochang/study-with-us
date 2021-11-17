@@ -49,7 +49,7 @@
     where
       st.del_status=1
       and
-      dr.remarks=null
+      dr.remarks is null
     order by 
       dr.request_no asc;
   </select>
@@ -83,7 +83,7 @@
 
   <delete id="delete" parameterType="int">
     delete from delete_request
-    where request_no=#{no}
+    where study_no=#{no}
   </delete>
 
 </mapper>
