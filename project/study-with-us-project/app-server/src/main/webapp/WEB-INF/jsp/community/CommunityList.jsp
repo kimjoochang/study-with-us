@@ -225,15 +225,15 @@ h1 {
 								<td>${community.writer.nickname}</td>
 								<td>${community.registeredDate}</td>
 								<td class="icon_td">
-								  <img class="icon" src="../img/eyeIcon.png">
+								  <img class="icon" src="${contextPath}/img/eyeIcon.png">
   							  <span>${community.viewCount}</span>
                 </td>
                 <td class="icon_td">
-								  <img class="icon" src="../img/fillingHeartIcon.png">
+								  <img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
 								  <span>${community.like}</span>
                 </td>
                 <td class="icon_td">
-								  <img class="icon" src="../img/speechBalloon.png">
+								  <img class="icon" src="${contextPath}/img/speechBalloon.png">
   							  <span>${community.commentCount}</span>
                 </td>
 							</tr>

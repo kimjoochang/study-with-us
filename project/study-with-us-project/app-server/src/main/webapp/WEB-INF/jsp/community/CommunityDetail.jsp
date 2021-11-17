@@ -212,11 +212,11 @@ textarea {
 						</c:if>
 					</div>
 					<div class="info_item">
-						<img class="icon" src="../img/eyeIcon.png">
+						<img class="icon" src="${contextPath}/img/eyeIcon.png">
 						<p class="icon_count">${community.viewCount}</p>
 						
 						<div class="info_item">
-							<img class="icon" src="../img/fillingHeartIcon.png">  
+							<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">  
 							<p class="icon_count">${community.like}</p>
 						</div>
 					</div>
