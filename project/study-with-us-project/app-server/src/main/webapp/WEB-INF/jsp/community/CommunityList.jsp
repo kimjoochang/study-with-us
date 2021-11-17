@@ -244,40 +244,43 @@ h1 {
 		</div>
 	</div>
 
+  <script>
+  const openBtn = document.getElementById('open');
+  //onModal button
+
+  const closeBtn = document.getElementById('close');
+  //offModal button
+
+  const modal = document.querySelector('.modal');
+  //HTML에서의 모달 최상위 요소
+
+  const overlay = document.querySelector('.modal_overlay');
+  //모달창이 활성화되면 흐린 배경을 표현하는 요소
+
+  const openModal = () => {
+    modal.classList.remove('hidden');
+  }
+
+  const closeModal = () => {
+    modal.classList.add('hidden');
+  }
+
+  openBtn.addEventListener('click', openModal);
+  //onModal
+
+  closeBtn.addEventListener('click', closeModal);
+  //모달창 내부의 닫기 버튼
+
+  //overlay.addEventListener('click', closeModal);
+  //모달창 영역 밖
+  
+  </script>
+  
+
 	<script>
-	
 	let type;
 	let box;
 	let text;
-
-	 const openBtn = document.getElementById('open');
-	//onModal button
-
-	const closeBtn = document.getElementById('close');
-	//offModal button
-
-	const modal = document.querySelector('.modal');
-	//HTML에서의 모달 최상위 요소
-
-	const overlay = document.querySelector('.modal_overlay');
-	//모달창이 활성화되면 흐린 배경을 표현하는 요소
-
-	const openModal = () => {
-	  modal.classList.remove('hidden');
-	}
-
-	const closeModal = () => {
-	  modal.classList.add('hidden');
-	}
-
-	openBtn.addEventListener('click', openModal);
-	//onModal
-
-	closeBtn.addEventListener('click', closeModal);
-	//모달창 내부의 닫기 버튼
-
-	//overlay.addEventListener('click', closeModal);
-	//모달창 영역 밖
 	
 	const changeColor = () => {
 	  if (${categoryNo} === 0) {
@@ -303,8 +306,6 @@ h1 {
 	}
 	
 	changeColor();
-	
- 
 
 var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
 trList.forEach(function(trTag) {
