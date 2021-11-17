@@ -206,4 +206,61 @@ public class ChargeStudyController {
     return mv;
   }
 
+  @GetMapping("/adminpage/deleterequestlist")
+  public ModelAndView deleteRequestList() throws Exception {
+    Collection<DeleteRequestForm> deleteRequestFormList = deleteRequestFormDao.findAllForAdmin();
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("deleteRequestFormList", deleteRequestFormList);
+    mv.addObject("pageTitle", "스터디위더스 : 삭제요청 목록");
+    mv.setViewName("../jsp/AdminPage_study");
+    return mv;
+  }
+
+  @PostMapping("/adminpage/requestapprove")
+  public ModelAndView requestApprove(int no, int studyNo) throws Exception {
+
+    Study study = chargeStudyDao.findByNo(studyNo);
+
+    if (study == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
+    } 
+
+    study.setDeleteStatus(2);
+
+    deleteRequestFormDao.delete(no);
+    chargeStudyDao.update(study);
+
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:deleterequestlist");
+    return mv;
+  }
+
+  @PostMapping("/adminpage/requestreject")
+  public ModelAndView requestReject(int no, int studyNo, String remarks) throws Exception {
+
+    Study study = chargeStudyDao.findByNo(studyNo);
+
+    if (study == null) {
+      throw new Exception("해당 번호의 스터디가 없습니다.");
+    } 
+
+    study.setDeleteStatus(0);
+
+    DeleteRequestForm deleteRequestForm = deleteRequestFormDao.findByNo(no);
+
+    deleteRequestForm.setRemarks(remarks);
+
+    deleteRequestFormDao.updateRemarks(deleteRequestForm);
+    chargeStudyDao.update(study);
+
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:deleterequestlist");
+    return mv;
+  }
+
 }

@@ -49,7 +49,7 @@
     where
       st.del_status=1
       and
-      dr.remarks=null
+      dr.remarks is null
     order by 
       dr.request_no asc;
   </select>

@@ -10,9 +10,9 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
 
-<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="${contextPath}/css/theme.css">
 
 <style>
 .container {
@@ -180,11 +180,11 @@ h1 {
 				<ul class="my-menu-list">
 					<div class="profile-icon">
 
-						<img src="img/profile.png">
+						<img src="${contextPath}/img/profile.png">
 					</div>
 					<li class="userid">admin</li>
 					<ul class=sub>
-						<li><a href="../mentorapplication/list">회원 관리</a></li>
+						<li><a href="mentorapplication/list">회원 관리</a></li>
 						<li><a href="../chargestudy/deleterequestlist">스터디 관리</a></li>
 						<li><a href="#">캘린더 관리</a></li>
 					</ul>
@@ -210,7 +210,7 @@ h1 {
 										<td>${deleteRequestForm.study.title}</td>
 										<td>${deleteRequestForm.applicant.name}</td>
 										<td>${deleteRequestForm.registeredDate}</td>
-										<td><a id="open" onclick="openModal(${vs.index});" href="#"><img class="icon" src="../img/document.png"></a></td>
+										<td><a id="open" onclick="openModal(${vs.index});" href="#"><img class="icon" src="${contextPath}/img/document.png"></a></td>
 										<!--deleteRequestForm.reason -->
 									</tr>
 								</tbody>
@@ -302,14 +302,6 @@ h1 {
 	  }
 
 	</script>
-	
-	<script src="../assets/js/jquery-3.5.1.min.js"></script>
-
-	<script src="../assets/js/bootstrap.bundle.min.js"></script>
-
-	<script src="../assets/vendor/wow/wow.min.js"></script>
-
-	<script src="../assets/js/theme.js"></script>
 
 </body>
 </html>
