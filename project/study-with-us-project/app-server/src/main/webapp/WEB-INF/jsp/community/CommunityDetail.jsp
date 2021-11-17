@@ -10,9 +10,9 @@
 <meta charset="UTF-8">
 <title>커뮤니티 상세</title>
 
-<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
 
-<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="${contextPath}/css/theme.css">
 </head>
 <style>
 body {
