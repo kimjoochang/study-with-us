@@ -80,25 +80,11 @@ h1 {
 	<div class="container">
 		<jsp:include page="../header.jsp"></jsp:include>
 
-		<c:choose>
-              <c:when test="${community.category eq 0}">
-                <c:set var="cmntType" value="정보" />
-              </c:when>
-
-              <c:when test="${community.category eq 1}">
-                <c:set var="cmntType" value="질문" />
-              </c:when>
-
-              <c:when test="${community.category eq 2}">
-                <c:set var="cmntType" value="스몰톡" />
-              </c:when>
-            </c:choose>
-
-
 			<!-- 검색창 -->
 			<div class="search-view">
 			<form class="search-form" action="search">
 				<input type="search" name="keyword" placeholder="키워드를 검색해주세요." class="search-input">
+				<input type="hidden" name="categoryNo" value="${categoryNo}" >
 				<button type="submit" class="search-button">
 						<img class="reading-glasses-icon" src="${contextPath}/img/search icon.png"></button>
 					<!--
@@ -159,9 +145,9 @@ h1 {
 				<!--모달 화면-->
 				<div class="modal_content">
 					<div class="form_category_menu">
-						<a class="info_box" href='form?categoryNo=0'>정보</a> 
-						<a class="qa_box" href='form?categoryNo=1'>질문</a>
-						<a class="talk_box" href='form?categoryNo=2'>스몰톡</a>
+						<a class="info_box" href='form?no=0'>정보</a> 
+						<a class="qa_box" href='form?no=1'>질문</a>
+						<a class="talk_box" href='form?no=2'>스몰톡</a>
 					</div>
 					<div class="form_box">
 						<form action='add' target="CommunityList.jsp" method='post'>
@@ -184,9 +170,9 @@ h1 {
 		<div class="main-wrapper">
 			<div class="side_menu">
 				<ul class="categorys">
-					<li><a class="info_text" href='list?categoryNo=0'>정보 커뮤니티</a><br>
-					<li><a class="qa_text" href='list?categoryNo=1'>질문 커뮤니티</a><br>
-					<li><a class="talk_text" href='list?categoryNo=2'>스몰톡 커뮤니티</a><br>
+					<li><a class="info_text" href='list?no=0'>정보 커뮤니티</a><br>
+					<li><a class="qa_text" href='list?no=1'>질문 커뮤니티</a><br>
+					<li><a class="talk_text" href='list?no=2'>스몰톡 커뮤니티</a><br>
 				</ul>
 			</div>
 
@@ -206,15 +192,15 @@ h1 {
 
 					<c:forEach items="${communityList}" var="community">
 						<c:choose>
-							<c:when test="${community.category eq 0}">
+							<c:when test="${community.no eq 0}">
 								<c:set var="type" value="정보" />
 							</c:when>
 
-							<c:when test="${community.category eq 1}">
+							<c:when test="${community.no eq 1}">
 								<c:set var="type" value="질문" />
 							</c:when>
 
-							<c:when test="${community.category eq 2}">
+							<c:when test="${community.no eq 2}">
 								<c:set var="type" value="스몰톡" />
 							</c:when>
 						</c:choose>
@@ -315,6 +301,7 @@ trList.forEach(function(trTag) {
 });
 
   </script>
+  
 </body>
 </html>
 

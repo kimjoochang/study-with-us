@@ -189,7 +189,7 @@
 
 
 <body>
-   <jsp:include page="../WEB-INF/jsp/header.jsp"></jsp:include>
+   <jsp:include page="${contextPath}jsp/header.jsp"></jsp:include>
     <div class="container"> 
 
   <!--    <header class="freepagetop"> -->
@@ -241,7 +241,7 @@
 </form>     
    <!--    </header>freepagetop-->
     </div> <!-- container -->
-    <jsp:include page="../WEB-INF/jsp/footer.jsp"></jsp:include> 
+    <jsp:include page="${contextPath}/jsp/footer.jsp"></jsp:include> 
 
 </body>
 </html>

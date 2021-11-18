@@ -24,14 +24,26 @@ public class CommunityController {
 	@Autowired CommunityDao communityDao;
 	@Autowired CommentDao commentDao;
 
+	@GetMapping("/community/search")
+	public ModelAndView search(String keyword, int categoryNo) throws Exception {
+
+		Collection <Community> communityList = communityDao.findByKeyword(keyword, categoryNo);
+
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("communityList", communityList);
+		mv.addObject("categoryNo", categoryNo);
+		mv.addObject("pageTitle", "스터디위더스 : 커뮤니티검색결과");
+		mv.setViewName("community/CommunityList");
+		return mv;
+	}
+
 	@GetMapping("/community/list")
 	public ModelAndView list(int no) throws Exception {
 		Collection<Community> communityList = communityDao.findAll(no);
 
-		communityDao.updateCount(no);
-
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("communityList", communityList);
+		mv.addObject("categoryNo", no);
 		mv.addObject("pageTitle", "스터디위더스 : 커뮤니티목록");
 		mv.setViewName("community/CommunityList");
 		return mv;
@@ -54,7 +66,7 @@ public class CommunityController {
 		sqlSessionFactory.openSession().commit();
 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("redirect:list");
+		mv.setViewName("redirect:list?no=" + community.getCategory());
 		return mv;
 	}
 
@@ -78,6 +90,21 @@ public class CommunityController {
 		return mv;
 	}
 
+	@GetMapping("/community/updateform")
+	public ModelAndView updateForm(int no) throws Exception {
+		Community community = communityDao.findByNo(no);
+
+		if (community == null) {
+			throw new Exception("해당 번호의 스터디가 없습니다.");
+		}
+
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("community", community);
+		mv.addObject("pageTitle", "스터디위더스 : 커뮤니티수정");
+		mv.setViewName("community/CommunityUpdateForm");
+		return mv;
+	}
+
 	@PostMapping("/community/update")
 	public ModelAndView update(Community community) throws Exception {
 
@@ -90,27 +117,24 @@ public class CommunityController {
 		sqlSessionFactory.openSession().commit();
 
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("community", community);
-		mv.addObject("pageTitle", "스터디위더스 : 커뮤니티수정");
-		mv.setViewName("community/CommunityUpdateForm");
+		mv.setViewName("redirect:detail?no=" + community.getNo());
 		return mv;
 	}
 
 	@GetMapping("/community/delete")
-	public ModelAndView delete(int communityNo) throws Exception {
+	public ModelAndView delete(int no) throws Exception {
 
-		Community community = communityDao.findByNo(communityNo);
+		Community community = communityDao.findByNo(no);
+
 		if (community == null) {
 			throw new Exception("해당 번호의 게시글이 없습니다.");
 		}
 
-		communityDao.delete(communityNo);
+		communityDao.delete(no);
 		sqlSessionFactory.openSession().commit();
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:list?no=" + community.getCategory());
-		//		mv.setViewName("redirect:list?no=" + community.getCategory());
-		//		mv.setViewName("redirect:list?no=" + community.getNo());
 		return mv;
 	}
 }
