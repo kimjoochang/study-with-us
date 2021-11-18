@@ -25,7 +25,9 @@ public class CommentController {
 	public ModelAndView add(int communityNo, String content, HttpSession session) throws Exception {
 		Comment comment = new Comment();
 		comment.setWriter((Member) session.getAttribute("loginUser"));
+		System.out.println(communityNo);
 		comment.setCommunityNo(communityNo);
+		System.out.println(comment.getCommunityNo());
 		comment.setContent(content);
 
 		commentDao.insert(comment);
@@ -33,6 +35,8 @@ public class CommentController {
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:../detail?no=" + communityNo);
+		//		mv.setViewName("community/CommunityDetail");
+
 		return mv;
 	} 
 
