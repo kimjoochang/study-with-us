@@ -183,15 +183,15 @@
         
         <form action='update' method='post'>
 		<c:choose>
-			<c:when test="${community.category eq 0}">
+			<c:when test="${community.no eq 0}">
 				<c:set var="type" value="정보" />
 			</c:when>
 
-			<c:when test="${community.category eq 1}">
+			<c:when test="${community.no eq 1}">
 				<c:set var="type" value="질문" />
 			</c:when>
 
-			<c:when test="${community.category eq 2}">
+			<c:when test="${community.no eq 2}">
 				<c:set var="type" value="스몰톡" />
 			</c:when>
 		</c:choose>

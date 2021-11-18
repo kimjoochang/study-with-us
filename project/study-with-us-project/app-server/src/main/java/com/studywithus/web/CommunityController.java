@@ -31,9 +31,8 @@ public class CommunityController {
 
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("communityList", communityList);
+		mv.addObject("categoryNo", categoryNo);
 		mv.addObject("pageTitle", "스터디위더스 : 커뮤니티검색결과");
-		//		mv.setViewName("community/CommunityList");
-		//		mv.setViewName("redirect:list?no=" + community.getCategory());
 		mv.setViewName("community/CommunityList");
 		return mv;
 	}
@@ -44,6 +43,7 @@ public class CommunityController {
 
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("communityList", communityList);
+		mv.addObject("categoryNo", no);
 		mv.addObject("pageTitle", "스터디위더스 : 커뮤니티목록");
 		mv.setViewName("community/CommunityList");
 		return mv;
@@ -117,7 +117,6 @@ public class CommunityController {
 		sqlSessionFactory.openSession().commit();
 
 		ModelAndView mv = new ModelAndView();
-		//		mv.addObject("community", community);
 		mv.setViewName("redirect:detail?no=" + community.getNo());
 		return mv;
 	}
@@ -136,8 +135,6 @@ public class CommunityController {
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:list?no=" + community.getCategory());
-		//		mv.setViewName("redirect:list?no=" + community.getCategory());
-		//		mv.setViewName("redirect:list?no=" + community.getNo());
 		return mv;
 	}
 }
