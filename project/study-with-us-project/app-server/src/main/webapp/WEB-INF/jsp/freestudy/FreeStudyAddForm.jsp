@@ -23,7 +23,7 @@ trimDirectiveWhitespaces="true" %>
     
   <header class="freepagetop">
 
-    <form action='add'>
+    <form action='add' method="post">
       
       <div class="study-box">
       <fieldset class="menu">
@@ -69,7 +69,7 @@ trimDirectiveWhitespaces="true" %>
           <option>--구/군--</option>
         </select>
         
-        <script language=javascript>
+        <script type="text/javascript">
           
           var cat1_num = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
           var cat1_name = new Array('서울','부산','대구','인천','광주','대전','울산','강원','경기','경남','경북','전남','전북','제주','충남','충북');
@@ -168,19 +168,20 @@ trimDirectiveWhitespaces="true" %>
 </div>
 
 <div class="study-content-line">
-  <label class="study-content-label" for='content'>내용</label> 
-  <textarea cols="69" rows="10" name='content' placeholder="개설할 스터디 내용을 입력해주세요."></textarea>
-</div>
-
-<div class="study-content-line">
-  <label class="study-content-label" for='category'>카테고리</label> 
-  <input type='text' name='category' placeholder="개설할 스터디 카테고리를 입력해주세요."><br>
+  <label for='category'>카테고리</label> 
+  <input id='category' type='text' name='category'>
 </div>
 
 <div class="study-content-line">
   <label class="study-content-label" for='maxMembers'>정원</label> 
-  <input type='number' id='maxMembers' name='maxMembers' placeholder="ex) 6명"정원><br>
-</div>  
+  <input type='number' id='maxMembers' name='maxMembers' placeholder="ex) 4" 정원><br>
+</div>
+  
+<div class="study-content-line">
+  <label class="study-content-label" for='content'>내용</label> 
+  <textarea cols="69" rows="10" name='content' placeholder="개설할 스터디 내용을 입력해주세요."></textarea>
+</div>
+
 
 <%Date nowDate = new Date(System.currentTimeMillis()); %>
 
@@ -194,14 +195,12 @@ trimDirectiveWhitespaces="true" %>
   <input id='endDate' type='date' min ="<%=nowDate%>" name='endDate'>
 </div>
 
-<div class="study-content-line">
-  <label for='category'>카테고리</label> 
-  <input id='category' type='text' name='category'>
-</div>
+<label for='writer'>작성자</label> 
+<input id='writer' type='text' value='${loginUser.nickname}' readonly><br>
 
 </div><!--study-form-content-->
-<br>
 
+<br>
 <div class="study-bottom-button">
   <input class="input5" type="reset" value="초기화">
   <input class="input5" type="submit" value="등록">

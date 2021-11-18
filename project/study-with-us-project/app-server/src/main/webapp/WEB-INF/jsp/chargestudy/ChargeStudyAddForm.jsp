@@ -4,6 +4,7 @@
     
 <%@page import="com.studywithus.domain.Member"%>
 <%@ page import="java.sql.Date"%>
+
 <% Member loginUser = (Member) session.getAttribute("loginUser"); %>
 
 
@@ -22,11 +23,13 @@
     <jsp:include page="../header.jsp"></jsp:include>
 
 <header class="freepagetop">
+
   <form action='add' method="post">
 
     <div class="study-box">
       <fieldset class="menu">
         <div class="study-form-content">
+        
   <h1 class="study-content-category">멘토링 등록</h1>
   <hr>
 
@@ -47,8 +50,18 @@
 </div> <!--study-area-div-->
 
 <div class="study-content-line">
-  <label for='title'>제목</label> 
+  <label for='title'>제목</label>
   <input id='title' type='text' name='title' placeholder="제목을 입력해주세요.">
+</div>
+
+<div class="study-content-line">
+  <label for='category'>카테고리</label> 
+  <input id='category' type='text' name='category'>
+</div>
+
+<div class="study-content-line">
+  <label for='maxMembers'>정원</label> 
+  <input id='maxMembers' type='number' name='maxMembers' placeholder="ex) 4">
 </div>
 
 <div class="study-content-line">
@@ -69,23 +82,12 @@
 </div>
 
 <div class="study-content-line">
-  <label for='category'>카테고리</label> 
-  <input id='category' type='text' name='category'>
-</div>
-
-<div class="study-content-line">
-  <label for='maxMembers'>정원</label> 
-  <input id='maxMembers' type='number' name='maxMembers' placeholder="ex) 6명">
-</div>
-
-<div class="study-content-line">
   <label for='price'>금액</label> 
   <input id='price' type='text' name='price' placeholder="ex) 10000">
 </div>
 
-  <label for='writer'>작성자</label> 
-
-<input id='writer' type='email' value='${loginUser.email}' readonly><br>
+ <label for='writer'>작성자</label> 
+<input id='writer' type='text' value='${loginUser.nickname}' readonly><br>
 
 </div>
 

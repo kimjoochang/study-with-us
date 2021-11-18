@@ -19,9 +19,10 @@
     .interest_icon {
       width : 50px;
     }
- #close, button {
- all : unset;
- }
+    
+	 #close, button {
+	 all : unset;
+	 }
  
  .modal {
   top: 0;
@@ -123,13 +124,13 @@ text-align: center;
     
     <div class="form-group">
       <label for='f-writer'>작성자</label> 
-      <input id='f-writer' type='email' name='writer' value='${chargeStudy.writer.email}' readonly><br>
+      <input id='f-writer' type='text' name='writer' value='${chargeStudy.writer.nickname}' readonly><br>
     </div>
-
 
     <div class="form-group">
       <label class="study-content2" for='f-content'>내용</label> 
-      <input class="study-content-box" id='f-content' type='text' name='content' value='${chargeStudy.content}' readonly><br>
+      <input class="study-content-box" id='f-content' type='text' 
+      name='content' cols="69" rows="10" value='${chargeStudy.content}' readonly><br>
     </div>
     
     <label for='f-startDate'>시작일</label> 
