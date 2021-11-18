@@ -3,6 +3,10 @@ package com.studywithus.domain;
 import java.sql.Date;
 
 public class Member {
+  public static final int GENERAL_MEMBER = 0;
+  public static final int MENTOR = 1;
+  public static final int ADMIN = 2;
+
   private int no; // 회원 번호
   private String name; // 회원 이름
   private String email; // 회원 이메일

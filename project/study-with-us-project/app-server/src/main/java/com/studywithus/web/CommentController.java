@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.studywithus.dao.CommentDao;
+import com.studywithus.dao.CommunityDao;
 import com.studywithus.domain.Comment;
 import com.studywithus.domain.Member;
 
@@ -17,39 +18,40 @@ import com.studywithus.domain.Member;
 public class CommentController {
 
 	@Autowired SqlSessionFactory sqlSessionFactory;
+	@Autowired CommunityDao communityDao;
 	@Autowired CommentDao commentDao;
 
 	@PostMapping("/community/comment/add")
-	public ModelAndView add(Comment comment, HttpSession session) throws Exception {
-
+	public ModelAndView add(int communityNo, String content, HttpSession session) throws Exception {
+		Comment comment = new Comment();
 		comment.setWriter((Member) session.getAttribute("loginUser"));
+		comment.setCommunityNo(communityNo);
+		comment.setContent(content);
 
 		commentDao.insert(comment);
 		sqlSessionFactory.openSession().commit();
 
 		ModelAndView mv = new ModelAndView();
-		//mv.setViewName("community/CommnityDetail");
+		mv.setViewName("redirect:../detail?no=" + communityNo);
 		return mv;
 	} 
 
+	@GetMapping("/community/comment/delete")
+	public ModelAndView delete(int commentNo, HttpSession session) throws Exception {
 
-	@GetMapping("/comment/delete")
-	public ModelAndView delete(int no) throws Exception {
+		Comment comment = commentDao.findByNo(commentNo);
 
-		Comment comment = commentDao.findByNo(no);
 		if (comment == null) {
 			throw new Exception("해당 번호의 댓글이 없습니다.");
 		}
 
-		commentDao.delete(no);
+		commentDao.delete(commentNo);
 		sqlSessionFactory.openSession().commit();
 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("redirect:list");
+		mv.setViewName("redirect:../detail?no=" + comment.getCommunityNo());
 		return mv;
 	}
-	/*
-	 */
 }
 
 

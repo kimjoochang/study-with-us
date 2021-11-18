@@ -132,7 +132,7 @@ margin-right:10px;
   left: 35%;
   width: 50%;
   height: 55%;
-  background-color: snow;
+  background-color: white;
   opacity: 0.95;
   padding: 30px 30px;
   border-radius: 10px;
@@ -239,7 +239,7 @@ text-align: center;
               <a id="open1" class="nav-link" href="#">Sign Up / In</a>
               </c:if>
               <c:if test="${loginUser ne null}">
-              <a id="open1" class="nav-link" href="user/logout">Logout</a>
+              <a class="nav-link" href="user/logout">Logout</a>
               </c:if>
             </li>
             <li class="nav-item">
@@ -438,14 +438,14 @@ text-align: center;
         <div class="modal2_content">
           <div class="form_box">
             <form action='mentorapplication/add' method='post'>
-              <input class="form_input_title" type='text' name='selfIntro' size=36
-                maxlength=30 placeholder="멘토링 소개에 들어갈 자기소개를 입력하세요.">
-              <textarea class="input_content" name="content" id="textarea"
-                cols="40" rows="5"></textarea>
-              <input class="form_input_title" type='text' name='subject' size=36
-                maxlength=30 placeholder="개설할 멘토링 주제를 입력하세요.">
-              <textarea class="input_content" name="content" id="textarea"
-                cols="40" rows="5"></textarea>
+                <br>
+              <textarea class="input_content" name="selfIntroduction" id="textarea"
+                cols="40" rows="5" placeholder="멘토링 소개에 들어갈 자기소개를 입력하세요."></textarea>
+                <br>
+                <br>
+                <br>
+              <textarea class="input_content" name="subject" id="textarea"
+                cols="40" rows="5" placeholder="개설할 멘토링 주제를 입력하세요."></textarea>
               <div class="form_buttons">
                 <input type="submit" onclick="offClick()" value="등록"> 
                 <input id="close2" type="button" value="취소">
@@ -591,7 +591,7 @@ text-align: center;
         <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
       </div>
 
-      <div class="title_img"><img src="../img/스터디위더스.png"></img></div>
+      <div class="title_img"><img src="${contextPath}/img/스터디위더스.png"></img></div>
       <!-- 추가 -->
       <div class="modal-body mx-4">
 

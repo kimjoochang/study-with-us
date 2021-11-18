@@ -90,10 +90,10 @@ a{
             <a href='form?categoryNo=2'>스몰톡</a>
         </div>
         
-        <form action='add' target="CommunityList.jsp">
+        <form action='add' method='post'">
             카테고리 : ${type}<br>
             <input type='hidden' name='categoryNo' value='${categoryNo}'><br>
-            제목 <br><input type='text' name='title' size=48 maxlength=30><br><br>
+            제목<br><input type='text' name='title' size=48 maxlength=30><br><br>
             내용<br> 
             <textarea name="content" id="textarea" cols="50" rows="10"></textarea><br><br><br>
         <input id=button type="submit" onclick="window.close()" value="등록">

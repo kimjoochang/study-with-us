@@ -221,7 +221,7 @@ h1 {
                     <!--모달 화면-->
                     <div class="modal_content">
                       <div class="form_box">
-                        <form action='approve' method='post'>
+                        <form action='../mentorapplication/approve' method='post'>
                         <input type="hidden" name="no" value="${mentorApplication.no}">
                         <input type="hidden" name="applicantNo" value="${mentorApplication.applicant.no}">
                           <textarea class="input_content" name="selfIntro"
@@ -248,7 +248,7 @@ h1 {
                     <!--모달 화면-->
                     <div class="modal_content">
                       <div class="form_box">
-                        <form action='reject' method='post'>
+                        <form action='../mentorapplication/reject' method='post'>
                           <input type="hidden" name="no" value="${mentorApplication.no}">
                           <textarea class="input_content" name="remarks"
                             id="textarea" cols="40" rows="5" placeholder="거절 사유를 입력하세요."></textarea>

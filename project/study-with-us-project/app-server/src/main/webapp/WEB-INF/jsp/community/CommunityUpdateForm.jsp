@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<form action='update'>
+<form action='update' method='post'>
     <label for='f-no'>번호</label> 
     <input id='f-no' type='text' name='no' value='${community.no}' readonly><br>
     
