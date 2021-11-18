@@ -99,6 +99,7 @@ h1 {
 			<div class="search-view">
 			<form class="search-form" action="search">
 				<input type="search" name="keyword" placeholder="키워드를 검색해주세요." class="search-input">
+				<input type="hidden" name="categoryNo" value="${community.category}" >
 				<button type="submit" class="search-button">
 						<img class="reading-glasses-icon" src="${contextPath}/img/search icon.png"></button>
 					<!--
@@ -315,6 +316,7 @@ trList.forEach(function(trTag) {
 });
 
   </script>
+  
 </body>
 </html>
 

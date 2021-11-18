@@ -8,12 +8,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>커뮤니티 상세</title>
+<title>스터디위더스 : 커뮤니티상세</title>
 
 <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
-
 <link rel="stylesheet" href="${contextPath}/css/theme.css">
 </head>
+
 <style>
 body {
 	width: 2000px;
@@ -94,7 +94,7 @@ body {
 .icon_count {
 	color: black;
 	margin-left: 5px;
-margin-top : 0.8rem;
+	margin-top: 0.8rem;
 }
 
 .comment_header {
@@ -174,6 +174,9 @@ textarea {
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="container">
+
+		<form action="detail">
+
 		<c:choose>
 			<c:when test="${community.category eq 0}">
 				<c:set var="type" value="정보" />
@@ -207,16 +210,18 @@ textarea {
 				<div class="cmnt_icon">
 					<div class="community_buttons">
 						<c:if test="${loginUser.no eq community.writer.no}">
-							<a id="community_button" href="updateform?no=${community.no}">수정</a>
-							<a id="community_button" href="delete?no=${community.no}">삭제</a>
+							<a id="community_button"
+								href="updateform?no=${community.no}">수정</a>
+							<a id="community_button"
+								href="delete?no=${community.no}">삭제</a>
 						</c:if>
 					</div>
 					<div class="info_item">
 						<img class="icon" src="${contextPath}/img/eyeIcon.png">
 						<p class="icon_count">${community.viewCount}</p>
-						
+
 						<div class="info_item">
-							<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">  
+							<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
 							<p class="icon_count">${community.like}</p>
 						</div>
 					</div>
@@ -224,8 +229,7 @@ textarea {
 			</section>
 
 			<section class="comment_header">
-				<div class="comment_count">${fn:length(comments)}개의 댓글이 있습니다.
-				</div>
+				<div class="comment_count">${fn:length(comments)}개의댓글이있습니다.</div>
 			</section>
 			<div class="comment_input">
 				<form action='comment/add' method='post'>
@@ -261,8 +265,9 @@ textarea {
 					</li>
 				</ul>
 			</c:forEach>
-		</div>
-	</div>
+		</div> <!--wrapper-->
+	</form> <!--detail-->
+	</div> <!--container-->
 
 	<script>
     const addComment = () => {
