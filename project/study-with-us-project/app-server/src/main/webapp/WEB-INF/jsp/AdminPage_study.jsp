@@ -277,7 +277,6 @@ h1 {
  // 삭제사유 모달 여는 함수
 	const openModal = (e) => {
 	const modal = document.getElementById(e);
-		console.log(modal);
 		 modal.classList.remove('hidden');
 	}
 	
@@ -290,7 +289,6 @@ h1 {
 	 
 	 console.log(param);
 	 const reasonModal = document.getElementById(param);
-		console.log(reasonModal);
 		reasonModal.classList.remove('hidden');
 	  }
 

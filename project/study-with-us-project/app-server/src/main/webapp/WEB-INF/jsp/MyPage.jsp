@@ -221,12 +221,12 @@ input {
 								<div class="box">
 
 									닉네임 &nbsp;&nbsp;&nbsp;&nbsp; <input class="nickname"
-										value="쫄지마"></input>
+										value="${loginUser.nickname}"></input>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<button type="button" class="btn btn-primary btn-sm">변경</button>
 									<br> 이메일 &nbsp;&nbsp;&nbsp;&nbsp; <input class="email"
 										type="email" name="email" id="email"
-										value="studywithus@gmail.com"></input>
+										value="${loginUser.email}"></input>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<button type="button" class="btn btn-primary btn-sm">변경</button>
 									<br> 비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
@@ -242,7 +242,7 @@ input {
 							<div class="box2">
 
 								휴대폰 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="ph" type="text"
-									value="010-1234-5678"></input>
+									value="${loginUser.phoneNumber}"></input>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<button type="button" class="btn btn-primary btn-sm">변경</button>
 							</div>
