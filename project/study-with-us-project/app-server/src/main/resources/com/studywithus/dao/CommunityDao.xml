@@ -63,11 +63,12 @@
 		cmnt_no desc
 	</sql>
 
-	<select id="findAll" resultMap="CommunityMap" parameterType="int">
+	<select id="findAll" resultMap="CommunityMap">
 		<include refid="select1"/>
 		where
 		  cm.category=#{categoryNo}
 		<include refid="order1"/>
+		limit ${communityStartNo}, 8
 	</select>
 
 	<!-- ForLikes <select id="findAll" resultMap="CommunityMap"> select count(member_no) 
@@ -83,6 +84,13 @@
 		<include refid="select1" />
 		where
 		cm.cmnt_no=#{no}
+	</select>
+	
+	<select id="communityCount" resultType="int">
+	select 
+	count(*) 
+	from cmnt 
+	where category=#{categoryNo};
 	</select>
 
 	<select id="findByKeyword" resultMap="CommunityMap">
