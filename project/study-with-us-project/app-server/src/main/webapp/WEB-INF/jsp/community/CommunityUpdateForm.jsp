@@ -267,9 +267,9 @@
 </div> <!--wrapper-->
 
 </form>
+<jsp:include page="../footer.jsp"></jsp:include>
 </div> <!--container-->
 
-<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
 

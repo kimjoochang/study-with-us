@@ -28,8 +28,8 @@
 
     <div class="study-box">
       <fieldset class="menu">
-        <div class="study-form-content">
-        
+    
+        <div class="study-form-content">    
   <h1 class="study-content-category">멘토링 등록</h1>
   <hr>
 
@@ -56,7 +56,12 @@
 
 <div class="study-content-line">
   <label for='category'>카테고리</label> 
-  <input id='category' type='text' name='category'>
+  <select name = category>
+    <option value="" selected="selected">---카테고리---</option>
+    <option value="category">일반기업</option>
+    <option value="category" >공기업/공무원</option>
+    <option value="category" >교육</option>
+  </select>
 </div>
 
 <div class="study-content-line">
@@ -66,7 +71,7 @@
 
 <div class="study-content-line">
   <label class="study-content-label" for='content'>내용</label>
-  <textarea name ="content" cols="69" rows="10" placeholder="등록할 스터디 내용을 입력해주세요."> </textarea>
+  <textarea class = "study-textarea" name ="content" cols="69" rows="10" placeholder="등록할 스터디 내용을 입력해주세요."> </textarea>
 </div>
 
 <%Date nowDate = new Date(System.currentTimeMillis()); %>
@@ -86,10 +91,7 @@
   <input id='price' type='text' name='price' placeholder="ex) 10000">
 </div>
 
- <label for='writer'>작성자</label> 
-<input id='writer' type='text' value='${loginUser.nickname}' readonly><br>
-
-</div>
+</div><!--study-form-content-->
 
 <br>
 <div class="study-bottom-button">
@@ -102,9 +104,10 @@
 </fieldset> <!-- menu-->
 </form>
 </header> <!-- -->
-</div> <!-- container -->
 
 <jsp:include page="../footer.jsp"></jsp:include>
+</div> <!-- container -->
+
 </body>
 </html>
 

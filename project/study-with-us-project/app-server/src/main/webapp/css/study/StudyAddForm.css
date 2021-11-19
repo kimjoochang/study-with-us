@@ -13,7 +13,10 @@ label {
   font-weight: bolder;
 }
 
-
+.study-onoff-radio {
+  width: 20px;
+  text-align: left;
+}
 .freepagetop{
 -webkit-font-smoothing: antialiased;
 background-attachment: scroll;
@@ -189,4 +192,8 @@ background-color: red;
   display: flex;
   text-align: center;
   justify-content: center;
+}
+
+.study-textarea {
+  width: 560px;
 }

@@ -137,6 +137,7 @@
   </div> <!--wrapper-->
   </div> <!--main_main-->
   
+  <jsp:include page="../footer.jsp"></jsp:include>
 	</div> <!-- container -->
 	
 	<script>
@@ -148,7 +149,6 @@
 	});
 	</script>
 
-<jsp:include page="../footer.jsp"></jsp:include>
 	</body>
 	</html>
 
