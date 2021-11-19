@@ -619,8 +619,8 @@ text-align: center;
           <!--<button type="button" class="btn btn-primary btn-block z-depth-1a">스터디위더스 시작하기</button>-->
         </div>
      </form>
-     
-         <br>
+
+     <br>
          <p class="font-small blue-text d-flex justify-content-end">
          <a href="user/findemail" class="blue-text sl-1">Forgot ID</a> &nbsp;/&nbsp;
          <a href="user/resetpwd" class="blue-text sl-1">PWD</a></p>
@@ -633,7 +633,7 @@ text-align: center;
 
         <div class="row my-3 justify-content-center">
           <div class="sns_container">
-            <div class="sns_icon"> <a><img src="${contextPath}/img/facebook.png"></img></a></div>
+            <div class="sns_icon"><a><img src="${contextPath}/img/facebook.png"></img></a></div>
             <div class="sns_icon"><a><img src="${contextPath}/img/twitter.png"></img></a></div>
             <div class="sns_icon"><a><img src="${contextPath}/img/google.png"></img></a></div>
             <div class="sns_icon"><a><img src="${contextPath}/img/instagram.png"></img></a></div>

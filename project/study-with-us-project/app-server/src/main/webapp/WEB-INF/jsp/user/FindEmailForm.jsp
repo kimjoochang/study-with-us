@@ -189,7 +189,9 @@
 
 
 <body>
-   <jsp:include page="${contextPath}jsp/header.jsp"></jsp:include>
+<!-- 
+   <jsp:include page="${contextPath}/jsp/header.jsp"></jsp:include>
+ -->
     <div class="container"> 
 
   <!--    <header class="freepagetop"> -->
