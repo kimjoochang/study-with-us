@@ -196,11 +196,14 @@ h1 {
 				</table>
 			</div>
 		</div>
+		
+  <c:if test="${totalPageNo < 4}">
 		<div class="total_page_count">
 		<c:forEach var="i" begin="1" end="${totalPageNo}">
-		  <a class="page_count" href='list?no=${categoryNo}&pageNo=${i}'>${i}</a>
+		    <a class="page_count" href='list?no=${categoryNo}&pageNo=${i}'>${i}</a>
     </c:forEach>
 		</div>
+		  </c:if>
 		
 	</div>
 

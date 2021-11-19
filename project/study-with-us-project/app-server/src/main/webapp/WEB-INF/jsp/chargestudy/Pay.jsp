@@ -38,7 +38,7 @@
             name : '스터디위더스 멘토링',
             // ${chargeStudy.title}
             amount : <%=totalPrice%>,
-            buyer_email : '<%=email%>',
+            buyer_email : '${loginUser.email}',
             buyer_name : '<%=name%>',
             buyer_tel : '<%=phoneNumber%>',
             //m_redirect_url : '/'
