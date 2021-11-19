@@ -196,7 +196,7 @@ text-align: center;
 	  <section class="study-info-icon">
 			<div class="item2">
 				<!-- 회원(2) != 작성자-->
-				<c:if test="${chargeStudy.writer.no ne loginUser.no}">
+		    <c:if test="${checkWriter eq 2}">
 					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
 					<c:if test="${result eq 0}">
 						<div class="info_item">
@@ -250,7 +250,7 @@ text-align: center;
     -->
 
     
-<a href='list'>목록</a><br>
+<a class="input-button-bottom" href='list'>목록</a><br>
     
     <c:if test="${chargeStudy.writer.no eq loginUser.no}">
       <a class="input-button-bottom" href='updateform?no=${chargeStudy.no}'>수정</a> 
@@ -296,7 +296,9 @@ text-align: center;
         </div> <!-- modal_content -->
       </div> <!-- modal_overlay -->
     </div> <!-- modal_hidden -->
-</div>
+
+<jsp:include page="../footer.jsp"></jsp:include>
+</div><!--container-->
 
 <script>
 const reqCancel = () => {
@@ -341,6 +343,5 @@ closeBtn.addEventListener('click', closeModal);
 //모달창 영역 밖
 </script>
 
-<jsp:include page="../footer.jsp"></jsp:include>
 </body> <!--유료스터디 제일 큰 포맷-->
 </html>

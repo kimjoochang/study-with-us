@@ -153,17 +153,17 @@
 			</section>
 		-->
 
-		  <!-- 관심목록 추가/삭제 아이콘 출력 -->
+	<!-- 관심목록 추가/삭제 아이콘 출력 -->
     <!-- 글쓴이(0) = 비회원 -->
     <section class="study-info-icon">
       <div class="item2">
         <c:if test="${loginUser eq null}">
             <div class="info_item">
             <img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
-            <p class="icon_count">${chargeStudy.likes}</p> 
+            <p class="icon_count">${freeStudy.likes}</p> 
             
             <img class="icon" src="${contextPath}/img/eyeIcon.png">
-            <p class="icon_count">${chargeStudy.viewCount}</p>
+            <p class="icon_count">${freeStudy.viewCount}</p>
           </div> <!--info_item-->
         </c:if> <!--글쓴이(0) 비회원-->
       </div> <!--item2-->
@@ -173,7 +173,7 @@
 		<section class="study-info-icon">
 			<div class="item2">
 				<!-- 회원(1) = 작성자-->
-				<c:if test="${checkWriter eq 1}">
+				<c:if test="${freeStudy.writer.no eq loginUser.no}">
 					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
 						<c:if test="${result eq 0}">
 							<div class="info_item">
@@ -183,7 +183,7 @@
 								<img class="icon" src="${contextPath}/img/eyeIcon.png">
 								<p class="icon_count">${freeStudy.viewCount}</p>
 
-								<a href='interest/add?no=${freeStudy.no}'><img class="icon" src="../img/interestAdd.png"></a>
+								<a href='interest/add?no=${freeStudy.no}'><img class="icon" src="${contextPath}/img/interestAdd.png"></a>
 								<p class="icon_count">${freeStudy.likes}</p> 
 							</div> <!--info_item-->
 						</c:if> <!-- 글쓴이(1) 관심목록 추가 전 -->
@@ -197,7 +197,7 @@
 								<img class="icon" src="${contextPath}/img/eyeIcon.png">
 								<p class="icon_count">${freeStudy.viewCount}</p>
 
-								<a href='interest/delete?no=${freeStudy.no}'><img class="icon" src="../img/interestDelete.png"></a>
+								<a href='interest/delete?no=${freeStudy.no}'><img class="icon" src="${contextPath}/img/interestDelete.png"></a>
 								<p class="icon_count">${freeStudy.likes}</p> 
 							</div> <!--info_item-->
 						</c:if> <!-- 글쓴이(1) 관심목록 추가 상태인 경우 -->
@@ -209,7 +209,8 @@
 		<section class="study-info-icon">
       <div class="item2">
         <!-- 회원(2) != 작성자-->
-        <c:if test="${freeStudy.writer.no ne loginUser.no}">
+		    <c:if test="${checkWriter eq 2}">
+
           <!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
           <c:if test="${result eq 0}">
             <div class="info_item">
@@ -224,26 +225,27 @@
               </div> <!--info_item-->
             </c:if> <!-- 회원(2) 관심목록 추가 전 -->
             
-            
-						<!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
-						<c:if test="${result eq 1}">
-							<div class="info_item">
-								<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
-								<p class="icon_count">${freeStudy.likes}</p> 
+		<!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
+			<c:if test="${result eq 1}">
+				<div class="info_item">
+					<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
+					<p class="icon_count">${freeStudy.likes}</p> 
 								
-								<img class="icon" src="${contextPath}/img/eyeIcon.png">
-								<p class="icon_count">${freeStudy.viewCount}</p>
+					<img class="icon" src="${contextPath}/img/eyeIcon.png">
+					<p class="icon_count">${freeStudy.viewCount}</p>
 
-								<a href='interest/delete?no=${freeStudy.no}'><img class="icon" src="${contextPath}/img/interestDelete.png"></a>
-							</div> <!--info_item-->
-						</c:if> <!-- 회원(2) 관심목록 추가 상태인 경우 -->
-				</c:if> <!-- checkWriter eq 2 -->
-			</div> <!-- item2 -->
-	  </section> <!--  회원(2) != 작성자 -->
-		<!-- 관심목록 추가/삭제 아이콘 출력 끝!!! -->
-				  <a href='list'>목록</a><br>
-					<a class="input-button-bottom" href='/swu/freestudy/list'> 목록 </a>
-				
+					<a href='interest/delete?no=${freeStudy.no}'><img class="icon" src="${contextPath}/img/interestDelete.png"></a>
+				</div> <!--info_item-->
+			</c:if> <!-- 회원(2) 관심목록 추가 상태인 경우 -->
+			
+		</c:if> <!-- checkWriter eq 2 -->
+	</div> <!-- item2 -->
+	</section> <!--  회원(2) != 작성자 -->
+	<!-- 관심목록 추가/삭제 아이콘 출력 끝!!! -->
+
+
+
+				<a class="input-button-bottom" href='list'>목록</a><br>				
 				
 				<c:if test="${participateResult eq 0}">
 					<a class="input-button-bottom" href='list'> 목록 </a>
@@ -299,6 +301,7 @@
 			</form> <!--detail-->
 		</header> <!--freestudy-top-->
 		
+		<jsp:include page="../footer.jsp"></jsp:include>
 		</div>   <!--container-->
 
 	<script>
@@ -310,7 +313,6 @@
   });
   </script>
   
-<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 <!--무료스터디 제일 큰 포맷-->
 

@@ -394,6 +394,7 @@ main {
  display: flex;
  flex-direction: column;
  box-sizing: inherit;
+ height: 100%;
 }
 
 .uldesign {
@@ -575,4 +576,8 @@ width: 40.3125px;
 
 .icon_count {
   margin-left: 2px;
+}
+
+.container {
+  height: 100%;
 }

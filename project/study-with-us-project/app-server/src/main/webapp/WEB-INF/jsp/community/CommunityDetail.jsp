@@ -88,7 +88,8 @@ body {
 }
 
 .icon {
-	width: 20px;
+width: 20px;
+margin-left: 10px;
 }
 
 .icon_count {
@@ -96,6 +97,32 @@ body {
 	margin-left: 5px;
 	margin-top: 0.8rem;
 }
+
+.info_item{
+align-items: center;
+box-sizing: border-box;
+color: rgb(0, 0, 0);
+cursor: pointer;
+display: flex;
+font-family: "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+font-size: 12px;
+height: 18px;
+xjustify-content: center;
+list-style-image: none;
+list-style-position: outside;
+list-style-type: none;
+text-align: left;
+width: 50px;
+
+text-align: right;
+float: right;
+font-weight: 500;
+margin-top: 2px;
+margin-right: 5px;
+}
+
+.item2 {
+margin-left: 30px;}
 
 .comment_header {
 	font-size: 20px;
@@ -169,6 +196,13 @@ textarea {
 .hidden {
 	display: none;
 }
+
+.study-info-icon {
+  margin-left: 380px;
+  display: flex;
+  text-align: right;
+}
+
 </style>
 
 <body>
@@ -207,21 +241,118 @@ textarea {
 			<section class="cmnt_body">
 				<div class="cmnt_content">${community.content}</div>
 				<div class="cmnt_icon">
-					<div class="community_buttons">
-						<c:if test="${loginUser.no eq community.writer.no}">
-							<a id="community_button" href="updateform?no=${community.no}">수정</a>
-							<a id="community_button"href="delete?no=${community.no}">삭제</a>
-						</c:if>
-					</div>
+
+	<!-- 여기 관심목록 추가 삭제 추가 -->
+	<!-- 관심목록 추가/삭제 아이콘 출력 -->
+		<!-- 글쓴이(0) = 비회원 -->
+		<section class="study-info-icon">
+			<div class="item2">
+				<c:if test="${loginUser eq null}">
+						<div class="info_item">
+						<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
+						<p class="icon_count">${community.like}</p> 
+									
+						<img class="icon" src="${contextPath}/img/eyeIcon.png">
+						<p class="icon_count">${community.viewCount}</p>
+					</div> <!--info_item-->
+				</c:if> <!--글쓴이(0) 비회원-->
+			</div> <!--item2-->
+		</section>
+
+					
+		<section class="study-info-icon">
+			<div class="item2">
+				<!-- 회원(1) = 작성자-->
+				<c:if test="${community.writer.no eq loginUser.no}">
+					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
+						<c:if test="${result eq 0}">
+							<div class="info_item">
+								<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
+								<p class="icon_count">${community.like}</p> 
+											
+								<img class="icon" src="${contextPath}/img/eyeIcon.png">
+								<p class="icon_count">${community.viewCount}</p>
+
+								<a href='interest/add?no=${community.no}'><img class="icon" src="${contextPath}/img/interestAdd.png"></a>
+								<p class="icon_count">${community.like}</p> 
+							</div> <!--info_item-->
+						</c:if> <!-- 글쓴이(1) 관심목록 추가 전 -->
+							
+						<!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
+						<c:if test="${result eq 1}">
+							<div class="info_item">
+								<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
+								<p class="icon_count">${community.like}</p> 
+											
+								<img class="icon" src="${contextPath}/img/eyeIcon.png">
+								<p class="icon_count">${community.viewCount}</p>
+
+								<a href='interest/delete?no=${chargeStudy.no}'><img class="icon" src="${contextPath}/img/interestDelete.png"></a>
+								<p class="icon_count">${community.like}</p> 
+							</div> <!--info_item-->
+						</c:if> <!-- 글쓴이(1) 관심목록 추가 상태인 경우 -->
+				</c:if> <!--checkWriter eq 1-->
+			</div> <!-- item2 -->
+		</section> <!--  회원(1) = 작성자 -->
+
+
+		<section class="study-info-icon">
+			<div class="item2">
+				<!-- 회원(2) != 작성자-->
+				<c:if test="${checkWriter eq 2}">
+					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
+					<c:if test="${result eq 0}">
+						<div class="info_item">
+							<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
+								<p class="icon_count">${community.like}</p> 
+											
+								<img class="icon" src="${contextPath}/img/eyeIcon.png">
+								<p class="icon_count">${community.viewCount}</p>
+
+								<a href='interest/add?no=${community.no}'><img class="icon" src="${contextPath}/img/interestAdd.png"></a>
+								<p class="icon_count">${community.like}</p> 
+							</div> <!--info_item-->
+						</c:if> <!-- 회원(2) 관심목록 추가 전 -->
+										
+						<!-- 관심목록 추가 상태인 경우 삭제 버튼 출력 -->
+						<c:if test="${result eq 1}">
+							<div class="info_item">
+								<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
+								<p class="icon_count">${community.like}</p> 
+											
+								<img class="icon" src="${contextPath}/img/eyeIcon.png">
+								<p class="icon_count">${community.viewCount}</p>
+
+								<a href='interest/delete?no=${community.no}'><img class="icon" src="${contextPath}/img/interestDelete.png"></a>
+							</div> <!--info_item-->
+						</c:if> <!-- 회원(2) 관심목록 추가 상태인 경우 -->
+					</c:if> <!-- checkWriter eq 2 -->
+				</div> <!-- item2 -->
+			</section> <!--  회원(2) != 작성자 -->
+			<!-- 관심목록 추가/삭제 아이콘 출력 끝!!! -->
+
+
+					
+			<div class="community_buttons">
+				<c:if test="${loginUser.no eq community.writer.no}">
+					<a id="community_button" href="updateform?no=${community.no}">수정</a>
+					<a id="community_button"href="delete?no=${community.no}">삭제</a>
+				</c:if>
+			</div>
+
+					
+			
+				<!--
 					<div class="info_item">
 						<img class="icon" src="${contextPath}/img/eyeIcon.png">
 						<p class="icon_count">${community.viewCount}</p>
-
+							
 						<div class="info_item">
 							<img class="icon" src="${contextPath}/img/fillingHeartIcon.png">
 							<p class="icon_count">${community.like}</p>
 						</div>
 					</div>
+				-->
 				</div>
 			</section>
 
@@ -263,6 +394,8 @@ textarea {
 				</ul>
 			</c:forEach>
 		</div> <!--wrapper-->
+
+	<jsp:include page="../footer.jsp"></jsp:include>
 	</div> <!--container-->
 
 	<script>

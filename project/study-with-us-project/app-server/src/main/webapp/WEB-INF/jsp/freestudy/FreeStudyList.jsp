@@ -136,6 +136,7 @@ trimDirectiveWhitespaces="true" %>
 </div> <!-- main_main -->
 </div> <!-- wrapper -->
 
+<jsp:include page="../footer.jsp"></jsp:include>
 </div> <!-- container -->
 
 <script>
@@ -147,7 +148,6 @@ trimDirectiveWhitespaces="true" %>
   });
   </script>
 
-<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
 
