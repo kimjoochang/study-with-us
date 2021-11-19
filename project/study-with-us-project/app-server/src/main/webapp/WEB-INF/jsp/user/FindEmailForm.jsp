@@ -189,9 +189,7 @@
 
 
 <body>
-<!-- 
-   <jsp:include page="${contextPath}/jsp/header.jsp"></jsp:include>
- -->
+<jsp:include page="../header.jsp"></jsp:include>
     <div class="container"> 
 
   <!--    <header class="freepagetop"> -->
@@ -243,7 +241,6 @@
 </form>     
    <!--    </header>freepagetop-->
     </div> <!-- container -->
-    <jsp:include page="${contextPath}/jsp/footer.jsp"></jsp:include> 
-
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
