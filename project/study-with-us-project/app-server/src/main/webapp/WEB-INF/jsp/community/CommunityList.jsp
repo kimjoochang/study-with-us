@@ -71,6 +71,16 @@ h1 {
   display: none;
 }
 
+.total_page_count {
+  text-align : center;
+}
+
+.page_count {
+  color : black;
+  font-size : 15px;
+  margin-left : 3px;
+}
+
 
 </style>
 
@@ -87,48 +97,6 @@ h1 {
 				<input type="hidden" name="categoryNo" value="${categoryNo}" >
 				<button type="submit" class="search-button">
 						<img class="reading-glasses-icon" src="${contextPath}/img/search icon.png"></button>
-					<!--
-				</button>
-					<div class="search-option">
-						<div>
-							<input name="type" type="radio" value="type-users" id="type-users">
-							<label for="type-users">
-								<svg class="edit-pen-title">
-									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
-								</svg>
-								<span>Users</span>
-							</label>
-						</div>
-						
-						<div>
-							<input name="type" type="radio" value="type-posts" id="type-posts">
-							<label for="type-posts">
-								<svg class="edit-pen-title">
-									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#post"></use>
-								</svg>
-								<span>Posts</span>
-							</label>
-						</div>
-						<div>
-							<input name="type" type="radio" value="type-images" id="type-images">
-							<label for="type-images">
-								<svg class="edit-pen-title">
-									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#images"></use>
-								</svg>
-								<span>Images</span>
-							</label>
-						</div>
-						<div>
-							<input name="type" type="radio" value="type-special" id="type-special" checked="">
-							<label for="type-special">
-								<svg class="edit-pen-title">
-									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#special"></use>
-								</svg>
-								<span>Special</span>
-							</label>
-						</div>
-					</div>
-				-->
 			  </form> 
 			</div> <!--검색창-->
 
@@ -151,8 +119,8 @@ h1 {
 					</div>
 					<div class="form_box">
 						<form action='add' target="CommunityList.jsp" method='post'>
-							<input type='hidden' name='categoryNo' value='${categoryNo}'>
-							<input class="form_input_title" type='text' name='title' size=36
+							<input type='hidden' name='category' value='${categoryNo}'>
+							<input class="form_input_title" type='text' name='title' size=40
 								maxlength=30 placeholder="제목을 입력하세요.">
 							<textarea class="input_content" name="content" id="textarea"
 								cols="40" rows="5"></textarea>
@@ -170,9 +138,9 @@ h1 {
 		<div class="main-wrapper">
 			<div class="side_menu">
 				<ul class="categorys">
-					<li><a class="info_text" href='list?no=0'>정보 커뮤니티</a><br>
-					<li><a class="qa_text" href='list?no=1'>질문 커뮤니티</a><br>
-					<li><a class="talk_text" href='list?no=2'>스몰톡 커뮤니티</a><br>
+					<li><a class="info_text" href='list?no=0&pageNo=1'>정보 커뮤니티</a><br>
+					<li><a class="qa_text" href='list?no=1&pageNo=1'>질문 커뮤니티</a><br>
+					<li><a class="talk_text" href='list?no=2&pageNo=1'>스몰톡 커뮤니티</a><br>
 				</ul>
 			</div>
 
@@ -192,15 +160,15 @@ h1 {
 
 					<c:forEach items="${communityList}" var="community">
 						<c:choose>
-							<c:when test="${community.no eq 0}">
+							<c:when test="${community.category eq 0}">
 								<c:set var="type" value="정보" />
 							</c:when>
 
-							<c:when test="${community.no eq 1}">
+							<c:when test="${community.category eq 1}">
 								<c:set var="type" value="질문" />
 							</c:when>
 
-							<c:when test="${community.no eq 2}">
+							<c:when test="${community.category eq 2}">
 								<c:set var="type" value="스몰톡" />
 							</c:when>
 						</c:choose>
@@ -228,6 +196,12 @@ h1 {
 				</table>
 			</div>
 		</div>
+		<div class="total_page_count">
+		<c:forEach var="i" begin="1" end="${totalPageNo}">
+		  <a class="page_count" href='list?no=${categoryNo}&pageNo=${i}'>${i}</a>
+    </c:forEach>
+		</div>
+		
 	</div>
 
   <script>

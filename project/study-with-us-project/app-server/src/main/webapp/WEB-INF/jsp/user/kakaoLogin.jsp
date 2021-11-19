@@ -23,13 +23,18 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 Kakao.init('f652ed3e8b0bd8b9aab3df349bb8ce74'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
+
 //카카오로그인
 function kakaoLogin() {
     Kakao.Auth.login({
       success: function (response) {
         Kakao.API.request({
           url: '/v2/user/me',
+          data: {
+        	  properties: {
+        		  
+        	  }
+          }
           success: function (response) {
             console.log(response)
           },
