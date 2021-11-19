@@ -19,6 +19,7 @@
 
 <title>스터디위더스 : 멘토링결제</title>
 
+<!-- 아래는 아임포트 라이브러리 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
@@ -35,16 +36,17 @@
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
             name : '스터디위더스 멘토링',
+            // ${chargeStudy.title}
             amount : <%=totalPrice%>,
             buyer_email : '<%=email%>',
             buyer_name : '<%=name%>',
             buyer_tel : '<%=phoneNumber%>',
-            //m_redirect_url : 'http://www.naver.com'
+            //m_redirect_url : '/'
         }, function(rsp) {
             if ( rsp.success ) {
                 //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
                 jQuery.ajax({
-                    url: "/chargestudy/paycomplete", //cross-domain error가 발생하지 않도록 주의해주세요
+                    url: "/chargestudy/paycomplete", //cross-domain error가 발생하지 않도록 주의
                     type: 'POST',
                     dataType: 'json',
                     data: {
@@ -72,7 +74,7 @@
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
                 //실패시 이동할 페이지
-                location.href="<%=request.getContextPath()%>/chargestudy/payFail";
+                location.href="<%=request.getContextPath()%>/chargestudy/payfail";
                 alert(msg);
             }
         });
