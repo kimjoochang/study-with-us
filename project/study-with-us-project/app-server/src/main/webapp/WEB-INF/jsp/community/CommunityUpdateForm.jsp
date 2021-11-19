@@ -5,6 +5,7 @@
 <%@page import="com.studywithus.domain.Community"%>
 <%@page import="java.util.Collection"%>
 <%@page import="com.studywithus.dao.CommunityDao"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -228,7 +229,7 @@
 
     <div>
         <label for='f-writer'>작성자</label> 
-        <input id='f-writer' type='email' name='writer' value='${community.writer.email}' readonly><br>
+        <input id='f-writer' type='email' value='${community.writer.email}' readonly><br>
     </div>
 
     <div>
@@ -251,7 +252,7 @@
     
     <div class="community_buttons">
         <c:if test="${loginUser.no eq community.writer.no}">
-            <a id="community_button" href="detail?no=${community.no}">수정</a>
+            <button type = "submit">수정</button>
             <a id="community_button" href="detail?no=${community.no}">취소</a>
         </c:if>
     </div>
