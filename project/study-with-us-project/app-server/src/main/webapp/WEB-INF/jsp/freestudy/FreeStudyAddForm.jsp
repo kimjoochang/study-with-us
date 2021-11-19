@@ -46,8 +46,8 @@ trimDirectiveWhitespaces="true" %>
           <option value="" selected="selected">---온/오프라인---</option>
           <option value=0>온라인</option>
           <option value=1 >오프라인</option>
-        -->
       </select>
+        -->
       <div class="study-content-line">
       <form name="form" method="post">
           <label class="study-content-label" for='onOffLine'>온/오프라인</label>
@@ -55,6 +55,7 @@ trimDirectiveWhitespaces="true" %>
           <input class = "study-onoff-radio" type="radio" name="type" value="2" onclick="view()">온라인
           
           <div class="study-content-line" id="cattery" style="visibility:hidden;"></div>
+       </form>
         </div> <!--study-content-line-->
          
       <div class="study-content-line">
@@ -79,7 +80,6 @@ trimDirectiveWhitespaces="true" %>
               <option value='충북'>충북</option>
             </select>
           </form>
-
         <!-- -->
             <script language="javascript">
               function view(){
@@ -197,13 +197,13 @@ trimDirectiveWhitespaces="true" %>
 </div> <!--study-area-div-->
 
 <div class="study-content-line">
-<label for='category'>카테고리</label> 
-<select name = category>
-  <option value="" selected="selected">---카테고리---</option>
-  <option name="category" value="일반기업" >일반기업</option>
-  <option name="category" value="공기업/공무원" >공기업/공무원</option>
-  <option name="category" value="교육" >교육</option>
-</select>
+  <label for='category'>카테고리</label> 
+  <select name = category>
+    <option value="" selected="selected">---카테고리---</option>
+    <option value="일반기업">일반기업</option>
+    <option value="공기업" >공기업</option>
+    <option value="교육" >교육</option>
+  </select>
 </div>
 
 <div class="study-content-line">
@@ -242,7 +242,8 @@ trimDirectiveWhitespaces="true" %>
   <button class="input5" type="button" onclick="location.href='list'">취소</button><br>
 </div>
 
-</fieldset>
+</fieldset> <!-- menu-->
+</div><!-- "study-box" -->
  </form>
 </header>
 

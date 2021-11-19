@@ -58,9 +58,9 @@
   <label for='category'>카테고리</label> 
   <select name = category>
     <option value="" selected="selected">---카테고리---</option>
-    <option value="category">일반기업</option>
-    <option value="category" >공기업/공무원</option>
-    <option value="category" >교육</option>
+    <option value="일반기업">일반기업</option>
+    <option value="공기업" >공기업</option>
+    <option value="교육" >교육</option>
   </select>
 </div>
 
@@ -102,6 +102,7 @@
 </div>
 
 </fieldset> <!-- menu-->
+</div><!-- "study-box" -->
 </form>
 </header> <!-- -->
 
