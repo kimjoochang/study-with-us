@@ -342,6 +342,8 @@ textarea {
         </ul>
       </c:forEach>
     </div> <!--wrapper-->
+    <jsp:include page="../footer.jsp"></jsp:include>
+
   </div> <!--container-->
 
   <script>
