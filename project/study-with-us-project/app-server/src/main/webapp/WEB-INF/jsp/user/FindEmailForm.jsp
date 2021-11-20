@@ -212,7 +212,7 @@
           </div>
 
           <div class="pw-find-button">
-            <input class="input-button-find" type="submit" value="찾기" href="showemail"> 
+            <input class="input-button-find" type="submit" value="찾기"> 
           </div> 
           
         </div> <!--pw-content-->

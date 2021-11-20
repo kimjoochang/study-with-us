@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="${contextPath}/css/theme.css">
     <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
     <link rel="stylesheet" href="${contextPath}/css/study/StudyDetail.css">
+	<link rel="stylesheet" href="${contextPath}/css/footer.css">
 </head>
 
   <style type="text/css"> 
@@ -244,8 +245,6 @@
 	<!-- 관심목록 추가/삭제 아이콘 출력 끝!!! -->
 
 
-
-				<a class="input-button-bottom" href='list'>목록</a><br>				
 				
 				<c:if test="${participateResult eq 0}">
 					<a class="input-button-bottom" href='list'> 목록 </a>
@@ -257,47 +256,15 @@
 					<a class="input-button-bottom" href='applycancel?no=${freeStudy.no}'>스터디 신청 취소</a>
 				</c:if>
 		
-			<!--  스터디 신청/취소 유료 결제 모달 폼이랑 같이 진행하는 건가?-->
-					
-<!--  
-					<div class="study-bottom-button">
-						<c:choose>
-							<c:when test="${loginUser eq null}">
-							</c:when>
+			<a class="input-button-bottom" href='list'>목록</a><br>
+    
+				<c:if test="${freeStudy.writer.no eq loginUser.no}">
+					<a class="input-button-bottom" href='updateform?no=${freeStudy.no}'>수정</a> 
+					<a class="input-button-bottom" id ="open" href='#'>삭제</a> 
+				</c:if>
+				
 
-							<c:when test="${checkWriter eq 1}">
-								<a class="input-button-bottom" href='updateform?no=${freeStudy.no}'> 수정 </a>
-								
-								<a class="input-button-bottom" href='/swu/freestudy/list'>
-									목록 </a>
-
-							</c:when>
-
-							<c:when test="${checkWriter eq 2}">
-								<c:if test="${result eq 0}">
-									<a class="input-button-bottom"
-										href='/swu/freestudy/interest/add?no=${freeStudy.no}'
-										class="button-group"> 관심목록 추가</a>
-								</c:if>
-
-								<c:if test="${result eq 1}">
-									<a class="input-button-bottom"
-										href='/swu/freestudy/interest/delete?no=${freeStudy.no}'
-										class="button-group"> 관심목록 삭제 </a>
-								</c:if>
-
-							</c:when>
-						</c:choose>
-						<div class="interest-add-button">
-							<button id="open">
-								<img class="icon" src="../img/fillingHeartIcon.png">
-							</button>
-						</div>
--->
-						<!-- 관심목록 추가하기 버튼 -->
-						<!-- interest-add-button -->
 				</fieldset> <!--menu-->
-
 			</form> <!--detail-->
 		</header> <!--freestudy-top-->
 		

@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="${contextPath}/css/community/CommunityList.css">
 
+<link rel="stylesheet" href="${contextPath}/css/footer.css">
+
 <style>
 .icon {
   width : 15px;
@@ -193,8 +195,9 @@ h1 {
     </c:forEach>
 		</div>
 		  </c:if>
-		
-	</div>
+		  
+	<jsp:include page="../footer.jsp"></jsp:include>
+	</div> <!--container-->
 
   <script>
   const openBtn = document.getElementById('open');

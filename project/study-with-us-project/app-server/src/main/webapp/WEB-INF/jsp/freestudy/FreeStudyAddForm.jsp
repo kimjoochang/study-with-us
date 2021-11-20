@@ -15,6 +15,7 @@ trimDirectiveWhitespaces="true" %>
       <link rel="stylesheet" href="${contextPath}/css/theme.css">
       <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
       <link rel="stylesheet" href="${contextPath}/css/study/StudyAddForm.css">
+      <link rel="stylesheet" href="${contextPath}/css/footer.css">
   </head>
 
 <body>

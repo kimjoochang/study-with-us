@@ -21,6 +21,8 @@
 
 <link rel="stylesheet" href="${contextPath}/css/community/CommunityList.css">
 
+<link rel="stylesheet" href="${contextPath}/css/footer.css">
+
 <style>
 .icon {
   width : 15px;
