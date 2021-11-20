@@ -25,12 +25,15 @@
 .icon {
   width : 15px;
 }
+
 ul {
   list-style : none;
 }
+
 .icon_td {
   width : 30px;
 }
+
 .modal {
   top: 0;
   left: 0;
@@ -40,11 +43,13 @@ ul {
   justify-content: center;
   align-items: center;
 }
+
 .modal_overlay {
   position:fixed;
   width: 100%;
   height: 100%;
 }
+
 .modal_content {
   position: fixed;
   top: 30%;
@@ -57,20 +62,44 @@ ul {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
     rgba(0, 0, 0, 0.23);
 }
+
 h1 {
   margin: 0;
 }
+
 .hidden {
   display: none;
 }
+
 .total_page_count {
   text-align : center;
 }
+
 .page_count {
   color : black;
   font-size : 15px;
   margin-left : 3px;
 }
+
+
+<!---->
+.highlight {
+    background-color: #fff34d;
+    -moz-border-radius: 5px; /* FF1+ */
+    -webkit-border-radius: 5px; /* Saf3-4 */
+    border-radius: 5px; /* Opera 10.5, IE 9, Saf5, Chrome */
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* FF3.5+ */
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Saf3.0+, Chrome */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Opera 10.5+, IE 9.0 */
+}
+
+.highlight {
+    padding:1px 4px;
+    margin:0 -4px;
+}
+<!---->
+
+
 </style>
 
 </head>
@@ -82,12 +111,16 @@ h1 {
 			<!-- 검색창 -->
 			<div class="search-view">
 			<form class="search-form" action="search">
-				<input type="search" name="keyword" placeholder="키워드를 검색해주세요." class="search-input">
+				<input id="text-search" type="search" name="keyword" placeholder="키워드를 검색해주세요." class="search-input">
 				<input type="hidden" name="categoryNo" value="${categoryNo}" >
 				<button type="submit" class="search-button">
 						<img class="reading-glasses-icon" src="${contextPath}/img/search icon.png"></button>
 			  </form> 
 			</div> <!--검색창-->
+			
+			
+			
+			
 
 		<!-- 글쓰기 버튼 -->
 		<div class="add-button">
@@ -199,22 +232,30 @@ h1 {
   <script>
   const openBtn = document.getElementById('open');
   //onModal button
+
   const closeBtn = document.getElementById('close');
   //offModal button
+
   const modal = document.querySelector('.modal');
   //HTML에서의 모달 최상위 요소
+
   const overlay = document.querySelector('.modal_overlay');
   //모달창이 활성화되면 흐린 배경을 표현하는 요소
+
   const openModal = () => {
     modal.classList.remove('hidden');
   }
+
   const closeModal = () => {
     modal.classList.add('hidden');
   }
+
   openBtn.addEventListener('click', openModal);
   //onModal
+
   closeBtn.addEventListener('click', closeModal);
   //모달창 내부의 닫기 버튼
+
   //overlay.addEventListener('click', closeModal);
   //모달창 영역 밖
   
@@ -230,6 +271,7 @@ h1 {
 	  if (${categoryNo} === 0) {
 	    text = document.querySelector('.info_text');
 	    box =  document.querySelector('.info_box');
+
 	    text.classList.add('ctry_text_color');
 	    box.classList.add('ctry_box_color');
 	    
@@ -242,19 +284,46 @@ h1 {
 	  } else {
 	    text = document.querySelector('.talk_text');
 	    box =  document.querySelector('.talk_box');
+
 	    text.classList.add('ctry_text_color');
 	    box.classList.add('ctry_box_color');
 	  }
 	}
 	
 	changeColor();
+
 var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
 trList.forEach(function(trTag) {
   trTag.onclick = (e) => {
     window.location.href = e.currentTarget.querySelector("a").href;
   };
 });
+
   </script>
+  
+  
+  <!--  하이라이트기능 -->
+  <script type="text/javascript" src="/data/201102/IJ12974195865699/jquery-1.5.min.js"></script>
+<script type="text/javascript" src="/data/201102/IJ12974195865699/highlight.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('#text-search').bind('keyup change', function(ev) {
+        // pull in the new value
+        var searchTerm = $(this).val();
+
+        // remove any old highlighted terms
+        $('body').removeHighlight();
+
+        // disable highlighting if empty
+        if ( searchTerm ) {
+            // highlight the new term
+            $('body').highlight( searchTerm );
+        }
+    });
+});
+</script>
+
   
 </body>
 </html>
+
