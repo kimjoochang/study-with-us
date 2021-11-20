@@ -8,13 +8,13 @@
 
   <base target="_self" />
 
-  <link rel="stylesheet" href="../css/theme.css">
-  <link rel="stylesheet" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="${contextPath}/css/theme.css">
+  <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/mdb.min.css">
-  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="${contextPath}/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${contextPath}/css/mdb.min.css">
+  <link rel="stylesheet" href="${contextPath}/css/footer.css">
 
 </head>
 
@@ -25,11 +25,11 @@
     display: inline-block;
     width: 60px;
   }
-
+  
   body {
     background: #EDECF5;
   }
-
+  
   .content {
   display: flex;
   vertical-align: middle;
@@ -45,7 +45,6 @@
   padding-top: 32px;
   width: 845px;
   xheight: 1000px;
-
   position: relative;
   display: -ms-flexbox;
   -ms-flex-direction: column;
@@ -57,7 +56,6 @@
   border: 1px solid rgba(0,0,0,.2);
   border-radius: 0.3rem;
   outline: 0;
-
   background-attachment: scroll;
   background-clip: border-box;
   background-color: rgb(255, 255, 255);
@@ -68,14 +66,14 @@
   box-shadow: rgb(0 0 0 / 15%) 0px 5px 25px 0px;
   box-sizing: border-box;
 }
-
+ 
 .btn-primary1{
   background: #756daa;
   color:snow;
   border-radius: 70px;
   width: 500px;
 }
-
+ 
 .st-sns{
   font-size:5px;
 }
@@ -85,7 +83,7 @@
   margin-right:5px;
 }
     
-.container{
+.xcontainer{
   display: flex;
   text-align:center;
   justify-content:space-evenly;
@@ -96,8 +94,8 @@
   margin:30px 10px;
   text-align:center;
   justify-content: center;
-}   /*기존 join_ver*/
-
+}
+   /*기존 join_ver*/
 .uldesign {
   padding-left: 20px;
   display: flex;
@@ -116,9 +114,7 @@
   width: 845px;
   height: 1000px;
 }
-
 .menu {
-
   display: flex;
     vertical-align: middle;
   display: inline-block;
@@ -133,7 +129,6 @@
   padding-top: 32px;
   width: 845px;
   height: 500px;
-
   position: relative;
   display: -ms-flexbox;
   -ms-flex-direction: column;
@@ -145,8 +140,6 @@
   border: 1px solid rgba(0,0,0,.2);
   border-radius: 0.3rem;
   outline: 0;
-
-
   background-attachment: scroll;
   background-clip: border-box;
   background-color: rgb(255, 255, 255);
@@ -157,11 +150,9 @@
   box-shadow: rgb(0 0 0 / 15%) 0px 5px 25px 0px;
   box-sizing: border-box;
 }
-
 .pw-find-button {
   margin-top: 20px;
 }
-
 .input-button-find {
   text-decoration-line: none;
   float: center;
@@ -175,26 +166,30 @@
   box-shadow: 2px 2px 0px 0px rgb(77, 72, 72);
   margin: 5px;
 }
-
 .pw-content-input {
   width: 200px;
 }
-
 .pw-label {
   width: 200px;
   text-align: left;
   margin-right: -130px;
 }
+
+.find-email-form {
+  margin-top: 30px;
+  text-align: center;
+}
+
   </style>
 
 
 <body>
-   <jsp:include page="../header.jsp"></jsp:include>
     <div class="container"> 
+   <jsp:include page="../header.jsp"></jsp:include>
 
   <!--    <header class="freepagetop"> -->
       
-        <form method = "post" action="findemail">
+        <form class = "find-email-form" method = 'post' action='findemail'>
         <fieldset class="menu">
 
         <div class=" resetpassword-header text-center">
@@ -202,8 +197,7 @@
         </div>
         <hr>
 
-        <div class="title_img"><img src="../img/스터디위더스.png"></img></div>
-
+        <div class="title_img"><img src="${contextPath}/img/스터디위더스.png"></img></div>
 
         <div class="pw-content">
         
@@ -218,13 +212,13 @@
           </div>
 
           <div class="pw-find-button">
-            <input class="input-button-find" type="submit" value="찾기"> 
+            <input class="input-button-find" type="submit" value="찾기" href="showemail"> 
           </div> 
           
         </div> <!--pw-content-->
 
         </fieldset> <!--menu-->
-        
+        <!-- 
         <div class="button">
   
   <c:if test="${email ne null}">
@@ -237,11 +231,11 @@
     일치하는 정보를 찾을 수 없습니다.
   </c:if>
 </c:if>  
-</div>
+         -->
 </form>     
-   <!--    </header>freepagetop-->
+   <!-- </header>freepagetop-->
+    <jsp:include page="../footer.jsp"></jsp:include> 
     </div> <!-- container -->
-<jsp:include page="../footer.jsp"></jsp:include>
 
 </body>
 </html>

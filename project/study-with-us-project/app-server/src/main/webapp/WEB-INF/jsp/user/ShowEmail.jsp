@@ -13,13 +13,6 @@
 </head>
 
 <body>
-  <!--
-    <h1>아이디 찾기 결과</h1>
-    
-    <c:if test="${email ne null}">
-      회원님의 아이디는 <c:out value="${email}"/> 입니다.
-    </c:if>
-  -->
 
   <div class="alert alert-success" role="alert">
     <h4 class="alert-heading">아이디 찾기 결과</h4>

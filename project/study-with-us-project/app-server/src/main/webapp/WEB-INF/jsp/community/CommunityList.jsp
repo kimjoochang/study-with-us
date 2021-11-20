@@ -82,6 +82,24 @@ h1 {
 }
 
 
+<!---->
+.highlight {
+    background-color: #fff34d;
+    -moz-border-radius: 5px; /* FF1+ */
+    -webkit-border-radius: 5px; /* Saf3-4 */
+    border-radius: 5px; /* Opera 10.5, IE 9, Saf5, Chrome */
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* FF3.5+ */
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Saf3.0+, Chrome */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Opera 10.5+, IE 9.0 */
+}
+
+.highlight {
+    padding:1px 4px;
+    margin:0 -4px;
+}
+<!---->
+
+
 </style>
 
 </head>
@@ -93,12 +111,16 @@ h1 {
 			<!-- 검색창 -->
 			<div class="search-view">
 			<form class="search-form" action="search">
-				<input type="search" name="keyword" placeholder="키워드를 검색해주세요." class="search-input">
+				<input id="text-search" type="search" name="keyword" placeholder="키워드를 검색해주세요." class="search-input">
 				<input type="hidden" name="categoryNo" value="${categoryNo}" >
 				<button type="submit" class="search-button">
 						<img class="reading-glasses-icon" src="${contextPath}/img/search icon.png"></button>
 			  </form> 
 			</div> <!--검색창-->
+			
+			
+			
+			
 
 		<!-- 글쓰기 버튼 -->
 		<div class="add-button">
@@ -151,6 +173,7 @@ h1 {
 							<th scope="col">카테고리</th>
 							<th scope="col">제목</th>
 							<th scope="col">작성자</th>
+							<th scope="col">내용</th>
 							<th scope="col">등록일</th>
 							<th scope="col"> </th>
 							<th scope="col"> </th>
@@ -177,6 +200,7 @@ h1 {
 								<td>${type}</td>
 								<td><a href='detail?no=${community.no}'>${community.title}</a></td>
 								<td>${community.writer.nickname}</td>
+								<td>${community.content}</td>
 								<td>${community.registeredDate}</td>
 								<td class="icon_td">
 								  <img class="icon" src="${contextPath}/img/eyeIcon.png">
@@ -278,6 +302,29 @@ trList.forEach(function(trTag) {
 });
 
   </script>
+  
+  
+  <!--  하이라이트기능 -->
+  <script type="text/javascript" src="/data/201102/IJ12974195865699/jquery-1.5.min.js"></script>
+<script type="text/javascript" src="/data/201102/IJ12974195865699/highlight.js"></script>
+<script type="text/javascript">
+$(function() {
+    $('#text-search').bind('keyup change', function(ev) {
+        // pull in the new value
+        var searchTerm = $(this).val();
+
+        // remove any old highlighted terms
+        $('body').removeHighlight();
+
+        // disable highlighting if empty
+        if ( searchTerm ) {
+            // highlight the new term
+            $('body').highlight( searchTerm );
+        }
+    });
+});
+</script>
+
   
 </body>
 </html>
