@@ -54,7 +54,7 @@ function kakaoLogout() {
       Kakao.API.request({
         url: '/v1/user/unlink',
         success: function (response) {
-          console.log(response)
+        	location.href='../payment/add?no=${chargeStudy.no}&payMethod=0';
         },
         fail: function (error) {
           console.log(error)
