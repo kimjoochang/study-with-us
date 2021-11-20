@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.studywithus.dao.PaymentDao;
+import com.studywithus.dao.StudyDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Payment;
 
@@ -15,6 +16,7 @@ public class PaymentController {
 
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired PaymentDao paymentDao;
+  @Autowired StudyDao studyDao;
 
   @GetMapping("/payment/add")
   public ModelAndView add(int no, int payMethod, HttpSession session) throws Exception {
@@ -22,8 +24,10 @@ public class PaymentController {
 
     Member mentee = (Member) session.getAttribute("loginUser");
 
-    payment.setMentee(mentee);
-    payment.setStudyNo(no);
+    studyDao.findByNo(no);
+
+    payment.setMemberNo(mentee.getNo());
+    payment.setStudy(studyDao.findByNo(no));
     payment.setPaymentMethod(0);
 
 

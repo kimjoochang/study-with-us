@@ -14,8 +14,7 @@
    <link rel="stylesheet" href="${contextPath}/css/theme.css">
     <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
     <link rel="stylesheet" href="${contextPath}/css/study/StudyDetail.css">
-    <link rel="stylesheet" href="${contextPath}/css/footer.css">
-
+    
     <style type="text/css">
     .interest_icon {
       width : 50px;
@@ -79,8 +78,8 @@ text-align: center;
   
   <header class="freepagetop">
 
-    <form class="study-form" action="detail" >
-      <fieldset class="menu">
+    <form action="detail" >
+    <fieldset class="menu">
 
       <span class="study-top-status-2">
           <h1 class="study-content-category">
@@ -270,7 +269,6 @@ text-align: center;
 (스터디멤버 테이블에서 스터디번호와 회원번호 주고 멤버상태에 따라 구분할 지 ,
  결제테이블에서 스터디번호와 회원번호 주고 존재 여부로 확인할지) 
  -->
-</fieldset>
 	</form>
 	
 	<!-- 모달창 -->
@@ -292,17 +290,13 @@ text-align: center;
 							<button type="submit" class ="request_button">등록</button>
 							</div>
             </form>
-
           </div>
         </div> <!-- modal_content -->
       </div> <!-- modal_overlay -->
     </div> <!-- modal_hidden -->
 
-  </header> <!--freestudy-top-->
 <jsp:include page="../footer.jsp"></jsp:include>
 </div><!--container-->
-</body> <!--유료스터디 제일 큰 포맷-->
-
 
 <script>
 const reqCancel = () => {
@@ -407,4 +401,5 @@ closeBtn.addEventListener('click', closeModal);
     });}
     </script>
 
+</body> <!--유료스터디 제일 큰 포맷-->
 </html>

@@ -6,30 +6,29 @@
 <mapper namespace="com.studywithus.dao.PaymentDao">
   
   <resultMap type="Payment" id="PaymentMap">
-      <id column="member_no" property="studyNo"/>
-      <id column="study_no" property="studyNo"/>
+      <id column="member_no" property="memberNo"/>
     <result column="pay_method" property="paymentMethod"/>
     <result column="status" property="status"/>
     <result column="register_date" property="paymentDate"/>
        
-    <association property="mentee" javaType="Member">
-      <id column="mentee_no" property="no"/>
-      <result column="mentee_name" property="name"/>
-      <result column="mentee_email" property="email"/>
+    <association property="study" javaType="Study">
+      <id column="s_study_no" property="no"/>
+      <result column="s_title" property="title"/>
+      <result column="s_category" property="category"/>
+      <result column="s_price" property="price"/>
     </association>
   </resultMap>
   <sql id="select1">
  select
       p.pay_method,
-      p.status,
       p.register_date,
-      m.member_no mentee_no,
-      m.name mentee_name,
-      m.email mentee_email
+      st.study_no s_studyNo,
+      st.title s_title,
+      st.category s_category,
+      st.price s_price
     from 
       payment p
     inner join study st on p.study_no=st.study_no
-    inner join member m on p.member_no=m.member_no
   </sql>
   
   <select id="findAll" resultMap="PaymentMap" parameterType="int">
@@ -48,8 +47,8 @@
   
   <insert id="insert" parameterType="Payment">
    insert into 
-     payment(member_no,study_no,pay_method,status)
-    values(#{mentee.no},#{studyNo},#{paymentMethod},#{status}) 
+     payment(member_no,study_no,pay_method)
+    values(#{memberNo},#{study.no},#{paymentMethod}) 
   </insert>
 
   <update id="update">

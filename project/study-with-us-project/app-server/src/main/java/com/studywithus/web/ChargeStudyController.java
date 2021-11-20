@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.studywithus.dao.DeleteRequestFormDao;
+import com.studywithus.dao.PaymentDao;
 import com.studywithus.dao.StudyDao;
 import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.DeleteRequestForm;
 import com.studywithus.domain.Member;
+import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 
 @Controller
@@ -22,6 +24,7 @@ public class ChargeStudyController {
   @Autowired StudyDao chargeStudyDao;
   @Autowired DeleteRequestFormDao deleteRequestFormDao;
   @Autowired StudyMemberDao studyMemberDao;
+  @Autowired PaymentDao paymentDao;
 
   @GetMapping("/chargestudy/search")
   public ModelAndView search(String keyword) throws Exception {
@@ -309,6 +312,20 @@ public class ChargeStudyController {
     mv.addObject("chargeStudyList", chargeStudyList);
     mv.addObject("pageTitle", "스터디위더스 : 나의 관심목록");
     mv.setViewName("../jsp/chargestudy/ChargeStudyInterestList");
+    return mv;
+  }
+
+  @GetMapping("/mypage/paymentlist")
+  public ModelAndView paymentList(HttpSession session) throws Exception {
+
+    Member member = (Member) session.getAttribute("loginUser");
+
+    Collection<Payment> payments = paymentDao.findAll(member.getNo());
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("payments", payments);
+    mv.addObject("pageTitle", "스터디위더스 : 나의 결제내역");
+    mv.setViewName("../jsp/MyPage_payment");
     return mv;
   }
 
