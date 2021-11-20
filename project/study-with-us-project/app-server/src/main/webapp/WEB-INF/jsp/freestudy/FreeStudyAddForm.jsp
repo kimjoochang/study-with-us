@@ -80,7 +80,7 @@ trimDirectiveWhitespaces="true" %>
               <option value='충남'>충남</option>
               <option value='충북'>충북</option>
             </select>
-          </form>
+          
         <!-- -->
             <script language="javascript">
               function view(){

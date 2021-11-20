@@ -17,8 +17,11 @@
   <div class="alert alert-success" role="alert">
     <h4 class="alert-heading">아이디 찾기 결과</h4>
     <c:if test="${email ne null}">
+      <script>
+        callAlert(${email});
 
-    <p>회원님의 아이디는 <c:out value="${email}"/> 입니다.</p>
+      </script>
+      <p>회원님의 아이디는 <c:out value="${email}"/> 입니다.</p>
     </c:if>
     
     <c:if test="${email eq null}">
@@ -29,6 +32,14 @@
   <hr>
   
   <br><button>로그인</button> <button>비밀번호 찾기</button>
+
+  <script>
+    callAlert = (e) => {
+      alert(e);
+    }
+    alert('hi');
+  </script>
+
 
 </body>
 </html>
