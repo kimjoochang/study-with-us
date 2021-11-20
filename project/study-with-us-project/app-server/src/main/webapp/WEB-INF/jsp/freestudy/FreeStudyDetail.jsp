@@ -246,24 +246,47 @@
 	<!-- 관심목록 추가/삭제 아이콘 출력 끝!!! -->
 
 
-				
+			<!--
 				<c:if test="${participateResult eq 0}">
-					<a class="input-button-bottom" href='list'> 목록 </a>
-					<a class="input-button-bottom" href='apply?no=${freeStudy.no}'>스터디 신청</a>
-				</c:if>
-					
-				<c:if test="${participateResult eq 1}">
-					<a class="input-button-bottom" href='list'> 목록 </a>
-					<a class="input-button-bottom" href='applycancel?no=${freeStudy.no}'>스터디 신청 취소</a>
-				</c:if>
-		
-			<a class="input-button-bottom" href='list'>목록</a><br>
-    
-				<c:if test="${freeStudy.writer.no eq loginUser.no}">
-					<a class="input-button-bottom" href='updateform?no=${freeStudy.no}'>수정</a> 
-					<a class="input-button-bottom" id ="open" href='#'>삭제</a> 
+					<div class="study-detail-input-align">
+						<a class="input-button-bottom" href='list'> 목록 </a>
+						<a class="input-button-bottom" href='apply?no=${freeStudy.no}'>스터디 신청</a>
+					</div>
 				</c:if>
 				
+				<c:if test="${participateResult eq 1}">
+					<div class="study-detail-input-align">
+						<a class="input-button-bottom" href='list'> 목록 </a>
+						<a class="input-button-bottom" href='applycancel?no=${freeStudy.no}'>스터디 신청 취소</a>
+					</div>
+				</c:if>
+				
+				<div class="study-detail-input-align">
+					<a class="input-button-bottom" href='list'>목록</a><br>
+				</div>
+				
+				<c:if test="${freeStudy.writer.no eq loginUser.no}">
+					<div class="study-detail-input-align">
+						<a class="input-button-bottom" href='updateform?no=${freeStudy.no}'>수정</a> 
+						<a class="input-button-bottom" id ="open" href='#'>삭제</a> 
+					</div>
+				</c:if>
+			-->	
+				
+
+			<c:if test="${loginUser eq null}">
+				<a class="input-button-bottom" href='list'>목록</a><br>				
+			</c:if>	
+			
+			<c:if test="${participateResult eq 0}">
+				<a class="input-button-bottom" href='list'> 목록 </a>
+				<a class="input-button-bottom" href='apply?no=${freeStudy.no}'>스터디 신청</a>
+			</c:if>
+				
+			<c:if test="${participateResult eq 1}">
+				<a class="input-button-bottom" href='list'> 목록 </a>
+				<a class="input-button-bottom" href='applycancel?no=${freeStudy.no}'>스터디 신청 취소</a>
+			</c:if>
 
 				</fieldset> <!--menu-->
 			</form> <!--detail-->

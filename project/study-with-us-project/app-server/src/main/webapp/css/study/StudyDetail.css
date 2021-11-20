@@ -213,6 +213,11 @@ input {
   margin: 5px;
 }
 
+a.input-button-bottom {
+  display: inline-block;
+  text-align: center;
+}
+
 .info_item{
 align-items: center;
 box-sizing: border-box;
@@ -283,4 +288,9 @@ xa:visited { text-decoration: none; text-shadow: none; }
   display: flex;
   text-align: center;
   justify-content: center;
+}
+
+
+.study-detail-input-align {
+  display: inline-block;
 }
