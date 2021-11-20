@@ -3,8 +3,8 @@ package com.studywithus.domain;
 import java.sql.Date;
 
 public class Payment {
-  private int studyNo;
-  private Member mentee;
+  private int memberNo;
+  private Study study;
   private int paymentMethod; // 결제 수단
   private Date paymentDate; // 결제일
 
@@ -13,12 +13,20 @@ public class Payment {
   // 무료스터디 탈퇴상태 (유료 - 결제취소)= 2
   private int status; 
 
-  public int getStudyNo() {
-    return studyNo;
+  public int getMemberNo() {
+    return memberNo;
   }
-  public void setStudyNo(int studyNo) {
-    this.studyNo = studyNo;
+  public void setMemberNo(int memberNo) {
+    this.memberNo = memberNo;
   }
+
+  public Study getStudy() {
+    return study;
+  }
+  public void setStudy(Study study) {
+    this.study = study;
+  }
+
   public int getPaymentMethod() {
     return paymentMethod;
   }
@@ -36,11 +44,5 @@ public class Payment {
   }
   public void setStatus(int status) {
     this.status = status;
-  }
-  public Member getMentee() {
-    return mentee;
-  }
-  public void setMentee(Member mentee) {
-    this.mentee = mentee;
   }
 }

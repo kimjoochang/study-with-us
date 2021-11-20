@@ -39,6 +39,15 @@ label {
   text: bottom;
 }
 
+.study-form-center {
+  text-align: center;
+}
+
+
+.study-form {
+  text-align: center;
+}
+
 .first {
   xborder: 1px solid red;
   display:inline;
@@ -63,6 +72,7 @@ label {
 
 
 .study-info-icon {
+
   margin-left: 545px;
   display: flex;
   text-align: right;
@@ -77,7 +87,8 @@ label {
   line-height: 24px;
   padding-top: 32px;
   width: 845px;
-  height: 1000px;
+  xheight: 1000px;
+  margin: auto;
 }
 
 .menu {
@@ -192,6 +203,19 @@ input {
   margin-left: 7px;
 }
 
+.input6 {
+  text-align: center;
+  width: 70px;
+  height: 26px;
+  border-radius: 4px;
+  background-color: rgb(117, 109, 170);
+  color: rgb(246, 245, 252);
+  border: 2px solid rgb(117, 109, 170);
+  margin: 5px;
+  xmargin-left: 7px;
+}
+
+
 .input-button-bottom {
   text-align: center;
   width: 107px;
@@ -201,6 +225,11 @@ input {
   color: rgb(246, 245, 252);
   border: 2px solid rgb(117, 109, 170);
   margin: 5px;
+}
+
+a.input-button-bottom {
+  display: inline-block;
+  text-align: center;
 }
 
 .info_item{
@@ -273,4 +302,10 @@ xa:visited { text-decoration: none; text-shadow: none; }
   display: flex;
   text-align: center;
   justify-content: center;
+}
+
+
+.study-detail-input-align {
+  display: inline-block;
+  text-align: center;
 }

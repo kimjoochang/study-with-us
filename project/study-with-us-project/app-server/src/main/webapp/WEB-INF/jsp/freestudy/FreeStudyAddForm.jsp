@@ -15,6 +15,7 @@ trimDirectiveWhitespaces="true" %>
       <link rel="stylesheet" href="${contextPath}/css/theme.css">
       <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
       <link rel="stylesheet" href="${contextPath}/css/study/StudyAddForm.css">
+      <link rel="stylesheet" href="${contextPath}/css/footer.css">
   </head>
 
 <body>
@@ -241,6 +242,7 @@ trimDirectiveWhitespaces="true" %>
   <button class="input5">등록</button>
   <button class="input5" type="button" onclick="location.href='list'">취소</button><br>
 </div>
+
 
 </fieldset> <!-- menu-->
 </div><!-- "study-box" -->

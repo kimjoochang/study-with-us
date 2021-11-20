@@ -14,8 +14,7 @@
    <link rel="stylesheet" href="${contextPath}/css/theme.css">
     <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
     <link rel="stylesheet" href="${contextPath}/css/study/StudyDetail.css">
-    <link rel="stylesheet" href="${contextPath}/css/footer.css">
-
+    
     <style type="text/css">
     .interest_icon {
       width : 50px;
@@ -80,9 +79,7 @@ text-align: center;
   <header class="freepagetop">
 
     <form action="detail" >
-      <fieldset class="menu">
-
-        <div class="study-form-content">    
+    <fieldset class="menu">
 
       <span class="study-top-status-2">
           <h1 class="study-content-category">
@@ -252,30 +249,26 @@ text-align: center;
         <span id='f-registeredDate'>${chargeStudy.registeredDate}</span><br>
     -->
 
-</div><!--study-form-content-->
-
-<div class="study-bottom-button">
-  <a class="input6" href='list'>목록</a><br> 
+    
+<a class="input-button-bottom" href='list'>목록</a><br>
+    
     <c:if test="${chargeStudy.writer.no eq loginUser.no}">
-      <a class="input6" href='updateform?no=${chargeStudy.no}'>수정</a> 
+      <a class="input-button-bottom" href='updateform?no=${chargeStudy.no}'>수정</a> 
         <c:if test="${chargeStudy.deleteStatus eq 0}">
-          <a class="input6" id ="open" href='#'>삭제요청</a> 
+          <a class="input-button-bottom" id ="open" href='#'>삭제요청</a> 
         </c:if>
 
         <c:if test="${chargeStudy.deleteStatus eq 1}">
-          <input class="input6" type="button" onclick="reqCancel();" value="삭제요청 취소">
+          <input class="input-button-bottom" type="button" onclick="reqCancel();" value="삭제요청 취소">
         </c:if>
     </c:if>
     
-    <a id="payment_button" class="input6" onclick="kakaopay();" href='#'>결제</a>
-    <a class="input6" href='#'>결제취소</a>
-  </div> <!--study-bottom-button-->
+<a id="payment_button" class="input-button-bottom" onclick="kakaopay();" href='#'>결제</a>
+<a class="input-button-bottom" href='#'>결제취소</a>
 <!-- 결제 취소 조건 좀 더 고민해야함! 
 (스터디멤버 테이블에서 스터디번호와 회원번호 주고 멤버상태에 따라 구분할 지 ,
  결제테이블에서 스터디번호와 회원번호 주고 존재 여부로 확인할지) 
  -->
-</fieldset>
-
 	</form>
 	
 	<!-- 모달창 -->
@@ -297,17 +290,13 @@ text-align: center;
 							<button type="submit" class ="request_button">등록</button>
 							</div>
             </form>
-
           </div>
         </div> <!-- modal_content -->
       </div> <!-- modal_overlay -->
     </div> <!-- modal_hidden -->
 
-  </header> <!--freestudy-top-->
 <jsp:include page="../footer.jsp"></jsp:include>
 </div><!--container-->
-</body> <!--유료스터디 제일 큰 포맷-->
-
 
 <script>
 const reqCancel = () => {
@@ -412,4 +401,5 @@ closeBtn.addEventListener('click', closeModal);
     });}
     </script>
 
+</body> <!--유료스터디 제일 큰 포맷-->
 </html>
