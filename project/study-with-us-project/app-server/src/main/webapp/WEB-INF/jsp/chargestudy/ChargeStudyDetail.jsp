@@ -199,7 +199,7 @@ text-align: center;
 	  <section class="study-info-icon">
 			<div class="item2">
 				<!-- 회원(2) != 작성자-->
-		    <c:if test="${checkWriter eq 2}">
+		    <c:if test="${chargeStudy.writer.no ne loginUser.no && loginUser ne null}">
 					<!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
 					<c:if test="${result eq 0}">
 						<div class="info_item">
@@ -210,7 +210,6 @@ text-align: center;
 								<p class="icon_count">${chargeStudy.viewCount}</p>
 
 								<a href='interest/add?no=${chargeStudy.no}'><img class="icon" src="${contextPath}/img/interestAdd.png"></a>
-								<p class="icon_count">${chargeStudy.likes}</p> 
 							</div> <!--info_item-->
 						</c:if> <!-- 회원(2) 관심목록 추가 전 -->
 							
@@ -267,8 +266,13 @@ text-align: center;
         </c:if>
     </c:if>
     
+        <c:if test="${payResult eq 0}">
     <a id="payment_button" class="input6" onclick="kakaopay();" href='#'>결제</a>
+        </c:if>
+        
+        <c:if test="${payResult > 0}">
     <a class="input6" href='#'>결제취소</a>
+        </c:if>
   </div> <!--study-bottom-button-->
 <!-- 결제 취소 조건 좀 더 고민해야함! 
 (스터디멤버 테이블에서 스터디번호와 회원번호 주고 멤버상태에 따라 구분할 지 ,

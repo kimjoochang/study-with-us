@@ -44,6 +44,15 @@
     where 
       p.member_no=#{memberNo} and p.study_no=#{studyNo} 
   </select>
+
+  <select id="check" resultType="int">
+   select
+    count(*)
+    from
+    payment
+    where 
+      member_no=#{memberNo} and study_no=#{studyNo} 
+  </select>
   
   <insert id="insert" parameterType="Payment">
    insert into 

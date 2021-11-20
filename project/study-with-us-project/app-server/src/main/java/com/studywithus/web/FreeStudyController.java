@@ -40,6 +40,18 @@ public class FreeStudyController {
     return mv;
   }
 
+  @GetMapping("/freestudy/findByCategory")
+  public ModelAndView findByCategory(String keyword) throws Exception {
+
+    Collection <Study> freeStudyList = freeStudyDao.findAllByKeyword(0, 0, keyword);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("freeStudyList", freeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 스터디검색결과");
+    mv.setViewName("freestudy/FreeStudyList");
+    return mv;
+  }
+
   @PostMapping("/freestudy/add")
   public ModelAndView add(Study freeStudy, HttpSession session) throws Exception {
 
@@ -70,6 +82,8 @@ public class FreeStudyController {
   public ModelAndView detail(int no, HttpSession session) throws Exception {
 
     int result; // 관심목록 추가 여부 확인용 임시 변수
+    int participateResult;
+    Member participant = null;
 
     Study freeStudy = freeStudyDao.findByNo(no);
 
@@ -83,13 +97,22 @@ public class FreeStudyController {
 
     if (freeMember != null) {
       result =  freeStudyDao.checkLikesByMember(freeMember.getNo(), no);
+      participant = studyMemberDao.findByNoMember(freeMember.getNo(), no, Study.APPLICANT_STATUS);
     } else {
       result = 0;
+    }
+
+    if (participant == null) {
+      participateResult = 0;
+
+    } else {
+      participateResult = 1;
     }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("freeStudy", freeStudy);
     mv.addObject("result", result);
+    mv.addObject("participateResult", participateResult);
     mv.addObject("pageTitle", "스터디위더스 : 스터디상세");
     mv.setViewName("freestudy/FreeStudyDetail");
     return mv;
@@ -159,6 +182,34 @@ public class FreeStudyController {
 
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:../detail?no=" + no);
+    return mv;
+  }
+
+  @GetMapping("/freestudy/apply")
+  public ModelAndView apply(int no, HttpSession session) throws Exception {
+
+    Member member = (Member) session.getAttribute("loginUser");
+
+    studyMemberDao.insert(member.getNo(), no, Study.APPLICANT_STATUS);
+
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:detail?no=" + no);
+    return mv;
+  }
+
+  @GetMapping("/freestudy/applycancel")
+  public ModelAndView applycancel(int no, HttpSession session) throws Exception {
+
+    Member member = (Member) session.getAttribute("loginUser");
+
+    studyMemberDao.delete(member.getNo(), no);
+
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:detail?no=" + no);
     return mv;
   }
 

@@ -318,7 +318,7 @@ text-align: center;
             <div class="body">
               <h5 class="text-secondary">일반기업</h5>
               <p>We help you define your SEO objective & develop a realistic strategy with you</p>
-              <a href="service.html" class="btn btn-primary">Read more</a>
+              <a href="freestudy/findByCategory?keyword=일반기업" class="btn btn-primary">Read more</a>
             </div>
           </div>
         </div>
@@ -332,7 +332,7 @@ text-align: center;
             <div class="body">
               <h5 class="text-secondary">공기업/공무원</h5>
               <p>We help you define your SEO objective & develop a realistic strategy with you</p>
-              <a href="service.html" class="btn btn-primary">Read more</a>
+              <a href="freestudy/findByCategory?keyword=공기업" class="btn btn-primary">Read more</a>
             </div>
           </div>
         </div>
@@ -345,7 +345,7 @@ text-align: center;
             <div class="body">
               <h5 class="text-secondary">프로그래밍</h5>
               <p>We help you define your SEO objective & develop a realistic strategy with you</p>
-              <a href="service.html" class="btn btn-primary">Read more</a>
+              <a href="freestudy/findByCategory?keyword=프로그래밍" class="btn btn-primary">Read more</a>
             </div>
           </div>
         </div>

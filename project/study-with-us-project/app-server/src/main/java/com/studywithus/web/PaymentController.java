@@ -1,5 +1,6 @@
 package com.studywithus.web;
 
+import java.util.Collection;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,20 @@ public class PaymentController {
 
     return mv;
   } 
+
+  @GetMapping("/mypage/paymentlist")
+  public ModelAndView paymentList(HttpSession session) throws Exception {
+
+    Member member = (Member) session.getAttribute("loginUser");
+
+    Collection<Payment> payments = paymentDao.findAll(member.getNo());
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("payments", payments);
+    mv.addObject("pageTitle", "스터디위더스 : 나의 결제내역");
+    mv.setViewName("../jsp/MyPage_payment");
+    return mv;
+  }
   /*
 	@GetMapping("/community/comment/delete")
 	public ModelAndView delete(int commentNo, HttpSession session) throws Exception {
