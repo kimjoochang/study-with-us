@@ -272,21 +272,23 @@
 					</div>
 				</c:if>
 			-->	
-				
 
-			<c:if test="${loginUser eq null}">
-				<a class="input-button-bottom" href='list'>목록</a><br>				
-			</c:if>	
-			
-			<c:if test="${participateResult eq 0}">
-				<a class="input-button-bottom" href='list'> 목록 </a>
-				<a class="input-button-bottom" href='apply?no=${freeStudy.no}'>스터디 신청</a>
-			</c:if>
+			<div class="study-bottom-button">
+				<c:if test="${loginUser eq null}">
+					<a class="input6" href='list'>목록</a><br>				
+				</c:if>	
 				
-			<c:if test="${participateResult eq 1}">
-				<a class="input-button-bottom" href='list'> 목록 </a>
-				<a class="input-button-bottom" href='applycancel?no=${freeStudy.no}'>스터디 신청 취소</a>
-			</c:if>
+				<c:if test="${participateResult eq 0}">
+					<a class="input6" href='list'> 목록 </a>
+					<a class="input6" href='apply?no=${freeStudy.no}'>스터디 신청</a>
+				</c:if>
+				
+				<c:if test="${participateResult eq 1}">
+					<a class="input6" href='list'> 목록 </a>
+					<a class="input6" href='applycancel?no=${freeStudy.no}'>스터디 신청 취소</a>
+				</c:if>
+			</div> <!--study-bottom-button-->
+
 
 				</fieldset> <!--menu-->
 			</form> <!--detail-->

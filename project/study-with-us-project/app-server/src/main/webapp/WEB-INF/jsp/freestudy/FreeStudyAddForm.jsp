@@ -243,6 +243,7 @@ trimDirectiveWhitespaces="true" %>
   <button class="input5" type="button" onclick="location.href='list'">취소</button><br>
 </div>
 
+
 </fieldset> <!-- menu-->
 </div><!-- "study-box" -->
  </form>
