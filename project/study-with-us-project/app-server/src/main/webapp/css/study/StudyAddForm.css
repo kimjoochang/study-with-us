@@ -17,7 +17,9 @@ label {
   width: 20px;
   text-align: left;
 }
+
 .freepagetop{
+margin: auto;
 -webkit-font-smoothing: antialiased;
 background-attachment: scroll;
 font-family: "Noto Sans KR", -apple-system, system-ui, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica;

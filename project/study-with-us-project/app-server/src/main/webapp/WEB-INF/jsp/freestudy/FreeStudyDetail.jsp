@@ -29,7 +29,8 @@
 
 		<header class="freepagetop">
 
-			<form action="detail">
+		<div class="study-form-center">
+			<form class = "study-form-center" action="detail">
 				<fieldset class="menu">
 
 					<span class="study-top-status-2">
@@ -266,6 +267,7 @@
 
 				</fieldset> <!--menu-->
 			</form> <!--detail-->
+		</div> <!--study-form-center-->
 		</header> <!--freestudy-top-->
 		
 		<jsp:include page="../footer.jsp"></jsp:include>

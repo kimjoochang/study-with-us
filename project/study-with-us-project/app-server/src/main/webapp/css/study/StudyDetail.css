@@ -39,6 +39,11 @@ label {
   text: bottom;
 }
 
+.study-form-center {
+  text-align: center;
+}
+
+
 .study-form {
   text-align: center;
 }
@@ -82,6 +87,7 @@ label {
   padding-top: 32px;
   width: 845px;
   xheight: 1000px;
+  margin: auto;
 }
 
 .menu {
