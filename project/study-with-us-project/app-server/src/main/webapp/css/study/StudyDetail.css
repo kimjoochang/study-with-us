@@ -73,9 +73,10 @@ label {
 
 .study-info-icon {
 
-  margin-left: 545px;
-  display: flex;
+  xmargin-left: 545px;
+  xdisplay: flex;
   text-align: right;
+  margin-right: 100px;
 }
 
 .freepagetop{
@@ -252,7 +253,7 @@ text-align: right;
 float: right;
 font-weight: 500;
 margin-top: 2px;
-margin-right: 5px;
+xmargin-right: 40px;
 }
 
 .item2 {
@@ -302,6 +303,7 @@ xa:visited { text-decoration: none; text-shadow: none; }
   display: flex;
   text-align: center;
   justify-content: center;
+  margin-top: 30px;
 }
 
 
