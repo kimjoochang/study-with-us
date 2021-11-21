@@ -74,8 +74,9 @@ h1 {
   margin-left : 3px;
 }
 
-.button{
+.add-button {
 	border-radius: 10px;
+	font-size: 15px;
  }
  
 </style>
@@ -109,9 +110,9 @@ h1 {
 				<!--모달 화면-->
 				<div class="modal_content">
 					<div class="form_category_menu">
-						<a class="info_box" href='form?no=0'>정보</a> 
-						<a class="qa_box" href='form?no=1'>질문</a>
-						<a class="talk_box" href='form?no=2'>스몰톡</a>
+						<a class="info_box" >정보</a> 
+						<a class="qa_box">질문</a>
+						<a class="talk_box" >스몰톡</a>
 					</div>
 					<div class="form_box">
 						<form action='add' target="CommunityList.jsp" method='post'>
