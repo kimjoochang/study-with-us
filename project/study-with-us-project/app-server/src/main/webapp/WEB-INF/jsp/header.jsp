@@ -40,7 +40,7 @@
           
             <li class="nav-item active">
               <c:if test="${loginUser eq null}">
-              <a id="open1" class="nav-link" href="#">Sign Up / In</a>
+              <a id="open1" class="nav-link" href="${contextPath}/app/index#">Sign Up / In</a>
               </c:if>
               <c:if test="${loginUser ne null}">
               <a class="nav-link" href="${contextPath}/app/user/logout">Logout</a>
