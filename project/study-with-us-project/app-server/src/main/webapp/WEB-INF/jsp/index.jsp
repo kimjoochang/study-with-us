@@ -408,7 +408,7 @@ text-align: center;
           <div class="card-blog">
             <div class="header">
               <div class="post-thumb">
-                <a href="community/list?categoryNo=0"><img src="${contextPath}/img/cmnt.png"></img></a>
+                <a href="community/list?no=0&pageNo=1"><img src="${contextPath}/img/cmnt.png"></img></a>
               </div>
             </div>
             <div class="body">
