@@ -196,6 +196,7 @@ input {
 </head>
 
 <body>
+	
 <!-- 내생스 / 유료 -->
 	<div class="container">
 		<jsp:include page="header.jsp"></jsp:include>
