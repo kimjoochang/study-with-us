@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="${contextPath}/css/theme.css">
 
 </head>
+
 <style>
 
 .container{
@@ -609,32 +610,7 @@ width: 50.3125px;
 </style>
 
 <body>
-
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
-      <div class="container">
-        <!--<a href="#" class="navbar-brand">스터디<span class="text-primary">위더스</span></a>-->
-        <img src="${contextPath}/img/swu_text.png" alt="">
-
-        <div class="navbar-collapse collapse" id="navbarContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="service.html">Study</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="blog.html">Mentoring</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">Community</a>
-            </li>
-            <li class="nav-item">
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"></button>
-            <span class="navbar-toggler-icon"></span>
-      </div>
-    </nav>
+  <jsp:include page="header.jsp"></jsp:include>
 
 
  <!-- <div class="page-section" id="myinfo"> -->
@@ -680,13 +656,13 @@ width: 50.3125px;
                 <h1 class="studyTitle"> 제목1 </h1>
                 <span>
                   <img class="on_offline"
-                  src="${contextPath}/freestudy/onlineIcon.png">
+                  src="../../img/onlineIcon.png">
                   <p class="on_offline_status">온라인, 지명</p>
                 </span>
               
                 
                     <img class="icon"
-                    src="../../freestudy/fillingHeartIcon.png"></img>
+                    src="../../img/fillingHeartIcon.png"></img>
                   
                 </section>
               </li>
@@ -695,13 +671,13 @@ width: 50.3125px;
                 <h1 class="studyTitle"> 제목1 </h1>
                 <span>
                   <img class="on_offline"
-                  src="../../freestudy/onlineIcon.png">
+                  src="../../img/onlineIcon.png">
                   <p class="on_offline_status">온라인, 지명</p>
                 </span>
               
                 <div class="info_item">
                     <img class="icon"
-                    src="../../freestudy/fillingHeartIcon.png"></img>
+                    src="../../img//fillingHeartIcon.png"></img>
                   </div>
                 </section>
               </li>
@@ -710,13 +686,13 @@ width: 50.3125px;
                 <h1 class="studyTitle"> 제목1 </h1>
                 <span>
                   <img class="on_offline"
-                  src="../../freestudy/onlineIcon.png">
+                  src="../../img//onlineIcon.png">
                   <p class="on_offline_status">온라인, 지명</p>
                 </span>
               
                 <div class="info_item">
                     <img class="icon"
-                    src="../../freestudy/fillingHeartIcon.png"></img>
+                    src="../../img//fillingHeartIcon.png"></img>
                   </div>
                 </section>
               </li>

@@ -12,12 +12,9 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+  <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
 
- <!-- <link rel="stylesheet" href="../assets/vendor/animate/animate.css"> -->
-
-  <link rel="stylesheet" href="../assets/css/theme.css">
-
+	<link rel="stylesheet" href="${contextPath}/css/theme.css">
 </head>
 
 <style>
@@ -184,32 +181,7 @@ input{
 
 <body>
 
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
-      <div class="container">
-        <!--<a href="#" class="navbar-brand">스터디<span class="text-primary">위더스</span></a>-->
-        <img src="../assets/img/swu_text.png" alt="">
-
-        <div class="navbar-collapse collapse" id="navbarContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="service.html">Study</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="blog.html">Mentoring</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">Community</a>
-            </li>
-            <li class="nav-item">
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"></button>
-            <span class="navbar-toggler-icon"></span>
-      </div>
-    </nav>
-
+  <jsp:include page="header.jsp"></jsp:include>
 
  <!-- <div class="page-section" id="myinfo"> -->
    <div class="container">
@@ -224,9 +196,9 @@ input{
           <ul class="my-menu-list">
             <div class="profile-icon">
             
-            <img src="../assets/img/profile.png">
+            <img src="../../img/profile.png">
           </div>
-            <li class ="userid">jeje2kim 님</li>
+          <li class="userid">${loginUser.nickname}님</li>
             <ul class=sub>
             <li><a href="#">나의 정보</a></li>
             <li><a href="#">결제 내역</a></li>

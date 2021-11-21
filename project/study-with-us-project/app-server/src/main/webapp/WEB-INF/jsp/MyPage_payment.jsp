@@ -10,9 +10,10 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
 
-<link rel="stylesheet" href="${contextPath}/css/theme.css">
+	<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
+
+	<link rel="stylesheet" href="${contextPath}/css/theme.css">
 
 <style>
 .container {
@@ -162,7 +163,7 @@ input {
 	margin-bottom: 0px;
 	padding-bottom: 0px;
 }
-<!-- 수정 -->
+
 .btn {
   margin-left : 5px;
 	height: 40px;
@@ -181,7 +182,8 @@ input {
 </head>
 
 <body>
-<!-- 내생스 / 유료 -->
+	<jsp:include page="header.jsp"></jsp:include>
+
 	<div class="container">
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="col-lg-6 py-3 wow fadeInUp">
@@ -195,7 +197,7 @@ input {
 				<ul class="my-menu-list">
 					<div class="profile-icon">
 
-						<img src="../img/profile.png"">
+						<img src="../../img/profile.png"">
 					</div>
 					<li class="userid">${loginUser.nickname}님</li>
 					<ul class=sub>
@@ -252,13 +254,14 @@ input {
 	</div>
 	<!-- .container -->
 
-	<script src="../assets/js/jquery-3.5.1.min.js"></script>
+	<script src="${contextPath}/js/jquery-3.5.1.min.js"></script>
 
-	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+	<script src="${contextPath}/js/bootstrap.bundle.min.js"></script>
 
-	<script src="../assets/vendor/wow/wow.min.js"></script>
+	<script src="${contextPath}/vendor/wow/wow.min.js"></script>
 
-	<script src="../assets/js/theme.js"></script>
+	<script src="${contextPath}/js/theme.js"></script>
+
 
 </body>
 </html>
