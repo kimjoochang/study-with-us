@@ -278,7 +278,7 @@
 					 <c:if test="${freeStudy.writer.no eq loginUser.no}">
       <a class="input6" href='updateform?no=${freeStudy.no}'>수정</a> 
         <c:if test="${freeStudy.deleteStatus eq 0}">
-          <a class="input6" id ="open" href='#'>삭제</a> 
+          <a class="input6" id ="open" href='delete?no=${freeStudy.no}'>삭제</a> 
         </c:if>	
 				    </c:if>
 				

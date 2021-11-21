@@ -188,13 +188,18 @@ h1 {
 			</div>
 		</div>
 		
-  <c:if test="${totalPageNo < 4}">
 		<div class="total_page_count">
-		<c:forEach var="i" begin="1" end="${totalPageNo}">
-		    <a class="page_count" href='list?no=${categoryNo}&pageNo=${i}'>${i}</a>
+		<c:if test="${previousBtn eq 0}">
+		<a href='list?no=${categoryNo}&pageNo=${startNo-2}'>previous</a>
+		</c:if>
+		<c:forEach var="i" begin="${startNo}" end="${endNo}">
+		    <a class="page_count" href='list?no=${categoryNo}&pageNo=${startNo+i-1}'>${startNo+i-1}</a>
     </c:forEach>
+		
+		  <c:if test="${nextBtn eq 1}">
+    <a href='list?no=${categoryNo}&pageNo=${startNo + 2}'>next</a>
+    </c:if>
 		</div>
-		  </c:if>
 		  
 	<jsp:include page="../footer.jsp"></jsp:include>
 	</div> <!--container-->

@@ -545,7 +545,8 @@ text-align: center;
 
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">이메일</label>
-            <input type="email" name="email" class="form-control validate" placeholder="이메일을 입력하세요" required>
+              <input type="email" id="user_id" name="email" class="form-control validate" placeholder="이메일을 입력하세요" required>
+            <div class="check_font" id="id_check"></div>
           </div>
 
           <div class="md-form mb-5">
@@ -715,6 +716,8 @@ overlay2.addEventListener('click', closeModal2);
          };
      </script>
      
+     
+     
 <script src="../js/jquery-3.5.1.min.js"></script>
 
 <script src="../js/bootstrap.bundle.min.js"></script>
@@ -734,7 +737,49 @@ overlay2.addEventListener('click', closeModal2);
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="../js/mdb.min.js"></script>
 
-  
+  <script>
+// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+  $("#user_id").blur(function() {
+    // id = "id_reg" / name = "userId"
+    var user_id = $('#user_id').val();
+    $.ajax({
+      url : '${contextPath}/user/idCheck?userId='+ user_id,
+      type : 'get',
+      success : function(data) {
+        console.log("1 = 중복o / 0 = 중복x : "+ data);              
+        
+        if (data == 1) {
+            // 1 : 아이디가 중복되는 문구
+            $("#id_check").text("사용중인 아이디입니다 :p");
+            $("#id_check").css("color", "red");
+            $("#reg_submit").attr("disabled", true);
+          } else {
+            
+            if(idJ.test(user_id)){
+              // 0 : 아이디 길이 / 문자열 검사
+              $("#id_check").text("");
+              $("#reg_submit").attr("disabled", false);
+        
+            } else if(user_id == ""){
+              
+              $('#id_check').text('아이디를 입력해주세요 :)');
+              $('#id_check').css('color', 'red');
+              $("#reg_submit").attr("disabled", true);        
+              
+            } else {
+              
+              $('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
+              $('#id_check').css('color', 'red');
+              $("#reg_submit").attr("disabled", true);
+            }
+            
+          }
+        }, error : function() {
+            console.log("실패");
+        }
+      });
+    });
+</script>
 
   
 </body>
