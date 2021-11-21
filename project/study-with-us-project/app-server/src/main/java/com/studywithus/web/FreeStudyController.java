@@ -1,5 +1,6 @@
 package com.studywithus.web;
 
+import java.sql.Date;
 import java.util.Collection;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -89,6 +90,16 @@ public class FreeStudyController {
 
     if (freeStudy == null) {
       throw new Exception("해당 번호의 스터디가 없습니다.");
+    }
+
+    if (new Date(System.currentTimeMillis()).compareTo(freeStudy.getStartDate()) == -1) {
+      freeStudy.setStudyStatus(0); // 모집중
+
+    } else if (new Date(System.currentTimeMillis()).compareTo(freeStudy.getEndDate()) == -1) {
+      freeStudy.setStudyStatus(1); // 진행중
+
+    } else {
+      freeStudy.setStudyStatus(2); // 진행완료
     }
 
     freeStudyDao.updateCount(no);

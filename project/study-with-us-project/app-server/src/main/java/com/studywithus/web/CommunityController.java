@@ -52,9 +52,12 @@ public class CommunityController {
 
 
     int startNo = (int) ((3*calNum)-2);
-    int endNo = (int) ((3*calNum)+1);
+    int endNo = (int) ((3*calNum));
     int totalPageNo = ((int) Math.ceil(totalNum / 8) + 1);
 
+    System.out.println("페이지 시작 번호 =>" + startNo);
+    System.out.println("페이지 끝 번호 =>" + endNo);
+    System.out.println("전체 페이지 번호 =>" + totalPageNo);
     int previousBtn = 0;
     int nextBtn = 0;
 

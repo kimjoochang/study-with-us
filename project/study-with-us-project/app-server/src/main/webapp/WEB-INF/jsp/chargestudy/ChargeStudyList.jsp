@@ -1,7 +1,9 @@
+<%@page import="com.studywithus.domain.Study"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.sql.Date"%>
 
 <!DOCTYPE html>
 <html>
@@ -90,6 +92,21 @@
       <ul class="uldesign">
         
   <c:forEach items="${chargeStudyList}" var="chargeStudy">
+  <!-- 
+  <%
+  Study chargeStudy = (Study)pageContext.getAttribute("chargeStudy");
+  
+  if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == -1) {
+    chargeStudy.setStudyStatus(0); // 모집중
+
+  } else if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getEndDate()) == -1) {
+    chargeStudy.setStudyStatus(1); // 진행중
+
+  } else {
+    chargeStudy.setStudyStatus(2); // 진행완료
+  } %>
+   -->
+  
   <c:choose>
   <c:when test="${chargeStudy.studyStatus eq 0}">
 <c:set var="type" value="모집중"/>

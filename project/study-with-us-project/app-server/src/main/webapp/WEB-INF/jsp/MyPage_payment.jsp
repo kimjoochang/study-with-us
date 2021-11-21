@@ -15,6 +15,8 @@
 
 	<link rel="stylesheet" href="${contextPath}/css/theme.css">
 
+	<link rel="stylesheet" href="${contextPath}/css/footer.css">
+
 <style>
 .container {
 	margin-bottom: 70px;
@@ -249,10 +251,9 @@ input {
 			</div>
 		</div>
 
-	</div>
-	</div>
-	</div>
-	<!-- .container -->
+	<jsp:include page="footer.jsp"></jsp:include>
+	</div>	<!-- .container -->
+
 
 	<script src="${contextPath}/js/jquery-3.5.1.min.js"></script>
 

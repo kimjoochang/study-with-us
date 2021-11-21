@@ -77,6 +77,7 @@ h1 {
 .add-button {
   border-radius: 10px;
   font-size: 14px;
+
  }
  
 </style>

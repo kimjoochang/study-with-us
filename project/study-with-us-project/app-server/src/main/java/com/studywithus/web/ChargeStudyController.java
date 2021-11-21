@@ -1,5 +1,6 @@
 package com.studywithus.web;
 
+import java.sql.Date;
 import java.util.Collection;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -83,6 +84,16 @@ public class ChargeStudyController {
 
     if (chargeStudy == null) {
       throw new Exception("해당 번호의 멘토링이 없습니다.");
+    }
+
+    if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getStartDate()) == -1) {
+      chargeStudy.setStudyStatus(0); // 모집중
+
+    } else if (new Date(System.currentTimeMillis()).compareTo(chargeStudy.getEndDate()) == -1) {
+      chargeStudy.setStudyStatus(1); // 진행중
+
+    } else {
+      chargeStudy.setStudyStatus(2); // 진행완료
     }
 
     chargeStudyDao.updateCount(no);

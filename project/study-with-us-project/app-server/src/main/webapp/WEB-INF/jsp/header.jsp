@@ -40,7 +40,7 @@
           
             <li class="nav-item active">
               <c:if test="${loginUser eq null}">
-              <a id="open1" class="nav-link" href="#">Sign Up / In</a>
+              <a id="open1" class="nav-link" href="${contextPath}/app/index#">Sign Up / In</a>
               </c:if>
               <c:if test="${loginUser ne null}">
               <a class="nav-link" href="${contextPath}/app/user/logout">Logout</a>
@@ -55,10 +55,10 @@
               
               <c:if test="${loginUser ne null}">
               <c:if test="${loginUser.userAccessLevel eq 32}">
-                <a class="nav-link" href="adminpage/deleterequestlist">Admin Page</a>
+                <a class="nav-link" href="${contextPath}/app/adminpage/deleterequestlist">Admin Page</a>
               </c:if>
               <c:if test="${loginUser.userAccessLevel ne 32}">
-                <a class="nav-link" href="mypage/chargeregisterlist">My Page</a>
+                <a class="nav-link" href="${contextPath}/app/mypage/chargeregisterlist">My Page</a>
               </c:if>
               <li class="nav-item">
               </li>
