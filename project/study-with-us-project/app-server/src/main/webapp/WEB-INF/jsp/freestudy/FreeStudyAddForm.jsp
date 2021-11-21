@@ -59,7 +59,7 @@ trimDirectiveWhitespaces="true" %>
          
       <div class="study-content-line">
             <label for='area'>지역</label>
-            <select name="h_area1" onChange="cat1_change(this.value,h_area2)" >
+            <select name="area" onChange="cat1_change(this.value,h_area2)" >
               <option>--시/도--</option>
               <option value='서울'>서울</option>
               <option value='부산'>부산</option>
