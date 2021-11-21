@@ -411,7 +411,7 @@ text-align: center;
               </div>
             </div>
             <div class="body">
-              <h5 class="post-title"><a href="community/list?categoryNo=0">커뮤니티</a></h5>
+              <h5 class="post-title"><a href="community/list?no=0&pageNo=1">커뮤니티</a></h5>
               <div class="post-date">스터디위더스 회원들과 소통하고 정보를 나누어보세요</div>
             </div>
           </div>
@@ -733,8 +733,6 @@ overlay2.addEventListener('click', closeModal2);
   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="../js/mdb.min.js"></script>
-
-  
 
   
 </body>
