@@ -18,6 +18,7 @@
 
 	<link rel="stylesheet" href="${contextPath}/css/theme.css">
 
+	<link rel="stylesheet" href="${contextPath}/css/footer.css">
 
 <style>
 .container {
@@ -188,10 +189,10 @@ input {
 
 
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
-
-		<!-- <div class="page-section" id="myinfo"> -->
+	
+	<!-- <div class="page-section" id="myinfo"> -->
 		<div class="container">
+			<jsp:include page="header.jsp"></jsp:include>
 			<div class="col-lg-6 py-3 wow fadeInUp">
 
 				<span class="subhead">my page</span>
@@ -271,13 +272,9 @@ input {
 
 			</div>
 
-		</div>
-		</div>
-
-		</div>
-		</div>
-		</div>
-		<!-- .container -->
+			<jsp:include page="footer.jsp"></jsp:include>
+		</div> <!-- .container -->
+	
 		<!-- </div> <!-- .page-section -->
 
 

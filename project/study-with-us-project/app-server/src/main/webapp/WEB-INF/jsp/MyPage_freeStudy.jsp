@@ -10,9 +10,11 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
 
-<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="${contextPath}/css/theme.css">
+
+<link rel="stylesheet" href="${contextPath}/css/footer.css">
 
 <style>
 .container {
@@ -270,15 +272,14 @@ input {
 							</div>
 					</section>
 
-				</div>
+				</div> <!--content-section-->
 
-			</div>
-		</div>
+			</div> <!--both-->
+		</div> <!--col-lg-6 py-3 wow fadeInUp-->
 
-	</div>
-	</div>
-	</div>
-	<!-- .container -->
+	<jsp:include page="footer.jsp"></jsp:include>
+	</div>	<!-- .container -->
+
 	
 	<script src="${contextPath}/js/jquery-3.5.1.min.js"></script>
 

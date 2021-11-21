@@ -9,9 +9,12 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
 
-<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="${contextPath}/css/theme.css">
+
+<link rel="stylesheet" href="${contextPath}/css/footer.css">
+
 
 <style>
 .container {
@@ -181,7 +184,7 @@ input {
 
 <body>
 	<div class="container">
-		<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="header.jsp"></jsp:include>
 		<div class="col-lg-6 py-3 wow fadeInUp">
 
 			<span class="subhead">my page</span>
@@ -234,8 +237,8 @@ input {
 										id="my_password" value="11111111"></input>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<button type="button" class="btn btn-primary btn-sm">변경</button>
-								</div>
-							</div>
+								</div> <!--box-->
+							</div><!--box1-->
 
 
 							<div class="subject">연락처 정보</div>
@@ -245,25 +248,22 @@ input {
 									value="${loginUser.phoneNumber}"></input>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<button type="button" class="btn btn-primary btn-sm">변경</button>
-							</div>
+							</div> <!--box2-->
+
 							<div class="box3">
 								<span class="with">
-								<button type="button" class="btn btn-secondary btn-sm">회원 탈퇴</button>
-							</div>
-							</span>
-				</div>
-			</div>
-			</section>
-			</form>
+									<button type="button" class="btn btn-secondary btn-sm">회원 탈퇴</button>
+								</span>
+							</div> <!--box3-->
+						</section> <!--all-contents-->
+						</form>
+				</div> <!--content-section-->
+			</div> <!--both-->
 
-		</div>
+		</div> <!--col-lg-6 py-3 wow fadeInUp-->
 
-	</div>
-	</div>
-
-	</div>
-	</div>
-	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
+	</div> <!--container-->
 
 	<script src="../assets/js/jquery-3.5.1.min.js"></script>
 

@@ -15,6 +15,8 @@
 
 <link rel="stylesheet" href="${contextPath}/css/theme.css">
 
+<link rel="stylesheet" href="${contextPath}/css/footer.css">
+
 <style>
 .container {
 	margin-bottom: 70px;
@@ -217,9 +219,9 @@ input {
 			<div class="both">
 				<ul class="my-menu-list">
 					<div class="profile-icon">
-
 						<img src="${contextPath}/img/profile.png">
 					</div>
+
 					<li class="userid">${loginUser.nickname}님</li>
 					<ul class=sub>
 						<li><a href="/swu/app/mypage/myinfo">나의 정보</a></li>
@@ -228,26 +230,28 @@ input {
 						<li><a href="/swu/app/mypage/post">나의 활동</a></li>
 					</ul>
 				</ul>
-				<div class="content-section">
+			</div> <!--both-->
 
+
+				<div class="content-section">
 					<section class="all-contents">
 
 						<div class="box0">
 							<div class="subject">나의 활동</div>
-						</div>
+						</div> <!--box0-->
 
 						<div class="buttons">
 							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='chargeregisterlist';">내가 등록한 스터디</button>
 							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='chargeparticipatelist';">내가 참여한 스터디</button>
 							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/swu/app/mypage/mypost';">나의 게시글</button>
 							
-						</div>
+						</div> <!--buttons-->
 
 						<!-- 수정 -->
-            <div class ="study_category">
-            <a href="/swu/app/mypage/freeregisterlist"><button type="button" class="free_btn">무료</button></a>
-            <a href="chargeregisterlist"><button type="button" class="charge_btn">유료</button></a>
-            </div>						
+						<div class ="study_category">
+							<a href="/swu/app/mypage/freeregisterlist"><button type="button" class="free_btn">무료</button></a>
+							<a href="/swu/app/mypage/chargeregisterlist"><button type="button" class="charge_btn">유료</button></a>
+						</div>						
 
 						<div class="box1">
 							<div class="table-content">
@@ -262,6 +266,7 @@ input {
 											<th scope="col">종료일</th>
 										</tr>
 									</thead>
+
 									<c:forEach items="${studyList}" var="study">
 										<tbody>
 											<tr>
@@ -275,19 +280,16 @@ input {
 										</tbody>
 									</c:forEach>
 								</table>
-							</div>
-					</section>
+							</div> <!--table-content-->
+						</div> <!--box1-->
+					</section> <!--all-contents-->
+				</div> <!--content-section-->
 
-				</div>
+		</div> <!--col-lg-6 py-3 wow fadeInUp-->
 
-			</div>
-		</div>
-
-	</div>
-	</div>
-	</div>
-	<!-- .container -->
-
+	<jsp:include page="footer.jsp"></jsp:include>
+	</div><!-- .container -->
+	
 	<script src="${contextPath}/js/jquery-3.5.1.min.js"></script>
 
 	<script src="${contextPath}/js/bootstrap.bundle.min.js"></script>

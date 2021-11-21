@@ -15,6 +15,11 @@
   <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
 
 	<link rel="stylesheet" href="${contextPath}/css/theme.css">
+
+  <link rel="stylesheet" href="{contextPath}/css/theme.css">
+
+  <link rel="stylesheet" href="${contextPath}/css/footer.css">
+
 </head>
 
 <style>
@@ -176,15 +181,14 @@ input{
   width: 109px;
   font-size:12px;
 }
-
 </style>
 
 <body>
 
+  
+  <!-- <div class="page-section" id="myinfo"> -->
+  <div class="container">
   <jsp:include page="header.jsp"></jsp:include>
-
- <!-- <div class="page-section" id="myinfo"> -->
-   <div class="container">
        <div class="col-lg-6 py-3 wow fadeInUp">
          
          <span class="subhead">my page</span>
@@ -212,13 +216,13 @@ input{
   <section class="all-contents">
 
     <div class="box0">
-    <div class="subject"> 나의 활동 </div>
+        <div class="subject"> 나의 활동 </div>
     </div>
 
     <div class="buttons">
-    <button type="button" class="btn btn-primary btn-sm">나의 스터디</button>
-    <button type="button" class="btn btn-primary btn-sm">나의 게시글</button><br>
-    </div>
+      <button type="button" class="btn btn-primary btn-sm">나의 스터디</button>
+      <button type="button" class="btn btn-primary btn-sm">나의 게시글</button><br>
+    </div> <!--buttons-->
 
     <div class="box1">
       <div class="table-content">
@@ -260,31 +264,21 @@ input{
                 <td>오늘 제 생일이에요</td>
                 <td>2021-04-07</td>
               </tr>
-
-
             </tbody>
-        </table>    
-      </div>     
+            
+        </table> <!--table--> 
+      </div> <!--table-content-->  
+      </div> <!--box1-->
     
-</section>
+      </section> <!--all-contents-->
 
-
-
-
-  </div>
-
-
-
-
-
-
-
-        </div>
       </div>
-          
-        </div>
-      </div>
-    </div> <!-- .container -->
+      </div> <!--both-->
+    </div> <!--col-lg-6 py-3 wow fadeInUp-->
+
+  <jsp:include page="footer.jsp"></jsp:include>
+  </div><!-- .container -->
+
  <!-- </div> <!-- .page-section -->
     
     
