@@ -545,7 +545,8 @@ text-align: center;
 
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">이메일</label>
-            <input type="email" name="email" class="form-control validate" placeholder="이메일을 입력하세요" required>
+              <input type="email" id="user_id" name="email" class="form-control validate" placeholder="이메일을 입력하세요" required>
+            <div class="check_font" id="id_check"></div>
           </div>
 
           <div class="md-form mb-5">
@@ -715,6 +716,8 @@ overlay2.addEventListener('click', closeModal2);
          };
      </script>
      
+     
+     
 <script src="../js/jquery-3.5.1.min.js"></script>
 
 <script src="../js/bootstrap.bundle.min.js"></script>
@@ -733,7 +736,6 @@ overlay2.addEventListener('click', closeModal2);
   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="../js/mdb.min.js"></script>
-
   
 </body>
 </html>

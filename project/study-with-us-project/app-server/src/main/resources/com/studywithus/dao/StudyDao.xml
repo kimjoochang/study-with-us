@@ -11,6 +11,7 @@
     <result column="content" property="content"/>
     <result column="area" property="area"/>
     <result column="category" property="category"/>
+    <result column="on_off" property="onOffLine"/>
     <result column="register_date" property="registeredDate"/>
     <result column="view_count" property="viewCount"/>
     <result column="max_member" property="maxMembers"/>
@@ -42,6 +43,7 @@
       st.start_date,
       st.end_date,
       st.del_status,
+      st.on_off,
       st.price,
       st.status,
       (select 
@@ -86,6 +88,7 @@
       st.start_date,
       st.end_date,
       st.del_status,
+      st.on_off,
       st.price,
       st.status,
       (select 
@@ -131,6 +134,7 @@
       st.start_date,
       st.end_date,
       st.del_status,
+      st.on_off,
       st.price,
       st.status,
       (select 
@@ -181,8 +185,8 @@
   <insert id="insert" parameterType="study"
   useGeneratedKeys="true" keyColumn="study_no" keyProperty="no">
    insert into 
-     study(title,content,area,category,max_member,start_date,end_date,price,member_no)
-    values(#{title},#{content},#{area},#{category},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 
+     study(title,content,area,onOffLine,category,max_member,start_date,end_date,price,member_no)
+    values(#{title},#{content},#{area},#{on_off},#{category},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 
   </insert>
  
   <insert id="insertInterest">
@@ -221,6 +225,7 @@
       st.start_date,
       st.end_date,
       st.del_status,
+      st.on_off,
       st.price,
       st.status,
       (select 
@@ -300,7 +305,6 @@
     delete from review
     where study_no=#{no}
   </delete>
-
 <select id="findLikeMembers" resultMap="StudyMap" parameterType="int">
  select
     m.member_no likeMembers_no,
