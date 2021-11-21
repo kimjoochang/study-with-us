@@ -75,7 +75,7 @@ h1 {
 }
 
 .button{
-	border-radius: 10px;
+  border-radius: 10px;
  }
  
 </style>
@@ -192,17 +192,16 @@ h1 {
 				</table>
 			</div>
 		</div>
-		
 		<div class="total_page_count">
 		<c:if test="${previousBtn eq 0}">
-		<a href='list?no=${categoryNo}&pageNo=${startNo-2}'>previous</a>
+		<a href='list?no=${categoryNo}&pageNo=${startNo-3}'>previous</a>
 		</c:if>
 		<c:forEach var="i" begin="${startNo}" end="${endNo}">
-		    <a class="page_count" href='list?no=${categoryNo}&pageNo=${startNo+i-1}'>${startNo+i-1}</a>
+		    <a class="page_count" href='list?no=${categoryNo}&pageNo=${i}'>${i}</a>
     </c:forEach>
 		
 		  <c:if test="${nextBtn eq 1}">
-    <a href='list?no=${categoryNo}&pageNo=${startNo + 2}'>next</a>
+    <a href='list?no=${categoryNo}&pageNo=${startNo + 3}'>next</a>
     </c:if>
 		</div>
 		  
