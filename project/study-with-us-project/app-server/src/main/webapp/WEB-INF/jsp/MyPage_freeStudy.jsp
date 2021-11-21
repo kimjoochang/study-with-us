@@ -162,7 +162,7 @@ input {
 	margin-bottom: 0px;
 	padding-bottom: 0px;
 }
-<!-- 수정 -->
+
 .btn {
   margin-left : 5px;
 	height: 40px;
@@ -176,6 +176,21 @@ input {
   width : 100px;
   margin-top : 10px;
   margin-left : 25px;
+}
+
+.free_btn{
+	background-color: #eaeafd;
+	margin-left: 30px;
+	margin-top: 10px;
+	border-radius: 5px;
+}
+
+.charge_btn{
+	background-color: #eaeafd;
+	margin-left: 6px;
+	margin-top: 10px;
+	border-radius: 5px;
+	align-items: right;
 }
 </style>
 </head>
@@ -221,8 +236,8 @@ input {
 						</div>
 						<!-- 수정 -->
             <div class ="study_category">
-             <a href="../freestudy/registerlist">무료</a>
-            <a href="../chargestudy/registerlist">유료</a>
+             <a href="../freestudy/registerlist"><button type="button" class="free_btn">무료</button></a>
+            <a href="../chargestudy/registerlist"><button type="button" class="charge_btn">유료</button></a>
             </div>						
 
 						<div class="box1">
@@ -236,7 +251,6 @@ input {
 											<th scope="col">시작일</th>
 											<th scope="col">종료일</th>
 											<th scope="col">신청자 관리</th>
-											<th scope="col">팀원 관리</th>
 										</tr>
 									</thead>
 									<c:forEach items="${studyList}" var="study">
@@ -247,7 +261,6 @@ input {
 												<td>${study.members}</td>
 												<td>${study.startDate}</td>
 												<td>${study.endDate}</td>
-												<td>링크&아이콘</td>
 												<td>링크&아이콘</td>
 											</tr>
 										</tbody>
@@ -265,14 +278,14 @@ input {
 	</div>
 	</div>
 	<!-- .container -->
+	
+	<script src="${contextPath}/js/jquery-3.5.1.min.js"></script>
 
-	<script src="../assets/js/jquery-3.5.1.min.js"></script>
+	<script src="${contextPath}/js/bootstrap.bundle.min.js"></script>
 
-	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+	<script src="${contextPath}/vendor/wow/wow.min.js"></script>
 
-	<script src="../assets/vendor/wow/wow.min.js"></script>
-
-	<script src="../assets/js/theme.js"></script>
+	<script src="${contextPath}/js/theme.js"></script>
 
 </body>
 </html>

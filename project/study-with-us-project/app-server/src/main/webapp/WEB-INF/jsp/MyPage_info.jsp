@@ -187,6 +187,7 @@ input {
 </style>
 
 <body>
+	<jsp:include page="header.jsp"></jsp:include>
 
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light bg-white sticky"

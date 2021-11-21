@@ -170,21 +170,23 @@ input {
   margin-left : 5px;
 	height: 40px;
 	width: 150px;
-	font-size: 10px;
+	font-size: 12px;
+	border-radius: 5px;
 }
 
 .free_btn{
 	background-color: #eaeafd;
 	margin-left: 30px;
 	margin-top: 10px;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 .charge_btn{
 	background-color: #eaeafd;
 	margin-left: 6px;
 	margin-top: 10px;
-	border-radius: 10px;
+	border-radius: 5px;
+	align-items: right;
 }
 
 /*
@@ -243,8 +245,8 @@ input {
 
 						<!-- 수정 -->
             <div class ="study_category">
-            <a href="/swu/app/mypage/freeregisterlist"><button type="button" class="btn btn-primary btn-sm free_btn">무료</button></a>
-            <a href="chargeregisterlist"><button class="btn btn-primary btn-sm charge_btn">유료</button></a>
+            <a href="/swu/app/mypage/freeregisterlist"><button type="button" class="free_btn">무료</button></a>
+            <a href="chargeregisterlist"><button type="button" class="charge_btn">유료</button></a>
             </div>						
 
 						<div class="box1">
