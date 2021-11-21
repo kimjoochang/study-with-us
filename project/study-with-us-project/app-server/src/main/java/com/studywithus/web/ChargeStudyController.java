@@ -14,7 +14,6 @@ import com.studywithus.dao.StudyDao;
 import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.DeleteRequestForm;
 import com.studywithus.domain.Member;
-import com.studywithus.domain.Payment;
 import com.studywithus.domain.Study;
 
 @Controller
@@ -78,6 +77,7 @@ public class ChargeStudyController {
   public ModelAndView detail(int no, HttpSession session) throws Exception {
 
     int result;
+    int payResult;
 
     Study chargeStudy = chargeStudyDao.findByNo(no);
 
@@ -91,13 +91,17 @@ public class ChargeStudyController {
 
     if (member != null) {
       result =  chargeStudyDao.checkLikesByMember(member.getNo(), no);
+      payResult = paymentDao.check(member.getNo(), no);
+
     } else {
       result = 0;
+      payResult = -1;
     }
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("chargeStudy", chargeStudy);
     mv.addObject("result", result);
+    mv.addObject("payResult", payResult);
     mv.addObject("pageTitle", "스터디위더스 : 멘토링상세");
     mv.setViewName("chargestudy/ChargeStudyDetail");
     return mv;
@@ -312,20 +316,6 @@ public class ChargeStudyController {
     mv.addObject("chargeStudyList", chargeStudyList);
     mv.addObject("pageTitle", "스터디위더스 : 나의 관심목록");
     mv.setViewName("../jsp/chargestudy/ChargeStudyInterestList");
-    return mv;
-  }
-
-  @GetMapping("/mypage/paymentlist")
-  public ModelAndView paymentList(HttpSession session) throws Exception {
-
-    Member member = (Member) session.getAttribute("loginUser");
-
-    Collection<Payment> payments = paymentDao.findAll(member.getNo());
-
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("payments", payments);
-    mv.addObject("pageTitle", "스터디위더스 : 나의 결제내역");
-    mv.setViewName("../jsp/MyPage_payment");
     return mv;
   }
 

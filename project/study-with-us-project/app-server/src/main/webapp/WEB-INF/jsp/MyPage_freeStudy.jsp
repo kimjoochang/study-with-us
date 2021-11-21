@@ -195,7 +195,7 @@ input {
 				<ul class="my-menu-list">
 					<div class="profile-icon">
 
-						<img src="../img/profile.png"">
+						<img src="../img/profile.png">
 					</div>
 					<li class="userid">${loginUser.nickname}님</li>
 					<ul class=sub>

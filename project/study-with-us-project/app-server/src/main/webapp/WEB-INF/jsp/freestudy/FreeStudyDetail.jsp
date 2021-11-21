@@ -211,7 +211,7 @@
 		<section class="study-info-icon">
       <div class="item2">
         <!-- 회원(2) != 작성자-->
-		    <c:if test="${checkWriter eq 2}">
+		    <c:if test="${freeStudy.writer.no ne loginUser.no  && loginUser ne null}">
 
           <!-- 관심목록 추가 전 상태인 경우 추가 버튼 출력 -->
           <c:if test="${result eq 0}">
@@ -274,17 +274,21 @@
 			-->	
 
 			<div class="study-bottom-button">
-				<c:if test="${loginUser eq null}">
-					<a class="input6" href='list'>목록</a><br>				
-				</c:if>	
+					<a class="input6" href='list'>목록</a><br>			
+					 <c:if test="${freeStudy.writer.no eq loginUser.no}">
+      <a class="input6" href='updateform?no=${freeStudy.no}'>수정</a> 
+        <c:if test="${freeStudy.deleteStatus eq 0}">
+          <a class="input6" id ="open" href='#'>삭제</a> 
+        </c:if>	
+				    </c:if>
 				
-				<c:if test="${participateResult eq 0}">
-					<a class="input6" href='list'> 목록 </a>
-					<a class="input6" href='apply?no=${freeStudy.no}'>스터디 신청</a>
+				<c:if test="${freeStudy.writer.no ne loginUser.no && loginUser ne null}">
+  				<c:if test="${participateResult eq 0}">
+					 <a class="input6" href='apply?no=${freeStudy.no}'>스터디 신청</a>
+				  </c:if>
 				</c:if>
 				
 				<c:if test="${participateResult eq 1}">
-					<a class="input6" href='list'> 목록 </a>
 					<a class="input6" href='applycancel?no=${freeStudy.no}'>스터디 신청 취소</a>
 				</c:if>
 			</div> <!--study-bottom-button-->

@@ -205,8 +205,9 @@ input {
 }
 
 .input6 {
+	font-weight : bold;
   text-align: center;
-  width: 70px;
+  width: 130px;
   height: 26px;
   border-radius: 4px;
   background-color: rgb(117, 109, 170);
