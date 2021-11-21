@@ -288,7 +288,8 @@ text-align: center;
           <div class="col-md-6 py-5 wow fadeInLeft">
             <h1 class="mb-4">Let's Study with Us!</h1>
             <p class="text-lg text-grey mb-5">내가 원하는 분야의 스터디를 한 눈에 살펴보고 자유롭게 참여할 수 있는 스터디위더스 웹 사이트입니다. </p> 
-            <p> 그리고 이제 여기 밑에 어쩌고를 기반으로 어쩌고저쩌고 그랬습니다 하면서 우리 프로젝트 소개 이만큼만 적으면 되겠지 아니면 위에 문장이랑 아예 합쳐서 적을까?</p>
+            <p> 누구나 배움의 기회를 가지고 편리하게 스터디를 참여하기 위해 만들어진 스터디매칭 플랫폼입니다. 
+여러가지 카테고리의 스터디를 스터디 위더스에서 한눈에 보시고, 참여, 개설 및 다양한 서비스를 이용해 보세요.</p>
             <!-- <a href="#" class="btn btn-primary btn-split">Watch Video <div class="fab"><span class="mai-play"></span></div></a> -->
           </div>
           <div class="col-md-6 py-5 wow zoomIn">

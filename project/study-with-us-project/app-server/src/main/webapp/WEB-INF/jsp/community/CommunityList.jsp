@@ -73,6 +73,11 @@ h1 {
   font-size : 15px;
   margin-left : 3px;
 }
+
+.button{
+	border-radius: 10px;
+ }
+ 
 </style>
 
 </head>
