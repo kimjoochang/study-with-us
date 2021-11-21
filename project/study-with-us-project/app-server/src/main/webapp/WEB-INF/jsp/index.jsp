@@ -37,38 +37,32 @@
 </head>
 
 <style>
-
 .md-form.mb-5{
   margin:10px;
 }
-
 .modal-header{
   display: fixed;
   justify-content: space-evenly;
   align-items: center;
   z-index: 2000 !important;
 }
-
 .validate{
   padding: 0px;
   margin:0 auto;
   width:300px;
   height:35px;
 }
-
 .join_btn_4_space{
   display: flex;
   text-align:center;
   justify-content: space-evenly;
   margin: 10px;
 }
-
 .arrow{
 padding:0px;
 margin-left:-2.55px;
 margin-right:10px;
 }
-
 .img_main{
   height:360px;
   width:390px;
@@ -84,13 +78,11 @@ margin-right:10px;
   align-items: center;
   z-index: 100 !important;
 }
-
 .modal1_overlay {
   position:relative;
   width: 100%;
   height: 100%;
 }
-
 .modal1_content {
     position: fixed;
     text-align: center;
@@ -107,7 +99,6 @@ margin-right:10px;
     z-index: 10 !important;
     align-items: center;
 }
-
   .modal2 {
   top: 0;
   left: 0;
@@ -118,13 +109,11 @@ margin-right:10px;
   align-items: center;
   z-index: 100 !important;
 }
-
 .modal2_overlay {
   position:relative;
   width: 100%;
   height: 100%;
 }
-
 .modal2_content {
   position: fixed;
   text-align: center;
@@ -140,37 +129,30 @@ margin-right:10px;
     rgba(0, 0, 0, 0.23);
   z-index: 10 !important;
 }
-
 .hidden {
   display: none;
 }
-
 .email_ok {
 color:#fff; 
 display: none;
 }
-
 .email_already {
  color:#6A82FB;
  display: none;
  }
-
 /*
 .form_box {
   margin : 35px;
 }
-
 .hidden {
   display: none;
 }
-
 .button_box {
 display : flex;
 justify-content : flex-end;
 margin-right : 5px;
 text-align: center;
 }
-
 .form_buttons {
   display : flex;
   justify-content: flex-end;
@@ -180,22 +162,17 @@ text-align: center;
     .request_button, #close {
       margin-right : 15px;
     }
-
     input {
     all : unset;
     }
-
   .btn-primary1{
     background: #756daa;
     color: snow;
     border-radius: 70px;
-
   }
-
     .st-sns{
       font-size: 14px;
     }
-
     .row{
       margin-left:5px;
       margin-right:5px;
@@ -208,13 +185,11 @@ text-align: center;
     justify-content:space-evenly;
     margin-top:15px;
     }
-
   .title_img {
     margin:30px 10px;
     text-align:center;
     justify-content: center;
   }
-
   .sign-buttons {
     margin-top: 50%;
   }
@@ -318,7 +293,8 @@ text-align: center;
             </div>
             <div class="body">
               <h5 class="text-secondary">일반기업</h5>
-              <p>We help you define your SEO objective & develop a realistic strategy with you</p>
+              <p>General Company <br>
+                기업 공채 정보부터 면접까지 스터디 참여로 준비해보세요!</p>
               <a href="freestudy/findByCategory?keyword=일반기업" class="btn btn-primary">Read more</a>
             </div>
           </div>
@@ -332,7 +308,8 @@ text-align: center;
             </div>
             <div class="body">
               <h5 class="text-secondary">공기업/공무원</h5>
-              <p>We help you define your SEO objective & develop a realistic strategy with you</p>
+              <p>Public Enterprise/Public Official <br>
+                공기업, 공무원 단기 합격을 위한 파이널 스터디에 참여해보세요!</p>
               <a href="freestudy/findByCategory?keyword=공기업" class="btn btn-primary">Read more</a>
             </div>
           </div>
@@ -345,7 +322,8 @@ text-align: center;
               </svg></div>
             <div class="body">
               <h5 class="text-secondary">프로그래밍</h5>
-              <p>We help you define your SEO objective & develop a realistic strategy with you</p>
+              <p>Programming <br>
+                프로그래밍 입문 기초부터 실전 심화까지 원하는 스터디를 참여해보세요!</p>
               <a href="freestudy/findByCategory?keyword=프로그래밍" class="btn btn-primary">Read more</a>
             </div>
           </div>
@@ -364,7 +342,9 @@ text-align: center;
           <div class="divider"></div>
 
           <p>여기에 이제 프로젝트 설명이 들어갈 예정입니당. 사이트를 왜 만들게 되었는지, 어떤 기능들을 구현했는지 간단하게 적어두면 좋을 섹션인 것 같아</p>
-          <p>조원 이름이랑 깃헙 주소를 넣을까 말까 고민이다 안 넣으면 그냥 이렇게 간단한 소개만 넣을까?</p>
+          <p>김제이 https://github.com/Jei-Kim <br>
+            김주창 https://github.com/kimjoochang <br>
+            하선영 https://github.com/seonyoungHa</p>
           <a href="about.html" class="btn btn-primary mt-3">Read more</a>
         </div>
         <div class="col-lg-6 py-3 wow fadeInRight">
@@ -651,40 +631,32 @@ text-align: center;
 const openBtn = document.getElementById('open1');
 const openBtn2 = document.getElementById('open2');
 //onModal button
-
 const closeBtn = document.getElementById('close1');
 const closeBtn2 = document.getElementById('close2');
 //offModal button
-
 const modal = document.querySelector('.modal1');
 const modal2 = document.querySelector('.modal2');
 //HTML에서의 모달 최상위 요소
-
 const overlay = document.querySelector('.modal1_overlay');
 const overlay2 = document.querySelector('.modal2_overlay');
 //모달창이 활성화되면 흐린 배경을 표현하는 요소
-
 const openModal = () => {
 modal.classList.remove('hidden');
 }
 const openModal2 = () => {
 modal2.classList.remove('hidden');
 }
-
 const closeModal = () => {
 modal.classList.add('hidden');
 }
 const closeModal2 = () => {
 modal2.classList.add('hidden');
 }
-
 openBtn2.addEventListener('click', openModal2);
 openBtn.addEventListener('click', openModal);
 //onModal
-
 closeBtn2.addEventListener('click', closeModal2);
 closeBtn.addEventListener('click', closeModal);
-
 overlay.addEventListener('click', closeModal);
 overlay2.addEventListener('click', closeModal2);
 //모달창 영역 밖
