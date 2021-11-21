@@ -75,8 +75,8 @@ h1 {
 }
 
 .add-button {
-	border-radius: 10px;
-	font-size: 15px;
+  border-radius: 10px;
+  font-size: 14px;
  }
  
 </style>
@@ -110,9 +110,9 @@ h1 {
 				<!--모달 화면-->
 				<div class="modal_content">
 					<div class="form_category_menu">
-						<a class="info_box" >정보</a> 
-						<a class="qa_box">질문</a>
-						<a class="talk_box" >스몰톡</a>
+						<a class="info_box" href='form?no=0'>정보</a> 
+						<a class="qa_box" href='form?no=1'>질문</a>
+						<a class="talk_box" href='form?no=2'>스몰톡</a>
 					</div>
 					<div class="form_box">
 						<form action='add' target="CommunityList.jsp" method='post'>
@@ -193,17 +193,16 @@ h1 {
 				</table>
 			</div>
 		</div>
-		
 		<div class="total_page_count">
 		<c:if test="${previousBtn eq 0}">
-		<a href='list?no=${categoryNo}&pageNo=${startNo-2}'>previous</a>
+		<a href='list?no=${categoryNo}&pageNo=${startNo-3}'>previous</a>
 		</c:if>
 		<c:forEach var="i" begin="${startNo}" end="${endNo}">
-		    <a class="page_count" href='list?no=${categoryNo}&pageNo=${startNo+i-1}'>${startNo+i-1}</a>
+		    <a class="page_count" href='list?no=${categoryNo}&pageNo=${i}'>${i}</a>
     </c:forEach>
 		
 		  <c:if test="${nextBtn eq 1}">
-    <a href='list?no=${categoryNo}&pageNo=${startNo + 2}'>next</a>
+    <a href='list?no=${categoryNo}&pageNo=${startNo + 3}'>next</a>
     </c:if>
 		</div>
 		  
