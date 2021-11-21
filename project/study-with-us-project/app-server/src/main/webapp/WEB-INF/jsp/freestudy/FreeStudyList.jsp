@@ -107,6 +107,18 @@ trimDirectiveWhitespaces="true" %>
       <c:set var="type" value="진행완료"/>
         </c:when>
         </c:choose>
+        
+     <c:choose>
+   <c:when test="${freeStudy.onOffLine eq 0}">
+ <c:set var="type2" value="온라인"/>
+   </c:when>
+   </c:choose>
+
+   <c:choose>
+   <c:when test="${freeStudy.onOffLine eq 1}">
+ <c:set var="type2" value="오프라인"/>
+   </c:when>
+   </c:choose>
   
         <li class="lidesign"> <a href='detail?no=${freeStudy.no}'></a>
           <h1 class="studyTitle"> ${freeStudy.title} </h1>
@@ -114,7 +126,7 @@ trimDirectiveWhitespaces="true" %>
           <span>
             <img class="on_offline"
             src="${contextPath}/img/onlineIcon.png">
-            <p class="on_offline_status">${freeStudy.onOffLine},${freeStudy.area}</p>
+            <p class="on_offline_status">${type2}</p>
           </span>
           
           <section>

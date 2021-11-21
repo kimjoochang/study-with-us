@@ -185,8 +185,8 @@
   <insert id="insert" parameterType="study"
   useGeneratedKeys="true" keyColumn="study_no" keyProperty="no">
    insert into 
-     study(title,content,area,onOffLine,category,max_member,start_date,end_date,price,member_no)
-    values(#{title},#{content},#{area},#{on_off},#{category},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 
+     study(title,content,area,on_off,category,max_member,start_date,end_date,price,member_no)
+    values(#{title},#{content},#{area},#{onOffLine},#{category},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no})
   </insert>
  
   <insert id="insertInterest">

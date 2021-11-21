@@ -33,19 +33,44 @@
 			<form class = "study-form-center" action="detail">
 				<fieldset class="menu">
 
+				        <c:choose>
+        <c:when test="${freeStudy.studyStatus eq 0}">
+      <c:set var="type" value="모집중"/>
+        </c:when>
+        </c:choose>
+
+        <c:choose>
+        <c:when test="${freeStudy.studyStatus eq 1}">
+      <c:set var="type" value="진행중"/>
+        </c:when>
+        </c:choose>
+
+        <c:choose>
+        <c:when test="${freeStudy.studyStatus eq 2}">
+      <c:set var="type" value="진행완료"/>
+        </c:when>
+        </c:choose>
+        
+     <c:choose>
+   <c:when test="${freeStudy.onOffLine eq 0}">
+ <c:set var="type2" value="온라인"/>
+   </c:when>
+   </c:choose>
+
+   <c:choose>
+   <c:when test="${freeStudy.onOffLine eq 1}">
+ <c:set var="type2" value="오프라인"/>
+   </c:when>
+   </c:choose>
+   
 					<span class="study-top-status-2">
 						<h1 class="study-content-category">
 							스터디 상세보기 <input class="input5" id='f-status' type='text'
-								name='status' value='${freeStudy.studyStatus}' readonly>
+								name='status' value='${type}' readonly>
 							<span class="study-registered-date" id='f-registeredDate'>${freeStudy.registeredDate}</span>
 						</h1>
 					</span>
 
-					<!--
-        <div class="form-group">
-          <label for='f-registeredDate'>등록일</label> 
-        </div>
-      -->
 
 					<hr class="study-hr">
 
@@ -55,7 +80,7 @@
 							<input class="input3" id='f-category' type='text' name='category' value='${freeStudy.category}' readonly>
 
 							<img class="icon-top" src="${contextPath}/img/onlineIcon.png">
-							<input class="input3" id='f-onOffLine' type='number' name='onOffLine' value='${freeStudy.onOffLine}' readonly>
+							<input class="input3" id='f-onOffLine' type='number' name='onOffLine' value='${type2}' readonly>
 
 							<img class="icon-top" src="${contextPath}/img/area.png">
 							<input class="input3" id='f-area' type='text' name='area' value='${freeStudy.area}' readonly>
@@ -299,7 +324,6 @@
 		</div> <!--study-form-center-->
 		</header> <!--freestudy-top-->
 		
-		<jsp:include page="../footer.jsp"></jsp:include>
 		</div>   <!--container-->
 
 	<script>
