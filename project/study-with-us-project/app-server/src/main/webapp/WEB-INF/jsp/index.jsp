@@ -411,7 +411,7 @@ text-align: center;
               </div>
             </div>
             <div class="body">
-              <h5 class="post-title"><a href="community/list?categoryNo=0">커뮤니티</a></h5>
+              <h5 class="post-title"><a href="community/list?no=0&pageNo=1">커뮤니티</a></h5>
               <div class="post-date">스터디위더스 회원들과 소통하고 정보를 나누어보세요</div>
             </div>
           </div>
@@ -736,51 +736,6 @@ overlay2.addEventListener('click', closeModal2);
   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="../js/mdb.min.js"></script>
-
-  <script>
-// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
-  $("#user_id").blur(function() {
-    // id = "id_reg" / name = "userId"
-    var user_id = $('#user_id').val();
-    $.ajax({
-      url : '${contextPath}/user/idCheck?userId='+ user_id,
-      type : 'get',
-      success : function(data) {
-        console.log("1 = 중복o / 0 = 중복x : "+ data);              
-        
-        if (data == 1) {
-            // 1 : 아이디가 중복되는 문구
-            $("#id_check").text("사용중인 아이디입니다 :p");
-            $("#id_check").css("color", "red");
-            $("#reg_submit").attr("disabled", true);
-          } else {
-            
-            if(idJ.test(user_id)){
-              // 0 : 아이디 길이 / 문자열 검사
-              $("#id_check").text("");
-              $("#reg_submit").attr("disabled", false);
-        
-            } else if(user_id == ""){
-              
-              $('#id_check').text('아이디를 입력해주세요 :)');
-              $('#id_check').css('color', 'red');
-              $("#reg_submit").attr("disabled", true);        
-              
-            } else {
-              
-              $('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
-              $('#id_check').css('color', 'red');
-              $("#reg_submit").attr("disabled", true);
-            }
-            
-          }
-        }, error : function() {
-            console.log("실패");
-        }
-      });
-    });
-</script>
-
   
 </body>
 </html>
