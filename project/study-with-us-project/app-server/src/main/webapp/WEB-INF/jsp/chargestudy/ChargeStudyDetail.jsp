@@ -78,6 +78,25 @@ text-align: center;
   <jsp:include page="../header.jsp"></jsp:include>
   
   <header class="freepagetop">
+  
+<c:choose>
+  <c:when test="${chargeStudy.studyStatus eq 0}">
+<c:set var="type" value="모집중"/>
+  </c:when>
+  </c:choose>
+
+  <c:choose>
+  <c:when test="${chargeStudy.studyStatus eq 1}">
+<c:set var="type" value="진행중"/>
+  </c:when>
+  </c:choose>
+
+  <c:choose>
+  <c:when test="${chargeStudy.studyStatus eq 2}">
+<c:set var="type" value="진행완료"/>
+  </c:when>
+  </c:choose>
+  
 
     <form action="detail" >
       <fieldset class="menu">
@@ -87,7 +106,7 @@ text-align: center;
       <span class="study-top-status-2">
           <h1 class="study-content-category">
             멘토링 상세보기
-            <input class="input5" id='f-status' type='text' name='status' value='${chargeStudy.studyStatus}' readonly>
+            <input class="input5" id='f-status' type='text' name='status' value='${type}' readonly>
             <span class="study-registered-date" id='f-registeredDate'>${chargeStudy.registeredDate}</span>
           </h1>
       </span>
@@ -266,6 +285,7 @@ text-align: center;
         </c:if>
     </c:if>
     
+    <c:if test="${chargeStudy.writer.no ne loginUser.no && loginUser ne null}">
         <c:if test="${payResult eq 0}">
     <a id="payment_button" class="input6" onclick="kakaopay();" href='#'>결제</a>
         </c:if>
@@ -273,6 +293,7 @@ text-align: center;
         <c:if test="${payResult > 0}">
     <a class="input6" href='#'>결제취소</a>
         </c:if>
+    </c:if>
   </div> <!--study-bottom-button-->
 <!-- 결제 취소 조건 좀 더 고민해야함! 
 (스터디멤버 테이블에서 스터디번호와 회원번호 주고 멤버상태에 따라 구분할 지 ,
@@ -308,7 +329,6 @@ text-align: center;
     </div> <!-- modal_hidden -->
 
   </header> <!--freestudy-top-->
-<jsp:include page="../footer.jsp"></jsp:include>
 </div><!--container-->
 </body> <!--유료스터디 제일 큰 포맷-->
 

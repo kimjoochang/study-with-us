@@ -114,7 +114,7 @@
           <span>
             <img class="on_offline"
             src="${contextPath}/img/offLineIcon2.png">
-            <p class="on_offline_status">${freeStudy.onOffLine}.${freeStudy.area}</p>
+            <p class="on_offline_status">${chargeStudy.area}</p>
           </span>
           
           <section>
