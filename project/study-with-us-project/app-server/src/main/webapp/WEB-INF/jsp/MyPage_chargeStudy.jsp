@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,22 +163,42 @@ input {
 	margin-bottom: 0px;
 	padding-bottom: 0px;
 }
-<!-- 수정 -->
+
+ /*수정*/
+
 .btn {
   margin-left : 5px;
 	height: 40px;
-	width: 109px;
+	width: 150px;
 	font-size: 10px;
 }
 
+.free_btn{
+	background-color: #eaeafd;
+	margin-left: 30px;
+	margin-top: 10px;
+	border-radius: 10px;
+}
+
+.charge_btn{
+	background-color: #eaeafd;
+	margin-left: 6px;
+	margin-top: 10px;
+	border-radius: 10px;
+}
+
+/*
 .study_category{
   display : flex;
-  justify-content : space-around;
-  width : 100px;
+  justify-content : space-between;
+  width : 10000px;
   margin-top : 10px;
   margin-left : 25px;
 }
+*/
+
 </style>
+
 </head>
 
 <body>
@@ -195,14 +216,14 @@ input {
 				<ul class="my-menu-list">
 					<div class="profile-icon">
 
-						<img src="../img/profile.png"">
+						<img src="${contextPath}/img/profile.png">
 					</div>
 					<li class="userid">${loginUser.nickname}님</li>
 					<ul class=sub>
-						<li><a href="#">나의 정보</a></li>
-						<li><a href="#">결제 내역</a></li>
-						<li><a href="#">관심 목록</a></li>
-						<li><a href="#">나의 활동</a></li>
+						<li><a href="/swu/app/mypage/myinfo">나의 정보</a></li>
+						<li><a href="/swu/app/mypage/payment">결제 내역</a></li>
+						<li><a href="/swu/app/mypage/interest">관심 목록</a></li>
+						<li><a href="/swu/app/mypage/post">나의 활동</a></li>
 					</ul>
 				</ul>
 				<div class="content-section">
@@ -216,13 +237,14 @@ input {
 						<div class="buttons">
 							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='chargeregisterlist';">내가 등록한 스터디</button>
 							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='chargeparticipatelist';">내가 참여한 스터디</button>
-							<button type="button" class="btn btn-primary btn-sm">나의 게시글</button>
-							<br>
+							<button type="button" class="btn btn-primary btn-sm" onclick="location.href='/swu/app/mypage/mypost';">나의 게시글</button>
+							
 						</div>
+
 						<!-- 수정 -->
             <div class ="study_category">
-            <a href="../freestudy/registerlist">무료</a>
-            <a href="chargeregisterlist">유료</a>
+            <a href="/swu/app/mypage/freeregisterlist"><button type="button" class="btn btn-primary btn-sm free_btn">무료</button></a>
+            <a href="chargeregisterlist"><button class="btn btn-primary btn-sm charge_btn">유료</button></a>
             </div>						
 
 						<div class="box1">
@@ -236,7 +258,6 @@ input {
 											<th scope="col">멘티 수</th>
 											<th scope="col">시작일</th>
 											<th scope="col">종료일</th>
-											<th scope="col">멘티 관리</th>
 										</tr>
 									</thead>
 									<c:forEach items="${studyList}" var="study">
@@ -248,7 +269,6 @@ input {
 												<td>${study.members}</td>
 												<td>${study.startDate}</td>
 												<td>${study.endDate}</td>
-												<td>링크&아이콘 자리</td>
 											</tr>
 										</tbody>
 									</c:forEach>
@@ -266,13 +286,13 @@ input {
 	</div>
 	<!-- .container -->
 
-	<script src="../assets/js/jquery-3.5.1.min.js"></script>
+	<script src="${contextPath}/js/jquery-3.5.1.min.js"></script>
 
-	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+	<script src="${contextPath}/js/bootstrap.bundle.min.js"></script>
 
-	<script src="../assets/vendor/wow/wow.min.js"></script>
+	<script src="${contextPath}/vendor/wow/wow.min.js"></script>
 
-	<script src="../assets/js/theme.js"></script>
+	<script src="${contextPath}/js/theme.js"></script>
 
 </body>
 </html>

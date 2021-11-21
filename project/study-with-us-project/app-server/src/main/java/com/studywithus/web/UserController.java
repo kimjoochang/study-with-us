@@ -132,7 +132,7 @@ public class UserController {
 		}
 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("redirect:../index");
+		mv.setViewName("../MyPage_info"); 
 		return mv;
 	}
 

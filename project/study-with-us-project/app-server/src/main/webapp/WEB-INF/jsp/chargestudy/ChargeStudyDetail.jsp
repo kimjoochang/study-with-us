@@ -24,7 +24,7 @@
 	 #close, button {
 	 all : unset;
 	 }
- /**/
+ 
  .modal {
   top: 0;
   left: 0;
