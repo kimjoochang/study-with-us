@@ -193,6 +193,10 @@ text-align: center;
   .sign-buttons {
     margin-top: 50%;
   }
+  
+  .post-date{
+  font-size: 12px;}
+
 </style>
 
 <body>
@@ -403,7 +407,7 @@ text-align: center;
           <div class="card-blog">
             <div class="header">
               <div class="post-thumb">
-                <a href="mentorapplication/form"><img src="${contextPath}/img/mentor.png"></img></a>
+                <a id="open2" href="#"><img src="${contextPath}/img/mentor.png"></img></a>
               </div>
             </div>
             <div class="body">
@@ -516,26 +520,28 @@ text-align: center;
 
           <form action="user/join" method="post"><!-- 추가-->
             
-            <!--<div class="md-form mb-5">일단-->
-            <label data-error="wrong" data-success="right">이름</label>
+            <div class="md-form mb-5">
+            <label class ="sign_label" data-error="wrong" data-success="right">&nbsp;이름
             <input type="text" name="name" class="form-control validate" placeholder="이름을 입력하세요" required>
-          </div>
+          </label></div>
 
           <div class="md-form mb-5">
-            <label data-error="wrong" data-success="right">이메일</label>
+            <label data-error="wrong" data-success="right">&nbsp;이메일
               <input type="email" id="user_id" name="email" class="form-control validate" placeholder="이메일을 입력하세요" required>
+            </label></div>
+            
             <div class="check_font" id="id_check"></div>
-          </div>
+          
 
           <div class="md-form mb-5">
-            <label data-error="wrong" data-success="right">닉네임</label>
+            <label data-error="wrong" data-success="right">&nbsp;닉네임
             <input type="text" name="nickname" class="form-control validate" placeholder="닉네임을 입력하세요" required>
-          </div>
+          </label></div>
 
           <div class="md-form mb-5">
-            <label data-error="wrong" data-success="right">비밀번호</label>
+            <label data-error="wrong" data-success="right">&nbsp;비밀번호
             <input type="password" name="password" class="form-control validate" placeholder="비밀번호를 입력하세요" required>
-          </div>
+          </label></div>
 
         <!--
           <div class="md-form mb-5">
@@ -545,10 +551,10 @@ text-align: center;
         -->  
 
           <div class="md-form mb-5">
-            <label data-error="wrong" data-success="right">휴대폰 번호</label>
+            <label data-error="wrong" data-success="right">&nbsp;&nbsp;휴대폰 번호
             <input type="text" name="phoneNumber" class="form-control validate" placeholder="010-1234-5678" required>
-          </div>
-        <!--</div>주석-->
+          </label></div>
+        </div>
           
         <div class="modal-footer d-flex justify-content-center">
           <button class="btn btn-primary1">스터디위더스 시작하기</button><br><hr>
