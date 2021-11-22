@@ -136,6 +136,11 @@ margin-right:10px;
  color:#6A82FB;
  display: none;
  }
+
+ .td{
+  
+  border-spacing: 100px;
+ }
 /*
 .form_box {
   margin : 35px;
@@ -196,8 +201,23 @@ text-align: center;
   font-size: 12px;}
 
   .git-img{
+    margin-top: 0px;
    margin: 0 auto;
-   justyfy-content: space-between;
+   padding: 10px;
+  }
+
+  .table{
+    border-spacing: 500px;
+    margin-right: 50px;
+  }
+
+  .git-i{
+    border-spacing: 50px;
+  }
+
+  .git-n{
+    margin-top:5px;
+    text-align: center;
   }
 
 </style>
@@ -348,23 +368,35 @@ text-align: center;
           <h2 class="title-section">Team3</h2>
           <div class="divider"></div>
 
-          <p>기존에 분산되어 있던 스터디의 카테고리를 하나의 공간에서 이용할 수 있는 스터디 매칭 웹 사이트 '스터디위더스'<br>
-            사용자의 니즈에 맞게 여러 분야의 스터디 개설 및 참여 서비스를 제공하는 집약형 웹사이트를 구축하였습니다.<br>
-            주요 기능인 스터디 서비스 외에도, 기존 사이트들의 장점인 유저들간의 자유로운 정보 공유를 위한 공간으로<br>
+          <p>기존에 분산되어 있던 스터디의 카테고리를 하나의 공간에서 이용할 수 있는 스터디 매칭 웹 사이트 '스터디위더스'입니다.<br><br>
+            사용자의 니즈에 맞게 여러 분야의 스터디 개설 및 참여 서비스를 제공하는 집약형 웹사이트를 구축하였습니다.<br><br>
+            주요 기능인 스터디 서비스 외에도, 기존 사이트들의 장점인 유저들간의 자유로운 정보 공유를 위한 공간으로
             커뮤니티 게시판을 제공하기도 합니다.
-          </p><br>
+          </p>
+          
           <table class="git">
             <tr>
-              <td><a href="https://github.com/Jei-Kim"><img alt="github" src="${contextPath}/img/github.png"/></a></td>
-              <td></td>
-              <td><a href="https://github.com/kimjoochang"><img alt="github" src="${contextPath}/img/github.png"/></a></td>
-              <td></td>
-              <td><a href="https://github.com/seonyoungHa"><img alt="github" src="${contextPath}/img/github.png"/></a></td><br>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td class="git-i"><a href="https://github.com/Jei-Kim"><img alt="github" src="${contextPath}/img/github.png"/></a></td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td class="git-i"><a href="https://github.com/kimjoochang"><img alt="github" src="${contextPath}/img/github.png"/></a></td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td class="git-i"><a href="https://github.com/seonyoungHa"><img alt="github" src="${contextPath}/img/github.png"/></a></td><br>
+            </tr>
               <tr>
-              </table>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td class="git-n">김제이</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td class="git-n">김주창</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td class="git-n">하선영</td><br>
+              </tr>
+            </table>
+
+            <!--
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;김제이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               김주창&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              하선영
+              하선영-->
 <!--
           <div class ="git-img">
           <div class="git-j"><a href="https://github.com/Jei-Kim"><img src="${contextPath}/img/github.png"></img></a></div>
