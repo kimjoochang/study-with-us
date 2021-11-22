@@ -615,10 +615,10 @@ text-align: center;
 
         <div class="row my-3 justify-content-center">
           <div class="sns_container">
-            <div class="sns_icon"><a><img src="${contextPath}/img/facebook.png"></img></a></div>
-            <div class="sns_icon"><a><img src="${contextPath}/img/twitter.png"></img></a></div>
-            <div class="sns_icon"><a><img src="${contextPath}/img/google.png"></img></a></div>
-            <div class="sns_icon"><a><img src="${contextPath}/img/instagram.png"></img></a></div>
+            <div class="sns_icon"><a><img src="${contextPath}/img/facebook.png"></img></a></div>&nbsp;&nbsp;
+            <div class="sns_icon"><a><img src="${contextPath}/img/twitter.png"></img></a></div>&nbsp;&nbsp;
+            <div class="sns_icon"><a><img src="${contextPath}/img/google.png"></img></a></div>&nbsp;&nbsp;
+            <div class="sns_icon"><a><img src="${contextPath}/img/instagram.png"></img></a></div>&nbsp;&nbsp;
         </div><!--sns_container-->
         </div><!--row my-3 justify-content-center-->
         
@@ -669,7 +669,7 @@ overlay2.addEventListener('click', closeModal2);
     function checkEmail(){
         var email = $('#email').val(); //id값이 "email"인 입력란의 값을 저장?
         $.ajax({
-            url:'/user/emailCheck', //Controller에서 인식할 주소 설정해주기
+            url:'/user/idCheck', //Controller에서 인식할 주소 설정해주기
             type:'post', //POST 방식으로 전달
             data:{id:email},
             

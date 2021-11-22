@@ -275,14 +275,20 @@ color : #898798;
 
 .info_box {
 	padding : 5px 10px;
+  width: 100px;
+  text-align: center;
 }
 
 .qa_box {
 	padding : 5px 10px;
+  width: 100px;
+  text-align: center;
 }
 
 .talk_box {
 	padding : 5px 10px;
+  width: 100px;
+  text-align: center;
 }
 
 .form_input_title {
@@ -313,11 +319,11 @@ color : #898798;
 }
 
 .ctry_text_color {
-	color : #898798;
+	color :#323233;
 }
 
 .ctry_box_color {
-	background-color : #898798;
+  color :#c3bfe2;
 }
 
 
