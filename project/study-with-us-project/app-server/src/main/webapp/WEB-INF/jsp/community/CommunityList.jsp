@@ -24,15 +24,23 @@
 <link rel="stylesheet" href="${contextPath}/css/footer.css">
 
 <style>
+table {
+table-layout: fixed;
+word-break : break-all;
+}
+
 .icon {
   width : 15px;
 }
+
 ul {
   list-style : none;
 }
+
 .icon_td {
   width : 30px;
 }
+
 .modal {
   top: 0;
   left: 0;
@@ -42,12 +50,20 @@ ul {
   justify-content: center;
   align-items: center;
 }
+
 .modal_overlay {
   position:fixed;
   width: 100%;
   height: 100%;
 }
+
+input.form_input_title !important{
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+
 .modal_content {
+  text-align : center;
   position: fixed;
   top: 30%;
   left: 40%;
@@ -59,15 +75,19 @@ ul {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
     rgba(0, 0, 0, 0.23);
 }
+
 h1 {
   margin: 0;
 }
+
 .hidden {
   display: none;
 }
+
 .total_page_count {
   text-align : center;
 }
+
 .page_count {
   color : black;
   font-size : 15px;

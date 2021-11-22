@@ -285,7 +285,7 @@ text-align: center;
         </c:if>
     </c:if>
     
-    <c:if test="${chargeStudy.writer.no ne loginUser.no && loginUser ne null}">
+    <c:if test="${chargeStudy.writer.no ne loginUser.no && loginUser ne null && chargeStudy.studyStatus eq 0}">
         <c:if test="${payResult eq 0}">
     <a id="payment_button" class="input6" onclick="kakaopay();" href='#'>결제</a>
         </c:if>

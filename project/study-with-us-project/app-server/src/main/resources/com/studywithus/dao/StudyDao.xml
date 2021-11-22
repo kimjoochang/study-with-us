@@ -120,6 +120,146 @@
   ]]>
   </select>
   
+  <select id="findAllRecruit" resultMap="StudyMap">
+  <![CDATA[
+   select 
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.category,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.on_off,
+      st.price,
+      st.status,
+      (select 
+      count(*) 
+      from 
+      interest i
+      where
+      i.study_no=st.study_no) likes,
+      (select 
+      count(*) 
+      from 
+      study_member sm
+      where
+      sm.study_no=st.study_no
+      and
+      sm.status=1) members,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.nickname writer_nickname,
+      m.email writer_email
+    from 
+      study st
+    inner join member m on st.member_no=m.member_no
+   where price >=#{low} and price<=#{high}
+    and 
+    st.del_status != 2
+    order by 
+      st.study_no asc
+  ]]>
+  </select>
+  
+  <select id="findAllOngoing" resultMap="StudyMap">
+  <![CDATA[
+   select 
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.category,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.on_off,
+      st.price,
+      st.status,
+      (select 
+      count(*) 
+      from 
+      interest i
+      where
+      i.study_no=st.study_no) likes,
+      (select 
+      count(*) 
+      from 
+      study_member sm
+      where
+      sm.study_no=st.study_no
+      and
+      sm.status=1) members,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.nickname writer_nickname,
+      m.email writer_email
+    from 
+      study st
+    inner join member m on st.member_no=m.member_no
+   where price >=#{low} and price<=#{high}
+    and 
+    st.del_status != 2
+    order by 
+      st.study_no asc
+  ]]>
+  </select>
+  
+    <select id="findAllFinish" resultMap="StudyMap">
+  <![CDATA[
+   select 
+      st.study_no,
+      st.title,
+      st.content,
+      st.area,
+      st.category,
+      st.register_date,
+      st.view_count,
+      st.max_member,
+      st.start_date,
+      st.end_date,
+      st.del_status,
+      st.on_off,
+      st.price,
+      st.status,
+      (select 
+      count(*) 
+      from 
+      interest i
+      where
+      i.study_no=st.study_no) likes,
+      (select 
+      count(*) 
+      from 
+      study_member sm
+      where
+      sm.study_no=st.study_no
+      and
+      sm.status=1) members,
+      m.member_no writer_no,
+      m.name writer_name,
+      m.nickname writer_nickname,
+      m.email writer_email
+    from 
+      study st
+    inner join member m on st.member_no=m.member_no
+   where price >=#{low} and price<=#{high}
+    and 
+    st.del_status != 2
+    and
+    where st.start_date=#{nowDate}
+    order by 
+      st.study_no asc
+  ]]>
+  </select>
+  
   <select id="findAllByKeyword" resultMap="StudyMap">
   <![CDATA[
    select 

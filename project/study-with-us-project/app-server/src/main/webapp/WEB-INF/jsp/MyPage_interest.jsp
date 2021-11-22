@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -632,10 +636,10 @@ width: 50.3125px;
           </div>
             <li class ="userid">jeje2kim 님</li>
             <ul class=sub>
-            <li><a href="#">나의 정보</a></li>
-            <li><a href="#">결제 내역</a></li>
+            <li><a href="/swu/app//user/myinfo">나의 정보</a></li>
+            <li><a href="/swu/app/mypage/paymentlist">결제 내역</a></li>
             <li><a href="#">관심 목록</a></li>
-            <li><a href="#">나의 활동</a></li>
+            <li><a href="/swu/app/mypage/chargeregisterlist">나의 활동</a></li>
           </ul>
           </ul>
           <div class="content-section"> 

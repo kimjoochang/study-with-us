@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="${contextPath}/css/theme.css">
 
 <style>
+
+table {
+table-layout: fixed;
+word-break : break-all;
+}
+
 .container {
 	margin-bottom: 70px;
 }

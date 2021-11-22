@@ -193,10 +193,10 @@ input {
           </div>
           <li class="userid">${loginUser.nickname}님</li>
           <ul class=sub>
-            <li><a href="/swu/app/mypage/myinfo">나의 정보</a></li>
+            <li><a href="/swu/app/user/myinfo">나의 정보</a></li>
             <li><a href="/swu/app/mypage/payment">결제 내역</a></li>
             <li><a href="/swu/app/mypage/interest">관심 목록</a></li>
-            <li><a href="/swu/app/mypage/post">나의 활동</a></li>
+            <li><a href="/swu/app/mypage/chargeregisterlist">나의 활동</a></li>
           </ul>
         </ul>
         <div class="content-section">

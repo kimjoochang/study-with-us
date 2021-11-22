@@ -159,10 +159,8 @@ input {
 </head>
 
 <body>
-  <jsp:include page="header.jsp"></jsp:include>
-
-  <div class="container">
     <jsp:include page="header.jsp"></jsp:include>
+  <div class="container">
     <div class="col-lg-6 py-3 wow fadeInUp">
 
       <span class="subhead">my page</span>
@@ -178,10 +176,10 @@ input {
           </div>
           <li class="userid">${loginUser.nickname}님</li>
           <ul class=sub>
-            <li><a href="#">나의 정보</a></li>
-            <li><a href="#">결제 내역</a></li>
+            <li><a href="/swu/app//user/myinfo">나의 정보</a></li>
+            <li><a href="/swu/app/mypage/paymentlist">결제 내역</a></li>
             <li><a href="#">관심 목록</a></li>
-            <li><a href="#">나의 활동</a></li>
+            <li><a href="/swu/app/mypage/chargeregisterlist">나의 활동</a></li>
           </ul>
         </ul>
         <div class="content-section">
@@ -220,7 +218,6 @@ input {
         </div>
       </div>
     </div>
-  <jsp:include page="footer.jsp"></jsp:include>
   </div>  <!-- .container -->
   <script src="${contextPath}/js/jquery-3.5.1.min.js"></script>
   <script src="${contextPath}/js/bootstrap.bundle.min.js"></script>

@@ -77,16 +77,16 @@ public class UserController {
   }
 
   @GetMapping("/user/memberdelete") 
-  public ModelAndView memberDelete(int no) throws Exception {
+  public ModelAndView memberDelete(HttpSession session) throws Exception {
 
-    Member member = memberDao.findByNo(no);
+    Member member = (Member) session.getAttribute("loginUser");
 
     if (member == null) {
       throw new Exception("해당 번호의 회원이 없습니다.");
     }
 
     //  if(loginUser.getNo() == no) {
-    memberDao.delete(no);
+    memberDao.delete(member.getNo());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -133,7 +133,7 @@ public class UserController {
     }
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("../MyPage_info"); 
+    mv.setViewName("../jsp/MyPage_info"); 
     return mv;
   }
 
@@ -141,10 +141,68 @@ public class UserController {
   @ResponseBody
   public int idCheck(String userId) throws Exception {
 
-    System.out.println(userId);
-
     int data = memberDao.emailCheck(userId);
 
     return data;
+  }
+
+  @PostMapping("/mypage/updateNickname")
+  public ModelAndView updateNickname(String nickname, HttpSession session) throws Exception {
+    Member member = (Member) session.getAttribute("loginUser");
+
+    System.out.println(nickname);
+
+    Member oldMember= (Member) session.getAttribute("loginUser");
+
+    if (oldMember == null) {
+      throw new Exception("해당 번호의 회원이 없습니다.");
+    } 
+
+    oldMember.setNickname(nickname);
+
+    memberDao.update(oldMember);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../user/myinfo"); 
+    return mv;
+  }
+
+  @PostMapping("/mypage/updatePassword")
+  public ModelAndView updatePwd(String password, HttpSession session) throws Exception {
+    Member member = (Member) session.getAttribute("loginUser");
+
+    Member oldMember= memberDao.findByNo(member.getNo());
+    if (oldMember == null) {
+      throw new Exception("해당 번호의 회원이 없습니다.");
+    } 
+
+    oldMember.setPassword(password);
+
+    memberDao.update(oldMember);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:user/info"); 
+    return mv;
+  }
+
+  @PostMapping("/mypage/updateNumber")
+  public ModelAndView update(String phoneNumber, HttpSession session) throws Exception {
+    Member member = (Member) session.getAttribute("loginUser");
+
+    Member oldMember= memberDao.findByNo(member.getNo());
+    if (oldMember == null) {
+      throw new Exception("해당 번호의 회원이 없습니다.");
+    } 
+
+    oldMember.setPhoneNumber(phoneNumber);
+
+    memberDao.update(oldMember);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:user/info"); 
+    return mv;
   }
 }

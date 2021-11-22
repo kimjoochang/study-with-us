@@ -17,6 +17,40 @@
 <link rel="stylesheet" href="${contextPath}/css/footer.css">
 
 <style>
+
+.modal {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal_overlay {
+  position:fixed;
+  width: 100%;
+  height: 100%;
+}
+.modal_content {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  width: 400px;
+  height: 450px;
+  background-color: white;
+  padding: 30px 0px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+    rgba(0, 0, 0, 0.23);
+}
+h1 {
+  margin: 0;
+}
+.hidden {
+  display: none;
+}
+
 .container {
 	margin-bottom: 70px;
 }
@@ -217,10 +251,10 @@ input {
 					</div>
 					<li class="userid">${loginUser.nickname}님</li>
 					<ul class=sub>
-						<li><a href="#">나의 정보</a></li>
-						<li><a href="#">결제 내역</a></li>
+						<li><a href="/swu/app//user/myinfo">나의 정보</a></li>
+              <li><a href="/swu/app/mypage/paymentlist">결제 내역</a></li>
 						<li><a href="#">관심 목록</a></li>
-						<li><a href="#">나의 활동</a></li>
+						<li><a href="/swu/app/mypage/chargeregisterlist">나의 활동</a></li>
 					</ul>
 				</ul>
 				<div class="content-section">

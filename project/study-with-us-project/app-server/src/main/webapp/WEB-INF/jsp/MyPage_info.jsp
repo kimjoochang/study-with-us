@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,6 +24,39 @@
 
 
 <style>
+.modal {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal_overlay {
+  position:fixed;
+  width: 100%;
+  height: 100%;
+}
+.modal_content {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  width: 400px;
+  height: 450px;
+  background-color: white;
+  padding: 30px 0px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px
+    rgba(0, 0, 0, 0.23);
+}
+h1 {
+  margin: 0;
+}
+.hidden {
+  display: none;
+}
+
 .container {
   margin-bottom: 70px;
 }
@@ -170,7 +207,7 @@ input {
       <div class="col-lg-6 py-3 wow fadeInUp">
 
         <span class="subhead">my page</span>
-        <!--<h2 class="title-section">나의 정보</h2>-->
+        <!--<h2 class="title-section">ëì ì ë³´</h2>-->
         <div class="divider-sub"></div>
 
 
@@ -182,15 +219,14 @@ input {
             </div>
             <li class="userid">${loginUser.nickname}님</li>
             <ul class="sub">
-              <li><a href="#">나의 정보</a></li>
-              <li><a href="#">결제 내역</a></li>
+              <li><a href="/swu/app//user/myinfo">나의 정보</a></li>
+              <li><a href="/swu/app/mypage/paymentlist">결제 내역</a></li>
               <li><a href="#">관심 목록</a></li>
-              <li><a href="#">나의 활동</a></li>
+              <li><a href="/swu/app/mypage/chargeregisterlist">나의 활동</a></li>
             </ul>
           </ul>
           <div class="content-section">
 
-            <form>
               <section class="all-contents">
 
                 <div class="subject">개인 정보</div>
@@ -198,25 +234,25 @@ input {
                 <div class="box1">
 
                   <div class="attribute">
-                    사진 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="photo"
-                      type="text" value="사진을 등록하여 계정 맞춤 설정"></input>
+                  사진 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="photo"
+                    type="text" value="사진을 등록하여 계정 맞춤 설정"></input>
                     <!---->
                     <input class="file" type="file" name="fileName">
                   </div>
                   <hr>
                   <div class="box">
 
-                    닉네임 &nbsp;&nbsp;&nbsp;&nbsp; <input class="nickname"
-                      value="쫄지마"></input>
+                  닉네임 &nbsp;&nbsp;&nbsp;&nbsp; <input class="nickname"
+                    value="${loginUser.nickname}"></input>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="button" class="btn btn-primary btn-sm">변경</button>
-                    <br> 이메일 <input class="email"
+                    <button type="button" id="open" class="btn btn-primary btn-sm">변경</button>
+                    <br>이메일 <input class="email"
                       type="email" name="email" id="email"
-                      value="studywithus@gmail.com"></input>
+                      value="${loginUser.email}"></input>
                     
                     <br> 비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input
                       class="pwd" type="password" name="my_password"
-                      id="my_password" value="11111111"></input>
+                      id="my_password" value="********"></input>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="user/resetpwd"><button type="button" class="btn btn-primary btn-sm">변경</button></a>
                   </div>
@@ -226,22 +262,41 @@ input {
                 <div class="subject">연락처 정보</div>
                 <div class="box2">
 
-                  휴대폰 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="ph"
-                    type="text" value="010-1234-5678"></input>
+                 휴대폰번호 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="ph"
+                    type="text" value="${loginUser.phoneNumber}"></input>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <button type="button" class="btn btn-primary btn-sm">변경</button>
                 </div>
                 <div class="box3">
-                  <span class="with"><button type="button"
-                      class="btn btn-secondary btn-sm">회원 탈퇴</button>
+                  <span class="with"><button type="button" onclick="location.href=" class="btn btn-secondary btn-sm">회원 탈퇴</button>
                 </div>
                 </span>
           </div>
         </div>
 
+                   <!-- 모달창 -->
+    <!--이벤트 발생 시 hidden 삭제-->
+    <div class="modal hidden">
+      <!--모달 활성화 시 흐린 배경 표현-->
+      <div class="modal_overlay">
+        <!--모달 화면-->
+        <div class="modal_content">
+          <div class="form_box">
+            <form action='../mypage/updateNickname' method='post'>
+              <input class="form_input_title" type='text' name='nickname' size=40
+                maxlength=15 placeholder="변경할 닉네임을 입력해주세요">
+              <div class="form_buttons">
+                <input type="submit" onclick="offClick()" value="등록"> 
+                <input id="close" type="button" value="취소">
+              </div>
+            </form>
+          </div>
+        </div> <!-- modal_content -->
+      </div> <!-- modal_overlay -->
+    </div> <!-- modal_hidden -->
+
 
         </section>
-        </form>
 
 
       </div>
@@ -254,6 +309,30 @@ input {
     </div>
     <!-- .container -->
     <!-- </div> <!-- .page-section -->
+    
+     <script>
+  const openBtn = document.getElementById('open');
+  //onModal button
+  const closeBtn = document.getElementById('close');
+  //offModal button
+  const modal = document.querySelector('.modal');
+  //HTML에서의 모달 최상위 요소
+  const overlay = document.querySelector('.modal_overlay');
+  //모달창이 활성화되면 흐린 배경을 표현하는 요소
+  const openModal = () => {
+    modal.classList.remove('hidden');
+  }
+  const closeModal = () => {
+    modal.classList.add('hidden');
+  }
+  openBtn.addEventListener('click', openModal);
+  //onModal
+  closeBtn.addEventListener('click', closeModal);
+  //모달창 내부의 닫기 버튼
+  //overlay.addEventListener('click', closeModal);
+  //모달창 영역 밖
+  
+  </script>
 
 
 

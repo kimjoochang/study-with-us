@@ -156,6 +156,169 @@
   </div> <!--wrapper-->
   </div> <!--main_main-->
   
+       <!-- ***** 로그인/회원가입 시 모달창 *****-->
+      <div class="modal1 hidden">
+      <!--모달 활성화 시 흐린 배경 표현-->
+      <div class="modal1_overlay">
+        <!--모달 화면-->
+        <div class="modal1_content">
+     <button type="button" class="close" data-dismiss="modal" aria-lable="close" onclick="closeModal();">&times;</button>
+          <div class="sign-buttons">
+              <div class="d-flex justify-content-center">
+          
+              <!--회원가입 버튼 -->
+              <div class="text-center">
+                <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signupPage" onclick="closeModal();">&nbsp;Sign up&nbsp;<i class="fas fa-user-plus ml-3"></i></a>
+              </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          
+              <!--로그인 버튼-->
+              <div class="text-center">
+                <a href="" class="btn btn-primary1" data-toggle="modal" data-target="#signinPage" onclick="closeModal();">&nbsp;&nbsp;&nbsp;&nbsp;Sign in&nbsp;<i class="fas fa-sign-in-alt ml-3"></i></a>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+        </div> <!-- modal_content -->
+      </div> <!-- modal_overlay -->
+    </div> <!-- modal_hidden -->
+    </div>
+  </div>
+
+
+<div class="modal fade" id="signupPage">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        
+        <div class="modal-header text-center">
+          <h5 class="modal-title w-100 dark-grey-text font-weight-bold">Sign Up</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
+        </div>
+
+        <div class="title_img"><img src="${contextPath}/img/스터디위더스.png"></img></div>
+
+        <div class="modal-body mx-3">
+
+          <form action="user/join" method="post"><!-- 추가-->
+            
+            <div class="md-form mb-5">
+            <label class ="sign_label" data-error="wrong" data-success="right">&nbsp;이름
+            <input type="text" name="name" class="form-control validate" placeholder="이름을 입력하세요" required>
+          </label></div>
+
+          <!--  --><div class="md-form mb-5">
+           <div class="check_font" id="id_check">
+            <label data-error="wrong" data-success="right">&nbsp;이메일
+              <input type="email" id="user_id" name="email" class="form-control validate" 
+              placeholder="이메일을 입력하세요" required oninput = "checkEmail()" />
+            </label></div>
+         <!--  -->     <span class="email_already">이미 사용중인 이메일입니다.</span>
+           <!--  -->   </div>
+            
+            <!-- 얘를 빼보자 // 원본소스
+              <div class="check_font" id="id_check">
+             <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkEmail()" />
+            <span class="email_ok">사용 가능한 이메일입니다.</span>
+            <span class="email_already">이미 사용중인 이메일입니다.</span>
+          
+            <span class="email_ok">사용 가능한 이메일입니다.</span>
+            <span class="email_already">이미 사용중인 이메일입니다.</span>
+            </div>  --> 
+          
+
+          <div class="md-form mb-5">
+            <label data-error="wrong" data-success="right">&nbsp;닉네임
+            <input type="text" name="nickname" class="form-control validate" placeholder="닉네임을 입력하세요" required>
+          </label></div>
+
+          <div class="md-form mb-5">
+            <label data-error="wrong" data-success="right">&nbsp;비밀번호
+            <input type="password" name="password" class="form-control validate" placeholder="비밀번호를 입력하세요" required>
+          </label></div>
+<!-- 
+          <div class="md-form mb-5">
+            <label data-error="wrong" data-success="right">비밀번호 확인</label>
+            <input type="password" name="password_confirm" class="form-control validate">
+          </div>
+ -->
+
+          <div class="md-form mb-5">
+            <label data-error="wrong" data-success="right">&nbsp;&nbsp;휴대폰 번호
+            <input type="text" name="phoneNumber" class="form-control validate" placeholder="010-1234-5678" required>
+          </label></div>
+        </div>
+          
+        <div class="modal-footer d-flex justify-content-center">
+          <button class="btn btn-primary1">스터디위더스 시작하기</button><br><hr>
+        </div>
+      </form>
+
+      </div>
+    </div>
+  </div>
+  
+<!--LOG IN 누르면 나오는 모달 창 내용들--> 
+
+<div class="modal fade" id="signinPage">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header text-center">
+        <h5 class="modal-title w-100 dark-grey-text font-weight-bold">Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-lable="close">&times;</button>
+      </div>
+
+      <div class="title_img"><img src="${contextPath}/img/스터디위더스.png"></img></div>
+      <!-- 추가 -->
+      <div class="modal-body mx-4">
+
+        <form action='user/login' method="post">
+        <div class="md-form">
+       <label data-error="wrong" data-success="right"> 이메일 
+   <!--  얘를 빼보자 <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkEmail()" />
+         -->
+        <input type="email" id = "email" name='email' class="form-control validate" autocomplete="" /></label> 
+<!--         <span class="email_ok">사용 가능한 이메일입니다.</span>
+        <span class="email_already">이미 사용중인 이메일입니다.</span> -->
+          
+        </div>
+
+        <div class="md-form">
+          <label data-error="wrong" data-success="right">비밀번호
+          <input type="password" name='password' class="form-control validate"></label>
+        </div><br>
+        <div class="text-center mb-3">
+           <button class="btn btn-primary1">스터디위더스 시작하기</button><br>
+           
+           
+         <!--   <button type="button" class="btn btn-primary1 btn-block z-depth-1a">스터디위더스 시작하기</button><br><hr> -->
+          <!--<button type="button" class="btn btn-primary btn-block z-depth-1a">스터디위더스 시작하기</button>-->
+        </div>
+     </form>
+
+     <br>
+         <p class="font-small blue-text d-flex justify-content-end">
+         <a href="user/findemail" class="blue-text sl-1">Forgot ID</a> &nbsp;/&nbsp;
+         <a href="user/resetpwd" class="blue-text sl-1">PWD</a></p>
+         <br><hr>
+
+        <div class="st-sns">
+        <p class="font-large dark-grey-text d-flex justify-content-center">or</p>
+        <p class="font-large dark-grey-text d-flex justify-content-center">SNS로 시작하기</p>
+      </div>
+
+        <div class="row my-3 justify-content-center">
+          <div class="sns_container">
+            <div class="sns_icon"><a><img src="${contextPath}/img/facebook.png"></img></a></div>&nbsp;&nbsp;
+            <div class="sns_icon"><a><img src="${contextPath}/img/twitter.png"></img></a></div>&nbsp;&nbsp;
+            <div class="sns_icon"><a><img src="${contextPath}/img/google.png"></img></a></div>&nbsp;&nbsp;
+            <div class="sns_icon"><a><img src="${contextPath}/img/instagram.png"></img></a></div>&nbsp;&nbsp;
+        </div><!--sns_container-->
+        </div><!--row my-3 justify-content-center-->
+        
+  
   <jsp:include page="../footer.jsp"></jsp:include>
 	</div> <!-- container -->
 	
