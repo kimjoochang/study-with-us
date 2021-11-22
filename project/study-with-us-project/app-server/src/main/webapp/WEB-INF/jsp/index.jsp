@@ -167,7 +167,7 @@ text-align: center;
     input {
     all : unset;
     }
-    
+
   .btn-primary1{
     background: #756daa;
     color: snow;
@@ -386,11 +386,11 @@ text-align: center;
             </tr>
               <tr>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td class="git-n">김제이</td>
+                <td class="git-n">Jei Kim</td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td class="git-n">김주창</td>
+                <td class="git-n">Joochang Kim</td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td class="git-n">하선영</td><br>
+                <td class="git-n">Seonyoung Ha</td><br>
               </tr>
             </table>
 
