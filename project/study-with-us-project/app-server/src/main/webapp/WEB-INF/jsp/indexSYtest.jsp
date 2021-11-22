@@ -185,21 +185,14 @@ text-align: center;
     justify-content:space-evenly;
     margin-top:15px;
     }
-    
   .title_img {
     margin:30px 10px;
     text-align:center;
     justify-content: center;
   }
-  
   .sign-buttons {
     margin-top: 50%;
   }
-  
-  .post-date{
-  font-size: 12px;}
-
-
 </style>
 
 <body>
@@ -353,7 +346,7 @@ text-align: center;
           <div class="divider"></div>
 
           <p>기존에 분산되어 있던 스터디의 카테고리를 한 사이트에 모으고 <br>
-            사용자 니즈에 맞게 참여, 생성 할 수 있는 스터디 웹사이트개설 프로젝트</p>
+             사용자 니즈에 맞게 참여, 생성 할 수 있는 스터디 웹사이트개설 프로젝트</p>
           <p>김제이 https://github.com/Jei-Kim <br>
             김주창 https://github.com/kimjoochang <br>
             하선영 https://github.com/seonyoungHa</p>
@@ -415,7 +408,7 @@ text-align: center;
           <div class="card-blog">
             <div class="header">
               <div class="post-thumb">
-                <a id="open2" href="#"><img src="${contextPath}/img/mentor.png"></img></a>
+                <a href="mentorapplication/form"><img src="${contextPath}/img/mentor.png"></img></a>
               </div>
             </div>
             <div class="body">
@@ -478,6 +471,9 @@ text-align: center;
           Addr. 서울특별시 강남구 역삼동 12-7번지. <br>
           02 - 123 - 4567 <br>
           COPYRIGHT 2021. TEAM3. ALL RIGHT RESERVED.<br>
+          
+          Illustration by 
+          <a href="https://icons8.com/illustrations/author/602b6fa7123f993a3afdba7b"> Victoria Chepkasova</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
         </div>
       </div>
 
@@ -528,41 +524,26 @@ text-align: center;
 
           <form action="user/join" method="post"><!-- 추가-->
             
-            <div class="md-form mb-5">
-            <label class ="sign_label" data-error="wrong" data-success="right">&nbsp;이름
+            <!--<div class="md-form mb-5">일단-->
+            <label data-error="wrong" data-success="right">이름</label>
             <input type="text" name="name" class="form-control validate" placeholder="이름을 입력하세요" required>
-          </label></div>
-
-          <!--  --><div class="md-form mb-5">
-           <div class="check_font" id="id_check">
-            <label data-error="wrong" data-success="right">&nbsp;이메일
-              <input type="email" id="user_id" name="email" class="form-control validate" 
-              placeholder="이메일을 입력하세요" required oninput = "checkEmail()" />
-            </label></div>
-             <!--  -->  <span class="email_ok">사용 가능한 이메일입니다.</span>
-         <!--  -->     <span class="email_already">이미 사용중인 이메일입니다.</span>
-           <!--  -->   </div>
-            
-            <!-- 얘를 빼보자 // 원본소스
-              <div class="check_font" id="id_check">
-             <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkEmail()" />
-            <span class="email_ok">사용 가능한 이메일입니다.</span>
-            <span class="email_already">이미 사용중인 이메일입니다.</span>
-          
-            <span class="email_ok">사용 가능한 이메일입니다.</span>
-            <span class="email_already">이미 사용중인 이메일입니다.</span>
-            </div>  --> 
-          
+          </div>
 
           <div class="md-form mb-5">
-            <label data-error="wrong" data-success="right">&nbsp;닉네임
+            <label data-error="wrong" data-success="right">이메일</label>
+              <input type="email" id="user_id" name="email" class="form-control validate" placeholder="이메일을 입력하세요" required>
+            <div class="check_font" id="id_check"></div>
+          </div>
+
+          <div class="md-form mb-5">
+            <label data-error="wrong" data-success="right">닉네임</label>
             <input type="text" name="nickname" class="form-control validate" placeholder="닉네임을 입력하세요" required>
-          </label></div>
+          </div>
 
           <div class="md-form mb-5">
-            <label data-error="wrong" data-success="right">&nbsp;비밀번호
+            <label data-error="wrong" data-success="right">비밀번호</label>
             <input type="password" name="password" class="form-control validate" placeholder="비밀번호를 입력하세요" required>
-          </label></div>
+          </div>
 
         <!--
           <div class="md-form mb-5">
@@ -572,10 +553,10 @@ text-align: center;
         -->  
 
           <div class="md-form mb-5">
-            <label data-error="wrong" data-success="right">&nbsp;&nbsp;휴대폰 번호
+            <label data-error="wrong" data-success="right">휴대폰 번호</label>
             <input type="text" name="phoneNumber" class="form-control validate" placeholder="010-1234-5678" required>
-          </label></div>
-        </div>
+          </div>
+        <!--</div>주석-->
           
         <div class="modal-footer d-flex justify-content-center">
           <button class="btn btn-primary1">스터디위더스 시작하기</button><br><hr>
@@ -603,19 +584,20 @@ text-align: center;
 
         <form action='user/login' method="post">
         <div class="md-form">
-       <label data-error="wrong" data-success="right"> 이메일 
+       <label data-error="wrong" data-success="right"> 이메일 </label> 
    <!--  얘를 빼보자 <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkEmail()" />
          -->
-        <input type="email" id = "email" name='email' class="form-control validate" autocomplete="" /></label> 
-<!--         <span class="email_ok">사용 가능한 이메일입니다.</span>
-        <span class="email_already">이미 사용중인 이메일입니다.</span> -->
+        <input type="email" id = "email" name='email' class="form-control validate" autocomplete="" />
+        <span class="email_ok">사용 가능한 이메일입니다.</span>
+        <span class="email_already">이미 사용중인 이메일입니다.</span>
           
         </div>
 
         <div class="md-form">
-          <label data-error="wrong" data-success="right">비밀번호
-          <input type="password" name='password' class="form-control validate"></label>
+          <label data-error="wrong" data-success="right">비밀번호</label>
+          <input type="password" name='password' class="form-control validate">
         </div><br>
+        
         <div class="text-center mb-3">
            <button class="btn btn-primary1">스터디위더스 시작하기</button><br>
            
@@ -638,10 +620,10 @@ text-align: center;
 
         <div class="row my-3 justify-content-center">
           <div class="sns_container">
-            <div class="sns_icon"><a><img src="${contextPath}/img/facebook.png"></img></a></div>&nbsp;&nbsp;
-            <div class="sns_icon"><a><img src="${contextPath}/img/twitter.png"></img></a></div>&nbsp;&nbsp;
-            <div class="sns_icon"><a><img src="${contextPath}/img/google.png"></img></a></div>&nbsp;&nbsp;
-            <div class="sns_icon"><a><img src="${contextPath}/img/instagram.png"></img></a></div>&nbsp;&nbsp;
+            <div class="sns_icon"><a><img src="${contextPath}/img/facebook.png"></img></a></div>
+            <div class="sns_icon"><a><img src="${contextPath}/img/twitter.png"></img></a></div>
+            <div class="sns_icon"><a><img src="${contextPath}/img/google.png"></img></a></div>
+            <div class="sns_icon"><a><img src="${contextPath}/img/instagram.png"></img></a></div>
         </div><!--sns_container-->
         </div><!--row my-3 justify-content-center-->
         
@@ -692,7 +674,7 @@ overlay2.addEventListener('click', closeModal2);
     function checkEmail(){
         var email = $('#email').val(); //id값이 "email"인 입력란의 값을 저장?
         $.ajax({
-            url:'/user/idCheck', //Controller에서 인식할 주소 설정해주기
+            url:'/user/emailCheck', //Controller에서 인식할 주소 설정해주기
             type:'post', //POST 방식으로 전달
             data:{id:email},
             
@@ -706,7 +688,7 @@ overlay2.addEventListener('click', closeModal2);
                  }
              },
              error:function(){
-                 alert("이메일을 다시 입력하세요.");
+                 alert("에러입니다");
              }
          });
          };

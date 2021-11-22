@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
 
-	<link rel="stylesheet" href="${contextPath}/css/theme.css">
+  <link rel="stylesheet" href="${contextPath}/css/theme.css">
 
   <link rel="stylesheet" href="{contextPath}/css/theme.css">
 
@@ -23,28 +23,23 @@
 </head>
 
 <style>
-
 .container{
   margin-bottom: 70px;
 }
-
 .myinfo-wrapper {
   padding-bottom: 100px;
   color: #898798;
   overflow: hidden;
 }
-
 .both{
   position: fixed;
   display: absolute;
   height: 800px;
 }
-
 .userid{
  font-size:14px;
  color: #3b3a44;
 }
-
 ul.sub, .my-menu-list {
   list-style-type: none;
   padding: 0px;
@@ -56,8 +51,6 @@ ul.sub, .my-menu-list {
   position: fixed;
   border-radius: 3px;
 }
-
-
 ul.sub li a {
   text-decoration: none;
   padding: 10px;
@@ -66,23 +59,19 @@ ul.sub li a {
   font-weight: bold;
   
 }
-
 ul.sub li a:hover {
   background: #8e8aad;
   color: #fff;
 }
-
 ul.sub li a.home {
   background : rgb(150, 144, 144);
   color: #fff;
   height: auto;
   
 }
-
 .cd1 {
   margin-left: 120px;
 }
-
 .divider-sub {
   display: block;
   margin-top: 10px;
@@ -92,21 +81,17 @@ ul.sub li a.home {
   border-radius: 40px;
   background-color: #827e9e;
 }
-
 .profile-icon{
   text-align:center;
   margin-top:20px;
   margin-bottom:10px;
 }
-
 .my-menu-list{
   text-align:center;
 }
-
 .my-menu-list .sub{
   margin-top:15px
 }
-
 .content-section{
   width: 900px;
   height: 920px;
@@ -115,13 +100,11 @@ ul.sub li a.home {
   margin-top: 0px;
   margin-left: 180px;
 }
-
 .subject{
   font-size: 20px;
   margin-left: 30px;
   padding-top: 35px;
 }
-
 .box1{
   width: 800px;
   height: 300px;
@@ -132,27 +115,22 @@ ul.sub li a.home {
   margin-left:20px;
   box-sizing:border-box
 }
-
   
 input{
   all: unset;
 }
-
 .attribute{
  text-align: justify;
   
 }
-
 .photo{
   padding: 15px;
   font-size: 12px;
 }
-
  .nickname, .email {
   padding: 20px;
   font-size: 12px;
 }
-
 .file{
   padding: 20px;
   margin-left:57px;
@@ -162,20 +140,17 @@ input{
   padding-top:20px;
   padding-right:22px;
 }
-
 .ph {
   margin-top: 0px;
   padding: 20px;
   font-size: 12px;
 }
-
 .buttons{
   margin-top:20px;
   margin-left:25px;
   margin-bottom:0px;
   padding-bottom:0px;
 }
-
 .btn {
   height:35px;
   width: 109px;
