@@ -132,13 +132,13 @@ margin-right:10px;
 .hidden {
   display: none;
 }
+
 .email_already {
  color:#6A82FB;
  display: none;
  }
 
  .td{
-  
   border-spacing: 100px;
  }
 /*
@@ -159,13 +159,15 @@ text-align: center;
   justify-content: flex-end;
   width : 360px;
 }
-  */
+*/
     .request_button, #close {
       margin-right : 15px;
     }
+
     input {
     all : unset;
     }
+    
   .btn-primary1{
     background: #756daa;
     color: snow;
@@ -368,11 +370,10 @@ text-align: center;
           <h2 class="title-section">Team3</h2>
           <div class="divider"></div>
 
-          <p>기존에 분산되어 있던 스터디의 카테고리를 하나의 공간에서 이용할 수 있는 스터디 매칭 웹 사이트 '스터디위더스'입니다.<br><br>
-            사용자의 니즈에 맞게 여러 분야의 스터디 개설 및 참여 서비스를 제공하는 집약형 웹사이트를 구축하였습니다.<br><br>
-            주요 기능인 스터디 서비스 외에도, 기존 사이트들의 장점인 유저들간의 자유로운 정보 공유를 위한 공간으로
-            커뮤니티 게시판을 제공하기도 합니다.
-          </p>
+          <p>기존에 분산되어 있던 스터디의 카테고리를 하나의 공간에서 이용할 수 있는 스터디 매칭 웹 사이트 '스터디위더스'입니다.</p><br>
+            사용자의 니즈에 맞게 여러 분야의 스터디 개설 및 참여 서비스를 제공하는 집약형 웹사이트를 구축하였습니다.</p><br>
+          <p>주요 기능인 스터디 서비스 외에도, 기존 사이트들의 장점인 유저들간의 자유로운 정보 공유를 위한 공간으로
+            커뮤니티 게시판을 제공하기도 합니다.</p>
           
           <table class="git">
             <tr>
