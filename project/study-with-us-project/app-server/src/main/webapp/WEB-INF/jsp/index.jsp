@@ -132,10 +132,6 @@ margin-right:10px;
 .hidden {
   display: none;
 }
-.email_ok {
-color:#fff; 
-display: none;
-}
 .email_already {
  color:#6A82FB;
  display: none;
@@ -269,8 +265,7 @@ text-align: center;
         <div class="row align-items-center flex-wrap-reverse h-100">
           <div class="col-md-6 py-5 wow fadeInLeft">
             <h1 class="mb-4">Let's Study with Us!</h1>
-            <p class="text-lg text-grey mb-5">내가 원하는 분야의 스터디를 한 눈에 살펴보고 <br>
-              자유롭게 참여할 수 있는 스터디위더스 웹 사이트입니다. </p> 
+            <p class="text-lg text-grey mb-5">내가 원하는 분야의 스터디를 한 눈에 살펴보고 자유롭게 참여할 수 있는 스터디위더스 웹 사이트입니다. </p> 
             <p> 누구나 배움의 기회를 가지고 편리하게 스터디를 참여하기 위해 만들어진 스터디매칭 플랫폼입니다. 
 여러가지 카테고리의 스터디를 스터디 위더스에서 한눈에 보시고, 참여, 개설 및 다양한 서비스를 이용해 보세요.</p>
             <!-- <a href="#" class="btn btn-primary btn-split">Watch Video <div class="fab"><span class="mai-play"></span></div></a> -->
@@ -302,8 +297,7 @@ text-align: center;
             <div class="body">
               <h5 class="text-secondary">일반기업</h5>
               <p>General Company <br>
-                기업 공채 정보부터 면접까지<br>
-                스터디 참여로 준비해보세요!</p>
+                기업 공채 정보부터 면접까지 스터디 참여로 준비해보세요!</p>
               <a href="freestudy/findByCategory?keyword=일반기업" class="btn btn-primary">Read more</a>
             </div>
           </div>
@@ -318,8 +312,7 @@ text-align: center;
             <div class="body">
               <h5 class="text-secondary">공기업/공무원</h5>
               <p>Public Enterprise/Public Official <br>
-                공기업, 공무원 단기 합격을 위한 <br>
-                파이널 스터디에 참여해보세요!</p>
+                공기업, 공무원 단기 합격을 위한 파이널 스터디에 참여해보세요!</p>
               <a href="freestudy/findByCategory?keyword=공기업" class="btn btn-primary">Read more</a>
             </div>
           </div>
@@ -333,8 +326,7 @@ text-align: center;
             <div class="body">
               <h5 class="text-secondary">프로그래밍</h5>
               <p>Programming <br>
-                프로그래밍 입문 기초부터 실전까지<br>
-                원하는 스터디를 참여해보세요!</p>
+                프로그래밍 입문 기초부터 실전 심화까지 원하는 스터디를 참여해보세요!</p>
               <a href="freestudy/findByCategory?keyword=프로그래밍" class="btn btn-primary">Read more</a>
             </div>
           </div>
@@ -352,8 +344,7 @@ text-align: center;
           <h2 class="title-section">Team3</h2>
           <div class="divider"></div>
 
-          <p>기존에 분산되어 있던 스터디의 카테고리를 한 사이트에 모으고 <br>
-            사용자 니즈에 맞게 참여, 생성 할 수 있는 스터디 웹사이트개설 프로젝트</p>
+          <p>여기에 이제 프로젝트 설명이 들어갈 예정입니당. 사이트를 왜 만들게 되었는지, 어떤 기능들을 구현했는지 간단하게 적어두면 좋을 섹션인 것 같아</p>
           <p>김제이 https://github.com/Jei-Kim <br>
             김주창 https://github.com/kimjoochang <br>
             하선영 https://github.com/seonyoungHa</p>
@@ -539,7 +530,6 @@ text-align: center;
               <input type="email" id="user_id" name="email" class="form-control validate" 
               placeholder="이메일을 입력하세요" required oninput = "checkEmail()" />
             </label></div>
-             <!--  -->  <span class="email_ok">사용 가능한 이메일입니다.</span>
          <!--  -->     <span class="email_already">이미 사용중인 이메일입니다.</span>
            <!--  -->   </div>
             
@@ -563,13 +553,12 @@ text-align: center;
             <label data-error="wrong" data-success="right">&nbsp;비밀번호
             <input type="password" name="password" class="form-control validate" placeholder="비밀번호를 입력하세요" required>
           </label></div>
-
-        <!--
+<!-- 
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">비밀번호 확인</label>
             <input type="password" name="password_confirm" class="form-control validate">
           </div>
-        -->  
+ -->
 
           <div class="md-form mb-5">
             <label data-error="wrong" data-success="right">&nbsp;&nbsp;휴대폰 번호
@@ -690,14 +679,16 @@ overlay2.addEventListener('click', closeModal2);
 
 <script type="text/javascript">
     function checkEmail(){
-        var email = $('#email').val(); //id값이 "email"인 입력란의 값을 저장?
+        var email = $('#user_id').val(); //id값이 "email"인 입력란의 값을 저장?
         $.ajax({
-            url:'/user/idCheck', //Controller에서 인식할 주소 설정해주기
-            type:'post', //POST 방식으로 전달
-            data:{id:email},
+            url:'/swu/app/user/idCheck?userId='+email, //Controller에서 인식할 주소 설정해주기
+            type:'get', //POST 방식으로 전달
+            //data:{id:email},
             
-            success:function(cnt){
-               if(cnt != 1){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+            success:function(data){
+            	console.log(email);
+            	console.log(data);
+               if(data != 1){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
                      $('.email_ok').css("display","inline-block"); 
                      $('.email_already').css("display", "none");
                  } else { // cnt가 1일 경우 -> 이미 존재하는 아이디

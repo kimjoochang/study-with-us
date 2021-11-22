@@ -141,17 +141,10 @@ public class UserController {
   @ResponseBody
   public int idCheck(String userId) throws Exception {
 
-    int data; 
+    System.out.println(userId);
 
-    Member member = memberDao.emailCheck(userId);
+    int data = memberDao.emailCheck(userId);
 
-    if (member == null) {
-      data = 0;
-
-    } else {
-      data = 1;
-
-    }
     return data;
   }
 }

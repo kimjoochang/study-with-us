@@ -13,7 +13,7 @@ public interface MemberDao {
   Member findMemberByEmailPassword(@Param("email") String email, @Param("password") String password) throws Exception; // 로그인
 
   //11.15추가
-  Member emailCheck(String email) throws Exception; 
+  int emailCheck(String email) throws Exception; 
 
   void insert(Member member) throws Exception;
   void update(Member member) throws Exception;
