@@ -324,7 +324,7 @@ textarea {
           <li class="comment_wrapper">
             <section class="comment_info">
               <div class="comment_write_info">
-                <img class="profile" src="user">
+                <img class="profile" src="${contextPath}/img/profile.png">
                 <div class="comment_member_info">
                   <div>${comment.writer.nickname}</div>
                   <div>${comment.registeredDate}</div>

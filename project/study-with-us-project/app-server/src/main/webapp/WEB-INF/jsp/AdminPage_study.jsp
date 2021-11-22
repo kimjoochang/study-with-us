@@ -186,7 +186,7 @@ h1 {
 				<ul class="my-menu-list">
 					<div class="profile-icon">
 
-						<img src="${contextPath}/img/profile.png">
+						<img src="${contextPath}/img/manager.png">
 					</div>
 					<li class="userid">admin</li>
 					<ul class=sub>

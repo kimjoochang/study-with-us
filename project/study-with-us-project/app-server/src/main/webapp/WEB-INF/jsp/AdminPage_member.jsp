@@ -16,6 +16,10 @@
 
 <style>
 
+.icon {
+    width: 25px;
+}
+
 table {
 table-layout: fixed;
 word-break : break-all;
@@ -182,7 +186,7 @@ h1 {
 				<ul class="my-menu-list">
 					<div class="profile-icon">
 
-						<img src="img/profile.png">
+						<img src="${contextPath}/img/manager.png">
 					</div>
 					<li class="userid">admin</li>
 					<ul class=sub>
@@ -195,8 +199,6 @@ h1 {
 					<div class="title">
 						<span class="page_subject">회원 관리</span>
 						<div>
-						<a href="../mentorapplication/list">멘토승인 관리</a>
-						<a href="#">블랙리스트 관리</a>
 						</div>
 					</div>
 					<div class="table-content">
