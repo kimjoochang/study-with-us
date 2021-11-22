@@ -152,7 +152,7 @@
          
     <!-- 아이디 중복 체크 구현 위해서 추가함 - 11.15 제이 -->
     <select id="emailCheck" parameterType="String" resultType="int">
-        SELECT COUNT(email) FROM USER WHERE email= #{email}
+        SELECT COUNT(email) FROM MEMBER WHERE email=#{email}
     </select>
     
 </mapper>
