@@ -185,17 +185,20 @@ text-align: center;
     justify-content:space-evenly;
     margin-top:15px;
     }
+    
   .title_img {
     margin:30px 10px;
     text-align:center;
     justify-content: center;
   }
+  
   .sign-buttons {
     margin-top: 50%;
   }
   
   .post-date{
   font-size: 12px;}
+
 
 </style>
 
@@ -525,12 +528,25 @@ text-align: center;
             <input type="text" name="name" class="form-control validate" placeholder="이름을 입력하세요" required>
           </label></div>
 
-          <div class="md-form mb-5">
+          <!--  --><div class="md-form mb-5">
+           <div class="check_font" id="id_check">
             <label data-error="wrong" data-success="right">&nbsp;이메일
-              <input type="email" id="user_id" name="email" class="form-control validate" placeholder="이메일을 입력하세요" required>
+              <input type="email" id="user_id" name="email" class="form-control validate" 
+              placeholder="이메일을 입력하세요" required oninput = "checkEmail()" />
             </label></div>
+             <!--  -->  <span class="email_ok">사용 가능한 이메일입니다.</span>
+         <!--  -->     <span class="email_already">이미 사용중인 이메일입니다.</span>
+           <!--  -->   </div>
             
-            <div class="check_font" id="id_check"></div>
+            <!-- 얘를 빼보자 // 원본소스
+              <div class="check_font" id="id_check">
+             <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkEmail()" />
+            <span class="email_ok">사용 가능한 이메일입니다.</span>
+            <span class="email_already">이미 사용중인 이메일입니다.</span>
+          
+            <span class="email_ok">사용 가능한 이메일입니다.</span>
+            <span class="email_already">이미 사용중인 이메일입니다.</span>
+            </div>  --> 
           
 
           <div class="md-form mb-5">
@@ -582,20 +598,19 @@ text-align: center;
 
         <form action='user/login' method="post">
         <div class="md-form">
-       <label data-error="wrong" data-success="right"> 이메일 </label> 
+       <label data-error="wrong" data-success="right"> 이메일 
    <!--  얘를 빼보자 <input type="email" id = "email" name='email' class="form-control validate" autocomplete="username" required oninput = "checkEmail()" />
          -->
-        <input type="email" id = "email" name='email' class="form-control validate" autocomplete="" />
-        <span class="email_ok">사용 가능한 이메일입니다.</span>
-        <span class="email_already">이미 사용중인 이메일입니다.</span>
+        <input type="email" id = "email" name='email' class="form-control validate" autocomplete="" /></label> 
+<!--         <span class="email_ok">사용 가능한 이메일입니다.</span>
+        <span class="email_already">이미 사용중인 이메일입니다.</span> -->
           
         </div>
 
         <div class="md-form">
-          <label data-error="wrong" data-success="right">비밀번호</label>
-          <input type="password" name='password' class="form-control validate">
+          <label data-error="wrong" data-success="right">비밀번호
+          <input type="password" name='password' class="form-control validate"></label>
         </div><br>
-        
         <div class="text-center mb-3">
            <button class="btn btn-primary1">스터디위더스 시작하기</button><br>
            
@@ -686,7 +701,7 @@ overlay2.addEventListener('click', closeModal2);
                  }
              },
              error:function(){
-                 alert("에러입니다");
+                 alert("이메일을 다시 입력하세요.");
              }
          });
          };
