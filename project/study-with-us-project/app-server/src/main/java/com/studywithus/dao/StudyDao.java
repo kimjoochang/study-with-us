@@ -7,6 +7,10 @@ import com.studywithus.domain.Study;
 public interface StudyDao {
   List<Study> findAll(@Param("low") int low, @Param("high") int high) throws Exception;
 
+  List<Study> findAllRecruit(@Param("low") int low, @Param("high") int high) throws Exception;
+  List<Study> findAllOngoing(@Param("low") int low, @Param("high") int high) throws Exception;
+  List<Study> findAllFinish(@Param("low") int low, @Param("high") int high) throws Exception;
+
   List<Study> findAllByKeyword(@Param("low") int low, @Param("high") int high, @Param("category") String keyword) throws Exception;
 
   List<Study> findByKeyword(String keyword) throws Exception;

@@ -161,6 +161,8 @@
    where price >=#{low} and price<=#{high}
     and 
     st.del_status != 2
+    and
+    start_date>now()
     order by 
       st.study_no asc
   ]]>
@@ -207,6 +209,10 @@
    where price >=#{low} and price<=#{high}
     and 
     st.del_status != 2
+    and
+    start_date<now()
+    and
+    end_date>now() 
     order by 
       st.study_no asc
   ]]>
@@ -254,7 +260,7 @@
     and 
     st.del_status != 2
     and
-    where st.start_date=#{nowDate}
+    st.end_date<now()
     order by 
       st.study_no asc
   ]]>

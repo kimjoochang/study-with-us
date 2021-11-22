@@ -74,6 +74,39 @@ public class ChargeStudyController {
     return mv;
   }
 
+  @GetMapping("/chargestudy/listrecruit")
+  public ModelAndView listRecruit() throws Exception {
+    Collection<Study> chargeStudyList = chargeStudyDao.findAllRecruit(1,10000000);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("chargeStudyList", chargeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 멘토링목록");
+    mv.setViewName("chargestudy/ChargeStudyList");
+    return mv;
+  }
+
+  @GetMapping("/chargestudy/listongoing")
+  public ModelAndView listOngoing() throws Exception {
+    Collection<Study> chargeStudyList = chargeStudyDao.findAllOngoing(1,10000000);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("chargeStudyList", chargeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 멘토링목록");
+    mv.setViewName("chargestudy/ChargeStudyList");
+    return mv;
+  }
+
+  @GetMapping("/chargestudy/listfinish")
+  public ModelAndView listFinish() throws Exception {
+    Collection<Study> chargeStudyList = chargeStudyDao.findAllFinish(1,10000000);
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("chargeStudyList", chargeStudyList);
+    mv.addObject("pageTitle", "스터디위더스 : 멘토링목록");
+    mv.setViewName("chargestudy/ChargeStudyList");
+    return mv;
+  }
+
   @GetMapping("/chargestudy/detail")
   public ModelAndView detail(int no, HttpSession session) throws Exception {
 
