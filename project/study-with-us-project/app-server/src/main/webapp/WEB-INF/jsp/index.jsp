@@ -195,6 +195,10 @@ text-align: center;
   .post-date{
   font-size: 12px;}
 
+  .git-img{
+   margin: 0 auto;
+   justyfy-content: space-between;
+  }
 
 </style>
 
@@ -297,7 +301,7 @@ text-align: center;
             <div class="body">
               <h5 class="text-secondary">일반기업</h5>
               <p>General Company <br>
-                기업 공채 정보부터 면접까지 스터디 참여로 준비해보세요!</p>
+                <br>기업 공채 정보부터 면접까지 스터디 참여로 준비해보세요!</p>
               <a href="freestudy/findByCategory?keyword=일반기업" class="btn btn-primary">Read more</a>
             </div>
           </div>
@@ -312,7 +316,7 @@ text-align: center;
             <div class="body">
               <h5 class="text-secondary">공기업/공무원</h5>
               <p>Public Enterprise/Public Official <br>
-                공기업, 공무원 단기 합격을 위한 파이널 스터디에 참여해보세요!</p>
+                <br>공기업, 공무원 단기 합격을 위한 파이널 스터디에 참여해보세요!</p>
               <a href="freestudy/findByCategory?keyword=공기업" class="btn btn-primary">Read more</a>
             </div>
           </div>
@@ -326,7 +330,7 @@ text-align: center;
             <div class="body">
               <h5 class="text-secondary">프로그래밍</h5>
               <p>Programming <br>
-                프로그래밍 입문 기초부터 실전 심화까지 원하는 스터디를 참여해보세요!</p>
+                <br>프로그래밍 입문 기초부터 실전 심화까지 원하는 스터디를 참여해보세요!</p>
               <a href="freestudy/findByCategory?keyword=프로그래밍" class="btn btn-primary">Read more</a>
             </div>
           </div>
@@ -344,12 +348,34 @@ text-align: center;
           <h2 class="title-section">Team3</h2>
           <div class="divider"></div>
 
-          <p>여기에 이제 프로젝트 설명이 들어갈 예정입니당. 사이트를 왜 만들게 되었는지, 어떤 기능들을 구현했는지 간단하게 적어두면 좋을 섹션인 것 같아</p>
-          <p>김제이 https://github.com/Jei-Kim <br>
-            김주창 https://github.com/kimjoochang <br>
-            하선영 https://github.com/seonyoungHa</p>
-          <a href="about.html" class="btn btn-primary mt-3">Read more</a>
+          <p>기존에 분산되어 있던 스터디의 카테고리를 하나의 공간에서 이용할 수 있는 스터디 매칭 웹 사이트 '스터디위더스'<br>
+            사용자의 니즈에 맞게 여러 분야의 스터디 개설 및 참여 서비스를 제공하는 집약형 웹사이트를 구축하였습니다.<br>
+            주요 기능인 스터디 서비스 외에도, 기존 사이트들의 장점인 유저들간의 자유로운 정보 공유를 위한 공간으로<br>
+            커뮤니티 게시판을 제공하기도 합니다.
+          </p><br>
+          <table class="git">
+            <tr>
+              <td><a href="https://github.com/Jei-Kim"><img alt="github" src="${contextPath}/img/github.png"/></a></td>
+              <td></td>
+              <td><a href="https://github.com/kimjoochang"><img alt="github" src="${contextPath}/img/github.png"/></a></td>
+              <td></td>
+              <td><a href="https://github.com/seonyoungHa"><img alt="github" src="${contextPath}/img/github.png"/></a></td><br>
+              <tr>
+              </table>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;김제이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              김주창&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              하선영
+<!--
+          <div class ="git-img">
+          <div class="git-j"><a href="https://github.com/Jei-Kim"><img src="${contextPath}/img/github.png"></img></a></div>
+          <div class="git-jc"><a href="https://github.com/kimjoochang"><img src="${contextPath}/img/github.png"></img></a></div>
+          <div class="git-sy"><a href="https://github.com/seonyoungHa"><img src="${contextPath}/img/github.png"></img></a></div><br>
+        </div>-->
+         <!-- 김제이&nbsp;&nbsp;&nbsp;김주창&nbsp;&nbsp;&nbsp;하선영-->
+          <!--<a href="about.html" class="btn btn-primary mt-3">Read more</a>-->
         </div>
+
+
         <div class="col-lg-6 py-3 wow fadeInRight">
           <div class="img-fluid py-3 text-center">
             <img class="img_sub" src="${contextPath}/img/gummy-macbook.png" alt="">
