@@ -281,9 +281,9 @@ public class FreeStudyController {
     Collection<Study> freeStudyList = freeStudyDao.findAllInterest(freeMember.getNo(),0,0);
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("chargeStudyList", freeStudyList);
+    mv.addObject("freeStudyList", freeStudyList);
     mv.addObject("pageTitle", "스터디위더스 : 나의 관심목록");
-    mv.setViewName("../jsp/chargestudy/ChargeStudyInterestList");
+    mv.setViewName("../jsp/freestudy/FreeStudyInterestList");
     return mv;
   }
 
