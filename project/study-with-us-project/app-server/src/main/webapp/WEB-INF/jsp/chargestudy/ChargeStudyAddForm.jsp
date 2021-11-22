@@ -62,7 +62,7 @@
     <option value="" selected="selected">---카테고리---</option>
     <option value="일반기업">일반기업</option>
     <option value="공기업" >공기업</option>
-    <option value="교육" >교육</option>
+    <option value="프로그래밍" >프로그래밍</option>
   </select>
 </div>
 
