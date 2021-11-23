@@ -13,15 +13,15 @@
     
    insert into
     cmnt(category,title,content,member_no)
-    values(#{0},#{'엄진영 강사님의 강의력에 무릎을 탁 치고 갑니다!'},
-                #{'비트캠프 개발자 양성과정 엄진영 강사님 왕 추천이요! 강사님께 안배웠다면 자바 시작도 못했을거 같네요.'},
-                #{2})
+    values(0,'엄진영 강사님의 강의력에 무릎을 탁 치고 갑니다!',
+                '비트캠프 개발자 양성과정 엄진영 강사님 왕 추천이요! 강사님께 안배웠다면 자바 시작도 못했을거 같네요.',
+                5)
     
    insert into
     cmnt(category,title,content,member_no)
-    values(#{0},#{'자바 독학 책 추천'},
-                #{'자바의 정석, 이펙티브 자바, 이것이 자바다'},
-                #{3})
+    values(#{0},#'자바 독학 책 추천'},
+                #'자바의 정석, 이펙티브 자바, 이것이 자바다'},
+                #3})
     
    insert into
     cmnt(category,title,content,member_no)
@@ -383,9 +383,30 @@
     comment(member_no,cmnt_no,content)
     values(#{1},#{0},
            #{''})
+          
            
+--멤버
+     insert into member(
+        name,
+        email,
+        nickname,
+        password,
+        phone_number,
+        status,
+        access_level)
+      values(#{name},#{email},#{nickname},password(#{password}),#{phoneNumber},#{status},#{userAccessLevel})
 
+--스터디멤버  
+   insert into 
+     study_member(member_no,study_no,status)
+    values(#{memberNo},#{studyNo},#{myStatus}) 
 
+   insert into 
+     study_member(member_no,study_no,status)
+    values(#{memberNo},
+           #{studyNo},
+           #{myStatus}) 
+    
     
 --스터디
    insert into 
@@ -412,6 +433,35 @@
      study(title,content,area,onOffLine,category,max_member,start_date,end_date,price,member_no)
     values(#{title},#{content},#{area},#{on_off},#{category},#{maxMembers},#{startDate},#{endDate},#{price},#{writer.no}) 
     
+    
+    '2021-09-03'
+    
+    
+          insert into 
+     study(title,content,area,category,max_member,start_date,end_date,price,member_no)
+    values('자바의 정석',
+           '자바 입문편 강의 입니다. 비전공자 분들을 위한 초보 강의입니다.',
+           '서울시 강남',
+           '일반기업',
+           3,
+           '2021-08-03',
+           '2021-09-01',
+           100000,
+           4)  
+           
+          insert into 
+     study(title,content,area,onOffLine,category,max_member,start_date,end_date,price,member_no)
+    values(#{title},
+           #{content},
+           #{area},
+           #{on_off},
+           #{category},
+           #{maxMembers},
+           #{startDate},
+           #{endDate},
+           #{price},
+           #{writer.no}) 
+           
           insert into 
      study(title,content,area,onOffLine,category,max_member,start_date,end_date,price,member_no)
     values(#{title},
@@ -424,3 +474,30 @@
            #{endDate},
            #{price},
            #{writer.no})  
+           
+          insert into 
+     study(title,content,area,onOffLine,category,max_member,start_date,end_date,price,member_no)
+    values(#{title},
+           #{content},
+           #{area},
+           #{on_off},
+           #{category},
+           #{maxMembers},
+           #{startDate},
+           #{endDate},
+           #{price},
+           #{writer.no})  
+           
+          insert into 
+     study(title,content,area,onOffLine,category,max_member,start_date,end_date,price,member_no)
+    values(#{title},
+           #{content},
+           #{area},
+           #{on_off},
+           #{category},
+           #{maxMembers},
+           #{startDate},
+           #{endDate},
+           #{price},
+           #{writer.no})  
+           
