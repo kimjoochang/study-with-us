@@ -77,6 +77,8 @@ public class MentorApplicationController {
 
     mentorApplicationDao.updateApproveStatus(no);
 
+    memberDao.update(applicant);
+
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

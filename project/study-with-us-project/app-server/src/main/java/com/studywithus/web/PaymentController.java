@@ -35,8 +35,8 @@ public class PaymentController {
 
 
 
-    paymentDao.insert(payment);
     studyMemberDao.insert(mentee.getNo(), payment.getStudy().getNo(), 1);
+    paymentDao.insert(payment);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

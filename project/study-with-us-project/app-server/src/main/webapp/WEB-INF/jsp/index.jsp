@@ -686,7 +686,7 @@ text-align: center;
 
         <div class="row my-3 justify-content-center">
           <div class="sns_container">
-            <div class="sns_icon"><a href="javascript:void(0)"onclick="kakaoLogin();"><img src="${contextPath}/img/facebook.png"></img></a></div>&nbsp;&nbsp;
+            <div class="sns_icon"><a href="javascript:void(0)" onclick="kakaoLogin();"><img src="${contextPath}/img/kakao.png"></img></a></div>&nbsp;&nbsp;
             <div class="sns_icon"><a><img src="${contextPath}/img/twitter.png"></img></a></div>&nbsp;&nbsp;
             <div class="sns_icon"><a><img src="${contextPath}/img/google.png"></img></a></div>&nbsp;&nbsp;
             <div class="sns_icon"><a><img src="${contextPath}/img/instagram.png"></img></a></div>&nbsp;&nbsp;
@@ -698,10 +698,19 @@ text-align: center;
     </div> 
   </div>
 
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+ <ul>
 
+  <li onclick="kakaoLogout();">
+      <a href="javascript:void(0)">
+          <span>카카오 로그아웃</span>
+      </a>
+  </li>
+</ul>
+<!-- 카카오 스크립트 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 Kakao.init('f652ed3e8b0bd8b9aab3df349bb8ce74'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
 
 //카카오로그인
 function kakaoLogin() {
@@ -709,13 +718,10 @@ function kakaoLogin() {
       success: function (response) {
         Kakao.API.request({
           url: '/v2/user/me',
-          data: {
-            properties: {
-              
-            }
-          }
           success: function (response) {
             console.log(response)
+            console.log(response.kakao_account.email)
+            const kakaoEmail = response.kakao_account.email;
           },
           fail: function (error) {
             console.log(error)
@@ -733,7 +739,7 @@ function kakaoLogout() {
       Kakao.API.request({
         url: '/v1/user/unlink',
         success: function (response) {
-          location.href='../payment/add?no=${chargeStudy.no}&payMethod=0';
+          console.log(response)
         },
         fail: function (error) {
           console.log(error)
@@ -742,7 +748,7 @@ function kakaoLogout() {
       Kakao.Auth.setAccessToken(undefined)
     }
   }  
-  </script>
+</script>
 
 <script>
 const openBtn = document.getElementById('open1');

@@ -54,6 +54,37 @@ public class UserController {
     return mv;
   }
 
+  @GetMapping("/user/kakologin")
+  public ModelAndView kakaologin(String email, String saveEmail, HttpServletResponse response, HttpSession session) throws Exception {
+
+    Cookie cookie = null;
+
+    if (saveEmail != null) {
+
+      cookie = new Cookie("email", email);
+      cookie.setMaxAge(60 * 60 * 24 * 7);
+      // cookie.setPath(sc.getContextPath() + "/app/user"); // 예) http://localhost:8080/pms/app/auth
+
+    } else {
+      cookie = new Cookie("email", "");
+      cookie.setMaxAge(0); // 유효기간을 0으로 설정하면 웹브라우저가 받는 즉시 무효한 쿠기가 된다.
+    }
+
+    response.addCookie(cookie);
+
+    ModelAndView mv = new ModelAndView();
+
+    Member loginUser = new Member();
+
+    loginUser.setEmail(email);
+    loginUser.setNickname("kakao"+(Math.random()*100));
+
+    session.setAttribute("loginUser", loginUser);
+
+    mv.setViewName("redirect:../index");
+    return mv;
+  }
+
   @GetMapping("/user/logout")
   public ModelAndView logout(HttpSession session) throws Exception {
 

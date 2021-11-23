@@ -1,3 +1,4 @@
+<%@page import="com.studywithus.domain.Member"%>
 <%@page import="com.studywithus.domain.Study"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -168,8 +169,6 @@
 		if(uid == 'null') {
 			alert("로그인이 필요합니다.");
 			
-		} else if (uid.getAccessLevel != 2){
-			alert("글쓰기 권한이 없습니다.")
 			
 		} else {
 			location.href="form";
