@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.studywithus.dao.PaymentDao;
 import com.studywithus.dao.StudyDao;
+import com.studywithus.dao.StudyMemberDao;
 import com.studywithus.domain.Member;
 import com.studywithus.domain.Payment;
 
@@ -18,6 +19,7 @@ public class PaymentController {
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired PaymentDao paymentDao;
   @Autowired StudyDao studyDao;
+  @Autowired StudyMemberDao studyMemberDao;
 
   @GetMapping("/payment/add")
   public ModelAndView add(int no, int payMethod, HttpSession session) throws Exception {
@@ -32,7 +34,9 @@ public class PaymentController {
     payment.setPaymentMethod(0);
 
 
+
     paymentDao.insert(payment);
+    studyMemberDao.insert(mentee.getNo(), payment.getStudy().getNo(), 1);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

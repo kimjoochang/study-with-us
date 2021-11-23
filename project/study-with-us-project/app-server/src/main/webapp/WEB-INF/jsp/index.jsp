@@ -686,7 +686,7 @@ text-align: center;
 
         <div class="row my-3 justify-content-center">
           <div class="sns_container">
-            <div class="sns_icon"><a><img src="${contextPath}/img/facebook.png"></img></a></div>&nbsp;&nbsp;
+            <div class="sns_icon"><a href="javascript:void(0)"onclick="kakaoLogin();"><img src="${contextPath}/img/facebook.png"></img></a></div>&nbsp;&nbsp;
             <div class="sns_icon"><a><img src="${contextPath}/img/twitter.png"></img></a></div>&nbsp;&nbsp;
             <div class="sns_icon"><a><img src="${contextPath}/img/google.png"></img></a></div>&nbsp;&nbsp;
             <div class="sns_icon"><a><img src="${contextPath}/img/instagram.png"></img></a></div>&nbsp;&nbsp;
@@ -697,6 +697,52 @@ text-align: center;
     </div>
     </div> 
   </div>
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+<script>
+Kakao.init('f652ed3e8b0bd8b9aab3df349bb8ce74'); //발급받은 키 중 javascript키를 사용해준다.
+
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          data: {
+            properties: {
+              
+            }
+          }
+          success: function (response) {
+            console.log(response)
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+          location.href='../payment/add?no=${chargeStudy.no}&payMethod=0';
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  }  
+  </script>
 
 <script>
 const openBtn = document.getElementById('open1');
