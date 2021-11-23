@@ -81,7 +81,7 @@
     <input id="input1" type="button" onclick="location.href='listrecruit'" value="모집중">
     <input id="input1" type="button" onclick="location.href='listongoing'" value="진행중">
     <input id="input1" type="button" onclick="location.href='listfinish'" value="진행완료">
-	  <a class=input2 href='form'>멘토링 작성</a>
+	  <a class=input2 href='#' onclick="auth();">멘토링 작성</a>
   </div>
 
 	<br>
@@ -159,6 +159,24 @@
   
   <jsp:include page="../footer.jsp"></jsp:include>
 	</div> <!-- container -->
+	
+	<script>
+	const auth = () => {
+		
+		 var uid = '<%=session.getAttribute("loginUser")%>';
+		
+		if(uid == 'null') {
+			alert("로그인이 필요합니다.");
+			
+		} else if (uid.getAccessLevel != 2){
+			alert("글쓰기 권한이 없습니다.")
+			
+		} else {
+			location.href="form";
+			
+		}
+	}
+	</script>
 	
 	<script>
 	var trList = document.querySelectorAll("li"); // 리턴 객체는 HTMLCollection 타입 객체이다.

@@ -24,6 +24,16 @@
 
 
 <style>
+
+input#close {
+    margin-left: 50px;
+}
+
+.form_input_title {
+  margin-top: 150px;
+  margin-bottom: 50px;
+}
+
 .modal {
   top: 0;
   left: 0;
@@ -39,6 +49,7 @@
   height: 100%;
 }
 .modal_content {
+  text-align : center;
   position: fixed;
   top: 30%;
   left: 40%;

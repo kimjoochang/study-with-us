@@ -239,8 +239,17 @@ h1 {
   //HTML에서의 모달 최상위 요소
   const overlay = document.querySelector('.modal_overlay');
   //모달창이 활성화되면 흐린 배경을 표현하는 요소
+  
   const openModal = () => {
+	     var uid = '<%=session.getAttribute("loginUser")%>';
+	    
+	    if(uid == 'null') {
+	      alert("로그인이 필요합니다.");
+	      
+	    } else {
     modal.classList.remove('hidden');
+	      
+  }
   }
   const closeModal = () => {
     modal.classList.add('hidden');
@@ -251,9 +260,7 @@ h1 {
   //모달창 내부의 닫기 버튼
   //overlay.addEventListener('click', closeModal);
   //모달창 영역 밖
-  
-  </script>
-  
+    </script>
 
 	<script>
 	let type;

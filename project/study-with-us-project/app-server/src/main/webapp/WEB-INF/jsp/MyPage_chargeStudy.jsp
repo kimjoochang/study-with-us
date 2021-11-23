@@ -194,8 +194,8 @@ input {
           <li class="userid">${loginUser.nickname}님</li>
           <ul class=sub>
             <li><a href="/swu/app/user/myinfo">나의 정보</a></li>
-            <li><a href="/swu/app/mypage/payment">결제 내역</a></li>
-            <li><a href="/swu/app/mypage/interest">관심 목록</a></li>
+            <li><a href="/swu/app/mypage/paymentlist">결제 내역</a></li>
+            <li><a href="#">관심 목록</a></li>
             <li><a href="/swu/app/mypage/chargeregisterlist">나의 활동</a></li>
           </ul>
         </ul>
@@ -217,7 +217,7 @@ input {
             <!-- 수정 -->
             <div class ="study_category">
             <a href="/swu/app/mypage/freeregisterlist"><button type="button" class="free_btn">무료</button></a>
-            <a href="chargeregisterlist"><button type="button" class="charge_btn">유료</button></a>
+            <a href="/swu/app/mypage/chargeregisterlist"><button type="button" class="charge_btn">유료</button></a>
             </div>            
 
             <div class="box1">

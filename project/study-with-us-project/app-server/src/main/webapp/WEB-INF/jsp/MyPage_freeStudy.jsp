@@ -18,6 +18,14 @@
 
 <style>
 
+.btn {
+    margin-left: 5px;
+    height: 40px;
+    width: 150px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
 .modal {
   top: 0;
   left: 0;
@@ -199,13 +207,6 @@ input {
 	padding-bottom: 0px;
 }
 
-.btn {
-  margin-left : 5px;
-	height: 40px;
-	width: 109px;
-	font-size: 10px;
-}
-
 .study_category{
   display : flex;
   justify-content : space-around;
@@ -272,9 +273,10 @@ input {
 							<br>
 						</div>
 						<!-- 수정 -->
+						
             <div class ="study_category">
-             <a href="../freestudy/registerlist"><button type="button" class="free_btn">무료</button></a>
-            <a href="../chargestudy/registerlist"><button type="button" class="charge_btn">유료</button></a>
+             <a href="/swu/app/mypage/freeregisterlist"><button type="button" class="free_btn">무료</button></a>
+            <a href="/swu/app/mypage/chargeregisterlist"><button type="button" class="charge_btn">유료</button></a>
             </div>						
 
 						<div class="box1">
@@ -311,7 +313,6 @@ input {
 			</div> <!--both-->
 		</div> <!--col-lg-6 py-3 wow fadeInUp-->
 
-	<jsp:include page="footer.jsp"></jsp:include>
 	</div>	<!-- .container -->
 
 	
